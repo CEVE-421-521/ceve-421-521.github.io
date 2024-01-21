@@ -89,7 +89,7 @@ After completing this course, you will be able to:
 ### Required Materials
 
 No textbook is required for this course.
-All materials will be posted as open source on [the course website]({{<var course.url >}}) or on [Canvas](https://canvas.rice.edu/courses/{{<var course.canvas_id >}}).
+All materials will be posted as open source on [the course website](https://ceve-421-521.github.io/) or on [Canvas](https://canvas.rice.edu/courses/65985).
 
 You will regularly be assigned scientific papers to read.
 Where those are available through the Rice library, you will be expected to access them yourself.
