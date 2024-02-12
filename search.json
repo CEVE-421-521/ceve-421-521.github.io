@@ -70,7 +70,14 @@
     "href": "readings/week-06-reading.html",
     "title": "Readings for Week 6",
     "section": "",
-    "text": "Please read Bankes (1993). We will post discussion questions by Monday.\n\n\n\n\nReferences\n\nBankes, S. (1993). Exploratory modeling for policy analysis. Operations Research, 41(3), 435–449. https://doi.org/c7rgcr"
+    "text": "Please read Bankes (1993)."
+  },
+  {
+    "objectID": "readings/week-06-reading.html#discussion-questions",
+    "href": "readings/week-06-reading.html#discussion-questions",
+    "title": "Readings for Week 6",
+    "section": "Discussion Questions",
+    "text": "Discussion Questions\n\nFor these 2 questions, be ready to share 1-2 sentences for each of them by writing them on the whiteboard at the front at the beginning of the discussion.\n\nWhat is the main idea of this paper?\nWhy did the author write this paper?\n\nThe author outlines 2 main types of modeling (consolidative and exploratory). Be ready to discuss the key differences of both of these main approaches.\nThe author uses a consolidative modeling example of the “ultimate combat model” to illustrate the main issues with consolidative models.\n\nWhat are some of the problems?\nAre there ways to avoid these problems in consolidative modeling?\n\nWhat are the uses of exploratory modeling, according to this paper? (so what?)\nWhat do we do with the uncertainty we discovered in our model?\n\ni.e. what is the role of sensitivity analysis? If we find the bounds in our model, then what?\nFollow up: how would we use model uncertainty for our case study on building elevations?\n\nThe author discusses a hierarchy of exploratory modeling types (data-driven, question-driven, model-driven). Let’s talk about the goals of each of them and how that may lead to differences in our modeling approach."
   },
   {
     "objectID": "readings/week-10-reading.html",
