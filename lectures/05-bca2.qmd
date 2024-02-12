@@ -59,7 +59,7 @@ Today, we'll focus on discounting.
 1. "The rate at which future benefits and costs are discounted relative to current values often determines whether a project passes the *benefit-cost test*. This is especially true of projects with long time horizons, such as those to reduce greenhouse gas emissions."
 1. Two rationales for discounting future benefits:
     1. Consumption rate of discount: "we place a lower value on the consumption of future generations, because we assume that future generations will be wealthier than we are and that the utility people receive from an extra dollar of consumption declines as their level of consumption increases." (3% often used.)
-    1. Investment approach: long as the rate of return to investment is positive, we need to invest less than a dollar today to obtain a dollar of benefits in the future. (7% often used).
+    1. Investment approach: as long as the rate of return to investment is positive, we need to invest less than a dollar today to obtain a dollar of benefits in the future. (7% often used).
     1. These are very imperfect assumptions!
 
 @weitzman_stern:2007:
@@ -77,11 +77,11 @@ However, the consequences of doing this at scale violate the key justificatinos 
 
 1. Use a very low discount rate
     1. This places more weight on outcomes far in the future
-    1. However, this can also lead to irrational conclusions. For example, 
+    1. However, this can also lead to irrational conclusions. For example, ... ???
 1. Uncertain discount rate
     1. "Using an investment- or a consumption-based approach will require human judgment about the appropriate models to use to capture uncertainty about future discount rates" [@arrow_discount:2013]
     1. This is equivalent to declining discount rate -- as you go farther out, your NPV is dominated by the lower discount rates.
-    1. You still need to 
+    1. You still need to ... ???
 
 # Cost-benefit analysis in the wild
 
