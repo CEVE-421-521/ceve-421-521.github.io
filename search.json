@@ -312,158 +312,88 @@
     "text": "Footnotes\n\n\nJulia precompiles packages when they are installed, and (to a lesser extent) when they are first used. The first time you use a package it may take a moment to load. This is normal, nothing to worry about, and rapidly improving.↩︎\nTo do a better job, we should separate out the long-term trend from the seasonal cycle. This is called de-trending and is a common technique in climate science. We can worry more about this later.↩︎"
   },
   {
-    "objectID": "labs/lab-04/template.html",
-    "href": "labs/lab-04/template.html",
-    "title": "Lab 4: House Elevation NPV Analysis",
+    "objectID": "labs/lab-05/index.html",
+    "href": "labs/lab-05/index.html",
+    "title": "Lab 5: Sea-Level Rise",
     "section": "",
-    "text": "using CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Interpolations\nusing Plots\nusing StatsPlots\nusing Unitful\n\nPlots.default(; margin=6Plots.mm)"
+    "text": "There are two objectives of this lab:"
   },
   {
-    "objectID": "labs/lab-03/template.html",
-    "href": "labs/lab-03/template.html",
-    "title": "Lab 3: Depth-Damage Models",
-    "section": "",
-    "text": "using CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Interpolations\nusing Plots\nusing StatsPlots\nusing Unitful\n\nPlots.default(; margin=6Plots.mm)\n\n\nSite information\n\n\nDepth-Damage\n\n\nExpected annual damages\n\n\nDiscussion"
+    "objectID": "labs/lab-05/index.html#the-usual",
+    "href": "labs/lab-05/index.html#the-usual",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "The usual",
+    "text": "The usual\nAs always:\n\nClone the lab repository to your computer\nOpen the lab repository in VS Code\nOpen the Julia REPL and activate, then instantiate, the lab environment\nMake sure you can render: quarto render template.qmd in the terminal.\n\nIf you run into issues, try running ] build IJulia in the Julia REPL (] enters the package manager).\nIf you still have issues, try opening up blankfile.py. That should trigger VS Code to give you the option to install the Python extension, which you should do. Then you should be able to open a menu in the bottom right of your screen to select which Python installation you want VS Code to use."
   },
   {
-    "objectID": "labs/lab-08/index.html",
-    "href": "labs/lab-08/index.html",
-    "title": "Lab 8: Parking Garage Case Study",
-    "section": "",
-    "text": "This is a placeholder."
+    "objectID": "labs/lab-05/index.html#load-packages",
+    "href": "labs/lab-05/index.html#load-packages",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Load packages",
+    "text": "Load packages\n\nusing CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Plots\nusing StatsPlots\nusing Unitful\n\nPlots.default(; margin=5Plots.mm)"
   },
   {
-    "objectID": "labs/lab-08/index.html#overview",
-    "href": "labs/lab-08/index.html#overview",
-    "title": "Lab 8: Parking Garage Case Study",
-    "section": "",
-    "text": "This is a placeholder."
+    "objectID": "labs/lab-05/index.html#local-package",
+    "href": "labs/lab-05/index.html#local-package",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Local package",
+    "text": "Local package\nWe’re starting to accumulate a lot of code describing our model. A good way to store this model is by creating a local package. I have created a package called HouseElevation that contains the model code. You don’t need to do anything special to install it, and you don’t need to edit the code, though I’d encourage you to have a look around!\nWhen we work with local packages, it’s common to use another package called Revise. This is a cool package that will automatically propagate any changes you make to the package to any code that uses the package. You don’t need to worry about this for now – just load them.\n\nusing Revise\nusing HouseElevation"
   },
   {
-    "objectID": "labs/lab-01/index.html",
-    "href": "labs/lab-01/index.html",
-    "title": "Lab 1: Software Installation",
-    "section": "",
-    "text": "Labs are in-class exercises intended to get practice with coding or analysis workflows.\n\nInstructions available on website\nDownload ahead of time by using link from Canvas\nYou will have your own repository (more in a minute)\nTry to finish in class, but due in 1 week"
+    "objectID": "labs/lab-05/index.html#house",
+    "href": "labs/lab-05/index.html#house",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "House",
+    "text": "House\n\n\n\n\n\n\nWe will consider a single house, and will ignore uncertainty in the depth-damage function or other house parameters\n\n\n\n\nNeglect uncertainty in depth-damage function\nConsider a single building\nWe’re going to put all relevant information into a House object:\n\nDepth-damage function\nArea\nCost (USD)\nElevation relative to gauge\nMetadata\n\n\nWe can create a House as follows – note that we’re using a let...end block to create the House object. This means that any variables defined inside the block are not available outside the block, which is a good way to avoid “polluting the global namespace.”\n\nhouse = let\n    haz_fl_dept = CSV.read(\"data/haz_fl_dept.csv\", DataFrame) # read in the file\n    desc = \"one story, Contents, fresh water, short duration\"\n    row = @rsubset(haz_fl_dept, :Description == desc)[1, :] # select the row I want\n    area = 500u\"ft^2\"\n    height_above_gauge = 10u\"ft\"\n    House(\n        row;\n        area=area,\n        height_above_gauge=height_above_gauge,\n        value_usd=250_000,\n    )\nend\n\nWe can then use the House object to calculate the damage to the house for a given flood depth. Let’s convert the damage to dollars by multiplying the fraction (given by our depth-damage function) by the value of the house. For example:\n\n\nCode\nlet\n    depths = uconvert.(u\"ft\", (-7.0u\"ft\"):(1.0u\"inch\"):(30.0u\"ft\"))\n    damages = house.ddf.(depths) .* house.value_usd ./ 1000\n    scatter(\n        depths,\n        damages;\n        xlabel=\"Flood Depth\",\n        ylabel=\"Damage (Thousand USD)\",\n        label=\"$(house.description)\\n($(house.source))\",\n        legend=:bottomright,\n        size=(800, 400),\n        yformatter=:plain, # prevents scientific notation\n    )\nend\n\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe can also use the House object to calculate the cost of raising the house to a given elevation. We use the elevation_cost function like this:\n\nelevation_cost(house, 10u\"ft\")\n\n67620.0\n\n\nand again we can plot this.\n\nlet\n    elevations = 0u\"ft\":0.25u\"ft\":14u\"ft\"\n    costs = [elevation_cost(house, eᵢ) for eᵢ in elevations]\n    scatter(\n        elevations,\n        costs ./ 1_000;\n        xlabel=\"Elevation\",\n        ylabel=\"Cost (Thousand USD)\",\n        label=\"$(house.description)\\n($(house.source))\",\n        legend=:bottomright,\n        size=(800, 400),\n        yformatter=:plain, # prevents scientific notation\n    )\nend"
   },
   {
-    "objectID": "labs/lab-01/index.html#labs",
-    "href": "labs/lab-01/index.html#labs",
-    "title": "Lab 1: Software Installation",
-    "section": "",
-    "text": "Labs are in-class exercises intended to get practice with coding or analysis workflows.\n\nInstructions available on website\nDownload ahead of time by using link from Canvas\nYou will have your own repository (more in a minute)\nTry to finish in class, but due in 1 week"
+    "objectID": "labs/lab-05/index.html#sea-level-rise",
+    "href": "labs/lab-05/index.html#sea-level-rise",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Sea-level rise",
+    "text": "Sea-level rise\n\n\n\n\n\n\nWe will sample many different scenarios of sea-level rise\n\n\n\nWe’re modeling sea-level rise following the approach of Oddo et al. (2017). Essentially, we use five parameters: \\(a\\), \\(b\\), \\(c\\), \\(t^*\\), and \\(c^*\\). The local sea-level in year \\(t\\) is given by equation 6 of Oddo et al. (2017):\n\\[\n\\mathrm{SLR}= a + b(t - 2000) + c (t - 2000)^2 + c^* \\, \\mathbb{I} (t &gt; t^*) (t - t^*)\n\\]\nThe authors note:\n\nIn this model, the parameters \\(a\\), \\(b\\), and \\(c\\) represent the reasonably well-characterized process of thermosteric expansion as a second-order polynomial. It also accounts for more poorly understood processes, including potential abrupt sealevel rise consistent with sudden changes in ice flow dynamics.Here, \\(c^*\\) represents an increase in the rate of sea-level rise that takes place at some uncertain time, \\(t^*\\), in the future.\n\nThis is, of course, a highly simplified model. However, the parameters can be calibrated to match historical sea-level rise (i.e., throwing out any parameter values that don’t match the historical record) and use a statistical inversion method to estimate the parameters. One could also calibrate the parameters to match other, more complex, physics-based models. We’ll use Monte Carlo simulations from Oddo et al. (2017), available on GitHub. These were actually calibrated for the Netherlands, but we’ll pretend that sea-level rise in your location matches (which – as we know – it doesn’t).\n\nslr_scenarios = let\n    df = CSV.read(\"data/slr_oddo.csv\", DataFrame)\n    [Oddo17SLR(a, b, c, tstar, cstar) for (a, b, c, tstar, cstar) in eachrow(df)]\nend\nprintln(\"There are $(length(slr_scenarios)) parameter sets\")\n\nWe can plot these scenarios to get a sense of the range of sea-level rise we might expect.\n\nlet\n    years = 1900:2150\n    p = plot(;\n        xlabel=\"Year\",\n        ylabel=\"Mean sea-level (ft)\\nwith respect to the year 2000\",\n        label=\"Oddo et al. (2017)\",\n        legend=false\n    )\n    for s in rand(slr_scenarios, 250)\n        plot!(p, years, s.(years); color=:lightgrey, alpha=0.5, linewidth=0.5)\n    end\n    p\nend\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe key insight you should take from this plot is that uncertainty in future sea level increases over time!"
   },
   {
-    "objectID": "labs/lab-01/index.html#toolkit-overview",
-    "href": "labs/lab-01/index.html#toolkit-overview",
-    "title": "Lab 1: Software Installation",
-    "section": "Toolkit: overview",
-    "text": "Toolkit: overview\nGetting set up for this course requires the following steps. If you are an experienced programmer, you are free to follow your own workflow to set up these tools. You will absolutely need Quarto, GitHub, and Julia. If you are not an experienced programmer, the following steps are not the only way to get these tools set up, but they are a very good way.\nIf you install course tools using steps other than the ones provided on this page, be aware that your instructors may be able to provide you with only limited support.\n\nJulia\nWe’re using the Julia programming language in this course. Julia is a fast, modern, open-source programming language designed for numerical and scientific computing.\nWe’re using it for a few key reasons. First, the syntax is human-readable and closely parallels math notation, which reduces the cognitive burden of translating between conceptual and computational models. Second, it’s fast, which means that Julia solves the “two language problem”: you don’t need to learn C or Fortran to dig under the hood and write fast code. Other great features include that it’s open-source, which makes it reproducible and shareable, and it has a fantastic package manager.\nThere are some great resources out there about why Julia is great. See posts by Julia Data Science or the Julia Creators (with followup).\n\n\nGitHub\ngit is a software tool for version control that keeps track of changes to files over time. GitHub is a website that hosts git repositories and provides a web interface for interacting with them.\nTo use GitHub, you’ll need a GitHub account. Code on GitHub is stored in repositories. A simple workflow is to clone a repository to your computer, make changes, commit them, then push your changes to GitHub.\nWe will also use GitHub classroom, which allows instructors to share templates and view your code.\n\n\nQuarto\nQuarto is a tool that allows you to combine text and code and create many types of output. For example, this website is made with Quarto! You will use Quarto to create reports for labs. This lets you keep everything in one place – no more running code, saving a figure to Downloads, copying into Word, then trying to remember where to paste the figure when you update the code.\n\n\nVS Code\nVS Code is a text editor. If you are an advanced user of another text editor, you can use that instead. However, VS Code is very nearly an officially supported IDE for Julia."
+    "objectID": "labs/lab-05/index.html#storm-surge",
+    "href": "labs/lab-05/index.html#storm-surge",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Storm surge",
+    "text": "Storm surge\n\n\n\n\n\n\nWe will consider parametric uncertainty in the storm surge\n\n\n\nThe next component of the model is the storm surge (i.e., the height of the flood above mean sea-level). We can model the water level at the gauge as the sum of the local sea-level and the storm surge. We can then model the water level at the house as the water level at the gauge minus the elevation of the house above the gauge.\nWe will consider parametric uncertainty in the storm surge. From lab 3, you should have a GeneralizedExtremeValue distribution for the storm surge. We can then sample parameters from a range centered on this distribution. For example, in the example for lab 3 we had GeneralizedExtremeValue(5, 1.5, 0.1). We can use this function to create a distribution for the storm surge.\n\nfunction draw_surge_distribution()\n    μ = rand(Normal(5, 1))\n    σ = rand(Exponential(1.5))\n    ξ = rand(Normal(0.1, 0.05))\n    GeneralizedExtremeValue(μ, σ, ξ)\nend\n\ndraw_surge_distribution (generic function with 1 method)\n\n\nWe can then call this function many times to get many different distributions for the storm surge. For example,\n[draw_surge_distribution() for _ in 1:1000]\n\n\n\n\n\n\nImportant\n\n\n\nThis is NOT statistical estimation. We are not saying anything at all about whether these parameters are consistent with observations. In fact, even when parameters are uncertain, sampling around a point estimate in this manner usually produces lots of parameter values that are highly implausible. Here, we are just exploring the implications of different parameter values. Building a better model for storm surge is a great idea for your final project!"
   },
   {
-    "objectID": "labs/lab-01/index.html#installing-software",
-    "href": "labs/lab-01/index.html#installing-software",
-    "title": "Lab 1: Software Installation",
-    "section": "Installing software",
-    "text": "Installing software\n\nInstall Julia\nThe best way to install Julia is through the juliaup tool, which will let you easily manage versions in the future and works seamlessly with VS Code. The instructions can be found at the JuliaUp GitHub repository, but we will summarize them here.\nIf your computer uses Windows, you can install Juliaup from the Windows Store.\nIf you have a Mac (or are using Linux), open a terminal (such as the Terminal app) and enter:\ncurl -fsSL https://install.julialang.org | sh\nOnce you install Juliaup, install Julia version 1.10 by opening a terminal (in MacOS or Linux) or the command line (in Windows) and entering:\njuliaup add 1.10\njuliaup default 1.10\nThis will install Julia 1.10 and make it the default version, which should maximize package compatibility throughout this course. Going forward, if you want to add new versions or change the default, you can follow the Juliaup instructions.\n\n\nInstall VS Code\nVS Code is as close to an officially supported editor for Julia as you can get. We will follow this guide for setting up VS Code with Julia.\n\nYou can skip this section if you are an experienced programmer and already have a preferred IDE. Your IDE will likely have instructions for Julia and Quarto setup.\n\nYou can download VS Code here; open the downloaded file to install. Make sure to select the correct version for your operating system. If you have a newish Apple mac (with M1, M2, or M3 chip), make sure to check whether you have an Intel or Apple chip before choosing which version to download. You can also use homebrew or your preferred package manager to install VS Code.\n\nVS Code Julia Extension\nLike many IDEs, VS Code is a modular system that can be extended with plugins. We will install the Julia extension, which will allow us to run Julia code and interact with the Julia REPL from within VS Code (we’ll add the Quarto extension later).\n\nOpen VS Code.\nSelect View and click Extensions to open the Extension View.\nSearch for julia in the search box. Click the green install button.\nRestart VS Code once the installation is complete. It should automatically find your Julia installation; reach out if not.\n\nThe Julia VS Code extension offers you some nice features. You can start a REPL (an interactive Julia coding environment) by opening the “Command Palette” (View -&gt; Command Palette, or CTRL/CMD+SHIFT+P) and typing “REPL” to bring up “Julia: Start REPL”. You can also create .jl and .qmd files to write Julia code and execute line by line.\n\n\n\nGitHub\nSee GitHub official tutorials for more helpful resources and tutorials.\n\nCreate GitHub Account\nIf you already have a GitHub account, you can use that for this course and do not need to create a new account. Otherwise, create an account. It doesn’t have to be linked to your Rice email or your NetID.\nFor labs and projects, you should use the GitHub Classroom link posted on Canvas to “accept” the assignment, which will give you your own GitHub repository for that assignment. The first time you click one of these links, you will need to link your place on the course roster with your GitHub account.\n\n\nGitHub Desktop (Optional)\nYou can do everything that you will need to do for this course with GitHub directly through VS Code. The GitHub desktop app is also great, or alternatively you may work directly through the terminal if you have prior experience.\n\n\n\nGitHub Copilot (Optional)\nGitHub Copilot is an AI-powered tool that helps you write code. You can install it following instructions here As described in the quickstart guide, Copilot is free for students. Be sure to review the policy on AI language models in the syllabus!\n\nInstall Git\ngit is a version control software that powers GitHub under the hood (git is the version control software, GitHub is an online platform). Based on past experience with the course, you probably already have git installed! If you’re not sure if it’s installed, see instructions here.\n\n\n\nInstall Quarto\nQuarto combines the best of Jupyter notebooks and R Markdown to create a document format that is ideal for conducting and communicating data science. We will use Quarto to create and share our work in this course; this website is also built using Quarto.||\nFollow the documentation to install Quarto. Be sure to ensure that you have the right version for your operating system.\n\nInstall the Quarto Extension for VS Code\nUnder “Step 2”, click on the VS Code icon.\n\n\nInstall Jupyter\nUnder the hood, Quarto uses Jupyter to run code. You don’t need to know how Jupyter works or worry about it, because it runs under the hood, but we will need to install it. Jupyter is a Python package.\nIf you don’t have Python installed (if you’re not sure, you should install Miniconda below), you’ll need to install it. The best way, by far, is to install Miniconda (see Conda documentation).\nOnce you have Python installed, you can open your Terminal (open VS Code then open the terminal), then run\npython3 -m pip install jupyter\n\n\n\n\n\n\nBased on past experience, getting Jupyter installed and Quarto to find your Jupyter installation is the most common source of problems, especially on Windows machines. Please start this early so you have a full week to get help if you need it."
+    "objectID": "labs/lab-05/index.html#discount-rate",
+    "href": "labs/lab-05/index.html#discount-rate",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Discount rate",
+    "text": "Discount rate\n\n\n\n\n\n\nWe will consider parametric uncertainty in the discount rate.\n\n\n\nThe discount rate is an important economic parameter in our NPV analysis. There are elements of discounting that are perhaps not random (e.g., how much do you value the future versus the present?) while there are other elements that are very much random (what is the opportunity cost of spending money now?) We will model this by treating the discount rate as a random variable, but more sophisticated analyses are possible. We can use the following function\n\nfunction draw_discount_rate()\n    return rand(Normal(0.04, 0.02))\nend\n\nNote that we are now defining the discount rate as a proportion (from 0 to 1) rather than a percentage (from 0 to 100)."
   },
   {
-    "objectID": "labs/lab-01/index.html#lab-instructions",
-    "href": "labs/lab-01/index.html#lab-instructions",
-    "title": "Lab 1: Software Installation",
-    "section": "Lab Instructions",
-    "text": "Lab Instructions\nOnce you have everything set up, your lab for the week will be to complete the following steps. These will ensure that your installation is working smoothly!\n\nFollow the link to lab 1 assignment from Canvas (it should start with classroom.github.com). You will get a message saying ” Your assignment repository has been created: …“. Click on the link to go to your repository.\nclone the repository for lab 01 (use the Github Classroom link from Canvas) to your computer. You can use VS Code functionality, GitHub Desktop, or your terminal.\nOpen the directory containing the repository in VS Code doing one of the following:\n\nFrom GitHub desktop: Repository &gt; Open in Visual Studio Code\nIn VS Code: File &gt; Open Folder...\n\nOpen the index.qmd file in VS Code and replace the author: CEVE 421/521 line with your name and netID\nOpen the JULIA Repl\n\nOpen the command palette (Ctrl+Shift+P on Windows/Linux, Cmd+Shift+P on Mac)\nStart typing “Julia: Start REPL”. It will auto-complete; select the command as it appears.\n\nSet up your project environment.\n\nIn the Julia REPL, type ] to enter the package manager. It should now show something like (lab-01) pkg&gt;.\nType instantiate and run it (Enter). This will install all the packages needed for this lab.\nType the backspace key to exit the package manager.\n\nEdit the index.qmd file to add your name and netID\nRender the document\n\nOpen the index.qmd file\nOpen the command palette and run “Quarto: Preview”. After some activity, a preview of the rendered document should open in VS Code. If you see something like Browse at http://localhost:4200/index.html you can open that link in your web browser to see the rendered document.\nRender to PDF or Microsoft Word following the directions below.\n\nIf you’re still having trouble:\n\nTry running build IJulia in the Julia REPL’s Pkg mode (type ])\nCome to office hours\nPost on the Canvas discussion for Lab 1\n\ncommit and push your changes to GitHub\nSubmit your rendered .docx or .pdf file to Canvas\n\n\nRunning Code\nWe can use Quarto to run Julia code in-line\n\nprintln(\"I'm using Julia!\")\n\nI'm using Julia!\n\n\nWe can also load packages\n\nusing CairoMakie\nusing LaTeXStrings\n\nand use them to make plots\n\nf = Figure()\nax = Axis(f[1, 1]; title=L\"$y = \\sin(x)$\", xlabel=L\"$x$\", ylabel=L\"$y$\")\nx = range(0, 10; length=100)\ny = sin.(x)\nlines!(ax, x, y)\nf\n\n\n\n\n\n\n\n\n\n\nRendering the Document\nA Quarto document is a plain text file that uses a simple code language to embed text, math, code, and the code’s output. You can run the document line by line, or you can render to a variety of formats. This is helpful for sharing with others, or for creating a final document for yourself.\nWe will check our ability to\n\nPreview the document in HTML (a web-native format)\nRender the document to PDF or Microsoft Word (a portable, shareable, and printable format)\n\n\nHTML\nFirst, verify that you can preview the document in HTML:\n\nOpen the command palette (Cmd+Shift+P on macOS, Ctrl+Shift+P on Windows/Linux)\nType “Quarto: Preview”\n\n\n\nPDF\nYou can use Quarto to generate PDF documents. Follow the instructions on Quarto’s website to install the necessary software.\n\nTo instruct Quarto to render to PDF, you need to edit the document metadata. Specifically, uncomment the lines in the document metadata corresponding to the PDF format.\nOpen the command palette (Cmd+Shift+P on macOS, Ctrl+Shift+P on Windows/Linux)\nType “Quarto: Render”\n\n\n\nWord\nYou can also render the document to Microsoft Word. See the Quarto documentation.\n\nTo instruct Quarto to render to Word, you need to edit the document metadata. Specifically, uncomment the lines in the document metadata corresponding to the Word format.\nOpen the command palette (Cmd+Shift+P on macOS, Ctrl+Shift+P on Windows/Linux)\nType “Quarto: Render”"
+    "objectID": "labs/lab-05/index.html#running-a-simulation",
+    "href": "labs/lab-05/index.html#running-a-simulation",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Running a simulation",
+    "text": "Running a simulation\nIn the notation we’ve seen in class, we have a system model \\(f\\) that takes in a state of the world \\(\\mathbf{s}\\), an action \\(a\\), and outputs some metric or metrics. I’ve reproduced this in our model, adding one extra piece: a ModelParams object that contains all the parameters of the model that don’t change from one simulation to the next.\nIn our model, the ModelParams are the house characteristics (area, value, and depth-damage curve) and the years we’re considering. You should consider different time horizons!\n\np = ModelParams(\n    house=house,\n    years=2024:2083\n)\n\nThe next step is to create an object to hold our state of the world (SOW). We can create one like this. In the next step, we’ll want to sample a large ensemble of SOWs.\n\nsow = SOW(\n    rand(slr_scenarios),\n    draw_surge_distribution(),\n    draw_discount_rate()\n)\n\nLast, we need to define our action. For now, our action is very simple: we’re going to raise the house to a fixed elevation. However, in the future we might have a more complex action (e.g., when the sea level exceeds some threshold \\(t1\\), raise the house by some fixed amount \\(t2\\), which has two parameters). We define our action as follows:\n\na = Action(3.0u\"ft\")\n\nFinally, we have a function to run the simulation. This function takes in the model parameters, the state of the world, and the action, and returns the NPV of the action. Please have a look at run_sim.jl to see how this is implemented!\n\nres = run_sim(a, sow, p)\n\n-710877.7557496062"
   },
   {
-    "objectID": "labs/lab-09/index.html",
-    "href": "labs/lab-09/index.html",
-    "title": "Lab 9: The Lake Problem",
-    "section": "",
-    "text": "This is a placeholder."
+    "objectID": "labs/lab-05/index.html#apply-the-model-to-your-site",
+    "href": "labs/lab-05/index.html#apply-the-model-to-your-site",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Apply the model to your site",
+    "text": "Apply the model to your site\n\nBuild your own house object, based on the house you’ve been using (or you can switch if you’d like)\n\nBriefly explain where you got the area, value, and depth-damage curve from\nPlot the depth-damage curve\nPlot the cost of raising the house to different elevations from 0 to 14 ft\n\nRead in the sea-level rise data\nModify my code to create a function to draw samples of storm surge and the discount rate. Explain your modeling choices!\nDefine an illustrative action, SOW, and model parameters, and run a simulation."
   },
   {
-    "objectID": "labs/lab-09/index.html#overview",
-    "href": "labs/lab-09/index.html#overview",
-    "title": "Lab 9: The Lake Problem",
-    "section": "",
-    "text": "This is a placeholder."
+    "objectID": "labs/lab-05/index.html#large-ensemble",
+    "href": "labs/lab-05/index.html#large-ensemble",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Large ensemble",
+    "text": "Large ensemble\nNow that you’ve got the model working for your site, you should run a large ensemble of simulations (explain how you interpret “large”).\n\nSample many SOWs (see below)\nSample a range of actions. You can do this randomly, or you can look at just a couple of actions (e.g., 0, 3, 6, 9, 12 ft) – explain your choice.\nRun the simulations for each SOW and action. You can use a for loop for this.\nCreate a DataFrame of your key inputs and results (see below)\n\nHere’s how you can create a few SOWs and actions and run the simulations for each:\n\nsows = [SOW(rand(slr_scenarios), draw_surge_distribution(), draw_discount_rate()) for _ in 1:10] # for 10 SOWs\nactions = [Action(3.0u\"ft\") for _ in 1:10] # these are all the same\nresults = [run_sim(a, s, p) for (a, s) in zip(actions, sows)]\n\n10-element Vector{Float64}:\n  -61868.57862977405\n  -67237.79686407646\n  -65394.2182087443\n  -84149.3090256865\n -517191.1229076938\n  -61567.0\n -456000.25199364184\n -122474.23947973218\n  -61570.38011831405\n  -61710.73352150028\n\n\nHere’s how you can create a dataframe of your results. Each row corresponds to one simulation, and the columns are the inputs and outputs of the simulation.\n\ndf = DataFrame(\n    npv=results,\n    Δh_ft=[a.Δh_ft for a in actions],\n    slr_a=[s.slr.a for s in sows],\n    slr_b=[s.slr.b for s in sows],\n    slr_c=[s.slr.c for s in sows],\n    slr_tstar=[s.slr.tstar for s in sows],\n    slr_cstar=[s.slr.cstar for s in sows],\n    surge_μ=[s.surge_dist.μ for s in sows],\n    surge_σ=[s.surge_dist.σ for s in sows],\n    surge_ξ=[s.surge_dist.ξ for s in sows],\n    discount_rate=[s.discount_rate for s in sows],\n)\n\n10×11 DataFrame\n\n\n\nRow\nnpv\nΔh_ft\nslr_a\nslr_b\nslr_c\nslr_tstar\nslr_cstar\nsurge_μ\nsurge_σ\nsurge_ξ\ndiscount_rate\n\n\n\nFloat64\nFloat64\nFloat64\nFloat64\nFloat64\nFloat64\nFloat64\nFloat64\nFloat64\nFloat64\nFloat64\n\n\n\n\n1\n-61868.6\n3.0\n41.1559\n2.17952\n0.00100156\n2067.4\n17.9032\n5.77518\n0.573448\n0.0557051\n0.033753\n\n\n2\n-67237.8\n3.0\n36.2131\n2.39398\n0.00289456\n2019.08\n6.04179\n5.7126\n0.558078\n0.157045\n0.0255227\n\n\n3\n-65394.2\n3.0\n43.3258\n2.58222\n0.00438437\n2046.18\n14.9276\n5.30002\n0.793912\n0.0803801\n0.0355017\n\n\n4\n-84149.3\n3.0\n32.4364\n1.94842\n0.000168338\n2083.53\n17.3336\n6.643\n0.592408\n0.237746\n0.0285327\n\n\n5\n-5.17191e5\n3.0\n14.9893\n1.81748\n0.000567944\n2018.21\n22.1679\n4.40659\n2.99982\n0.038229\n0.0385293\n\n\n6\n-61567.0\n3.0\n30.9718\n2.05055\n0.000945859\n2091.52\n28.0413\n3.95486\n0.0502782\n0.0868399\n0.0636091\n\n\n7\n-4.56e5\n3.0\n52.2318\n2.71748\n0.00614131\n2034.42\n19.5402\n6.0403\n1.68128\n0.106842\n0.0154647\n\n\n8\n-1.22474e5\n3.0\n27.1447\n2.1201\n0.00158074\n2042.98\n15.9945\n4.62582\n1.7026\n0.135964\n0.0659431\n\n\n9\n-61570.4\n3.0\n18.3117\n1.64975\n-0.00148664\n2056.08\n18.3323\n5.51208\n0.292629\n0.105844\n0.0327748\n\n\n10\n-61710.7\n3.0\n38.5742\n2.24758\n0.00276166\n2047.48\n24.8926\n5.69724\n0.294538\n0.171753\n0.0670211"
   },
   {
-    "objectID": "labs/lab-07/index.html",
-    "href": "labs/lab-07/index.html",
-    "title": "Lab 7: Multiobjective Optimization",
-    "section": "",
-    "text": "This is a placeholder."
-  },
-  {
-    "objectID": "labs/lab-07/index.html#overview",
-    "href": "labs/lab-07/index.html#overview",
-    "title": "Lab 7: Multiobjective Optimization",
-    "section": "",
-    "text": "This is a placeholder."
-  },
-  {
-    "objectID": "labs/lab-06/index.html",
-    "href": "labs/lab-06/index.html",
-    "title": "Lab 6: Policy Search",
-    "section": "",
-    "text": "This is a placeholder."
-  },
-  {
-    "objectID": "labs/lab-06/index.html#overview",
-    "href": "labs/lab-06/index.html#overview",
-    "title": "Lab 6: Policy Search",
-    "section": "",
-    "text": "This is a placeholder."
-  },
-  {
-    "objectID": "labs/lab-03/index.html",
-    "href": "labs/lab-03/index.html",
-    "title": "Lab 3: Depth-Damage Models",
-    "section": "",
-    "text": "Today, we’re going to be working with depth-damage functions. This will give us practice:\n\nworking with and manipulating tabular data\nwriting functions\n\nIn addition, the depth-damage function you choose / build will be a building block for your final project.\n\n\nAs before:\n\nClone the repository for this lab to your computer and open it in VS Code.\nIn the Julia REPL, activate and then instantiate the project environment.\nCheck that you can preview the project by running quarto preview template.qmd in the terminal (not Julia REPL). If that doesn’t work, open the Julia REPL, enter package mode with ], and run build IJulia.\nIf that doesn’t work, ask for help! The way VS Code looks for Python on your computer can be weird and counterintuitive.\n\n\n\n\nAs usual, we load all required packages at the top of the notebook, in one place.\n\nusing CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Interpolations\nusing Plots\nusing StatsPlots\nusing Unitful\n\n1Plots.default(; margin=6Plots.mm)\n\n\n1\n\nThis updates the default margin in our plots so that axis labels don’t get cut off."
-  },
-  {
-    "objectID": "labs/lab-03/index.html#setup",
-    "href": "labs/lab-03/index.html#setup",
-    "title": "Lab 3: Depth-Damage Models",
-    "section": "",
-    "text": "As before:\n\nClone the repository for this lab to your computer and open it in VS Code.\nIn the Julia REPL, activate and then instantiate the project environment.\nCheck that you can preview the project by running quarto preview template.qmd in the terminal (not Julia REPL). If that doesn’t work, open the Julia REPL, enter package mode with ], and run build IJulia.\nIf that doesn’t work, ask for help! The way VS Code looks for Python on your computer can be weird and counterintuitive."
-  },
-  {
-    "objectID": "labs/lab-03/index.html#load-packages",
-    "href": "labs/lab-03/index.html#load-packages",
-    "title": "Lab 3: Depth-Damage Models",
-    "section": "",
-    "text": "As usual, we load all required packages at the top of the notebook, in one place.\n\nusing CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Interpolations\nusing Plots\nusing StatsPlots\nusing Unitful\n\n1Plots.default(; margin=6Plots.mm)\n\n\n1\n\nThis updates the default margin in our plots so that axis labels don’t get cut off."
-  },
-  {
-    "objectID": "labs/lab-03/index.html#parsing",
-    "href": "labs/lab-03/index.html#parsing",
-    "title": "Lab 3: Depth-Damage Models",
-    "section": "Parsing",
-    "text": "Parsing\nWe’d like to be able to use the depth-damage functions in this file. However, the depths are stored in a somewhat annoying format (e.g., “ft04m” means -4 feet). To make life simple, I’ve created some functionality in the depthdamage.jl file that you can use. We can load it as follows:\n\ninclude(\"depthdamage.jl\")\n\nDepthDamageData\n\n\nThe main thing that we’ll use is called DepthDamageData. This is a data structure or type that stores the depth-damage data, as well as any relevant metadata. If you’ve created a class in a language like C++ or Python, it’s the same idea. I’ve also defined a constructor that takes in the row of a DataFrame and creates a DepthDamageData object, to make life easy.\nI’ll show you how to do this for an illustrative depth-damage function from the New Orleans USACE.\n\ndemo_row = @rsubset(\n    haz_fl_dept, :Description == \"one story, Contents, fresh water, short duration\"\n)[\n    1, :,\n]\ndd = DepthDamageData(demo_row)\n\nDepthDamageData(Quantity{Float64, 𝐋, Unitful.FreeUnits{(ft,), 𝐋, nothing}}[-4.0 ft, -3.0 ft, -2.0 ft, -1.0 ft, 0.0 ft, 1.0 ft, 2.0 ft, 3.0 ft, 4.0 ft, 5.0 ft  …  15.0 ft, 16.0 ft, 17.0 ft, 18.0 ft, 19.0 ft, 20.0 ft, 21.0 ft, 22.0 ft, 23.0 ft, 24.0 ft], [0.0, 0.0, 0.0, 0.0, 0.0, 42.0, 63.0, 82.0, 85.0, 91.0  …  91.0, 91.0, 91.0, 91.0, 91.0, 91.0, 91.0, 91.0, 91.0, 91.0], String7(\"RES1\"), \"57\", String31(\"USACE - New Orleans\"), \"one story, Contents, fresh water, short duration\", \"missing\")\n\n\nThis prints out a bunch of data. We can see that it has the following fields, which should broadly match with our DataFrame:\n\nfieldnames(typeof(dd))\n\n(:depths, :damages, :occupancy, :dmg_fn_id, :source, :description, :comment)"
-  },
-  {
-    "objectID": "labs/lab-03/index.html#plotting",
-    "href": "labs/lab-03/index.html#plotting",
-    "title": "Lab 3: Depth-Damage Models",
-    "section": "Plotting",
-    "text": "Plotting\nNow that we’ve created a DepthDamageData object, we can plot it. When we plot things with units, the Unitful package (as long as we are using it) knows how to handle them.\n\nscatter(\n    dd.depths,\n    dd.damages;\n    xlabel=\"Flood Depth at House\",\n    ylabel=\"Damage (%)\",\n    label=\"$(dd.description) ($(dd.source))\",\n    legend=:bottomright,\n    size=(700, 500),\n)"
-  },
-  {
-    "objectID": "labs/lab-03/index.html#interpolating",
-    "href": "labs/lab-03/index.html#interpolating",
-    "title": "Lab 3: Depth-Damage Models",
-    "section": "Interpolating",
-    "text": "Interpolating\nThis is great. However, what if we want to estimate damage between the points? We need a way to interpolate. We can do this using the Interpolations package!\n\n1itp = let\n2    depth_ft = ustrip.(u\"ft\", dd.depths)\n    damage_frac = dd.damages\n    Interpolations.LinearInterpolation(\n        depth_ft,\n        damage_frac;\n3        extrapolation_bc=Interpolations.Flat(),\n    )\nend\n\n\n1\n\nI really like these let...end blocks and use them quite a bit. The main thing to know is that all the variables defined inside the let block are only available inside the let block. Once we get to the end of the block, they vanish! This keeps us from defining tons of variables that get in each others’ way.\n\n2\n\nThe Interpolations package doesn’t take units on its input, so we convert the input (which can be of any length unit) to feet before passing it in. If our depths are in meters or millimeters, it won’t be a problem – the ustrip function will convert to feet and then turn them into scalars.\n\n3\n\nInterpolations requires us to specify how to extrapolate. We choose Flat(), meaning that anything below the lowest value in the table will be assumed to have the same damage as the lowest value in the table and anything above the highest value in the table will be assumed to have the same damage as the highest value in the table.\n\n\n\n\nNow we can use this interpolation function to estimate damage at any depth.\n\nlet\n1    dmg_fn(x) = itp(ustrip.(u\"ft\", x))\n2    dmg_fn.([3.1u\"ft\", 2.2u\"m\", 91.4u\"inch\"])\nend\n\n\n1\n\nConvert the input to feet\n\n2\n\nEstimate damage at 3.1 feet, 2.2 meters, and 91.4 inches\n\n\n\n\n3-element Vector{Float64}:\n 82.30000000000001\n 91.0\n 91.0"
-  },
-  {
-    "objectID": "labs/lab-03/index.html#packaging",
-    "href": "labs/lab-03/index.html#packaging",
-    "title": "Lab 3: Depth-Damage Models",
-    "section": "Packaging",
-    "text": "Packaging\nTo make life simple, we can define a function that takes in some depths and some damages and returns a function that can be used to estimate damage at any depth.\n\nfunction get_depth_damage_function(\n    depth_train::Vector{&lt;:T}, dmg_train::Vector{&lt;:AbstractFloat}\n) where {T&lt;:Unitful.Length}\n\n    # interpolate\n    depth_ft = ustrip.(u\"ft\", depth_train)\n    interp_fn = Interpolations.LinearInterpolation(\n1        depth_ft,\n        dmg_train;\n2        extrapolation_bc=Interpolations.Flat(),\n    )\n\n    damage_fn = function (depth::T2) where {T2&lt;:Unitful.Length}\n3        return interp_fn(ustrip.(u\"ft\", depth))\n    end\n4    return damage_fn\nend\n\n\n1\n\nThe Interpolations package doesn’t take units on its input, so we convert the input (which can be of any length) to feet before passing it in. If our depths are in meters or millimeters, it won’t be a problem – the ustrip function will convert to feet and then turn them into scalars.\n\n2\n\nInterpolations requires us to specify how to extrapolate. We choose Flat(), meaning that anything below the lowest value in the table will be assumed to have the same damage as the lowest value in the table and anything above the highest value in the table will be assumed to have the same damage as the highest value in the table.\n\n3\n\nThis is a bit confusing. We are defining a function, inside of a function.\n\n4\n\nWe return the function that we just defined. So when we call this function, we get a function – we in turn need to call that function on something else.\n\n\n\n\nget_depth_damage_function (generic function with 1 method)\n\n\n\ndamage_fn = get_depth_damage_function(dd.depths, dd.damages)\n\n#16 (generic function with 1 method)\n\n\nNow damage_fn is a function. It takes in a depth, with some type of length unit defined using Unitful, and returns the damage in percent. We can use this to plot a depth-damage curve:\n\np = let\n1    depths = uconvert.(u\"ft\", (-7.0u\"ft\"):(1.0u\"inch\"):(30.0u\"ft\"))\n2    damages = damage_fn.(depths)\n    scatter(\n        depths,\n        damages;\n        xlabel=\"Flood Depth\",\n        ylabel=\"Damage (%)\",\n        label=\"$(dd.description) ($(dd.source))\",\n        legend=:bottomright,\n        size=(800, 400),\n        linewidth=2,\n    )\nend\np\n\n\n1\n\nWe create a vector of depths from -7 feet to 30 feet, in 1 inch increments. We use uconvert to convert the units to feet (by default, Unitful converts to meters when we add together length units).\n\n2\n\nOur damage_fn is defined to take in a single scalar. To make predictions about a Vector of depths, we use . to broadcast the function over the vector.\n\n\n\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOf course, if we use plot instead of scatter, then we get a line plot which is automatically smooth."
+    "objectID": "labs/lab-05/index.html#analysis",
+    "href": "labs/lab-05/index.html#analysis",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "Analysis",
+    "text": "Analysis\nNow, analyze your results. You can use scatterplots and other visualizations, or any other statistical analyses that you think may be helpful. Remember that the goal is to understand how different parameter values affect the success or failure of different actions.\nSome questions to consider:\n\nWhen do you get the best results?\nWhen do you get the worst results?\nWhat are the most important parameters?\nIf you had unlimited computing power, would you run more simulations? How many?\nWhat are the implications of your results for decision-making?"
   },
   {
     "objectID": "labs/lab-04/index.html",
@@ -550,18 +480,186 @@
     "text": "Discussion\n\nWhat do you notice about the NPV for different actions?\nWhat do you notice about the sensitivity test?\nWhat are some limitations of this analysis?\n\nWhat things are missing from this analysis that you think are important?\nHow might they affect the results?\nWhat are some ways you might address these limitations?"
   },
   {
-    "objectID": "labs/lab-05/index.html",
-    "href": "labs/lab-05/index.html",
-    "title": "Lab 5: Sea-Level Rise",
+    "objectID": "labs/lab-03/index.html",
+    "href": "labs/lab-03/index.html",
+    "title": "Lab 3: Depth-Damage Models",
+    "section": "",
+    "text": "Today, we’re going to be working with depth-damage functions. This will give us practice:\n\nworking with and manipulating tabular data\nwriting functions\n\nIn addition, the depth-damage function you choose / build will be a building block for your final project.\n\n\nAs before:\n\nClone the repository for this lab to your computer and open it in VS Code.\nIn the Julia REPL, activate and then instantiate the project environment.\nCheck that you can preview the project by running quarto preview template.qmd in the terminal (not Julia REPL). If that doesn’t work, open the Julia REPL, enter package mode with ], and run build IJulia.\nIf that doesn’t work, ask for help! The way VS Code looks for Python on your computer can be weird and counterintuitive.\n\n\n\n\nAs usual, we load all required packages at the top of the notebook, in one place.\n\nusing CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Interpolations\nusing Plots\nusing StatsPlots\nusing Unitful\n\n1Plots.default(; margin=6Plots.mm)\n\n\n1\n\nThis updates the default margin in our plots so that axis labels don’t get cut off."
+  },
+  {
+    "objectID": "labs/lab-03/index.html#setup",
+    "href": "labs/lab-03/index.html#setup",
+    "title": "Lab 3: Depth-Damage Models",
+    "section": "",
+    "text": "As before:\n\nClone the repository for this lab to your computer and open it in VS Code.\nIn the Julia REPL, activate and then instantiate the project environment.\nCheck that you can preview the project by running quarto preview template.qmd in the terminal (not Julia REPL). If that doesn’t work, open the Julia REPL, enter package mode with ], and run build IJulia.\nIf that doesn’t work, ask for help! The way VS Code looks for Python on your computer can be weird and counterintuitive."
+  },
+  {
+    "objectID": "labs/lab-03/index.html#load-packages",
+    "href": "labs/lab-03/index.html#load-packages",
+    "title": "Lab 3: Depth-Damage Models",
+    "section": "",
+    "text": "As usual, we load all required packages at the top of the notebook, in one place.\n\nusing CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Interpolations\nusing Plots\nusing StatsPlots\nusing Unitful\n\n1Plots.default(; margin=6Plots.mm)\n\n\n1\n\nThis updates the default margin in our plots so that axis labels don’t get cut off."
+  },
+  {
+    "objectID": "labs/lab-03/index.html#parsing",
+    "href": "labs/lab-03/index.html#parsing",
+    "title": "Lab 3: Depth-Damage Models",
+    "section": "Parsing",
+    "text": "Parsing\nWe’d like to be able to use the depth-damage functions in this file. However, the depths are stored in a somewhat annoying format (e.g., “ft04m” means -4 feet). To make life simple, I’ve created some functionality in the depthdamage.jl file that you can use. We can load it as follows:\n\ninclude(\"depthdamage.jl\")\n\nDepthDamageData\n\n\nThe main thing that we’ll use is called DepthDamageData. This is a data structure or type that stores the depth-damage data, as well as any relevant metadata. If you’ve created a class in a language like C++ or Python, it’s the same idea. I’ve also defined a constructor that takes in the row of a DataFrame and creates a DepthDamageData object, to make life easy.\nI’ll show you how to do this for an illustrative depth-damage function from the New Orleans USACE.\n\ndemo_row = @rsubset(\n    haz_fl_dept, :Description == \"one story, Contents, fresh water, short duration\"\n)[\n    1, :,\n]\ndd = DepthDamageData(demo_row)\n\nDepthDamageData(Quantity{Float64, 𝐋, Unitful.FreeUnits{(ft,), 𝐋, nothing}}[-4.0 ft, -3.0 ft, -2.0 ft, -1.0 ft, 0.0 ft, 1.0 ft, 2.0 ft, 3.0 ft, 4.0 ft, 5.0 ft  …  15.0 ft, 16.0 ft, 17.0 ft, 18.0 ft, 19.0 ft, 20.0 ft, 21.0 ft, 22.0 ft, 23.0 ft, 24.0 ft], [0.0, 0.0, 0.0, 0.0, 0.0, 42.0, 63.0, 82.0, 85.0, 91.0  …  91.0, 91.0, 91.0, 91.0, 91.0, 91.0, 91.0, 91.0, 91.0, 91.0], String7(\"RES1\"), \"57\", String31(\"USACE - New Orleans\"), \"one story, Contents, fresh water, short duration\", \"missing\")\n\n\nThis prints out a bunch of data. We can see that it has the following fields, which should broadly match with our DataFrame:\n\nfieldnames(typeof(dd))\n\n(:depths, :damages, :occupancy, :dmg_fn_id, :source, :description, :comment)"
+  },
+  {
+    "objectID": "labs/lab-03/index.html#plotting",
+    "href": "labs/lab-03/index.html#plotting",
+    "title": "Lab 3: Depth-Damage Models",
+    "section": "Plotting",
+    "text": "Plotting\nNow that we’ve created a DepthDamageData object, we can plot it. When we plot things with units, the Unitful package (as long as we are using it) knows how to handle them.\n\nscatter(\n    dd.depths,\n    dd.damages;\n    xlabel=\"Flood Depth at House\",\n    ylabel=\"Damage (%)\",\n    label=\"$(dd.description) ($(dd.source))\",\n    legend=:bottomright,\n    size=(700, 500),\n)"
+  },
+  {
+    "objectID": "labs/lab-03/index.html#interpolating",
+    "href": "labs/lab-03/index.html#interpolating",
+    "title": "Lab 3: Depth-Damage Models",
+    "section": "Interpolating",
+    "text": "Interpolating\nThis is great. However, what if we want to estimate damage between the points? We need a way to interpolate. We can do this using the Interpolations package!\n\n1itp = let\n2    depth_ft = ustrip.(u\"ft\", dd.depths)\n    damage_frac = dd.damages\n    Interpolations.LinearInterpolation(\n        depth_ft,\n        damage_frac;\n3        extrapolation_bc=Interpolations.Flat(),\n    )\nend\n\n\n1\n\nI really like these let...end blocks and use them quite a bit. The main thing to know is that all the variables defined inside the let block are only available inside the let block. Once we get to the end of the block, they vanish! This keeps us from defining tons of variables that get in each others’ way.\n\n2\n\nThe Interpolations package doesn’t take units on its input, so we convert the input (which can be of any length unit) to feet before passing it in. If our depths are in meters or millimeters, it won’t be a problem – the ustrip function will convert to feet and then turn them into scalars.\n\n3\n\nInterpolations requires us to specify how to extrapolate. We choose Flat(), meaning that anything below the lowest value in the table will be assumed to have the same damage as the lowest value in the table and anything above the highest value in the table will be assumed to have the same damage as the highest value in the table.\n\n\n\n\nNow we can use this interpolation function to estimate damage at any depth.\n\nlet\n1    dmg_fn(x) = itp(ustrip.(u\"ft\", x))\n2    dmg_fn.([3.1u\"ft\", 2.2u\"m\", 91.4u\"inch\"])\nend\n\n\n1\n\nConvert the input to feet\n\n2\n\nEstimate damage at 3.1 feet, 2.2 meters, and 91.4 inches\n\n\n\n\n3-element Vector{Float64}:\n 82.30000000000001\n 91.0\n 91.0"
+  },
+  {
+    "objectID": "labs/lab-03/index.html#packaging",
+    "href": "labs/lab-03/index.html#packaging",
+    "title": "Lab 3: Depth-Damage Models",
+    "section": "Packaging",
+    "text": "Packaging\nTo make life simple, we can define a function that takes in some depths and some damages and returns a function that can be used to estimate damage at any depth.\n\nfunction get_depth_damage_function(\n    depth_train::Vector{&lt;:T}, dmg_train::Vector{&lt;:AbstractFloat}\n) where {T&lt;:Unitful.Length}\n\n    # interpolate\n    depth_ft = ustrip.(u\"ft\", depth_train)\n    interp_fn = Interpolations.LinearInterpolation(\n1        depth_ft,\n        dmg_train;\n2        extrapolation_bc=Interpolations.Flat(),\n    )\n\n    damage_fn = function (depth::T2) where {T2&lt;:Unitful.Length}\n3        return interp_fn(ustrip.(u\"ft\", depth))\n    end\n4    return damage_fn\nend\n\n\n1\n\nThe Interpolations package doesn’t take units on its input, so we convert the input (which can be of any length) to feet before passing it in. If our depths are in meters or millimeters, it won’t be a problem – the ustrip function will convert to feet and then turn them into scalars.\n\n2\n\nInterpolations requires us to specify how to extrapolate. We choose Flat(), meaning that anything below the lowest value in the table will be assumed to have the same damage as the lowest value in the table and anything above the highest value in the table will be assumed to have the same damage as the highest value in the table.\n\n3\n\nThis is a bit confusing. We are defining a function, inside of a function.\n\n4\n\nWe return the function that we just defined. So when we call this function, we get a function – we in turn need to call that function on something else.\n\n\n\n\nget_depth_damage_function (generic function with 1 method)\n\n\n\ndamage_fn = get_depth_damage_function(dd.depths, dd.damages)\n\n#16 (generic function with 1 method)\n\n\nNow damage_fn is a function. It takes in a depth, with some type of length unit defined using Unitful, and returns the damage in percent. We can use this to plot a depth-damage curve:\n\np = let\n1    depths = uconvert.(u\"ft\", (-7.0u\"ft\"):(1.0u\"inch\"):(30.0u\"ft\"))\n2    damages = damage_fn.(depths)\n    scatter(\n        depths,\n        damages;\n        xlabel=\"Flood Depth\",\n        ylabel=\"Damage (%)\",\n        label=\"$(dd.description) ($(dd.source))\",\n        legend=:bottomright,\n        size=(800, 400),\n        linewidth=2,\n    )\nend\np\n\n\n1\n\nWe create a vector of depths from -7 feet to 30 feet, in 1 inch increments. We use uconvert to convert the units to feet (by default, Unitful converts to meters when we add together length units).\n\n2\n\nOur damage_fn is defined to take in a single scalar. To make predictions about a Vector of depths, we use . to broadcast the function over the vector.\n\n\n\n\n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOf course, if we use plot instead of scatter, then we get a line plot which is automatically smooth."
+  },
+  {
+    "objectID": "labs/lab-06/index.html",
+    "href": "labs/lab-06/index.html",
+    "title": "Lab 6: Policy Search",
     "section": "",
     "text": "This is a placeholder."
   },
   {
-    "objectID": "labs/lab-05/index.html#overview",
-    "href": "labs/lab-05/index.html#overview",
-    "title": "Lab 5: Sea-Level Rise",
+    "objectID": "labs/lab-06/index.html#overview",
+    "href": "labs/lab-06/index.html#overview",
+    "title": "Lab 6: Policy Search",
     "section": "",
     "text": "This is a placeholder."
+  },
+  {
+    "objectID": "labs/lab-07/index.html",
+    "href": "labs/lab-07/index.html",
+    "title": "Lab 7: Multiobjective Optimization",
+    "section": "",
+    "text": "This is a placeholder."
+  },
+  {
+    "objectID": "labs/lab-07/index.html#overview",
+    "href": "labs/lab-07/index.html#overview",
+    "title": "Lab 7: Multiobjective Optimization",
+    "section": "",
+    "text": "This is a placeholder."
+  },
+  {
+    "objectID": "labs/lab-09/index.html",
+    "href": "labs/lab-09/index.html",
+    "title": "Lab 9: The Lake Problem",
+    "section": "",
+    "text": "This is a placeholder."
+  },
+  {
+    "objectID": "labs/lab-09/index.html#overview",
+    "href": "labs/lab-09/index.html#overview",
+    "title": "Lab 9: The Lake Problem",
+    "section": "",
+    "text": "This is a placeholder."
+  },
+  {
+    "objectID": "labs/lab-01/index.html",
+    "href": "labs/lab-01/index.html",
+    "title": "Lab 1: Software Installation",
+    "section": "",
+    "text": "Labs are in-class exercises intended to get practice with coding or analysis workflows.\n\nInstructions available on website\nDownload ahead of time by using link from Canvas\nYou will have your own repository (more in a minute)\nTry to finish in class, but due in 1 week"
+  },
+  {
+    "objectID": "labs/lab-01/index.html#labs",
+    "href": "labs/lab-01/index.html#labs",
+    "title": "Lab 1: Software Installation",
+    "section": "",
+    "text": "Labs are in-class exercises intended to get practice with coding or analysis workflows.\n\nInstructions available on website\nDownload ahead of time by using link from Canvas\nYou will have your own repository (more in a minute)\nTry to finish in class, but due in 1 week"
+  },
+  {
+    "objectID": "labs/lab-01/index.html#toolkit-overview",
+    "href": "labs/lab-01/index.html#toolkit-overview",
+    "title": "Lab 1: Software Installation",
+    "section": "Toolkit: overview",
+    "text": "Toolkit: overview\nGetting set up for this course requires the following steps. If you are an experienced programmer, you are free to follow your own workflow to set up these tools. You will absolutely need Quarto, GitHub, and Julia. If you are not an experienced programmer, the following steps are not the only way to get these tools set up, but they are a very good way.\nIf you install course tools using steps other than the ones provided on this page, be aware that your instructors may be able to provide you with only limited support.\n\nJulia\nWe’re using the Julia programming language in this course. Julia is a fast, modern, open-source programming language designed for numerical and scientific computing.\nWe’re using it for a few key reasons. First, the syntax is human-readable and closely parallels math notation, which reduces the cognitive burden of translating between conceptual and computational models. Second, it’s fast, which means that Julia solves the “two language problem”: you don’t need to learn C or Fortran to dig under the hood and write fast code. Other great features include that it’s open-source, which makes it reproducible and shareable, and it has a fantastic package manager.\nThere are some great resources out there about why Julia is great. See posts by Julia Data Science or the Julia Creators (with followup).\n\n\nGitHub\ngit is a software tool for version control that keeps track of changes to files over time. GitHub is a website that hosts git repositories and provides a web interface for interacting with them.\nTo use GitHub, you’ll need a GitHub account. Code on GitHub is stored in repositories. A simple workflow is to clone a repository to your computer, make changes, commit them, then push your changes to GitHub.\nWe will also use GitHub classroom, which allows instructors to share templates and view your code.\n\n\nQuarto\nQuarto is a tool that allows you to combine text and code and create many types of output. For example, this website is made with Quarto! You will use Quarto to create reports for labs. This lets you keep everything in one place – no more running code, saving a figure to Downloads, copying into Word, then trying to remember where to paste the figure when you update the code.\n\n\nVS Code\nVS Code is a text editor. If you are an advanced user of another text editor, you can use that instead. However, VS Code is very nearly an officially supported IDE for Julia."
+  },
+  {
+    "objectID": "labs/lab-01/index.html#installing-software",
+    "href": "labs/lab-01/index.html#installing-software",
+    "title": "Lab 1: Software Installation",
+    "section": "Installing software",
+    "text": "Installing software\n\nInstall Julia\nThe best way to install Julia is through the juliaup tool, which will let you easily manage versions in the future and works seamlessly with VS Code. The instructions can be found at the JuliaUp GitHub repository, but we will summarize them here.\nIf your computer uses Windows, you can install Juliaup from the Windows Store.\nIf you have a Mac (or are using Linux), open a terminal (such as the Terminal app) and enter:\ncurl -fsSL https://install.julialang.org | sh\nOnce you install Juliaup, install Julia version 1.10 by opening a terminal (in MacOS or Linux) or the command line (in Windows) and entering:\njuliaup add 1.10\njuliaup default 1.10\nThis will install Julia 1.10 and make it the default version, which should maximize package compatibility throughout this course. Going forward, if you want to add new versions or change the default, you can follow the Juliaup instructions.\n\n\nInstall VS Code\nVS Code is as close to an officially supported editor for Julia as you can get. We will follow this guide for setting up VS Code with Julia.\n\nYou can skip this section if you are an experienced programmer and already have a preferred IDE. Your IDE will likely have instructions for Julia and Quarto setup.\n\nYou can download VS Code here; open the downloaded file to install. Make sure to select the correct version for your operating system. If you have a newish Apple mac (with M1, M2, or M3 chip), make sure to check whether you have an Intel or Apple chip before choosing which version to download. You can also use homebrew or your preferred package manager to install VS Code.\n\nVS Code Julia Extension\nLike many IDEs, VS Code is a modular system that can be extended with plugins. We will install the Julia extension, which will allow us to run Julia code and interact with the Julia REPL from within VS Code (we’ll add the Quarto extension later).\n\nOpen VS Code.\nSelect View and click Extensions to open the Extension View.\nSearch for julia in the search box. Click the green install button.\nRestart VS Code once the installation is complete. It should automatically find your Julia installation; reach out if not.\n\nThe Julia VS Code extension offers you some nice features. You can start a REPL (an interactive Julia coding environment) by opening the “Command Palette” (View -&gt; Command Palette, or CTRL/CMD+SHIFT+P) and typing “REPL” to bring up “Julia: Start REPL”. You can also create .jl and .qmd files to write Julia code and execute line by line.\n\n\n\nGitHub\nSee GitHub official tutorials for more helpful resources and tutorials.\n\nCreate GitHub Account\nIf you already have a GitHub account, you can use that for this course and do not need to create a new account. Otherwise, create an account. It doesn’t have to be linked to your Rice email or your NetID.\nFor labs and projects, you should use the GitHub Classroom link posted on Canvas to “accept” the assignment, which will give you your own GitHub repository for that assignment. The first time you click one of these links, you will need to link your place on the course roster with your GitHub account.\n\n\nGitHub Desktop (Optional)\nYou can do everything that you will need to do for this course with GitHub directly through VS Code. The GitHub desktop app is also great, or alternatively you may work directly through the terminal if you have prior experience.\n\n\n\nGitHub Copilot (Optional)\nGitHub Copilot is an AI-powered tool that helps you write code. You can install it following instructions here As described in the quickstart guide, Copilot is free for students. Be sure to review the policy on AI language models in the syllabus!\n\nInstall Git\ngit is a version control software that powers GitHub under the hood (git is the version control software, GitHub is an online platform). Based on past experience with the course, you probably already have git installed! If you’re not sure if it’s installed, see instructions here.\n\n\n\nInstall Quarto\nQuarto combines the best of Jupyter notebooks and R Markdown to create a document format that is ideal for conducting and communicating data science. We will use Quarto to create and share our work in this course; this website is also built using Quarto.||\nFollow the documentation to install Quarto. Be sure to ensure that you have the right version for your operating system.\n\nInstall the Quarto Extension for VS Code\nUnder “Step 2”, click on the VS Code icon.\n\n\nInstall Jupyter\nUnder the hood, Quarto uses Jupyter to run code. You don’t need to know how Jupyter works or worry about it, because it runs under the hood, but we will need to install it. Jupyter is a Python package.\nIf you don’t have Python installed (if you’re not sure, you should install Miniconda below), you’ll need to install it. The best way, by far, is to install Miniconda (see Conda documentation).\nOnce you have Python installed, you can open your Terminal (open VS Code then open the terminal), then run\npython3 -m pip install jupyter\n\n\n\n\n\n\nBased on past experience, getting Jupyter installed and Quarto to find your Jupyter installation is the most common source of problems, especially on Windows machines. Please start this early so you have a full week to get help if you need it."
+  },
+  {
+    "objectID": "labs/lab-01/index.html#lab-instructions",
+    "href": "labs/lab-01/index.html#lab-instructions",
+    "title": "Lab 1: Software Installation",
+    "section": "Lab Instructions",
+    "text": "Lab Instructions\nOnce you have everything set up, your lab for the week will be to complete the following steps. These will ensure that your installation is working smoothly!\n\nFollow the link to lab 1 assignment from Canvas (it should start with classroom.github.com). You will get a message saying ” Your assignment repository has been created: …“. Click on the link to go to your repository.\nclone the repository for lab 01 (use the Github Classroom link from Canvas) to your computer. You can use VS Code functionality, GitHub Desktop, or your terminal.\nOpen the directory containing the repository in VS Code doing one of the following:\n\nFrom GitHub desktop: Repository &gt; Open in Visual Studio Code\nIn VS Code: File &gt; Open Folder...\n\nOpen the index.qmd file in VS Code and replace the author: CEVE 421/521 line with your name and netID\nOpen the JULIA Repl\n\nOpen the command palette (Ctrl+Shift+P on Windows/Linux, Cmd+Shift+P on Mac)\nStart typing “Julia: Start REPL”. It will auto-complete; select the command as it appears.\n\nSet up your project environment.\n\nIn the Julia REPL, type ] to enter the package manager. It should now show something like (lab-01) pkg&gt;.\nType instantiate and run it (Enter). This will install all the packages needed for this lab.\nType the backspace key to exit the package manager.\n\nEdit the index.qmd file to add your name and netID\nRender the document\n\nOpen the index.qmd file\nOpen the command palette and run “Quarto: Preview”. After some activity, a preview of the rendered document should open in VS Code. If you see something like Browse at http://localhost:4200/index.html you can open that link in your web browser to see the rendered document.\nRender to PDF or Microsoft Word following the directions below.\n\nIf you’re still having trouble:\n\nTry running build IJulia in the Julia REPL’s Pkg mode (type ])\nCome to office hours\nPost on the Canvas discussion for Lab 1\n\ncommit and push your changes to GitHub\nSubmit your rendered .docx or .pdf file to Canvas\n\n\nRunning Code\nWe can use Quarto to run Julia code in-line\n\nprintln(\"I'm using Julia!\")\n\nI'm using Julia!\n\n\nWe can also load packages\n\nusing CairoMakie\nusing LaTeXStrings\n\nand use them to make plots\n\nf = Figure()\nax = Axis(f[1, 1]; title=L\"$y = \\sin(x)$\", xlabel=L\"$x$\", ylabel=L\"$y$\")\nx = range(0, 10; length=100)\ny = sin.(x)\nlines!(ax, x, y)\nf\n\n\n\n\n\n\n\n\n\n\nRendering the Document\nA Quarto document is a plain text file that uses a simple code language to embed text, math, code, and the code’s output. You can run the document line by line, or you can render to a variety of formats. This is helpful for sharing with others, or for creating a final document for yourself.\nWe will check our ability to\n\nPreview the document in HTML (a web-native format)\nRender the document to PDF or Microsoft Word (a portable, shareable, and printable format)\n\n\nHTML\nFirst, verify that you can preview the document in HTML:\n\nOpen the command palette (Cmd+Shift+P on macOS, Ctrl+Shift+P on Windows/Linux)\nType “Quarto: Preview”\n\n\n\nPDF\nYou can use Quarto to generate PDF documents. Follow the instructions on Quarto’s website to install the necessary software.\n\nTo instruct Quarto to render to PDF, you need to edit the document metadata. Specifically, uncomment the lines in the document metadata corresponding to the PDF format.\nOpen the command palette (Cmd+Shift+P on macOS, Ctrl+Shift+P on Windows/Linux)\nType “Quarto: Render”\n\n\n\nWord\nYou can also render the document to Microsoft Word. See the Quarto documentation.\n\nTo instruct Quarto to render to Word, you need to edit the document metadata. Specifically, uncomment the lines in the document metadata corresponding to the Word format.\nOpen the command palette (Cmd+Shift+P on macOS, Ctrl+Shift+P on Windows/Linux)\nType “Quarto: Render”"
+  },
+  {
+    "objectID": "labs/lab-08/index.html",
+    "href": "labs/lab-08/index.html",
+    "title": "Lab 8: Parking Garage Case Study",
+    "section": "",
+    "text": "This is a placeholder."
+  },
+  {
+    "objectID": "labs/lab-08/index.html#overview",
+    "href": "labs/lab-08/index.html#overview",
+    "title": "Lab 8: Parking Garage Case Study",
+    "section": "",
+    "text": "This is a placeholder."
+  },
+  {
+    "objectID": "labs/lab-03/template.html",
+    "href": "labs/lab-03/template.html",
+    "title": "Lab 3: Depth-Damage Models",
+    "section": "",
+    "text": "using CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Interpolations\nusing Plots\nusing StatsPlots\nusing Unitful\n\nPlots.default(; margin=6Plots.mm)\n\n\nSite information\n\n\nDepth-Damage\n\n\nExpected annual damages\n\n\nDiscussion"
+  },
+  {
+    "objectID": "labs/lab-04/template.html",
+    "href": "labs/lab-04/template.html",
+    "title": "Lab 4: House Elevation NPV Analysis",
+    "section": "",
+    "text": "using CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Interpolations\nusing Plots\nusing StatsPlots\nusing Unitful\n\nPlots.default(; margin=6Plots.mm)"
+  },
+  {
+    "objectID": "labs/lab-05/template.html",
+    "href": "labs/lab-05/template.html",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "",
+    "text": "As always:\n\nClone the lab repository to your computer\nOpen the lab repository in VS Code\nOpen the Julia REPL and activate, then instantiate, the lab environment\nMake sure you can render: quarto render template.qmd in the terminal.\n\nIf you run into issues, try running ] build IJulia in the Julia REPL (] enters the package manager).\nIf you still have issues, try opening up blankfile.py. That should trigger VS Code to give you the option to install the Python extension, which you should do. Then you should be able to open a menu in the bottom right of your screen to select which Python installation you want VS Code to use.\n\n\n\n\n\n\nusing CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Plots\nusing StatsPlots\nusing Unitful\n\nPlots.default(; margin=5Plots.mm)\n\n\n\n\n\nusing Revise\nusing HouseElevation"
+  },
+  {
+    "objectID": "labs/lab-05/template.html#the-usual",
+    "href": "labs/lab-05/template.html#the-usual",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "",
+    "text": "As always:\n\nClone the lab repository to your computer\nOpen the lab repository in VS Code\nOpen the Julia REPL and activate, then instantiate, the lab environment\nMake sure you can render: quarto render template.qmd in the terminal.\n\nIf you run into issues, try running ] build IJulia in the Julia REPL (] enters the package manager).\nIf you still have issues, try opening up blankfile.py. That should trigger VS Code to give you the option to install the Python extension, which you should do. Then you should be able to open a menu in the bottom right of your screen to select which Python installation you want VS Code to use."
+  },
+  {
+    "objectID": "labs/lab-05/template.html#load-packages",
+    "href": "labs/lab-05/template.html#load-packages",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "",
+    "text": "using CSV\nusing DataFrames\nusing DataFramesMeta\nusing Distributions\nusing Plots\nusing StatsPlots\nusing Unitful\n\nPlots.default(; margin=5Plots.mm)"
+  },
+  {
+    "objectID": "labs/lab-05/template.html#local-package",
+    "href": "labs/lab-05/template.html#local-package",
+    "title": "Lab 5: Sea-Level Rise",
+    "section": "",
+    "text": "using Revise\nusing HouseElevation"
   },
   {
     "objectID": "labs/lab-02/template.html",
