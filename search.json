@@ -638,7 +638,14 @@
     "href": "readings/week-07-reading.html",
     "title": "Readings for Week 7",
     "section": "",
-    "text": "Discussion questions will be posted here.\n\n\n\nAssigned reading will be drawn from:\n\nvan Berchum et al. (2019)\nSchwetschenau et al. (2023)\n\n\n\n\n\nReferences\n\nSchwetschenau, S. E., Kovankaya, Y., Elliott, M. A., Allaire, M., White, K. D., & Lall, U. (2023). Optimizing Scale for Decentralized Wastewater Treatment: A Tool to Address Failing Wastewater Infrastructure in the United States. ACS ES&T Engineering, 3(1), 1–14. https://doi.org/10.1021/acsestengg.2c00188\n\n\nvan Berchum, E. C., Mobley, W., Jonkman, S. N., Timmermans, J. S., Kwakkel, J. H., & Brody, S. D. (2019). Evaluation of flood risk reduction strategies through combinations of interventions. Journal of Flood Risk Management, 12(S2), e12506. https://doi.org/10.1111/jfr3.12506"
+    "text": "Please read Schwetschenau et al. (2023). This is a fairly technical paper that uses optimization techniques that I do not expect you to know or even be able to follow! Please focus on the introduction, discussion, and conclusions; look at the methods to understand what the authors are optimizing (what are the decision variables and what is the objective function), but don’t worry about the details of the optimization itself. Do not spend lots of time following the math unless you find it personally interesting!"
+  },
+  {
+    "objectID": "readings/week-07-reading.html#discussion-questions",
+    "href": "readings/week-07-reading.html#discussion-questions",
+    "title": "Readings for Week 7",
+    "section": "Discussion questions:",
+    "text": "Discussion questions:\n\nWho is the intended audience of this paper?\nThis paper uses an exploratory model to suggest infrastructure and financial decisions. What might be some risks associated with this? What do the authors do to mitigate this risk?\nWhat problem is facing the community of UnionTown? How do the authors hope to address this problem?\nDo you think that the results, as presented, are useful from a policy making perspective? Why or why not?\nAre there any externalities or things that are being unaccounted for that we might also want to consider in this paper? If yes, what are they? -= (Optional bonus for anyone who’s done a bit of AI or wants to do a bit of extra research) The authors here use Dijkstra’s algorithm. Can you foresee any risks with applying that to this situation?"
   },
   {
     "objectID": "syllabus.html",
