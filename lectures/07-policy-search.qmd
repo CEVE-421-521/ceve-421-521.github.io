@@ -125,7 +125,7 @@ plot!(-2:0.1:20, f4.(-2:0.1:20); color=:purple, linewidth=3)
 ## Linear programming with discrete decisions
 
 ::: {.incremental}
-- Fixed costs create discontinuitites in the objective function
+- Fixed costs create discontinuities in the objective function
 - Example: which electricity generators should be on/off?
 - Need to create new indicator variables which flag on/off status: $\mathbb{I}_i = \begin{cases} 0 & \textrm{off} \\ 1 & \textrm{on} \end{cases}$.
 - Can be solved with mixed-integer linear programming (MILP)
