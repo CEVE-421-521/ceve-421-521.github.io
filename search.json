@@ -66,6 +66,13 @@
     "text": "Proposed solutions\n\nUse a very low discount rate\n\nThis places more weight on outcomes far in the future\nHowever, this can also lead to irrational conclusions. For example,\n\nUncertain discount rate\n\n“Using an investment- or a consumption-based approach will require human judgment about the appropriate models to use to capture uncertainty about future discount rates” (Arrow et al., 2013)\nThis is equivalent to declining discount rate – as you go farther out, your NPV is dominated by the lower discount rates.\nYou still need to"
   },
   {
+    "objectID": "lectures/07-policy-search.html#references",
+    "href": "lectures/07-policy-search.html#references",
+    "title": "Policy Search and Optimization",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nSchwetschenau, S. E., Kovankaya, Y., Elliott, M. A., Allaire, M., White, K. D., & Lall, U. (2023). Optimizing Scale for Decentralized Wastewater Treatment: A Tool to Address Failing Wastewater Infrastructure in the United States. ACS ES&T Engineering, 3(1), 1–14. https://doi.org/10.1021/acsestengg.2c00188"
+  },
+  {
     "objectID": "readings/week-12-reading.html",
     "href": "readings/week-12-reading.html",
     "title": "Readings for Week 12",
