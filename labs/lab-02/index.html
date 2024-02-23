@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -444,6 +444,7 @@ f(2.1)</code></pre>
 </dl>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="4">
+<div>
 <div><div style="float: left;"><span>5×5 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
 <table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -510,6 +511,7 @@ f(2.1)</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>This data comes from the NOAA Tides and Currents website, specifically for a station at Sewells Point, VA for the year 1928. NAVD refers to the North American Vertical Datum, which is a reference point for measuring sea level, and GMT refers to Greenwich Mean Time, which is the time zone used in the data (rather than local time).</p>
 <p>We can see that our DataFrame has five columns, the first of which is “Date Time”. However, the “Date Time” column is being parsed as a <code>string</code>. We want it to be a <code>DateTime</code> object from the <code>Dates</code> package. To do that, we need to tell Julia how the dates are formatted. We could then manually convert, but <code>CSV.read</code> has a kewyord argument that we can use</p>
 <div id="de5f8176" class="cell" data-execution_count="5">
@@ -529,6 +531,7 @@ f(2.1)</code></pre>
 </dl>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="5">
+<div>
 <div><div style="float: left;"><span>3×5 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
 <table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -579,6 +582,7 @@ f(2.1)</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>The next column is “Water Level”, which is the height of the water above the reference point (NAVD) in meters. We can see that this is being parsed as a float, which is what we want 👍. However, you have to <em>know</em> that the data is in meters rather than inches or feet or something else. To explicitly add information about the units, we can use the <code>Unitful</code> package.</p>
 <div id="5584a54c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode numberSource julia code-annotation-code number-lines code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1"></a>df[!, <span class="st">" Water Level"</span>] <span class="op">.*=</span> <span class="fl">1</span>u<span class="st">"m"</span></span>
@@ -592,6 +596,7 @@ f(2.1)</code></pre>
 </dl>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="6">
+<div>
 <div><div style="float: left;"><span>3×5 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
 <table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -642,6 +647,7 @@ f(2.1)</code></pre>
 </div>
 </div>
 </div>
+</div>
 </section>
 <section id="subsetting-and-renaming" class="level2">
 <h2 class="anchored" data-anchor-id="subsetting-and-renaming">Subsetting and renaming</h2>
@@ -662,6 +668,7 @@ f(2.1)</code></pre>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1"></a>df <span class="op">=</span> <span class="pp">@select</span>(df, <span class="op">:</span>datetime, <span class="op">:</span>lsl)</span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="fu">first</span>(df, <span class="fl">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
+<div>
 <div><div style="float: left;"><span>3×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
 <table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -694,6 +701,7 @@ f(2.1)</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>
@@ -777,6 +785,7 @@ f(2.1)</code></pre>
 </dl>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="10">
+<div>
 <div><div style="float: left;"><span>3×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
 <table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -809,6 +818,7 @@ f(2.1)</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </div>
 </div>
