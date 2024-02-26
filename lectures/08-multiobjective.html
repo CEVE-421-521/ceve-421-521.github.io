@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -30,7 +30,92 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -329,6 +414,9 @@
       tex: { packages: { '[+]': ['physics'] } }
     };
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <meta property="og:title" content="CEVE 421/521 – Spring 2024 - Multiobjective Policy Search and Optimization">
 <meta property="og:description" content="Lecture">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2024">
@@ -344,15 +432,421 @@
 <p class="date">Mon., Feb.&nbsp;26</p>
 </section>
 <section class="slide level2">
+<h2>Credit</h2>
+<p>I borrow heavily from</p>
+<blockquote>
+<p><a href="https://engineering.purdue.edu/~sudhoff/ee630/Lecture09.pdf">Lecture 9</a> of S.D. Sudhoff’s course “Engineering Analysis and Design Using Genetic Algorithms” taught at Purdue</p>
+</blockquote>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Motivation</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Motivation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Multiobjective optimization</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Implementation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Enriching our notation</h2>
 
-<p>This is a placeholder.</p>
+<img data-src="../_assets/img/bayes-rdm-II.png" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Single-objective policy search</h2>
+<p>Using this notation, we want to <span class="math inline">\(\min / \max g(a)\)</span>, subject to constraints.</p>
+<div class="fragment">
+<p>In other words, we want <em>a single solution</em> that scores the best according to <span class="math inline">\(g(a)\)</span>.</p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Objectives can be hard to combine</h2>
+<p>Sometimes, combining objectives into a single function is difficult.</p>
+<div>
+<ol type="1">
+<li class="fragment">Operating a reservoir to maximize power generation, minimize flood risk, and supply water to a city.</li>
+<li class="fragment">Designing a levee to balance cost, financial flood risk, ecological impact, and human safety.</li>
+<li class="fragment">Your examples?</li>
+</ol>
+</div>
+<div class="fragment">
+<p>Addressing multiple, sometimes-competing, needs is often called “multi-criteria decision analysis”</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Multiobjective optimization</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Motivation</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Multiobjective optimization</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Implementation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Goals</h2>
+<p>Goal: find a <strong>set of solutions</strong> that are not <strong>dominated</strong> by any other solution</p>
+<div class="fragment">
+<p>We call this the <em>Pareto front</em> or <em>Pareto set</em>.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Mathematical formulation</h2>
+<p><span class="math display">\[
+\begin{align}
+&amp; \min / \max f_m(x), &amp; \quad m = 1, 2, \ldots, M \\
+\text{subject to} \quad &amp;g_j(x) \leq 0, &amp;\quad  j = 1, 2, \ldots, J \\
+&amp;h_k(x) = 0, &amp;\quad  k = 1, 2, \ldots, K \\
+&amp;x_i^{(L)} \leq x_i \leq x_i^{(U)}, &amp;\quad  i = 1, 2, \ldots, N
+\end{align}
+\]</span></p>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What’s new?</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><span class="math inline">\(M\)</span> objective functions</li>
+<li>Lots of notation for constraints</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Dominance</h2>
+<div>
+<ol type="1">
+<li class="fragment">Single-objective: goodness of solution defined by objective function</li>
+<li class="fragment">Multiobjective: goodness of solution defined by dominance</li>
+<li class="fragment">Definition: <span class="math inline">\(a_1\)</span> dominates <span class="math inline">\(a_2\)</span> if:
+<ol type="1">
+<li class="fragment"><span class="math inline">\(a_1\)</span> is no worse than <span class="math inline">\(a_2\)</span> in all objectives</li>
+<li class="fragment"><span class="math inline">\(a_1\)</span> is strictly better than <span class="math inline">\(a_2\)</span> in at least one objective</li>
+</ol></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Dominance example</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div id="87fae15c" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a><span class="kw">let</span></span>
+<span id="cb1-2"><a></a>    points <span class="op">=</span> [(<span class="fl">2</span>, <span class="fl">2</span>), (<span class="fl">1</span>, <span class="fl">4</span>), (<span class="fl">4</span>, <span class="fl">1</span>), (<span class="fl">3</span>, <span class="fl">3</span>), (<span class="fl">5</span>, <span class="fl">2</span>)]</span>
+<span id="cb1-3"><a></a>    p <span class="op">=</span> <span class="fu">plot</span>(;</span>
+<span id="cb1-4"><a></a>        xlims<span class="op">=</span>(<span class="fl">0</span>, <span class="fl">5.5</span>),</span>
+<span id="cb1-5"><a></a>        ylims<span class="op">=</span>(<span class="fl">0</span>, <span class="fl">5.5</span>),</span>
+<span id="cb1-6"><a></a>        xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span>f_1<span class="st">$ (Maximize)"</span>,</span>
+<span id="cb1-7"><a></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span>f_2<span class="st">$ (Minimize)"</span>,</span>
+<span id="cb1-8"><a></a>        legend<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb1-9"><a></a>        xticks<span class="op">=</span>[],</span>
+<span id="cb1-10"><a></a>        yticks<span class="op">=</span>[],</span>
+<span id="cb1-11"><a></a>        margin<span class="op">=</span><span class="fl">10</span>Plots.mm,</span>
+<span id="cb1-12"><a></a>        aspect_ratio<span class="op">=:</span>equal,</span>
+<span id="cb1-13"><a></a>        size<span class="op">=</span>(<span class="fl">500</span>, <span class="fl">500</span>),</span>
+<span id="cb1-14"><a></a>    )</span>
+<span id="cb1-15"><a></a>    <span class="cf">for</span> (idx, point) <span class="kw">in</span> <span class="fu">enumerate</span>(points)</span>
+<span id="cb1-16"><a></a>        <span class="fu">plot!</span>(</span>
+<span id="cb1-17"><a></a>            [<span class="fl">0</span>, point[<span class="fl">1</span>]],</span>
+<span id="cb1-18"><a></a>            [point[<span class="fl">2</span>], point[<span class="fl">2</span>]];</span>
+<span id="cb1-19"><a></a>            color<span class="op">=:</span>black,</span>
+<span id="cb1-20"><a></a>            alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb1-21"><a></a>            label<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb1-22"><a></a>            style<span class="op">=:</span>dash,</span>
+<span id="cb1-23"><a></a>        )</span>
+<span id="cb1-24"><a></a>        <span class="fu">plot!</span>(</span>
+<span id="cb1-25"><a></a>            [point[<span class="fl">1</span>], point[<span class="fl">1</span>]],</span>
+<span id="cb1-26"><a></a>            [<span class="fl">0</span>, point[<span class="fl">2</span>]];</span>
+<span id="cb1-27"><a></a>            color<span class="op">=:</span>black,</span>
+<span id="cb1-28"><a></a>            alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb1-29"><a></a>            label<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb1-30"><a></a>            style<span class="op">=:</span>dash,</span>
+<span id="cb1-31"><a></a>        )</span>
+<span id="cb1-32"><a></a>        <span class="fu">scatter!</span>([point[<span class="fl">1</span>]], [point[<span class="fl">2</span>]]; label<span class="op">=</span><span class="cn">false</span>, markersize<span class="op">=</span><span class="fl">15</span>, color<span class="op">=:</span>orange)</span>
+<span id="cb1-33"><a></a>        <span class="fu">annotate!</span>(point[<span class="fl">1</span>] <span class="op">-</span> <span class="fl">0.25</span>, point[<span class="fl">2</span>] <span class="op">+</span> <span class="fl">0.25</span>, <span class="fu">text</span>(<span class="st">"</span><span class="sc">$</span>idx<span class="st">"</span>, <span class="fl">14</span>, <span class="op">:</span>left))</span>
+<span id="cb1-34"><a></a>    <span class="cf">end</span></span>
+<span id="cb1-35"><a></a>    p</span>
+<span id="cb1-36"><a></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<!--?xml version="1.0" encoding="utf-8"?-->
+<svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewbox="0 0 2000 2000">
+<defs>
+  <clippath id="clip250">
+    <rect x="0" y="0" width="2000" height="2000"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip250)" d="M0 2000 L2000 2000 L2000 0 L0 0  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip251">
+    <rect x="400" y="200" width="1401" height="1401"></rect>
+  </clippath>
+</defs>
+<path clip-path="url(#clip250)" d="M282.449 1717.55 L1811.02 1717.55 L1811.02 188.976 L282.449 188.976  Z" fill="#ffffff" fill-rule="evenodd" fill-opacity="1"></path>
+<defs>
+  <clippath id="clip252">
+    <rect x="282" y="188" width="1530" height="1530"></rect>
+  </clippath>
+</defs>
+<polyline clip-path="url(#clip250)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="282.449,1717.55 1811.02,1717.55 "></polyline>
+<path clip-path="url(#clip250)" d="M861.358 1743.87 Q861.358 1745.64 860.231 1746.74 Q859.136 1747.83 857.751 1747.83 Q856.753 1747.83 856.012 1747.22 Q855.304 1746.61 855.304 1745.54 Q855.304 1744.45 856.141 1743.29 Q856.978 1742.13 858.879 1741.97 Q857.623 1740.78 855.626 1740.78 Q854.627 1740.78 853.79 1741.42 Q852.985 1742.03 852.534 1743.03 Q852.051 1744.06 850.956 1749.89 Q850.602 1751.79 850.28 1753.63 Q849.958 1755.46 849.571 1757.4 L855.046 1757.4 Q855.755 1757.4 856.044 1757.43 Q856.334 1757.46 856.56 1757.62 Q856.817 1757.78 856.817 1758.14 Q856.817 1759.04 856.399 1759.26 Q856.012 1759.46 854.853 1759.46 L849.185 1759.46 L845.223 1780.36 Q845.127 1780.97 844.708 1782.9 Q844.321 1784.8 843.388 1787.93 Q842.454 1791.08 841.52 1792.95 Q841.004 1794.01 840.328 1795.01 Q839.684 1796.04 838.75 1797.07 Q837.816 1798.1 836.592 1798.72 Q835.368 1799.36 834.08 1799.36 Q831.89 1799.36 830.183 1798.14 Q828.476 1796.91 828.476 1794.82 Q828.476 1793.05 829.571 1791.95 Q830.698 1790.86 832.083 1790.86 Q833.082 1790.86 833.79 1791.47 Q834.531 1792.08 834.531 1793.14 Q834.531 1793.6 834.37 1794.11 Q834.209 1794.63 833.855 1795.21 Q833.5 1795.82 832.727 1796.24 Q831.954 1796.65 830.892 1796.72 Q832.148 1797.91 834.08 1797.91 Q834.692 1797.91 835.239 1797.65 Q835.787 1797.43 836.238 1796.85 Q836.721 1796.27 837.075 1795.69 Q837.429 1795.14 837.784 1794.08 Q838.138 1793.05 838.363 1792.27 Q838.589 1791.5 838.879 1790.12 Q839.201 1788.73 839.362 1787.89 Q839.523 1787.09 839.813 1785.51 L844.74 1759.46 L840.392 1759.46 Q839.619 1759.46 839.297 1759.42 Q839.008 1759.39 838.782 1759.23 Q838.557 1759.04 838.557 1758.65 Q838.557 1758.04 838.814 1757.78 Q839.104 1757.49 839.426 1757.46 Q839.748 1757.4 840.521 1757.4 L845.094 1757.4 Q846.64 1749.25 847.252 1747.06 Q847.961 1744.74 849.056 1743.13 Q850.151 1741.49 851.375 1740.71 Q852.598 1739.94 853.597 1739.65 Q854.627 1739.33 855.626 1739.33 Q857.88 1739.33 859.619 1740.55 Q861.358 1741.74 861.358 1743.87 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M868.081 1791.15 L868.081 1789.71 Q873.627 1789.71 876.49 1786.75 Q877.279 1786.75 877.415 1786.93 Q877.55 1787.11 877.55 1787.95 L877.55 1813.85 Q877.55 1815.23 878.226 1815.65 Q878.902 1816.08 881.856 1816.08 L883.321 1816.08 L883.321 1817.5 Q881.698 1817.37 875.836 1817.37 Q869.975 1817.37 868.374 1817.5 L868.374 1816.08 L869.84 1816.08 Q872.748 1816.08 873.447 1815.68 Q874.146 1815.25 874.146 1813.85 L874.146 1789.93 Q871.733 1791.15 868.081 1791.15 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M931.147 1736.37 Q926.882 1743.69 924.813 1750.85 Q922.744 1758.02 922.744 1765.37 Q922.744 1772.72 924.813 1779.95 Q926.913 1787.14 931.147 1794.43 L926.054 1794.43 Q921.28 1786.95 918.893 1779.72 Q916.537 1772.5 916.537 1765.37 Q916.537 1758.27 918.893 1751.08 Q921.248 1743.88 926.054 1736.37 L931.147 1736.37 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M942.764 1738.31 L952.344 1738.31 L964.471 1770.65 L976.661 1738.31 L986.242 1738.31 L986.242 1785.83 L979.972 1785.83 L979.972 1744.11 L967.718 1776.7 L961.256 1776.7 L949.002 1744.11 L949.002 1785.83 L942.764 1785.83 L942.764 1738.31 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1014.95 1767.91 Q1007.85 1767.91 1005.12 1769.54 Q1002.38 1771.16 1002.38 1775.08 Q1002.38 1778.19 1004.42 1780.04 Q1006.48 1781.86 1010.02 1781.86 Q1014.89 1781.86 1017.82 1778.42 Q1020.78 1774.95 1020.78 1769.22 L1020.78 1767.91 L1014.95 1767.91 M1026.63 1765.5 L1026.63 1785.83 L1020.78 1785.83 L1020.78 1780.42 Q1018.77 1783.67 1015.78 1785.23 Q1012.79 1786.76 1008.46 1786.76 Q1002.98 1786.76 999.737 1783.7 Q996.522 1780.61 996.522 1775.46 Q996.522 1769.44 1000.53 1766.39 Q1004.57 1763.33 1012.56 1763.33 L1020.78 1763.33 L1020.78 1762.76 Q1020.78 1758.72 1018.1 1756.52 Q1015.46 1754.29 1010.65 1754.29 Q1007.6 1754.29 1004.7 1755.02 Q1001.81 1755.76 999.132 1757.22 L999.132 1751.81 Q1002.35 1750.57 1005.37 1749.96 Q1008.39 1749.33 1011.26 1749.33 Q1018.99 1749.33 1022.81 1753.34 Q1026.63 1757.35 1026.63 1765.5 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1068.33 1750.19 L1055.44 1767.53 L1069 1785.83 L1062.09 1785.83 L1051.71 1771.83 L1041.34 1785.83 L1034.43 1785.83 L1048.28 1767.18 L1035.61 1750.19 L1042.51 1750.19 L1051.97 1762.89 L1061.42 1750.19 L1068.33 1750.19 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1077.27 1750.19 L1083.13 1750.19 L1083.13 1785.83 L1077.27 1785.83 L1077.27 1750.19 M1077.27 1736.31 L1083.13 1736.31 L1083.13 1743.72 L1077.27 1743.72 L1077.27 1736.31 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1123.14 1757.03 Q1125.33 1753.08 1128.39 1751.2 Q1131.44 1749.33 1135.58 1749.33 Q1141.15 1749.33 1144.17 1753.24 Q1147.2 1757.12 1147.2 1764.32 L1147.2 1785.83 L1141.31 1785.83 L1141.31 1764.51 Q1141.31 1759.38 1139.5 1756.9 Q1137.68 1754.42 1133.96 1754.42 Q1129.41 1754.42 1126.76 1757.44 Q1124.12 1760.47 1124.12 1765.69 L1124.12 1785.83 L1118.23 1785.83 L1118.23 1764.51 Q1118.23 1759.35 1116.42 1756.9 Q1114.61 1754.42 1110.82 1754.42 Q1106.33 1754.42 1103.69 1757.47 Q1101.05 1760.5 1101.05 1765.69 L1101.05 1785.83 L1095.16 1785.83 L1095.16 1750.19 L1101.05 1750.19 L1101.05 1755.72 Q1103.05 1752.45 1105.85 1750.89 Q1108.65 1749.33 1112.51 1749.33 Q1116.39 1749.33 1119.09 1751.3 Q1121.83 1753.27 1123.14 1757.03 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1158.88 1750.19 L1164.74 1750.19 L1164.74 1785.83 L1158.88 1785.83 L1158.88 1750.19 M1158.88 1736.31 L1164.74 1736.31 L1164.74 1743.72 L1158.88 1743.72 L1158.88 1736.31 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1174.44 1750.19 L1202.26 1750.19 L1202.26 1755.53 L1180.24 1781.15 L1202.26 1781.15 L1202.26 1785.83 L1173.65 1785.83 L1173.65 1780.49 L1195.67 1754.86 L1174.44 1754.86 L1174.44 1750.19 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1241.7 1766.55 L1241.7 1769.41 L1214.77 1769.41 Q1215.15 1775.46 1218.4 1778.64 Q1221.68 1781.79 1227.5 1781.79 Q1230.88 1781.79 1234.03 1780.96 Q1237.21 1780.14 1240.33 1778.48 L1240.33 1784.02 Q1237.18 1785.36 1233.87 1786.06 Q1230.56 1786.76 1227.15 1786.76 Q1218.62 1786.76 1213.62 1781.79 Q1208.66 1776.83 1208.66 1768.36 Q1208.66 1759.61 1213.37 1754.48 Q1218.11 1749.33 1226.13 1749.33 Q1233.33 1749.33 1237.5 1753.97 Q1241.7 1758.59 1241.7 1766.55 M1235.84 1764.83 Q1235.78 1760.02 1233.14 1757.16 Q1230.53 1754.29 1226.2 1754.29 Q1221.3 1754.29 1218.34 1757.06 Q1215.41 1759.83 1214.96 1764.86 L1235.84 1764.83 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1250.39 1736.37 L1255.48 1736.37 Q1260.25 1743.88 1262.61 1751.08 Q1265 1758.27 1265 1765.37 Q1265 1772.5 1262.61 1779.72 Q1260.25 1786.95 1255.48 1794.43 L1250.39 1794.43 Q1254.62 1787.14 1256.69 1779.95 Q1258.79 1772.72 1258.79 1765.37 Q1258.79 1758.02 1256.69 1750.85 Q1254.62 1743.69 1250.39 1736.37 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><polyline clip-path="url(#clip250)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:1; fill:none" points="282.449,1717.55 282.449,188.976 "></polyline>
+<path clip-path="url(#clip250)" d="M156.587 1130.67 Q158.359 1130.67 159.454 1131.8 Q160.549 1132.9 160.549 1134.28 Q160.549 1135.28 159.937 1136.02 Q159.325 1136.73 158.262 1136.73 Q157.167 1136.73 156.008 1135.89 Q154.848 1135.05 154.687 1133.15 Q153.496 1134.41 153.496 1136.41 Q153.496 1137.41 154.14 1138.24 Q154.752 1139.05 155.75 1139.5 Q156.781 1139.98 162.61 1141.08 Q164.51 1141.43 166.346 1141.75 Q168.181 1142.08 170.114 1142.46 L170.114 1136.99 Q170.114 1136.28 170.146 1135.99 Q170.178 1135.7 170.339 1135.47 Q170.5 1135.22 170.854 1135.22 Q171.756 1135.22 171.982 1135.63 Q172.175 1136.02 172.175 1137.18 L172.175 1142.85 L193.077 1146.81 Q193.688 1146.91 195.621 1147.32 Q197.521 1147.71 200.645 1148.65 Q203.801 1149.58 205.669 1150.51 Q206.732 1151.03 207.73 1151.7 Q208.761 1152.35 209.791 1153.28 Q210.822 1154.22 211.434 1155.44 Q212.078 1156.66 212.078 1157.95 Q212.078 1160.14 210.854 1161.85 Q209.63 1163.56 207.537 1163.56 Q205.766 1163.56 204.671 1162.46 Q203.576 1161.33 203.576 1159.95 Q203.576 1158.95 204.188 1158.24 Q204.799 1157.5 205.862 1157.5 Q206.313 1157.5 206.828 1157.66 Q207.344 1157.82 207.923 1158.18 Q208.535 1158.53 208.954 1159.31 Q209.373 1160.08 209.437 1161.14 Q210.629 1159.89 210.629 1157.95 Q210.629 1157.34 210.371 1156.79 Q210.146 1156.25 209.566 1155.79 Q208.986 1155.31 208.407 1154.96 Q207.859 1154.6 206.796 1154.25 Q205.766 1153.89 204.993 1153.67 Q204.22 1153.44 202.835 1153.15 Q201.45 1152.83 200.613 1152.67 Q199.808 1152.51 198.229 1152.22 L172.175 1147.29 L172.175 1151.64 Q172.175 1152.41 172.143 1152.74 Q172.111 1153.03 171.949 1153.25 Q171.756 1153.48 171.37 1153.48 Q170.758 1153.48 170.5 1153.22 Q170.21 1152.93 170.178 1152.61 Q170.114 1152.28 170.114 1151.51 L170.114 1146.94 Q161.966 1145.39 159.776 1144.78 Q157.457 1144.07 155.847 1142.98 Q154.204 1141.88 153.431 1140.66 Q152.658 1139.43 152.368 1138.44 Q152.046 1137.41 152.046 1136.41 Q152.046 1134.15 153.27 1132.41 Q154.462 1130.67 156.587 1130.67 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M230.221 1123.95 Q229.387 1123.95 229.139 1123.88 Q228.891 1123.79 228.508 1123.43 L218.633 1114.57 Q213.178 1109.73 208.421 1109.73 Q205.332 1109.73 203.123 1111.35 Q200.914 1112.95 200.914 1115.9 Q200.914 1117.93 202.154 1119.65 Q203.394 1121.36 205.603 1122.15 Q205.558 1122.01 205.558 1121.54 Q205.558 1120.39 206.279 1119.76 Q207.001 1119.1 207.97 1119.1 Q209.21 1119.1 209.819 1119.92 Q210.405 1120.71 210.405 1121.49 Q210.405 1121.81 210.337 1122.24 Q210.27 1122.64 209.638 1123.3 Q208.985 1123.95 207.835 1123.95 Q204.611 1123.95 202.041 1121.52 Q199.471 1119.06 199.471 1115.32 Q199.471 1111.08 201.996 1108.31 Q204.498 1105.51 208.421 1105.51 Q209.796 1105.51 211.059 1105.94 Q212.298 1106.34 213.268 1106.91 Q214.237 1107.45 215.793 1108.94 Q217.348 1110.43 218.453 1111.62 Q219.558 1112.81 221.902 1115.5 L226.659 1120.39 L226.659 1112.07 Q226.659 1108.01 226.298 1107.7 Q225.645 1107.25 222.195 1106.68 L222.195 1105.51 L230.221 1106.82 L230.221 1123.95 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M149.09 1057.72 Q156.411 1061.99 163.572 1064.06 Q170.733 1066.13 178.086 1066.13 Q185.438 1066.13 192.663 1064.06 Q199.856 1061.96 207.145 1057.72 L207.145 1062.82 Q199.666 1067.59 192.44 1069.98 Q185.215 1072.33 178.086 1072.33 Q170.988 1072.33 163.795 1069.98 Q156.602 1067.62 149.09 1062.82 L149.09 1057.72 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M151.032 1046.11 L151.032 1036.53 L183.369 1024.4 L151.032 1012.21 L151.032 1002.63 L198.552 1002.63 L198.552 1008.9 L156.824 1008.9 L189.417 1021.15 L189.417 1027.61 L156.824 1039.87 L198.552 1039.87 L198.552 1046.11 L151.032 1046.11 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M162.904 990.12 L162.904 984.263 L198.552 984.263 L198.552 990.12 L162.904 990.12 M149.026 990.12 L149.026 984.263 L156.442 984.263 L156.442 990.12 L149.026 990.12 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M177.035 942.377 L198.552 942.377 L198.552 948.233 L177.226 948.233 Q172.166 948.233 169.651 950.207 Q167.137 952.18 167.137 956.127 Q167.137 960.869 170.16 963.607 Q173.184 966.344 178.404 966.344 L198.552 966.344 L198.552 972.232 L162.904 972.232 L162.904 966.344 L168.442 966.344 Q165.227 964.243 163.636 961.41 Q162.044 958.546 162.044 954.822 Q162.044 948.679 165.864 945.528 Q169.651 942.377 177.035 942.377 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M162.904 930.696 L162.904 924.839 L198.552 924.839 L198.552 930.696 L162.904 930.696 M149.026 930.696 L149.026 924.839 L156.442 924.839 L156.442 930.696 L149.026 930.696 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M169.747 884.831 Q165.8 882.635 163.922 879.579 Q162.044 876.524 162.044 872.386 Q162.044 866.816 165.959 863.792 Q169.842 860.769 177.035 860.769 L198.552 860.769 L198.552 866.657 L177.226 866.657 Q172.102 866.657 169.619 868.471 Q167.137 870.285 167.137 874.009 Q167.137 878.561 170.16 881.202 Q173.184 883.844 178.404 883.844 L198.552 883.844 L198.552 889.733 L177.226 889.733 Q172.07 889.733 169.619 891.547 Q167.137 893.361 167.137 897.149 Q167.137 901.636 170.192 904.278 Q173.216 906.92 178.404 906.92 L198.552 906.92 L198.552 912.808 L162.904 912.808 L162.904 906.92 L168.442 906.92 Q165.163 904.915 163.604 902.114 Q162.044 899.313 162.044 895.462 Q162.044 891.579 164.018 888.873 Q165.991 886.136 169.747 884.831 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M162.904 849.087 L162.904 843.231 L198.552 843.231 L198.552 849.087 L162.904 849.087 M149.026 849.087 L149.026 843.231 L156.442 843.231 L156.442 849.087 L149.026 849.087 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M162.904 833.523 L162.904 805.705 L168.251 805.705 L193.873 827.731 L193.873 805.705 L198.552 805.705 L198.552 834.319 L193.204 834.319 L167.582 812.294 L167.582 833.523 L162.904 833.523 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M179.263 766.27 L182.128 766.27 L182.128 793.197 Q188.175 792.815 191.358 789.568 Q194.509 786.29 194.509 780.465 Q194.509 777.091 193.682 773.94 Q192.854 770.757 191.199 767.638 L196.737 767.638 Q198.074 770.789 198.774 774.099 Q199.475 777.41 199.475 780.815 Q199.475 789.345 194.509 794.342 Q189.544 799.308 181.078 799.308 Q172.325 799.308 167.2 794.597 Q162.044 789.855 162.044 781.834 Q162.044 774.641 166.691 770.471 Q171.306 766.27 179.263 766.27 M177.545 772.126 Q172.739 772.19 169.874 774.832 Q167.009 777.441 167.009 781.77 Q167.009 786.672 169.779 789.632 Q172.548 792.56 177.577 793.006 L177.545 772.126 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M149.09 757.58 L149.09 752.488 Q156.602 747.714 163.795 745.358 Q170.988 742.971 178.086 742.971 Q185.215 742.971 192.44 745.358 Q199.666 747.714 207.145 752.488 L207.145 757.58 Q199.856 753.347 192.663 751.278 Q185.438 749.178 178.086 749.178 Q170.733 749.178 163.572 751.278 Q156.411 753.347 149.09 757.58 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="282.449,1161.71 838.294,1161.71 "></polyline>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="838.294,1717.55 838.294,1161.71 "></polyline>
+<circle clip-path="url(#clip252)" cx="838.294" cy="1161.71" r="54" fill="#ffa500" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="4"></circle>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="282.449,605.86 560.371,605.86 "></polyline>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="560.371,1717.55 560.371,605.86 "></polyline>
+<circle clip-path="url(#clip252)" cx="560.371" cy="605.86" r="54" fill="#ffa500" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="4"></circle>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="282.449,1439.63 1394.14,1439.63 "></polyline>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="1394.14,1717.55 1394.14,1439.63 "></polyline>
+<circle clip-path="url(#clip252)" cx="1394.14" cy="1439.63" r="54" fill="#ffa500" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="4"></circle>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="282.449,883.783 1116.22,883.783 "></polyline>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="1116.22,1717.55 1116.22,883.783 "></polyline>
+<circle clip-path="url(#clip252)" cx="1116.22" cy="883.783" r="54" fill="#ffa500" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="4"></circle>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="282.449,1161.71 1672.06,1161.71 "></polyline>
+<polyline clip-path="url(#clip252)" style="stroke:#000000; stroke-linecap:round; stroke-linejoin:round; stroke-width:4; stroke-opacity:0.5; fill:none" stroke-dasharray="16, 10" points="1672.06,1717.55 1672.06,1161.71 "></polyline>
+<circle clip-path="url(#clip252)" cx="1672.06" cy="1161.71" r="54" fill="#ffa500" fill-rule="evenodd" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="4"></circle>
+<path clip-path="url(#clip250)" d="M769.988 1115.58 L783.356 1115.58 L783.356 1069.44 L768.813 1072.36 L768.813 1064.9 L783.275 1061.99 L791.458 1061.99 L791.458 1115.58 L804.826 1115.58 L804.826 1122.47 L769.988 1122.47 L769.988 1115.58 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M500.734 559.733 L529.293 559.733 L529.293 566.62 L490.891 566.62 L490.891 559.733 Q495.549 554.913 503.57 546.811 Q511.631 538.669 513.697 536.319 Q517.627 531.904 519.166 528.865 Q520.746 525.787 520.746 522.83 Q520.746 518.009 517.343 514.971 Q513.981 511.933 508.553 511.933 Q504.704 511.933 500.41 513.269 Q496.157 514.606 491.296 517.32 L491.296 509.056 Q496.238 507.071 500.532 506.059 Q504.826 505.046 508.391 505.046 Q517.789 505.046 523.379 509.745 Q528.969 514.444 528.969 522.303 Q528.969 526.03 527.551 529.392 Q526.174 532.714 522.488 537.251 Q521.475 538.425 516.047 544.056 Q510.619 549.646 500.734 559.733 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1352 1367.78 Q1357.88 1369.03 1361.16 1373 Q1364.48 1376.97 1364.48 1382.81 Q1364.48 1391.76 1358.32 1396.66 Q1352.16 1401.56 1340.82 1401.56 Q1337.01 1401.56 1332.96 1400.79 Q1328.95 1400.06 1324.66 1398.57 L1324.66 1390.67 Q1328.06 1392.65 1332.11 1393.66 Q1336.16 1394.68 1340.58 1394.68 Q1348.28 1394.68 1352.29 1391.64 Q1356.34 1388.6 1356.34 1382.81 Q1356.34 1377.46 1352.57 1374.46 Q1348.84 1371.42 1342.16 1371.42 L1335.11 1371.42 L1335.11 1364.7 L1342.48 1364.7 Q1348.52 1364.7 1351.72 1362.31 Q1354.92 1359.88 1354.92 1355.34 Q1354.92 1350.68 1351.6 1348.21 Q1348.32 1345.7 1342.16 1345.7 Q1338.8 1345.7 1334.95 1346.43 Q1331.1 1347.16 1326.48 1348.7 L1326.48 1341.41 Q1331.14 1340.11 1335.19 1339.46 Q1339.28 1338.81 1342.89 1338.81 Q1352.2 1338.81 1357.63 1343.07 Q1363.06 1347.28 1363.06 1354.49 Q1363.06 1359.51 1360.19 1363 Q1357.31 1366.44 1352 1367.78 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1074.04 791.192 L1053.38 823.478 L1074.04 823.478 L1074.04 791.192 M1071.89 784.063 L1082.18 784.063 L1082.18 823.478 L1090.81 823.478 L1090.81 830.283 L1082.18 830.283 L1082.18 844.543 L1074.04 844.543 L1074.04 830.283 L1046.74 830.283 L1046.74 822.384 L1071.89 784.063 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path><path clip-path="url(#clip250)" d="M1605.13 1061.99 L1637.26 1061.99 L1637.26 1068.87 L1612.63 1068.87 L1612.63 1083.7 Q1614.41 1083.09 1616.19 1082.81 Q1617.98 1082.48 1619.76 1082.48 Q1629.88 1082.48 1635.8 1088.03 Q1641.71 1093.58 1641.71 1103.06 Q1641.71 1112.82 1635.64 1118.25 Q1629.56 1123.64 1618.5 1123.64 Q1614.69 1123.64 1610.72 1122.99 Q1606.79 1122.34 1602.58 1121.05 L1602.58 1112.82 Q1606.23 1114.81 1610.12 1115.78 Q1614.01 1116.75 1618.34 1116.75 Q1625.35 1116.75 1629.44 1113.07 Q1633.53 1109.38 1633.53 1103.06 Q1633.53 1096.74 1629.44 1093.06 Q1625.35 1089.37 1618.34 1089.37 Q1615.06 1089.37 1611.78 1090.1 Q1608.54 1090.83 1605.13 1092.37 L1605.13 1061.99 Z" fill="#000000" fill-rule="nonzero" fill-opacity="1"></path></svg>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<div>
+<ul>
+<li class="fragment">1 vs 2: 1 dominates</li>
+<li class="fragment">1 vs 5: 5 dominates</li>
+<li class="fragment">1 vs 4: neither dominates</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2></h2>
+
+<img data-src="../_assets/img/smith_pareto_2022_fig1.png" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="smith_pareto:2022">Smith et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></section>
+<section class="slide level2 scrollable">
+<h2>Goals of multiobjective optimization</h2>
+<div>
+<ol type="1">
+<li class="fragment">Find solutions as close to Pareto front as possible</li>
+<li class="fragment">Find solutions as diverse as possible (since infinite points lie along the Pareto front but we can only sample a finite number)</li>
+</ol>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Implementation</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Motivation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Multiobjective optimization</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Implementation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Weighted sum</h2>
+<p>We can <em>scalarize</em> the multiobjective problem into a single-objective problem by using a weighted sum:</p>
+<p><span class="math display">\[
+\min F(x) =\sum_{m=1}^M w_m f_m(x)
+\]</span> subject to the same constraints as before.</p>
+<div>
+<ul>
+<li class="fragment"><strong>Strength:</strong> simple</li>
+<li class="fragment"><strong>Weakness:</strong> have to choose weights</li>
+<li class="fragment"><strong>Opportunity:</strong> can vary weights to explore Pareto front</li>
+<li class="fragment"><strong>Threat:</strong> may miss parts of the Pareto front</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+<h2>Weighted sum: convex and nonconvex</h2>
+<div id="fig-moo-convex-nonconvex" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-moo-convex-nonconvex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../_assets/img/Sudhoff-convex.png"></p>
+</div>
+<div class="fragment quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img data-src="../_assets/img/Sudhoff-nonconvex.png"></p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-moo-convex-nonconvex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: From Sudhoff slides.
+</figcaption>
+</figure>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Genetic algorithms</h2>
+<div>
+<ol type="1">
+<li class="fragment">GAs operate on a set (“population” or “generation”) of solutions</li>
+<li class="fragment">Inspired by evolution: the best solutions are more likely to survive and reproduce</li>
+<li class="fragment">At each time step, compute a <em>fitness score</em> for each solution based on objectives and diversity</li>
+<li class="fragment">Use this score to select solutions for reproduction (crossover)</li>
+<li class="fragment">Add noise (mutation) to the next “generation”</li>
+<li class="fragment">Many algorithms! We won’t try to keep track of them all.</li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>A population of solutions</h2>
+<p>What do we get at the end?</p>
+<div>
+<ol type="1">
+<li class="fragment">A set of solutions that are not dominated by any other solution</li>
+<li class="fragment">Each represents
+<ol type="1">
+<li class="fragment">a different tradeoff between objectives</li>
+<li class="fragment">a different part of the Pareto front</li>
+</ol></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>One interpretation of multi-objective optimization is that it maps out the trade-offs between objectives.</p>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../_assets/img/kasprzyk_mordm_2013_fig5.png"></p>
+<figcaption>Figure 5 of <span class="citation" data-cites="kasprzyk_mordm:2013">Kasprzyk et al. (<a href="#/references" role="doc-biblioref" onclick="">2013</a>)</span></figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Checking convergence</h2>
+<p>Genetic / algorithms are not exact methods. They rely on <strong>heuristics</strong> to decide a solution is “good enough” even if it’s not a global optimum. However, we can and should test our solutions for convergence and quality.</p>
+<div>
+<ol type="1">
+<li class="fragment">Repeat the optimization with different initial conditions (“random seeds”). Do results change?</li>
+<li class="fragment">Use diagnostics like <strong>hypervolume</strong> to measure how much of the Pareto front we’ve found.</li>
+<li class="fragment">Compare to other methods (e.g., weighted sum) to see if we’re missing parts of the Pareto front.</li>
+<li class="fragment">Compare solutions to human-generated benchmarks.</li>
+</ol>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Wrapup</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Motivation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Multiobjective optimization</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Implementation</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Key ideas</h2>
+<ol type="1">
+<li>Policy search</li>
+<li>Multiobjective optimization</li>
+<li>Genetic algorithms</li>
+</ol>
+</section>
+<section class="slide level2">
+<h2>How many objectives do we need?</h2>
+<p>There are drawbacks to adding more objectives:</p>
+<ul>
+<li>Computational cost (exponentially more solutions needed)</li>
+<li>Conceptual complexity</li>
+<li>Difficulty communicating results</li>
+</ul>
+<p>so we want as few as possible. Thus, combining objectives into a single function is often a good idea, when appropriate.</p>
+</section>
+<section class="slide level2">
+<h2>Logistics</h2>
+<ul>
+<li>Wednesday: read <span class="citation" data-cites="zarekarizi_suboptimal:2020">Zarekarizi et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></li>
+<li>Friday: lab on multiobjective optimization</li>
+</ul>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
+<h2>References</h2>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-kasprzyk_mordm:2013" class="csl-entry" role="listitem">
+Kasprzyk, J. R., Nataraj, S., Reed, P. M., &amp; Lempert, R. J. (2013). Many objective robust decision making for complex environmental systems undergoing change. <em>Environmental Modelling &amp; Software</em>, <em>42</em>, 55–71. <a href="https://doi.org/10.1016/j.envsoft.2012.12.007">https://doi.org/10.1016/j.envsoft.2012.12.007</a>
+</div>
+<div id="ref-smith_pareto:2022" class="csl-entry" role="listitem">
+Smith, S., Southerby, M., Setiniyaz, S., Apsimon, R., &amp; Burt, G. (2022). Multiobjective optimization and <span>Pareto</span> front visualization techniques applied to normal conducting rf accelerating structures. <em>Physical Review Accelerators and Beams</em>, <em>25</em>(6), 062002. <a href="https://doi.org/10.1103/PhysRevAccelBeams.25.062002">https://doi.org/10.1103/PhysRevAccelBeams.25.062002</a>
+</div>
+<div id="ref-zarekarizi_suboptimal:2020" class="csl-entry" role="listitem">
+Zarekarizi, M., Srikrishnan, V., &amp; Keller, K. (2020). Neglecting uncertainties biases house-elevation decisions to manage riverine flood risks. <em>Nature Communications</em>, <em>11</em>(1, 1), 5361. <a href="https://doi.org/10.1038/s41467-020-19188-9">https://doi.org/10.1038/s41467-020-19188-9</a>
+</div>
+</div>
+</section></section>
     </div>
   </div>
 
