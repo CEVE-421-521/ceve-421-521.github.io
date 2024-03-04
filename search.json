@@ -59,6 +59,34 @@
     "text": "References\n\n\n\n\n\n\n\n\nKasprzyk, J. R., Nataraj, S., Reed, P. M., & Lempert, R. J. (2013). Many objective robust decision making for complex environmental systems undergoing change. Environmental Modelling & Software, 42, 55–71. https://doi.org/10.1016/j.envsoft.2012.12.007\n\n\nSmith, S., Southerby, M., Setiniyaz, S., Apsimon, R., & Burt, G. (2022). Multiobjective optimization and Pareto front visualization techniques applied to normal conducting rf accelerating structures. Physical Review Accelerators and Beams, 25(6), 062002. https://doi.org/10.1103/PhysRevAccelBeams.25.062002\n\n\nZarekarizi, M., Srikrishnan, V., & Keller, K. (2020). Neglecting uncertainties biases house-elevation decisions to manage riverine flood risks. Nature Communications, 11(1, 1), 5361. https://doi.org/10.1038/s41467-020-19188-9"
   },
   {
+    "objectID": "lectures/09-sequential.html",
+    "href": "lectures/09-sequential.html",
+    "title": "Sequential Decision Problems",
+    "section": "",
+    "text": "This lecture borrows heavily from Herman et al. (2020)."
+  },
+  {
+    "objectID": "lectures/09-sequential.html#house-elevation-problem",
+    "href": "lectures/09-sequential.html#house-elevation-problem",
+    "title": "Sequential Decision Problems",
+    "section": "House elevation problem",
+    "text": "House elevation problem\nThus far, we have looked at a single static decision: how high to elevate the house. However, in many cases, decisions are not static, but rather sequential. For example, we don’t necessarily need to make this decision today! Instead, we could wait and see how fast local sea-levels are rising, and then make a decision later with more information."
+  },
+  {
+    "objectID": "lectures/09-sequential.html#general-dynamic-decision-problems",
+    "href": "lectures/09-sequential.html#general-dynamic-decision-problems",
+    "title": "Sequential Decision Problems",
+    "section": "General dynamic decision problems",
+    "text": "General dynamic decision problems\nDynamic planning problems identify policies to select actions in response to new information over time. Policy design involves choosing the sequence, timing, and/or threshold of actions to achieve a desired outcome. This typically involves a combination of optimal control and adaptive design."
+  },
+  {
+    "objectID": "lectures/09-sequential.html#expected-future-rewards",
+    "href": "lectures/09-sequential.html#expected-future-rewards",
+    "title": "Sequential Decision Problems",
+    "section": "Expected future rewards",
+    "text": "Expected future rewards\n\n\n\n\n\n\nFor more a detailed introduction to optimal control or reinforcement learning, see Sutton & Barto (2018)."
+  },
+  {
     "objectID": "lectures/05-bca2.html",
     "href": "lectures/05-bca2.html",
     "title": "Cost-Benefit Analysis II",
@@ -764,7 +792,7 @@
     "href": "readings/week-09-reading.html",
     "title": "Readings for Week 9",
     "section": "",
-    "text": "Discussion questions will be posted here.\n\n\n\nAssigned reading will be drawn from:\n\nHerman et al. (2020)\nQuinn et al. (2017)\nFletcher et al. (2019)\nSutton & Barto (2018)\n\n\n\n\n\nReferences\n\nFletcher, S., Lickley, M., & Strzepek, K. (2019). Learning about climate change uncertainty enables flexible water infrastructure planning. Nature Communications, 10(1), 1782. https://doi.org/10.1038/s41467-019-09677-x\n\n\nHerman, J. D., Quinn, J. D., Steinschneider, S., Giuliani, M., & Fletcher, S. (2020). Climate adaptation as a control problem: Review and perspectives on dynamic water resources planning under uncertainty. Water Resources Research, e24389. https://doi.org/10.1029/2019wr025502\n\n\nQuinn, J. D., Reed, P. M., & Keller, K. (2017). Direct policy search for robust multi-objective management of deeply uncertain socio-ecological tipping points. Environmental Modelling & Software, 92, 125–141. https://doi.org/10.1016/j.envsoft.2017.02.017\n\n\nSutton, R. S., & Barto, A. G. (2018). Reinforcement learning: An Introduction (Second Edition). Cambridge, Massachusetts and London, England: MIT Press."
+    "text": "Please read from Quinn et al. (2017) and answer the following questions:\n\nWhat is being optimized in this paper?\nWhat uncertainties and processes are being considered? Are there any relevant considerations not included in the model?\nThe authors discussed that this work creates two new technological contributions: “(1) demonstrating the value and use of direct policy search (DPS) (Rosenstein & Barto, 2001) for identifying adaptive robust operational control strategies for socio-ecological systems and (2) demonstrating how nonlinear environmental thresholds, or tipping points, pose fundamental challenges for balancing economic benefits and their consequent risks to socio-ecological systems”. Why do you think these contributions are important?\nThis paper explores the modeling of “socio-ecological systems with tipping points,” specifically the classical shallow lake problem. Discuss other examples of these types of systems. Do you think climate change will produce similar systems?\n\n\n\n\n\nReferences\n\nQuinn, J. D., Reed, P. M., & Keller, K. (2017). Direct policy search for robust multi-objective management of deeply uncertain socio-ecological tipping points. Environmental Modelling & Software, 92, 125–141. https://doi.org/10.1016/j.envsoft.2017.02.017"
   },
   {
     "objectID": "readings/week-13-reading.html",
