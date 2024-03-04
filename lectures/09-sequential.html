@@ -150,9 +150,22 @@ window.Quarto = {
   <li><a href="#house-elevation-problem" id="toc-house-elevation-problem" class="nav-link" data-scroll-target="#house-elevation-problem">House elevation problem</a></li>
   <li><a href="#general-dynamic-decision-problems" id="toc-general-dynamic-decision-problems" class="nav-link" data-scroll-target="#general-dynamic-decision-problems">General dynamic decision problems</a></li>
   </ul></li>
-  <li><a href="#optimal-control" id="toc-optimal-control" class="nav-link" data-scroll-target="#optimal-control">Optimal control</a>
+  <li><a href="#optimal-control-and-reinforcement-learning" id="toc-optimal-control-and-reinforcement-learning" class="nav-link" data-scroll-target="#optimal-control-and-reinforcement-learning">Optimal control and reinforcement learning</a>
   <ul class="collapse">
+  <li><a href="#framing" id="toc-framing" class="nav-link" data-scroll-target="#framing">Framing</a></li>
+  <li><a href="#reward" id="toc-reward" class="nav-link" data-scroll-target="#reward">Reward</a></li>
+  <li><a href="#policy" id="toc-policy" class="nav-link" data-scroll-target="#policy">Policy</a></li>
   <li><a href="#expected-future-rewards" id="toc-expected-future-rewards" class="nav-link" data-scroll-target="#expected-future-rewards">Expected future rewards</a></li>
+  </ul></li>
+  <li><a href="#solution-methods" id="toc-solution-methods" class="nav-link" data-scroll-target="#solution-methods">Solution methods</a>
+  <ul class="collapse">
+  <li><a href="#open-loop" id="toc-open-loop" class="nav-link" data-scroll-target="#open-loop">Open loop</a></li>
+  <li><a href="#dynamic-programming" id="toc-dynamic-programming" class="nav-link" data-scroll-target="#dynamic-programming">Dynamic programming</a></li>
+  <li><a href="#policy-search" id="toc-policy-search" class="nav-link" data-scroll-target="#policy-search">Policy search</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
+  <ul class="collapse">
+  <li><a href="#flexibility" id="toc-flexibility" class="nav-link" data-scroll-target="#flexibility">Flexibility</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/lectures/09-sequential.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="09-sequential.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -198,16 +211,6 @@ window.Quarto = {
 <p>This lecture borrows heavily from <span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#ref-herman_control:2020" role="doc-biblioref">2020</a>)</span>.</p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>I am actively adding more material to this lecture!</p>
-</div>
-</div>
-</div>
 <section id="house-elevation-problem" class="level2">
 <h2 class="anchored" data-anchor-id="house-elevation-problem">House elevation problem</h2>
 <p>Thus far, we have looked at a single <em>static</em> decision: how high to elevate the house. However, in many cases, decisions are not static, but rather <em>sequential</em>. For example, we don’t necessarily need to make this decision today! Instead, we could wait and see how fast local sea-levels are rising, and then make a decision later <strong>with more information</strong>.</p>
@@ -217,38 +220,125 @@ window.Quarto = {
 <p>Dynamic planning problems identify policies to select actions in response <em>to new information over time</em>. Policy design involves choosing the sequence, timing, and/or threshold of actions to achieve a desired outcome. This typically involves a combination of optimal control and adaptive design.</p>
 </section>
 </section>
-<section id="optimal-control" class="level1">
-<h1>Optimal control</h1>
-<p>Optimal control is a family of mathematical techniques used to optimize sequential decision problems. The most important concept in optimal control is the <strong>state</strong> of the system. We can think of the state as the information available to the decision maker at any given time, although we can also consider formulations where some state variables are not directly observable. The state evolves over time according to a dynamics model, which describes how the state changes in response to the decision maker’s actions and external factors: <span class="math display">\[
-\mathbf{x}_{t+1} = f_t(\mathbf{x}_t, a_t, e_{t+1}),
-\]</span> where - <span class="math inline">\(\mathbf{x}_t\)</span> is the state at time <span class="math inline">\(t\)</span>, e.g.&nbsp;the sea level at time <span class="math inline">\(t\)</span> - <span class="math inline">\(a_t\)</span> is the decision at time <span class="math inline">\(t\)</span>, e.g.&nbsp;whether we elevate and if so how high - <span class="math inline">\(e_t\)</span> is some forcing, e.g., - <span class="math inline">\(f_t\)</span> is assumed deterministic, but it can evolve over time.</p>
-<p>The optimization problem is to choose a <strong>policy</strong> that selects actions to minimize some cost function (equivalently, maximize some reward function, etc.) over time.</p>
-<section id="expected-future-rewards" class="level2">
-<h2 class="anchored" data-anchor-id="expected-future-rewards">Expected future rewards</h2>
+<section id="optimal-control-and-reinforcement-learning" class="level1">
+<h1>Optimal control and reinforcement learning</h1>
+<p>Optimal control and reinforcement learning are related fields relating to the study of optimizing sequential decision problems.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>For more a detailed introduction to optimal control or reinforcement learning, see <span class="citation" data-cites="sutton_reinforcement:2018">Sutton &amp; Barto (<a href="#ref-sutton_reinforcement:2018" role="doc-biblioref">2018</a>)</span>.</p>
+<p>For a thorough but accessible textbook on reinforcement learning, I recommend <span class="citation" data-cites="sutton_reinforcement:2018">Sutton &amp; Barto (<a href="#ref-sutton_reinforcement:2018" role="doc-biblioref">2018</a>)</span>.</p>
 </div>
 </div>
 </div>
+<section id="framing" class="level2">
+<h2 class="anchored" data-anchor-id="framing">Framing</h2>
+<p>In sequential decision problems, the decision maker does not need to make all decisions at once. Instead, at each time step, the decision maker makes a decision based on the <strong>state</strong> of the system (which may not be fully observable). In our case study, the state might include the current elevation of the house, the current sea level, and other potential variables.</p>
+<p>Mathematically, the state evolves over time according to a dynamics model, which describes how the state changes in response to the decision maker’s actions and external factors: <span class="math display">\[
+\mathbf{x}_{t+1} = f_t(\mathbf{x}_t, a_t, e_{t+1}),
+\]</span> where</p>
+<ul>
+<li><span class="math inline">\(\mathbf{x}_t\)</span> is the state at time <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(a_t\)</span> is the decision at time <span class="math inline">\(t\)</span> (<em>e.g.&nbsp;whether we elevate and if so how high</em>)</li>
+<li><span class="math inline">\(e_{t+1}\)</span> is some forcing (<em>e.g., the rate of sea level rise</em>)</li>
+<li><span class="math inline">\(f_t\)</span> is assumed deterministic, but it can evolve over time.</li>
+</ul>
+</section>
+<section id="reward" class="level2">
+<h2 class="anchored" data-anchor-id="reward">Reward</h2>
+<p>A key concept in sequential decision problems is that at each time step, the decision maker gets some immediate feedback. This is often called reward, <span class="math inline">\(R\)</span>. The reward <span class="math inline">\(R_{t+1}\)</span> (indices by convention) depends on the state at time <span class="math inline">\(t\)</span>, the action at time <span class="math inline">\(t\)</span>, and the forcing at time <span class="math inline">\(t\)</span>.</p>
+<p>In our house elevation problem, the reward might be the cost of flood insurance and the cost of elevating (which will often be zero).</p>
+</section>
+<section id="policy" class="level2">
+<h2 class="anchored" data-anchor-id="policy">Policy</h2>
+<p>The decision maker’s strategy for choosing actions is called a <strong>policy</strong>. The policy is a deterministic (or stochastic) function that maps states to actions. We’ll focus here on <em>discrete time</em> problems, although <em>continuous time</em> problems are also well-studied in some domains.</p>
+<div id="fig-rl" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../_assets/img/rl-sketch.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A sketch of the reinforcement learning problem.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="expected-future-rewards" class="level2">
+<h2 class="anchored" data-anchor-id="expected-future-rewards">Expected future rewards</h2>
+<p>A central idea of optimal control problems is to maximize the expected sum of future rewards.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The basic idea is that there might be actions that give a low reward now, but that lead to high rewards in the future. In our case study, an illustration would be spending a lot of money to elevate the house now, but then not having to pay as much for flood insurance in the future. Future rewards are usually discounted (as we have seen); this can be done either in the cost function or in the reward function.</p>
+<p>This leads naturally to an important concept in reinforcement learning: <strong>value</strong>. The value of a state is the expected sum of future rewards that can be obtained from that state, assuming the decision maker follows a particular policy. The value of a state-action pair is the expected sum of future rewards that can be obtained from that state, assuming the decision maker takes a particular action and then follows a particular policy.</p>
+</section>
+</section>
+<section id="solution-methods" class="level1">
+<h1>Solution methods</h1>
+<p>There are many methods for solving sequential decision problems! Here, we’ll focus on a few examples from <span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#ref-herman_control:2020" role="doc-biblioref">2020</a>)</span>. This is not by any means a comprehensive list.</p>
+<p>On Wednesday we’ll read a paper that compares what we call here open loop (they call it “intertemporal open loop control”) and dynamic policy search.</p>
+<section id="open-loop" class="level2">
+<h2 class="anchored" data-anchor-id="open-loop">Open loop</h2>
+<p>Open loop control solves for all actions at once. The result is a vector of actions corresponding to each time step.</p>
+<p>The primary advantage of open loop control is that it’s very easy to execute the policy – no further analysis, updating, or optimization is needed. The primary disadvantage is that it’s not adaptive – it doesn’t take into account new information that might be available later. It can also be computationally challenging because it requires solving a lot of decision variables (each time step is a decision variable) and they are not independent (if I elevate my house in 2030, I probably don’t want to elevate it in 2031).</p>
+</section>
+<section id="dynamic-programming" class="level2">
+<h2 class="anchored" data-anchor-id="dynamic-programming">Dynamic programming</h2>
+<p>There are many variations of dynamic programming, but the most commonly applied is stochastic dynamic programming, in which the value function <span class="math inline">\(Q\)</span> for each state at time <span class="math inline">\(t\)</span> is estimated from the recursive Bellman equation: <span class="math display">\[
+Q_t(\mathbf{x}_t) = \min_{a_t} \left\{ R_t + \gamma Q_{t+1} (\mathbf{x}_{t+1}) \right\}.
+\]</span> where <span class="math inline">\(\gamma\)</span> is the discount factor.</p>
+<p>This problem is typically discretized and solved using a backward induction algorithm. In other words, a discrete number of states and actions are considered. The discrete state transition function gives you the probability of transitioning from one state to another, given an action. A very rough solution approach is:</p>
+<ol type="1">
+<li>Calculate the value function for the each step in last time step, <span class="math inline">\(Q_T(x^1_T), Q_T(x^2_T), \ldots\)</span>.</li>
+<li>For each time step <span class="math inline">\(t = T-1, T-2, \ldots, 1\)</span>, calculate the value function for each state <span class="math inline">\(x_t\)</span> using the Bellman equation:
+<ol type="1">
+<li>For each state <span class="math inline">\(x_t\)</span>, calculate the value of each action <span class="math inline">\(a_t\)</span> as the reward plus the discounted <em>expected value</em> of the next state</li>
+<li>Choose the action that maximizes the value function</li>
+<li>The value function for the state is the value of the action that maximizes the value function</li>
+</ol></li>
+</ol>
+<p>An advantage of methods like SDP is that they can provide exact solutions to the problem, conditional on the model and discretization. A disadvantage is that often very strong assumptions are required to discretize the problem and make it tractable. SDP also suffers from the “curse of dimensionality” because as the number of states and actions increases, the number of possible state-action pairs increases exponentially.</p>
+</section>
+<section id="policy-search" class="level2">
+<h2 class="anchored" data-anchor-id="policy-search">Policy search</h2>
+<p>Policy search assumes a specific functional form for a policy <span class="math inline">\(\pi\)</span> with parameters <span class="math inline">\(\theta\)</span> such that <span class="math inline">\(a_t = f(\mathbf{x}_t, \theta)\)</span>. The goal is to find the parameters <span class="math inline">\(\theta\)</span> that maximize the expected sum of future rewards.</p>
+<p>Common choices of <span class="math inline">\(f\)</span> include linear decision rules, radial basis functions, binary trees, and neural networks. A primary advantage of policy search is that it can be very flexible and adaptive, and can be used with <strong>simulation-optimization</strong> frameworks. A primary disadvantage is that it can be computationally expensive and can require a lot of data to estimate the parameters.</p>
+<p>In our case study, there are many different ways to parameterize our decision rule. Two options suggested by <span class="citation" data-cites="garnergarner_slrise:2018">(<a href="#ref-garnergarner_slrise:2018" role="doc-biblioref"><strong>garnergarner_slrise:2018?</strong></a>)</span> are:</p>
+<ol type="1">
+<li>define a “buffer height” as the minimum tolerable elevation of the house relative to the mean sea level and a “freeboard height” so that when the buffer height is exceeded, the house is elevated to be BH + FH above the mean sea level.</li>
+<li>Estimate FH and BH based on the local slope and acceleration of the sea-level</li>
+</ol>
+<p>However, very complex control rules using deep neural networks are also used (e.g., in video game playing).</p>
+</section>
+</section>
+<section id="discussion" class="level1">
+<h1>Discussion</h1>
+<p>Like everything we’ve seen in this class, we are using a model to represent the real world, but the model isn’t the real world and we should take this into account when designing and interpreting our optimization.</p>
+<section id="flexibility" class="level2">
+<h2 class="anchored" data-anchor-id="flexibility">Flexibility</h2>
+<p>The financial theory of real options defines “the right, but not obligation” to take a particular action in the future. For example, if I purchase the right to buy Apple stocks in 1 year at price <span class="math inline">\(X\)</span>, I can choose to buy the stocks if the price is higher than <span class="math inline">\(X\)</span>, but I don’t have to buy them if the price is lower than <span class="math inline">\(X\)</span>. This is a real option, and it has value.</p>
+<p>This has motivated study of options in engineering and policy design. It turns out that creating flexibility in decision making can be very valuable, but it’s not always easy to generate designs that are naturally flexible. An example we’ll see on Friday gives a simple example: build a parking garage to a few floors, build it to many floors, or build a few floors but extra-strong so we can add levels in the future if needed? <span class="citation" data-cites="deneufville_parkinggarage:2006">(<a href="#ref-deneufville_parkinggarage:2006" role="doc-biblioref">Neufville et al., 2006</a>)</span>.</p>
 
 
 
 </section>
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-herman_control:2020" class="csl-entry" role="listitem">
 Herman, J. D., Quinn, J. D., Steinschneider, S., Giuliani, M., &amp; Fletcher, S. (2020). Climate adaptation as a control problem: <span>Review</span> and perspectives on dynamic water resources planning under uncertainty. <em>Water Resources Research</em>, e24389. <a href="https://doi.org/10.1029/2019wr025502">https://doi.org/10.1029/2019wr025502</a>
 </div>
-<div id="ref-sutton_reinforcement:2018" class="csl-entry" role="listitem">
-Sutton, R. S., &amp; Barto, A. G. (2018). <em>Reinforcement learning: An <span>Introduction</span></em> (Second Edition). <span>Cambridge, Massachusetts and London, England</span>: <span>MIT Press</span>.
+<div id="ref-deneufville_parkinggarage:2006" class="csl-entry" role="listitem">
+Neufville, R. de, Scholtes, S., &amp; Wang, T. (2006). Real <span>Options</span> by <span>Spreadsheet</span>: <span>Parking Garage Case Example</span>. <em>Journal of Infrastructure Systems</em>, <em>12</em>(2), 107–111. <a href="https://doi.org/10.1061/(asce)1076-0342(2006)12:2(107)">https://doi.org/10.1061/(asce)1076-0342(2006)12:2(107)</a>
 </div>
-</div></section></div></main> <!-- /main -->
+<div id="ref-sutton_reinforcement:2018" class="csl-entry" role="listitem">
+Sutton, R. S., &amp; Barto, A. G. (2018). <em>Reinforcement learning: An <span>Introduction</span></em> (Second Edition). Cambridge, Massachusetts; London, England: MIT Press.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This is a slight simplification; equation 1 of <span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#ref-herman_control:2020" role="doc-biblioref">2020</a>)</span> gives a more general form.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
