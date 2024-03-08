@@ -673,14 +673,35 @@
     "href": "labs/lab-07/index.html",
     "title": "Lab 7: Parking Garage Case Study",
     "section": "",
-    "text": "This is a placeholder."
+    "text": "Neufville et al. (2006) introduced a case study of a parking garage in which the decision variable is the number of levels to build. This is about as simple as a sequential decision problem can get, which makes it a great “toy problem” to illustrate the basic concepts of sequential decision making and how to program them effectively.\n\n\nAs always:\n\nClone the lab repository to your computer\nOpen the lab repository in VS Code\nOpen the Julia REPL and activate, then instantiate, the lab environment\nMake sure you can render: quarto render template.qmd in the terminal.\n\nIf you run into issues, try running ] build IJulia in the Julia REPL (] enters the package manager).\nIf you still have issues, try opening up blankfile.py. That should trigger VS Code to give you the option to install the Python extension, which you should do. Then you should be able to open a menu in the bottom right of your screen to select which Python installation you want VS Code to use.\n\n\n\n\n\n\nusing Revise\nusing ParkingGarage\n\nPrecompiling ParkingGarage\n  ✓ ParkingGarage\n  1 dependency successfully precompiled in 1 seconds\n\n\nand also regular packages\n\nusing Plots\nPlots.default(; margin=5Plots.mm)\n\n\n\n\nWe view the problem as a sequential decision problem following Neufville et al. (2006). We have a single decision to make: how many levels to build. We will compare results for two cases:\n\nstatic case. The number of levels is fixed.\nadaptive case. We pay an extra 5% for up-front costs, but then retain the option to build more levels in the future. We will use a simple rule to decide when to build more levels: if demand exceeds the current capacity, we will build one more level.\n\nAs we’ve seen in class, a key concept in sequential decision making is the idea of a state. In this problem, we have three state variables: the year and the number of levels. We could add some complexity to our problem by making the demand stochastic, in which case we’d want it to be a state variable, but here we’ll treat it as a determinstic function of time.\nWe also have some uncertainty in our model: the discount rate, the time horizon, and the demand growth rate. The paper uses an exponential growth model for demand, but we’ll use a linear one.\n\n\nCode\nlet\n    sow = ParkingGarageSOW()\n    years = 1:(sow.n_years)\n    demand = [\n        ParkingGarage.calculate_demand(year, sow.demand_growth_rate) for year in years\n    ]\n    plot(\n        years,\n        demand;\n        ylabel=\"Demand [cars/day]\",\n        xlabel=\"Year\",\n        legend=false,\n        title=\"Demand Growth Rate: $(sow.demand_growth_rate) Cars/Year\",\n        size=(800, 400),\n        marker=:circle,\n    )\nend"
   },
   {
-    "objectID": "labs/lab-07/index.html#overview",
-    "href": "labs/lab-07/index.html#overview",
+    "objectID": "labs/lab-07/index.html#setup",
+    "href": "labs/lab-07/index.html#setup",
     "title": "Lab 7: Parking Garage Case Study",
     "section": "",
-    "text": "This is a placeholder."
+    "text": "As always:\n\nClone the lab repository to your computer\nOpen the lab repository in VS Code\nOpen the Julia REPL and activate, then instantiate, the lab environment\nMake sure you can render: quarto render template.qmd in the terminal.\n\nIf you run into issues, try running ] build IJulia in the Julia REPL (] enters the package manager).\nIf you still have issues, try opening up blankfile.py. That should trigger VS Code to give you the option to install the Python extension, which you should do. Then you should be able to open a menu in the bottom right of your screen to select which Python installation you want VS Code to use."
+  },
+  {
+    "objectID": "labs/lab-07/index.html#load-packages",
+    "href": "labs/lab-07/index.html#load-packages",
+    "title": "Lab 7: Parking Garage Case Study",
+    "section": "",
+    "text": "using Revise\nusing ParkingGarage\n\nPrecompiling ParkingGarage\n  ✓ ParkingGarage\n  1 dependency successfully precompiled in 1 seconds\n\n\nand also regular packages\n\nusing Plots\nPlots.default(; margin=5Plots.mm)"
+  },
+  {
+    "objectID": "labs/lab-07/index.html#formal-problem-framing",
+    "href": "labs/lab-07/index.html#formal-problem-framing",
+    "title": "Lab 7: Parking Garage Case Study",
+    "section": "",
+    "text": "We view the problem as a sequential decision problem following Neufville et al. (2006). We have a single decision to make: how many levels to build. We will compare results for two cases:\n\nstatic case. The number of levels is fixed.\nadaptive case. We pay an extra 5% for up-front costs, but then retain the option to build more levels in the future. We will use a simple rule to decide when to build more levels: if demand exceeds the current capacity, we will build one more level.\n\nAs we’ve seen in class, a key concept in sequential decision making is the idea of a state. In this problem, we have three state variables: the year and the number of levels. We could add some complexity to our problem by making the demand stochastic, in which case we’d want it to be a state variable, but here we’ll treat it as a determinstic function of time.\nWe also have some uncertainty in our model: the discount rate, the time horizon, and the demand growth rate. The paper uses an exponential growth model for demand, but we’ll use a linear one.\n\n\nCode\nlet\n    sow = ParkingGarageSOW()\n    years = 1:(sow.n_years)\n    demand = [\n        ParkingGarage.calculate_demand(year, sow.demand_growth_rate) for year in years\n    ]\n    plot(\n        years,\n        demand;\n        ylabel=\"Demand [cars/day]\",\n        xlabel=\"Year\",\n        legend=false,\n        title=\"Demand Growth Rate: $(sow.demand_growth_rate) Cars/Year\",\n        size=(800, 400),\n        marker=:circle,\n    )\nend"
+  },
+  {
+    "objectID": "labs/lab-07/index.html#uncertainty",
+    "href": "labs/lab-07/index.html#uncertainty",
+    "title": "Lab 7: Parking Garage Case Study",
+    "section": "Uncertainty",
+    "text": "Uncertainty\nFigure 1 of Neufville et al. (2006) shows how the NPV changes when uncertainty is added to the model. Reproduce this figure, using our model. Specifically:\n\nGenerate an ensemble of SOWs. Justify how you are sampling the three parameters (n_years, demand_growth_rate, and discount_rate). I suggest to keep n_years as a constant, and perhaps to keep the discount rate constant as well.\nFor each SOW, calculate the NPV for each policy.\nCalculate the average NPV for each number of levels and plot."
   },
   {
     "objectID": "labs/lab-06/index.html",
