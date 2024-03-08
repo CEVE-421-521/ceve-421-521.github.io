@@ -223,7 +223,7 @@ window.MathJax = {
 </section>
 <section id="load-packages" class="level2">
 <h2 class="anchored" data-anchor-id="load-packages">Load packages</h2>
-<div id="3bcd8e5a" class="cell" data-execution_count="1">
+<div id="3bcd8e5a" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">using</span> <span class="bu">Revise</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">using</span> <span class="bu">ParkingGarage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -233,7 +233,7 @@ window.MathJax = {
 </div>
 </div>
 <p>and also regular packages</p>
-<div id="81fa5a75" class="cell" data-execution_count="2">
+<div id="81fa5a75" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a>Plots.<span class="fu">default</span>(; margin<span class="op">=</span><span class="fl">5</span>Plots.mm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -247,7 +247,7 @@ window.MathJax = {
 </ol>
 <p>As we’ve seen in class, a key concept in sequential decision making is the idea of a state. In this problem, we have three state variables: the year and the number of levels. We could add some complexity to our problem by making the demand stochastic, in which case we’d want it to be a state variable, but here we’ll treat it as a determinstic function of time.</p>
 <p>We also have some uncertainty in our model: the discount rate, the time horizon, and the demand growth rate. The paper uses an exponential growth model for demand, but we’ll use a linear one.</p>
-<div id="7c17470b" class="cell" data-execution_count="3">
+<div id="7c17470b" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">let</span></span>
@@ -337,7 +337,7 @@ window.MathJax = {
 <section id="static-case" class="level1">
 <h1>Static case</h1>
 <p>This function assumes that the demand is deterministic and that the number of levels is fixed. The decision variable is the number of levels of the garage to build. If we consider a single SOW, we can calculate the NPV of the profits for a given policy.</p>
-<div id="5972ec2f" class="cell" data-execution_count="4">
+<div id="5972ec2f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">let</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>    sow <span class="op">=</span> <span class="fu">ParkingGarageSOW</span>(; demand_growth_rate<span class="op">=</span><span class="fl">80.0</span>, n_years<span class="op">=</span><span class="fl">20</span>, discount_rate<span class="op">=</span><span class="fl">0.12</span>)</span>
 <span id="cb5-3"><a href="#cb5-3"></a>    n_levels <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">12</span></span>

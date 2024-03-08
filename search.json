@@ -704,6 +704,13 @@
     "text": "Uncertainty\nFigure 1 of Neufville et al. (2006) shows how the NPV changes when uncertainty is added to the model. Reproduce this figure, using our model. Specifically:\n\nGenerate an ensemble of SOWs. Justify how you are sampling the three parameters (n_years, demand_growth_rate, and discount_rate). I suggest to keep n_years as a constant, and perhaps to keep the discount rate constant as well.\nFor each SOW, calculate the NPV for each policy.\nCalculate the average NPV for each number of levels and plot."
   },
   {
+    "objectID": "labs/lab-07/template.html",
+    "href": "labs/lab-07/template.html",
+    "title": "Lab 7: Parking Garage Case Study",
+    "section": "",
+    "text": "using Revise\nusing ParkingGarage\n\nand also regular packages\n\nusing Plots\nPlots.default(; margin=5Plots.mm)"
+  },
+  {
     "objectID": "labs/lab-06/index.html",
     "href": "labs/lab-06/index.html",
     "title": "Lab 6: Policy Search",
