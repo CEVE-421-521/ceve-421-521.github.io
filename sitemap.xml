@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://ceve-421-521.github.io/lectures/10-robustness.html</loc>
-    <lastmod>2023-11-27T13:26:35.794Z</lastmod>
+    <lastmod>2024-03-18T15:39:17.366Z</lastmod>
   </url>
   <url>
     <loc>https://ceve-421-521.github.io/lectures/09-sequential.html</loc>
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://ceve-421-521.github.io/readings/week-10-reading.html</loc>
-    <lastmod>2023-11-27T13:38:05.769Z</lastmod>
+    <lastmod>2024-03-18T14:46:30.059Z</lastmod>
   </url>
   <url>
     <loc>https://ceve-421-521.github.io/index.html</loc>
@@ -66,67 +66,71 @@
   </url>
   <url>
     <loc>https://ceve-421-521.github.io/assignments/exam-2.html</loc>
-    <lastmod>2023-11-27T13:44:44.926Z</lastmod>
+    <lastmod>2024-03-18T15:36:19.998Z</lastmod>
   </url>
   <url>
-    <loc>https://ceve-421-521.github.io/assignments/exam-1.html</loc>
-    <lastmod>2023-11-27T13:44:45.621Z</lastmod>
+    <loc>https://ceve-421-521.github.io/assignments/exam-2-review.html</loc>
+    <lastmod>2024-03-18T15:35:35.443Z</lastmod>
   </url>
   <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-02/index.html</loc>
-    <lastmod>2024-01-25T16:48:40.180Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-05/index.html</loc>
-    <lastmod>2024-02-16T17:50:34.978Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-04/index.html</loc>
-    <lastmod>2024-02-08T16:20:26.908Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-03/index.html</loc>
-    <lastmod>2024-01-26T16:57:10.825Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-06/template.html</loc>
-    <lastmod>2024-03-01T16:05:45.565Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-01/index.html</loc>
-    <lastmod>2024-01-19T04:43:51.764Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-07/index.html</loc>
-    <lastmod>2024-03-08T16:55:00.982Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-07/template.html</loc>
-    <lastmod>2024-03-08T16:55:00.982Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-06/index.html</loc>
-    <lastmod>2024-03-01T16:05:45.558Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-08/index.html</loc>
-    <lastmod>2024-03-01T16:47:26.790Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-03/template.html</loc>
-    <lastmod>2024-01-26T16:56:38.291Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-04/template.html</loc>
-    <lastmod>2024-02-08T16:20:26.909Z</lastmod>
+    <loc>https://ceve-421-521.github.io/labs/lab-02/template.html</loc>
+    <lastmod>2024-01-19T16:27:24.192Z</lastmod>
   </url>
   <url>
     <loc>https://ceve-421-521.github.io/labs/lab-05/template.html</loc>
     <lastmod>2024-02-16T16:41:36.397Z</lastmod>
   </url>
   <url>
-    <loc>https://ceve-421-521.github.io/labs/lab-02/template.html</loc>
-    <lastmod>2024-01-19T16:27:24.192Z</lastmod>
+    <loc>https://ceve-421-521.github.io/labs/lab-04/template.html</loc>
+    <lastmod>2024-02-08T16:20:26.909Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-03/template.html</loc>
+    <lastmod>2024-01-26T16:56:38.291Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-08/index.html</loc>
+    <lastmod>2024-03-18T15:37:04.710Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-06/index.html</loc>
+    <lastmod>2024-03-01T16:05:45.558Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-07/template.html</loc>
+    <lastmod>2024-03-08T16:55:00.982Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-07/index.html</loc>
+    <lastmod>2024-03-08T16:55:00.982Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-01/index.html</loc>
+    <lastmod>2024-01-19T04:43:51.764Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-06/template.html</loc>
+    <lastmod>2024-03-01T16:05:45.565Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-03/index.html</loc>
+    <lastmod>2024-01-26T16:57:10.825Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-04/index.html</loc>
+    <lastmod>2024-02-08T16:20:26.908Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-05/index.html</loc>
+    <lastmod>2024-02-16T17:50:34.978Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/labs/lab-02/index.html</loc>
+    <lastmod>2024-01-25T16:48:40.180Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ceve-421-521.github.io/assignments/exam-1.html</loc>
+    <lastmod>2023-11-27T13:44:45.621Z</lastmod>
   </url>
   <url>
     <loc>https://ceve-421-521.github.io/assignments/exam-3.html</loc>

@@ -30,7 +30,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -343,16 +363,323 @@
 <p class="subtitle">Lecture</p>
 <p class="date">Mon., Mar.&nbsp;18</p>
 </section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Refresher</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Refresher</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Robustness motivation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Robustness metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Critiques and alternative perspectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Course organization</h2>
+<ol type="1">
+<li>Module 1: background knowledge (climate risk, etc.)</li>
+<li>Module 2: quantitative tools for decision-making under uncertainty</li>
+<li>Module 3: getting more philosophical and practical</li>
+</ol>
+</section>
+<section class="slide level2">
+<h2>Notation</h2>
+
+<img data-src="../_assets/img/bayes-rdm-II.png" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Why do we use computers?</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Your turn</strong></p>
+</div>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Robustness motivation</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Refresher</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Robustness motivation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Robustness metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Critiques and alternative perspectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
 <section class="slide level2">
 
-<p>This is a placeholder.</p>
+<div class="columns">
+<div class="column" style="width:54%;">
+<p><img data-src="../_assets/img/abraham_demandforecast_2020_fig2.jpg"></p>
+</div><div class="column" style="width:44%;">
+<h3>The problem</h3>
+<p><span class="citation" data-cites="abraham_demandforecasts:2020">Abraham et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> show that water utilities systematically over-estimate future demand. Using a single, certain, forecast of future water demand might motivate over-building infrastructure.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:54%;">
+<p><img data-src="../_assets/img/abraham_demandforecast_2020_fig2.jpg"></p>
+</div><div class="column" style="width:44%;">
+<h3>Robustness</h3>
+<p>We want to make choices / design infrastructure that are <strong>robust</strong> to errors in demand forecasts.</p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Definition</h2>
+<blockquote>
+<p>The insensitivity of system design to errors, random or otherwise, in the estimates of those parameters affecting design choice <span class="citation" data-cites="matalas:1977">(<a href="#/references" role="doc-biblioref" onclick="">Matalas &amp; Fiering, 1977</a>)</span></p>
+</blockquote>
+<p>Mathematical definitions differ dramatically, however <span class="citation" data-cites="herman_robustness:2015">(@ <a href="#/references" role="doc-biblioref" onclick="">Herman et al., 2015</a>)</span>! Today we will discuss some overlapping perspectives and ideas about robustness.</p>
+</section>
+<section class="slide level2 scrollable">
+<h2>Bottom-up analysis</h2>
+<div>
+<ol type="1">
+<li class="fragment"><strong>Top-down, certain:</strong> experts develop a “best” forecast of future conditions, then choose a design that is optimal under that forecast</li>
+<li class="fragment"><strong>Top-down, uncertain:</strong> experts assign likelihoods to uncertain states of the world, then choose a design that optimizes expected performance <span class="citation" data-cites="herman_robustness:2015">(<a href="#/references" role="doc-biblioref" onclick="">Herman et al., 2015</a>)</span></li>
+<li class="fragment"><strong>Bottom-up:</strong> first <strong>explore</strong> to identify SOWs a solution is vulnerable to, then assess likelihood (more Wednesday!)</li>
+</ol>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Robustness metrics</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Refresher</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Robustness motivation</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Robustness metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Critiques and alternative perspectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Taxonomy</h2>
+
+<img data-src="../_assets/img/herman_robustness_2015_fig1.png" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="herman_robustness:2015">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span></p></section>
+<section class="slide level2 scrollable">
+<h2>Regret</h2>
+<p>Regret measures how sorry you are with your choice. There are two main definitions <span class="citation" data-cites="herman_robustness:2015">(<a href="#/references" role="doc-biblioref" onclick="">Herman et al., 2015</a>)</span>:</p>
+<div>
+<ol type="1">
+<li class="fragment">Deviation of a single solution in the real world or a simulated SOW from its baseline (expected) performance</li>
+<li class="fragment">Difference between the performance of a solution in the real world or a simulated SOW and the best possible performance in that SOW</li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Satistficing</h2>
+<p>Satisficing measures whether solutions achieve specific minimum requirements, condensing performance into a binary “satisfactory” or “unsatisfactory”.</p>
+<div>
+<ol type="1">
+<li class="fragment">With many SOWs, many studies use a <strong>domain criterion</strong>: over what fraction of SOWs does a solution satisfy a performance threshold <span class="citation" data-cites="herman_robustness:2015">(<a href="#/references" role="doc-biblioref" onclick="">Herman et al., 2015</a>)</span>?</li>
+<li class="fragment"><em>Note:</em> this is equivalent to asking what is the probability that a solution satisfies a performance threshold, although many people who calculate robustness metrics are allergic to the word “probability”</li>
+<li class="fragment">More complex satisficing criteria: see <span class="citation" data-cites="mcphail_robustness:2019">McPhail et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>.</li>
+</ol>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Critiques and alternative perspectives</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Refresher</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Robustness motivation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Robustness metrics</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Critiques and alternative perspectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Parameters?</h2>
+<div class="fragment">
+<p>The robustness metrics we’ve seen are defined in terms of parameters: we have a model with parameters, and we define SOWs as different values of those parameters.</p>
+</div>
+<div class="fragment">
+<p>Is this a good way to quantify our conceptual ideas about robustness?</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Combinations of uncertianties</h2>
+<p>In practice, we often have a combination of parametric uncertainties and “model structure” uncertainties <span class="citation" data-cites="doss-gollin_subjective:2022">(<a href="#/references" role="doc-biblioref" onclick="">Doss-Gollin &amp; Keller, 2023</a>)</span>. And <strong>not all SOWs are equally likely</strong>!</p>
+
+<img data-src="../_assets/img/lsl-evolution.png" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img data-src="../_assets/img/hausfather_scenarios_2020.jpg"></p>
+</div><div class="column" style="width:55%;">
+<p>Climate scenario uncertainties are “deep” (more next week!), but it would be a mistake to say we don’t know <em>anything</em> and all futures are equally likely <span class="citation" data-cites="hausfather_scenarios:2020">(<a href="#/references" role="doc-biblioref" onclick="">Hausfather &amp; Peters, 2020</a>)</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="../_assets/img/lsl-priors-weights.png"></p>
+<figcaption><span class="citation" data-cites="doss-gollin_subjective:2022">Doss-Gollin &amp; Keller (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:45%;">
+<h3>Alternative perspective</h3>
+<div>
+<ol type="1">
+<li class="fragment">Using “prior beliefs” assign likelihoods to different SOWs</li>
+<li class="fragment">Use quantiative toolkit (optimization, sensitivity analysis, etc.)</li>
+<li class="fragment">Vary prior belefs: a solution that is robust to different <strong>probability distributions</strong> rather than to different <strong>parameter values</strong>.</li>
+</ol>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Logistics</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Refresher</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Robustness motivation</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Robustness metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Critiques and alternative perspectives</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Exam 2</h2>
+<ul>
+<li>Exam 2 was scheduled for 3/22</li>
+<li>It will be postponed to 3/29</li>
+<li>3/22: review session</li>
+<li>Lake problem lab will be postponed to 4/5</li>
+<li>I will have Exam 1 graded by 3/22 so you know where you stand!</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Final project</h2>
+<p>In your final project, you will add something that’s misisng to the house-elevation problem. This might be:</p>
+<ul>
+<li>More complexity / realisim for a model component (e.g., depth-damage function, nonstationary storm surge probability, household financial constraints, etc.)</li>
+<li>A new model component (e.g., a better decision alternative, etc.)</li>
+<li>Applying a decision tool from class (e.g., sequential decision analysis, robustness checks, etc.)</li>
+</ul>
+<p>Timeline coming soon – don’t worry about Canvas for now.</p>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-abraham_demandforecasts:2020" class="csl-entry" role="listitem">
+Abraham, S., Diringer, S., &amp; Cooley, H. (2020). <em>An <span>Assessment</span> of <span>Urban Water Demand Forecasts</span> in <span>California</span></em>. Oakland, California: Pacific Institute. Retrieved from <a href="https://pacinst.org/wp-content/uploads/2020/08/Pacific-Institute-Assessment-Urban-Water-Demand-Forecasts-in-CA-Aug-2020.pdf">https://pacinst.org/wp-content/uploads/2020/08/Pacific-Institute-Assessment-Urban-Water-Demand-Forecasts-in-CA-Aug-2020.pdf</a>
+</div>
+<div id="ref-doss-gollin_subjective:2022" class="csl-entry" role="listitem">
+Doss-Gollin, J., &amp; Keller, K. (2023). A subjective <span>Bayesian</span> framework for synthesizing deep uncertainties in climate risk management. <em>Earth’s Future</em>, <em>11</em>(1). <a href="https://doi.org/10.1029/2022EF003044">https://doi.org/10.1029/2022EF003044</a>
+</div>
+<div id="ref-hausfather_scenarios:2020" class="csl-entry" role="listitem">
+Hausfather, Z., &amp; Peters, G. P. (2020). Emissions – the ’business as usual’ story is misleading. <em>Nature</em>, <em>577</em>(7792, 7792), 618–620. <a href="https://doi.org/10.1038/d41586-020-00177-3">https://doi.org/10.1038/d41586-020-00177-3</a>
+</div>
+<div id="ref-herman_robustness:2015" class="csl-entry" role="listitem">
+Herman, J. D., Reed, P. M., Zeff, H. B., &amp; Characklis, G. W. (2015). How should robustness be defined for water systems planning under change? <em>Journal of Water Resources Planning and Management</em>, <em>141</em>(10), 04015012. <a href="https://doi.org/10.1061/(asce)wr.1943-5452.0000509">https://doi.org/10.1061/(asce)wr.1943-5452.0000509</a>
+</div>
+<div id="ref-matalas:1977" class="csl-entry" role="listitem">
+Matalas, N. C., &amp; Fiering, M. B. (1977). 6. <span>Water-Resource Systems Planning</span>. In <em>Climate, <span>Climatic Change</span>, and <span>Water Supply</span></em> (pp. 99–110). Washington, DC: The National Academies Press. Retrieved from <a href="https://www.nap.edu/read/185/chapter/11">https://www.nap.edu/read/185/chapter/11</a>
+</div>
+<div id="ref-mcphail_robustness:2019" class="csl-entry" role="listitem">
+McPhail, C., Maier, H. R., Kwakkel, J. H., Giuliani, M., Castelletti, A., &amp; Westra, S. (2019). Robustness metrics: How are they calculated, when should they be used and why do they give different results? <em>Earth’s Future</em>, 169–191. <a href="https://doi.org/10.1002/2017ef000649">https://doi.org/10.1002/2017ef000649</a>
+</div>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
