@@ -40,7 +40,7 @@ institution: "{{< var course.institution >}}}"
       1. Examples:
           - distribution of storm surge (with very long records)
           - probabilistic depth-damage curve calibrated on many similar structures
-   1. "Subjective" probabilities: uncertainties represented using probabilistic models informed by expert judgement
+   1. "Subjective" probabilities: uncertainties represented using probabilistic models informed by expert judgment
       1. Not actually different from "objective" probabilities (you always have to make assumptions)
       1. Examples:
           - future price of carbon
@@ -54,7 +54,7 @@ institution: "{{< var course.institution >}}}"
 1. What tools do different approaches enable?
    1. Probabilities are required for many traditional decision-making tools, such as cost-benefit analysis and optimization
       1. These tools rely on quantifying the likelihood of different outcomes and evaluating the expected value of different strategies.
-      1. Risk-based and risk-averse approaches can be used (e.g., look at 95th percentile of damages, weight bad outcomes more heavily, etc.)
+      1. Risk-based and risk-averse approaches can be used (e.g., look at 95th percentile of damages, weigh bad outcomes more heavily, etc.)
    1. There are many methods for accounting for deep uncertainty
       1. Exploratory modeling: no assumptions of likelihood made
       1. Robustness approaches: involve aggregating some metric across scenarios, which is sensitive to the range of scenarios considered (equivalent to a probability distribution)
