@@ -30,7 +30,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -344,15 +364,448 @@
 <p class="date">Mon., Apr.&nbsp;1</p>
 </section>
 <section class="slide level2">
+<h2>Today: equity</h2>
+<ul>
+<li>Equity is a complex and multifaceted concept
+<ul>
+<li>Different stakeholders may have varying definitions and understandings of equity</li>
+<li>Despite growing interest in equity, quantitative metrics to measure it are scarce</li>
+</ul></li>
+<li>Most studies that attempt to quantify equity do not clearly explain how their metrics relate to equity</li>
+</ul>
+<p>You will learn how to interpret, evaluate, and contribute to quantitative metrics for equity in climate-risk research. Today’s lecture draws heavily on <span class="citation" data-cites="pollack_equity:2023">Pollack et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>.</p>
+</section>
+<section class="slide level2">
+<h2>Today: values</h2>
+<p>Equity is not the only place where values come into play in climate risk management</p>
 
-<p>This is a placeholder.</p>
+<img data-src="../_assets/img/keller_values.jpg" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="keller_management:2021">Keller et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></section>
+<section class="slide level2">
+<h2>Creating a supportive learning environment</h2>
+<ul>
+<li>As we discuss topics related to environmental disparities and equity, it’s essential to be kind, respectful, and give each other the benefit of the doubt</li>
+<li>We all have different valuable perspectives and experiences that can contribute to our understanding of these complex issues</li>
+<li>Creating a supportive and inclusive learning environment will help us engage in meaningful and productive conversations</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>ASCE code of ethics</h2>
+<p><a href="https://www.asce.org/career-growth/ethics/code-of-ethics">asce.org/career-growth/ethics/code-of-ethics</a></p>
+<p>Engineers govern their professional careers on the following fundamental principles:</p>
+<ul>
+<li>create safe, resilient, and sustainable infrastructure;</li>
+<li>treat all persons with respect, dignity, and fairness in a manner that fosters equitable participation without regard to personal identity;</li>
+<li>consider the current and anticipated needs of society; and</li>
+<li>utilize their knowledge and skills to enhance the quality of life for humanity.</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>tl;dr: engineers apply normative values!</h2>
+<ul>
+<li>Honesty / truthfulness</li>
+<li>Benefit society</li>
+<li>Make the profession look good</li>
+<li>Consider diverse societal needs</li>
+<li>Safety</li>
+<li>Confidentialty</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Communities face uneven exposure to environmental harms</h2>
+<p><span class="citation" data-cites="bullard_dismantling:1999">Bullard (<a href="#/references" role="doc-biblioref" onclick="">1999</a>)</span>:</p>
+<div>
+<ul>
+<li class="fragment">Many economically impoverished communities and their inhabitants are exposed to greater health hazards in their homes, in their jobs and in their neighbourhoods when compared to their more affluent counterparts
+<ul>
+<li class="fragment"><em>What examples are you aware of?</em></li>
+</ul></li>
+<li class="fragment">In the real world, all communities are not created equal. All communities do not receive equal protection. Economics, political clout and race play an important part in sorting out residential amenities and disamenities.</li>
+<li class="fragment">Environmental racism refers to any environmental policy, practice or directive that differentially affects or disadvantages (whether intended or unintended) individuals, groups or communities based on race or colour.
+<ul>
+<li class="fragment"><em>Why might it be helpful for a framework to focus on proving effect rather than intent?</em></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Equity overview</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Equity overview</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Equity in what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Equity at what scale?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Equity with respect to what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Procedural equity</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Equity vs equality vs justice</h2>
+<ul>
+<li>Equity: Fairness and impartiality in the distribution of resources, opportunities, and outcomes</li>
+<li>Equality: Treating everyone the same way, regardless of their individual needs or circumstances</li>
+<li>Justice: The principle of fairness and righteousness, often encompassing equity and equality</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Distributive Justice</h2>
+<p>Access to resources and outcomes are fair and equitable across social groups and classes (e.g., gender, sexuality, class, race/ethnicity, indigeneity)</p>
+<ul>
+<li>Example: No disparities in flood protection measures between low-income and high-income neighborhoods</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Interpersonal justice</h2>
+<p>Individuals are treated fairly and equitably, no matter who they are</p>
+<ul>
+<li>Example: Low-income and high-income residents are given equal consideration when applying for post-flood assistance</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Procedural justice</h2>
+<p>Rules, norms, and decision-making processes are fair and equitable</p>
+<ul>
+<li>Example: All community members have equal opportunities to participate in decision-making processes related to flood risk management</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Recognition justice</h2>
+<p>Different worldviews and values are fairly and equitably represented</p>
+<ul>
+<li>Example: Indigenous knowledge and perspectives are considered when developing flood risk management strategies</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Transformative (or restorative) justice</h2>
+<p>Root causes of oppression in systems are collaboratively addressed and communities are peacefully reconstructed</p>
+<ul>
+<li>Example: Historical inequities in flood risk exposure are addressed through targeted investments in disadvantaged communities</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Social welfare</h2>
+<ul>
+<li>If everyone has a utility function, we can aggregate across people to create a social welfare function</li>
+<li>However, there’s not a single “right” way to do this <span class="citation" data-cites="debreu:1959 arrow_values:1951">(<a href="#/references" role="doc-biblioref" onclick="">Arrow, 1951</a>; <a href="#/references" role="doc-biblioref" onclick="">Debreu, 1959</a>)</span></li>
+<li>The field of social welfare theory tries to figure out good ways to come up with a social welfare function</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Moral frameworks</h2>
+<ul>
+<li>Egalitarianism: Prioritizing equality in the distribution of resources or outcomes</li>
+<li>Utilitarianism: Prioritizing overall well-being or the greatest good for the greatest number</li>
+<li>Rawlsian principles: Prioritizing benefits for the least advantaged individuals</li>
+<li>Prioritarianism: Giving greater weight to benefits for those who are worse off</li>
+</ul>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Equity in what?</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity overview</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Equity in what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Equity at what scale?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Equity with respect to what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Procedural equity</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Risk assessment outcomes</h2>
+<p>In the context of flood risk management, several key outcomes are often distinguished:</p>
+<ul>
+<li>Flood hazard: The physical peril or threat of flooding</li>
+<li>Exposure: The people, property, or other assets in the path of potential flooding</li>
+<li>Vulnerability: The susceptibility of exposed elements to damage or harm</li>
+<li>Risk: The potential for consequences, determined by the interactions between hazards, exposures, and vulnerabilities</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Environmental justice and outcome measures</h2>
+<p>Environmental justice theories suggest that a wider range of outcome measures should be considered when assessing equity, including:</p>
+<ul>
+<li>Risk: The distribution of potential consequences across different groups</li>
+<li>Funding: The allocation of resources for flood risk management and recovery</li>
+<li>Recovery: The ability of different groups to recover from flood events</li>
+<li>Benefits: The distribution of positive outcomes, such as reduced flood risk or improved quality of life</li>
+</ul>
+<p>These theories emphasize the importance of examining the distribution of both positive outcomes (benefits, recovery, funding) and burdens (risk) when evaluating equity.</p>
+</section>
+<section class="slide level2">
+<h2>Key question</h2>
+<p>We can measure “equity” in different ways:</p>
+<div>
+<ul>
+<li class="fragment">How much investment is given to different individuals / groups?</li>
+<li class="fragment">How much residual risk remains for different individuals / groups after interventions?</li>
+<li class="fragment">How much hazard reduction is achieved for different individuals / groups?</li>
+<li class="fragment">How do these outcomes compare across individuals / groups?</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Equity at what scale?</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity overview</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity in what?</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Equity at what scale?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Equity with respect to what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Procedural equity</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Why aggregation matters</h2>
+<ul>
+<li>The scale and definition of spatial boundaries at which the distribution of an outcome is measured can significantly impact the assessment of equity.</li>
+<li>Aggregating data at different scales can reveal or obscure disparities.</li>
+<li>The choice of aggregation unit should be informed by the specific context and the theories or frameworks being applied.</li>
+<li>It’s important to consider the scale at which inequities are most likely to be produced and experienced.</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Common aggregation choices in the literature</h2>
+<p><span class="citation" data-cites="pollack_equity:2023">Pollack et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>:</p>
+<div>
+<ul>
+<li class="fragment">Individual level: Outcomes measured at the individual, household, or building level.</li>
+<li class="fragment">Neighborhood level: Outcomes measured using community-defined neighborhood boundaries, which are important in many theories of environmental justice.</li>
+<li class="fragment">Small areas: Outcomes measured using population-based administrative boundaries that approximate neighborhoods, such as census block groups or tracts.</li>
+<li class="fragment">Large areas: Outcomes measured over relatively large areas like cities or regions.</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Equity with respect to what?</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity overview</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity in what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity at what scale?</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Equity with respect to what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Procedural equity</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Other characteristics</h2>
+<p>The “other characteristics” component includes demographics, measures of environmental burden, and procedural disparities. These are used to assess if inequities exist along particular dimensions.</p>
+</section>
+<section class="slide level2">
+<h2>Demographics</h2>
+<ul>
+<li>Individual variables, such as income, race, ethnicity, or age</li>
+<li>Aggregated indices that combine multiple demographic characteristics to proxy attributes such as vulnerability or disadvantage</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Environmental burden</h2>
+<ul>
+<li>Measures of environmental quality, such as access to nature, protection by green infrastructure, or exposure to pollution or other environmental hazards</li>
+<li>Some environmental burdens or goods could also be conceived of as relevant outcomes</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Procedural disparities</h2>
+<ul>
+<li>Discriminatory practices, such as those that produced historically redlined neighborhoods</li>
+<li>Policies that produce distinct groups subject to different procedural factors and experiences</li>
+<li>Example: Insurance claims filed by houses with different sewage systems being treated under different review processes</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Causal factors</h2>
+<p>Theories call for analysts to uncover the causal factors that produce inequities and create injustice, rather than simply describing disparities.</p>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Procedural equity</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity overview</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity in what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity at what scale?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity with respect to what?</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Procedural equity</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Power dynamics in participatory processes</h2>
+<p><span class="citation" data-cites="fletcher_waterresourcesequity:2022">Fletcher et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>:</p>
+<ul>
+<li>Simply including marginalized communities is not enough; equitable participation is key</li>
+<li>Power imbalances can shape whose knowledge is prioritized and who benefits from the process</li>
+<li>Explicitly identifying power dynamics and finding ways for participants to share power is important</li>
+<li>Skilled facilitation and collaboration with boundary organizations can help address power imbalances</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2></h2>
+
+<img data-src="../_assets/img/fletcher_deliberation.png" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="fletcher_waterresourcesequity:2022">Fletcher et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></p></section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Wrapup</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity overview</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity in what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity at what scale?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity with respect to what?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Procedural equity</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Wrapup</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Taxonomy</h2>
+
+<img data-src="../_assets/img/pollack-taxonomy.png" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="pollack_equity:2023">Pollack et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p></section>
+<section class="slide level2">
+<h2>Key points</h2>
+<ul>
+<li>There isn’t a single “right” way to quantify equity.</li>
+<li>However, being clear about how you’re conceptualizing and defining equity can help readers determine whether that’s consistent with their values and understanding.</li>
+<li>Grounding equity assessments in theories of justice and local historical context is important.</li>
+</ul>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
+<h2>Wednesday assignment</h2>
+<p>Rather than reading a paper, please research an environmental injustice in Houston.</p>
+<ul>
+<li>Prepare a two-minute presentation covering the injustice, relying on the key ideas from today’s lecture (e.g., equity in what? across what scale? with respect to what?).</li>
+<li>Upload your presentation to Canvas.</li>
+<li>You may work in mixed undergrad/grad groups of up to three students.</li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-arrow_values:1951" class="csl-entry" role="listitem">
+Arrow, K. J. (1951). <em>Social choice and individual values</em>. New York: Wiley.
+</div>
+<div id="ref-bullard_dismantling:1999" class="csl-entry" role="listitem">
+Bullard, R. D. (1999). Dismantling <span>Environmental Racism</span> in the <span>USA</span>. <em>Local Environment</em>, <em>4</em>(1), 5–19. <a href="https://doi.org/10.1080/13549839908725577">https://doi.org/10.1080/13549839908725577</a>
+</div>
+<div id="ref-debreu:1959" class="csl-entry" role="listitem">
+Debreu, G. (1959). <em>Theory of value; an axiomatic analysis of economic equilibrium</em>. New Haven, CT: Yale Univeristy Press.
+</div>
+<div id="ref-fletcher_waterresourcesequity:2022" class="csl-entry" role="listitem">
+Fletcher, S., Hadjimichael, A., Quinn, J., Osman, K., Giuliani, M., Gold, D., et al. (2022). Equity in <span>Water Resources Planning</span>: <span>A Path Forward</span> for <span>Decision Support Modelers</span>. <em>Journal of Water Resources Planning and Management</em>, <em>148</em>(7), 02522005. <a href="https://doi.org/10.1061/(ASCE)WR.1943-5452.0001573">https://doi.org/10.1061/(ASCE)WR.1943-5452.0001573</a>
+</div>
+<div id="ref-keller_management:2021" class="csl-entry" role="listitem">
+Keller, K., Helgeson, C., &amp; Srikrishnan, V. (2021). Climate risk management. <em>Annual Review of Earth and Planetary Sciences</em>, <em>49</em>(1), 95–116. <a href="https://doi.org/10.1146/annurev-earth-080320-055847">https://doi.org/10.1146/annurev-earth-080320-055847</a>
+</div>
+<div id="ref-pollack_equity:2023" class="csl-entry" role="listitem">
+Pollack, A., Helgeson, C., Kousky, C., &amp; Keller, K. (2024, February 27). Transparency on underlying values is needed for useful equity measurements. <a href="https://doi.org/10.31219/osf.io/kvyxr">https://doi.org/10.31219/osf.io/kvyxr</a>
+</div>
+</div>
+</section></section>
     </div>
   </div>
 
