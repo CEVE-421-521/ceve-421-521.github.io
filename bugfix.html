@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CEVE 421/521 – Spring 2024 - CEVE 421/521: Climate Risk Management</title>
+<title>CEVE 421/521 – Spring 2024 - Fixing bugs for extra credit</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./syllabus.html" rel="next">
+<link href="./resources.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -79,7 +79,7 @@ window.MathJax = {
 </script>
 
 
-<meta property="og:title" content="CEVE 421/521 – Spring 2024 - CEVE 421/521: Climate Risk Management">
+<meta property="og:title" content="CEVE 421/521 – Spring 2024 - Fixing bugs for extra credit">
 <meta property="og:description" content="Homepage for CEVE 421/521, Climate Risk Management, at Rice University, Spring 2024.">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2024">
 </head>
@@ -93,7 +93,7 @@ window.MathJax = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bugfix.html">Fixing bugs</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -127,7 +127,7 @@ window.MathJax = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -151,7 +151,7 @@ window.MathJax = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./bugfix.html" class="sidebar-item-text sidebar-link">
+  <a href="./bugfix.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Fixing bugs</span></a>
   </div>
 </li>
@@ -161,23 +161,14 @@ window.MathJax = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#course-information" id="toc-course-information" class="nav-link active" data-scroll-target="#course-information">Course Information</a></li>
-  <li><a href="#instructor" id="toc-instructor" class="nav-link" data-scroll-target="#instructor">Instructor</a></li>
-  <li><a href="#software-tools" id="toc-software-tools" class="nav-link" data-scroll-target="#software-tools">Software Tools</a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">CEVE 421/521: Climate Risk Management</h1>
+<h1 class="title">Fixing bugs for extra credit</h1>
 </div>
 
 
@@ -194,31 +185,27 @@ window.MathJax = {
 </header>
 
 
-<p>This is the course website for the Spring 2024 edition of CEVE 421/521, Climate Risk Management, taught at <a href="https://www.rice.edu">Rice University</a> by <a href="https://jamesdossgollin.me">James Doss-Gollin</a>.</p>
-<section id="course-information" class="level2">
-<h2 class="anchored" data-anchor-id="course-information">Course Information</h2>
-<p>Climate variability and change pose threats to lives and livelihoods. These climate risks can be managed through the design and operation of infrastructure systems, as well as through disaster response and recovery. Decisions about how to develop and choose risk management strategies are often based on pure vibes, but occasionally rigorous quantitative analyses that make use of scientific information can inform them (we will focus on these cases). These analyses involve integrating knowledge from multiple disciplines to balance competing goals (objectives) under uncertainty.</p>
-<p>In this course, you will learn climate science, uncertainty quantification, and decision analysis methods to support climate risk management. You will be assigned readings for every class that cover both methods and applications, and will work collaboratively to implement key concepts through programming problem sets. Active class participation is required. Methods covered include scenario analysis, exploratory modeling, cost-benefit analysis, single- and multi-objective policy search, reinforcement learning, deep uncertainty, robust decision making, and equitable decision making.</p>
-<p>For additional information, see the <a href="syllabus.html">syllabus</a>.</p>
-</section>
-<section id="instructor" class="level2">
-<h2 class="anchored" data-anchor-id="instructor">Instructor</h2>
-<p>Dr.&nbsp;James Doss-Gollin is an assistant professor of Civil and Environmental Engineering at Rice University. His research integrates Earth science, data science, and decision science to address challenges in climate risk management, water resources, and energy system resilience. He also teaches CEVE 543 (Data Science for Climate Hazards).</p>
-</section>
-<section id="software-tools" class="level2">
-<h2 class="anchored" data-anchor-id="software-tools">Software Tools</h2>
-<ul>
-<li>This course will use the <a href="https://julialang.org">Julia</a> programming language. Julia is a modern, free, open source language designed for scientific computing.</li>
-<li>No prior knowledge of Julia is expected, but some exposure to programming is strongly encouraged.</li>
-<li>Assignments will be distributed using <a href="https://github.com">GitHub Classroom</a>.</li>
-</ul>
-</section>
-<section id="acknowledgements" class="level2">
-<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>The layout for this site was inspired by and draws from Vivek Srikrishnan’s <a href="https://github.com/vsrikrish/environmental-systems-analysis/">Environmental Systems Analysis</a> course at Cornell, <a href="https://sta210-s22.github.io/website/">STA 210</a> at Duke University, and <a href="https://www.andrewheiss.com/teaching/">Andrew Heiss’s</a> course materials at Georgia State. It builds heavily from my data science for climate hazard assessment course, <a href="https://ceve543.github.io/">CEVE 543</a>.</p>
+<p>You can get extra credit if you find and/or fix any bug (major or minor) in the course materials. Here’s how.</p>
+<ol type="1">
+<li><strong>Find a bug</strong>. This could be a typo, a broken link, a mistake in the code, or anything else that you think is wrong.</li>
+<li><strong>Create an issue</strong>. Go to the <a href="https://ceve-421-521.github.io/ceve-421-521.github.io">course GitHub repository</a> and click on the “Issues” tab. Click the “New issue” button and describe the bug you found. This description can be very short (e.g., “typo in lecture 3 slide 5”). This is worth 1 point.
+<ol type="1">
+<li>Optionally, identify the specific line in the source code where the bug occurs. To link to the line, clikc on the line number, then click “Copy permalink”. Include this in the Issue. This is worth another point.</li>
+</ol></li>
+<li><strong>Fix the bug</strong>. If you know how to fix the bug, you can do so.
+<ol type="1">
+<li>There are two ways to create a pull request:
+<ol type="1">
+<li><strong>On GitHub</strong>: Click the “Edit” button on the page where the typo occurs. Make the change, then click “Propose changes”. This is worth 1 point.</li>
+<li><strong>On your computer</strong>: First, <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo"><strong>fork</strong></a> the course repository. Then, <strong>clone</strong> your fork to your computer. Make the change in your local copy, then <strong>commit</strong> and <strong>push</strong> the change to your fork. Finally, create a <strong>pull request</strong> to merge your change into the main course repository. This is worth 1 points.</li>
+</ol></li>
+<li>In either case: include the issue number in your commit message. For example, <code>Resolves #10,</code> for a fix that solves issue #10. That way, when the change is merged, the issue will be automatically closed.</li>
+</ol></li>
+</ol>
+<p>If you’re stuck, check out <a href="https://www.youtube.com/watch?v=rgbCcBNZcdQ">this 5 minute walkthrough</a> of the process. Or ask for help!</p>
+<p>At the end of the semester, you’ll get points based on the “bug points” you gathered over the semester. I’ll weight so that everyone who found even one bug gets one point of extra credit and the person who found the most bugs gets 5 points of extra credit.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -671,11 +658,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./resources.html" class="pagination-link" aria-label="Resources">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Resources</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./syllabus.html" class="pagination-link" aria-label="Syllabus">
-        <span class="nav-page-text">Syllabus</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -686,7 +673,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
 <p><strong>Page still under construction.</strong></p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/bugfix.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Made with <a href="https://julialang.org">Julia</a> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/ceve543/ceve543.github.io">View the source on <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></p>
 </div>
