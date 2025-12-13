@@ -1,43 +1,18 @@
 ---
-title: Readings for Week 13
-date: 2024-04-10
-week: 13
+title: "Week 13 Reading"
+subtitle: "Multi-objective Optimization"
 
-categories: [Reading]
-format: html
+format:
+  html: default
+  typst: default
 ---
 
-After reading and discussing @condon_myopia:2021, you should be able to:
 
-1. Explain the main factors contributing to the mispricing of climate risks in financial markets and the potential impacts of this mispricing.
-1. Evaluate the difficulties and constraints in measuring and reporting climate-related financial risks.
-1. Understand and examine the suggested policy actions to tackle climate risk mispricing, such as mandatory disclosure and other supporting regulations.
+## Overview
 
-## Guiding Questions
+For now, @kasprzyk_mordm:2013
 
-This paper is published in a law journal, which has a different format and writing style compared to the scientific papers we have read so far. 
-However, it is still quite accessible to readers from various backgrounds.
-As you read, please make note of any terms or concepts that you find unclear or would like to discuss further in class.
+## Discussion Questions
 
-Additionally, consider the following guiding questions while reading:
-
-1. Introduction
-    1. What is the central issue the paper discusses concerning climate risk and financial markets?
-    1. What are the possible effects of climate risk mispricing that are highlighted in the introduction?
-
-1. Climate Risk and Equity Misvaluation
-    1. What data does the paper provide to back up the assertion that markets are underestimating climate risks?
-    1. The paper outlines several key factors contributing to climate risk mispricing. In your opinion, which of these factors is the most important, and why?
-    1. How do the various factors of mispricing work together to hinder market correction?
-
-1. Societal Harm of Climate Risk Underassessment
-    1. In what ways can the mispricing of climate risks contribute to increased physical harm from climate change?
-    1. Explain the concept of a "climate bubble" and how it could pose a systemic risk to the financial system.
-    1. Why is disclosure by itself not enough to solve the issue of climate risk mispricing?
-
-1. Recommendations
-    1. What role does the Securities and Exchange Commission (SEC) play in addressing climate risk mispricing?
-    1. How can auditors and climate experts help improve the assessment and disclosure of climate risks?
-    1. Beyond disclosure, what other supporting policies does the paper recommend to address climate risk mispricing?
-
-1. Conclusion
+1. *TBD*
+2. *TBD*

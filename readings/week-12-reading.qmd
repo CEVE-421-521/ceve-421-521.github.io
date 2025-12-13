@@ -1,11 +1,23 @@
 ---
-title: Readings for Week 12
-date: 2024-04-03
-week: 12
+title: "Week 12 Reading"
+subtitle: "Sequential Decision Making"
 
-categories: [Reading]
-format: html
+format:
+  html: default
+  typst: default
 ---
 
-No journal articles for this week.
-Instead, see Canvas for a short assignment.
+
+## Overview
+
+@garner_slrise:2018
+
+Please note that **there is an error in this paper**; the units of storm surge are off by a factor of 10.
+Watch out for your unit conversions!
+This means that sea-level rise is emphasized relative to storm surge in the model.
+Regardless, the methods and qualitative findings are interesting.
+
+## Discussion Questions
+
+1. *TBD*
+2. *TBD*

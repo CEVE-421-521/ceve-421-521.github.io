@@ -1,74 +1,62 @@
 ---
+title: Syllabus
 format:
   html:
+    toc: true
     toc-depth: 3
-    title: Syllabus
-  pdf:
-    documentclass: article
-    fontsize: 11pt
-    geometry:
-      - margin=1in  
-    include-in-header:
-      text: |
-        \renewcommand\toprule[2]\relax
-        \renewcommand\bottomrule[2]\relax
-    title: "{{< var course.number >}} ({{< var course.title >}}) Syllabus"
-    subtitle: "{{< var course.semester >}}"
+  typst:
+    toc: false
+    margin:
+      x: 1in
+      y: 1in
 ---
 
-## Course Description
+|  |  |
+|:--|:--|
+| **Course** | {{< var course.number >}}: {{< var course.title >}} |
+| **Semester** | {{< var course.semester >}} |
+| **Instructor** | [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) |
+| **Email** | [{{< var instructor.email >}}](mailto:{{< var instructor.email >}}) |
+| **Office** | {{< var instructor.office >}} |
+| **Class Days** | {{< var course.days >}} |
+| **Class Time** | {{< var course.time >}} |
 
-Climate variability and change pose threats to lives and livelihoods.
-These climate risks can be managed through the design and operation of infrastructure systems, as well as through disaster response and recovery.
-Decisions about how to develop and choose risk management strategies are often based on pure vibes, but occasionally rigorous quantitative analyses that make use of scientific information can inform them (we will focus on these cases).
-These analyses involve integrating knowledge from multiple disciplines to balance competing goals (objectives) under uncertainty.
+: {.striped .hover}
 
-In this course, you will learn climate science, uncertainty quantification, and decision analysis methods to support climate risk management.
-You will be assigned readings for every class that cover both methods and applications, and will work collaboratively to implement key concepts through programming problem sets.
-Active class participation is required.
-Methods covered include scenario analysis, exploratory modeling, cost-benefit analysis, single- and multi-objective policy search, reinforcement learning, deep uncertainty, robust decision making, and equitable decision making.
+## Overview
 
-## Course Information
-:::: {.columns .course-details}
+How should cities invest in flood protection when historical data no longer predicts the future?
+How do we weigh certain, immediate costs against uncertain future benefits or balance efficiency against equity?
 
-::: {.column width="30%"}
-### Instructor
+These questions sit at the intersection of climate science, engineering, and decision-making under uncertainty.
+In practice, such decisions are often guided by intuition, politics, or precedent.
+This course focuses on the cases where rigorous quantitative analysis can do better.
 
-* {{< fa user title="Name" >}} [[{{< var instructor.name_no_title >}}]({{< var instructor.url >}})]{.ms-1}
-* {{< fa envelope title="Email" >}} [[{{< var instructor.email >}}](mailto:{{< var instructor.email >}})]{.ms-1}
-* {{< fa building title="Office" >}} [{{< var instructor.office >}}]{.ms-2}
-:::
+The course follows a three-part arc:
 
-::: {.column width="30%"}
-### TA
+1. **Risk Analysis:** Characterize climate hazards and quantify uncertainty using probabilistic methods including Monte Carlo simulation and extreme value theory.
+2. **Decision Analysis:** Evaluate options under uncertainty using cost-benefit analysis, sensitivity analysis, and value of information.
+3. **Optimization Under Uncertainty:** Find robust strategies using exploratory modeling, sequential decision-making, and multi-objective optimization.
 
-TBD
-::::
+Readings cover both foundational methods and real-world applications; programming labs let you implement and extend key concepts.
 
-::: {.column width="30%"}
-### Meetings
-
-* {{< fa calendar title="Class Days" >}} {{< var course.days >}}
-* {{< fa clock title="Class Time" >}} {{< var course.time >}}
-* {{< fa university title="Class Location" >}} {{< var course.location >}}
-:::
-
-::::
 
 ### Prerequisites & Preparation
 
-The following prerequisites are required:
+This is a 400-level CEVE course.
+In the past, many students from disciplines outside CEVE, including architecture, economics, and environmental science, have taken this class and done well.
+The following prerequisites are **required**:
 
-- An introductory course in probability and statistics, such as CEVE 313, is strictly required.
-
-In addition, the following prerequisites are encouraged.
-
+- An introductory course in probability and statistics.
 - Some exposure to Python, Julia, Matlab, R, or another programming language
-- Additional coursework in applied statistics
-- Linear algebra (you should be comfortable with matrix notation and basic operations)
-- Optimization (you should be comfortable writing down optimization problems)
+- Standard undergraduate mathematics, including linear algebra and calculus (it's OK if these skills are a little bit rusty)
 
-If you are unsure whether your background gives you an adequate preparation for this course, *please contact the instructor!*
+In addition, the following prerequisites are **encouraged**.
+
+- Some exposure to Earth or environmental sciences, particularly regarding flooding
+- Additional exposure (in a course or other experience) to probability theory, data analysis, machine learning, or statistics
+
+If you are unsure whether your background gives you an adequate preparation for this course, **please contact the instructor!**
 
 ::: {.callout-tip}
 ### What If My Skills Are Rusty?
@@ -77,41 +65,24 @@ If your programming, mathematics, or statistics skills are a little rusty, don't
 We will review concepts and build skills over the course of the semester.
 :::
 
-### Course Objectives 
+## Course Objectives
 
-After completing this course, you will be able to:
+By the end of this course, you will be able to:
 
-1. Evaluate and describe the strengths and weaknesses of different approaches to modeling the impact of weather and climate hazards on critical systems.
-2. Apply and critique methods for cost-benefit analysis, optimization, policy search, and stochastic control to climate adaptation problems.
-3. Describe multiple frameworks for decision making under deep uncertainty.
-4. Decision analytical frameworks well suited to a particular problem and justify the choice.
-
-### Required Materials
-
-No textbook is required for this course.
-All materials will be posted as open source on [the course website]({{< var course.url >}}) or on [Canvas](https://canvas.rice.edu/courses/{{< var course.canvas_id >}}).
-
-You will regularly be assigned scientific papers to read.
-Where those are available through the Rice library, you will be expected to access them yourself.
-You are encouraged, though not required, to use Zotero (Rice students have free storage).
-See [Fondren Library's Resources](http://fondrenlearning.blogs.rice.edu/zotero/) for resources.
-
-You will need a working laptop for this class.
-If you do not have access to a working laptop, or if you lose access during the semester, please email the instructor.
+1. **Risk Analysis:** Characterize climate hazards using probabilistic methods (Monte Carlo, Extreme Value Theory).
+2. **Decision Analysis:** Critique and apply Cost-Benefit Analysis and Valuation frameworks.
+3. **Optimization:** Apply robustness frameworks (XLRM) to find strategies that perform well across deep uncertainty.
+4. **Integration:** Critique real-world climate plans by identifying hidden assumptions and ethical trade-offs.
 
 ## A Community of Learning
 
-Rice's [core values](https://www.rice.edu/mission-values) are responsibility, integrity, community, and excellence.
-Our goal is to create a learning community aligned with these core values.
-
 ### Core Expectations
 
-Course success involves a dual responsibility on the part of the instructor and the student.
+Course success involves a shared responsibility on the part of the instructor and the student.
 
 :::: {.columns}
-
-::: {.column width="48%"}
-As the instructor, my responsibility is to provide you with a structure and opportunity to learn.
+::: {.column width="45%"}
+As the instructor, **my responsibility** is to provide you with a structure and opportunity to learn.
 To this end, I commit to:
 
 * provide organized and focused lectures, in-class activities, and assignments;
@@ -119,41 +90,66 @@ To this end, I commit to:
 * manage the classroom atmosphere to promote learning;
 * schedule sufficient out-of-class contact opportunities, such as office hours;
 * allow adequate time for assignment completion;
-* make lecture materials, class policies, activities, and assignments accessible to students. 
+* make lecture materials, class policies, activities, and assignments accessible to students.
 :::
-
-::: {.column width="4%"}
+::: {.column width="10%"}
 :::
+::: {.column width="45%"}
+Students are responsible for their own learning in the course.
+It is **your responsibility** to:
 
-::: {.column width="48%"}
-Students are responsible for their own learning in the course and should commit to:
-
-* attending all lectures;
-* doing all required preparatory work before class; 
-* actively participating in online and in-class discussions;
-* beginning assignments and other work early; and
-* attending office hours as needed. 
+* attend all lectures;
+* do all required preparatory work before class;
+* actively participate in online and in-class discussions;
+* begin assignments and other work early; and
+* attend office hours as needed.
 :::
 ::::
 
-::: {.callout-important}
-## What If I'm Sick?
+### AI Policy
 
-Please stay home if you're feeling sick!
-This is beneficial for both for your own recovery and the health and safety of your classmates.
-We will also make any necessary arrangements for you to stay on top of the class material and if whatever is going on will negatively impact your grade, for example by causing you to be unable to submit an assignment on time.
+We approach AI tools (like ChatGPT, Claude, Copilot) as tools.
+There is no ban on AI in this course unless a specific assignment states otherwise.
+Instead, we operate on four principles:
+
+1. **Shared Responsibility:** I commit to teaching you; you commit to learning.
+If you use AI to bypass thinking (e.g., generating code you don't understand), you cheat yourself of the skills you are spending your time (and money!) to learn.
+2. **Assessment Design:** Most grading relies on in-class assessments (Exams & Quizzes) and critical critiques which are difficult to "game" with AI.
+3. **Open Dialogue:** We will talk openly in class about how we are using these tools.
+We are learning together how to use them constructively.
+This requires being able to discuss our use of AI without worrying that we will be shamed for admitting that we use them.
+However, we commit to accepting constructive criticism of our (mis)use of AI tools
+
+A separate document on [AI](/ai.qmd) is provided to help you use these technologies to deepen your understanding (e.g., as a tutor or debugger) rather than as a replacement for your own intellect.
+
+### Laptop Policy
+
+To foster active discussion and deep cognitive presence, **laptops are not used during Monday Lectures and Wednesday Seminars.**
+Exceptions are made for tablet note-taking (flat on desk) or documented accommodations.
+Laptops are required for **Friday Lab Studios.**
+
+### Diversity and Inclusion
+
+Our goal in this class is to foster an inclusive learning environment and make everyone feel comfortable in the classroom, regardless of social identity, background, and specific learning needs.
+As engineers, our work touches on many critical aspects of society, and questions of inclusion and social justice cannot be separated from considerations of systems analysis, objective selection, risk analysis, and trade-offs. 
+
+In all communications and interactions with each other, members of this class community (students and instructors) are expected to be respectful and inclusive.
+In this spirit, we ask all participants to:
+
+* share their experiences, values, and beliefs;
+* be open to and respectful of the views of others; and
+* value each other's opinions and communicate in a respectful manner.
+
+You are expected to be professional and courteous on all course interactions and platforms.
+
+[Credit: [Vivek Srikrishnan, Cornell](https://github.com/vsrikrish/environmental-systems-analysis/blob/Fall24/syllabus.qmd)]
+
+::: {.callout-important}
+## Please, Be Excellent To Teach Other
+
+We all make mistakes in our communications with one another, both when speaking and listening. Be mindful of how spoken or written language might be misunderstood, and be aware that, for a variety of reasons, how others perceive your words and actions may not be exactly how you intended them. At the same time, it is also essential that we be respectful and interpret each other's comments and actions in good faith. 
 :::
 
-
-### Diversity, Equity, and Inclusion
-
-Rice is committed to building and maintaining an equitable and inclusive campus community.
-Diversity can refer to multiple ways that we identify ourselves, including but not limited to race, color, national origin, language, sex, disability, age, sexual orientation, gender identity, religion, creed, ancestry, belief, veteran status, or genetic information.
-Each of these diverse identities, along with many others not mentioned here, shape the perspectives our students, faculty, and staff bring to our campus.
-We, at Rice, will work to promote diversity, equity and inclusion not only because diversity fuels excellence and innovation, but because we want to pursue justice.
-We acknowledge our imperfections while we also fully commit to the work, inside and outside of our classrooms, of building and sustaining a campus community that increasingly embraces these core values.
-
-Each of us is responsible for creating a safer, more inclusive environment.
 
 ### Accommodation for Students with Disabilities
 
@@ -163,175 +159,113 @@ If you have a documented disability or other condition that may affect academic 
 
 If any of our class meetings conflict with your religious events, student athletics, or other non-negotiable scheduling conflict, please let me know ASAP so that we can make arrangements for you.
 
-### Mask Policies
-
-Masks are welcome but not required in the classroom.
-However, if a colleague (student, faculty, or staff) requests that others wear a mask, you are *strongly encouraged* to make them feel safe.
-Please do not ask someone making such a request to disclose their underlying medical condition.
-If for some reason you need your instructor or classmates to wear a mask, please let me know and I will communicate this to the class without disclosing your identity.
-
-These policies may change over the course of the semester as the situation evolves.
-
 ### Getting Help
 
 You can ask questions through Canvas Discussions and Office Hours.
-We will make an effort to respond to all Canvas discussion questions within 24 hours, though this won't always be possible (travel, weekends, etc.).
-Please do not use email for questions about course content or labs, since other students may have related questions.
-You *should* use email for questions about personal matters, such as scheduling conflicts, accommodations, etc.
 
-## Academic Integrity
-
-This class is designed to encourage collaboration, and students are encouraged to discuss their work with other students.
-Engineering as a profession relies upon the honesty and integrity of its practitioners (see *e.g.* the [American Society for Civil Engineers' Code of Ethics](https://www.asce.org/-/media/asce-images-and-files/career-and-growth/ethics/documents/asce-code-ethics.pdf)).
-**All work submitted must represent the students' own work and understanding**, whether individually or as a group (depending on the particulars of the assignment).
-
-If you are ever unclear about academic integrity, please ask!
-Additionally, always err on the side of providing more information.)
+1. **Do not** use email for questions about course content or labs, since other students may have related questions.
+1. **Do** use email for questions about personal matters, such as scheduling conflicts, accommodations, etc.
 
 ### Rice Honor Code
 
-More specifically, all students will be held to the standards of the Rice Honor Code, a code that you pledged to honor when you matriculated at this institution.
+All students will be held to the standards of the Rice Honor Code, a code that you pledged to honor when you matriculated at this institution.
 If you are unfamiliar with the details of this code and how it is administered, you should consult the Honor System Handbook at [honor.rice.edu/honor-system-handbook/](https://honor.rice.edu/honor-system-handbook/).
 This handbook outlines the University's expectations for the integrity of your academic work, the procedures for resolving alleged violations of those expectations, and the rights and responsibilities of students and faculty members throughout the process.
 
-### AI/ML Resource Policy {#sec-llm}
-
-Large language models (LLMs), like GPT, are powerful tools for generating text that can be used for coding and doing data analysis.
-This is at once empowering (LLMs are powerful and can save you time) and risky (LLMs can make mistakes that are hard to detect).
-
-Our general view is that LLMs are powerful tools that you will encounter and use when you leave this classroom, so it's important to learn how to use them responsibly and effectively.
-You are generally permitted to use LLMs in this course, but ultimately, you are responsible for guaranteeing, understanding, and interpreting your results.
-In particular:
-
-- One of the best applications of LLMs is to write code. This can help accelerate your workflow, especially when you are learning new syntax. However, LLMs can make bad decisions about how to structure your code, can introduce bugs, and can mislead you about what your code is doing. You are responsible for understanding and debugging your code, and for ensuring that it does what you intend it to do.
-- LLMs should not be used to generate text that you submit as your own work. If you are assigned a writing assignment, the point is to stimulate your thought process, and you short-cut this if you ask a LLM to generate the response for you. This leads to shallow thinking! However, you *may* use tools including LLMs (but also Grammarly, spell-check, etc.) to help you edit your writing. This can sometimes be a fine line; it's always better to ask if you're not sure, and to disclose your use of these tools in your submission
-
-The [resources page](resources.qmd) has links to helpful ideas about LLMs and how to use them.
-
-### Policy on Web Posting of Course Materials
-
-Uploading course materials to web sites is not an authorized use of the course material.
-Both the poster and the user are in violation of the university policy, which is actionable.
-
 ## Grading
 
-Your final grade will be calculated as follow:
+Grades are weighted to reflect the different expectations for Undergraduate and Graduate students.
 
-| Category | Points (421) | Points (521) |
-| :------- | :---------- | :---------- |
-| Reading quizzes | 10 | 10 |
-| Labs | 10 | 10 |
-| Tests | 40 | 30 |
-| Project | 30 | 30 |
-| Reading Discussion | 0 | 10 |
-| Reading Notes | 10 | 10 |
+| Category | CEVE 421 (Undergrad) | CEVE 521 (Grad) |
+| :--- | :---: | :---: |
+| **Quizzes** | **20%** | **15%** |
+| **Exams (3)** | **60%** (20% each) | **45%** (15% each) |
+| **Final Project** | **20%** | **20%** |
+| **Seminar Leadership** | *N/A* | **20%** |
 
+### Quizzes
 
-### Reading Quizzes
+Expect quizzes on Wednesdays.
+They serve three purposes:
 
-The purpose of assigning readings is to enhance class discussions.
-Students who are prepared for class enhance the learning experience for everyone and enable a collaborative group discussion.
-At the start of classes for which reading was assigned, expect a very short (5 minute) quiz covering basic concepts from the reading.
-You should be able to get all points on these readings if you have done the reading, even if you found key concepts challenging or confusing.
+1. **Theory Check:** Confirm you have engaged with the lectures and technical readings.
+1. **Reading Check:** Confirm you have come to class ready to discuss the reading
+1. **Lab Check:** Confirm you have completed the previous Friday's Lab.
 
-Your lowest two reading quizzes will be dropped.
+These quizzes are not intended to be challenging if you have kept up with basic course expectations; they are primarily intended to make sure you are not falling behind.
+*The lowest two quizzes are dropped.*
+
+### Exams
+
+There are three equally weighted exams.
+These are in-class exams designed to be completed in 50 minutes.
+Exams will contain a mix of multiple choice and open-ended questions.
 
 ### Labs
 
-On Fridays we will use class time for hands-on programming exercises ("labs") to give you guided practice applying the concepts and methods from class.
-These labs will be announced on [the course website]({{<var course.url >}}) ahead of time so anyone who is able can bring a laptop to class.
-These labs can be done in groups; if you cannot bring a laptop to class for whatever reason, you will be able to (and are encouraged to) work with other students, though you must turn in your own assignment for grading.
-All labs will cover either a set of programming tools or a case study.
+Computational labs are for building your computational toolkit (Julia).
+Labs will be distributed through GitHub classroom.
+Solutions are posted immediately for self-correction.
 
-Your lowest two labs will be dropped.
+Labs are not graded.
+However, Quizzes and Exams will test your ability to interpret and apply these computational methods.
+(A Wednesday quiz may contain questions about the previous Friday's lab).
 
-### Tests
+::: {.callout-important}
+## Hybrid
 
-In-class written exams will be given for each module of the course.
-Tests are designed to be straightforward and will cover key ideas from reading, as well as key terms and concepts from lecture and code interpretation related to labs.
+You may attend labs in-person or on Zoom.
+If there is an exam, lecture, or discussion on a Friday, you are expected to attend in-person.
+:::
 
-### Project
+### Final Project
 
-We will build a case study related to house elevation over the course of the semester through weekly labs.
-Answers will be posted for each lab, so mistakes made in one lab do not pass to the next.
+Working in small teams, you will act as expert consultants to audit a real-world climate planning document.
+Through three progressive Audit Memos, you'll analyze the plan's decision framework, evidence base, and robustness to uncertainty—culminating in an Executive Briefing and Written Report.
 
-For a final project, you will be asked to incorporate additional concept(s) from the course into the case study.
-For example, you might improve the representation of additional sources of uncertainty, use a more sophisticated optimization algorithm, or change the objectives of the optimization problem.
+See [Final Project](assignments/final-project.qmd) for full details and timeline.
 
-Students enrolled in the 421 section (i.e., undergraduates) may work in small groups.
-Students enrolled in the 521 section (i.e., graduate students) must work individually.
 
-### Reading Discussion
+### Graduate Student Requirements (CEVE 521)
 
-All students enrolled in the 521 section (i.e., graduate students) will present one of the papers assigned to the class and lead a discussion.
+In addition to the standard coursework, graduate students will **lead one Wednesday Paper Discussion session.**
+You will design an active learning experience—not simply present a paper.
 
-- This discussion should take 30-50 minutes.
-- You should sign up for a time by the second week of class.
-- You should meet with your instructor at least one week before your presentation to discuss the reading and your discussion plan.
+See [Graduate Seminar Requirements](assignments/graduate-seminar.qmd) for full details.
 
-You will be graded on the quality of your presentation, the depth of your understanding of the reading, and your ability to lead a discussion.
+## Weekly Rhythm
 
-Students enrolled in the 421 section may choose to present a paper alone or in a group.
-If you choose to present a paper, you will be graded on the same scale as the 521 students.
-
-### Reading Notes
-
-All students will act as "note-taker" for an in-class reading discussion.
-The note-taker will be responsible for taking notes on the discussion (following up from the recording as necessary), then adding them to the course website (through a Pull Request; guidance will be provided).
-These notes should summarize, rather than transcribe, the discussion, and identify key insights, questions, disagreements, and points of confusion.
-
-You should sign up for a time by the second week of class.
-Groups may be permitted depending on enrollment.
-
-### Late Work Policy
-
-Late projects will be subjected to a 10% penalty per day. Specifically, your grade will be multiplied $0.9^d$ where $d$ is the number of days late.
-Late labs will not be accepted so that solutions can be posted promptly.
-
-As described above, your lowest two labs and reading quizzes will be dropped.
-This is intended to accommodate events like minor illnesses, travel to a conference, and other circumstances that may cause you to miss a lab or quiz.
-If a major circumstance arises (e.g., a death in the family, a serious illness, etc.) that causes you to miss an extended period of time, please contact the instructor to discuss accommodations.
+| Day | Activity | Focus | Preparation |
+| :--- | :--- | :--- | :--- |
+| **Monday** | Lecture | Frameworks & Concepts | See `Preparation` slide of lecture |
+| **Wednesday** | Seminar | **Quiz** & Active Discussion | Complete Readings & Lab |
+| **Friday** | Lab Studio | Coding & Debugging | Laptop required |
 
 ## Preliminary Schedule
 
-The following schedule outlines our planned topics and readings for the semester.
-In general, we will use Mondays for lecture, Wednesdays for group discussion centered on readings, and Fridays for computational labs.
+*Schedule is subject to change.
+Updated versions will be posted on the course website.*
 
-This schedule is subject to change.
-Updated versions will be posted on [the Schedule page](./schedule.qmd) of the course website.
+| Week | Dates | Topic | Lab / Exam | Project |
+| :---- | :------ | :----------- | :----------- | :------ |
+| | **Module 1** | **Risk Analysis** | |
+| **1** | Jan 12, 14, 16 | Intro to Climate Risk Management | Lab 1: Julia Setup & Hello World | |
+| **2** | Jan 21, 23 | Hazard, Exposure, Vulnerability (XLRM) | Lab 2: Intro to iCOW | |
+| **3** | Jan 26, 28, 30 | Climate Science & Scenarios | Lab 3: Sea-Level Rise Scenarios with BRICK | Topic Proposal |
+| **4** | Feb 2, 4, 6 | Monte Carlo & Fat Tails | Lab 4: Monte Carlo Hazard Modeling | |
+| **5** | Feb 9, 11 | Risk Metrics (EAD, VaR, CVaR) | Lab 5: Probabilistic Risk Analysis | |
+| | **Module 2** | **Decision Analysis** | |
+| **6** | Feb 16, 18, 20 | Valuation & Benefit-Cost Analysis | **Exam 1** *(Covers Module 1)* | |
+| **7** | Feb 23, 25, 27 | Optimal Static Decisions | Lab 6: Simulation-Optimization | Memo 1 |
+| **8** | Mar 2, 4, 6 | Sensitivity & Value of Information | Lab 7: Value of Partial Information | |
+| **9** | Mar 9, 11, 13 | Bridge: Trade-offs & Values *(not on exam)* | **Exam 2** *(Covers Module 2)* | |
+| | March 16-20 | *Spring Break (No Class)* | |
+| | **Module 3** | **Optimization Under Uncertainty** | |
+| **10** | Mar 23, 25, 27 | Robustness & Deep Uncertainty | Lab 8: Robustness Metrics | Memo 2 |
+| **11** | Mar 30, Apr 1, 3 | Exploratory Modeling & Scenario Discovery | Lab 9: Scenario Discovery | |
+| **12** | Apr 6, 8, 10 | Sequential Decision Making | Lab 10: Real Options & Dynamic Policy Search | Memo 3 |
+| **13** | Apr 13, 15, 17 | Multi-Objective Optimization | Lab 11: Pareto Fronts | Slides Due |
+| **14** | Apr 20, 22, 24 | Final Project Presentations | | |
+| **Final** | TBD | | **Exam 3** *(Covers Module 3)* | Written Report |
 
-::: {.callout-note}
-Not all readings listed here will be assigned in full.
-Some may be assigned as optional reading and others may be assigned as excerpts.
-:::
-
-
-| Week    | Course Dates                    | Topic | Reading | Exam / Project |
-| -------- | --------------- | ---------------------- | ---------------------- | ---------------------- |
-| | **Module 1:** | **Introduction** | | |
-|  1  | 1/8, 1/10, 1/12 | Introduction to climate risk management | @frank_newjersey:2022, @loucks_planning:2017 Ch. 1 | |
-|  2  | 1/17, 1/19 | Science of climate hazard | @seneviratne_wg1ch11:2021, @lall_ncawater:2018 |  |
-|  3  | 1/22, 1/24, 1/26 | Vulnerability, exposure, and impacts | @wing_vulnerability:2020, @bonnafous_waterrisk:2017 | |
-|  4  | 1/29, 1/31, 2/2  | Systems | @reed_multisectordynamics:2022,  | Exam 1 | 
-| | **Module 2:** | **Decision Analysis** | | |
-|  5  | 2/5, 2/7, 2/8 | Cost-benefit analysis | @arrow_discount:2013 | |
-|  6  | 2/12, 2/14, 2/16 | Scenario analysis | @bankes_exploratory:1993 | Final Project: Proposal |
-|  7  | 2/19, 2/21, 2/23 | Policy search and optimization | @vanberchum_coastal:2019, @schwetschenau_optimizing:2023 | |
-|  8  | 2/26, 2/28, 3/1 | Multiobjective policy search | @zarekarizi_suboptimal:2020 | | 
-|  9  | 3/4, 3/6, 3/8 | Sequential decision problems | @herman_control:2020, @quinn_dps:2017, @fletcher_mombasa:2019, @sutton_reinforcement:2018 | |
-|  10 | 3/18, 3/20, 3/22 | Robustness | @herman_robustness:2015, @mcphail_robustness:2019 | Revised Project Proposal; Exam 2 |
-| | **Module 3:** | **Thinking Critically** | | |
-|  11 | 3/25, 3/27, 3/29 | Deep uncertainty | @schneider_scenarios:2002, @lempert_robust:2000, @oreskes_verification:1994 | |
-|  12 | 4/1, 4/3, 4/5 | Equity and justice | @pollack_equity:2023, @fletcher_waterresourcesequity:2022 | |
-|  13 | 4/10, 4/12 | Financial and systemic risks | @thomson_systemic:2023, @condon_myopia:2021 | |
-|  14 | 4/15, 4/17, 4/19 | Reflections | @keller_management:2021, @gilligan_beyondwickedness:2020 | Draft Project Writeup; Exam 3 |
-| | | **Final Projects** | | |
-|  | TBD | *during final exam slot* | | Project presentations |
-|  | 4/30 | | | Final write-up |
-
-: {.striped .hover}
-
-## References
-
-:::{#refs}
-:::
+: {.striped .hover tbl-colwidths="[12,12,35,32,15]"}

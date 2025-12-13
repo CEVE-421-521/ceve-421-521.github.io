@@ -1,0 +1,26 @@
+---
+title: "Valuation & Benefit-Cost Analysis"
+subtitle: "Lecture"
+date: 2026-02-16
+week: 6
+
+format:
+  revealjs: default
+  beamer: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+
+## Coming Soon
+
+This lecture is under development.
+
+## Preparation
+
+Revisit @zarekarizi_suboptimal:2020
+
+
+## References

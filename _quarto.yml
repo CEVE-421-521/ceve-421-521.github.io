@@ -2,10 +2,18 @@ project:
   type: website
   preview:
     port: 4200
+  render:
+    - "*.qmd"
+    - "**/*.qmd"
+    - "!CLAUDE.md"
+    - "!ROADMAP.md"
+    - "!README.md"
+    - "!LICENSE.md"
 
 website:
   page-navigation: true
-  title: "CEVE 421/521 -- Spring 2024"
+  title: "CEVE 421/521 -- Spring 2026"
+
   description: "Homepage for {{< var course.number >}}, {{< var course.title >}}, at Rice University, {{< var course.semester >}}."
   site-url: https://ceve-421-521.github.io/
   repo-url: https://www.github.com/ceve-421-521/ceve-421-521.github.io
@@ -32,7 +40,7 @@ website:
     logo: _assets/logos/Rice_Logo_280_Blue.svg
     title: "CEVE 421/521"
     search: true
-    tools: 
+    tools:
       - icon: github
         href: "{{var course.github}}"
         text: "Github Repository"
@@ -49,15 +57,18 @@ website:
         href: schedule.qmd
       - text: Resources
         href: resources.qmd
-      - text: Fixing bugs
-        href: bugfix.qmd
+      - text: AI Policy
+        href: ai.qmd
 
 echo: true
 
 format:
   # customization for HTML documents (i.e., the website)
   html:
-    theme: spacelab #spacelab #simplex
+    theme:
+      - spacelab
+      - _assets/sass/custom.scss
+    csl: _assets/references/american-geophysical-union.csl
     copy-code: true
     code-overflow: wrap
     toc: true
@@ -70,12 +81,25 @@ format:
     html-math-method: mathjax
     include-in-header: mathjax-config.html
     date-format: "ddd., MMM. D"
-  
+
+  # customization for PDF output via Typst
+  typst:
+    style: "american-geophysical-union"
+    margin:
+      x: 1in
+      y: 1in
+    mainfont: "Palatino"
+    fontsize: 11pt
+    section-numbering: "1.1.1"
+    include-before-body:
+      text: |
+        #show table: set text(size: 9pt)
+
   # customization for RevealJS (i.e., the slides)
   revealjs:
-
+    csl: _assets/references/american-geophysical-union.csl
     theme: _assets/sass/slides.scss
-    
+
     # page numbering
     slide-number: c/t
     show-slide-number: all
@@ -92,30 +116,41 @@ format:
         numbers: true
     scrollable: true
     preview-links: auto
-    
+
     # code, links, and refs
     link-external-newwindow: true
     citations-hover: true
     code-annotations: below
-    
+
     # math and code
     html-math-method: mathjax
-    include-in-header: lectures/mathjax-config.html
+    include-in-header: mathjax-config.html
     date-format: "ddd., MMM. D"
+
+    # slide footer
+    footer: "{{< var course.number >}} | {{< var course.semester >}} &emsp;&emsp; {{< var instructor.name >}}"
+
+  # customization for Beamer (PDF slides for printing)
+  beamer:
+    theme: metropolis
+    colortheme: default
+    fonttheme: professionalfonts
+    aspectratio: 169
+    navigation: horizontal
+    section-titles: true
+    toc: false
 
 # references
 bibliography: "references.bib"
-csl: _assets/references/american-geophysical-union.csl
 
-# code to use
-jupyter: julia-1.10
-
-# execution options
+# Julia engine configuration
+engine: julia
 execute:
-  freeze: auto  
+  exeflags: ["+1.12", "--project=@.", "--threads=auto"]
+  freeze: auto
   cache: true
 
-# reveal-auto-agenda extension
+# extensions
 filters:
   - reveal-auto-agenda
 

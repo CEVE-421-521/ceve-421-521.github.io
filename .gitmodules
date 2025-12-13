@@ -22,3 +22,36 @@
 [submodule "labs/lab-09"]
 	path = labs/lab-09
 	url = https://github.com/CEVE-421-521/lab-09.git
+[submodule "labs/lab-01-S26"]
+	path = labs/lab-01-S26
+	url = https://github.com/CEVE-421-521/lab-01-S26.git
+[submodule "labs/lab-02-S26"]
+	path = labs/lab-02-S26
+	url = https://github.com/CEVE-421-521/lab-02-S26.git
+[submodule "labs/lab-03-S26"]
+	path = labs/lab-03-S26
+	url = https://github.com/CEVE-421-521/lab-03-S26.git
+[submodule "labs/lab-04-S26"]
+	path = labs/lab-04-S26
+	url = https://github.com/CEVE-421-521/lab-04-S26.git
+[submodule "labs/lab-05-S26"]
+	path = labs/lab-05-S26
+	url = https://github.com/CEVE-421-521/lab-05-S26.git
+[submodule "labs/lab-06-S26"]
+	path = labs/lab-06-S26
+	url = https://github.com/CEVE-421-521/lab-06-S26.git
+[submodule "labs/lab-07-S26"]
+	path = labs/lab-07-S26
+	url = https://github.com/CEVE-421-521/lab-07-S26.git
+[submodule "labs/lab-08-S26"]
+	path = labs/lab-08-S26
+	url = https://github.com/CEVE-421-521/lab-08-S26.git
+[submodule "labs/lab-09-S26"]
+	path = labs/lab-09-S26
+	url = https://github.com/CEVE-421-521/lab-09-S26.git
+[submodule "labs/lab-10-S26"]
+	path = labs/lab-10-S26
+	url = https://github.com/CEVE-421-521/lab-10-S26.git
+[submodule "labs/lab-11-S26"]
+	path = labs/lab-11-S26
+	url = https://github.com/CEVE-421-521/lab-11-S26

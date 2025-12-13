@@ -1,21 +1,29 @@
 ---
-title: Readings for Week 3
-date: 2024-01-24
-week: 3
+title: "Week 3 Reading"
+subtitle: "Weather and climate extreme events in a changing climate"
 
-categories: [Reading]
-format: html
+format:
+  html: 
+    default
+  typst: default
 ---
 
-Please read @wing_vulnerability:2020 for Wednesday's class.
-As you read, please post any clarifying questions you have to Canvas.
 
-This paper analyzes insurance claims data to evaluate and explore "depth-damage" curves.
-Please consider the following questions as you read:
+## Assigned readings
 
-- What is the difference between a probabilistic and deterministic depth-damage curve? What are practical advantages of a probabilistic depth-damage curve?
-- If you were predicting flood damages for a structure, what information besides flood depth might be useful?
-- What might explain the regional patterns of depth-damage curves in the paper?
-- What are some problems with using insurance claims data to develop or validate depth-damage curves?
+::: {.callout-tip}
+As before, you are encouraged to use Zotero to manage your references (Zotero has great tools for highlighting and annotating PDFs, among other cool features. It's also open source so your annotations aren't locked into a proprietary system).
+:::
 
-Please also prepare a discussion question for class based on this paper.
+- @seneviratne_IPCC:2021:
+    - Read the Executive Summary
+    - Read the Introduction (section 11.1)
+    - Read the Data and Methods (section 11.2)
+    - Read one additional subsection (11.3, 11.4, ..., or 11.8)
+    - If you're adding this to Zotero, you may find the [IPCC-Bibtex](https://github.com/openclimatedata/ipcc-bibtex/) project helpful.
+- Prepare a two minute summary of key points from the "one additional subsection" that you read from @seneviratne_IPCC:2021. Be prepared to share your summary with the class.
+
+## Discussion questions
+
+*Coming soon*
+

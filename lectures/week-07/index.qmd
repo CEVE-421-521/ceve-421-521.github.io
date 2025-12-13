@@ -1,0 +1,25 @@
+---
+title: "Optimal Static Decisions"
+subtitle: "Lecture"
+date: 2026-02-23
+week: 7
+
+format:
+  revealjs: default
+  beamer: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+
+## Preparation
+
+Read a part of @vandantzig_dike:1956 and then we will revisit it in the reading
+
+## Coming Soon
+
+This lecture is under development.
+
+## References

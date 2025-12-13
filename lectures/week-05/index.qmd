@@ -1,0 +1,26 @@
+---
+title: "Risk Metrics (EAD, VaR, CVaR)"
+subtitle: "Lecture"
+date: 2026-02-09
+week: 5
+
+format:
+  revealjs: default
+  beamer: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+
+## Coming Soon
+
+This lecture is under development.
+
+## Prepare
+
+Read about [VaR](https://www.investopedia.com/terms/v/var.asp) and [CVaR](https://www.investopedia.com/terms/c/conditional_value_at_risk.asp)
+
+
+## References

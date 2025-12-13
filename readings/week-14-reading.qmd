@@ -1,0 +1,17 @@
+---
+title: "Week 14 Reading"
+subtitle: "Synthesis and Final Projects"
+
+format:
+  html: default
+  typst: default
+---
+
+
+## Overview
+
+*No reading assigned for the final week.*
+
+## Discussion Questions
+
+*None for this week.*

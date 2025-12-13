@@ -1,0 +1,90 @@
+---
+title: AI Policy
+
+format:
+    html: default
+    typst: default
+---
+
+::: {.callout-warning}
+## Page Under Development
+
+This policy is being developed.
+Check back for updates.
+:::
+
+## Overview
+
+AI tools pose both opportunities and risks for climate risk analysis and for learning.
+Here, AI refers to tools like Claude, Gemini, ChatGPT, and similar, rather than to physics-informed machine learning.
+
+As described in the [syllabus](/syllabus.qmd), you are welcome to use AI tools **thoughtfully, carefully, and appropriately**, with the understanding that the fundamental purpose of this course is to help you build fundamental understanding, application-relevant skills, and critical thinking.
+This page provides detailed guidance that will help you understand what is meant by thoughtfully, carefully, and appropriately.
+
+## Guiding Philosophy
+
+There is no ban on AI in this course unless a specific assignment states otherwise.
+Instead, we operate on three principles:
+
+1. **Shared Responsibility:** I commit to teaching you; you commit to learning.
+If you use AI to bypass thinking (e.g., generating code you don't understand), you cheat yourself of the skills you are spending your time (and money!) to learn.
+2. **Assessment Design:** Most grading relies on in-class assessments (Exams & Quizzes) and critical critiques which are difficult to "game" with AI.
+3. **Open Dialogue:** We will talk openly in class about how we are using these tools.
+We are learning together how to use them constructively.
+This requires being able to discuss our use of AI without worrying that we will be shamed for admitting that we use them.
+However, in the same spirit we commit to accept constructive criticism of our (mis)use of AI tools.
+
+## Logistics
+
+As Rice students, you have free access to the following tools:
+
+* Rice provides you with access to [Gemini](https://gemini.google.com/). Google states they will not use your data to train their model when you use your Rice login. The [guided learning](https://blog.google/outreach-initiatives/education/guided-learning/) feature is new, and purports to help
+* [NotebookLM](https://notebooklm.google/) is an app powered by Gemini that is designed specifically for reading and asking questions about documents, which you must provide as context.
+* [GitHub Copilot](https://github.com/features/copilot){target=_blank} is an extension for VS Code that can provide suggestions for code completion and editing. It is [free](https://techcommunity.microsoft.com/t5/educator-developer-blog/step-by-step-setting-up-github-student-and-github-copilot-as-an/ba-p/3736279){target=_blank} for students and educators.
+* [More Useful Things](https://www.moreusefulthings.com/prompts) has a library of prompts created by Ethan Mollnick and Lilach Mollick that can be useful for students and instructors.
+* [Grammarly](https://kb.rice.edu/132065) lies somewhere between a traditional AI tool and a spell checker. It can be useful for improving your writing and giving you writing feedback.
+
+## Critique
+
+There is currently a **tremendous amount** of publicity and hype around AI tools.
+Some of it is well-founded; there are legitimately impressive technological achievements!
+At the same time, balance is sorely lacking.
+The following resources provide substantive and nuanced critiques of AI technologies, politics, economics, and business cases far more eloquently than I could.
+
+* [AI Snake Oil](https://www.aisnakeoil.com/){target=_blank} is a blog that seeks to dispel hype, remove misconceptions, and clarify the limits of AI. The authors are in the Princeton University Department of Computer Science.
+* [Where's your Ed At](https://www.wheresyoured.at/) is a newsletter and podcast that is deeply critical of the politics and business of AI
+* [Tech Won't Save Us](https://techwontsave.us/) is a podcast that covers the tech industry, including but not limited to AI, from a critical political perspective.
+
+You may find that you agree or disagree with these critiques, but you are strongly encouraged to seek a broad set of perspectives.
+
+## AI in Risk Analysis
+
+*Coming soon*
+
+* There are specific instances of AI tools accelerating scientific discovery, when used appropriately and when claims are verifiable [@bubeck_scienceacceleration:2025]
+
+## AI in Learning
+
+*Coming soon: Discussion of how AI can enhance and potentially harm the learning process.*
+
+* Strong and highly publicized claims that using AI led to reduced learning [@kosmyna_yourbrainonchatgpt:2025;@bastani_gpt4:2025], although others have argued that the study focused on a particularly inappropriate use of AI for writing and is not necessarily representative of all AI-enhanced writing
+* Everyone in the education system is trying to figure out what AI means [@uk_aieducation:2025]
+* Gemini has a learning mode that works best if you give it reliable, vetted material
+* NotebookLM can be helpful for reading papers -- though it is an LLM that hallucinates and also is only as good as its text extraction from the underling PDF which is often a pain point
+
+## Some Suggestions
+
+*These are things that I have tried and found useful. Please add your own suggestions*
+
+1. I disable autocomplete in VS Code, I find it not only annoying but that it robs me of my own thinking
+2. Asking for feedback on your work can be helpful.
+    - **Note:** the AI is not a person. Do not ask it "what do you think?" Instead, ask it to simulate or role play. For example: "imagine you are a college professor who is notoriously pedantic about efficient writing. Please provide constructive feedback on my draft."
+    - The advice provided is often pretty bad. Trust yourself! 
+3. Don't just ask it to write code for you from scratch. Instead:
+    - First, ask it to help you think through how to structure the problem.
+    - Then, ask it to help you find documentation and correct your syntax.
+
+## References
+
+:::{#refs}
+:::

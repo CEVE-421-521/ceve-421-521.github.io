@@ -1,22 +1,17 @@
 ---
-title: Readings for Week 7
-date: 2024-02-21
-week: 7
+title: "Week 7 Reading"
+subtitle: "Optimal Static Decisions"
 
-categories: [Reading]
-format: html
+format:
+  html: default
+  typst: default
 ---
 
-Please read @schwetschenau_optimizing:2023.
-This is a fairly technical paper that uses optimization techniques that I do not expect you to know or even be able to follow!
-Please focus on the introduction, discussion, and conclusions; look at the methods to understand what the authors are optimizing (what are the decision variables and what is the objective function), but don’t worry about the details of the optimization itself.
-Do not spend lots of time following the math unless you find it personally interesting!
+## Overview
 
-## Discussion questions:
+@vandantzig_dike:1956
 
-- Who is the intended audience of this paper?
-- This paper uses an exploratory model to suggest infrastructure and financial decisions.  What might be some risks associated with this? What do the authors do to mitigate this risk?
-- What problem is facing the community of UnionTown? How do the authors hope to address this problem?
-- Do you think that the results, as presented, are useful from a policy making perspective?  Why or why not?
-- Are there any externalities or things that are being unaccounted for that we might also want to consider in this paper?  If yes, what are they?
-- (Optional bonus for anyone who’s done a bit of AI or wants to do a bit of extra research)  The authors here use Dijkstra’s algorithm.  Can you foresee any risks with applying that to this situation?
+## Discussion Questions
+
+1. *TBD*
+2. *TBD*

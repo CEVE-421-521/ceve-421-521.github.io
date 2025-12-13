@@ -1,37 +1,60 @@
 ---
-title: "{{< var course.number >}}: {{< var course.title >}}"
 format: html
+suppress-bibliography: true
 ---
 
-This is the course website for the {{< var course.semester >}} edition of {{< var course.number >}}, {{< var course.title >}}, taught at [{{< var university.name >}}]({{< var university.url >}}) by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}).
+::: {.hero-banner}
+# {{< var course.title >}}
 
-## Course Information
+**{{< var course.number >}} | {{< var course.semester >}}**
+:::
 
-Climate variability and change pose threats to lives and livelihoods.
-These climate risks can be managed through the design and operation of infrastructure systems, as well as through disaster response and recovery.
-Decisions about how to develop and choose risk management strategies are often based on pure vibes, but occasionally rigorous quantitative analyses that make use of scientific information can inform them (we will focus on these cases).
-These analyses involve integrating knowledge from multiple disciplines to balance competing goals (objectives) under uncertainty.
+How should cities invest in flood protection when historical data no longer predicts the future?
+How do we weigh costs against uncertain benefits, or balance efficiency against equity?
 
-In this course, you will learn climate science, uncertainty quantification, and decision analysis methods to support climate risk management.
-You will be assigned readings for every class that cover both methods and applications, and will work collaboratively to implement key concepts through programming problem sets.
-Active class participation is required.
-Methods covered include scenario analysis, exploratory modeling, cost-benefit analysis, single- and multi-objective policy search, reinforcement learning, deep uncertainty, robust decision making, and equitable decision making.
+These questions sit at the intersection of climate science, engineering, and decision-making under uncertainty.
+In practice, such decisions are often guided by intuition, politics, or precedent.
+This course focuses on the cases where rigorous quantitative analysis can do better.
 
-For additional information, see the [syllabus](syllabus.html).
+The course follows a three-part arc:
+
+1. **Risk Analysis:** Characterize climate hazards and quantify uncertainty using probabilistic methods.
+2. **Decision Analysis:** Evaluate options under uncertainty using cost-benefit analysis, sensitivity analysis, and value of information.
+3. **Optimization Under Uncertainty:** Find robust strategies using exploratory modeling, sequential decision-making, and multi-objective optimization.
+
+Readings cover both foundational methods and real-world applications; programming labs let you implement and extend key concepts.
+
+For policies and grading, see the [syllabus](syllabus.html).
 
 ## Instructor
 
 {{< var instructor.name >}} is an assistant professor of Civil and Environmental Engineering at Rice University.
 His research integrates Earth science, data science, and decision science to address challenges in climate risk management, water resources, and energy system resilience.
-He also teaches CEVE 543 (Data Science for Climate Hazards).
+He believes the best way to learn quantitative methods is to apply them to problems you care about.
 
-## Software Tools
+## Learning Approach
 
-- This course will use the [Julia](https://julialang.org) programming language. Julia is a modern, free, open source language designed for scientific computing.
-- No prior knowledge of Julia is expected, but some exposure to programming is strongly encouraged.
-- Assignments will be distributed using [GitHub Classroom](https://github.com).
+::: {.columns}
+::: {.column width="44%"}
+### Readings & Discussion
 
+Each week, you will engage with a mix of current events, cutting-edge research, and foundational papers.
+Class sessions emphasize discussion over lecture: come prepared to question assumptions, challenge conclusions, and defend your reasoning.
+:::
+::: {.column width="4%"}
+:::
+::: {.column width="52%"}
+### Computational Labs
+
+Weekly labs apply theory to practice.
+You will develop risk management strategies for the "Island City on a Wedge.," a hypothetical coastal city inspired by real places facing real threats.
+Along the way, you will learn [Julia](https://julialang.org) for scientific computing, [Quarto](https://quarto.org/) for reproducible analysis, and [GitHub](https://github.com) for collaboration.
+:::
+:::
+
+::: {.callout-tip}
 ## Acknowledgements
 
 The layout for this site was inspired by and draws from Vivek Srikrishnan's [Environmental Systems Analysis](https://github.com/vsrikrish/environmental-systems-analysis/) course at Cornell, [STA 210](https://sta210-s22.github.io/website/) at Duke University, and [Andrew Heiss's](https://www.andrewheiss.com/teaching/) course materials at Georgia State.
 It builds heavily from my data science for climate hazard assessment course, [CEVE 543](https://ceve543.github.io/).
+:::

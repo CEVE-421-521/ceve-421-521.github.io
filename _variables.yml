@@ -4,7 +4,7 @@ instructor:
   name: Dr. James Doss-Gollin
   name_no_title: James Doss-Gollin
   email: jdossgollin@rice.edu
-  url: "https://jamesdossgollin.me"
+  url: "https://jdossgollin.github.io"
   github: jdossgollin
   office: "Ryon 215"
   contact_policy: >-
@@ -13,15 +13,15 @@ instructor:
 course:
   number: "CEVE 421/521"
   title: "Climate Risk Management"
-  semester: "Spring 2024"
+  semester: "Spring 2026"
   days: "MWF"
-  time: "11-11:50am"
+  time: "1-1:50 pm"
   location: "TBD"
-  github: "https://www.github.com/ceve543/ceve543.github.io"
+  github: "https://www.github.com/CEVE-421-521/ceve-421-521.github.io"
   url: "https://ceve-421-521.github.io/"
-  copyright_year: "2024"
+  copyright_year: "2026"
   institution: "Rice University"
-  canvas_id: 65985
+  canvas_id: TBD
 
 university:
   name: Rice University
@@ -32,4 +32,4 @@ department:
   url: "https://cee.rice.edu"
 
 github_org:
-  repo: "https://github.com/jdossgollin"
+  repo: "https://github.com/CEVE-421-521"

@@ -1,31 +1,65 @@
 ---
 title: "{{< var course.number >}} Schedule"
-format: html
-listing:
-  type: table
-  contents:
-    - "lectures/*.qmd"
-    - "labs/*/index.qmd"
-    - "readings/*.qmd"
-    - "assignments/*.qmd"
-  sort:
-    - "date"
-    - "title"
-  table-striped: true
-  table-hover: true
-  categories: numbered
-  fields: [week, title, date, categories]
-  field-display-names: 
-    week: "Week"
-    title: "Topic"
-    date: "Date"
-    categories: "Category"
-  page-size: 100
+format: 
+    html: default
+    typst: default
 ---
 
 ::: {.callout-note}
-## Reading
+## Note
 
-A subset of readings listed here will likely be assigned.
 Check the page for each reading to see discussion questions.
+You will often be encouraged to focus only on part of relevant papers.
+
+**[Final Project](assignments/final-project.qmd):** Deliverables are due throughout the semester (see schedule below).
+
+**CEVE 521 students:** You will lead one Paper Discussion session. See [Graduate Seminar Requirements](assignments/graduate-seminar.qmd).
 :::
+
+| Week | Date | What |
+| :--- | :--- | :--- |
+| **1** | Mon., Jan. 12 | **Lecture:** [Intro to Climate Risk Management](lectures/week-01/index.qmd) [[{{< fa display >}}](lectures/week-01/index.html) [{{< fa file-pdf >}}](lectures/week-01/index.pdf)] |
+| | Wed., Jan. 14 | **Topical Discussion:** [@frank_newjersey:2022 and @crawford_jerseyshore:2025](readings/week-01-reading.qmd) |
+| | Fri., Jan. 16 | **Lab 1:** [Julia Setup & Hello World](labs/lab-01-S26/index.qmd) |
+| **2** | Mon., Jan. 19 | *Martin Luther King, Jr. Day (No Class)* |
+| | Wed., Jan. 21 | **Lecture:** [Hazard, Exposure, Vulnerability](lectures/week-02/index.qmd) [[{{< fa display >}}](lectures/week-02/index.html) [{{< fa file-pdf >}}](lectures/week-02/index.pdf)] |
+| | Fri., Jan. 23 | **Lab 2:** [Intro to iCOW](labs/lab-02-S26/index.qmd) |
+| **3** | Mon., Jan. 26 | **Lecture:** [Climate Variability, Extremes, and Change](lectures/week-03/index.qmd) [[{{< fa display >}}](lectures/week-03/index.html) [{{< fa file-pdf >}}](lectures/week-03/index.pdf)] |
+| | Wed., Jan. 28 | **Paper Discussion:** [@seneviratne_IPCC:2021](readings/week-03-reading.qmd) |
+| | Fri., Jan. 30 | **Lab 3:** [Sea-Level Rise Scenarios with BRICK](labs/lab-03-S26/index.qmd) / **Project:** Topic Proposal Due |
+| **4** | Mon., Feb. 2 | **Lecture:** [Uncertainty & Monte Carlo](lectures/week-04/index.qmd) [[{{< fa display >}}](lectures/week-04/index.html) [{{< fa file-pdf >}}](lectures/week-04/index.pdf)] |
+| | Wed., Feb. 4 | **Paper Discussion:** [@zarekarizi_suboptimal:2020](readings/week-04-reading.qmd) |
+| | Fri., Feb. 6 | **Lab 4:** [Monte Carlo Hazard Modeling](labs/lab-04-S26/index.qmd) |
+| **5** | Mon., Feb. 9 | **Lecture:** [Risk Metrics (EAD, VaR, CVaR)](lectures/week-05/index.qmd) [[{{< fa display >}}](lectures/week-05/index.html) [{{< fa file-pdf >}}](lectures/week-05/index.pdf)] |
+| | Wed., Feb. 11 | **Lab 5:** [Probabilistic Risk Analysis](labs/lab-05-S26/index.qmd) |
+| | Fri., Feb. 13 | *No Class* |
+| **6** | Mon., Feb. 16 | **Exam 1** (Covers Module 1) |
+| | Wed., Feb. 18 | **Lecture:** [Valuation & Benefit-Cost Analysis](lectures/week-06/index.qmd) [[{{< fa display >}}](lectures/week-06/index.html) [{{< fa file-pdf >}}](lectures/week-06/index.pdf)] |
+| | Fri., Feb. 20 | **Paper Discussion:** [@arrow_discount:2013](readings/week-06-reading.qmd) |
+| **7** | Mon., Feb. 23 | **Lecture:** [Optimal Static Decisions](lectures/week-07/index.qmd) [[{{< fa display >}}](lectures/week-07/index.html) [{{< fa file-pdf >}}](lectures/week-07/index.pdf)] |
+| | Wed., Feb. 25 | **Paper Discussion:** [@vandantzig_dike:1956](readings/week-07-reading.qmd) |
+| | Fri., Feb. 27 | **Lab 6:** [Simulation-Optimization](labs/lab-06-S26/index.qmd) / **Project:** Memo 1 Due |
+| **8** | Mon., Mar. 2 | **Lecture:** [Sensitivity & Value of Information](lectures/week-08/index.qmd) [[{{< fa display >}}](lectures/week-08/index.html) [{{< fa file-pdf >}}](lectures/week-08/index.pdf)] |
+| | Wed., Mar. 4 | **Paper Discussion:** [@runge_voi:2011](readings/week-08-reading.qmd) |
+| | Fri., Mar. 6 | **Lab 7:** [Value of Partial Information](labs/lab-07-S26/index.qmd) |
+| **9** | Mon., Mar. 9 | **Lecture:** [Trade-offs & Values](lectures/week-09/index.qmd) [[{{< fa display >}}](lectures/week-09/index.html) [{{< fa file-pdf >}}](lectures/week-09/index.pdf)] |
+| | Wed., Mar. 11 | **Paper Discussion:** [@daw_taboo:2015](readings/week-09-reading.qmd) |
+| | Fri., Mar. 13 | **Exam 2** (Covers Module 2) |
+| | *Mar. 16-20* | *Spring Break* |
+| **10** | Mon., Mar. 23 | **Lecture:** [Robustness & Deep Uncertainty](lectures/week-10/index.qmd) [[{{< fa display >}}](lectures/week-10/index.html) [{{< fa file-pdf >}}](lectures/week-10/index.pdf)] |
+| | Wed., Mar. 25 | **Paper Discussion:** [@lempert_robust:2000 and @schneider_scenarios:2002](readings/week-10-reading.qmd) |
+| | Fri., Mar. 27 | **Lab 8:** [Robustness Metrics](labs/lab-08-S26/index.qmd) / **Project:** Memo 2 Due |
+| **11** | Mon., Mar. 30 | **Lecture:** [Exploratory Modeling & Scenario Discovery](lectures/week-11/index.qmd) [[{{< fa display >}}](lectures/week-11/index.html) [{{< fa file-pdf >}}](lectures/week-11/index.pdf)] |
+| | Wed., Apr. 1 | **Paper Discussion:** [@bankes_exploratory:1993](readings/week-11-reading.qmd) |
+| | Fri., Apr. 3 | **Lab 9:** [Scenario Discovery](labs/lab-09-S26/index.qmd) |
+| **12** | Mon., Apr. 6 | **Lecture:** [Sequential Decision Making](lectures/week-12/index.qmd) [[{{< fa display >}}](lectures/week-12/index.html) [{{< fa file-pdf >}}](lectures/week-12/index.pdf)] |
+| | Wed., Apr. 8 | **Paper Discussion:** [@garner_slrise:2018](readings/week-12-reading.qmd) |
+| | Fri., Apr. 10 | **Lab 10:** [Real Options & Dynamic Policy Search](labs/lab-10-S26/index.qmd) / **Project:** Memo 3 Due |
+| **13** | Mon., Apr. 13 | **Lecture:** [Multi-Objective Optimization](lectures/week-13/index.qmd) [[{{< fa display >}}](lectures/week-13/index.html) [{{< fa file-pdf >}}](lectures/week-13/index.pdf)] |
+| | Wed., Apr. 15 | **Paper Discussion:** [@kasprzyk_mordm:2013](readings/week-13-reading.qmd) |
+| | Fri., Apr. 17 | **Lab 11:** [Pareto Fronts](labs/lab-11-S26/index.qmd) / **Project:** Slides Due |
+| **14** | Mon., Apr. 20 | **Final Project Presentations** (Teams 1 & 2) |
+| | Wed., Apr. 22 | **Final Project Presentations** (Teams 3 & 4) |
+| | Fri., Apr. 24 | **Final Project Presentations** (Teams 5 & 6) |
+
+: {.striped .hover}

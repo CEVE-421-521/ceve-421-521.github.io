@@ -1,16 +1,17 @@
 ---
-title: Readings for Week 9
-date: 2024-03-06
-week: 9
+title: "Week 9 Reading"
+subtitle: "Trade-offs and Values"
 
-categories: [Reading]
-format: html
+format:
+  html: default
+  typst: default
 ---
 
-Please read from @quinn_dps:2017 and answer the following questions:
+## Overview
 
-1. What is being optimized in this paper?
-1. What uncertainties and processes are being considered? Are there any relevant considerations not included in the model?
-1. The authors discussed that this work creates two new technological contributions: "(1) demonstrating the value and use of direct policy search (DPS) (Rosenstein & Barto, 2001) for identifying adaptive robust operational control strategies for socio-ecological systems and (2) demonstrating how nonlinear environmental thresholds, or tipping points, pose fundamental challenges for balancing economic benefits and their consequent risks
-to socio-ecological systems". Why do you think these contributions are important? 
-1. This paper explores the modeling of "socio-ecological systems with tipping points," specifically the classical shallow lake problem. Discuss other examples of these types of systems. Do you think climate change will produce similar systems?
+@daw_taboo:2015 and/or @pollack_equity:2024
+
+## Discussion Questions
+
+1. *TBD*
+2. *TBD*

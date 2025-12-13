@@ -197,3 +197,121 @@ $link-color: $rice-gray;
     font-size: 36px;
     color: $rice-gray;
 }
+
+// Title slide styling with gradient background
+.reveal .slide-background-content {
+    &[data-background-hash*="title"] {
+        background: linear-gradient(135deg, $rice-blue 0%, $dark-blue-gray 100%);
+    }
+}
+
+// Title slide specific styling
+.reveal section.title-slide,
+.reveal section#title-slide {
+    h1, h2 {
+        color: white;
+        text-transform: none;
+    }
+
+    .subtitle, .author, .date, .institute {
+        color: $light-blue-gray;
+    }
+
+    .quarto-title-author-name {
+        color: $bright-blue;
+    }
+}
+
+// Code block styling
+.reveal pre {
+    background-color: #1e1e2e;
+    border-radius: 8px;
+    padding: 1em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid $grass-green;
+    font-size: 0.7em;
+}
+
+.reveal pre code {
+    background: transparent;
+    color: #cdd6f4;
+    padding: 0;
+}
+
+// Syntax highlighting overrides for dark code blocks
+.reveal .sourceCode {
+    .kw { color: #cba6f7; } // keywords - mauve
+    .dt { color: #f9e2af; } // data types - yellow
+    .fu { color: #89b4fa; } // functions - blue
+    .st { color: #a6e3a1; } // strings - green
+    .co { color: #6c7086; } // comments - gray
+    .op { color: #89dceb; } // operators - sky
+    .dv, .fl { color: #fab387; } // numbers - peach
+}
+
+// Callout boxes for slides
+.reveal .callout {
+    border-radius: 8px;
+    padding: 1em;
+    margin: 1em 0;
+    border-left: 5px solid;
+
+    &.callout-note {
+        background-color: rgba($medium-blue, 0.15);
+        border-left-color: $medium-blue;
+
+        .callout-title {
+            color: $medium-blue;
+        }
+    }
+
+    &.callout-warning {
+        background-color: rgba($warm-yellow, 0.15);
+        border-left-color: $warm-yellow;
+
+        .callout-title {
+            color: $warm-yellow;
+        }
+    }
+
+    &.callout-important {
+        background-color: rgba($brick-red, 0.15);
+        border-left-color: $brick-red;
+
+        .callout-title {
+            color: $brick-red;
+        }
+    }
+
+    &.callout-tip {
+        background-color: rgba($grass-green, 0.15);
+        border-left-color: $grass-green;
+
+        .callout-title {
+            color: $grass-green;
+        }
+    }
+
+    .callout-title {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 0.5em;
+    }
+}
+
+// Definition box style
+.reveal .definition-box {
+    background-color: rgba($rice-blue, 0.1);
+    border: 2px solid $rice-blue;
+    border-radius: 8px;
+    padding: 1em;
+    margin: 1em 0;
+}
+
+// Key insight highlight
+.reveal .key-insight {
+    background: linear-gradient(90deg, rgba($grass-green, 0.2) 0%, transparent 100%);
+    border-left: 4px solid $grass-green;
+    padding: 0.5em 1em;
+    margin: 1em 0;
+}

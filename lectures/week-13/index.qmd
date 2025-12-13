@@ -1,0 +1,30 @@
+---
+title: "Multi-Objective Optimization"
+subtitle: "Lecture"
+date: 2026-04-13
+week: 13
+
+format:
+  revealjs: default
+  beamer: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+
+## Coming Soon
+
+This lecture is under development.
+
+Content to adapt from previous course:
+
+- Enriched notation diagram
+- Dominance definition and examples
+- Pareto front visualization
+- Weighted sum approach and limitations
+- Genetic algorithms / MOEAs
+- Convergence diagnostics (hypervolume)
+
+## References

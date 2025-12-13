@@ -1,0 +1,25 @@
+---
+title: "Sensitivity & Value of Information"
+subtitle: "Lecture"
+date: 2026-03-02
+week: 8
+
+format:
+  revealjs: default
+  beamer: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+
+## Coming Soon
+
+This lecture is under development.
+
+## Preparation
+
+Read a piece of @runge_voi:2011, we will revisit it on Wednesday
+
+## References

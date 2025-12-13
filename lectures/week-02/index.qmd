@@ -1,0 +1,25 @@
+---
+title: "Hazard, Exposure, Vulnerability"
+subtitle: "Lecture"
+date: 2026-01-21
+week: 2
+
+format:
+  revealjs: default
+  beamer: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+
+## Preparation
+
+[Flood Risk Assessment and HEC-FDA](https://www.hec.usace.army.mil/confluence/fdadocs/fdaqsg/flood-risk-assessment-and-hec-fda-152637126.html)
+
+## Coming Soon
+
+This lecture is under development.
+
+## References

@@ -1,10 +1,18 @@
 ---
-title: Readings for Week 11
-date: 2024-03-27
-week: 11
+title: "Week 11 Reading"
+subtitle: "Exploratory Modeling and Scenario Discovery"
 
-categories: [Reading]
-format: html
+format:
+  html: default
+  typst: default
 ---
 
-No readings for this week, James is out of town.
+
+## Overview
+
+@bankes_exploratory:1993
+
+## Discussion Questions
+
+1. *TBD*
+2. *TBD*

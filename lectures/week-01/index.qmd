@@ -1,0 +1,25 @@
+---
+title: "Intro to Climate Risk Management"
+subtitle: "Lecture"
+date: 2026-01-12
+week: 1
+
+format:
+  revealjs: default
+  beamer: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+
+## Preparation
+
+No preparation is required for this class.
+
+## Coming Soon
+
+This lecture is under development.
+
+## References

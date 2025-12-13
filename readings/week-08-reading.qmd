@@ -1,14 +1,17 @@
 ---
-title: Readings for Week 8
-date: 2024-02-28
-week: 8
+title: "Week 8 Reading"
+subtitle: "Sensitivity and Value of Information"
 
-categories: [Reading]
-format: html
+format:
+  html: default
+  typst: default
 ---
 
-Please read @zarekarizi_suboptimal:2020.
+## Overview
 
-1. Create a table of the uncertainties considered, why they are important, and how they are treated in the paper. Be prepared to share your table with the class.
-1. What objectives are considered in the paper? Why might it be difficult to combine these objectives into a single objective function?
-1. What processes or phenomena are omitted from the model? What are the potential impacts of these omissions?
+@runge_voi:2011
+
+## Discussion Questions
+
+1. *TBD*
+2. *TBD*

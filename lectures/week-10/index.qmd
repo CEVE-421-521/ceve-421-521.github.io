@@ -1,0 +1,36 @@
+---
+title: "Robustness & Deep Uncertainty"
+subtitle: "Lecture"
+date: 2026-03-23
+week: 10
+
+format:
+  revealjs: default
+  beamer: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+
+## Coming Soon
+
+This lecture is under development.
+
+Content to adapt from previous course:
+
+**From Robustness lecture:**
+
+- Definition: "insensitivity of system design to errors" (Matalas)
+- Robustness metrics taxonomy (Herman et al.)
+- Regret and satisficing approaches
+- Bottom-up vs. top-down analysis
+
+**From Deep Uncertainty lecture:**
+
+- Spectrum of uncertainty
+- Lempert-Schneider debate
+- When probabilities help vs. exploratory approaches
+
+## References
