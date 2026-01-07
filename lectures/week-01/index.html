@@ -7,7 +7,9 @@
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
+<link href="../../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Dr.&nbsp;James Doss-Gollin">
@@ -29,7 +31,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-b501ff268bbeca590a3faf2471d3e094.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -158,14 +180,606 @@ Dr.&nbsp;James Doss-Gollin
 <p>No preparation is required for this class.</p>
 </section>
 <section class="slide level2">
-<h2>Coming Soon</h2>
-<p>This lecture is under development.</p>
+<h2>Meet the professor</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="jdossgollin.jpeg"></p>
+<figcaption>Dr.&nbsp;James Doss-Gollin</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>Assistant Professor of Civil and Environmental Engineering</li>
+<li><a href="https://dossgollin-lab.github.io">dossgollin-lab.github.io</a></li>
+<li><a href="mailto:jdossgollin@rice.edu">jdossgollin@rice.edu</a></li>
+<li>Office hours by appointment (or come chat after class)</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Your turn</h2>
+<p>Let’s go around quickly:</p>
+<ol type="1">
+<li>Name / what you prefer to be called</li>
+<li>Year and major / research area</li>
+</ol>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>What is climate risk management?</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>What is climate risk management?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>The XLRM Framework</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Example decisions</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>About the course</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Software tools</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
 </section>
 <section class="slide level2">
-<h2>References</h2>
-
-
+<h2>Climate</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<blockquote>
+<p>The slowly varying aspects of the atmosphere–hydrosphere–land surface system.</p>
+</blockquote>
+<p><a href="https://glossary.ametsoc.org/wiki/Climate">AMS Glossary of Meteorology</a></p>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="usgs-water-cycle.png" style="width:100.0%"></p>
+<figcaption><a href="https://www.usgs.gov/special-topics/water-science-school/science/water-cycle-diagrams"><i class="fa-solid fa-camera-retro" aria-label="camera-retro"></i>: USGS Water Cycle</a></figcaption>
+</figure>
+</div>
+</div></div>
 </section>
+<section class="slide level2">
+<h2>Climate Risk</h2>
+
+<img data-src="ipcc-risk.jpg" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption"><a href="https://www.ipcc.ch/report/ar5/wg2/"><i class="fa-solid fa-camera-retro" aria-label="camera-retro"></i>: IPCC AR5 WG2</a></p></section>
+<section class="slide level2">
+<h2>Climate Risk</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Your turn!</strong></p>
+</div>
+<div class="callout-content">
+<p>What climate risks have you heard of?</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Climate Risk Management</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Your turn!</strong></p>
+</div>
+<div class="callout-content">
+<p>What climate risk management strategies have you heard of?</p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment">Financial instruments (e.g., insurance)</li>
+<li class="fragment">Floodproof buildings</li>
+<li class="fragment">Zoning codes</li>
+<li class="fragment">Major infrastructure</li>
+<li class="fragment">Improve emergency planning</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>The XLRM Framework</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What is climate risk management?</p>
+</div></li>
+<li><div class="agenda-active">
+<p>The XLRM Framework</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Example decisions</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>About the course</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Software tools</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>A Lens for Climate Decisions</h2>
+<p>Throughout this course, we’ll use the <strong>XLRM Framework</strong> to structure our thinking:</p>
+<ul>
+<li class="fragment"><strong>X</strong> = e<strong>X</strong>ogenous uncertainties (what we can’t control)</li>
+<li class="fragment"><strong>L</strong> = <strong>L</strong>evers (decisions we can make)</li>
+<li class="fragment"><strong>R</strong> = <strong>R</strong>elationships (how the system works)</li>
+<li class="fragment"><strong>M</strong> = <strong>M</strong>etrics (what we care about)</li>
+</ul>
+<div class="fragment">
+<p>We’ll dive deeper into XLRM next week.</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Example decisions</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What is climate risk management?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The XLRM Framework</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Example decisions</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>About the course</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Software tools</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2></h2>
+<h3>Update land use / zoning regulations?</h3>
+<div class="columns">
+<div class="column" style="width:35%;">
+<div class="caption">
+<p><i class="fa-solid fa-camera-retro" aria-label="camera-retro"></i>: <span class="citation" data-cites="satija_boomtown:2016">Satija et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span></p>
+</div>
+</div><div class="column" style="width:65%;">
+<p><img data-src="boomtown.png"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2></h2>
+<h3>How to size stormwater infrastructure?</h3>
+<div class="columns">
+<div class="column" style="width:25%;">
+<div class="caption">
+<p><i class="fa-solid fa-camera-retro" aria-label="camera-retro"></i>: Doss-Gollin</p>
+</div>
+</div><div class="column" style="width:75%;">
+<p><img data-src="doss-gollin-buffalo-drainage.jpeg"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2></h2>
+<h3>How high to elevate a house for proactive flood protection?</h3>
+<div class="columns">
+<div class="column" style="width:35%;">
+<div class="caption">
+<p><i class="fa-solid fa-camera-retro" aria-label="camera-retro"></i>: Allison Lee / <a href="https://www.houstonpublicmedia.org/articles/news/2017/10/06/240934/many-houstonians-seek-home-elevation-after-repetitive-flooding/">Houston Public Media</a></p>
+</div>
+</div><div class="column" style="width:65%;">
+<p><img data-src="lee-meyerland-elevation.jpg"></p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2></h2>
+<h3>Require weatherization of privately owned electricity infrastructure?</h3>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="caption">
+<p><i class="fa-solid fa-camera-retro" aria-label="camera-retro"></i>: <a href="https://www.flickr.com/photos/joncutrer/50975248406">Jonathan Cutrer</a> / Flickr.</p>
+</div>
+</div><div class="column" style="width:70%;">
+<p><img data-src="cutrer-uri.jpg"></p>
+</div></div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>About the course</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What is climate risk management?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The XLRM Framework</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Example decisions</p>
+</div></li>
+<li><div class="agenda-active">
+<p>About the course</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Software tools</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Course goals</h2>
+<p>Climate risk management is a very broad field. We will:</p>
+<ol type="1">
+<li><strong>Survey</strong> how it is implemented in different fields</li>
+<li>Develop a <strong>deep understanding</strong> of how to assess proposed climate risk strategies</li>
+<li><strong>Apply</strong> these methods to a real-world problem</li>
+</ol>
+</section>
+<section class="slide level2">
+<h2>You are the auditors</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>The Big Picture</strong></p>
+</div>
+<div class="callout-content">
+<p>You’re training to be the experts who <strong>check the work</strong>.</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Every climate plan has hidden assumptions</li>
+<li class="fragment">Every cost-benefit analysis makes value judgments</li>
+<li class="fragment">Your job: find the “vibes” in technical documents</li>
+<li class="fragment">Final project: <strong>Audit a Real-World Plan</strong></li>
+</ul>
+</section>
+<section class="slide level2 scrollable">
+<h2>Three modules</h2>
+<ol type="1">
+<li><strong>Risk Analysis</strong> (Weeks 1-5): Characterize hazards and quantify uncertainty</li>
+<li><strong>Decision Analysis</strong> (Weeks 6-9): Evaluate options under uncertainty</li>
+<li><strong>Optimization Under Uncertainty</strong> (Weeks 10-13): Find robust strategies</li>
+</ol>
+<p>Week 14: Final Project Presentations</p>
+</section>
+<section class="slide level2">
+<h2>Class structure: Weekly rhythm</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Day</th>
+<th style="text-align: left;">Activity</th>
+<th style="text-align: center;">Laptops?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Monday</strong></td>
+<td style="text-align: left;">Lecture</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Wednesday</strong></td>
+<td style="text-align: left;">Quiz + Paper Discussion</td>
+<td style="text-align: center;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Friday</strong></td>
+<td style="text-align: left;">Lab Studio</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>No laptops Mon/Wed helps us focus on discussion. Exceptions: tablet note-taking or documented accommodations.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>The syllabus is online!</h2>
+<ul>
+<li>Course website: <a href="https://ceve-421-521.github.io/">https://ceve-421-521.github.io/</a></li>
+<li>Syllabus: <a href="https://ceve-421-521.github.io/syllabus/">https://ceve-421-521.github.io/syllabus/</a></li>
+<li>Read it! (and confirm on Canvas)</li>
+<li>Questions? Ask now or later!</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Grading: CEVE 421 (Undergrad)</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Category</th>
+<th style="text-align: center;">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Quizzes</strong></td>
+<td style="text-align: center;">20%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Exams</strong> (3 × 20% each)</td>
+<td style="text-align: center;">60%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Final Project</strong></td>
+<td style="text-align: center;">20%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+<h2>Grading: CEVE 521 (Graduate)</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Category</th>
+<th style="text-align: center;">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Quizzes</strong></td>
+<td style="text-align: center;">15%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Exams</strong> (3 × 15% each)</td>
+<td style="text-align: center;">45%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Final Project</strong></td>
+<td style="text-align: center;">20%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Seminar Leadership</strong></td>
+<td style="text-align: center;">20%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+<h2>About those exams</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>No cumulative final!</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><strong>Exam 1</strong> (Week 6): Covers Module 1 (Risk Analysis)</li>
+<li><strong>Exam 2</strong> (Week 9): Covers Module 2 (Decision Analysis)</li>
+<li><strong>Exam 3</strong> (Finals Week): Covers Module 3 only</li>
+</ul>
+<p>Finals week = Exam 3 + Written Report</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>About the labs</h2>
+<p>Labs are <strong>ungraded</strong> but essential:</p>
+<ul>
+<li>Solutions posted immediately for self-correction</li>
+<li>Wednesday quizzes may include lab content</li>
+<li>Exams will test your ability to apply these methods</li>
+</ul>
+<div class="fragment">
+<p>You may attend labs in-person or on Zoom.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Graduate students: Discussion leadership</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>CEVE 521 Requirement</strong></p>
+</div>
+<div class="callout-content">
+<p>You will <strong>lead one Wednesday discussion session</strong>.</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Design an active learning experience—not just a presentation</li>
+<li class="fragment">Contact me to schedule your session</li>
+<li class="fragment">This signals to everyone: Wednesdays are <strong>active</strong>, not passive</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>A community of learning</h2>
+<ul>
+<li>We all benefit from a diverse, safe, welcoming, and inclusive environment</li>
+<li>Analysis is not value neutral</li>
+<li>Assume good faith and engage in good faith yourself</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Accommodations</h2>
+<p>If you have a documented disability, scheduling conflicts, or otherwise need accommodations, please let me know as soon as possible.</p>
+<p>Viruses are circulating and everyone’s immune system is different. If you need others to wear a mask to protect you, please let me know – no health disclosures needed.</p>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Software tools</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What is climate risk management?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The XLRM Framework</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Example decisions</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>About the course</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Software tools</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Tool overview</h2>
+<p>In this class, we will use:</p>
+<ol type="1">
+<li>Julia</li>
+<li>GitHub</li>
+<li>Quarto</li>
+<li>VS Code (suggested)</li>
+</ol>
+</section>
+<section class="slide level2">
+<h2>Why Julia?</h2>
+<ul>
+<li class="fragment">Readable syntax that closely parallels math notation</li>
+<li class="fragment">Designed for numerical and scientific computing</li>
+<li class="fragment">Fast! Solves the “two language problem”</li>
+<li class="fragment">Open source</li>
+</ul>
+</section>
+<section class="slide level2 scrollable">
+<h2>GitHub</h2>
+<ol type="1">
+<li>You need a GitHub account</li>
+<li>Code is stored in “repositories”</li>
+<li><code>clone</code> a repository to your computer</li>
+<li>Make changes and <code>commit</code> them</li>
+<li><code>push</code> your changes to GitHub</li>
+</ol>
+</section>
+<section class="slide level2">
+<h2>Quarto</h2>
+<p>Quarto lets you combine text and code in one document:</p>
+<ul>
+<li>This website is made with Quarto</li>
+<li>You will use Quarto for lab reports</li>
+<li>Everything in one place, reproducible</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Resources</h2>
+<p>See the <a href="../../resources.html">resources page</a> for links to tutorials and other resources!</p>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Logistics</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What is climate risk management?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The XLRM Framework</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Example decisions</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>About the course</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Software tools</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Reading for Wednesday</h2>
+<p>Two articles on flood risk management in New Jersey:</p>
+<ul>
+<li><span class="citation" data-cites="frank_newjersey:2022">Frank (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
+<li><span class="citation" data-cites="crawford_jerseyshore:2025">Crawford (<a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span></li>
+</ul>
+<p>Come prepared for discussion. Quiz should be easy if you do the reading!</p>
+</section>
+<section class="slide level2">
+<h2>Lab 1: Friday</h2>
+<ul>
+<li>Julia setup and “Hello World”</li>
+<li>Start early! Installation can be tricky.</li>
+<li>Friday lab session is for troubleshooting and Q&amp;A</li>
+</ul>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-crawford_jerseyshore:2025" class="csl-entry" role="listitem">
+Crawford, S. (2025, December 5). Floods and <span>Storms Are Ravaging</span> the <span>Jersey Shore</span>. <span>Why Do We Keep Building It Back</span>? Retrieved December 5, 2025, from <a href="https://www.rollingstone.com/culture/culture-features/floods-storms-jersey-shore-beach-rebuilding-1235477927/">https://www.rollingstone.com/culture/culture-features/floods-storms-jersey-shore-beach-rebuilding-1235477927/</a>
+</div>
+<div id="ref-frank_newjersey:2022" class="csl-entry" role="listitem">
+Frank, T. (2022, August 22). Bold <span>New Jersey Shore Flood Rules Could Be Blueprint</span> for <span>Entire U</span>.<span>S</span>. <span>Coast</span>. <em>Scientific American</em>. Retrieved from <a href="https://www.scientificamerican.com/article/bold-new-jersey-shore-flood-rules-could-be-blueprint-for-entire-u-s-coast/">https://www.scientificamerican.com/article/bold-new-jersey-shore-flood-rules-could-be-blueprint-for-entire-u-s-coast/</a>
+</div>
+<div id="ref-satija_boomtown:2016" class="csl-entry" role="listitem">
+Satija, N., Collier, K., &amp; Shaw, A. (2016, December 7). Boomtown, flood town. <em>ProPublica: Hell and High Water</em>. Retrieved from <a href="https://projects.propublica.org/houston-cypress/">https://projects.propublica.org/houston-cypress/</a>
+</div>
+</div>
+
+
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
