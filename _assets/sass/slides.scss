@@ -179,8 +179,19 @@ $link-color: $rice-gray;
 
 }
 
+// Three-column footer: course (left), instructor (center), slide number (right)
 .reveal .footer {
     color: $rice-gray;
+    width: 100%;
+    left: 0;
+    text-align: center;
+
+    // Course info on the left
+    &::before {
+        content: "CEVE 421/521 Spring 2026";
+        position: absolute;
+        left: 1em;
+    }
 }
 
 .reveal .caption {

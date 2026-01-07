@@ -15,9 +15,10 @@ institution: "{{< var course.institution >}}"
 
 ## Preparation
 
-No preparation is required for this class.
+No preparation is required for class today.
+In general, reading may be assigned before Monday lectures.
 
-## Meet the professor
+## About Me
 
 ::: {.columns}
 ::: {.column width="40%"}
@@ -29,7 +30,7 @@ No preparation is required for this class.
 - Assistant Professor of Civil and Environmental Engineering
 - [dossgollin-lab.github.io](https://dossgollin-lab.github.io)
 - [jdossgollin@rice.edu](mailto:jdossgollin@rice.edu)
-- Office hours by appointment (or come chat after class)
+- Office hours Wednesday 12-1 (before class) or by appointment
 :::
 :::
 
@@ -75,34 +76,24 @@ What climate risks have you heard of?
 What climate risk management strategies have you heard of?
 :::
 
-::: {.fragment}
-::: {.incremental}
+::: {.fragment .nonincremental}
 - Financial instruments (e.g., insurance)
 - Floodproof buildings
 - Zoning codes
 - Major infrastructure
 - Improve emergency planning
 :::
-:::
 
-# The XLRM Framework
-
-## A Lens for Climate Decisions
-
-Throughout this course, we'll use the **XLRM Framework** to structure our thinking:
+## Our Focus
 
 ::: {.incremental}
-- **X** = e**X**ogenous uncertainties (what we can't control)
-- **L** = **L**evers (decisions we can make)
-- **R** = **R**elationships (how the system works)
-- **M** = **M**etrics (what we care about)
+- **Design decisions** with years-to-decades timescales
+- Infrastructure sizing, land use planning, building codes
+- Less emphasis on emergency management or real-time operations
+- But the frameworks and tools apply broadly: insurance, humanitarian response, and more
 :::
 
-::: {.fragment}
-We'll dive deeper into XLRM next week.
-:::
-
-# Example decisions
+## Example Decisions
 
 ##
 ### Update land use / zoning regulations?
@@ -161,6 +152,33 @@ We'll dive deeper into XLRM next week.
 :::
 :::
 
+# Theoretical Frameworks
+
+## XLRM Framework
+
+Throughout this course, we'll use the **XLRM Framework** to structure our thinking:
+
+::: {.incremental}
+- **X** = e**X**ogenous uncertainties (what we can't control)
+- **L** = **L**evers (decisions we can make)
+- **R** = **R**elationships (how the system works)
+- **M** = **M**etrics (what we care about)
+:::
+
+## Other Foundations
+
+We'll also draw on:
+
+::: {.incremental}
+- **Economic theory**: utility, welfare, and their limitations
+- **Stochastic optimization**: making optimal decisions under uncertainty
+- **Deep uncertainty**: what to do when we can't assign probabilities
+:::
+
+::: {.fragment}
+More on each throughout the semester!
+:::
+
 # About the course
 
 ## Course goals
@@ -172,19 +190,19 @@ We will:
 1. Develop a **deep understanding** of how to assess proposed climate risk strategies
 1. **Apply** these methods to a real-world problem
 
-## You are the auditors
+## Final Project
 
 ::: {.callout-important}
-## The Big Picture
+## Audit a Real-World Plan
 
-You're training to be the experts who **check the work**.
+You'll select a climate adaptation or risk management plan and critically evaluate it.
 :::
 
 ::: {.incremental}
 - Every climate plan has hidden assumptions
 - Every cost-benefit analysis makes value judgments
-- Your job: find the "vibes" in technical documents
-- Final project: **Audit a Real-World Plan**
+- You're training to be the experts who **check the work**
+- Find the "vibes" hiding in technical documents
 :::
 
 ## Three modules
@@ -212,7 +230,7 @@ Exceptions: tablet note-taking or documented accommodations.
 
 - Course website: [https://ceve-421-521.github.io/](https://ceve-421-521.github.io/)
 - Syllabus: [https://ceve-421-521.github.io/syllabus/](https://ceve-421-521.github.io/syllabus/)
-- Read it! (and confirm on Canvas)
+- Read it by Wednesday!
 - Questions? Ask now or later!
 
 ## Grading: CEVE 421 (Undergrad)
@@ -222,6 +240,20 @@ Exceptions: tablet note-taking or documented accommodations.
 | **Quizzes** | 20% |
 | **Exams** (3 × 20% each) | 60% |
 | **Final Project** | 20% |
+
+## Graduate students: Discussion leadership
+
+::: {.callout-important}
+## CEVE 521 Requirement
+
+You will **lead one Wednesday discussion session**.
+:::
+
+::: {.incremental}
+- Design an active learning experience—not just a presentation
+- Contact me to schedule your session
+- This signals to everyone: Wednesdays are **active**, not passive
+:::
 
 ## Grading: CEVE 521 (Graduate)
 
@@ -256,25 +288,25 @@ Labs are **ungraded** but essential:
 You may attend labs in-person or on Zoom.
 :::
 
-## Graduate students: Discussion leadership
-
-::: {.callout-important}
-## CEVE 521 Requirement
-
-You will **lead one Wednesday discussion session**.
-:::
-
-::: {.incremental}
-- Design an active learning experience—not just a presentation
-- Contact me to schedule your session
-- This signals to everyone: Wednesdays are **active**, not passive
-:::
-
 ## A community of learning
 
 - We all benefit from a diverse, safe, welcoming, and inclusive environment
 - Analysis is not value neutral
 - Assume good faith and engage in good faith yourself
+
+## AI and LLMs
+
+::: {.incremental}
+- **Tool comfort:** LLMs are oustanding at tasks like coding, *if you really know what you're doing* 
+  - Most of you are not
+- **Shared responsibility:** I teach, you learn
+- **Assessment design:** Exams and quizzes test *your* understanding
+- **Open dialogue:** Let's talk honestly about how we use these tools
+:::
+
+::: {.fragment}
+Full policy: [ceve-421-521.github.io/ai.html](https://ceve-421-521.github.io/ai.html)
+:::
 
 ## Accommodations
 
@@ -283,47 +315,13 @@ If you have a documented disability, scheduling conflicts, or otherwise need acc
 Viruses are circulating and everyone's immune system is different.
 If you need others to wear a mask to protect you, please let me know -- no health disclosures needed.
 
-# Software tools
-
-## Tool overview
-
-In this class, we will use:
-
-1. Julia
-1. GitHub
-1. Quarto
-1. VS Code (suggested)
-
-## Why Julia?
-
-::: {.incremental}
-- Readable syntax that closely parallels math notation
-- Designed for numerical and scientific computing
-- Fast! Solves the "two language problem"
-- Open source
-:::
-
-## GitHub
-
-1. You need a GitHub account
-1. Code is stored in "repositories"
-1. `clone` a repository to your computer
-1. Make changes and `commit` them
-1. `push` your changes to GitHub
-
-## Quarto
-
-Quarto lets you combine text and code in one document:
-
-- This website is made with Quarto
-- You will use Quarto for lab reports
-- Everything in one place, reproducible
-
-## Resources
-
-See the [resources page](/resources.qmd) for links to tutorials and other resources!
-
 # Logistics
+
+## Software Tools
+
+We'll use **Julia**, **GitHub**, **Quarto**, and **VS Code** for labs.
+
+More details on Friday—see the [resources page](/resources.qmd) for setup guides!
 
 ## Reading for Wednesday
 
@@ -332,14 +330,28 @@ Two articles on flood risk management in New Jersey:
 - @frank_newjersey:2022
 - @crawford_jerseyshore:2025
 
-Come prepared for discussion.
-Quiz should be easy if you do the reading!
+Readings and guiding questions are on the class website
+
+- Come prepared for discussion
+- Quiz should be easy if you do the reading!
+- PDFs also available on Canvas
 
 ## Lab 1: Friday
 
 - Julia setup and "Hello World"
 - Start early! Installation can be tricky.
 - Friday lab session is for troubleshooting and Q&A
+
+## This Week's To-Dos
+
+### Before Wednesday
+
+1. Read the syllabus
+2. Complete the reading (@frank_newjersey:2022 and @crawford_jerseyshore:2025)
+
+### Before Friday
+
+3. Start Lab 1 — complete the "Before Lab" setup steps
 
 ## References
 

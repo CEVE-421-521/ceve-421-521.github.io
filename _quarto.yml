@@ -127,8 +127,8 @@ format:
     include-in-header: mathjax-config.html
     date-format: "ddd., MMM. D"
 
-    # slide footer
-    footer: "{{< var course.number >}} | {{< var course.semester >}} &emsp;&emsp; {{< var instructor.name >}}"
+    # slide footer (name in center, course info added via CSS)
+    footer: "{{< var instructor.name >}}"
 
 # references
 bibliography: "references.bib"
