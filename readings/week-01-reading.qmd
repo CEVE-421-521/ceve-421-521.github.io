@@ -1,6 +1,6 @@
 ---
 title: "Week 1 Reading"
-subtitle: "Jersey Shore"
+subtitle: "Jersey Shore Case Study"
 
 format:
   html: default
@@ -9,12 +9,43 @@ format:
 
 ## Overview
 
-Please read @frank_newjersey:2022 and @crawford_jerseyshore:2025.
+This week's readings examine climate adaptation policy through a case study of New Jersey's coastal regulations.
+These two articles describe the same location at two different points in time, allowing us to examine the gap between proposed climate adaptation policy and implementation outcomes.
+
+## Assigned Readings
+
+Read these articles in order:
+
+1. @frank_newjersey:2022 -- A 2022 article describing New Jersey's proposed climate adaptation regulations, which used long-term sea level rise projections to restrict development in flood-prone areas.
+
+2. @crawford_jerseyshore:2025 -- A 2025 article examining what happened to those regulations three years later, and the broader challenges facing coastal communities.
+
 In case you are having difficulty accessing files, PDFs are available on Canvas.
 
-You are strongly encouraged, though not required, to use Zotero to store your references.
+::: {.callout-tip}
+You are strongly encouraged to use Zotero to store your references.
 See [the resources page](/resources.qmd) for suggestions on how to use Zotero.
+:::
+
+## Pre-Reading Guide
+
+As you read, pay attention to the following:
+
+**From the 2022 article:**
+
+- What specific climate projections (sea level rise amounts, time horizons) formed the basis for the proposed regulations?
+- What was the regulatory mechanism proposed to limit development?
+- How was the plan received by scientists and rating agencies?
+
+**From the 2025 article:**
+
+- What happened to the proposed regulations between 2022 and 2025?
+- What federal funding mechanisms currently support coastal protection, and what is their status?
+- What does the phrase "loving this place to death" suggest about the limits of engineering solutions?
 
 ## Discussion Questions
 
-*Coming soon!*
+1. What are the key differences between the 2022 proposal and the 2025 reality?
+2. Who bears the costs of coastal protection, and how might that change?
+3. What role do property values and market forces play in coastal adaptation decisions?
+

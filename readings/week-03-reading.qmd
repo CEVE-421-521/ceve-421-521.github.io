@@ -8,6 +8,12 @@ format:
   typst: default
 ---
 
+::: {.callout-warning}
+## Preliminary
+
+This reading assignment is preliminary and subject to change.
+Please wait for this warning to be removed before starting the assignment.
+:::
 
 ## Assigned readings
 

@@ -6,7 +6,7 @@ week: 5
 
 format:
   revealjs: default
-  beamer: default
+  pptx: default
 
 author: "{{< var instructor.name >}}"
 course: "{{< var course.number >}}, {{< var course.title >}}"
