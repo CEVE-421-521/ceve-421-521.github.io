@@ -3,6 +3,7 @@ title: "Uncertainty & Monte Carlo"
 subtitle: "Lecture"
 date: 2026-02-02
 week: 4
+status: draft
 
 format:
   revealjs: default

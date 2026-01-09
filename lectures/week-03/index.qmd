@@ -3,6 +3,7 @@ title: "Climate Variability, Extremes, and Change"
 subtitle: "Lecture"
 date: 2026-01-26
 week: 3
+status: draft
 
 format:
   revealjs: default

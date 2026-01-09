@@ -160,3 +160,29 @@ pre.sourceCode {
 .badge-exam {
   background-color: $brick-red;
 }
+
+// Draft material styling for schedule
+.draft-material {
+  opacity: 0.6;
+
+  a {
+    color: $rice-gray !important;
+
+    &:hover {
+      color: $dark-gray !important;
+    }
+  }
+}
+
+.draft-badge {
+  font-size: 0.7em;
+  background-color: $warm-yellow;
+  color: $rice-blue;
+  padding: 0.15em 0.5em;
+  border-radius: 0.25rem;
+  margin-left: 0.3em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}

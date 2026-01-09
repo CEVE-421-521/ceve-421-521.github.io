@@ -3,6 +3,7 @@ title: "Bridge: Trade-offs & Values"
 subtitle: "Lecture"
 date: 2026-03-09
 week: 9
+status: draft
 
 format:
   revealjs: default

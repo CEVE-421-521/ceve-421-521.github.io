@@ -3,6 +3,7 @@ title: "Intro to Climate Risk Management"
 subtitle: "Lecture"
 date: 2026-01-12
 week: 1
+status: published
 
 format:
   revealjs: default

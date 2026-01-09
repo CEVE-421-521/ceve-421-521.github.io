@@ -3,6 +3,7 @@ title: "Hazard, Exposure, Vulnerability"
 subtitle: "Lecture"
 date: 2026-01-21
 week: 2
+status: draft
 
 format:
   revealjs: default

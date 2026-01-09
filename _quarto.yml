@@ -142,6 +142,7 @@ execute:
 
 # extensions
 filters:
+  - status
   - reveal-auto-agenda
 
 auto-agenda:

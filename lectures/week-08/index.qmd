@@ -3,6 +3,7 @@ title: "Sensitivity & Value of Information"
 subtitle: "Lecture"
 date: 2026-03-02
 week: 8
+status: draft
 
 format:
   revealjs: default

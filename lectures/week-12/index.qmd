@@ -3,6 +3,7 @@ title: "Sequential Decision Making"
 subtitle: "Lecture"
 date: 2026-04-06
 week: 12
+status: draft
 
 format:
   revealjs: default

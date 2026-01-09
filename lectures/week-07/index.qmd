@@ -3,6 +3,7 @@ title: "Optimal Static Decisions"
 subtitle: "Lecture"
 date: 2026-02-23
 week: 7
+status: draft
 
 format:
   revealjs: default

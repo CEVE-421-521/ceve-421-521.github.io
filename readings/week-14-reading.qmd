@@ -1,18 +1,12 @@
 ---
 title: "Week 14 Reading"
 subtitle: "Synthesis and Final Projects"
+status: draft
 
 format:
   html: default
   typst: default
 ---
-
-::: {.callout-warning}
-## Preliminary
-
-This reading assignment is preliminary and subject to change.
-Please wait for this warning to be removed before starting the assignment.
-:::
 
 
 ## Overview

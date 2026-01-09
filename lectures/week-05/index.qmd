@@ -3,6 +3,7 @@ title: "Risk Metrics (EAD, VaR, CVaR)"
 subtitle: "Lecture"
 date: 2026-02-09
 week: 5
+status: draft
 
 format:
   revealjs: default

@@ -1,0 +1,8 @@
+title: Material Status
+author: CEVE 421/521
+version: 1.0.0
+contributes:
+  shortcodes:
+    - status.lua
+  filters:
+    - draft-filter.lua

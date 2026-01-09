@@ -1,18 +1,12 @@
 ---
 title: "Week 7 Reading"
 subtitle: "Optimal Static Decisions"
+status: draft
 
 format:
   html: default
   typst: default
 ---
-
-::: {.callout-warning}
-## Preliminary
-
-This reading assignment is preliminary and subject to change.
-Please wait for this warning to be removed before starting the assignment.
-:::
 
 ## Overview
 

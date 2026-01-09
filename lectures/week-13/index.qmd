@@ -3,6 +3,7 @@ title: "Multi-Objective Optimization"
 subtitle: "Lecture"
 date: 2026-04-13
 week: 13
+status: draft
 
 format:
   revealjs: default
