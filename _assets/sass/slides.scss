@@ -190,7 +190,8 @@ $link-color: $rice-gray;
     &::before {
         content: "CEVE 421/521 Spring 2026";
         position: absolute;
-        left: 1em;
+        left: 4em;
+        text-decoration: none;
     }
 }
 
@@ -210,26 +211,36 @@ $link-color: $rice-gray;
 }
 
 // Title slide styling with gradient background
-.reveal .slide-background-content {
-    &[data-background-hash*="title"] {
-        background: linear-gradient(135deg, $rice-blue 0%, $dark-blue-gray 100%);
-    }
-}
+.reveal section#title-slide,
+.reveal .slides > section:first-child {
+    background: linear-gradient(135deg, $rice-blue 0%, $dark-blue-gray 100%) !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
 
-// Title slide specific styling
-.reveal section.title-slide,
-.reveal section#title-slide {
-    h1, h2 {
-        color: white;
-        text-transform: none;
+    h1, h2, .title, .quarto-title-block .title {
+        color: white !important;
+        text-transform: none !important;
+        margin-bottom: 0.3em !important;
     }
 
-    .subtitle, .author, .date, .institute {
-        color: $light-blue-gray;
+    p, .subtitle, .author, .institute, .quarto-title-author-name {
+        color: $light-blue-gray !important;
+        margin-top: 0.5em !important;
     }
 
-    .quarto-title-author-name {
-        color: $bright-blue;
+    .date, .quarto-title-meta-contents, p.date {
+        color: $rice-gray !important;
+        font-size: 0.65em !important;
+        margin-top: 0.3em !important;
     }
 }
 

@@ -80,7 +80,7 @@ format:
     code-line-numbers: true
     html-math-method: mathjax
     include-in-header: mathjax-config.html
-    date-format: "ddd., MMM. D"
+    date-format: "dddd, MMMM D, YYYY"
 
   # customization for PDF output via Typst
   typst:
@@ -125,7 +125,7 @@ format:
     # math and code
     html-math-method: mathjax
     include-in-header: mathjax-config.html
-    date-format: "ddd., MMM. D"
+    date-format: "dddd, MMMM D, YYYY"
 
     # slide footer (name in center, course info added via CSS)
     footer: "{{< var instructor.name >}}"

@@ -1,6 +1,5 @@
 ---
 title: "Intro to Climate Risk Management"
-subtitle: "Lecture"
 date: 2026-01-12
 week: 1
 status: published
@@ -14,12 +13,204 @@ course: "{{< var course.number >}}, {{< var course.title >}}"
 institution: "{{< var course.institution >}}"
 ---
 
-## Preparation
+# Decisions We Face
 
-No preparation is required for class today.
-In general, reading may be assigned before Monday lectures.
+## Example Decisions
+
+::: {.notes}
+Target: 1:01.
+Hook: start with concrete decisions to motivate the course.
+Move through examples quickly (~1 min each).
+:::
+
+### Update land use / zoning regulations?
+
+::: {.columns}
+::: {.column width="35%"}
+::: {.caption}
+{{< fa camera-retro >}}: @satija_boomtown:2016
+:::
+:::
+::: {.column width="65%"}
+![](boomtown.png)
+:::
+:::
+
+## Example Decisions
+
+### How to size stormwater infrastructure?
+
+::: {.columns}
+::: {.column width="25%"}
+::: {.caption}
+{{< fa camera-retro >}}: Doss-Gollin
+:::
+:::
+::: {.column width="75%"}
+![](doss-gollin-buffalo-drainage.jpeg)
+:::
+:::
+
+## Example Decisions
+
+### How high to elevate a house for proactive flood protection?
+
+::: {.columns}
+::: {.column width="35%"}
+::: {.caption}
+{{< fa camera-retro >}}: Allison Lee / [Houston Public Media](https://www.houstonpublicmedia.org/articles/news/2017/10/06/240934/many-houstonians-seek-home-elevation-after-repetitive-flooding/)
+:::
+:::
+::: {.column width="65%"}
+![](lee-meyerland-elevation.jpg)
+:::
+:::
+
+## Example Decisions
+
+### Require weatherization of privately owned electricity infrastructure?
+::: {.columns}
+::: {.column width="30%"}
+
+::: {.caption}
+{{< fa camera-retro >}}: [Jonathan Cutrer](https://www.flickr.com/photos/joncutrer/50975248406) / Flickr.
+:::
+:::
+::: {.column width="70%"}
+![](cutrer-uri.jpg)
+:::
+:::
+
+## Example Decisions
+
+### How to prioritize grid hardening for a growing, electrifying city?
+
+::: {.columns}
+::: {.column width="30%"}
+::: {.caption}
+{{< fa camera-retro >}}: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Electricity_Grid_Schematic_English.svg) / CC-BY-3.0
+:::
+:::
+::: {.column width="70%"}
+![](grid-schematic.png)
+:::
+:::
+
+# Frameworks and Concepts
+
+## Your Turn
+
+::: {.notes}
+Target: 1:06.
+Pause for thinking, then invite responses.
+Listen for: data, models, economics, optimization.
+:::
+
+::: {.callout-tip}
+How would you help a decision-maker choose the "best" option?
+What tools or frameworks would you reach for?
+:::
+
+## Foundations We'll Draw On
+
+::: {.notes}
+Target: 1:08.
+Connect to what students said.
+These are the theoretical pillars of the course.
+:::
+
+::: {.incremental}
+- **Economic theory**: utility, welfare, cost-benefit analysis
+- **Stochastic optimization**: optimal decisions under uncertainty
+- **Uncertainty quantification**: characterizing what we don't know
+- **Robust decision making**: strategies that work across scenarios
+- **Engineering systems analysis**: modeling complex systems
+:::
+
+## Climate
+
+::: {.notes}
+Target: 1:10. Quick definition -- don't belabor.
+:::
+
+::: {.columns}
+::: {.column width="40%"}
+> The slowly varying aspects of the atmosphere–hydrosphere–land surface system.
+
+[AMS Glossary of Meteorology](https://glossary.ametsoc.org/wiki/Climate)
+:::
+::: {.column width="60%"}
+![[{{< fa camera-retro >}}: USGS Water Cycle](https://www.usgs.gov/special-topics/water-science-school/science/water-cycle-diagrams)](usgs-water-cycle.png){width="100%"}
+:::
+:::
+
+## Risk Framework
+
+::: {.notes}
+Target: 1:12.
+IPCC risk framework: Risk = f(Hazard, Exposure, Vulnerability).
+Point out all three components.
+:::
+
+![[{{< fa camera-retro >}}: IPCC AR5 WG2](https://www.ipcc.ch/report/ar5/wg2/)](ipcc-risk.jpg){width="80%"}
+
+## Climate Risks
+
+::: {.notes}
+Target: 1:14.
+Quick brainstorm -- call on a few students.
+:::
+
+::: {.callout-tip}
+## Your turn!
+
+What climate risks have you heard of?
+:::
+
+## Climate Risk Management
+
+::: {.notes}
+Target: 1:17.
+Another quick brainstorm.
+Reveal fragments after hearing responses.
+:::
+
+::: {.callout-tip}
+## Your turn!
+
+What climate risk management strategies have you heard of?
+:::
+
+::: {.fragment .nonincremental}
+- Financial instruments (e.g., insurance)
+- Floodproof buildings
+- Zoning codes
+- Major infrastructure
+- Improve emergency planning
+:::
+
+## XLRM Framework
+
+::: {.notes}
+Target: 1:20. Key framework for the semester. Will revisit many times. X-L-R-M mnemonic.
+:::
+
+We'll use **XLRM** to structure our thinking about decisions:
+
+::: {.incremental}
+- **X** = e**X**ogenous uncertainties (what we can't control)
+- **L** = **L**evers (decisions we can make)
+- **R** = **R**elationships (how the system works)
+- **M** = **M**etrics (what we care about)
+:::
+
+# About Us
 
 ## About Me
+
+::: {.notes}
+Target: 1:22.
+:::
 
 ::: {.columns}
 ::: {.column width="40%"}
@@ -37,152 +228,22 @@ In general, reading may be assigned before Monday lectures.
 
 ## Your turn
 
+::: {.notes}
+Target: 1:27. Brief intros—name and background.
+:::
+
 Let's go around quickly:
 
 1. Name / what you prefer to be called
 1. Year and major / research area
 
-# What is climate risk management?
-
-## Climate
-
-::: {.columns}
-::: {.column width="40%"}
-> The slowly varying aspects of the atmosphere–hydrosphere–land surface system.
-
-[AMS Glossary of Meteorology](https://glossary.ametsoc.org/wiki/Climate)
-:::
-::: {.column width="60%"}
-![[{{< fa camera-retro >}}: USGS Water Cycle](https://www.usgs.gov/special-topics/water-science-school/science/water-cycle-diagrams)](usgs-water-cycle.png){width="100%"}
-:::
-:::
-
-## Climate Risk
-
-![[{{< fa camera-retro >}}: IPCC AR5 WG2](https://www.ipcc.ch/report/ar5/wg2/)](ipcc-risk.jpg){width="80%"}
-
-## Climate Risk
-
-::: {.callout-tip}
-## Your turn!
-
-What climate risks have you heard of?
-:::
-
-## Climate Risk Management
-
-::: {.callout-tip}
-## Your turn!
-
-What climate risk management strategies have you heard of?
-:::
-
-::: {.fragment .nonincremental}
-- Financial instruments (e.g., insurance)
-- Floodproof buildings
-- Zoning codes
-- Major infrastructure
-- Improve emergency planning
-:::
-
-## Our Focus
-
-::: {.incremental}
-- **Design decisions** with years-to-decades timescales
-- Infrastructure sizing, land use planning, building codes
-- Less emphasis on emergency management or real-time operations
-- But the frameworks and tools apply broadly: insurance, humanitarian response, and more
-:::
-
-## Example Decisions
-
-##
-### Update land use / zoning regulations?
-
-::: {.columns}
-::: {.column width="35%"}
-::: {.caption}
-{{< fa camera-retro >}}: @satija_boomtown:2016
-:::
-:::
-::: {.column width="65%"}
-![](boomtown.png)
-:::
-:::
-
-##
-### How to size stormwater infrastructure?
-
-::: {.columns}
-::: {.column width="25%"}
-::: {.caption}
-{{< fa camera-retro >}}: Doss-Gollin
-:::
-:::
-::: {.column width="75%"}
-![](doss-gollin-buffalo-drainage.jpeg)
-:::
-:::
-
-##
-### How high to elevate a house for proactive flood protection?
-
-::: {.columns}
-::: {.column width="35%"}
-::: {.caption}
-{{< fa camera-retro >}}: Allison Lee / [Houston Public Media](https://www.houstonpublicmedia.org/articles/news/2017/10/06/240934/many-houstonians-seek-home-elevation-after-repetitive-flooding/)
-:::
-:::
-::: {.column width="65%"}
-![](lee-meyerland-elevation.jpg)
-:::
-:::
-
-##
-
-### Require weatherization of privately owned electricity infrastructure?
-::: {.columns}
-::: {.column width="30%"}
-
-::: {.caption}
-{{< fa camera-retro >}}: [Jonathan Cutrer](https://www.flickr.com/photos/joncutrer/50975248406) / Flickr.
-:::
-:::
-::: {.column width="70%"}
-![](cutrer-uri.jpg)
-:::
-:::
-
-# Theoretical Frameworks
-
-## XLRM Framework
-
-Throughout this course, we'll use the **XLRM Framework** to structure our thinking:
-
-::: {.incremental}
-- **X** = e**X**ogenous uncertainties (what we can't control)
-- **L** = **L**evers (decisions we can make)
-- **R** = **R**elationships (how the system works)
-- **M** = **M**etrics (what we care about)
-:::
-
-## Other Foundations
-
-We'll also draw on:
-
-::: {.incremental}
-- **Economic theory**: utility, welfare, and their limitations
-- **Stochastic optimization**: making optimal decisions under uncertainty
-- **Deep uncertainty**: what to do when we can't assign probabilities
-:::
-
-::: {.fragment}
-More on each throughout the semester!
-:::
-
-# About the course
+# About the Course
 
 ## Course goals
+
+::: {.notes}
+Target: 1:30. Transition to course logistics.
+:::
 
 Climate risk management is a very broad field.
 We will:
@@ -193,20 +254,24 @@ We will:
 
 ## Final Project
 
-::: {.callout-important}
-## Audit a Real-World Plan
-
-You'll select a climate adaptation or risk management plan and critically evaluate it.
+::: {.notes}
+Target: 1:32.
+Emphasize "expert consultants" -- they're practicing a marketable skill.
 :::
 
+In small teams, you'll act as expert consultants auditing a real-world climate plan.
+
 ::: {.incremental}
-- Every climate plan has hidden assumptions
-- Every cost-benefit analysis makes value judgments
-- You're training to be the experts who **check the work**
-- Find the "vibes" hiding in technical documents
+- **Three Audit Memos:** Analyze the plan's framework, evidence, and robustness
+- **Executive Briefing:** Present your findings in Week 14
+- **Written Report:** Due during finals week
 :::
 
 ## Three modules
+
+::: {.notes}
+Target: 1:34. Quick overview -- they'll see this structure repeated.
+:::
 
 1. **Risk Analysis** (Weeks 1-5): Characterize hazards and quantify uncertainty
 1. **Decision Analysis** (Weeks 6-9): Evaluate options under uncertainty
@@ -215,6 +280,10 @@ You'll select a climate adaptation or risk management plan and critically evalua
 Week 14: Final Project Presentations
 
 ## Class structure: Weekly rhythm
+
+::: {.notes}
+Target: 1:36. Emphasize no laptops Mon/Wed—this is intentional for discussion quality.
+:::
 
 | Day | Activity | Laptops? |
 |:---|:---|:---:|
@@ -234,13 +303,29 @@ Exceptions: tablet note-taking or documented accommodations.
 - Read it by Wednesday!
 - Questions? Ask now or later!
 
-## Grading: CEVE 421 (Undergrad)
+## Grading
+
+::: {.columns}
+::: {.column width="50%"}
+**CEVE 421 (Undergrad)**
 
 | Category | Weight |
 |:---|:---:|
-| **Quizzes** | 20% |
-| **Exams** (3 × 20% each) | 60% |
-| **Final Project** | 20% |
+| Quizzes | 20% |
+| Exams (3 × 20%) | 60% |
+| Final Project | 20% |
+:::
+::: {.column width="50%"}
+**CEVE 521 (Graduate)**
+
+| Category | Weight |
+|:---|:---:|
+| Quizzes | 15% |
+| Exams (3 × 15%) | 45% |
+| Final Project | 20% |
+| Seminar Leadership | 20% |
+:::
+:::
 
 ## Graduate students: Discussion leadership
 
@@ -255,15 +340,6 @@ You will **lead one Wednesday discussion session**.
 - Contact me to schedule your session
 - This signals to everyone: Wednesdays are **active**, not passive
 :::
-
-## Grading: CEVE 521 (Graduate)
-
-| Category | Weight |
-|:---|:---:|
-| **Quizzes** | 15% |
-| **Exams** (3 × 15% each) | 45% |
-| **Final Project** | 20% |
-| **Seminar Leadership** | 20% |
 
 ## About those exams
 
@@ -291,18 +367,24 @@ You may attend labs in-person or on Zoom.
 
 ## A community of learning
 
+::: {.notes}
+Target: 1:45.
+:::
+
 - We all benefit from a diverse, safe, welcoming, and inclusive environment
 - Analysis is not value neutral
 - Assume good faith and engage in good faith yourself
 
 ## AI and LLMs
 
+::: {.notes}
+Target: 1:47.
+:::
+
 ::: {.incremental}
-- **Tool comfort:** LLMs are oustanding at tasks like coding, *if you really know what you're doing* 
-  - Most of you are not
-- **Shared responsibility:** I teach, you learn
-- **Assessment design:** Exams and quizzes test *your* understanding
-- **Open dialogue:** Let's talk honestly about how we use these tools
+- LLMs are useful for some tasks, notably coding, *if you really know what you're doing*. You should learn to use them appropriately.
+- Your use should be guided by purpose (here: learning!)
+- I want us to discuss how we use these tools rather than to police your use.
 :::
 
 ::: {.fragment}
@@ -317,12 +399,6 @@ Viruses are circulating and everyone's immune system is different.
 If you need others to wear a mask to protect you, please let me know -- no health disclosures needed.
 
 # Logistics
-
-## Software Tools
-
-We'll use **Julia**, **GitHub**, **Quarto**, and **VS Code** for labs.
-
-More details on Friday—see the [resources page](/resources.qmd) for setup guides!
 
 ## Reading for Wednesday
 
@@ -344,6 +420,10 @@ Readings and guiding questions are on the class website
 - Friday lab session is for troubleshooting and Q&A
 
 ## This Week's To-Dos
+
+::: {.notes}
+Target: 1:50. End on time. Repeat key actions: read syllabus, do reading, start Lab 1 setup.
+:::
 
 ### Before Wednesday
 
