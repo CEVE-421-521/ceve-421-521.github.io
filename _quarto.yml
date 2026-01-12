@@ -9,6 +9,9 @@ project:
     - "!ROADMAP.md"
     - "!README.md"
     - "!LICENSE.md"
+    - "!scripts/**"
+    - "!exams/**"
+    - "!_background/**"
 
 website:
   page-navigation: true

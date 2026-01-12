@@ -163,6 +163,15 @@ function publish_lab(lab_num::String, semester::String="S26")
         println("✅ Copied data/")
     end
 
+    # Copy _assets directory (for custom SCSS)
+    src_assets = joinpath(src_dir, "_assets")
+    if isdir(src_assets)
+        dst_assets = joinpath(target_dir, "_assets")
+        rm(dst_assets; recursive=true, force=true)
+        cp(src_assets, dst_assets)
+        println("✅ Copied _assets/")
+    end
+
     println("\n📦 Lab $lab_id published to $target_dir")
 end
 

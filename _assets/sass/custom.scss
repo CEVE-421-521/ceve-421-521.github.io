@@ -107,6 +107,31 @@ $link-hover-color: $medium-blue;
   border-left-color: $grass-green;
 }
 
+// Custom styling for student response callouts
+// Usage: ::: {.callout-tip .response appearance="simple" icon=false title="Your Response"}
+.callout-tip.callout-style-simple {
+  &:has(.callout-title-container:first-child) {
+    border-left-color: $shadow-purple;
+    background-color: rgba($shadow-purple, 0.05);
+  }
+}
+
+// Alternative: style all simple tip callouts distinctly for labs
+.callout.callout-style-simple[data-callout="tip"] {
+  border-left-color: $shadow-purple;
+  background-color: rgba($shadow-purple, 0.05);
+
+  .callout-title {
+    color: $shadow-purple;
+    font-weight: 600;
+  }
+
+  .callout-body {
+    font-style: italic;
+    color: $dark-gray;
+  }
+}
+
 // Code block enhancements
 div.sourceCode {
   border-left: 3px solid $grass-green;
