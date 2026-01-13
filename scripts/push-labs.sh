@@ -25,11 +25,11 @@ fi
 echo "Starting to push updates for all labs..."
 echo "-------------------------------------------------"
 
-for i in 01 02 03 04 05 06 07 08 09 10; do
-    LAB_DIR="${LABS_DIR}lab-${i}-${SEMESTER}"
+for LAB_DIR in ${LABS_DIR}lab-*-${SEMESTER}; do
+    LAB_NAME=$(basename "$LAB_DIR")
 
     if [ -d "$LAB_DIR" ]; then
-        echo "=> Processing lab-${i}-${SEMESTER}"
+        echo "=> Processing ${LAB_NAME}"
         cd "$LAB_DIR"
 
         # Check if there are changes
@@ -45,9 +45,6 @@ for i in 01 02 03 04 05 06 07 08 09 10; do
         fi
 
         cd - > /dev/null
-        echo "-------------------------------------------------"
-    else
-        echo "=> Skipping lab-${i}-${SEMESTER} (directory not found)"
         echo "-------------------------------------------------"
     fi
 done
