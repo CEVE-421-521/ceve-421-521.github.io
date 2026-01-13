@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-3c14ae2744a878d18ac517e57de66303.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-a0c0b81605dbae697d64c2e06ac65422.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -117,6 +117,7 @@ window.MathJax = {
 
 <meta property="og:title" content="Lab 1: Julia Setup &amp; Hello World – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="CEVE 421/521">
+<meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-01-S26/index_files/figure-html/fig-sine-output-1.svg">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -133,8 +134,10 @@ window.MathJax = {
    
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3</span> Exercises</a></li>
+  <li><a href="#pre-lab-requirements" id="toc-pre-lab-requirements" class="nav-link" data-scroll-target="#pre-lab-requirements"><span class="header-section-number">2</span> Pre-Lab Requirements</a></li>
+  <li><a href="#in-class-workflow" id="toc-in-class-workflow" class="nav-link" data-scroll-target="#in-class-workflow"><span class="header-section-number">3</span> In-Class Workflow</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission"><span class="header-section-number">4</span> Submission</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/labs/lab-01-S26/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -169,276 +172,379 @@ window.MathJax = {
 
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>Lab objectives and context - to be written.</p>
+<p>Welcome to CEVE 421/521! This lab will guide you through setting up the software tools we’ll use throughout the semester. By the end of this lab, you’ll have a working Julia environment and will create your first visualization.</p>
 </section>
-<section id="setup" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2</span> Setup</h2>
+<section id="pre-lab-requirements" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="pre-lab-requirements"><span class="header-section-number">2</span> Pre-Lab Requirements</h2>
+<p>Complete these steps <strong>before</strong> coming to lab. Budget 30-60 minutes for installation. If you get stuck, note where you stopped and we’ll troubleshoot in class.</p>
+<section id="create-a-github-account" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="create-a-github-account"><span class="header-section-number">2.1</span> Create a GitHub Account</h3>
+<p>If you don’t already have one, create a free account at <a href="https://github.com">github.com</a>. Use your Rice email to get access to additional student benefits.</p>
+</section>
+<section id="accept-the-github-classroom-assignment" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="accept-the-github-classroom-assignment"><span class="header-section-number">2.2</span> Accept the GitHub Classroom Assignment</h3>
+<ol type="1">
+<li>Go to Canvas and find the Lab 1 assignment</li>
+<li>Click the GitHub Classroom link</li>
+<li>Accept the assignment to create your personal repository</li>
+<li>You’ll get a link to your new repo (e.g., <code>CEVE-421-521/lab-01-S26-yourname</code>)</li>
+</ol>
+</section>
+<section id="install-github-desktop" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="install-github-desktop"><span class="header-section-number">2.3</span> Install GitHub Desktop</h3>
+<p>Download and install <a href="https://desktop.github.com/">GitHub Desktop</a>. This provides a visual interface for Git operations.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Experienced users can use the command line or another Git client, but GitHub Desktop is recommended for this course.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="clone-your-repository" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="clone-your-repository"><span class="header-section-number">2.4</span> Clone Your Repository</h3>
+<ol type="1">
+<li>Open GitHub Desktop</li>
+<li>Click “Clone a repository from the Internet”</li>
+<li>Find your lab repository under your GitHub account</li>
+<li><strong>Important</strong>: Choose a local path that is NOT in OneDrive, Google Drive, iCloud, or any synced folder
+<ul>
+<li>Recommended: Create a folder like <code>~/CEVE-421-521/</code> and clone into it</li>
+<li>Your path should be something like <code>~/CEVE-421-521/lab-01-S26-yourname</code></li>
+</ul></li>
+</ol>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Cloud sync services (OneDrive, Google Drive, Dropbox) can corrupt Git repositories. Always store code repositories in a non-synced folder.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="install-visual-studio-code" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="install-visual-studio-code"><span class="header-section-number">2.5</span> Install Visual Studio Code</h3>
+<p>Download and install <a href="https://code.visualstudio.com/">VS Code</a>. Then install the Julia extension:</p>
+<ol type="1">
+<li>Open VS Code</li>
+<li>Click the Extensions icon in the left sidebar (or press <code>Ctrl+Shift+X</code> / <code>Cmd+Shift+X</code>)</li>
+<li>Search for “Julia”</li>
+<li>Install the “Julia” extension by julialang</li>
+</ol>
+</section>
+<section id="install-julia-via-juliaup" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="install-julia-via-juliaup"><span class="header-section-number">2.6</span> Install Julia via Juliaup</h3>
+<p>We use <a href="https://github.com/JuliaLang/juliaup">Juliaup</a> to manage Julia installations.</p>
+<p><strong>Windows:</strong> Open PowerShell and run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>winget install julia <span class="op">-</span>s msstore</span></code></pre></div>
+<p><strong>macOS/Linux:</strong> Open Terminal and run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://install.julialang.org <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
+<p>After installation, set Julia 1.12 as the default:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">juliaup</span> add 1.12</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">juliaup</span> default 1.12</span></code></pre></div>
+<p>Verify your installation by opening a new terminal and running:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span> <span class="at">--version</span></span></code></pre></div>
+<p>You should see <code>julia version 1.12.x</code>.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>CEVE 543 Students
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We used Julia 1.11 in CEVE 543 last semester. If you don’t install version 1.12 here, you’ll run into errors later.</p>
+</div>
+</div>
+</section>
+<section id="install-quarto" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="install-quarto"><span class="header-section-number">2.7</span> Install Quarto</h3>
+<p>Download and install <a href="https://quarto.org/docs/get-started/">Quarto</a>. This is the document rendering system we use for labs.</p>
+<p>Verify installation:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> <span class="at">--version</span></span></code></pre></div>
+</section>
+<section id="set-up-github-copilot-optional-but-recommended" class="level3" data-number="2.8">
+<h3 data-number="2.8" class="anchored" data-anchor-id="set-up-github-copilot-optional-but-recommended"><span class="header-section-number">2.8</span> Set Up GitHub Copilot (Optional but Recommended)</h3>
+<p>GitHub Copilot is an AI coding assistant that can help you write code. Students get free access:</p>
+<ol type="1">
+<li>Apply for the <a href="https://education.github.com/pack">GitHub Student Developer Pack</a></li>
+<li>Once approved, install the “GitHub Copilot” extension in VS Code</li>
+<li>Sign in with your GitHub account</li>
+</ol>
+<p>You are also welcome to explore other AI coding tools such as Claude Code and OpenAI Codex, but these generally have no, or limited, free plans.</p>
+</section>
+<section id="activate-the-julia-environment" class="level3" data-number="2.9">
+<h3 data-number="2.9" class="anchored" data-anchor-id="activate-the-julia-environment"><span class="header-section-number">2.9</span> Activate the Julia Environment</h3>
+<ol type="1">
+<li>Open your cloned lab folder in VS Code. You can do this directly from GitHub desktop.</li>
+<li>Open the VS Code terminal (<code>Ctrl+``</code> or <code>Cmd+``</code>)</li>
+<li>Start Julia by typing <code>julia</code></li>
+<li>Activate and instantiate the project:</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="st">"."</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span></code></pre></div>
+<p>This installs all required packages for the lab.</p>
+</section>
+<section id="verify-your-setup" class="level3" data-number="2.10">
+<h3 data-number="2.10" class="anchored" data-anchor-id="verify-your-setup"><span class="header-section-number">2.10</span> Verify Your Setup</h3>
+<p>In VS Code, open the terminal and run:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render index.qmd</span></code></pre></div>
+<p>This should produce two files:</p>
+<ul>
+<li><code>index.html</code> (web version)</li>
+<li><code>index.pdf</code> (PDF version via Typst)</li>
+</ul>
+<p>If both files are created without errors, your setup is complete!</p>
+</section>
+</section>
+<section id="in-class-workflow" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="in-class-workflow"><span class="header-section-number">3</span> In-Class Workflow</h2>
+<p>Now that your environment is set up, let’s complete the lab exercises.</p>
+<section id="setup" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">3.1</span> Setup</h3>
+<p>This section loads the tools (called “packages”) we need for this lab.</p>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="st">"Manifest.toml"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-green-fg ansi-bold">    Updating</span> registry at `~/.julia/registries/General.toml`
-<span class="ansi-green-fg ansi-bold">    Updating</span> `~/Documents/teaching/CEVE-421-521/ceve-421-521.github.io/labs/lab-01-S26/Project.toml`
-  <span class="ansi-bright-black-fg">[13f3f980] </span><span class="ansi-bright-green-fg">+ CairoMakie v0.15.8</span>
-<span class="ansi-green-fg ansi-bold">    Updating</span> `~/Documents/teaching/CEVE-421-521/ceve-421-521.github.io/labs/lab-01-S26/Manifest.toml`
-  <span class="ansi-bright-black-fg">[621f4979] </span><span class="ansi-bright-green-fg">+ AbstractFFTs v1.5.0</span>
-  <span class="ansi-bright-black-fg">[1520ce14] </span><span class="ansi-bright-green-fg">+ AbstractTrees v0.4.5</span>
-  <span class="ansi-bright-black-fg">[79e6a3ab] </span><span class="ansi-bright-green-fg">+ Adapt v4.4.0</span>
-  <span class="ansi-bright-black-fg">[35492f91] </span><span class="ansi-bright-green-fg">+ AdaptivePredicates v1.2.0</span>
-  <span class="ansi-bright-black-fg">[66dad0bd] </span><span class="ansi-bright-green-fg">+ AliasTables v1.1.3</span>
-  <span class="ansi-bright-black-fg">[27a7e980] </span><span class="ansi-bright-green-fg">+ Animations v0.4.2</span>
-  <span class="ansi-bright-black-fg">[67c07d97] </span><span class="ansi-bright-green-fg">+ Automa v1.1.0</span>
-  <span class="ansi-bright-black-fg">[13072b0f] </span><span class="ansi-bright-green-fg">+ AxisAlgorithms v1.1.0</span>
-  <span class="ansi-bright-black-fg">[39de3d68] </span><span class="ansi-bright-green-fg">+ AxisArrays v0.4.8</span>
-  <span class="ansi-bright-black-fg">[18cc8868] </span><span class="ansi-bright-green-fg">+ BaseDirs v1.3.2</span>
-  <span class="ansi-bright-black-fg">[fa961155] </span><span class="ansi-bright-green-fg">+ CEnum v0.5.0</span>
-  <span class="ansi-bright-black-fg">[96374032] </span><span class="ansi-bright-green-fg">+ CRlibm v1.0.2</span>
-  <span class="ansi-bright-black-fg">[159f3aea] </span><span class="ansi-bright-green-fg">+ Cairo v1.1.1</span>
-  <span class="ansi-bright-black-fg">[13f3f980] </span><span class="ansi-bright-green-fg">+ CairoMakie v0.15.8</span>
-  <span class="ansi-bright-black-fg">[d360d2e6] </span><span class="ansi-bright-green-fg">+ ChainRulesCore v1.26.0</span>
-  <span class="ansi-bright-black-fg">[a2cac450] </span><span class="ansi-bright-green-fg">+ ColorBrewer v0.4.2</span>
-  <span class="ansi-bright-black-fg">[35d6a980] </span><span class="ansi-bright-green-fg">+ ColorSchemes v3.31.0</span>
-  <span class="ansi-bright-black-fg">[3da002f7] </span><span class="ansi-bright-green-fg">+ ColorTypes v0.12.1</span>
-  <span class="ansi-bright-black-fg">[c3611d14] </span><span class="ansi-bright-green-fg">+ ColorVectorSpace v0.11.0</span>
-  <span class="ansi-bright-black-fg">[5ae59095] </span><span class="ansi-bright-green-fg">+ Colors v0.13.1</span>
-  <span class="ansi-bright-black-fg">[34da2185] </span><span class="ansi-bright-green-fg">+ Compat v4.18.1</span>
-  <span class="ansi-bright-black-fg">[95dc2771] </span><span class="ansi-bright-green-fg">+ ComputePipeline v0.1.6</span>
-  <span class="ansi-bright-black-fg">[187b0558] </span><span class="ansi-bright-green-fg">+ ConstructionBase v1.6.0</span>
-  <span class="ansi-bright-black-fg">[d38c429a] </span><span class="ansi-bright-green-fg">+ Contour v0.6.3</span>
-  <span class="ansi-bright-black-fg">[9a962f9c] </span><span class="ansi-bright-green-fg">+ DataAPI v1.16.0</span>
-  <span class="ansi-bright-black-fg">[864edb3b] </span><span class="ansi-bright-green-fg">+ DataStructures v0.19.3</span>
-  <span class="ansi-bright-black-fg">[e2d170a0] </span><span class="ansi-bright-green-fg">+ DataValueInterfaces v1.0.0</span>
-  <span class="ansi-bright-black-fg">[927a84f5] </span><span class="ansi-bright-green-fg">+ DelaunayTriangulation v1.6.6</span>
-  <span class="ansi-bright-black-fg">[31c24e10] </span><span class="ansi-bright-green-fg">+ Distributions v0.25.122</span>
-  <span class="ansi-bright-black-fg">[ffbed154] </span><span class="ansi-bright-green-fg">+ DocStringExtensions v0.9.5</span>
-  <span class="ansi-bright-black-fg">[4e289a0a] </span><span class="ansi-bright-green-fg">+ EnumX v1.0.5</span>
-  <span class="ansi-bright-black-fg">[429591f6] </span><span class="ansi-bright-green-fg">+ ExactPredicates v2.2.9</span>
-  <span class="ansi-bright-black-fg">[411431e0] </span><span class="ansi-bright-green-fg">+ Extents v0.1.6</span>
-  <span class="ansi-bright-black-fg">[7a1cc6ca] </span><span class="ansi-bright-green-fg">+ FFTW v1.10.0</span>
-  <span class="ansi-bright-black-fg">[5789e2e9] </span><span class="ansi-bright-green-fg">+ FileIO v1.17.1</span>
-  <span class="ansi-bright-black-fg">[8fc22ac5] </span><span class="ansi-bright-green-fg">+ FilePaths v0.9.0</span>
-  <span class="ansi-bright-black-fg">[48062228] </span><span class="ansi-bright-green-fg">+ FilePathsBase v0.9.24</span>
-  <span class="ansi-bright-black-fg">[1a297f60] </span><span class="ansi-bright-green-fg">+ FillArrays v1.15.0</span>
-  <span class="ansi-bright-black-fg">[53c48c17] </span><span class="ansi-bright-green-fg">+ FixedPointNumbers v0.8.5</span>
-  <span class="ansi-bright-black-fg">[1fa38f19] </span><span class="ansi-bright-green-fg">+ Format v1.3.7</span>
-  <span class="ansi-bright-black-fg">[b38be410] </span><span class="ansi-bright-green-fg">+ FreeType v4.1.1</span>
-  <span class="ansi-bright-black-fg">[663a7486] </span><span class="ansi-bright-green-fg">+ FreeTypeAbstraction v0.10.8</span>
-  <span class="ansi-bright-black-fg">[5c1252a2] </span><span class="ansi-bright-green-fg">+ GeometryBasics v0.5.10</span>
-  <span class="ansi-bright-black-fg">[a2bd30eb] </span><span class="ansi-bright-green-fg">+ Graphics v1.1.3</span>
-  <span class="ansi-bright-black-fg">[3955a311] </span><span class="ansi-bright-green-fg">+ GridLayoutBase v0.11.2</span>
-  <span class="ansi-bright-black-fg">[42e2da0e] </span><span class="ansi-bright-green-fg">+ Grisu v1.0.2</span>
-  <span class="ansi-bright-black-fg">[34004b35] </span><span class="ansi-bright-green-fg">+ HypergeometricFunctions v0.3.28</span>
-  <span class="ansi-bright-black-fg">[2803e5a7] </span><span class="ansi-bright-green-fg">+ ImageAxes v0.6.12</span>
-  <span class="ansi-bright-black-fg">[c817782e] </span><span class="ansi-bright-green-fg">+ ImageBase v0.1.7</span>
-  <span class="ansi-bright-black-fg">[a09fc81d] </span><span class="ansi-bright-green-fg">+ ImageCore v0.10.5</span>
-  <span class="ansi-bright-black-fg">[82e4d734] </span><span class="ansi-bright-green-fg">+ ImageIO v0.6.9</span>
-  <span class="ansi-bright-black-fg">[bc367c6b] </span><span class="ansi-bright-green-fg">+ ImageMetadata v0.9.10</span>
-  <span class="ansi-bright-black-fg">[9b13fd28] </span><span class="ansi-bright-green-fg">+ IndirectArrays v1.0.0</span>
-  <span class="ansi-bright-black-fg">[d25df0c9] </span><span class="ansi-bright-green-fg">+ Inflate v0.1.5</span>
-  <span class="ansi-bright-black-fg">[a98d9a8b] </span><span class="ansi-bright-green-fg">+ Interpolations v0.16.2</span>
-  <span class="ansi-bright-black-fg">[d1acc4aa] </span><span class="ansi-bright-green-fg">+ IntervalArithmetic v1.0.2</span>
-  <span class="ansi-bright-black-fg">[8197267c] </span><span class="ansi-bright-green-fg">+ IntervalSets v0.7.13</span>
-  <span class="ansi-bright-black-fg">[3587e190] </span><span class="ansi-bright-green-fg">+ InverseFunctions v0.1.17</span>
-  <span class="ansi-bright-black-fg">[92d709cd] </span><span class="ansi-bright-green-fg">+ IrrationalConstants v0.2.6</span>
-  <span class="ansi-bright-black-fg">[f1662d9f] </span><span class="ansi-bright-green-fg">+ Isoband v0.1.1</span>
-  <span class="ansi-bright-black-fg">[c8e1da08] </span><span class="ansi-bright-green-fg">+ IterTools v1.10.0</span>
-  <span class="ansi-bright-black-fg">[82899510] </span><span class="ansi-bright-green-fg">+ IteratorInterfaceExtensions v1.0.0</span>
-  <span class="ansi-bright-black-fg">[692b3bcd] </span><span class="ansi-bright-green-fg">+ JLLWrappers v1.7.1</span>
-  <span class="ansi-bright-black-fg">[682c06a0] </span><span class="ansi-bright-green-fg">+ JSON v1.3.0</span>
-  <span class="ansi-bright-black-fg">[b835a17e] </span><span class="ansi-bright-green-fg">+ JpegTurbo v0.1.6</span>
-  <span class="ansi-bright-black-fg">[5ab0869b] </span><span class="ansi-bright-green-fg">+ KernelDensity v0.6.10</span>
-  <span class="ansi-bright-black-fg">[b964fa9f] </span><span class="ansi-bright-green-fg">+ LaTeXStrings v1.4.0</span>
-  <span class="ansi-bright-black-fg">[8cdb02fc] </span><span class="ansi-bright-green-fg">+ LazyModules v0.3.1</span>
-  <span class="ansi-bright-black-fg">[2ab3a3ac] </span><span class="ansi-bright-green-fg">+ LogExpFunctions v0.3.29</span>
-  <span class="ansi-bright-black-fg">[1914dd2f] </span><span class="ansi-bright-green-fg">+ MacroTools v0.5.16</span>
-  <span class="ansi-bright-black-fg">[ee78f7c6] </span><span class="ansi-bright-green-fg">+ Makie v0.24.8</span>
-  <span class="ansi-bright-black-fg">[dbb5928d] </span><span class="ansi-bright-green-fg">+ MappedArrays v0.4.3</span>
-  <span class="ansi-bright-black-fg">[0a4f8689] </span><span class="ansi-bright-green-fg">+ MathTeXEngine v0.6.7</span>
-  <span class="ansi-bright-black-fg">[e1d29d7a] </span><span class="ansi-bright-green-fg">+ Missings v1.2.0</span>
-  <span class="ansi-bright-black-fg">[e94cdb99] </span><span class="ansi-bright-green-fg">+ MosaicViews v0.3.4</span>
-  <span class="ansi-bright-black-fg">[77ba4419] </span><span class="ansi-bright-green-fg">+ NaNMath v1.1.3</span>
-  <span class="ansi-bright-black-fg">[f09324ee] </span><span class="ansi-bright-green-fg">+ Netpbm v1.1.1</span>
-  <span class="ansi-bright-black-fg">[510215fc] </span><span class="ansi-bright-green-fg">+ Observables v0.5.5</span>
-  <span class="ansi-bright-black-fg">[6fe1bfb0] </span><span class="ansi-bright-green-fg">+ OffsetArrays v1.17.0</span>
-  <span class="ansi-bright-black-fg">[52e1d378] </span><span class="ansi-bright-green-fg">+ OpenEXR v0.3.3</span>
-  <span class="ansi-bright-black-fg">[bac558e1] </span><span class="ansi-bright-green-fg">+ OrderedCollections v1.8.1</span>
-  <span class="ansi-bright-black-fg">[90014a1f] </span><span class="ansi-bright-green-fg">+ PDMats v0.11.36</span>
-  <span class="ansi-bright-black-fg">[f57f5aa1] </span><span class="ansi-bright-green-fg">+ PNGFiles v0.4.4</span>
-  <span class="ansi-bright-black-fg">[19eb6ba3] </span><span class="ansi-bright-green-fg">+ Packing v0.5.1</span>
-  <span class="ansi-bright-black-fg">[5432bcbf] </span><span class="ansi-bright-green-fg">+ PaddedViews v0.5.12</span>
-  <span class="ansi-bright-black-fg">[69de0a69] </span><span class="ansi-bright-green-fg">+ Parsers v2.8.3</span>
-  <span class="ansi-bright-black-fg">[eebad327] </span><span class="ansi-bright-green-fg">+ PkgVersion v0.3.3</span>
-  <span class="ansi-bright-black-fg">[995b91a9] </span><span class="ansi-bright-green-fg">+ PlotUtils v1.4.4</span>
-  <span class="ansi-bright-black-fg">[647866c9] </span><span class="ansi-bright-green-fg">+ PolygonOps v0.1.2</span>
-<span class="ansi-yellow-fg">⌅</span> <span class="ansi-bright-black-fg">[aea7be01] </span><span class="ansi-bright-green-fg">+ PrecompileTools v1.2.1</span>
-  <span class="ansi-bright-black-fg">[21216c6a] </span><span class="ansi-bright-green-fg">+ Preferences v1.5.0</span>
-  <span class="ansi-bright-black-fg">[92933f4c] </span><span class="ansi-bright-green-fg">+ ProgressMeter v1.11.0</span>
-  <span class="ansi-bright-black-fg">[43287f4e] </span><span class="ansi-bright-green-fg">+ PtrArrays v1.3.0</span>
-  <span class="ansi-bright-black-fg">[4b34888f] </span><span class="ansi-bright-green-fg">+ QOI v1.0.2</span>
-  <span class="ansi-bright-black-fg">[1fd47b50] </span><span class="ansi-bright-green-fg">+ QuadGK v2.11.2</span>
-  <span class="ansi-bright-black-fg">[b3c3ace0] </span><span class="ansi-bright-green-fg">+ RangeArrays v0.3.2</span>
-  <span class="ansi-bright-black-fg">[c84ed2f1] </span><span class="ansi-bright-green-fg">+ Ratios v0.4.5</span>
-  <span class="ansi-bright-black-fg">[189a3867] </span><span class="ansi-bright-green-fg">+ Reexport v1.2.2</span>
-  <span class="ansi-bright-black-fg">[05181044] </span><span class="ansi-bright-green-fg">+ RelocatableFolders v1.0.1</span>
-  <span class="ansi-bright-black-fg">[ae029012] </span><span class="ansi-bright-green-fg">+ Requires v1.3.1</span>
-  <span class="ansi-bright-black-fg">[79098fc4] </span><span class="ansi-bright-green-fg">+ Rmath v0.9.0</span>
-  <span class="ansi-bright-black-fg">[5eaf0fd0] </span><span class="ansi-bright-green-fg">+ RoundingEmulator v0.2.1</span>
-  <span class="ansi-bright-black-fg">[fdea26ae] </span><span class="ansi-bright-green-fg">+ SIMD v3.7.2</span>
-  <span class="ansi-bright-black-fg">[6c6a2e73] </span><span class="ansi-bright-green-fg">+ Scratch v1.3.0</span>
-  <span class="ansi-bright-black-fg">[65257c39] </span><span class="ansi-bright-green-fg">+ ShaderAbstractions v0.5.0</span>
-  <span class="ansi-bright-black-fg">[992d4aef] </span><span class="ansi-bright-green-fg">+ Showoff v1.0.3</span>
-  <span class="ansi-bright-black-fg">[73760f76] </span><span class="ansi-bright-green-fg">+ SignedDistanceFields v0.4.0</span>
-  <span class="ansi-bright-black-fg">[699a6c99] </span><span class="ansi-bright-green-fg">+ SimpleTraits v0.9.5</span>
-  <span class="ansi-bright-black-fg">[45858cf5] </span><span class="ansi-bright-green-fg">+ Sixel v0.1.5</span>
-  <span class="ansi-bright-black-fg">[a2af1166] </span><span class="ansi-bright-green-fg">+ SortingAlgorithms v1.2.2</span>
-  <span class="ansi-bright-black-fg">[276daf66] </span><span class="ansi-bright-green-fg">+ SpecialFunctions v2.6.1</span>
-  <span class="ansi-bright-black-fg">[860ef19b] </span><span class="ansi-bright-green-fg">+ StableRNGs v1.0.4</span>
-  <span class="ansi-bright-black-fg">[cae243ae] </span><span class="ansi-bright-green-fg">+ StackViews v0.1.2</span>
-  <span class="ansi-bright-black-fg">[90137ffa] </span><span class="ansi-bright-green-fg">+ StaticArrays v1.9.15</span>
-  <span class="ansi-bright-black-fg">[1e83bf80] </span><span class="ansi-bright-green-fg">+ StaticArraysCore v1.4.4</span>
-  <span class="ansi-bright-black-fg">[10745b16] </span><span class="ansi-bright-green-fg">+ Statistics v1.11.1</span>
-  <span class="ansi-bright-black-fg">[82ae8749] </span><span class="ansi-bright-green-fg">+ StatsAPI v1.8.0</span>
-  <span class="ansi-bright-black-fg">[2913bbd2] </span><span class="ansi-bright-green-fg">+ StatsBase v0.34.9</span>
-  <span class="ansi-bright-black-fg">[4c63d2b9] </span><span class="ansi-bright-green-fg">+ StatsFuns v1.5.2</span>
-  <span class="ansi-bright-black-fg">[09ab397b] </span><span class="ansi-bright-green-fg">+ StructArrays v0.7.2</span>
-  <span class="ansi-bright-black-fg">[ec057cc2] </span><span class="ansi-bright-green-fg">+ StructUtils v2.6.0</span>
-  <span class="ansi-bright-black-fg">[3783bdb8] </span><span class="ansi-bright-green-fg">+ TableTraits v1.0.1</span>
-  <span class="ansi-bright-black-fg">[bd369af6] </span><span class="ansi-bright-green-fg">+ Tables v1.12.1</span>
-  <span class="ansi-bright-black-fg">[62fd8b95] </span><span class="ansi-bright-green-fg">+ TensorCore v0.1.1</span>
-  <span class="ansi-bright-black-fg">[731e570b] </span><span class="ansi-bright-green-fg">+ TiffImages v0.11.6</span>
-  <span class="ansi-bright-black-fg">[3bb67fe8] </span><span class="ansi-bright-green-fg">+ TranscodingStreams v0.11.3</span>
-  <span class="ansi-bright-black-fg">[981d1d27] </span><span class="ansi-bright-green-fg">+ TriplotBase v0.1.0</span>
-  <span class="ansi-bright-black-fg">[1cfade01] </span><span class="ansi-bright-green-fg">+ UnicodeFun v0.4.1</span>
-  <span class="ansi-bright-black-fg">[1986cc42] </span><span class="ansi-bright-green-fg">+ Unitful v1.27.0</span>
-  <span class="ansi-bright-black-fg">[e3aaa7dc] </span><span class="ansi-bright-green-fg">+ WebP v0.1.3</span>
-  <span class="ansi-bright-black-fg">[efce3f68] </span><span class="ansi-bright-green-fg">+ WoodburyMatrices v1.0.0</span>
-  <span class="ansi-bright-black-fg">[6e34b625] </span><span class="ansi-bright-green-fg">+ Bzip2_jll v1.0.9+0</span>
-  <span class="ansi-bright-black-fg">[4e9b3aee] </span><span class="ansi-bright-green-fg">+ CRlibm_jll v1.0.1+0</span>
-  <span class="ansi-bright-black-fg">[83423d85] </span><span class="ansi-bright-green-fg">+ Cairo_jll v1.18.5+0</span>
-  <span class="ansi-bright-black-fg">[5ae413db] </span><span class="ansi-bright-green-fg">+ EarCut_jll v2.2.4+0</span>
-  <span class="ansi-bright-black-fg">[2e619515] </span><span class="ansi-bright-green-fg">+ Expat_jll v2.7.3+0</span>
-  <span class="ansi-bright-black-fg">[b22a6f82] </span><span class="ansi-bright-green-fg">+ FFMPEG_jll v8.0.0+0</span>
-  <span class="ansi-bright-black-fg">[f5851436] </span><span class="ansi-bright-green-fg">+ FFTW_jll v3.3.11+0</span>
-  <span class="ansi-bright-black-fg">[a3f928ae] </span><span class="ansi-bright-green-fg">+ Fontconfig_jll v2.17.1+0</span>
-  <span class="ansi-bright-black-fg">[d7e528f0] </span><span class="ansi-bright-green-fg">+ FreeType2_jll v2.13.4+0</span>
-  <span class="ansi-bright-black-fg">[559328eb] </span><span class="ansi-bright-green-fg">+ FriBidi_jll v1.0.17+0</span>
-  <span class="ansi-bright-black-fg">[b0724c58] </span><span class="ansi-bright-green-fg">+ GettextRuntime_jll v0.22.4+0</span>
-  <span class="ansi-bright-black-fg">[59f7168a] </span><span class="ansi-bright-green-fg">+ Giflib_jll v5.2.3+0</span>
-  <span class="ansi-bright-black-fg">[7746bdde] </span><span class="ansi-bright-green-fg">+ Glib_jll v2.86.2+0</span>
-  <span class="ansi-bright-black-fg">[3b182d85] </span><span class="ansi-bright-green-fg">+ Graphite2_jll v1.3.15+0</span>
-  <span class="ansi-bright-black-fg">[2e76f6c2] </span><span class="ansi-bright-green-fg">+ HarfBuzz_jll v8.5.1+0</span>
-  <span class="ansi-bright-black-fg">[905a6f67] </span><span class="ansi-bright-green-fg">+ Imath_jll v3.1.11+0</span>
-  <span class="ansi-bright-black-fg">[1d5cc7b8] </span><span class="ansi-bright-green-fg">+ IntelOpenMP_jll v2025.2.0+0</span>
-  <span class="ansi-bright-black-fg">[aacddb02] </span><span class="ansi-bright-green-fg">+ JpegTurbo_jll v3.1.3+0</span>
-  <span class="ansi-bright-black-fg">[c1c5ebd0] </span><span class="ansi-bright-green-fg">+ LAME_jll v3.100.3+0</span>
-  <span class="ansi-bright-black-fg">[88015f11] </span><span class="ansi-bright-green-fg">+ LERC_jll v4.0.1+0</span>
-  <span class="ansi-bright-black-fg">[1d63c593] </span><span class="ansi-bright-green-fg">+ LLVMOpenMP_jll v18.1.8+0</span>
-  <span class="ansi-bright-black-fg">[dd4b983a] </span><span class="ansi-bright-green-fg">+ LZO_jll v2.10.3+0</span>
-<span class="ansi-yellow-fg">⌅</span> <span class="ansi-bright-black-fg">[e9f186c6] </span><span class="ansi-bright-green-fg">+ Libffi_jll v3.4.7+0</span>
-  <span class="ansi-bright-black-fg">[7e76a0d4] </span><span class="ansi-bright-green-fg">+ Libglvnd_jll v1.7.1+1</span>
-  <span class="ansi-bright-black-fg">[94ce4f54] </span><span class="ansi-bright-green-fg">+ Libiconv_jll v1.18.0+0</span>
-  <span class="ansi-bright-black-fg">[4b2f31a3] </span><span class="ansi-bright-green-fg">+ Libmount_jll v2.41.2+0</span>
-  <span class="ansi-bright-black-fg">[89763e89] </span><span class="ansi-bright-green-fg">+ Libtiff_jll v4.7.2+0</span>
-  <span class="ansi-bright-black-fg">[38a345b3] </span><span class="ansi-bright-green-fg">+ Libuuid_jll v2.41.2+0</span>
-  <span class="ansi-bright-black-fg">[856f044c] </span><span class="ansi-bright-green-fg">+ MKL_jll v2025.2.0+0</span>
-  <span class="ansi-bright-black-fg">[e7412a2a] </span><span class="ansi-bright-green-fg">+ Ogg_jll v1.3.6+0</span>
-  <span class="ansi-bright-black-fg">[6cdc7f73] </span><span class="ansi-bright-green-fg">+ OpenBLASConsistentFPCSR_jll v0.3.29+0</span>
-  <span class="ansi-bright-black-fg">[18a262bb] </span><span class="ansi-bright-green-fg">+ OpenEXR_jll v3.2.4+0</span>
-  <span class="ansi-bright-black-fg">[458c3c95] </span><span class="ansi-bright-green-fg">+ OpenSSL_jll v3.5.4+0</span>
-  <span class="ansi-bright-black-fg">[efe28fd5] </span><span class="ansi-bright-green-fg">+ OpenSpecFun_jll v0.5.6+0</span>
-  <span class="ansi-bright-black-fg">[91d4177d] </span><span class="ansi-bright-green-fg">+ Opus_jll v1.5.2+0</span>
-  <span class="ansi-bright-black-fg">[36c8627f] </span><span class="ansi-bright-green-fg">+ Pango_jll v1.57.0+0</span>
-<span class="ansi-yellow-fg">⌅</span> <span class="ansi-bright-black-fg">[30392449] </span><span class="ansi-bright-green-fg">+ Pixman_jll v0.44.2+0</span>
-  <span class="ansi-bright-black-fg">[f50d1b31] </span><span class="ansi-bright-green-fg">+ Rmath_jll v0.5.1+0</span>
-  <span class="ansi-bright-black-fg">[ffd25f8a] </span><span class="ansi-bright-green-fg">+ XZ_jll v5.8.1+0</span>
-  <span class="ansi-bright-black-fg">[4f6342f7] </span><span class="ansi-bright-green-fg">+ Xorg_libX11_jll v1.8.12+0</span>
-  <span class="ansi-bright-black-fg">[0c0b7dd1] </span><span class="ansi-bright-green-fg">+ Xorg_libXau_jll v1.0.13+0</span>
-  <span class="ansi-bright-black-fg">[a3789734] </span><span class="ansi-bright-green-fg">+ Xorg_libXdmcp_jll v1.1.6+0</span>
-  <span class="ansi-bright-black-fg">[1082639a] </span><span class="ansi-bright-green-fg">+ Xorg_libXext_jll v1.3.7+0</span>
-  <span class="ansi-bright-black-fg">[ea2f1a96] </span><span class="ansi-bright-green-fg">+ Xorg_libXrender_jll v0.9.12+0</span>
-  <span class="ansi-bright-black-fg">[c7cfdc94] </span><span class="ansi-bright-green-fg">+ Xorg_libxcb_jll v1.17.1+0</span>
-  <span class="ansi-bright-black-fg">[c5fb5394] </span><span class="ansi-bright-green-fg">+ Xorg_xtrans_jll v1.6.0+0</span>
-  <span class="ansi-bright-black-fg">[3161d3a3] </span><span class="ansi-bright-green-fg">+ Zstd_jll v1.5.7+1</span>
-  <span class="ansi-bright-black-fg">[9a68df92] </span><span class="ansi-bright-green-fg">+ isoband_jll v0.2.3+0</span>
-  <span class="ansi-bright-black-fg">[a4ae2306] </span><span class="ansi-bright-green-fg">+ libaom_jll v3.13.1+0</span>
-  <span class="ansi-bright-black-fg">[0ac62f75] </span><span class="ansi-bright-green-fg">+ libass_jll v0.17.4+0</span>
-  <span class="ansi-bright-black-fg">[f638f0a6] </span><span class="ansi-bright-green-fg">+ libfdk_aac_jll v2.0.4+0</span>
-  <span class="ansi-bright-black-fg">[b53b4c65] </span><span class="ansi-bright-green-fg">+ libpng_jll v1.6.53+0</span>
-  <span class="ansi-bright-black-fg">[075b6546] </span><span class="ansi-bright-green-fg">+ libsixel_jll v1.10.5+0</span>
-  <span class="ansi-bright-black-fg">[f27f6e37] </span><span class="ansi-bright-green-fg">+ libvorbis_jll v1.3.8+0</span>
-  <span class="ansi-bright-black-fg">[c5f90fcd] </span><span class="ansi-bright-green-fg">+ libwebp_jll v1.6.0+0</span>
-  <span class="ansi-bright-black-fg">[1317d2d5] </span><span class="ansi-bright-green-fg">+ oneTBB_jll v2022.0.0+1</span>
-  <span class="ansi-bright-black-fg">[1270edf5] </span><span class="ansi-bright-green-fg">+ x264_jll v10164.0.1+0</span>
-  <span class="ansi-bright-black-fg">[dfaa095f] </span><span class="ansi-bright-green-fg">+ x265_jll v4.1.0+0</span>
-  <span class="ansi-bright-black-fg">[0dad84c5] </span><span class="ansi-bright-green-fg">+ ArgTools v1.1.2</span>
-  <span class="ansi-bright-black-fg">[56f22d72] </span><span class="ansi-bright-green-fg">+ Artifacts v1.11.0</span>
-  <span class="ansi-bright-black-fg">[2a0f44e3] </span><span class="ansi-bright-green-fg">+ Base64 v1.11.0</span>
-  <span class="ansi-bright-black-fg">[8bf52ea8] </span><span class="ansi-bright-green-fg">+ CRC32c v1.11.0</span>
-  <span class="ansi-bright-black-fg">[ade2ca70] </span><span class="ansi-bright-green-fg">+ Dates v1.11.0</span>
-  <span class="ansi-bright-black-fg">[8ba89e20] </span><span class="ansi-bright-green-fg">+ Distributed v1.11.0</span>
-  <span class="ansi-bright-black-fg">[f43a241f] </span><span class="ansi-bright-green-fg">+ Downloads v1.6.0</span>
-  <span class="ansi-bright-black-fg">[7b1f6079] </span><span class="ansi-bright-green-fg">+ FileWatching v1.11.0</span>
-  <span class="ansi-bright-black-fg">[b77e0a4c] </span><span class="ansi-bright-green-fg">+ InteractiveUtils v1.11.0</span>
-  <span class="ansi-bright-black-fg">[4af54fe1] </span><span class="ansi-bright-green-fg">+ LazyArtifacts v1.11.0</span>
-  <span class="ansi-bright-black-fg">[b27032c2] </span><span class="ansi-bright-green-fg">+ LibCURL v0.6.4</span>
-  <span class="ansi-bright-black-fg">[76f85450] </span><span class="ansi-bright-green-fg">+ LibGit2 v1.11.0</span>
-  <span class="ansi-bright-black-fg">[8f399da3] </span><span class="ansi-bright-green-fg">+ Libdl v1.11.0</span>
-  <span class="ansi-bright-black-fg">[37e2e46d] </span><span class="ansi-bright-green-fg">+ LinearAlgebra v1.11.0</span>
-  <span class="ansi-bright-black-fg">[56ddb016] </span><span class="ansi-bright-green-fg">+ Logging v1.11.0</span>
-  <span class="ansi-bright-black-fg">[d6f4376e] </span><span class="ansi-bright-green-fg">+ Markdown v1.11.0</span>
-  <span class="ansi-bright-black-fg">[a63ad114] </span><span class="ansi-bright-green-fg">+ Mmap v1.11.0</span>
-  <span class="ansi-bright-black-fg">[ca575930] </span><span class="ansi-bright-green-fg">+ NetworkOptions v1.2.0</span>
-  <span class="ansi-bright-black-fg">[44cfe95a] </span><span class="ansi-bright-green-fg">+ Pkg v1.11.0</span>
-  <span class="ansi-bright-black-fg">[de0858da] </span><span class="ansi-bright-green-fg">+ Printf v1.11.0</span>
-  <span class="ansi-bright-black-fg">[3fa0cd96] </span><span class="ansi-bright-green-fg">+ REPL v1.11.0</span>
-  <span class="ansi-bright-black-fg">[9a3f8284] </span><span class="ansi-bright-green-fg">+ Random v1.11.0</span>
-  <span class="ansi-bright-black-fg">[ea8e919c] </span><span class="ansi-bright-green-fg">+ SHA v0.7.0</span>
-  <span class="ansi-bright-black-fg">[9e88b42a] </span><span class="ansi-bright-green-fg">+ Serialization v1.11.0</span>
-  <span class="ansi-bright-black-fg">[1a1011a3] </span><span class="ansi-bright-green-fg">+ SharedArrays v1.11.0</span>
-  <span class="ansi-bright-black-fg">[6462fe0b] </span><span class="ansi-bright-green-fg">+ Sockets v1.11.0</span>
-  <span class="ansi-bright-black-fg">[2f01184e] </span><span class="ansi-bright-green-fg">+ SparseArrays v1.11.0</span>
-  <span class="ansi-bright-black-fg">[f489334b] </span><span class="ansi-bright-green-fg">+ StyledStrings v1.11.0</span>
-  <span class="ansi-bright-black-fg">[4607b0f0] </span><span class="ansi-bright-green-fg">+ SuiteSparse</span>
-  <span class="ansi-bright-black-fg">[fa267f1f] </span><span class="ansi-bright-green-fg">+ TOML v1.0.3</span>
-  <span class="ansi-bright-black-fg">[a4e569a6] </span><span class="ansi-bright-green-fg">+ Tar v1.10.0</span>
-  <span class="ansi-bright-black-fg">[8dfed614] </span><span class="ansi-bright-green-fg">+ Test v1.11.0</span>
-  <span class="ansi-bright-black-fg">[cf7118a7] </span><span class="ansi-bright-green-fg">+ UUIDs v1.11.0</span>
-  <span class="ansi-bright-black-fg">[4ec0a83e] </span><span class="ansi-bright-green-fg">+ Unicode v1.11.0</span>
-  <span class="ansi-bright-black-fg">[e66e0078] </span><span class="ansi-bright-green-fg">+ CompilerSupportLibraries_jll v1.1.1+0</span>
-  <span class="ansi-bright-black-fg">[deac9b47] </span><span class="ansi-bright-green-fg">+ LibCURL_jll v8.6.0+0</span>
-  <span class="ansi-bright-black-fg">[e37daf67] </span><span class="ansi-bright-green-fg">+ LibGit2_jll v1.7.2+0</span>
-  <span class="ansi-bright-black-fg">[29816b5a] </span><span class="ansi-bright-green-fg">+ LibSSH2_jll v1.11.0+1</span>
-  <span class="ansi-bright-black-fg">[c8ffd9c3] </span><span class="ansi-bright-green-fg">+ MbedTLS_jll v2.28.6+0</span>
-  <span class="ansi-bright-black-fg">[14a3606d] </span><span class="ansi-bright-green-fg">+ MozillaCACerts_jll v2023.12.12</span>
-  <span class="ansi-bright-black-fg">[4536629a] </span><span class="ansi-bright-green-fg">+ OpenBLAS_jll v0.3.27+1</span>
-  <span class="ansi-bright-black-fg">[05823500] </span><span class="ansi-bright-green-fg">+ OpenLibm_jll v0.8.5+0</span>
-  <span class="ansi-bright-black-fg">[efcefdf7] </span><span class="ansi-bright-green-fg">+ PCRE2_jll v10.42.0+1</span>
-  <span class="ansi-bright-black-fg">[bea87d4a] </span><span class="ansi-bright-green-fg">+ SuiteSparse_jll v7.7.0+0</span>
-  <span class="ansi-bright-black-fg">[83775a58] </span><span class="ansi-bright-green-fg">+ Zlib_jll v1.2.13+1</span>
-  <span class="ansi-bright-black-fg">[8e850b90] </span><span class="ansi-bright-green-fg">+ libblastrampoline_jll v5.11.0+0</span>
-  <span class="ansi-bright-black-fg">[8e850ede] </span><span class="ansi-bright-green-fg">+ nghttp2_jll v1.59.0+0</span>
-  <span class="ansi-bright-black-fg">[3f19e933] </span><span class="ansi-bright-green-fg">+ p7zip_jll v17.4.0+2</span>
-<span class="ansi-cyan-fg ansi-bold">        Info</span> Packages marked with <span class="ansi-yellow-fg">⌅</span> have new versions available but compatibility constraints restrict them from upgrading. To see why use `status --outdated -m`
-</pre>
+<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode julia code-annotation-code code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-1" class="code-annotation-target"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="st">"Manifest.toml"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">Pkg</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3">3</button><span id="annotated-cell-8-3" class="code-annotation-target"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="4">4</button><span id="annotated-cell-8-4" class="code-annotation-target"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="1" data-code-annotation="1">Check if a file called <code>Manifest.toml</code> exists in the current folder. This file tracks which package versions are installed.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="2">Load Julia’s built-in package manager, called <code>Pkg</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="3" data-code-annotation="3">Install all packages listed in <code>Project.toml</code>. This only runs if <code>Manifest.toml</code> doesn’t exist yet.</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="4" data-code-annotation="4"><code>end</code> closes the <code>if</code> block. Julia uses <code>if ... end</code> instead of curly braces like some other languages.</span>
+</dd>
+</dl>
 </div>
 </div>
-</div>
-</section>
-<section id="exercises" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3</span> Exercises</h2>
-<section id="exercise-1" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">3.1</span> Exercise 1</h3>
-<p>Exercise description - to be written.</p>
+<p>We’ll load a popular plotting library</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Solution code will go here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode julia code-annotation-code code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-1" class="code-annotation-target"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="1" data-code-annotation="1">Load the CairoMakie package, which we’ll use to create plots. <code>using</code> makes all the functions from that package available.</span>
+</dd>
+</dl>
 </div>
-
-
+</div>
 </section>
+<section id="exercises" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.2</span> Exercises</h3>
+<section id="exercise-1-identify-yourself" class="level4" data-number="3.2.1">
+<h4 data-number="3.2.1" class="anchored" data-anchor-id="exercise-1-identify-yourself"><span class="header-section-number">3.2.1</span> Exercise 1: Identify Yourself</h4>
+<p>Fill in your name, NetID, and GitHub username below. In Julia, we store values in <strong>variables</strong> using the <code>=</code> sign.</p>
+<div id="6" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode julia code-annotation-code code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-1" class="code-annotation-target"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"James Doss-Gollin"</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-2" class="code-annotation-target"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a>netid <span class="op">=</span> <span class="st">"jd82"</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="3">3</button><span id="annotated-cell-10-3" class="code-annotation-target"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a>github_username <span class="op">=</span> <span class="st">"jdossgollin"</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="1">Create a variable called <code>name</code> and assign it a <strong>string</strong> (text in quotes). Replace with your name!</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="2" data-code-annotation="2">Create another variable called <code>netid</code>. Strings can use either double quotes <code>"..."</code> or single quotes <code>'...'</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="3" data-code-annotation="3">Your GitHub username is what appears in your repository URL (e.g., <code>github.com/jdossgollin</code>).</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>"jdossgollin"</code></pre>
+</div>
+</div>
+<p>Now, Quarto will automatically print a greeting using <strong>string interpolation</strong>:</p>
+<div id="8" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode julia code-annotation-code code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-1" class="code-annotation-target"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Hello! My name is </span><span class="sc">$</span>name<span class="st"> and my NetID is </span><span class="sc">$</span>netid<span class="st">."</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="1" data-code-annotation="1"><code>println()</code> prints text to the screen. The <code>$</code> symbol inside a string inserts the value of a variable. This is called <strong>string interpolation</strong> - Julia replaces <code>$name</code> with the actual value stored in <code>name</code>.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hello! My name is James Doss-Gollin and my NetID is jd82.</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-2-generate-data" class="level4" data-number="3.2.2">
+<h4 data-number="3.2.2" class="anchored" data-anchor-id="exercise-2-generate-data"><span class="header-section-number">3.2.2</span> Exercise 2: Generate Data</h4>
+<p>Let’s create some data to visualize. We’ll generate a noisy sine wave - this simulates real-world data that has measurement error.</p>
+<div id="10" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode julia code-annotation-code code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="1">1</button><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>, <span class="fl">2</span>pi, length<span class="op">=</span><span class="fl">50</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2">2</button><span id="annotated-cell-12-2" class="code-annotation-target"><a href="#annotated-cell-12-2" aria-hidden="true" tabindex="-1"></a>noise <span class="op">=</span> <span class="fl">0.3</span> <span class="op">*</span> <span class="fu">randn</span>(<span class="fu">length</span>(x))</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="3">3</button><span id="annotated-cell-12-3" class="code-annotation-target"><a href="#annotated-cell-12-3" aria-hidden="true" tabindex="-1"></a>y_noisy <span class="op">=</span> <span class="fu">sin</span>.(x) <span class="op">.+</span> noise</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="4">4</button><span id="annotated-cell-12-4" class="code-annotation-target"><a href="#annotated-cell-12-4" aria-hidden="true" tabindex="-1"></a>y_true <span class="op">=</span> <span class="fu">sin</span>.(x)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="1" data-code-annotation="1">Create 50 evenly-spaced numbers from 0 to 2π (about 6.28). <code>range()</code> is like making tick marks on a ruler. <code>pi</code> is a built-in constant in Julia.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="2" data-code-annotation="2">Generate random “noise” values. <code>randn(n)</code> creates <code>n</code> random numbers from a normal distribution (bell curve centered at 0). <code>length(x)</code> returns how many elements are in <code>x</code> (50). Multiplying by 0.3 makes the noise smaller.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="3" data-code-annotation="3">Calculate noisy y-values. The <strong>dot</strong> <code>.</code> before <code>sin</code> and <code>+</code> means “apply this operation to <strong>each element</strong>” - this is called <strong>broadcasting</strong>. Without the dot, Julia would try to take the sine of the whole array at once (which doesn’t work). So <code>sin.(x)</code> computes sine for all 50 x-values.</span>
+</dd>
+<dt data-target-cell="annotated-cell-12" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-lines="4" data-code-annotation="4">Calculate the “true” sine values without noise, for comparison.</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="exercise-3-create-a-visualization" class="level4" data-number="3.2.3">
+<h4 data-number="3.2.3" class="anchored" data-anchor-id="exercise-3-create-a-visualization"><span class="header-section-number">3.2.3</span> Exercise 3: Create a Visualization</h4>
+<p>Now let’s plot the noisy data alongside the true sine function. CairoMakie uses a “grammar of graphics” approach: you build plots layer by layer.</p>
+<div id="cell-fig-sine" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode julia code-annotation-code code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3">3</button><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]; xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>, title<span class="op">=</span><span class="st">"Noisy Sine Wave"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="4">4</button><span id="annotated-cell-13-4" class="code-annotation-target"><a href="#annotated-cell-13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax, x, y_noisy; label<span class="op">=</span><span class="st">"Noisy data"</span>, markersize<span class="op">=</span><span class="fl">8</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="5">5</button><span id="annotated-cell-13-5" class="code-annotation-target"><a href="#annotated-cell-13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, x, y_true; linestyle<span class="op">=:</span>dash, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"True function"</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="6">6</button><span id="annotated-cell-13-6" class="code-annotation-target"><a href="#annotated-cell-13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="7">7</button><span id="annotated-cell-13-7" class="code-annotation-target"><a href="#annotated-cell-13-7" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="annotated-cell-13-8"><a href="#annotated-cell-13-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="1,8" data-code-annotation="1"><code>let ... end</code> creates a temporary scope. Variables created inside (like <code>fig</code> and <code>ax</code>) won’t clutter your workspace. This is a good habit for plotting code.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="2" data-code-annotation="2">Create an empty figure - think of it as a blank canvas to draw on.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="3" data-code-annotation="3">Add an axis (the plotting area with x/y coordinates) to the figure. <code>fig[1, 1]</code> means “row 1, column 1” of a grid layout. The semicolon <code>;</code> separates positional arguments from <strong>keyword arguments</strong> like <code>xlabel=</code>, <code>ylabel=</code>, and <code>title=</code>.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="4" data-code-annotation="4">Add scattered points. The <code>!</code> at the end of <code>scatter!</code> is a Julia convention meaning “this function modifies something” (here, it adds to the axis). We pass the axis, x-coordinates, y-coordinates, and styling options.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="5" data-code-annotation="5">Add a dashed line for the true function. <code>:dash</code> is a <strong>symbol</strong> - a special Julia type for named options (look up “Julia symbols” for more).</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="6" data-code-annotation="6">Add a legend that automatically uses the <code>label</code> text from each plot layer.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="7">7</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="7" data-code-annotation="7">Return the figure so it displays. In Julia, the last expression in a block is automatically returned.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-sine" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-sine-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Noisy sine wave data with true function overlay
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="submission" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="submission"><span class="header-section-number">4</span> Submission</h2>
+<p>Follow these steps to submit your completed lab:</p>
+<section id="push-to-github" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="push-to-github"><span class="header-section-number">4.1</span> Push to GitHub</h3>
+<p>In GitHub Desktop:</p>
+<ol type="1">
+<li>Review your changes in the “Changes” tab</li>
+<li>Write a summary (e.g., “Complete Lab 1 exercises”)</li>
+<li>Click “Commit to main”</li>
+<li>Click “Push origin” to upload to GitHub</li>
+</ol>
+</section>
+<section id="handle-the-formatter-pr" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="handle-the-formatter-pr"><span class="header-section-number">4.2</span> Handle the Formatter PR</h3>
+<p>After you push, a GitHub Action will check your code formatting. If any changes are needed:</p>
+<ol type="1">
+<li>Go to your repository on GitHub</li>
+<li>Look for a Pull Request titled “Format Julia code”</li>
+<li>If one exists, click “Merge pull request” and confirm</li>
+</ol>
+</section>
+<section id="pull-changes-to-your-computer" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="pull-changes-to-your-computer"><span class="header-section-number">4.3</span> Pull Changes to Your Computer</h3>
+<p>After merging the formatter PR (or if there was no PR), you need to sync your local copy:</p>
+<ol type="1">
+<li>Open GitHub Desktop</li>
+<li>Click “Fetch origin” in the top bar (this checks for remote changes)</li>
+<li>If changes are found, click “Pull origin” to download them</li>
+<li>Your local files are now up to date with GitHub</li>
+</ol>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Always pull before you start working and after merging any PRs. This keeps your local copy in sync with GitHub.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="re-render-and-submit" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="re-render-and-submit"><span class="header-section-number">4.4</span> Re-render and Submit</h3>
+<p>After pulling any changes:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render index.qmd</span></code></pre></div>
+<p>Upload the generated <code>index.pdf</code> file to the Lab 1 assignment on Canvas.</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="summary"><span class="header-section-number">5</span> Summary</h2>
+<p>In this lab, you:</p>
+<ul>
+<li>Set up a complete Julia development environment</li>
+<li>Learned the lab workflow: clone → code → push → merge PR → render → submit</li>
+<li>Created your first Julia visualization using CairoMakie</li>
+</ul>
+<p>This workflow will be the same for all labs this semester. If you have any issues, come to office hours or post on the discussion board.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -451,68 +557,6 @@ window.MathJax = {
       icon: icon
     };
     anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
-        }
-      }
-      return false;
-    }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
-    }
-    const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
-    });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
-    }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/ceve-421-521\.github\.io\/");
