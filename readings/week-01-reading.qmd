@@ -4,8 +4,26 @@ subtitle: "Jersey Shore Case Study"
 status: published
 
 format:
-  html: default
-  typst: default
+  html:
+    default
+  typst:
+    fontsize: 11pt
+    margin:
+      x: 1in
+      y: 1in
+    number-sections: true
+    fig-format: svg
+
+engine: julia
+execute:
+  exeflags: ["+1.12", "--project=..", "--threads=auto"]
+  cache: true
+  freeze: auto
+
+code-overflow: wrap
+code-line-numbers: false
+code-block-font-size: "0.85em"
+code-annotations: hover
 ---
 
 ## Overview

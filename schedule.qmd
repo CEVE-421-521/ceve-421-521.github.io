@@ -11,9 +11,9 @@ format:
 Check the page for each reading to see discussion questions.
 You will often be encouraged to focus only on part of relevant papers.
 
-**[Final Project](assignments/final-project.qmd):** Deliverables are due throughout the semester (see schedule below).
+**[Final Project](exams/assignments/final-project.qmd):** Deliverables are due throughout the semester (see schedule below).
 
-**CEVE 521 students:** You will lead one Paper Discussion session. See [Graduate Seminar Requirements](assignments/graduate-seminar.qmd).
+**CEVE 521 students:** You will lead one Paper Discussion session. See [Graduate Seminar Requirements](exams/assignments/graduate-seminar.qmd).
 :::
 
 | Week | Date | What |

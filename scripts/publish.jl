@@ -192,7 +192,8 @@ function publish_site()
     clean_target_dir(PUBLIC_SITE)
 
     # Copy config files (no sanitization needed)
-    for config in ["_quarto.yml", "_variables.yml", ".gitignore", "mathjax-config.html", "references.bib", "_status.yml"]
+    # Note: Project.toml is copied but Manifest.toml is NOT (regenerated on build)
+    for config in ["_quarto.yml", "_variables.yml", ".gitignore", "mathjax-config.html", "references.bib", "_status.yml", "Project.toml"]
         if isfile(config)
             copy_file(config, joinpath(PUBLIC_SITE, config))
         end
@@ -276,6 +277,18 @@ function publish_site()
             end
         end
         println("✅ Assignments synced")
+    end
+
+    # Sanitize exams/assignments (project and seminar requirements)
+    if isdir("exams/assignments")
+        for item in readdir("exams/assignments")
+            src_path = joinpath("exams", "assignments", item)
+            dst_path = joinpath(PUBLIC_SITE, "exams", "assignments", item)
+            if isfile(src_path) && endswith(item, ".qmd")
+                sanitize_file(src_path, dst_path)
+            end
+        end
+        println("✅ Exams/assignments synced")
     end
 
     println("\n🎉 Site published to $PUBLIC_SITE")

@@ -223,7 +223,7 @@ If there is an exam, lecture, or discussion on a Friday, you are expected to att
 Working in small teams, you will act as expert consultants to audit a real-world climate planning document.
 Through three progressive Audit Memos, you'll analyze the plan's decision framework, evidence base, and robustness to uncertainty—culminating in an Executive Briefing and Written Report.
 
-See [Final Project](assignments/final-project.qmd) for full details and timeline.
+See [Final Project](exams/assignments/final-project.qmd) for full details and timeline.
 
 
 ### Graduate Student Requirements (CEVE 521)
@@ -231,7 +231,7 @@ See [Final Project](assignments/final-project.qmd) for full details and timeline
 In addition to the standard coursework, graduate students will **lead one Wednesday Paper Discussion session.**
 You will design an active learning experience—not simply present a paper.
 
-See [Graduate Seminar Requirements](assignments/graduate-seminar.qmd) for full details.
+See [Graduate Seminar Requirements](exams/assignments/graduate-seminar.qmd) for full details.
 
 ## Weekly Rhythm
 
