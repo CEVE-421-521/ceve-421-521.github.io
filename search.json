@@ -450,41 +450,6 @@
     "text": "5 Summary\nIn this lab, you:\n\nSet up a complete Julia development environment\nLearned the lab workflow: clone → code → push → merge PR → render → submit\nCreated your first Julia visualization using CairoMakie\n\nThis workflow will be the same for all labs this semester. If you have any issues, come to office hours or post on the discussion board."
   },
   {
-    "objectID": "assignments/graduate-seminar.html",
-    "href": "assignments/graduate-seminar.html",
-    "title": "Graduate Seminar Leadership (CEVE 521)",
-    "section": "",
-    "text": "In addition to the standard coursework, CEVE 521 students will lead one Wednesday Paper Discussion session.\nYou will not simply present a paper; you will design an active learning experience."
-  },
-  {
-    "objectID": "assignments/graduate-seminar.html#overview",
-    "href": "assignments/graduate-seminar.html#overview",
-    "title": "Graduate Seminar Leadership (CEVE 521)",
-    "section": "",
-    "text": "In addition to the standard coursework, CEVE 521 students will lead one Wednesday Paper Discussion session.\nYou will not simply present a paper; you will design an active learning experience."
-  },
-  {
-    "objectID": "assignments/graduate-seminar.html#requirements",
-    "href": "assignments/graduate-seminar.html#requirements",
-    "title": "Graduate Seminar Leadership (CEVE 521)",
-    "section": "Requirements",
-    "text": "Requirements\n\nCurate: Select a relevant paper and set pre-reading questions.\nDesign: Create a lesson plan with at least one interactive element (e.g., Think-Pair-Share, Concept Map).\nLead: Facilitate the 50-minute discussion."
-  },
-  {
-    "objectID": "assignments/graduate-seminar.html#timeline",
-    "href": "assignments/graduate-seminar.html#timeline",
-    "title": "Graduate Seminar Leadership (CEVE 521)",
-    "section": "Timeline",
-    "text": "Timeline\nYou must meet with the instructor 2 weeks prior to your session to approve your plan."
-  },
-  {
-    "objectID": "assignments/graduate-seminar.html#deliverables",
-    "href": "assignments/graduate-seminar.html#deliverables",
-    "title": "Graduate Seminar Leadership (CEVE 521)",
-    "section": "Deliverables",
-    "text": "Deliverables\n\nPre-reading questions (posted 1 week before your session)\nLesson plan (submitted 2 weeks before for approval)\nFacilitation of the 50-minute discussion"
-  },
-  {
     "objectID": "ai.html",
     "href": "ai.html",
     "title": "AI Policy",
@@ -573,48 +538,6 @@
     "crumbs": [
       "AI Policy"
     ]
-  },
-  {
-    "objectID": "assignments/final-project.html",
-    "href": "assignments/final-project.html",
-    "title": "Final Project",
-    "section": "",
-    "text": "Working in small teams, you will act as expert consultants to audit a real-world climate planning document. Your chosen document must be decision-relevant—it should contain identifiable decisions (Levers) and measurable outcomes (Metrics).\nThe project is built through three “Audit Memos” (1–2 pages each) to ensure steady progress, culminating in an Executive Briefing presentation and a final Written Report."
-  },
-  {
-    "objectID": "assignments/final-project.html#overview",
-    "href": "assignments/final-project.html#overview",
-    "title": "Final Project",
-    "section": "",
-    "text": "Working in small teams, you will act as expert consultants to audit a real-world climate planning document. Your chosen document must be decision-relevant—it should contain identifiable decisions (Levers) and measurable outcomes (Metrics).\nThe project is built through three “Audit Memos” (1–2 pages each) to ensure steady progress, culminating in an Executive Briefing presentation and a final Written Report."
-  },
-  {
-    "objectID": "assignments/final-project.html#timeline",
-    "href": "assignments/final-project.html#timeline",
-    "title": "Final Project",
-    "section": "Timeline",
-    "text": "Timeline\n\n\n\n\n\n\n\n\nDeadline\nDeliverable\nDescription\n\n\n\n\nWeek 3 (Friday)\nTopic Proposal\nSubmit document choice and confirm it contains identifiable Levers (L) and Metrics (M).\n\n\nWeek 7 (Friday)\nMemo 1 (Framework)\nMap the plan’s Levers (L) and Metrics (M). What choices are being made? What outcomes are being measured?\n\n\nWeek 10 (Friday)\nMemo 2 (Evidence)\nMap the plan’s Valuation approach and System Models (R). What models are used? Are they appropriate?\n\n\nWeek 12 (Friday)\nMemo 3 (Robustness)\nMap the plan’s consideration of Uncertainties (X) and Robustness. How does the plan handle deep uncertainty?\n\n\nWeek 13 (Friday)\nSlides Due\nAll teams must submit their presentation slides. This ensures fairness so no team gains extra work time depending on their presentation slot.\n\n\nWeek 14\nExecutive Briefing\nA 20-minute team presentation. Non-presenting teams act as the “Client Board” and must ask rigorous questions.\n\n\nFinals\nWritten Report\nA synthesis of your memos with a final recommendation to Endorse, Reject, or Modify the plan."
-  },
-  {
-    "objectID": "assignments/final-project.html#requirements",
-    "href": "assignments/final-project.html#requirements",
-    "title": "Final Project",
-    "section": "Requirements",
-    "text": "Requirements\n[Project requirements will be posted here]"
-  },
-  {
-    "objectID": "assignments/final-project.html#deliverables",
-    "href": "assignments/final-project.html#deliverables",
-    "title": "Final Project",
-    "section": "Deliverables",
-    "text": "Deliverables\n[Detailed specifications for each memo will be posted here]"
-  },
-  {
-    "objectID": "assignments/final-project.html#grading-and-rubric",
-    "href": "assignments/final-project.html#grading-and-rubric",
-    "title": "Final Project",
-    "section": "Grading and Rubric",
-    "text": "Grading and Rubric\n[Detailed specifications will be posted here]"
   },
   {
     "objectID": "index.html",

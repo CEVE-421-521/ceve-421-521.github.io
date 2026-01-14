@@ -1,0 +1,41 @@
+---
+title: Final Project
+date: 2026-04-20
+week: 14
+
+categories: [Project]
+format: html
+---
+
+## Overview
+
+Working in small teams, you will act as expert consultants to audit a real-world climate planning document.
+Your chosen document must be **decision-relevant**—it should contain identifiable decisions (Levers) and measurable outcomes (Metrics).
+
+The project is built through three "Audit Memos" (1–2 pages each) to ensure steady progress, culminating in an Executive Briefing presentation and a final Written Report.
+
+## Timeline
+
+| Deadline | Deliverable | Description |
+| :--- | :--- | :----- |
+| **Week 3 (Friday)** | Topic Proposal | Submit document choice and confirm it contains identifiable Levers (L) and Metrics (M). |
+| **Week 7 (Friday)** | Memo 1 (Framework) | Map the plan's Levers (L) and Metrics (M). What choices are being made? What outcomes are being measured? |
+| **Week 10 (Friday)** | Memo 2 (Evidence) | Map the plan's Valuation approach and System Models (R). What models are used? Are they appropriate? |
+| **Week 12 (Friday)** | Memo 3 (Robustness) | Map the plan's consideration of Uncertainties (X) and Robustness. How does the plan handle deep uncertainty? |
+| **Week 13 (Friday)** | Slides Due | All teams must submit their presentation slides. This ensures fairness so no team gains extra work time depending on their presentation slot. |
+| **Week 14** | Executive Briefing | A 20-minute team presentation. Non-presenting teams act as the "Client Board" and must ask rigorous questions. |
+| **Finals** | Written Report | A synthesis of your memos with a final recommendation to Endorse, Reject, or Modify the plan. |
+
+## Requirements
+
+[Project requirements will be posted here]
+
+## Deliverables
+
+[Detailed specifications for each memo will be posted here]
+
+## Grading and Rubric
+
+[Detailed specifications will be posted here]
+
+
