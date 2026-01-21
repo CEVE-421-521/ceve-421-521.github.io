@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 2: Intro to iCOW – CEVE 421/521 – Spring 2026</title>
+<title>Lab 2: Hazard-Damage Convolution – CEVE 421/521 – Spring 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-61bb8871afd1fa7f377239e83bf9b202.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -114,8 +114,37 @@ window.MathJax = {
   };
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Lab 2: Intro to iCOW – CEVE 421/521 – Spring 2026">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Lab 2: Hazard-Damage Convolution – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="CEVE 421/521">
 <meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-02-S26/index_files/figure-html/fig-gev-pdf-output-1.svg">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
@@ -134,16 +163,9 @@ window.MathJax = {
    
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a></li>
-  <li><a href="#exercise-1-the-gev-distribution-for-flood-hazard" id="toc-exercise-1-the-gev-distribution-for-flood-hazard" class="nav-link" data-scroll-target="#exercise-1-the-gev-distribution-for-flood-hazard"><span class="header-section-number">3</span> Exercise 1: The GEV Distribution for Flood Hazard</a></li>
-  <li><a href="#exercise-2-monte-carlo-sampling" id="toc-exercise-2-monte-carlo-sampling" class="nav-link" data-scroll-target="#exercise-2-monte-carlo-sampling"><span class="header-section-number">4</span> Exercise 2: Monte Carlo Sampling</a></li>
-  <li><a href="#exercise-3-define-a-depth-damage-function" id="toc-exercise-3-define-a-depth-damage-function" class="nav-link" data-scroll-target="#exercise-3-define-a-depth-damage-function"><span class="header-section-number">5</span> Exercise 3: Define a Depth-Damage Function</a></li>
-  <li><a href="#exercise-4-compute-damage-distribution-for-one-house" id="toc-exercise-4-compute-damage-distribution-for-one-house" class="nav-link" data-scroll-target="#exercise-4-compute-damage-distribution-for-one-house"><span class="header-section-number">6</span> Exercise 4: Compute Damage Distribution for One House</a></li>
-  <li><a href="#exercise-5-extend-to-100-houses-with-varying-exposures" id="toc-exercise-5-extend-to-100-houses-with-varying-exposures" class="nav-link" data-scroll-target="#exercise-5-extend-to-100-houses-with-varying-exposures"><span class="header-section-number">7</span> Exercise 5: Extend to 100 Houses with Varying Exposures</a></li>
-  <li><a href="#exercise-6-total-community-risk" id="toc-exercise-6-total-community-risk" class="nav-link" data-scroll-target="#exercise-6-total-community-risk"><span class="header-section-number">8</span> Exercise 6: Total Community Risk</a></li>
-  <li><a href="#reflection-questions" id="toc-reflection-questions" class="nav-link" data-scroll-target="#reflection-questions"><span class="header-section-number">9</span> Reflection Questions</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">10</span> Summary</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission"><span class="header-section-number">11</span> Submission</a></li>
+  <li><a href="#before-lab" id="toc-before-lab" class="nav-link" data-scroll-target="#before-lab"><span class="header-section-number">2</span> Before Lab</a></li>
+  <li><a href="#during-lab" id="toc-during-lab" class="nav-link" data-scroll-target="#during-lab"><span class="header-section-number">3</span> During Lab</a></li>
+  <li><a href="#checklist" id="toc-checklist" class="nav-link" data-scroll-target="#checklist">Checklist</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/labs/lab-02-S26/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -152,7 +174,7 @@ window.MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 2: Intro to iCOW</h1>
+<h1 class="title">Lab 2: Hazard-Damage Convolution</h1>
 <p class="subtitle lead">CEVE 421/521</p>
 </div>
 
@@ -176,81 +198,260 @@ window.MathJax = {
 </header>
 
 
-<div class="callout callout-warning callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container"><i class="callout-icon"></i></div>
-<div class="callout-caption-container flex-fill">Draft Material</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This content is under development and subject to change.</p>
-</div>
-</div>
-
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>In this lab, you will learn to quantify flood risk by connecting hazard models to damage functions. This is a core skill in climate risk analysis: translating uncertain physical events into uncertain economic outcomes.</p>
+<p>In lecture, we learned that <strong>risk</strong> emerges from the interaction of hazard, exposure, and vulnerability. Today, we’ll implement the mathematical machinery that connects them: <strong>convolution</strong>.</p>
+<p>Convolution is how we transform a distribution of hazards into a distribution of damages. This is the core computational technique behind flood risk scores, insurance pricing, and cost-benefit analysis.</p>
 <p><strong>Learning Objectives:</strong></p>
 <ol type="1">
-<li>Understand the GEV distribution for modeling extreme events</li>
-<li>Use Monte Carlo sampling for uncertainty quantification</li>
+<li>Understand convolution as the bridge between hazard and damage distributions</li>
+<li>Implement convolution both analytically (simple case) and via Monte Carlo</li>
+<li>Work with the GEV distribution for extreme events</li>
 <li>Apply a depth-damage function to compute flood losses</li>
-<li>Use for loops to extend analysis to multiple houses</li>
-<li>Calculate community-level risk metrics</li>
+<li>Extend analysis to a community of 100 houses</li>
+<li>Get introduced to the SimOptDecisions.jl framework</li>
 </ol>
 </section>
-<section id="setup" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2</span> Setup</h2>
-<p>Julia uses packages to make code reusable and modular. This block will install all required packages for you – the first time you run the code, it may be slow while everything is installed and compiled. From there, it should be quick.</p>
+<section id="before-lab" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="before-lab"><span class="header-section-number">2</span> Before Lab</h2>
+<p>Complete these steps <strong>before</strong> coming to lab. Read through the entire notebook so you understand what we’ll be doing.</p>
+<section id="setup" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">2.1</span> Setup</h3>
+<p>Julia uses packages to make code reusable and modular. Run this block to install all required packages – the first time may be slow while everything is installed and compiled.</p>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="st">"Manifest.toml"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a>dir_name <span class="op">=</span> <span class="fu">dirname</span>(<span class="pp">@__FILE__</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(dir_name)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-4" class="code-annotation-target"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="fu">joinpath</span>(dir_name, <span class="st">"Manifest.toml"</span>))</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-5" class="code-annotation-target"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">Get the folder where this notebook lives</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="2">Load Julia’s package manager</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="3" data-code-annotation="3">Activate this folder’s project environment</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="4" data-code-annotation="4">Check if packages have been installed yet</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="5" data-code-annotation="5">If not, install all packages listed in Project.toml</span>
+</dd>
+</dl>
 </div>
-<p>Here, we tell the notebook which packages we will be using.</p>
+</div>
+<p>Now load the packages we’ll use:</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">2026</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">For creating figures</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="2">For probability distributions (GEV, Uniform, etc.)</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="3">For reproducible random numbers</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="4">For <code>mean()</code> and other statistics</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="5">Set seed so everyone gets the same results</span>
+</dd>
+</dl>
+</div>
 </div>
 </section>
-<section id="exercise-1-the-gev-distribution-for-flood-hazard" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercise-1-the-gev-distribution-for-flood-hazard"><span class="header-section-number">3</span> Exercise 1: The GEV Distribution for Flood Hazard</h2>
-<p>Imagine a coastal town called ImaginaryLand. We want to model the annual maximum storm surge – the highest water level observed each year.</p>
-<p>The Generalized Extreme Value (GEV) distribution is the theoretically appropriate model for annual maxima. It has three parameters:</p>
-<ul>
-<li><strong>Location (μ):</strong> The “center” of the distribution, roughly the typical annual maximum</li>
-<li><strong>Scale (σ):</strong> How spread out the distribution is (must be positive)</li>
-<li><strong>Shape (ξ):</strong> Controls the tail behavior; positive = heavier tail, negative = bounded tail</li>
-</ul>
-<p>For ImaginaryLand, let’s assume storm surge follows a GEV distribution with:</p>
-<ul>
-<li>μ = 5 ft (typical annual max surge)</li>
-<li>σ = 2 ft (moderate variability)</li>
-<li>ξ = 0.1 (slightly heavy tail – extreme events are possible)</li>
-</ul>
+<section id="convolution-by-hand" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="convolution-by-hand"><span class="header-section-number">2.2</span> Convolution by Hand</h3>
+<p>Before we use computers, let’s understand convolution with a simple example you can do with pencil and paper.</p>
+<section id="a-simple-flood-risk-problem" class="level4" data-number="2.2.1">
+<h4 data-number="2.2.1" class="anchored" data-anchor-id="a-simple-flood-risk-problem"><span class="header-section-number">2.2.1</span> A Simple Flood Risk Problem</h4>
+<p>Imagine a house worth $100,000 that faces flood risk. Based on historical data, we know:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Event</th>
+<th>Probability</th>
+<th>Damage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No flood</td>
+<td>87%</td>
+<td>$0</td>
+</tr>
+<tr class="even">
+<td>Minor flood</td>
+<td>10%</td>
+<td>$10,000</td>
+</tr>
+<tr class="odd">
+<td>Moderate flood</td>
+<td>2%</td>
+<td>$50,000</td>
+</tr>
+<tr class="even">
+<td>Major flood</td>
+<td>1%</td>
+<td>$90,000</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="computing-expected-damage" class="level4" data-number="2.2.2">
+<h4 data-number="2.2.2" class="anchored" data-anchor-id="computing-expected-damage"><span class="header-section-number">2.2.2</span> Computing Expected Damage</h4>
+<p>The <strong>expected annual damage (EAD)</strong> is the probability-weighted average of all possible damages:</p>
+<p><span class="math display">\[\text{EAD} = \sum_{i} p_i \times D_i\]</span></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Compute the expected annual damage by hand. Show your calculation.</em></p>
+<p><em>Replace this text with your work.</em></p>
+</div>
+</div>
+<p>Let’s verify with code:</p>
 <div id="6" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the storm surge distribution for ImaginaryLand</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>μ <span class="op">=</span> <span class="fl">5.0</span>  <span class="co"># location (ft)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>σ <span class="op">=</span> <span class="fl">2.0</span>  <span class="co"># scale (ft)</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ξ <span class="op">=</span> <span class="fl">0.1</span>  <span class="co"># shape (dimensionless)</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>surge_dist <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(μ, σ, ξ)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-1" class="code-annotation-target"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a>probabilities <span class="op">=</span> [<span class="fl">0.87</span>, <span class="fl">0.10</span>, <span class="fl">0.02</span>, <span class="fl">0.01</span>]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="2">2</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>damages <span class="op">=</span> [<span class="fl">0</span>, <span class="fl">10_000</span>, <span class="fl">50_000</span>, <span class="fl">90_000</span>]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="3">3</button><span id="annotated-cell-3-3" class="code-annotation-target"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>expected_damage <span class="op">=</span> <span class="fu">sum</span>(probabilities <span class="op">.*</span> damages)</span>
+<span id="annotated-cell-3-4"><a href="#annotated-cell-3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Expected Annual Damage: \$</span><span class="sc">$</span>(expected_damage)<span class="st">"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="1" data-code-annotation="1">Probabilities must sum to 1.0</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="2">Damages in dollars for each scenario</span>
+</dd>
+<dt data-target-cell="annotated-cell-3" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-3" data-code-lines="3" data-code-annotation="3">The <code>.*</code> does element-wise multiplication; <code>sum()</code> adds them up</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Expected Annual Damage: $2900.0</code></pre>
+</div>
+</div>
+<p>This is <strong>convolution</strong>: we’ve transformed a hazard distribution (flood probabilities) into a damage distribution and computed its expected value.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>A homeowner asks: “My expected damage is only $2,900/year, so floods aren’t a big deal, right?”</em></p>
+<p><em>What would you tell them? Think about what expected value hides.</em></p>
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="during-lab" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="during-lab"><span class="header-section-number">3</span> During Lab</h2>
+<p>Work through these sections during the lab session.</p>
+<section id="monte-carlo-convolution" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="monte-carlo-convolution"><span class="header-section-number">3.1</span> Monte Carlo Convolution</h3>
+<p>With continuous distributions and nonlinear damage functions, analytical convolution becomes intractable. Monte Carlo simulation offers a flexible alternative.</p>
+<section id="the-gev-distribution" class="level4" data-number="3.1.1">
+<h4 data-number="3.1.1" class="anchored" data-anchor-id="the-gev-distribution"><span class="header-section-number">3.1.1</span> The GEV Distribution</h4>
+<p>The <strong>Generalized Extreme Value (GEV)</strong> distribution models annual maximum flood stages. It has three parameters:</p>
+<ul>
+<li><strong>μ (location):</strong> roughly the “typical” annual maximum</li>
+<li><strong>σ (scale):</strong> how spread out the distribution is</li>
+<li><strong>ξ (shape):</strong> tail behavior; ξ &gt; 0 means fat tails (more extreme events)</li>
+</ul>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-1" class="code-annotation-target"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a>μ <span class="op">=</span> <span class="fl">5.0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-2" class="code-annotation-target"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>σ <span class="op">=</span> <span class="fl">2.0</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="3">3</button><span id="annotated-cell-4-3" class="code-annotation-target"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>ξ <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="4">4</button><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>surge_dist <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(μ, σ, ξ)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="1" data-code-annotation="1">Location parameter (ft) – shifts the distribution left/right</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="2" data-code-annotation="2">Scale parameter (ft) – must be positive</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="3" data-code-annotation="3">Shape parameter – positive means heavy right tail</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="4">Create a GEV distribution object from the Distributions.jl package</span>
+</dd>
+</dl>
+</div>
 </div>
 <p>Let’s visualize this distribution:</p>
 <div id="cell-fig-gev-pdf" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    x_range <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>, <span class="fl">15</span>; length<span class="op">=</span><span class="fl">200</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Storm Surge (ft)"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Annual Maximum Storm Surge Distribution"</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, x_range, <span class="fu">pdf</span>.(surge_dist, x_range); linewidth<span class="op">=</span><span class="fl">2</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    x_range <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>, <span class="fl">15</span>; length<span class="op">=</span><span class="fl">200</span>)</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="annotated-cell-5-6"><a href="#annotated-cell-5-6" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Flood Stage (ft)"</span>,</span>
+<span id="annotated-cell-5-7"><a href="#annotated-cell-5-7" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="annotated-cell-5-8"><a href="#annotated-cell-5-8" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Annual Maximum Flood Stage Distribution"</span></span>
+<span id="annotated-cell-5-9"><a href="#annotated-cell-5-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2">2</button><span id="annotated-cell-5-10" class="code-annotation-target"><a href="#annotated-cell-5-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, x_range, <span class="fu">pdf</span>.(surge_dist, x_range); linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="annotated-cell-5-11"><a href="#annotated-cell-5-11" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="annotated-cell-5-12"><a href="#annotated-cell-5-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1">Create 200 evenly-spaced points from 0 to 15</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="10" data-code-annotation="2"><code>pdf.()</code> broadcasts the probability density function over all x values</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div id="fig-gev-pdf" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -258,7 +459,45 @@ window.MathJax = {
 <img src="index_files/figure-html/fig-gev-pdf-output-1.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gev-pdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: GEV distribution for annual maximum storm surge in ImaginaryLand.
+Figure&nbsp;1: GEV distribution for annual maximum flood stage.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exploring-the-gev-parameters" class="level4" data-number="3.1.2">
+<h4 data-number="3.1.2" class="anchored" data-anchor-id="exploring-the-gev-parameters"><span class="header-section-number">3.1.2</span> Exploring the GEV Parameters</h4>
+<p>Try changing the GEV parameters below to build intuition. Watch how the distribution shape changes.</p>
+<div id="cell-fig-gev-explore" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x_range <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>, <span class="fl">20</span>; length<span class="op">=</span><span class="fl">200</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">300</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Try changing these values!</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    μ_test <span class="op">=</span> <span class="fl">5.0</span>   <span class="co"># Try: 3.0, 5.0, 7.0</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    σ_test <span class="op">=</span> <span class="fl">2.0</span>   <span class="co"># Try: 1.0, 2.0, 4.0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ξ_test <span class="op">=</span> <span class="fl">0.1</span>   <span class="co"># Try: -0.1, 0.0, 0.1, 0.3</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    test_dist <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(μ_test, σ_test, ξ_test)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Flood Stage (ft)"</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"GEV(μ=</span><span class="sc">$</span><span class="st">μ</span>_test<span class="st">, σ=</span><span class="sc">$</span><span class="st">σ</span>_test<span class="st">, ξ=</span><span class="sc">$</span><span class="st">ξ</span>_test<span class="st">)"</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, x_range, <span class="fu">pdf</span>.(test_dist, x_range); linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-gev-explore" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gev-explore-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-gev-explore-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gev-explore-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Experiment with different GEV parameters to see how they affect the distribution.
 </figcaption>
 </figure>
 </div>
@@ -274,29 +513,59 @@ Figure&nbsp;1: GEV distribution for annual maximum storm surge in ImaginaryLand.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>What does the shape of this distribution tell us about flood risk in ImaginaryLand? Why might the right tail be important for risk analysis? Replace this text with your observations.</em></p>
+<p><em>Experiment with the parameters above. What happens when you:</em></p>
+<ul>
+<li><em>Increase μ from 5 to 7?</em></li>
+<li><em>Increase σ from 2 to 4?</em></li>
+<li><em>Change ξ from 0.1 to 0.3?</em></li>
+</ul>
+<p><em>Replace this text with your observations.</em></p>
 </div>
 </div>
 </section>
-<section id="exercise-2-monte-carlo-sampling" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="exercise-2-monte-carlo-sampling"><span class="header-section-number">4</span> Exercise 2: Monte Carlo Sampling</h2>
-<p>Now we’ll use Monte Carlo sampling to generate many possible flood scenarios. Each sample represents one possible year’s worth of flooding.</p>
-<p>The following code draws 10,000 samples from the GEV distribution and plots a histogram.</p>
+<section id="monte-carlo-sampling" class="level4" data-number="3.1.3">
+<h4 data-number="3.1.3" class="anchored" data-anchor-id="monte-carlo-sampling"><span class="header-section-number">3.1.3</span> Monte Carlo Sampling</h4>
+<p>We’ll draw 10,000 samples from the GEV distribution. Each sample represents one possible year’s annual maximum flood.</p>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="fl">10_000</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>hazard_samples <span class="op">=</span> <span class="fu">rand</span>(surge_dist, n_samples)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1"><code>rand(distribution, n)</code> draws n random samples from the distribution</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>We plot the samples as a <strong>normalized histogram</strong> (probability density) so we can compare it to the true PDF. The area under the histogram equals 1.</p>
 <div id="cell-fig-mc-samples" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="fl">10_000</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>hazard_samples <span class="op">=</span> <span class="fu">rand</span>(surge_dist, n_samples)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Storm Surge (ft)"</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Count"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Monte Carlo Samples from GEV"</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, hazard_samples; bins<span class="op">=</span><span class="fl">50</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Flood Stage (ft)"</span>,</span>
+<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"10,000 Sampled Annual Maximum Flood Stages"</span></span>
+<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-9" class="code-annotation-target"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, hazard_samples; bins<span class="op">=</span><span class="fl">50</span>, normalization<span class="op">=:</span>pdf)</span>
+<span id="annotated-cell-8-10"><a href="#annotated-cell-8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, <span class="fu">range</span>(<span class="fl">0</span>, <span class="fl">15</span>; length<span class="op">=</span><span class="fl">200</span>), <span class="fu">pdf</span>.(surge_dist, <span class="fu">range</span>(<span class="fl">0</span>, <span class="fl">15</span>; length<span class="op">=</span><span class="fl">200</span>));</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-11" class="code-annotation-target"><a href="#annotated-cell-8-11" aria-hidden="true" tabindex="-1"></a>           color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"True PDF"</span>)</span>
+<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>rt)</span>
+<span id="annotated-cell-8-13"><a href="#annotated-cell-8-13" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="annotated-cell-8-14"><a href="#annotated-cell-8-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="9" data-code-annotation="1"><code>normalization=:pdf</code> scales the histogram so the total area equals 1</span>
+</dd>
+<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-8" data-code-lines="11" data-code-annotation="2">Overlay the true PDF to show our samples match the distribution</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div id="fig-mc-samples" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -304,102 +573,135 @@ Figure&nbsp;1: GEV distribution for annual maximum storm surge in ImaginaryLand.
 <img src="index_files/figure-html/fig-mc-samples-output-1.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mc-samples-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Monte Carlo samples from the storm surge distribution.
+Figure&nbsp;3: Monte Carlo samples from the flood stage distribution, normalized as a PDF.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-3-define-a-depth-damage-function" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="exercise-3-define-a-depth-damage-function"><span class="header-section-number">5</span> Exercise 3: Define a Depth-Damage Function</h2>
-<p>A depth-damage function translates flood depth into damage as a fraction of the building value. This is a simplified HAZUS-style function for residential structures.</p>
-<div id="12" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">    depth_damage(depth::Real)</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">HAZUS-style depth-damage function for a residential structure.</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">Returns damage as a fraction of structure value (0 to 1).</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st"># Arguments</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">- `depth`: Flood depth above first floor (ft). Negative means no flooding.</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">depth_damage</span>(depth<span class="op">::</span><span class="dt">Real</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> depth <span class="op">&lt;=</span> <span class="fl">0</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.0</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elseif</span> depth <span class="op">&lt;=</span> <span class="fl">1</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.10</span> <span class="op">*</span> depth</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elseif</span> depth <span class="op">&lt;=</span> <span class="fl">4</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.10</span> <span class="op">+</span> <span class="fl">0.15</span> <span class="op">*</span> (depth <span class="op">-</span> <span class="fl">1</span>)</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elseif</span> depth <span class="op">&lt;=</span> <span class="fl">8</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">0.55</span> <span class="op">+</span> <span class="fl">0.10</span> <span class="op">*</span> (depth <span class="op">-</span> <span class="fl">4</span>)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">min</span>(<span class="fl">0.95</span>, <span class="fl">0.95</span>)  <span class="co"># Cap at 95%</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="a-depth-damage-function" class="level4" data-number="3.1.4">
+<h4 data-number="3.1.4" class="anchored" data-anchor-id="a-depth-damage-function"><span class="header-section-number">3.1.4</span> A Depth-Damage Function</h4>
+<p>Now we need a function that converts flood depth to damage. We’ll use a <strong>logistic</strong> (S-shaped) curve: damage starts slowly, increases rapidly in the middle range, then saturates.</p>
+<div id="18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""Logistic damage function. Returns damage in dollars."""</span></span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">logistic_damage</span>(</span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>    flood_stage<span class="op">::</span><span class="dt">T</span>, house_elevation<span class="op">::</span><span class="dt">T</span>, house_value<span class="op">::</span><span class="dt">T</span>;</span>
+<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a>    threshold<span class="op">::</span><span class="dt">T</span>=<span class="fu">one</span>(T), saturation<span class="op">::</span><span class="dt">T</span>=<span class="fu">T</span>(<span class="fl">7</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-5" class="code-annotation-target"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>) <span class="kw">where</span> {T<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>}</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2">2</button><span id="annotated-cell-9-6" class="code-annotation-target"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a>    depth <span class="op">=</span> <span class="fu">max</span>(<span class="fu">zero</span>(T), flood_stage <span class="op">-</span> house_elevation)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="3">3</button><span id="annotated-cell-9-7" class="code-annotation-target"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>    depth <span class="op">&lt;=</span> threshold <span class="op">&amp;&amp;</span> <span class="cf">return</span> <span class="fu">zero</span>(T)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="4">4</button><span id="annotated-cell-9-8" class="code-annotation-target"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a>    depth <span class="op">&gt;=</span> saturation <span class="op">&amp;&amp;</span> <span class="cf">return</span> house_value</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="5">5</button><span id="annotated-cell-9-9" class="code-annotation-target"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a>    midpoint <span class="op">=</span> (threshold <span class="op">+</span> saturation) <span class="op">/</span> <span class="fl">2</span></span>
+<span id="annotated-cell-9-10"><a href="#annotated-cell-9-10" aria-hidden="true" tabindex="-1"></a>    steepness <span class="op">=</span> <span class="fu">T</span>(<span class="fl">6</span>) <span class="op">/</span> (saturation <span class="op">-</span> threshold)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="6">6</button><span id="annotated-cell-9-11" class="code-annotation-target"><a href="#annotated-cell-9-11" aria-hidden="true" tabindex="-1"></a>    damage_fraction <span class="op">=</span> <span class="fu">one</span>(T) <span class="op">/</span> (<span class="fu">one</span>(T) <span class="op">+</span> <span class="fu">exp</span>(<span class="op">-</span>steepness <span class="op">*</span> (depth <span class="op">-</span> midpoint)))</span>
+<span id="annotated-cell-9-12"><a href="#annotated-cell-9-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> damage_fraction <span class="op">*</span> house_value</span>
+<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="5" data-code-annotation="1">Type parameter ensures all inputs have consistent floating-point type</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="6" data-code-annotation="2">Flood depth = water level minus floor elevation (can’t be negative)</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="7" data-code-annotation="3">No damage below 1 ft of water inside the house (furniture above floor, etc.)</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="8" data-code-annotation="4">Total loss at 7 ft of water</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="9" data-code-annotation="5">Logistic curve centered at midpoint between threshold and saturation</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="11" data-code-annotation="6">Standard logistic function formula</span>
+</dd>
+</dl>
 </div>
-<p>The following code plots the depth-damage function for depths from -2 to 15 feet.</p>
-<div id="cell-fig-ddf" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    depths <span class="op">=</span> <span class="fu">range</span>(<span class="op">-</span><span class="fl">2</span>, <span class="fl">15</span>; length<span class="op">=</span><span class="fl">100</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    damages <span class="op">=</span> <span class="fu">depth_damage</span>.(depths)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Flood Depth (ft)"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Damage Ratio"</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Depth-Damage Function"</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, depths, damages; linewidth<span class="op">=</span><span class="fl">2</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Let’s visualize this damage function:</p>
+<div id="cell-fig-logistic-damage" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a>    house_elev <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a>    house_val <span class="op">=</span> <span class="fl">100_000.0</span></span>
+<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4" aria-hidden="true" tabindex="-1"></a>    flood_stages <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>, <span class="fl">12</span>; length<span class="op">=</span><span class="fl">200</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-5" class="code-annotation-target"><a href="#annotated-cell-10-5" aria-hidden="true" tabindex="-1"></a>    damages <span class="op">=</span> [<span class="fu">logistic_damage</span>(s, house_elev, house_val) for s <span class="kw">in</span> flood_stages]</span>
+<span id="annotated-cell-10-6"><a href="#annotated-cell-10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="annotated-cell-10-8"><a href="#annotated-cell-10-8" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="annotated-cell-10-9"><a href="#annotated-cell-10-9" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="annotated-cell-10-10"><a href="#annotated-cell-10-10" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Flood Stage (ft)"</span>,</span>
+<span id="annotated-cell-10-11"><a href="#annotated-cell-10-11" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Damage (\$)"</span>,</span>
+<span id="annotated-cell-10-12"><a href="#annotated-cell-10-12" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Damage Function (House at 2 ft elevation)"</span></span>
+<span id="annotated-cell-10-13"><a href="#annotated-cell-10-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="annotated-cell-10-14"><a href="#annotated-cell-10-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, flood_stages, damages; linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="2">2</button><span id="annotated-cell-10-15" class="code-annotation-target"><a href="#annotated-cell-10-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vlines!</span>(ax, [house_elev]; color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dash, label<span class="op">=</span><span class="st">"House floor"</span>)</span>
+<span id="annotated-cell-10-16"><a href="#annotated-cell-10-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>lt)</span>
+<span id="annotated-cell-10-17"><a href="#annotated-cell-10-17" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="annotated-cell-10-18"><a href="#annotated-cell-10-18" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="5" data-code-annotation="1">List comprehension: apply the function to each flood stage</span>
+</dd>
+<dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="15" data-code-annotation="2">Vertical line showing where the house floor is</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<div id="fig-ddf" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-logistic-damage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ddf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-ddf-output-1.svg" class="img-fluid figure-img">
+<div aria-describedby="fig-logistic-damage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-logistic-damage-output-1.svg" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ddf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: HAZUS-style depth-damage function for residential structures.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-logistic-damage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Logistic depth-damage function for a house at 2 ft elevation.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="exercise-4-compute-damage-distribution-for-one-house" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="exercise-4-compute-damage-distribution-for-one-house"><span class="header-section-number">6</span> Exercise 4: Compute Damage Distribution for One House</h2>
-<p>Now we’ll combine the hazard (storm surge) with the vulnerability (depth-damage function) to compute the distribution of damages for a single house.</p>
-<p><strong>Important:</strong> The flood depth at a house is the surge minus the house’s first floor elevation.</p>
-<div id="16" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># House parameters</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>house_value <span class="op">=</span> <span class="fl">250_000</span>  <span class="co"># dollars</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>house_elevation <span class="op">=</span> <span class="fl">5.0</span>  <span class="co"># feet above sea level (first floor elevation)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="convolution-via-monte-carlo" class="level4" data-number="3.1.5">
+<h4 data-number="3.1.5" class="anchored" data-anchor-id="convolution-via-monte-carlo"><span class="header-section-number">3.1.5</span> Convolution via Monte Carlo</h4>
+<p>Now we convolve the hazard samples through the damage function. This transforms our distribution of flood stages into a distribution of damages.</p>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a>house_elevation <span class="op">=</span> <span class="fl">2.0</span>  <span class="co"># feet</span></span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>house_value <span class="op">=</span> <span class="fl">100_000.0</span>  <span class="co"># dollars</span></span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-4" class="code-annotation-target"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a>damage_samples <span class="op">=</span> [<span class="fu">logistic_damage</span>(h, house_elevation, house_value) for h <span class="kw">in</span> hazard_samples]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="1">Apply the damage function to each of the 10,000 flood stage samples</span>
+</dd>
+</dl>
 </div>
-<p>The following code computes the damage to this house for each hazard sample.</p>
+</div>
+<p>Again, we plot as a normalized histogram (probability density). Notice the spike at $0 (years with no damage) and the long right tail.</p>
 <div id="cell-fig-damage-dist" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate flood depth at house for each sample</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>flood_depths <span class="op">=</span> hazard_samples <span class="op">.-</span> house_elevation</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply depth-damage function to get damage ratios</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>damage_ratios <span class="op">=</span> <span class="fu">depth_damage</span>.(flood_depths)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to dollar damages</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>damages <span class="op">=</span> damage_ratios <span class="op">.*</span> house_value</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the damage distribution</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Damage (\$)"</span>,</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Count"</span>,</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Distribution of Annual Damages"</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, damages; bins<span class="op">=</span><span class="fl">50</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Annual Damage (\$)"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Distribution of Annual Damages"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, damage_samples; bins<span class="op">=</span><span class="fl">50</span>, normalization<span class="op">=:</span>pdf)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div id="fig-damage-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -407,81 +709,258 @@ Figure&nbsp;3: HAZUS-style depth-damage function for residential structures.
 <img src="index_files/figure-html/fig-damage-dist-output-1.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-damage-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Distribution of annual damages for a single house.
+Figure&nbsp;5: Distribution of annual damages from Monte Carlo convolution, shown as a PDF.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Run the code below to answer these questions:</p>
-<ol type="1">
-<li>What is the mean annual damage (expected annual damage, EAD)?</li>
-<li>What is the probability of any damage occurring?</li>
-<li>What is the probability of damage exceeding $50,000?</li>
-</ol>
-<div id="20" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mean_damage <span class="op">=</span> <span class="fu">mean</span>(damages)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>prob_any_damage <span class="op">=</span> <span class="fu">mean</span>(damages <span class="op">.&gt;</span> <span class="fl">0</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>prob_severe <span class="op">=</span> <span class="fu">mean</span>(damages <span class="op">.&gt;</span> <span class="fl">50_000</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Mean annual damage: \$</span><span class="sc">$</span>(<span class="fu">round</span>(mean_damage; digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Probability of any damage: </span><span class="sc">$</span>(<span class="fu">round</span>(prob_any_damage <span class="op">*</span> <span class="fl">100</span>; digits<span class="op">=</span><span class="fl">1</span>))<span class="st">%"</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Probability of damage &gt; \$50k: </span><span class="sc">$</span>(<span class="fu">round</span>(prob_severe <span class="op">*</span> <span class="fl">100</span>; digits<span class="op">=</span><span class="fl">1</span>))<span class="st">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="risk-statistics" class="level4" data-number="3.1.6">
+<h4 data-number="3.1.6" class="anchored" data-anchor-id="risk-statistics"><span class="header-section-number">3.1.6</span> Risk Statistics</h4>
+<div id="26" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a>ead_mc <span class="op">=</span> <span class="fu">mean</span>(damage_samples)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2">2</button><span id="annotated-cell-13-2" class="code-annotation-target"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>prob_any_damage <span class="op">=</span> <span class="fu">mean</span>(damage_samples <span class="op">.&gt;</span> <span class="fl">0</span>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3">3</button><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>prob_severe <span class="op">=</span> <span class="fu">mean</span>(damage_samples <span class="op">.&gt;</span> <span class="fl">50_000</span>)</span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-13-5"><a href="#annotated-cell-13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Expected Annual Damage (Monte Carlo): \$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_mc; digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>)</span>
+<span id="annotated-cell-13-6"><a href="#annotated-cell-13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Probability of any damage: </span><span class="sc">$</span>(<span class="fu">round</span>(prob_any_damage <span class="op">*</span> <span class="fl">100</span>; digits<span class="op">=</span><span class="fl">1</span>))<span class="st">%"</span>)</span>
+<span id="annotated-cell-13-7"><a href="#annotated-cell-13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Probability of damage &gt; \$50k: </span><span class="sc">$</span>(<span class="fu">round</span>(prob_severe <span class="op">*</span> <span class="fl">100</span>; digits<span class="op">=</span><span class="fl">1</span>))<span class="st">%"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="1" data-code-annotation="1">Mean of samples estimates the expected value</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="2" data-code-annotation="2">Fraction of samples with positive damage</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="3" data-code-annotation="3">Fraction of samples exceeding $50,000</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean annual damage: $51900.74
-Probability of any damage: 63.4%
-Probability of damage &gt; $50k: 35.6%</code></pre>
+<pre><code>Expected Annual Damage (Monte Carlo): $48917.84
+Probability of any damage: 94.1%
+Probability of damage &gt; $50k: 45.9%</code></pre>
 </div>
 </div>
 </section>
-<section id="exercise-5-extend-to-100-houses-with-varying-exposures" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="exercise-5-extend-to-100-houses-with-varying-exposures"><span class="header-section-number">7</span> Exercise 5: Extend to 100 Houses with Varying Exposures</h2>
-<p>Now let’s consider a community of 100 houses at different elevations. We’ll model this as a “city on a wedge” where houses are distributed at various heights above sea level.</p>
-<div id="22" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 100 houses at different elevations</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>n_houses <span class="op">=</span> <span class="fl">100</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Heights above sea level follow a Uniform distribution</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>height_min <span class="op">=</span> <span class="fl">3.0</span>  <span class="co"># feet</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>height_max <span class="op">=</span> <span class="fl">12.0</span>  <span class="co"># feet</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>house_elevations <span class="op">=</span> <span class="fu">rand</span>(<span class="fu">Uniform</span>(height_min, height_max), n_houses)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># All houses have the same value for simplicity</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>house_values <span class="op">=</span> <span class="fu">fill</span>(<span class="fl">250_000</span>, n_houses)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="structuring-analysis-with-simoptdecisions" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="structuring-analysis-with-simoptdecisions"><span class="header-section-number">3.2</span> Structuring Analysis with SimOptDecisions</h3>
+<p>Now let’s use the <strong>SimOptDecisions.jl</strong> framework to structure our analysis. This framework helps organize risk analysis by clearly separating:</p>
+<ul>
+<li><strong>Config:</strong> Fixed parameters (house value, house elevation)</li>
+<li><strong>Scenario:</strong> One state of the world (one flood event)</li>
+</ul>
+<div id="28" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-1" class="code-annotation-target"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"house_elevation.jl"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="1" data-code-annotation="1">Load type definitions from a separate file</span>
+</dd>
+</dl>
 </div>
-<p>The following code uses a for loop to compute the expected annual damage for each house, storing the results in a vector called <code>expected_damages</code>.</p>
-<div id="24" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize storage for expected annual damages</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>expected_damages <span class="op">=</span> <span class="fu">zeros</span>(n_houses)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop over houses</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_houses</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate flood depths for this house</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    depths_i <span class="op">=</span> hazard_samples <span class="op">.-</span> house_elevations[i]</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate damage ratios</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    damage_ratios_i <span class="op">=</span> <span class="fu">depth_damage</span>.(depths_i)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate dollar damages</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    damages_i <span class="op">=</span> damage_ratios_i <span class="op">.*</span> house_values[i]</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store expected annual damage</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    expected_damages[i] <span class="op">=</span> <span class="fu">mean</span>(damages_i)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Let’s visualize the relationship between elevation and expected damage:</p>
+<p>The <code>house_elevation.jl</code> file defines:</p>
+<ul>
+<li><code>HouseConfig</code>: holds house value and base elevation</li>
+<li><code>FloodScenario</code>: represents ONE flood event (one water level)</li>
+<li><code>depth_damage()</code>: logistic depth-damage function</li>
+<li><code>compute_damage()</code>: computes dollar damage for a house given a flood scenario</li>
+</ul>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Key insight:</strong> A <code>FloodScenario</code> represents a single state of the world – one sampled water level. It is NOT a probability distribution. We create many scenarios by sampling from the hazard distribution.</p>
+</div>
+</div>
+</div>
+<section id="visualizing-the-depth-damage-function" class="level4" data-number="3.2.1">
+<h4 data-number="3.2.1" class="anchored" data-anchor-id="visualizing-the-depth-damage-function"><span class="header-section-number">3.2.1</span> Visualizing the Depth-Damage Function</h4>
+<div id="cell-fig-ddf" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    depths <span class="op">=</span> <span class="fu">range</span>(<span class="op">-</span><span class="fl">2</span>, <span class="fl">12</span>; length<span class="op">=</span><span class="fl">200</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    damages <span class="op">=</span> [<span class="fu">depth_damage</span>(<span class="fu">Float64</span>(d)) for d <span class="kw">in</span> depths]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Flood Depth Above First Floor (ft)"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Damage Ratio"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Depth-Damage Function"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, depths, damages; linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vlines!</span>(ax, [<span class="fl">0</span>]; color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dash, label<span class="op">=</span><span class="st">"Floor level"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-ddf" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ddf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-ddf-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ddf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Logistic depth-damage function from SimOptDecisions.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="single-house-analysis" class="level4" data-number="3.2.2">
+<h4 data-number="3.2.2" class="anchored" data-anchor-id="single-house-analysis"><span class="header-section-number">3.2.2</span> Single House Analysis</h4>
+<p>Let’s analyze a house at 4 ft elevation:</p>
+<div id="32" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1">1</button><span id="annotated-cell-16-1" class="code-annotation-target"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a>my_house <span class="op">=</span> <span class="fu">HouseConfig</span>(house_value<span class="op">=</span><span class="fl">250_000.0</span>, base_elevation<span class="op">=</span><span class="fl">4.0</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="1" data-code-annotation="1">Create a configuration object with keyword arguments</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>Now we create a <code>FloodScenario</code> for each sampled water level and compute damage:</p>
+<div id="34" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="1">1</button><span id="annotated-cell-17-1" class="code-annotation-target"><a href="#annotated-cell-17-1" aria-hidden="true" tabindex="-1"></a>scenarios <span class="op">=</span> [<span class="fu">FloodScenario</span>(h) for h <span class="kw">in</span> hazard_samples]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-17" data-target-annotation="2">2</button><span id="annotated-cell-17-2" class="code-annotation-target"><a href="#annotated-cell-17-2" aria-hidden="true" tabindex="-1"></a>house_damages <span class="op">=</span> [<span class="fu">compute_damage</span>(my_house, s) for s <span class="kw">in</span> scenarios]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-17" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="1" data-code-annotation="1">Wrap each water level sample in a <code>FloodScenario</code> object</span>
+</dd>
+<dt data-target-cell="annotated-cell-17" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-17" data-code-lines="2" data-code-annotation="2">Compute damage for each scenario using our house configuration</span>
+</dd>
+</dl>
+</div>
+</div>
+<div id="cell-fig-house-damage" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Annual Damage (\$)"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Damage Distribution for House at 4 ft Elevation"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, house_damages; bins<span class="op">=</span><span class="fl">50</span>, normalization<span class="op">=:</span>pdf)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-house-damage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-house-damage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-house-damage-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-house-damage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Distribution of annual damages for a single house at 4 ft elevation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="38" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ead_house <span class="op">=</span> <span class="fu">mean</span>(house_damages)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>prob_damage_house <span class="op">=</span> <span class="fu">mean</span>(house_damages <span class="op">.&gt;</span> <span class="fl">0</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>prob_severe_house <span class="op">=</span> <span class="fu">mean</span>(house_damages <span class="op">.&gt;</span> <span class="fl">50_000</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Expected Annual Damage: \$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_house; digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Probability of any damage: </span><span class="sc">$</span>(<span class="fu">round</span>(prob_damage_house <span class="op">*</span> <span class="fl">100</span>; digits<span class="op">=</span><span class="fl">1</span>))<span class="st">%"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Probability of damage &gt; \$50k: </span><span class="sc">$</span>(<span class="fu">round</span>(prob_severe_house <span class="op">*</span> <span class="fl">100</span>; digits<span class="op">=</span><span class="fl">1</span>))<span class="st">%"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Expected Annual Damage: $63915.29
+Probability of any damage: 63.5%
+Probability of damage &gt; $50k: 36.7%</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="community-risk-analysis" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="community-risk-analysis"><span class="header-section-number">3.3</span> Community Risk Analysis</h3>
+<p>Now let’s extend our analysis to a community of 100 houses at different elevations. This represents a “city on a wedge” where houses closer to the water are at lower elevations.</p>
+<section id="setting-up-the-community" class="level4" data-number="3.3.1">
+<h4 data-number="3.3.1" class="anchored" data-anchor-id="setting-up-the-community"><span class="header-section-number">3.3.1</span> Setting Up the Community</h4>
+<div id="40" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-20"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-20-1"><a href="#annotated-cell-20-1" aria-hidden="true" tabindex="-1"></a>n_houses <span class="op">=</span> <span class="fl">100</span></span>
+<span id="annotated-cell-20-2"><a href="#annotated-cell-20-2" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="1">1</button><span id="annotated-cell-20-3" class="code-annotation-target"><a href="#annotated-cell-20-3" aria-hidden="true" tabindex="-1"></a>house_elevations <span class="op">=</span> <span class="fu">rand</span>(<span class="fu">Uniform</span>(<span class="fl">3.0</span>, <span class="fl">12.0</span>), n_houses)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="2">2</button><span id="annotated-cell-20-4" class="code-annotation-target"><a href="#annotated-cell-20-4" aria-hidden="true" tabindex="-1"></a>house_value_community <span class="op">=</span> <span class="fl">250_000.0</span></span>
+<span id="annotated-cell-20-5"><a href="#annotated-cell-20-5" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-20" data-target-annotation="3">3</button><span id="annotated-cell-20-6" class="code-annotation-target"><a href="#annotated-cell-20-6" aria-hidden="true" tabindex="-1"></a>houses <span class="op">=</span> [<span class="fu">HouseConfig</span>(house_value<span class="op">=</span>house_value_community, base_elevation<span class="op">=</span><span class="cn">e</span>) for <span class="cn">e</span> <span class="kw">in</span> house_elevations]</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-20" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-20" data-code-lines="3" data-code-annotation="1">Random elevations between 3 and 12 feet</span>
+</dd>
+<dt data-target-cell="annotated-cell-20" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-20" data-code-lines="4" data-code-annotation="2">All houses have the same value for simplicity</span>
+</dd>
+<dt data-target-cell="annotated-cell-20" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-20" data-code-lines="6" data-code-annotation="3">Create a vector of HouseConfig objects</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="computing-ead-for-each-house" class="level4" data-number="3.3.2">
+<h4 data-number="3.3.2" class="anchored" data-anchor-id="computing-ead-for-each-house"><span class="header-section-number">3.3.2</span> Computing EAD for Each House</h4>
+<p><strong>Key insight:</strong> All houses experience the <strong>same storm</strong> (same hazard samples). The only difference is their elevation.</p>
+<div id="42" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-21"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="1">1</button><span id="annotated-cell-21-1" class="code-annotation-target"><a href="#annotated-cell-21-1" aria-hidden="true" tabindex="-1"></a>expected_damages <span class="op">=</span> <span class="fu">zeros</span>(n_houses)</span>
+<span id="annotated-cell-21-2"><a href="#annotated-cell-21-2" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="2">2</button><span id="annotated-cell-21-3" class="code-annotation-target"><a href="#annotated-cell-21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_houses</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="3">3</button><span id="annotated-cell-21-4" class="code-annotation-target"><a href="#annotated-cell-21-4" aria-hidden="true" tabindex="-1"></a>    damages_i <span class="op">=</span> [<span class="fu">compute_damage</span>(houses[i], s) for s <span class="kw">in</span> scenarios]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-21" data-target-annotation="4">4</button><span id="annotated-cell-21-5" class="code-annotation-target"><a href="#annotated-cell-21-5" aria-hidden="true" tabindex="-1"></a>    expected_damages[i] <span class="op">=</span> <span class="fu">mean</span>(damages_i)</span>
+<span id="annotated-cell-21-6"><a href="#annotated-cell-21-6" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-21" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-21" data-code-lines="1" data-code-annotation="1">Pre-allocate a vector to store results</span>
+</dd>
+<dt data-target-cell="annotated-cell-21" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-21" data-code-lines="3" data-code-annotation="2">Loop over each house</span>
+</dd>
+<dt data-target-cell="annotated-cell-21" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-21" data-code-lines="4" data-code-annotation="3">Compute damage for all 10,000 scenarios</span>
+</dd>
+<dt data-target-cell="annotated-cell-21" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-21" data-code-lines="5" data-code-annotation="4">Store the mean (expected) damage</span>
+</dd>
+</dl>
+</div>
+</div>
 <div id="cell-fig-ead-vs-elevation" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"House Elevation (ft)"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Expected Annual Damage (\$)"</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Expected Annual Damage vs. House Elevation"</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax, house_elevations, expected_damages; markersize<span class="op">=</span><span class="fl">8</span>)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"House Elevation (ft)"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Expected Annual Damage (\$)"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"EAD vs. Elevation for 100 Houses"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax, house_elevations, expected_damages; markersize<span class="op">=</span><span class="fl">8</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div id="fig-ead-vs-elevation" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -489,7 +968,7 @@ Probability of damage &gt; $50k: 35.6%</code></pre>
 <img src="index_files/figure-html/fig-ead-vs-elevation-output-1.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ead-vs-elevation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Expected annual damage decreases nonlinearly with house elevation.
+Figure&nbsp;8: Expected annual damage decreases nonlinearly with house elevation.
 </figcaption>
 </figure>
 </div>
@@ -505,45 +984,50 @@ Figure&nbsp;5: Expected annual damage decreases nonlinearly with house elevation
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>Why is the relationship between elevation and expected damage nonlinear? Replace this text with your explanation.</em></p>
+<p><em>Why is the relationship between elevation and expected damage nonlinear? What causes the steep drop-off as elevation increases?</em></p>
+<p><em>Replace this text with your explanation.</em></p>
 </div>
 </div>
 </section>
-<section id="exercise-6-total-community-risk" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="exercise-6-total-community-risk"><span class="header-section-number">8</span> Exercise 6: Total Community Risk</h2>
-<p>The following code calculates the total expected annual damage across all 100 houses.</p>
-<div id="28" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>total_ead <span class="op">=</span> <span class="fu">sum</span>(expected_damages)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Total community EAD: \$</span><span class="sc">$</span>(<span class="fu">round</span>(total_ead; digits<span class="op">=</span><span class="fl">2</span>))<span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Total community EAD: $3.36898534e6</code></pre>
+<section id="community-level-damage-distribution" class="level4" data-number="3.3.3">
+<h4 data-number="3.3.3" class="anchored" data-anchor-id="community-level-damage-distribution"><span class="header-section-number">3.3.3</span> Community-Level Damage Distribution</h4>
+<p>To understand total community risk, we compute total damage for each Monte Carlo sample:</p>
+<div id="46" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1">1</button><span id="annotated-cell-23-1" class="code-annotation-target"><a href="#annotated-cell-23-1" aria-hidden="true" tabindex="-1"></a>total_damages <span class="op">=</span> <span class="fu">zeros</span>(n_samples)</span>
+<span id="annotated-cell-23-2"><a href="#annotated-cell-23-2" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2">2</button><span id="annotated-cell-23-3" class="code-annotation-target"><a href="#annotated-cell-23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_samples</span>
+<span id="annotated-cell-23-4"><a href="#annotated-cell-23-4" aria-hidden="true" tabindex="-1"></a>    scenario_j <span class="op">=</span> scenarios[j]</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="3">3</button><span id="annotated-cell-23-5" class="code-annotation-target"><a href="#annotated-cell-23-5" aria-hidden="true" tabindex="-1"></a>    total_damages[j] <span class="op">=</span> <span class="fu">sum</span>(<span class="fu">compute_damage</span>(houses[i], scenario_j) <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_houses)</span>
+<span id="annotated-cell-23-6"><a href="#annotated-cell-23-6" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="1" data-code-annotation="1">One total damage value per scenario (possible year)</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="3" data-code-annotation="2">Loop over scenarios (not houses!)</span>
+</dd>
+<dt data-target-cell="annotated-cell-23" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-23" data-code-lines="5" data-code-annotation="3">Sum damage across all 100 houses for this scenario</span>
+</dd>
+</dl>
 </div>
 </div>
-<p>Now let’s visualize the distribution of total community damages. We need to calculate total damage for each Monte Carlo sample:</p>
 <div id="cell-fig-community-damage" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total damage for each sample</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>total_damages <span class="op">=</span> <span class="fu">zeros</span>(n_samples)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_samples</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    sample_total <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_houses</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        depth_ij <span class="op">=</span> hazard_samples[j] <span class="op">-</span> house_elevations[i]</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        damage_ij <span class="op">=</span> <span class="fu">depth_damage</span>(depth_ij) <span class="op">*</span> house_values[i]</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        sample_total <span class="op">+=</span> damage_ij</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    total_damages[j] <span class="op">=</span> sample_total</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Total Community Damage (\$)"</span>,</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Count"</span>,</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Distribution of Annual Community Damages"</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, total_damages; bins<span class="op">=</span><span class="fl">50</span>)</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Total Community Damage (\$)"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Distribution of Annual Community Damages"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, total_damages; bins<span class="op">=</span><span class="fl">50</span>, normalization<span class="op">=:</span>pdf)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div id="fig-community-damage" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -551,15 +1035,100 @@ Figure&nbsp;5: Expected annual damage decreases nonlinearly with house elevation
 <img src="index_files/figure-html/fig-community-damage-output-1.svg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-community-damage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Distribution of total annual damages across the community.
+Figure&nbsp;9: Distribution of total annual damages across the community.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<div id="50" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>total_ead <span class="op">=</span> <span class="fu">mean</span>(total_damages)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Total Community EAD: \$</span><span class="sc">$</span>(<span class="fu">round</span>(total_ead <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st"> million"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Sum of individual EADs: \$</span><span class="sc">$</span>(<span class="fu">round</span>(<span class="fu">sum</span>(expected_damages) <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st"> million"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total Community EAD: $2.841 million
+Sum of individual EADs: $2.841 million</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Why are the total community EAD and the sum of individual EADs equal (or nearly equal)? Would they still be equal if we used different hazard samples for each house?</em></p>
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
 </section>
-<section id="reflection-questions" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="reflection-questions"><span class="header-section-number">9</span> Reflection Questions</h2>
+</section>
+<section id="the-simoptdecisions-framework" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="the-simoptdecisions-framework"><span class="header-section-number">3.4</span> The SimOptDecisions Framework</h3>
+<p>The SimOptDecisions.jl package provides a structured way to think about decisions under uncertainty. Here’s the key vocabulary:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 44%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>What it means</th>
+<th>In this lab</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Config</strong></td>
+<td>Fixed parameters that don’t change</td>
+<td>House value, base elevation</td>
+</tr>
+<tr class="even">
+<td><strong>Scenario</strong></td>
+<td>One state of the world</td>
+<td>One flood water level</td>
+</tr>
+<tr class="odd">
+<td><strong>State</strong></td>
+<td>Evolving conditions over time</td>
+<td>(Not used today)</td>
+</tr>
+<tr class="even">
+<td><strong>Action</strong></td>
+<td>A decision</td>
+<td>(Not used today)</td>
+</tr>
+<tr class="odd">
+<td><strong>Policy</strong></td>
+<td>A decision rule</td>
+<td>(Not used today)</td>
+</tr>
+</tbody>
+</table>
+<p>Today we focused on <strong>risk analysis</strong>: understanding the distribution of damages given uncertainty in hazards.</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>In future labs, we’ll use SimOptDecisions to:</p>
+<ul>
+<li>Add <strong>State</strong> to track conditions that change over time (like sea level rise)</li>
+<li>Add <strong>Actions</strong> and <strong>Policies</strong> to represent decisions (like how high to elevate)</li>
+<li>Compare different policies across many scenarios</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="reflection-questions" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="reflection-questions"><span class="header-section-number">3.5</span> Reflection Questions</h3>
 <p>Answer these questions in a few sentences each:</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 1">
 <div class="callout-header d-flex align-content-center">
@@ -571,7 +1140,8 @@ Figure&nbsp;6: Distribution of total annual damages across the community.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>How does uncertainty in the hazard (GEV) propagate to uncertainty in damages? Replace this text with your answer.</em></p>
+<p><em>How does uncertainty in the hazard distribution propagate to uncertainty in damages through convolution?</em></p>
+<p><em>Replace this text with your answer.</em></p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 2">
@@ -584,7 +1154,8 @@ Figure&nbsp;6: Distribution of total annual damages across the community.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>Why is expected damage not equal to damage at the expected flood stage? (Hint: think about Jensen’s inequality) Replace this text with your answer.</em></p>
+<p><em>Why is expected damage NOT equal to damage at the expected flood stage? (Hint: think about Jensen’s inequality and the shape of the damage function.)</em></p>
+<p><em>Replace this text with your answer.</em></p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 3">
@@ -597,31 +1168,52 @@ Figure&nbsp;6: Distribution of total annual damages across the community.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>What assumptions did we make that might not hold in reality? Replace this text with your answer.</em></p>
+<p><em>What assumptions did we make that might not hold in reality? List at least three and explain why they matter.</em></p>
+<p><em>Replace this text with your answer.</em></p>
 </div>
 </div>
 </section>
-<section id="summary" class="level2" data-number="10">
-<h2 data-number="10" class="anchored" data-anchor-id="summary"><span class="header-section-number">10</span> Summary</h2>
+<section id="summary" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.6</span> Summary</h3>
 <p>In this lab, you learned to:</p>
 <ol type="1">
-<li>Work with the GEV distribution for extreme event modeling</li>
-<li>Use Monte Carlo sampling for uncertainty quantification</li>
-<li>Apply a depth-damage function to translate hazard into losses</li>
-<li>Use for loops to analyze many houses</li>
-<li>Calculate community-level risk metrics</li>
+<li><strong>Convolve</strong> hazard distributions through damage functions analytically and via Monte Carlo</li>
+<li>Work with the <strong>GEV distribution</strong> for extreme event modeling</li>
+<li>Apply <strong>depth-damage functions</strong> to translate hazard into losses</li>
+<li>Analyze <strong>community-level risk</strong> with 100 houses at varying elevations</li>
+<li>Structure risk analysis using <strong>SimOptDecisions.jl</strong> (Config + Scenario)</li>
 </ol>
-<p>These are the building blocks for the iCOW model and climate risk analysis more broadly.</p>
+<p>The key insight: <strong>convolution is the mathematical bridge</strong> between “how bad could the flood be?” and “how much will it cost?”</p>
 </section>
-<section id="submission" class="level2" data-number="11">
-<h2 data-number="11" class="anchored" data-anchor-id="submission"><span class="header-section-number">11</span> Submission</h2>
+<section id="submission" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="submission"><span class="header-section-number">3.7</span> Submission</h3>
 <ol type="1">
 <li>Push your completed notebook to GitHub</li>
 <li>If the formatter creates a pull request, approve it and re-render</li>
 <li>Submit the link to your repository on Canvas</li>
 </ol>
+</section>
+</section>
+<section id="checklist" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="checklist">Checklist</h2>
+<p>Before submitting, make sure you have completed these tasks. Each task involves <strong>modifying existing code</strong>, not writing from scratch.</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>Setup</strong>: Run all setup cells and verify packages load without error</label></li>
+<li><label><input type="checkbox"><strong>Hand calculation</strong>: Compute the EAD for the discrete example and write your answer</label></li>
+<li><label><input type="checkbox"><strong>GEV exploration</strong>: Change at least two GEV parameters and describe how they affect the distribution (especially how ξ affects the right tail)</label></li>
+<li><label><input type="checkbox"><strong>Homeowner question</strong>: Explain what EAD hides about risk</label></li>
+<li><label><input type="checkbox"><strong>SimOptDecisions house</strong>: Change <code>my_house</code> elevation from 4.0 to 2.0 and observe how the damage distribution changes</label></li>
+<li><label><input type="checkbox"><strong>EAD vs elevation</strong>: Answer why the relationship is nonlinear</label></li>
+<li><label><input type="checkbox"><strong>Community EAD</strong>: Answer why total EAD equals sum of individual EADs</label></li>
+<li><label><input type="checkbox"><strong>Reflection questions</strong>: Answer all three reflection questions</label></li>
+<li><label><input type="checkbox"><strong>LLM exploration</strong>: Use GitHub Copilot, Claude Code, or another AI assistant to explore this codebase. Ask it to explain why a specific piece of code works the way it does. In your notebook, briefly describe one thing you learned about the code from the LLM.</label></li>
+<li><label><input type="checkbox"><strong>Render</strong>: Re-render the notebook to make sure all outputs are up to date</label></li>
+</ul>
+<section id="references" class="level3" data-number="3.8">
+<h3 data-number="3.8" class="anchored" data-anchor-id="references"><span class="header-section-number">3.8</span> References</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

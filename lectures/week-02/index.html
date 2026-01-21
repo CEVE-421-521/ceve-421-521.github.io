@@ -6,9 +6,9 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="../../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.26">
+  <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Dr.&nbsp;James Doss-Gollin">
   <title>CEVE 421/521 -- Spring 2026 – Hazard, Exposure, Vulnerability</title>
@@ -50,7 +50,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-286dcaa7f93810640a2473dbc792793a.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f813b346ce809c8bbd246a85cc5c9db3.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -174,45 +174,33 @@ Dr.&nbsp;James Doss-Gollin
   <p class="date">Wednesday, January 21, 2026</p>
 </section>
 <section class="slide level2">
-
-<div class="callout callout-warning" style="margin-bottom: 1em;">
-<div class="callout-body"><strong>Draft:</strong> This content is under development.</div>
+<h2>What Is a Fair Insurance Premium?</h2>
+<aside class="notes">
+<p>Target: 1:00. Open with a question that motivates the math.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>You own a house in a flood zone.</p>
+<p>An insurance company offers you a policy.</p>
+<div class="fragment">
+<p><strong>How do they decide what to charge you?</strong></p>
 </div>
-
-</section>
-<section>
-<section class="title-slide slide level1 agenda-slide center scrollable">
-<h1>Hook: The Insurance Dilemma</h1>
-<div class="agenda-heading">
-<p>Today</p>
-</div>
-<div class="agenda">
-<ol>
-<li><div class="agenda-active">
-<p>Hook: The Insurance Dilemma</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Risk Analysis Vocabulary</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>XLRM Framework</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Extreme Value Theory (Brief)</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>The iCOW Model</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Wrap Up</p>
-</div></li>
-</ol>
+<div class="fragment">
+<p>Today: The math behind flood risk pricing.</p>
 </div>
 </section>
 <section class="slide level2">
-<h2>A Pricing Problem</h2>
+<h2>Quick Estimate</h2>
 <aside class="notes">
-<p>Target: 1:02. Hook: start with a concrete business decision. Insurance connects directly to risk quantification.</p>
+<p>Target: 1:03. Get brains working immediately. Give 30 seconds to think, then cold call 2-3 students.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -224,18 +212,60 @@ Dr.&nbsp;James Doss-Gollin
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p>An insurance company wants to offer flood insurance for coastal homes.</p>
-<p>To set premiums, they need to answer:</p>
-<ul>
-<li class="fragment">How often will floods occur?</li>
-<li class="fragment">How bad will those floods be?</li>
-<li class="fragment">How much damage will result?</li>
-</ul>
+<p>A house faces two possible flood scenarios this year:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Probability</th>
+<th>Damage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No flood</td>
+<td>80%</td>
+<td>$0</td>
+</tr>
+<tr class="even">
+<td>3 ft flood</td>
+<td>20%</td>
+<td>$50,000</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>What’s the expected annual damage?</strong></p>
+<p><em>(30 seconds to think)</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Quick Estimate: Answer</h2>
+<aside class="notes">
+<p>Target: 1:05. Key insight: we weight by probability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><span class="math display">\[E[\text{Damage}] = 0.8 \times \$0 + 0.2 \times \$50,000 = \$10,000\]</span></p>
+<div class="fragment">
+<p>This simple calculation is the core of <strong>risk analysis</strong>.</p>
+</div>
+<div class="fragment">
+<p>Today: How do we do this when floods and damages are <em>continuous</em>?</p>
+</div>
 </section>
 <section class="slide level2 scrollable">
-<h2>The Core Question</h2>
+<h2>Today</h2>
 <aside class="notes">
-<p>Target: 1:04. Frame the lecture around this question.</p>
+<p>Target: 1:07. Quick roadmap.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -247,15 +277,13 @@ Dr.&nbsp;James Doss-Gollin
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p><strong>How do we translate hazards into damages?</strong></p>
-<p>Today we will:</p>
 <ol type="1">
-<li class="fragment">Define key vocabulary: hazard, exposure, vulnerability</li>
-<li class="fragment">Review the XLRM framework for structuring risk problems</li>
-<li class="fragment">Introduce the GEV distribution for extreme events</li>
-<li class="fragment">Preview the iCOW model we’ll use all semester</li>
+<li>Define key vocabulary: hazard, exposure, vulnerability</li>
+<li>See how these combine to produce <strong>risk</strong></li>
+<li>Learn why <span class="math inline">\(E[f(x)] \neq f(E[x])\)</span> (Jensen’s inequality)</li>
+<li>Introduce Monte Carlo for complex damage functions</li>
 </ol>
-</section></section>
+</section>
 <section>
 <section class="title-slide slide level1 agenda-slide center scrollable">
 <h1>Risk Analysis Vocabulary</h1>
@@ -264,20 +292,20 @@ Dr.&nbsp;James Doss-Gollin
 </div>
 <div class="agenda">
 <ol>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Hook: The Insurance Dilemma</p>
-</div></li>
 <li><div class="agenda-active">
 <p>Risk Analysis Vocabulary</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>XLRM Framework</p>
+<p>From Components to Risk</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>Extreme Value Theory (Brief)</p>
+<p>Convolution: Hazard → Damages</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>The iCOW Model</p>
+<p>Extreme Value Theory</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>The House Elevation Problem</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
 <p>Wrap Up</p>
@@ -288,7 +316,7 @@ Dr.&nbsp;James Doss-Gollin
 <section class="slide level2">
 <h2>Hazard</h2>
 <aside class="notes">
-<p>Target: 1:07. Emphasize that hazard is the physical event, not the damage.</p>
+<p>Target: 1:10. Emphasize that hazard is the physical event, not the damage.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -310,9 +338,9 @@ Dr.&nbsp;James Doss-Gollin
 <p>Key insight: Hazards are characterized by <strong>probability distributions</strong>, not single values.</p>
 </section>
 <section class="slide level2">
-<h2>Exposure</h2>
+<h2>Exposure: What’s at Risk?</h2>
 <aside class="notes">
-<p>Target: 1:10. Exposure is about WHAT is at risk, not how vulnerable it is.</p>
+<p>Target: 1:12. Exposure is about WHAT is at risk, not how vulnerable it is.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -324,19 +352,51 @@ Dr.&nbsp;James Doss-Gollin
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p><strong>Exposure:</strong> What is at risk?</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><strong>Exposure</strong> = assets that could be affected</p>
 <ul>
 <li>Buildings and infrastructure</li>
 <li>People and livelihoods</li>
 <li>Agricultural land</li>
 <li>Economic activity</li>
 </ul>
-<p>Key insight: Exposure <strong>changes over time</strong> with development and migration.</p>
+</div><div class="column" style="width:55%;">
+<div id="fig-exposure-global" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-exposure-global-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="jongman_exposure_2012_fig2.png">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-exposure-global-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Global flood exposure has grown 10× since 1970. Source: <span class="citation" data-cites="jongman_exposure:2012">Jongman et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span>
+</figcaption>
+</figure>
+</div>
+</div></div>
 </section>
+<section class="slide level2">
+<h2>Exposure Changes Over Time</h2>
+<aside class="notes">
+<p>Target: 1:14. Local example: Houston’s footprint has exploded.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<img data-src="tedesco_exposure_2020_fig8.png" style="width:90.0%" class="r-stretch quarto-figure-center" id="fig-houston-growth"><p class="caption">
+Figure&nbsp;2: Houston’s built footprint 1800-2018. Development into flood-prone areas increases exposure. Source: <span class="citation" data-cites="tedesco_exposure:2020">Tedesco et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>
+</p></section>
 <section class="slide level2">
 <h2>Vulnerability</h2>
 <aside class="notes">
-<p>Target: 1:13. This is where depth-damage functions come in.</p>
+<p>Target: 1:16. This is where depth-damage functions come in.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -352,14 +412,13 @@ Dr.&nbsp;James Doss-Gollin
 <p>Important distinction:</p>
 <ul>
 <li><strong>Fragility:</strong> Probability of failure (binary)</li>
-<li><strong>Vulnerability:</strong> Degree of damage (continuous)</li>
+<li><strong>Vulnerability:</strong> Degree of damage (continuous, 0-1)</li>
 </ul>
-<p>For floods, we typically use <strong>depth-damage functions</strong> to quantify vulnerability.</p>
 </section>
 <section class="slide level2">
-<h2>Depth-Damage Functions</h2>
+<h2>Fragility vs.&nbsp;Vulnerability</h2>
 <aside class="notes">
-<p>Target: 1:17. Show the Wing figure. Discuss uncertainty in these relationships.</p>
+<p>Target: 1:18. Show the Gidaris figure - panel (a) is a 3D fragility surface, panel (b) shows fragility curves.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -372,13 +431,33 @@ Dr.&nbsp;James Doss-Gollin
           display:block!important;
       }</style></aside>
 
-<img data-src="wing_vulnerability_2020_fig1.jpg" class="r-stretch quarto-figure-center" id="fig-wing-ddf"><p class="caption">
-Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxplots show <span class="citation" data-cites="wing_vulnerability:2020">Wing et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> analysis; lines show USACE depth-damage curves.
+<img data-src="gidaris_multiplehazard_2017.jpg" class="r-stretch quarto-figure-center" id="fig-fragility"><p class="caption">
+Figure&nbsp;3: Fragility surfaces (a) and curves (b) show probability of damage given hazard intensity. Source: <span class="citation" data-cites="gidaris_multiplehazard:2017">Gidaris et al. (<a href="#/references" role="doc-biblioref" onclick="">2017</a>)</span>
 </p></section>
 <section class="slide level2">
-<h2>Key Observations</h2>
+<h2>Depth-Damage Functions</h2>
 <aside class="notes">
-<p>Target: 1:20. Pause and ask students what they notice.</p>
+<p>Target: 1:20. Show the Wing figure. Discuss the huge uncertainty in these relationships.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>For floods, <strong>depth-damage functions</strong> quantify vulnerability:</p>
+
+<img data-src="wing_vulnerability_2020_fig1.jpg" class="r-stretch quarto-figure-center" id="fig-wing-ddf"><p class="caption">
+Figure&nbsp;4: Empirical depth-damage from NFIP claims data. Boxplots: <span class="citation" data-cites="wing_vulnerability:2020">Wing et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> analysis. Lines: USACE engineering curves.
+</p></section>
+<section class="slide level2">
+<h2>What Do You Notice?</h2>
+<aside class="notes">
+<p>Target: 1:22. Pause and ask students what they observe.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -397,11 +476,40 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
 <li class="fragment">Empirical data differs from engineering curves</li>
 <li class="fragment">First foot of water causes significant damage</li>
 </ul>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>From Components to Risk</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Risk Analysis Vocabulary</p>
+</div></li>
+<li><div class="agenda-active">
+<p>From Components to Risk</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Convolution: Hazard → Damages</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Extreme Value Theory</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>The House Elevation Problem</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
 </section>
 <section class="slide level2">
 <h2>Risk = f(Hazard, Exposure, Vulnerability)</h2>
 <aside class="notes">
-<p>Target: 1:23. Core equation for the course. Write on board.</p>
+<p>Target: 1:24. Core equation for the course. Write on board.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -418,40 +526,11 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
 <p>where <span class="math inline">\(h\)</span> is the hazard intensity (e.g., flood depth).</p>
 <p>For <strong>expected damages</strong>, we integrate over the hazard distribution:</p>
 <p><span class="math display">\[E[\text{Damage}] = \int \text{Vulnerability}(h) \times \text{Exposure} \times p(h) \, dh\]</span></p>
-</section></section>
-<section>
-<section class="title-slide slide level1 agenda-slide center scrollable">
-<h1>XLRM Framework</h1>
-<div class="agenda-heading">
-<p>Today</p>
-</div>
-<div class="agenda">
-<ol>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Hook: The Insurance Dilemma</p>
-</div></li>
-<li><div class="agenda-inactive agenda-pre-active">
-<p>Risk Analysis Vocabulary</p>
-</div></li>
-<li><div class="agenda-active">
-<p>XLRM Framework</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Extreme Value Theory (Brief)</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>The iCOW Model</p>
-</div></li>
-<li><div class="agenda-inactive agenda-post-active">
-<p>Wrap Up</p>
-</div></li>
-</ol>
-</div>
 </section>
 <section class="slide level2">
-<h2>Review from Week 1</h2>
+<h2>Annual Expected Damages at Scale</h2>
 <aside class="notes">
-<p>Target: 1:26. Quick review. Students should recognize this from week 1.</p>
+<p>Target: 1:26. This figure shows the full workflow from data to expected annual damage.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -463,60 +542,14 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p>XLRM helps us structure decision problems under uncertainty:</p>
-<ul>
-<li><strong>X</strong>: e<strong>X</strong>ogenous uncertainties (things we can’t control)</li>
-<li><strong>L</strong>: <strong>L</strong>evers (things we can control)</li>
-<li><strong>R</strong>: <strong>R</strong>elationships (models connecting X and L to outcomes)</li>
-<li><strong>M</strong>: <strong>M</strong>etrics (how we measure success)</li>
-</ul>
-</section>
-<section class="slide level2">
-<h2>XLRM for Flood Risk</h2>
-<aside class="notes">
-<p>Target: 1:30. Work through this example on the board.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Component</th>
-<th>Flood Risk Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>X</strong></td>
-<td>Sea level rise, storm intensity, housing prices</td>
-</tr>
-<tr class="even">
-<td><strong>L</strong></td>
-<td>Elevate house, build seawall, buy insurance, retreat</td>
-</tr>
-<tr class="odd">
-<td><strong>R</strong></td>
-<td>Depth-damage function, storm surge model, economic model</td>
-</tr>
-<tr class="even">
-<td><strong>M</strong></td>
-<td>Expected annual damages, probability of ruin, NPV</td>
-</tr>
-</tbody>
-</table>
-</section>
+
+<img data-src="demoel_reducing_2014_fig2.png" style="width:85.0%" class="r-stretch quarto-figure-center" id="fig-risk-workflow"><p class="caption">
+Figure&nbsp;5: From hazard and exposure data through damage models to expected annual damage (EAD). Source: <span class="citation" data-cites="demoel_reducing:2014">de Moel et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span>
+</p></section>
 <section class="slide level2">
 <h2>Your Turn</h2>
 <aside class="notes">
-<p>Target: 1:34. Give students 60 seconds to think. Then cold call 2-3 students.</p>
+<p>Target: 1:28. Give students 60 seconds to think. Then cold call 2-3 students.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -529,15 +562,44 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
           display:block!important;
       }</style></aside>
 <p>A city is deciding whether to build a new seawall.</p>
-<p>What are the <strong>X</strong>, <strong>L</strong>, <strong>R</strong>, and <strong>M</strong>?</p>
+<p>Identify the <strong>hazard</strong>, <strong>exposure</strong>, and <strong>vulnerability</strong>.</p>
 <div class="fragment">
 <p>Discuss with a neighbor for 60 seconds.</p>
 </div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Convolution: Hazard → Damages</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Risk Analysis Vocabulary</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>From Components to Risk</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Convolution: Hazard → Damages</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Extreme Value Theory</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>The House Elevation Problem</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
 </section>
-<section class="slide level2 scrollable">
-<h2>Key Insight</h2>
+<section class="slide level2">
+<h2>The Key Mathematical Idea</h2>
 <aside class="notes">
-<p>Target: 1:37. Connect to course theme.</p>
+<p>Target: 1:32. This is the bridge to Friday’s lab. Draw on board if helpful.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -549,37 +611,220 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p>The XLRM framework helps us:</p>
+<p>We have:</p>
+<ul>
+<li>A <strong>hazard distribution</strong> <span class="math inline">\(p(h)\)</span>: probability of each flood depth</li>
+<li>A <strong>damage function</strong> <span class="math inline">\(D(h)\)</span>: damage given flood depth</li>
+</ul>
+<p>We want:</p>
+<ul>
+<li>The <strong>damage distribution</strong> <span class="math inline">\(p(D)\)</span>: probability of each damage level</li>
+</ul>
+<p>This transformation is called <strong>convolution</strong>.</p>
+</section>
+<section class="slide level2">
+<h2>Convolution Illustrated</h2>
+<aside class="notes">
+<p>Target: 1:34. Simple example to build intuition.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Hazard Distribution</strong></p>
+<ul>
+<li>50% chance: no flood (h=0)</li>
+<li>30% chance: minor flood (h=2ft)</li>
+<li>20% chance: major flood (h=6ft)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Damage Function</strong></p>
+<ul>
+<li>h=0 → $0 damage</li>
+<li>h=2ft → $10,000 damage</li>
+<li>h=6ft → $100,000 damage</li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>Damage Distribution:</strong></p>
+<ul>
+<li>50% chance: $0</li>
+<li>30% chance: $10,000</li>
+<li>20% chance: $100,000</li>
+</ul>
+<p>Expected damage = $0.5(0) + 0.3(10k) + 0.2(100k) = <strong>$23,000</strong></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Jensen’s Inequality</h2>
+<aside class="notes">
+<p>Target: 1:36. Critical conceptual point. This equation WILL be on assessments. Draw convex function with secant line above curve.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>For any nonlinear function <span class="math inline">\(f\)</span>:</p>
+<p><span class="math display">\[E[f(x)] \neq f(E[x])\]</span></p>
+<div class="fragment">
+<p><strong>This will be on assessments. Know it.</strong></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Jensen’s Inequality: Example</h2>
+<aside class="notes">
+<p>Target: 1:38. Concrete example demonstrating the inequality.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Hazard:</strong></p>
+<ul>
+<li>50% chance: 2 ft flood</li>
+<li>50% chance: 8 ft flood</li>
+<li><span class="math inline">\(E[h] = 5\)</span> ft</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Damage function:</strong></p>
+<ul>
+<li><span class="math inline">\(D(2) = \$5,000\)</span></li>
+<li><span class="math inline">\(D(8) = \$90,000\)</span></li>
+<li><span class="math inline">\(D(5) = \$20,000\)</span></li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><span class="math inline">\(D(E[h]) = D(5) = \$20,000\)</span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(E[D(h)] = 0.5(\$5k) + 0.5(\$90k) = \$47,500\)</span></p>
+</div>
+<div class="fragment">
+<p>The difference matters: <strong>$27,500 underestimate</strong>.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Why Monte Carlo?</h2>
+<aside class="notes">
+<p>Target: 1:40. Connect Monte Carlo to the integration problem.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>For continuous distributions, expected damage is an integral:</p>
+<p><span class="math display">\[E[D] = \int D(h) \cdot p(h) \, dh\]</span></p>
+<div class="fragment">
+<p>This integral is <strong>intractable</strong> for nontrivial damage functions or probability density functions.</p>
+</div>
+<div class="fragment">
+<p><strong>Solution:</strong> Monte Carlo integration approximates it with samples.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>The Law of Large Numbers</h2>
+<aside class="notes">
+<p>Target: 1:42. Keep it simple - just the intuition.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>If we draw <span class="math inline">\(N\)</span> samples <span class="math inline">\(h_1, h_2, \ldots, h_N\)</span> from <span class="math inline">\(p(h)\)</span>:</p>
+<p><span class="math display">\[\frac{1}{N} \sum_{i=1}^{N} D(h_i) \xrightarrow{N \to \infty} E[D]\]</span></p>
+<div class="fragment">
+<p><strong>The sample average converges to the true expected value.</strong></p>
+<p>More samples → better approximation</p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Monte Carlo Recipe</h2>
+<aside class="notes">
+<p>Target: 1:43. Procedural summary connecting to lab.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <ol type="1">
-<li>Identify what we know vs.&nbsp;what is uncertain</li>
-<li>Clarify what decisions we control</li>
-<li>Make explicit how we model the system</li>
-<li>Define how we measure success</li>
+<li><strong>Sample</strong> <span class="math inline">\(N\)</span> flood scenarios from hazard distribution</li>
+<li><strong>Apply</strong> damage function: compute <span class="math inline">\(D(h_i)\)</span> for each</li>
+<li><strong>Summarize</strong> the damage samples</li>
 </ol>
-<p>This is how we structure complex problems throughout the course.</p>
+<div class="fragment">
+<p>Once we have samples, we can compute <strong>any statistic</strong>:</p>
+<ul>
+<li>Mean (expected annual damage)</li>
+<li>Variance (how much does damage vary year-to-year?)</li>
+<li>Quantiles (what’s the 99th percentile damage?)</li>
+</ul>
+</div>
+<div class="fragment">
+<p>This is exactly what you’ll implement on Friday.</p>
+</div>
 </section></section>
 <section>
 <section class="title-slide slide level1 agenda-slide center scrollable">
-<h1>Extreme Value Theory (Brief)</h1>
+<h1>Extreme Value Theory</h1>
 <div class="agenda-heading">
 <p>Today</p>
 </div>
 <div class="agenda">
 <ol>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>Hook: The Insurance Dilemma</p>
-</div></li>
-<li><div class="agenda-inactive agenda-pre-active">
 <p>Risk Analysis Vocabulary</p>
 </div></li>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>XLRM Framework</p>
+<p>From Components to Risk</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Convolution: Hazard → Damages</p>
 </div></li>
 <li><div class="agenda-active">
-<p>Extreme Value Theory (Brief)</p>
+<p>Extreme Value Theory</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
-<p>The iCOW Model</p>
+<p>The House Elevation Problem</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
 <p>Wrap Up</p>
@@ -590,7 +835,7 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
 <section class="slide level2">
 <h2>Why Extremes Matter</h2>
 <aside class="notes">
-<p>Target: 1:40. Just planting the seed here. Deeper coverage in Week 4.</p>
+<p>Target: 1:44. Just planting the seed here. Deeper coverage in Week 4.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -604,12 +849,14 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
       }</style></aside>
 <p>Most flood damage comes from <strong>rare, extreme events</strong>.</p>
 <p>The problem: Normal distributions <strong>underestimate extreme risks</strong>.</p>
-<p>We need specialized tools for modeling the tails of distributions.</p>
+<div class="fragment">
+<p>We need specialized tools for modeling the <strong>tails</strong> of distributions.</p>
+</div>
 </section>
 <section class="slide level2">
 <h2>The GEV Distribution</h2>
 <aside class="notes">
-<p>Target: 1:43. Keep it light. Just enough to use in lab.</p>
+<p>Target: 1:45. Keep it light. Just enough to use in lab.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -628,7 +875,9 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
 <li><span class="math inline">\(\sigma\)</span> (scale): How spread out it is</li>
 <li><span class="math inline">\(\xi\)</span> (shape): How heavy the tail is</li>
 </ul>
-<p>For a deeper dive: <a href="https://ceve543.github.io/">CEVE 543</a></p>
+<div class="fragment">
+<p><span class="math inline">\(\xi &gt; 0\)</span> means <strong>fat tails</strong>: extreme events are more likely than a normal distribution predicts.</p>
+</div>
 </section>
 <section class="slide level2 scrollable">
 <h2>GEV in Practice</h2>
@@ -647,35 +896,35 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
       }</style></aside>
 <p>In lab on Friday, you will:</p>
 <ol type="1">
-<li>Fit a GEV distribution to real gauge data</li>
-<li>Sample from it to generate many possible flood scenarios</li>
-<li>Pass those through a damage model</li>
-<li>Study the resulting distribution of damages</li>
+<li>Define a GEV distribution for storm surge</li>
+<li>Sample thousands of possible flood scenarios</li>
+<li>Pass each through a depth-damage function</li>
+<li>Analyze the resulting damage distribution</li>
 </ol>
 <p>This is <strong>uncertainty quantification</strong> in action.</p>
 </section></section>
 <section>
 <section class="title-slide slide level1 agenda-slide center scrollable">
-<h1>The iCOW Model</h1>
+<h1>The House Elevation Problem</h1>
 <div class="agenda-heading">
 <p>Today</p>
 </div>
 <div class="agenda">
 <ol>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>Hook: The Insurance Dilemma</p>
-</div></li>
-<li><div class="agenda-inactive agenda-pre-active">
 <p>Risk Analysis Vocabulary</p>
 </div></li>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>XLRM Framework</p>
+<p>From Components to Risk</p>
 </div></li>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>Extreme Value Theory (Brief)</p>
+<p>Convolution: Hazard → Damages</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Extreme Value Theory</p>
 </div></li>
 <li><div class="agenda-active">
-<p>The iCOW Model</p>
+<p>The House Elevation Problem</p>
 </div></li>
 <li><div class="agenda-inactive agenda-post-active">
 <p>Wrap Up</p>
@@ -684,9 +933,9 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
 </div>
 </section>
 <section class="slide level2">
-<h2>Introducing iCOW</h2>
+<h2>A Concrete Decision</h2>
 <aside class="notes">
-<p>Target: 1:49. Set up the model students will use all semester.</p>
+<p>Target: 1:47. Set up the problem students will use all semester.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -698,14 +947,24 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p><strong>iCOW</strong> = <strong>i</strong>dealized <strong>C</strong>ost <strong>o</strong>f <strong>W</strong>aiting</p>
-<p>Based on <span class="citation" data-cites="ceres_cityonawedge:2019">Ceres et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>: “City on a Wedge”</p>
-<p>A simple, fast, pedagogical model for flood risk management.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>A homeowner faces a choice:</p>
+<p><strong>How high should I elevate my house?</strong></p>
+<p>Higher elevation = more upfront cost, but less future flood damage.</p>
+</div><div class="column" style="width:60%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lee-meyerland-elevation.jpg"></p>
+<figcaption>House elevation in Meyerland, Houston. Photo: Allison Lee / Houston Public Media</figcaption>
+</figure>
+</div>
+</div></div>
 </section>
-<section class="slide level2">
-<h2>City on a Wedge</h2>
+<section class="slide level2 scrollable">
+<h2>The Trade-off</h2>
 <aside class="notes">
-<p>Target: 1:52. Draw on board if no figure available. Simple triangle cross-section.</p>
+<p>Target: 1:48. Draw on board if helpful.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -717,18 +976,24 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p>Imagine a city on a triangular wedge:</p>
 <ul>
-<li>One side faces the water</li>
-<li>Elevation increases as you move inland</li>
-<li>Houses at different elevations face different flood risks</li>
+<li class="fragment"><strong>Elevate 0 feet:</strong> No construction cost, high expected damages</li>
+<li class="fragment"><strong>Elevate 14 feet:</strong> High construction cost, near-zero damages</li>
+<li class="fragment"><strong>Somewhere in between:</strong> ???</li>
 </ul>
-<p>Simple geometry makes calculations tractable.</p>
+<div class="fragment">
+<p>Finding the optimal elevation requires:</p>
+<ol type="1">
+<li>A hazard model (GEV distribution for surge)</li>
+<li>A damage model (depth-damage function)</li>
+<li>A cost model (construction costs by elevation)</li>
+</ol>
+</div>
 </section>
 <section class="slide level2">
-<h2>iCOW Components</h2>
+<h2>This Semester’s Sandbox</h2>
 <aside class="notes">
-<p>Target: 1:55. Map back to XLRM.</p>
+<p>Target: 1:48. Connect to the iCOW model and SimOptDecisions.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -740,55 +1005,38 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<p>We’ll use the <strong>house elevation problem</strong> throughout the course:</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th>Component</th>
-<th>iCOW Implementation</th>
+<th>Week</th>
+<th>Topic</th>
+<th>What We Add</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Hazard</strong></td>
-<td>Storm surge / flood stage (GEV distribution)</td>
+<td>2</td>
+<td>Hazard-Damage Convolution</td>
+<td>Basic Monte Carlo</td>
 </tr>
 <tr class="even">
-<td><strong>Exposure</strong></td>
-<td>Houses at different elevations</td>
+<td>3-5</td>
+<td>Risk Metrics</td>
+<td>EAD, VaR, CVaR</td>
 </tr>
 <tr class="odd">
-<td><strong>Vulnerability</strong></td>
-<td>Depth-damage function</td>
+<td>6-8</td>
+<td>Decision Analysis</td>
+<td>Optimal static decisions</td>
 </tr>
 <tr class="even">
-<td><strong>Levers</strong></td>
-<td>Elevate houses, build seawall, managed retreat</td>
+<td>10-13</td>
+<td>Deep Uncertainty</td>
+<td>Robust optimization</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section class="slide level2">
-<h2>Why iCOW?</h2>
-<aside class="notes">
-<p>Target: 1:58. Set expectations for the semester.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<p>Why use this simplified model?</p>
-<ul>
-<li class="fragment"><strong>Fast enough</strong> for many Monte Carlo simulations</li>
-<li class="fragment"><strong>Simple enough</strong> to understand completely</li>
-<li class="fragment"><strong>Rich enough</strong> to explore real trade-offs</li>
-</ul>
-<p>We will use iCOW throughout the semester to explore risk management decisions.</p>
 </section></section>
 <section>
 <section class="title-slide slide level1 agenda-slide center scrollable">
@@ -799,19 +1047,19 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
 <div class="agenda">
 <ol>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>Hook: The Insurance Dilemma</p>
-</div></li>
-<li><div class="agenda-inactive agenda-pre-active">
 <p>Risk Analysis Vocabulary</p>
 </div></li>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>XLRM Framework</p>
+<p>From Components to Risk</p>
 </div></li>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>Extreme Value Theory (Brief)</p>
+<p>Convolution: Hazard → Damages</p>
 </div></li>
 <li><div class="agenda-inactive agenda-pre-active">
-<p>The iCOW Model</p>
+<p>Extreme Value Theory</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The House Elevation Problem</p>
 </div></li>
 <li><div class="agenda-active">
 <p>Wrap Up</p>
@@ -822,7 +1070,7 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
 <section class="slide level2 scrollable">
 <h2>Key Takeaways</h2>
 <aside class="notes">
-<p>Target: 1:01. Summarize main points.</p>
+<p>Target: 1:49. Summarize main points.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -836,15 +1084,16 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
       }</style></aside>
 <ol type="1">
 <li><strong>Risk</strong> emerges from the interaction of hazard, exposure, and vulnerability</li>
-<li><strong>XLRM</strong> helps us structure complex decision problems</li>
-<li><strong>Extreme events</strong> require specialized distributions (GEV)</li>
-<li><strong>iCOW</strong> is our pedagogical sandbox for exploring flood risk decisions</li>
+<li><strong>Exposure is growing</strong>: More assets in harm’s way</li>
+<li><strong>Convolution</strong> transforms hazard distributions into damage distributions</li>
+<li><strong>Monte Carlo</strong> lets us handle complex, nonlinear systems</li>
+<li>The <strong>house elevation problem</strong> gives us a concrete sandbox</li>
 </ol>
 </section>
 <section class="slide level2 scrollable">
-<h2>Lab Preview</h2>
+<h2>Lab Preview: Friday</h2>
 <aside class="notes">
-<p>Target: 1:03. Connect to Friday’s lab.</p>
+<p>Target: 1:50. Connect to Friday’s lab.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -858,48 +1107,34 @@ Figure&nbsp;1: Empirical depth-damage relationships from NFIP claims data. Boxpl
       }</style></aside>
 <p>On Friday, you will:</p>
 <ol type="1">
-<li>Fit a GEV distribution to real flood gauge data</li>
-<li>Define a HAZUS-style depth-damage function</li>
-<li>Compute damage distributions using Monte Carlo</li>
+<li>Define a GEV distribution for storm surge</li>
+<li>Implement a depth-damage function</li>
+<li>Use Monte Carlo to compute damage distributions</li>
 <li>Extend to 100 houses at varying elevations</li>
-<li>Get started with the ICOW package</li>
+<li>Begin using the SimOptDecisions.jl framework</li>
 </ol>
-</section>
-<section class="slide level2">
-<h2>Before Friday</h2>
-<aside class="notes">
-<p>Target: 1:05. Reading assignment and preparation.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<p><strong>Reading:</strong> <span class="citation" data-cites="ceres_cityonawedge:2019">Ceres et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> “City on a Wedge”</p>
-<ul>
-<li>Focus on Sections 1-3 (model description)</li>
-<li>Understand the geometry and assumptions</li>
-<li>Come prepared with questions</li>
-</ul>
-<p>This gives you context for the lab and the rest of the semester.</p>
 </section>
 <section class="slide level2 smaller scrollable" id="references">
 <h2>References</h2>
-
-
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-ceres_cityonawedge:2019" class="csl-entry" role="listitem">
-Ceres, R. L., Forest, C. E., &amp; Keller, K. (2019). Optimization of multiple storm surge risk mitigation strategies for an island <span>City On</span> a <span>Wedge</span>. <em>Environmental Modelling &amp; Software</em>, <em>119</em>, 341–353. <a href="https://doi.org/10.1016/j.envsoft.2019.06.011">https://doi.org/10.1016/j.envsoft.2019.06.011</a>
+<div id="ref-gidaris_multiplehazard:2017" class="csl-entry" role="listitem">
+Gidaris, I., Padgett, J. E., Barbosa, A. R., Chen, S., Cox, D., Webb, B., &amp; Cerato, A. (2017). Multiple-<span>Hazard Fragility</span> and <span>Restoration Models</span> of <span>Highway Bridges</span> for <span>Regional Risk</span> and <span>Resilience Assessment</span> in the <span>United States</span>: <span class="nocase">State-of-the-Art Review</span>. <em>Journal of Structural Engineering</em>, <em>143</em>(3), 04016188. <a href="https://doi.org/10.1061/(ASCE)ST.1943-541X.0001672">https://doi.org/10.1061/(ASCE)ST.1943-541X.0001672</a>
+</div>
+<div id="ref-jongman_exposure:2012" class="csl-entry" role="listitem">
+Jongman, B., Ward, P. J., &amp; Aerts, J. C. J. H. (2012). Global exposure to river and coastal flooding: Long term trends and changes. <em>Global Environmental Change</em>, <em>22</em>(4), 823–835. <a href="https://doi.org/10.1016/j.gloenvcha.2012.07.004">https://doi.org/10.1016/j.gloenvcha.2012.07.004</a>
+</div>
+<div id="ref-demoel_reducing:2014" class="csl-entry" role="listitem">
+de Moel, H., van Vliet, M., &amp; Aerts, J. C. J. H. (2014). Evaluating the effect of flood damage-reducing measures: A case study of the unembanked area of <span>Rotterdam</span>, the <span>Netherlands</span>. <em>Regional Environmental Change</em>, <em>14</em>(3), 895–908. <a href="https://doi.org/10.1007/s10113-013-0420-z">https://doi.org/10.1007/s10113-013-0420-z</a>
+</div>
+<div id="ref-tedesco_exposure:2020" class="csl-entry" role="listitem">
+Tedesco, M., McAlpine, S., &amp; Porter, J. R. (2020). Exposure of real estate properties to the 2018 <span>Hurricane Florence</span> flooding. <em>Natural Hazards and Earth System Sciences</em>, <em>20</em>(3), 907–920. <a href="https://doi.org/10.5194/nhess-20-907-2020">https://doi.org/10.5194/nhess-20-907-2020</a>
 </div>
 <div id="ref-wing_vulnerability:2020" class="csl-entry" role="listitem">
 Wing, O. E. J., Pinter, N., Bates, P. D., &amp; Kousky, C. (2020). New insights into <span>US</span> flood vulnerability revealed from flood insurance big data. <em>Nature Communications</em>, <em>11</em>(1, 1), 1444. <a href="https://doi.org/10.1038/s41467-020-15264-2">https://doi.org/10.1038/s41467-020-15264-2</a>
 </div>
 </div>
+
+
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
