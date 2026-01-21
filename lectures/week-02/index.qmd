@@ -3,7 +3,7 @@ title: "Hazard, Exposure, Vulnerability"
 subtitle: "Lecture"
 date: 2026-01-21
 week: 2
-status: draft
+status: published
 
 format:
   revealjs: default
@@ -14,50 +14,81 @@ course: "{{< var course.number >}}, {{< var course.title >}}"
 institution: "{{< var course.institution >}}"
 ---
 
-# Hook: The Insurance Dilemma
-
-## A Pricing Problem
+## What Is a Fair Insurance Premium?
 
 ::: {.notes}
-Target: 1:02.
-Hook: start with a concrete business decision.
-Insurance connects directly to risk quantification.
+Target: 1:00.
+Open with a question that motivates the math.
 :::
 
-An insurance company wants to offer flood insurance for coastal homes.
+You own a house in a flood zone.
 
-To set premiums, they need to answer:
+An insurance company offers you a policy.
 
-::: {.incremental}
-- How often will floods occur?
-- How bad will those floods be?
-- How much damage will result?
+::: {.fragment}
+**How do they decide what to charge you?**
 :::
 
-## The Core Question
+::: {.fragment}
+Today: The math behind flood risk pricing.
+:::
+
+## Quick Estimate
 
 ::: {.notes}
-Target: 1:04.
-Frame the lecture around this question.
+Target: 1:03.
+Get brains working immediately.
+Give 30 seconds to think, then cold call 2-3 students.
 :::
 
-**How do we translate hazards into damages?**
+A house faces two possible flood scenarios this year:
 
-Today we will:
+| Scenario | Probability | Damage |
+|----------|-------------|--------|
+| No flood | 80% | $0 |
+| 3 ft flood | 20% | $50,000 |
 
-::: {.incremental}
+::: {.fragment}
+**What's the expected annual damage?**
+
+*(30 seconds to think)*
+:::
+
+## Quick Estimate: Answer
+
+::: {.notes}
+Target: 1:05.
+Key insight: we weight by probability.
+:::
+
+$$E[\text{Damage}] = 0.8 \times \$0 + 0.2 \times \$50,000 = \$10,000$$
+
+::: {.fragment}
+This simple calculation is the core of **risk analysis**.
+:::
+
+::: {.fragment}
+Today: How do we do this when floods and damages are *continuous*?
+:::
+
+## Today
+
+::: {.notes}
+Target: 1:07.
+Quick roadmap.
+:::
+
 1. Define key vocabulary: hazard, exposure, vulnerability
-2. Review the XLRM framework for structuring risk problems
-3. Introduce the GEV distribution for extreme events
-4. Preview the iCOW model we'll use all semester
-:::
+2. See how these combine to produce **risk**
+3. Learn why $E[f(x)] \neq f(E[x])$ (Jensen's inequality)
+4. Introduce Monte Carlo for complex damage functions
 
 # Risk Analysis Vocabulary
 
 ## Hazard
 
 ::: {.notes}
-Target: 1:07.
+Target: 1:10.
 Emphasize that hazard is the physical event, not the damage.
 :::
 
@@ -70,26 +101,51 @@ Emphasize that hazard is the physical event, not the damage.
 
 Key insight: Hazards are characterized by **probability distributions**, not single values.
 
-## Exposure
+## Exposure: What's at Risk?
 
 ::: {.notes}
-Target: 1:10.
+Target: 1:12.
 Exposure is about WHAT is at risk, not how vulnerable it is.
 :::
 
-**Exposure:** What is at risk?
+::: {.columns}
+::: {.column width="45%"}
+**Exposure** = assets that could be affected
 
 - Buildings and infrastructure
 - People and livelihoods
 - Agricultural land
 - Economic activity
+:::
+::: {.column width="55%"}
+:::{#fig-exposure-global}
+![](jongman_exposure_2012_fig2.png)
 
-Key insight: Exposure **changes over time** with development and migration.
+Global flood exposure has grown 10× since 1970.
+Source: @jongman_exposure:2012
+:::
+:::
+:::
+
+## Exposure Changes Over Time
+
+::: {.notes}
+Target: 1:14.
+Local example: Houston's footprint has exploded.
+:::
+
+:::{#fig-houston-growth}
+![](tedesco_exposure_2020_fig8.png){width="90%"}
+
+Houston's built footprint 1800-2018.
+Development into flood-prone areas increases exposure.
+Source: @tedesco_exposure:2020
+:::
 
 ## Vulnerability
 
 ::: {.notes}
-Target: 1:13.
+Target: 1:16.
 This is where depth-damage functions come in.
 :::
 
@@ -98,30 +154,45 @@ This is where depth-damage functions come in.
 Important distinction:
 
 - **Fragility:** Probability of failure (binary)
-- **Vulnerability:** Degree of damage (continuous)
+- **Vulnerability:** Degree of damage (continuous, 0-1)
 
-For floods, we typically use **depth-damage functions** to quantify vulnerability.
+## Fragility vs. Vulnerability
+
+::: {.notes}
+Target: 1:18.
+Show the Gidaris figure - panel (a) is a 3D fragility surface, panel (b) shows fragility curves.
+:::
+
+:::{#fig-fragility}
+![](gidaris_multiplehazard_2017.jpg)
+
+Fragility surfaces (a) and curves (b) show probability of damage given hazard intensity.
+Source: @gidaris_multiplehazard:2017
+:::
 
 ## Depth-Damage Functions
 
 ::: {.notes}
-Target: 1:17.
+Target: 1:20.
 Show the Wing figure.
-Discuss uncertainty in these relationships.
+Discuss the huge uncertainty in these relationships.
 :::
+
+For floods, **depth-damage functions** quantify vulnerability:
 
 :::{#fig-wing-ddf}
 ![](wing_vulnerability_2020_fig1.jpg)
 
-Empirical depth-damage relationships from NFIP claims data.
-Boxplots show @wing_vulnerability:2020 analysis; lines show USACE depth-damage curves.
+Empirical depth-damage from NFIP claims data.
+Boxplots: @wing_vulnerability:2020 analysis.
+Lines: USACE engineering curves.
 :::
 
-## Key Observations
+## What Do You Notice?
 
 ::: {.notes}
-Target: 1:20.
-Pause and ask students what they notice.
+Target: 1:22.
+Pause and ask students what they observe.
 :::
 
 From the depth-damage data:
@@ -133,10 +204,12 @@ From the depth-damage data:
 - First foot of water causes significant damage
 :::
 
+# From Components to Risk
+
 ## Risk = f(Hazard, Exposure, Vulnerability)
 
 ::: {.notes}
-Target: 1:23.
+Target: 1:24.
 Core equation for the course.
 Write on board.
 :::
@@ -151,75 +224,207 @@ For **expected damages**, we integrate over the hazard distribution:
 
 $$E[\text{Damage}] = \int \text{Vulnerability}(h) \times \text{Exposure} \times p(h) \, dh$$
 
-# XLRM Framework
-
-## Review from Week 1
+## Annual Expected Damages at Scale
 
 ::: {.notes}
 Target: 1:26.
-Quick review.
-Students should recognize this from week 1.
+This figure shows the full workflow from data to expected annual damage.
 :::
 
-XLRM helps us structure decision problems under uncertainty:
+:::{#fig-risk-workflow}
+![](demoel_reducing_2014_fig2.png){width="85%"}
 
-- **X**: e**X**ogenous uncertainties (things we can't control)
-- **L**: **L**evers (things we can control)
-- **R**: **R**elationships (models connecting X and L to outcomes)
-- **M**: **M**etrics (how we measure success)
-
-## XLRM for Flood Risk
-
-::: {.notes}
-Target: 1:30.
-Work through this example on the board.
+From hazard and exposure data through damage models to expected annual damage (EAD).
+Source: @demoel_reducing:2014
 :::
-
-| Component | Flood Risk Example |
-|-----------|-------------------|
-| **X** | Sea level rise, storm intensity, housing prices |
-| **L** | Elevate house, build seawall, buy insurance, retreat |
-| **R** | Depth-damage function, storm surge model, economic model |
-| **M** | Expected annual damages, probability of ruin, NPV |
 
 ## Your Turn
 
 ::: {.notes}
-Target: 1:34.
+Target: 1:28.
 Give students 60 seconds to think.
 Then cold call 2-3 students.
 :::
 
 A city is deciding whether to build a new seawall.
 
-What are the **X**, **L**, **R**, and **M**?
+Identify the **hazard**, **exposure**, and **vulnerability**.
 
 ::: {.fragment}
 Discuss with a neighbor for 60 seconds.
 :::
 
-## Key Insight
+# Convolution: Hazard → Damages
+
+## The Key Mathematical Idea
 
 ::: {.notes}
-Target: 1:37.
-Connect to course theme.
+Target: 1:32.
+This is the bridge to Friday's lab.
+Draw on board if helpful.
 :::
 
-The XLRM framework helps us:
+We have:
 
-1. Identify what we know vs. what is uncertain
-2. Clarify what decisions we control
-3. Make explicit how we model the system
-4. Define how we measure success
+- A **hazard distribution** $p(h)$: probability of each flood depth
+- A **damage function** $D(h)$: damage given flood depth
 
-This is how we structure complex problems throughout the course.
+We want:
 
-# Extreme Value Theory (Brief)
+- The **damage distribution** $p(D)$: probability of each damage level
+
+This transformation is called **convolution**.
+
+## Convolution Illustrated
+
+::: {.notes}
+Target: 1:34.
+Simple example to build intuition.
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+**Hazard Distribution**
+
+- 50% chance: no flood (h=0)
+- 30% chance: minor flood (h=2ft)
+- 20% chance: major flood (h=6ft)
+:::
+::: {.column width="50%"}
+**Damage Function**
+
+- h=0 → $0 damage
+- h=2ft → $10,000 damage
+- h=6ft → $100,000 damage
+:::
+:::
+
+::: {.fragment}
+**Damage Distribution:**
+
+- 50% chance: $0
+- 30% chance: $10,000
+- 20% chance: $100,000
+
+Expected damage = $0.5(0) + 0.3(10k) + 0.2(100k) = **$23,000**
+:::
+
+## Jensen's Inequality
+
+::: {.notes}
+Target: 1:36.
+Critical conceptual point.
+This equation WILL be on assessments.
+Draw convex function with secant line above curve.
+:::
+
+For any nonlinear function $f$:
+
+$$E[f(x)] \neq f(E[x])$$
+
+::: {.fragment}
+**This will be on assessments. Know it.**
+:::
+
+## Jensen's Inequality: Example
+
+::: {.notes}
+Target: 1:38.
+Concrete example demonstrating the inequality.
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+**Hazard:**
+
+- 50% chance: 2 ft flood
+- 50% chance: 8 ft flood
+- $E[h] = 5$ ft
+:::
+::: {.column width="50%"}
+**Damage function:**
+
+- $D(2) = \$5,000$
+- $D(8) = \$90,000$
+- $D(5) = \$20,000$
+:::
+:::
+
+::: {.fragment}
+$D(E[h]) = D(5) = \$20,000$
+:::
+::: {.fragment}
+$E[D(h)] = 0.5(\$5k) + 0.5(\$90k) = \$47,500$
+:::
+::: {.fragment}
+The difference matters: **\$27,500 underestimate**.
+:::
+
+## Why Monte Carlo?
+
+::: {.notes}
+Target: 1:40.
+Connect Monte Carlo to the integration problem.
+:::
+
+For continuous distributions, expected damage is an integral:
+
+$$E[D] = \int D(h) \cdot p(h) \, dh$$
+
+::: {.fragment}
+This integral is **intractable** for nontrivial damage functions or probability density functions.
+:::
+
+::: {.fragment}
+**Solution:** Monte Carlo integration approximates it with samples.
+:::
+
+## The Law of Large Numbers
+
+::: {.notes}
+Target: 1:42.
+Keep it simple - just the intuition.
+:::
+
+If we draw $N$ samples $h_1, h_2, \ldots, h_N$ from $p(h)$:
+
+$$\frac{1}{N} \sum_{i=1}^{N} D(h_i) \xrightarrow{N \to \infty} E[D]$$
+
+::: {.fragment}
+**The sample average converges to the true expected value.**
+
+More samples → better approximation
+:::
+
+## Monte Carlo Recipe
+
+::: {.notes}
+Target: 1:43.
+Procedural summary connecting to lab.
+:::
+
+1. **Sample** $N$ flood scenarios from hazard distribution
+2. **Apply** damage function: compute $D(h_i)$ for each
+3. **Summarize** the damage samples
+
+::: {.fragment}
+Once we have samples, we can compute **any statistic**:
+
+- Mean (expected annual damage)
+- Variance (how much does damage vary year-to-year?)
+- Quantiles (what's the 99th percentile damage?)
+:::
+
+::: {.fragment}
+This is exactly what you'll implement on Friday.
+:::
+
+# Extreme Value Theory
 
 ## Why Extremes Matter
 
 ::: {.notes}
-Target: 1:40.
+Target: 1:44.
 Just planting the seed here.
 Deeper coverage in Week 4.
 :::
@@ -228,12 +433,14 @@ Most flood damage comes from **rare, extreme events**.
 
 The problem: Normal distributions **underestimate extreme risks**.
 
-We need specialized tools for modeling the tails of distributions.
+::: {.fragment}
+We need specialized tools for modeling the **tails** of distributions.
+:::
 
 ## The GEV Distribution
 
 ::: {.notes}
-Target: 1:43.
+Target: 1:45.
 Keep it light.
 Just enough to use in lab.
 :::
@@ -246,7 +453,9 @@ Three parameters:
 - $\sigma$ (scale): How spread out it is
 - $\xi$ (shape): How heavy the tail is
 
-For a deeper dive: [CEVE 543](https://ceve543.github.io/)
+::: {.fragment}
+$\xi > 0$ means **fat tails**: extreme events are more likely than a normal distribution predicts.
+:::
 
 ## GEV in Practice
 
@@ -257,117 +466,104 @@ Preview what they'll do in lab.
 
 In lab on Friday, you will:
 
-1. Fit a GEV distribution to real gauge data
-2. Sample from it to generate many possible flood scenarios
-3. Pass those through a damage model
-4. Study the resulting distribution of damages
+1. Define a GEV distribution for storm surge
+2. Sample thousands of possible flood scenarios
+3. Pass each through a depth-damage function
+4. Analyze the resulting damage distribution
 
 This is **uncertainty quantification** in action.
 
-# The iCOW Model
+# The House Elevation Problem
 
-## Introducing iCOW
-
-::: {.notes}
-Target: 1:49.
-Set up the model students will use all semester.
-:::
-
-**iCOW** = **i**dealized **C**ost **o**f **W**aiting
-
-Based on @ceres_cityonawedge:2019: "City on a Wedge"
-
-A simple, fast, pedagogical model for flood risk management.
-
-## City on a Wedge
+## A Concrete Decision
 
 ::: {.notes}
-Target: 1:52.
-Draw on board if no figure available.
-Simple triangle cross-section.
+Target: 1:47.
+Set up the problem students will use all semester.
 :::
 
-Imagine a city on a triangular wedge:
+::: {.columns}
+::: {.column width="40%"}
+A homeowner faces a choice:
 
-- One side faces the water
-- Elevation increases as you move inland
-- Houses at different elevations face different flood risks
+**How high should I elevate my house?**
 
-Simple geometry makes calculations tractable.
+Higher elevation = more upfront cost, but less future flood damage.
+:::
+::: {.column width="60%"}
+![House elevation in Meyerland, Houston.
+Photo: Allison Lee / Houston Public Media](lee-meyerland-elevation.jpg)
+:::
+:::
 
-## iCOW Components
+## The Trade-off
 
 ::: {.notes}
-Target: 1:55.
-Map back to XLRM.
+Target: 1:48.
+Draw on board if helpful.
 :::
-
-| Component | iCOW Implementation |
-|-----------|---------------------|
-| **Hazard** | Storm surge / flood stage (GEV distribution) |
-| **Exposure** | Houses at different elevations |
-| **Vulnerability** | Depth-damage function |
-| **Levers** | Elevate houses, build seawall, managed retreat |
-
-## Why iCOW?
-
-::: {.notes}
-Target: 1:58.
-Set expectations for the semester.
-:::
-
-Why use this simplified model?
 
 ::: {.incremental}
-- **Fast enough** for many Monte Carlo simulations
-- **Simple enough** to understand completely
-- **Rich enough** to explore real trade-offs
+- **Elevate 0 feet:** No construction cost, high expected damages
+- **Elevate 14 feet:** High construction cost, near-zero damages
+- **Somewhere in between:** ???
 :::
 
-We will use iCOW throughout the semester to explore risk management decisions.
+::: {.fragment}
+Finding the optimal elevation requires:
+
+1. A hazard model (GEV distribution for surge)
+2. A damage model (depth-damage function)
+3. A cost model (construction costs by elevation)
+:::
+
+## This Semester's Sandbox
+
+::: {.notes}
+Target: 1:48.
+Connect to the iCOW model and SimOptDecisions.
+:::
+
+We'll use the **house elevation problem** throughout the course:
+
+| Week | Topic | What We Add |
+|------|-------|-------------|
+| 2 | Hazard-Damage Convolution | Basic Monte Carlo |
+| 3-5 | Risk Metrics | EAD, VaR, CVaR |
+| 6-8 | Decision Analysis | Optimal static decisions |
+| 10-13 | Deep Uncertainty | Robust optimization |
 
 # Wrap Up
 
 ## Key Takeaways
 
 ::: {.notes}
-Target: 1:01.
+Target: 1:49.
 Summarize main points.
 :::
 
 1. **Risk** emerges from the interaction of hazard, exposure, and vulnerability
-2. **XLRM** helps us structure complex decision problems
-3. **Extreme events** require specialized distributions (GEV)
-4. **iCOW** is our pedagogical sandbox for exploring flood risk decisions
+2. **Exposure is growing**: More assets in harm's way
+3. **Convolution** transforms hazard distributions into damage distributions
+4. **Monte Carlo** lets us handle complex, nonlinear systems
+5. The **house elevation problem** gives us a concrete sandbox
 
-## Lab Preview
+## Lab Preview: Friday
 
 ::: {.notes}
-Target: 1:03.
+Target: 1:50.
 Connect to Friday's lab.
 :::
 
 On Friday, you will:
 
-1. Fit a GEV distribution to real flood gauge data
-2. Define a HAZUS-style depth-damage function
-3. Compute damage distributions using Monte Carlo
+1. Define a GEV distribution for storm surge
+2. Implement a depth-damage function
+3. Use Monte Carlo to compute damage distributions
 4. Extend to 100 houses at varying elevations
-5. Get started with the ICOW package
-
-## Before Friday
-
-::: {.notes}
-Target: 1:05.
-Reading assignment and preparation.
-:::
-
-**Reading:** @ceres_cityonawedge:2019 "City on a Wedge"
-
-- Focus on Sections 1-3 (model description)
-- Understand the geometry and assumptions
-- Come prepared with questions
-
-This gives you context for the lab and the rest of the semester.
+5. Begin using the SimOptDecisions.jl framework
 
 ## References
+
+::: {#refs}
+:::

@@ -10,7 +10,6 @@ project:
     - "!README.md"
     - "!LICENSE.md"
     - "!scripts/**"
-    - "!exams/**"
     - "!_background/**"
 
 website:
