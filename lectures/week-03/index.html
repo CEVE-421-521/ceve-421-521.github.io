@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Dr.&nbsp;James Doss-Gollin">
-  <title>CEVE 421/521 -- Spring 2026 – Climate Variability, Extremes, and Change</title>
+  <title>CEVE 421/521 -- Spring 2026 – Climate Science and Scenarios</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,7 +29,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f813b346ce809c8bbd246a85cc5c9db3.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -131,7 +151,7 @@
       }
     };
   </script>
-<meta property="og:title" content="Climate Variability, Extremes, and Change – CEVE 421/521 – Spring 2026">
+<meta property="og:title" content="Climate Science and Scenarios – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="Lecture">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
@@ -140,7 +160,7 @@
     <div class="slides">
 
 <section class="quarto-title-block center">
-  <h1 class="title">Climate Variability, Extremes, and Change</h1>
+  <h1 class="title">Climate Science and Scenarios</h1>
   <p class="subtitle">Lecture</p>
 
 <div class="quarto-title-authors">
@@ -153,26 +173,943 @@ Dr.&nbsp;James Doss-Gollin
 
   <p class="date">Monday, January 26, 2026</p>
 </section>
+<section class="slide level2 scrollable">
+<h2>Motivating Questions</h2>
+<aside class="notes">
+<p>Frame the lecture around these two questions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<ol type="1">
+<li class="fragment">What causes climate hazards?</li>
+<li class="fragment">What have we <em>not</em> observed that is still possible?</li>
+<li class="fragment">How might these pattern change in the future?</li>
+</ol>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>The Climate System</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>The Climate System</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>What Generates Extremes?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Variability and Persistence</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Models and Their Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Sea Level Rise</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>A Fluid on a Rotating Sphere</h2>
+<aside class="notes">
+<p>Flash the equations—don’t derive them. Point is: this is physics, not magic.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Climate is governed by the Navier-Stokes equations on a rotating sphere, heated unevenly by the sun.</p>
+<ul>
+<li class="fragment">Conservation of mass, momentum, energy</li>
+<li class="fragment">Ocean + atmosphere + land + ice + water cycle</li>
+<li class="fragment">Nonlinear interactions across scales</li>
+</ul>
+</section>
 <section class="slide level2">
 
-<div class="callout callout-warning" style="margin-bottom: 1em;">
-<div class="callout-body"><strong>Draft:</strong> This content is under development.</div>
+<aside class="notes">
+<p>Don’t explain the equations. Just show that climate models solve physics.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:45%;">
+<h3>Equations of Motion</h3>
+</div><div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="vallis_textbook_2006.png"></p>
+<figcaption><span class="citation" data-cites="vallis_textbook:2006">Vallis (<a href="#/references" role="doc-biblioref" onclick="">2006</a>)</span></figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="hannachi_review_2017.png"></p>
+<figcaption><span class="citation" data-cites="hannachi_review:2017">Hannachi et al. (<a href="#/references" role="doc-biblioref" onclick="">2017</a>)</span></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:30%;">
+<h3>Chaos and regimes</h3>
+<p>The climate behaves as a <em>nonlinear dynamical system</em> with characteristic <em>modes</em> or <em>regimes</em>.</p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Weather vs.&nbsp;Climate</h2>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<h4>Weather Prediction</h4>
+<p>An <em>initial value problem</em></p>
+<ul>
+<li>Sensitive to starting conditions</li>
+<li>Errors grow exponentially</li>
+<li>Predictability limit: ~2 weeks</li>
+</ul>
+</div><div class="column fragment" style="width:50%;">
+<h4>Climate Projection</h4>
+<p>A <em>boundary value problem</em></p>
+<ul>
+<li>Driven by energy inputs/outputs</li>
+<li>Shape of the attractor</li>
+<li>Statistics over decades</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>What This Means for Risk</h2>
+<p>We cannot predict what the weather will be on January 26, 2100. We <em>can</em> project the statistical properties:</p>
+<div class="fragment">
+<ul>
+<li>What temperature will it be on average?</li>
+<li>How likely is it that we get at least 2” of rain?</li>
+<li>What is the probability distribution of maximum wind speeds?</li>
+</ul>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>What Generates Extremes?</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The Climate System</p>
+</div></li>
+<li><div class="agenda-active">
+<p>What Generates Extremes?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Variability and Persistence</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Models and Their Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Sea Level Rise</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Billion Dollar Disasters</h2>
+
+<img data-src="billion_dollar_disasters_2024.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">U.S. billion-dollar weather and climate disasters. Source: NOAA NCEI</p></section>
+<section class="slide level2">
+
+<aside class="notes">
+<p>ARs are narrow corridors of concentrated moisture transport. They cause extreme precipitation when they make landfall.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="gimeno_review_2014.jpg" style="width:80.0%"></p>
+<figcaption><span class="citation" data-cites="gimeno_review:2014">Gimeno et al. (<a href="#/references" role="doc-biblioref" onclick="">2014</a>)</span></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<h3>Atmospheric Rivers</h3>
+<p>Organized <em>moisture transport</em> from warm tropical and subtropical oceans drives a large fraction of midlatitude rainfall.</p>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Tropical Cyclones</h2>
+<aside class="notes">
+<p>TCs are organized vortices that convert ocean heat to kinetic energy. Harvey, Maria, Katrina—these are the billion-dollar events.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="tc_katrina_2005.jpg" style="width:90.0%"></p>
+<figcaption>Hurricane Katrina (2005) from GOES-12 infrared satellite. Source: <a href="https://svs.gsfc.nasa.gov/3251/">NASA/NOAA</a></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Organized vortices that convert ocean heat to kinetic energy:</p>
+<ul>
+<li class="fragment">Require warm SSTs (&gt; 26°C) and low wind shear</li>
+<li class="fragment">Strongest at landfall → storm surge, wind, rainfall</li>
+<li class="fragment">Examples: Harvey (2017), Maria (2017), Katrina (2005)</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Mesoscale Convective Systems</h2>
+<aside class="notes">
+<p>MCS are clusters of thunderstorms that organize and persist. They cause flash floods and severe weather.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="mcs_goes8_1997.gif" style="width:90.0%"></p>
+<figcaption>Mesoscale convective complex over the Great Plains (July 8, 1997). Source: <a href="https://cimss.ssec.wisc.edu/goes/misc/970708.html">CIMSS Wisconsin</a></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Organized clusters of thunderstorms (10–100 km):</p>
+<ul>
+<li class="fragment">Persist longer than individual cells</li>
+<li class="fragment">Responsible for most warm-season extreme rainfall</li>
+<li class="fragment">Flash floods, derechos, hail</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Blocking Patterns</h2>
+<aside class="notes">
+<p>Blocking = persistent high pressure that diverts the jet stream. Causes both heat waves and cold snaps depending on location.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="block_wikipedia.PNG" style="width:90.0%"></p>
+<figcaption>500 hPa geopotential height showing omega block over North America. Source: <a href="https://en.wikipedia.org/wiki/Block_(meteorology)">Wikipedia</a></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Persistent high-pressure systems that “block” normal flow:</p>
+<ul>
+<li class="fragment">Divert the jet stream for days to weeks</li>
+<li class="fragment">Heat waves (2021 Pacific Northwest, 2003 Europe)</li>
+<li class="fragment">Can also cause persistent cold (Polar vortex disruptions)</li>
+</ul>
+</div></div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Variability and Persistence</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The Climate System</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What Generates Extremes?</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Variability and Persistence</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Models and Their Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Sea Level Rise</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Climate Risks Cluster in Time</h2>
+<aside class="notes">
+<p>Key insight: climate risk is not white noise. Temporal clustering = compound risk. Use the megadrought figure to show multi-decade droughts.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="cook_megadroughts_2010.png"></p>
+<figcaption>Megadroughts in North America over the past 1200 years. <span class="citation" data-cites="cook_megadroughts:2010">Cook et al. (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:45%;">
+<p>Climate extremes are not independent events.</p>
+<ul>
+<li>Droughts persist for years</li>
+<li>Wet periods cluster together</li>
+<li>Hurricane seasons vary dramatically</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Climate Risks Cluster in Space</h2>
+<aside class="notes">
+<p>Use Bonnafous figure to show correlated risk across space.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="bonnafous_waterrisk_2017.png"></p>
+<figcaption>Spatial clustering of water risk exposure. <span class="citation" data-cites="bonnafous_waterrisk:2017">Bonnafous et al. (<a href="#/references" role="doc-biblioref" onclick="">2017</a>)</span></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:45%;">
+<p>Extremes are spatially correlated.</p>
+<ul>
+<li>Regional droughts affect portfolios</li>
+<li>Flood losses cluster geographically</li>
+<li>Insurance and infrastructure implications</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="enso_global_impacts.png"></p>
+<figcaption>NOAA <code>climate.gov</code></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:45%;">
+<h3>ENSO</h3>
+<p>The El Niño-Southern Oscillation (ENSO) is the leading mode of variability of the tropical Pacific, with global teleconnections.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="enso_what_is.jpg"></p>
+<figcaption>NOAA <code>climate.gov</code></figcaption>
+</figure>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Modes of Variability</h2>
+<p>Large-scale patterns organize climate variability:</p>
+<ul>
+<li class="fragment"><strong>PDO:</strong> Pacific Decadal Oscillation (20–30 years)</li>
+<li class="fragment"><strong>NAO:</strong> North Atlantic Oscillation</li>
+<li class="fragment"><strong>AMO:</strong> Atlantic Multidecadal Oscillation</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Multiscale Variability</h2>
+<aside class="notes">
+<p>Show the wavelet analysis—variability at multiple timescales.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<img data-src="doss-gollin_robustadaptation_2019.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Wavelet analysis reveals variability at multiple timescales. <span class="citation" data-cites="doss-gollin_robustadaptation:2019">Doss-Gollin et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></p></section>
+<section class="slide level2">
+<h2>Not just climate change</h2>
+<aside class="notes">
+<p>Drive home the point.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>The paleo record shows:</p>
+<ul>
+<li class="fragment">Multi-decade droughts occurred without human influence</li>
+<li class="fragment">The instrumental record (150 years) is a small sample</li>
+<li class="fragment"><em>Even without climate change</em>, the recent past is a flawed predictor of future hazard.</li>
+</ul>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Models and Their Limits</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The Climate System</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What Generates Extremes?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Variability and Persistence</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Models and Their Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Sea Level Rise</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>General Circulation Models</h2>
+<aside class="notes">
+<p>What GCMs actually do—numerical physics on a grid.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><strong>General Circulation Models (GCMs)</strong> solve physics on a 3D grid:</p>
+<ul>
+<li class="fragment">Conservation equations for mass, energy, momentum</li>
+<li class="fragment">Atmosphere, ocean, land, ice components</li>
+<li class="fragment">Typical resolution: ~100 km grid cells</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>How GCMs Work</h2>
+<aside class="notes">
+<p>Use schematic to show grid structure.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<img data-src="climate_model_schematic.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Climate models divide Earth into a 3D grid of cells. Source: NOAA Climate.gov</p></section>
+<section class="slide level2">
+<h2>Resolution Limits</h2>
+<aside class="notes">
+<p>Important for understanding what models can and cannot resolve.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>GCMs resolve features larger than ~100 km.</p>
+<p>Many hazards are smaller:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Hazard</th>
+<th>Typical Scale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tropical cyclones</td>
+<td>~50 km eye</td>
+</tr>
+<tr class="even">
+<td>Thunderstorms</td>
+<td>~10 km</td>
+</tr>
+<tr class="odd">
+<td>Tornadoes</td>
+<td>~1 km</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>Sub-grid processes must be <em>parameterized</em>, not resolved.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Downscaling</h2>
+<aside class="notes">
+<p>Two approaches, each with assumptions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Translating GCM output to local scales:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Statistical Downscaling</strong></p>
+<ul>
+<li>Empirical relationships</li>
+<li>Assumes stationarity of relationships</li>
+<li>Computationally cheap</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Dynamical Downscaling</strong></p>
+<ul>
+<li>Higher-resolution physics models</li>
+<li>Computationally expensive</li>
+<li>Inherits GCM biases</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>Critical Distinction: Scenarios vs.&nbsp;Projections</h2>
+<aside class="notes">
+<p>This distinction is CRITICAL for Lab 3. Make sure students understand the difference.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Definition</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Prediction</strong></td>
+<td>What WILL happen</td>
+<td>Tomorrow’s weather</td>
+</tr>
+<tr class="even">
+<td><strong>Projection</strong></td>
+<td>What WOULD happen IF</td>
+<td>Temperature if CO₂ doubles</td>
+</tr>
+<tr class="odd">
+<td><strong>Scenario</strong></td>
+<td>Plausible pathway</td>
+<td>RCP 8.5 emissions</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>Confusing these leads to poor decisions.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<aside class="notes">
+<p>RCP 8.5 ≠ business as usual. This sets up Wednesday’s IPCC reading discussion.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="hausfather_scenarios_2020.jpg"></p>
+<figcaption><span class="citation" data-cites="hausfather_scenarios:2020">Hausfather &amp; Peters (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:70%;">
+<h3>Scenarios Are Not Predictions</h3>
+<ul>
+<li class="fragment">Scenarios are “what if” storylines</li>
+<li class="fragment">They bracket human choices</li>
+<li class="fragment">No probabilities attached</li>
+</ul>
+</div></div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Sea Level Rise</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The Climate System</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What Generates Extremes?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Variability and Persistence</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Models and Their Limits</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Sea Level Rise</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Integrating Case Study</h2>
+<aside class="notes">
+<p>SLR is the Lab 3 topic—apply all the concepts.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Sea level rise integrates everything we’ve discussed:</p>
+<ul>
+<li class="fragment">Physical system (thermal expansion, ice dynamics)</li>
+<li class="fragment">Variability (interannual, decadal)</li>
+<li class="fragment">Model limitations (ice sheet uncertainty)</li>
+<li class="fragment">Scenarios vs.&nbsp;projections</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Components of Sea Level Rise</h2>
+<aside class="notes">
+<p>Use figure to explain multiple contributors.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<img data-src="lsl-evolution.png" style="width:80.0%" class="r-stretch quarto-figure-center"><p class="caption">Local sea level is affected by multiple processes. Source: NOAA</p></section>
+<section class="slide level2">
+<h2>Two Very Different Sources</h2>
+<aside class="notes">
+<p>Thermal expansion vs ice melt have very different uncertainty structures.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Thermal Expansion</strong></p>
+<ul>
+<li>Simple physics (warmer water expands)</li>
+<li>Well-constrained</li>
+<li>Scenario-driven uncertainty</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Ice Sheet Melt</strong></p>
+<ul>
+<li>Complex, threshold behaviors</li>
+<li>MISI/MICI processes</li>
+<li>Structural uncertainty dominates</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+<h2>The Ice Sheet Problem</h2>
+<aside class="notes">
+<p>MISI/MICI are the “synoptic generators” of SLR tail risk.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Marine Ice Sheet Instability (MISI) and Marine Ice Cliff Instability (MICI):</p>
+<ul>
+<li class="fragment">Potential for rapid, irreversible ice loss</li>
+<li class="fragment">Physical processes are real but poorly constrained</li>
+<li class="fragment">This is the tail risk for SLR</li>
+</ul>
+<div class="fragment">
+<p>These processes are the “synoptic generators” of the SLR tail.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Local Factors</h2>
+<aside class="notes">
+<p>Why Norfolk sees faster rise than global average.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Local sea level ≠ global mean:</p>
+<ul>
+<li class="fragment"><strong>Land subsidence:</strong> The ground is sinking</li>
+<li class="fragment"><strong>Ocean circulation:</strong> Gulf Stream effects</li>
+<li class="fragment"><strong>Gravitational fingerprints:</strong> Ice mass redistribution</li>
+</ul>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Wrap Up</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>The Climate System</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>What Generates Extremes?</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Variability and Persistence</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Models and Their Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Sea Level Rise</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Key Takeaways</h2>
+<aside class="notes">
+<p>Summarize the five parts.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<ol type="1">
+<li><strong>The System:</strong> Climate is chaotic physics; weather ≠ climate</li>
+<li><strong>Synoptic Generators:</strong> Extremes come from organized structures</li>
+<li><strong>Variability:</strong> Risk clusters in time and space; paleo shows what’s possible</li>
+<li><strong>Model Limits:</strong> GCMs are useful but not magic; resolution matters</li>
+<li><strong>Sea Level Rise:</strong> Integrates all uncertainties; Lab 3 case study</li>
+</ol>
+</section>
+<section class="slide level2">
+<h2>Looking Ahead</h2>
+<aside class="notes">
+<p>Connect to Wednesday’s discussion and Friday’s lab.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><strong>Wednesday:</strong> IPCC reading discussion on observed and projected changes</p>
+<p><strong>Friday (Lab 3):</strong></p>
+<ul>
+<li>Load NOAA scenarios and BRICK projections for Sewells Point</li>
+<li>Compare scenario uncertainty vs.&nbsp;structural uncertainty</li>
+<li>Ask: Which matters more for the tail?</li>
+</ul>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-bonnafous_waterrisk:2017" class="csl-entry" role="listitem">
+Bonnafous, L., Lall, U., &amp; Siegel, J. (2017). A water risk index for portfolio exposure to climatic extremes: Conceptualization and an application to the mining industry. <em>Hydrology and Earth System Sciences</em>, <em>21</em>(4), 2075–2106. <a href="https://doi.org/10/f96k67">https://doi.org/10/f96k67</a>
+</div>
+<div id="ref-cook_megadroughts:2010" class="csl-entry" role="listitem">
+Cook, E. R., Seager, R., Heim Jr, R. R., Vose, R. S., Herweijer, C., &amp; Woodhouse, C. (2010). Megadroughts in <span>North America</span>: Placing <span>IPCC</span> projections of hydroclimatic change in a long-term palaeoclimate context. <em>Journal of Quaternary Science</em>, <em>25</em>(1), 48–61. <a href="https://doi.org/10.1002/jqs.1303">https://doi.org/10.1002/jqs.1303</a>
+</div>
+<div id="ref-doss-gollin_robustadaptation:2019" class="csl-entry" role="listitem">
+Doss-Gollin, J., Farnham, D. J., Steinschneider, S., &amp; Lall, U. (2019). Robust adaptation to multiscale climate variability. <em>Earth’s Future</em>, <em>7</em>(7), 734–747. <a href="https://doi.org/10.1029/2019ef001154">https://doi.org/10.1029/2019ef001154</a>
+</div>
+<div id="ref-gimeno_review:2014" class="csl-entry" role="listitem">
+Gimeno, L., Nieto, R., Vázquez, M., &amp; Lavers, D. A. (2014). Atmospheric rivers: A mini-review. <em>Frontiers in Earth Science</em>, <em>2</em>, 1063. <a href="https://doi.org/10.3389/feart.2014.00002">https://doi.org/10.3389/feart.2014.00002</a>
+</div>
+<div id="ref-hannachi_review:2017" class="csl-entry" role="listitem">
+Hannachi, A., Straus, D. M., Franzke, C. L. E., Corti, S., &amp; Woollings, T. (2017). Low-frequency nonlinearity and regime behavior in the <span>Northern Hemisphere</span> extratropical atmosphere. <em>Reviews of Geophysics</em>, <em>55</em>(1), 199–234. <a href="https://doi.org/10.1002/2015rg000509">https://doi.org/10.1002/2015rg000509</a>
+</div>
+<div id="ref-hausfather_scenarios:2020" class="csl-entry" role="listitem">
+Hausfather, Z., &amp; Peters, G. P. (2020). Emissions – the ’business as usual’ story is misleading. <em>Nature</em>, <em>577</em>(7792, 7792), 618–620. <a href="https://doi.org/10.1038/d41586-020-00177-3">https://doi.org/10.1038/d41586-020-00177-3</a>
+</div>
+<div id="ref-vallis_textbook:2006" class="csl-entry" role="listitem">
+Vallis, G. K. (2006). <em>Atmospheric and <span>Oceanic Fluid Dynamics</span>: <span>Fundamentals</span> and <span>Large-Scale Circulation</span></em>. Cambridge University Press.
+</div>
 </div>
 
-</section>
-<section class="slide level2">
-<h2>Preparation</h2>
-<p>There is no specific preparation required for this class. Get a head start on <a href="../../readings/week-03-reading.html">the week’s reading</a></p>
-</section>
-<section class="slide level2">
-<h2>Coming Soon</h2>
-<p>This lecture is under development.</p>
-</section>
-<section class="slide level2">
-<h2>References</h2>
 
-
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

@@ -64,7 +64,7 @@
     "href": "syllabus.html#preliminary-schedule",
     "title": "Syllabus",
     "section": "Preliminary Schedule",
-    "text": "Preliminary Schedule\nSchedule is subject to change. Updated versions will be posted on the course website.\n\n\n\n\n\n\n\n\n\n\nWeek\nDates\nTopic\nLab / Exam\nProject\n\n\n\n\n\nModule 1\nRisk Analysis\n\n\n\n\n1\nJan 12, 14, 16\nIntro to Climate Risk Management\nLab 1: Julia Setup & Hello World\n\n\n\n2\nJan 21, 23\nHazard, Exposure, Vulnerability (XLRM)\nLab 2: Intro to iCOW\n\n\n\n3\nJan 26, 28, 30\nClimate Science & Scenarios\nLab 3: Sea-Level Rise Scenarios with BRICK\nTopic Proposal\n\n\n4\nFeb 2, 4, 6\nMonte Carlo & Fat Tails\nLab 4: Monte Carlo Hazard Modeling\n\n\n\n5\nFeb 9, 11\nRisk Metrics (EAD, VaR, CVaR)\nLab 5: Probabilistic Risk Analysis\n\n\n\n\nModule 2\nDecision Analysis\n\n\n\n\n6\nFeb 16, 18, 20\nValuation & Benefit-Cost Analysis\nExam 1 (Covers Module 1)\n\n\n\n7\nFeb 23, 25, 27\nOptimal Static Decisions\nLab 6: Simulation-Optimization\nMemo 1\n\n\n8\nMar 2, 4, 6\nSensitivity & Value of Information\nLab 7: Value of Partial Information\n\n\n\n9\nMar 9, 11, 13\nBridge: Trade-offs & Values (not on exam)\nExam 2 (Covers Module 2)\n\n\n\n\nMarch 16-20\nSpring Break (No Class)\n\n\n\n\n\nModule 3\nOptimization Under Uncertainty\n\n\n\n\n10\nMar 23, 25, 27\nRobustness & Deep Uncertainty\nLab 8: Robustness Metrics\nMemo 2\n\n\n11\nMar 30, Apr 1, 3\nExploratory Modeling & Scenario Discovery\nLab 9: Scenario Discovery\n\n\n\n12\nApr 6, 8, 10\nSequential Decision Making\nLab 10: Real Options & Dynamic Policy Search\nMemo 3\n\n\n13\nApr 13, 15, 17\nMulti-Objective Optimization\nLab 11: Pareto Fronts\nSlides Due\n\n\n14\nApr 20, 22, 24\nFinal Project Presentations\n\n\n\n\nFinal\nTBD\n\nExam 3 (Covers Module 3)\nWritten Report",
+    "text": "Preliminary Schedule\nSchedule is subject to change. Updated versions will be posted on the course website.\n\n\n\n\n\n\n\n\n\n\nWeek\nDates\nTopic\nLab / Exam\nProject\n\n\n\n\n\nModule 1\nRisk Analysis\n\n\n\n\n1\nJan 12, 14, 16\nIntro to Climate Risk Management\nLab 1: Julia Setup & Hello World\n\n\n\n2\nJan 21, 23\nHazard, Exposure, Vulnerability (XLRM)\nLab 2: Intro to iCOW\n\n\n\n3\nJan 26, 28, 30\nClimate Science & Scenarios\nLab 3: Sea-Level Rise Scenarios and Uncertainty\nTopic Proposal\n\n\n4\nFeb 2, 4, 6\nMonte Carlo & Fat Tails\nLab 4: Monte Carlo Hazard Modeling\n\n\n\n5\nFeb 9, 11\nRisk Metrics (EAD, VaR, CVaR)\nLab 5: Probabilistic Risk Analysis\n\n\n\n\nModule 2\nDecision Analysis\n\n\n\n\n6\nFeb 16, 18, 20\nValuation & Benefit-Cost Analysis\nExam 1 (Covers Module 1)\n\n\n\n7\nFeb 23, 25, 27\nOptimal Static Decisions\nLab 6: Simulation-Optimization\nMemo 1\n\n\n8\nMar 2, 4, 6\nSensitivity & Value of Information\nLab 7: Value of Partial Information\n\n\n\n9\nMar 9, 11, 13\nBridge: Trade-offs & Values (not on exam)\nExam 2 (Covers Module 2)\n\n\n\n\nMarch 16-20\nSpring Break (No Class)\n\n\n\n\n\nModule 3\nOptimization Under Uncertainty\n\n\n\n\n10\nMar 23, 25, 27\nRobustness & Deep Uncertainty\nLab 8: Robustness Metrics\nMemo 2\n\n\n11\nMar 30, Apr 1, 3\nExploratory Modeling & Scenario Discovery\nLab 9: Scenario Discovery\n\n\n\n12\nApr 6, 8, 10\nSequential Decision Making\nLab 10: Real Options & Dynamic Policy Search\nMemo 3\n\n\n13\nApr 13, 15, 17\nMulti-Objective Optimization\nLab 11: Pareto Fronts\nSlides Due\n\n\n14\nApr 20, 22, 24\nFinal Project Presentations\n\n\n\n\nFinal\nTBD\n\nExam 3 (Covers Module 3)\nWritten Report",
     "crumbs": [
       "Syllabus"
     ]
@@ -265,7 +265,7 @@
     "href": "lectures/week-02/index.html#references",
     "title": "Hazard, Exposure, Vulnerability",
     "section": "References",
-    "text": "References\n\n\nGidaris, I., Padgett, J. E., Barbosa, A. R., Chen, S., Cox, D., Webb, B., & Cerato, A. (2017). Multiple-Hazard Fragility and Restoration Models of Highway Bridges for Regional Risk and Resilience Assessment in the United States: State-of-the-Art Review. Journal of Structural Engineering, 143(3), 04016188. https://doi.org/10.1061/(ASCE)ST.1943-541X.0001672\n\n\nJongman, B., Ward, P. J., & Aerts, J. C. J. H. (2012). Global exposure to river and coastal flooding: Long term trends and changes. Global Environmental Change, 22(4), 823–835. https://doi.org/10.1016/j.gloenvcha.2012.07.004\n\n\nde Moel, H., van Vliet, M., & Aerts, J. C. J. H. (2014). Evaluating the effect of flood damage-reducing measures: A case study of the unembanked area of Rotterdam, the Netherlands. Regional Environmental Change, 14(3), 895–908. https://doi.org/10.1007/s10113-013-0420-z\n\n\nTedesco, M., McAlpine, S., & Porter, J. R. (2020). Exposure of real estate properties to the 2018 Hurricane Florence flooding. Natural Hazards and Earth System Sciences, 20(3), 907–920. https://doi.org/10.5194/nhess-20-907-2020\n\n\nWing, O. E. J., Pinter, N., Bates, P. D., & Kousky, C. (2020). New insights into US flood vulnerability revealed from flood insurance big data. Nature Communications, 11(1, 1), 1444. https://doi.org/10.1038/s41467-020-15264-2"
+    "text": "References\n\n\nGidaris, I., Padgett, J. E., Barbosa, A. R., Chen, S., Cox, D., Webb, B., & Cerato, A. (2017). Multiple-Hazard Fragility and Restoration Models of Highway Bridges for Regional Risk and Resilience Assessment in the United States: State-of-the-Art Review. Journal of Structural Engineering, 143(3), 04016188. https://doi.org/10.1061/(ASCE)ST.1943-541X.0001672\n\n\nde Moel, H., van Vliet, M., & Aerts, J. C. J. H. (2014). Evaluating the effect of flood damage-reducing measures: A case study of the unembanked area of Rotterdam, the Netherlands. Regional Environmental Change, 14(3), 895–908. https://doi.org/10.1007/s10113-013-0420-z\n\n\nWing, O. E. J., Pinter, N., Bates, P. D., & Kousky, C. (2020). New insights into US flood vulnerability revealed from flood insurance big data. Nature Communications, 11(1, 1), 1444. https://doi.org/10.1038/s41467-020-15264-2"
   },
   {
     "objectID": "labs/lab-11-S26/index.html",
@@ -485,6 +485,146 @@
     "text": "Deliverables\n\nPre-reading questions (posted 1 week before your session)\nLesson plan (submitted 2 weeks before for approval)\nFacilitation of the 50-minute discussion"
   },
   {
+    "objectID": "assignments/final-project/topic-proposal.html",
+    "href": "assignments/final-project/topic-proposal.html",
+    "title": "Final Project: Topic Proposal",
+    "section": "",
+    "text": "Due: Friday of Week 3\nThis proposal confirms your team and document choice. The goal is to ensure your chosen plan contains enough decision-relevant content for a meaningful audit.\nA good topic proposal sets you up for success on all subsequent deliverables. Spending time now to find the right document will make Memos 1-3 much easier to write."
+  },
+  {
+    "objectID": "assignments/final-project/topic-proposal.html#overview",
+    "href": "assignments/final-project/topic-proposal.html#overview",
+    "title": "Final Project: Topic Proposal",
+    "section": "",
+    "text": "Due: Friday of Week 3\nThis proposal confirms your team and document choice. The goal is to ensure your chosen plan contains enough decision-relevant content for a meaningful audit.\nA good topic proposal sets you up for success on all subsequent deliverables. Spending time now to find the right document will make Memos 1-3 much easier to write."
+  },
+  {
+    "objectID": "assignments/final-project/topic-proposal.html#choosing-a-plan-the-key-to-success",
+    "href": "assignments/final-project/topic-proposal.html#choosing-a-plan-the-key-to-success",
+    "title": "Final Project: Topic Proposal",
+    "section": "Choosing a Plan: The Key to Success",
+    "text": "Choosing a Plan: The Key to Success\nThe single most important decision you’ll make is which plan to audit. A well-chosen plan will give you rich material for analysis; a poor choice will leave you struggling to find content for your memos.\n\nWhat Makes a Good Plan?\nYour document should be:\n\nDecision-Relevant: The plan should contain specific, concrete decisions—not just aspirational goals. Look for plans that answer “what will we build?” or “how much will we invest?” rather than just “what do we hope to achieve?”\nAnalytically Rich: The plan should contain enough technical detail for you to critique. You need to be able to identify models, data sources, and assumptions.\nAppropriately Scoped: The plan should be substantial enough for a semester-long project (typically 50+ pages) but focused enough to analyze thoroughly.\nPublicly Available: You must be able to share the document and cite specific page numbers.\n\n\n\nTypes of Documents That Work Well\n\n\n\n\n\n\n\n\nDocument Type\nWhy It Works\nExample\n\n\n\n\nFlood Risk Management Plans\nClear decisions (levee heights, buyouts), quantified metrics (damages avoided), explicit models (hydraulic, economic)\nUS Army Corps feasibility studies\n\n\nCoastal Resilience Strategies\nMultiple levers (seawalls, living shorelines, retreat), scenario analysis, benefit-cost calculations\nState coastal master plans\n\n\nClimate Action Plans with Infrastructure Components\nSpecific projects with costs, timelines, and expected outcomes\nCity infrastructure adaptation plans\n\n\nHazard Mitigation Plans\nRequired to include risk assessment, mitigation actions, and benefit-cost analysis\nFEMA-approved local hazard mitigation plans\n\n\n\n\n\nTypes of Documents That Do NOT Work Well\n\n\n\n\n\n\n\n\nDocument Type\nWhy It Fails\nRed Flags\n\n\n\n\nAspirational Climate Pledges\nGoals without actions; no analysis to critique\n“Net zero by 2050” with no implementation pathway\n\n\nPolicy Frameworks\nDescribes what others should do, not what the organization will do\n“Stakeholders should consider…”\n\n\nShort White Papers\nNot enough depth for sustained analysis\nUnder 30 pages; no technical appendices\n\n\nPurely Qualitative Reports\nNo models or quantitative analysis to evaluate\nNo numbers, maps, or projections\n\n\nAcademic Papers\nAlready peer-reviewed; your role is to audit practitioners\nPublished in journals\n\n\n\n\n\nWhere to Find Good Plans\nFederal Sources:\n\nUSACE (Army Corps): Feasibility studies, post-flood reports, and flood risk management plans are excellent choices. Search “USACE [city name] feasibility study” or browse the USACE Digital Library.\nFEMA: Hazard Mitigation Plans are publicly available. Check your state’s emergency management agency website.\n\nState Sources:\n\nLouisiana Coastal Master Plan: A gold-standard example of decision-relevant climate planning.\nTexas General Land Office: Coastal resilience studies\nState climate adaptation plans: Quality varies; look for ones with specific projects and costs.\n\nCity/Regional Sources:\n\nMajor cities often have climate action plans, but quality varies widely.\nLook for plans that include infrastructure investments with cost estimates.\nRegional planning agencies (e.g., Houston-Galveston Area Council) often produce more technical documents.\n\nInternational Sources:\n\nNetherlands Delta Programme\nUK Environment Agency flood risk assessments\nWorld Bank climate adaptation project appraisals\n\n\n\nA Decision Checklist\nBefore committing to a document, verify you can answer “yes” to all of these:\n\nCan I identify at least 3 specific decisions (levers) the plan makes?\nDoes the plan include quantitative targets or metrics?\nCan I find evidence of models or analysis (not just assertions)?\nIs the full document available online?\nIs the document substantial enough (50+ pages) for a semester project?\nDoes the plan address climate hazards (flooding, sea level rise, extreme heat, etc.)?"
+  },
+  {
+    "objectID": "assignments/final-project/topic-proposal.html#the-xlrm-framework-finding-the-structure",
+    "href": "assignments/final-project/topic-proposal.html#the-xlrm-framework-finding-the-structure",
+    "title": "Final Project: Topic Proposal",
+    "section": "The XLRM Framework: Finding the Structure",
+    "text": "The XLRM Framework: Finding the Structure\nThe XLRM framework helps you systematically analyze any decision problem:\n\nX (Uncertainties): Factors outside the decision-maker’s control that affect outcomes\nL (Levers): Decisions or actions the decision-maker can take\nR (Relationships): Models, assumptions, and causal links connecting levers to outcomes\nM (Metrics): Quantifiable measures used to evaluate success\n\nYour proposal should demonstrate that your chosen plan contains all four components.\n\nIdentifying Uncertainties (X)\nUncertainties are factors that:\n\nAffect outcomes but are not controlled by the decision-maker\nCould take on different values or unfold in different ways\nMay be acknowledged explicitly or hidden in assumptions\n\nExamples of Uncertainties:\n\n\n\n\n\n\n\n\nCategory\nExamples\nWhat to Look For\n\n\n\n\nClimate\nFuture sea level rise, storm intensity, precipitation patterns\nScenario tables, climate projections, “under RCP 4.5…”\n\n\nSocioeconomic\nPopulation growth, land use change, economic development\nDemographic projections, development scenarios\n\n\nTechnical\nInfrastructure performance, model accuracy, failure modes\nSensitivity analyses, uncertainty ranges, caveats\n\n\nEconomic\nDiscount rates, future costs, property values\nAssumptions stated in BCA, “assuming 3% discount rate”\n\n\n\nHow to Find Them:\n\nLook for words like “scenario,” “projection,” “assumption,” “uncertainty,” “may,” “could”\nCheck appendices for sensitivity analyses or scenario descriptions\nNote when the plan uses single values vs. ranges\n\nCommon Mistake: Listing “climate change” as an uncertainty. Be more specific: which aspect of climate change? (e.g., “sea level rise between 1-4 feet by 2100”)\n\n\nIdentifying Levers (L)\nLevers are actions that:\n\nThe decision-maker can choose to take (or not take)\nHave associated costs and consequences\nCome in different options or magnitudes\n\nExamples of Levers:\n\n\n\n\n\n\n\n\nCategory\nExamples\nWhat to Look For\n\n\n\n\nStructural\nLevee heights, seawall design, drainage capacity\nEngineering specifications, design parameters\n\n\nNon-structural\nBuyouts, zoning changes, building codes\nPolicy recommendations, program descriptions\n\n\nFinancial\nInsurance requirements, grant programs, tax incentives\nBudget allocations, program designs\n\n\nOperational\nWarning systems, evacuation plans, maintenance schedules\nOperational protocols, trigger levels\n\n\n\nHow to Find Them:\n\nLook for “the plan recommends,” “we will construct,” “the preferred alternative”\nFind chapters on “alternatives considered” or “options analysis”\nNote any decision points where different choices were possible\n\nCommon Mistake: Confusing goals with levers. “Reduce flood risk” is a goal; “construct a 12-foot levee” is a lever.\n\n\nIdentifying Relationships (R)\nRelationships describe:\n\nHow levers connect to outcomes (causal mechanisms)\nModels used to predict consequences\nAssumptions about how systems behave\n\nExamples of Relationships:\n\n\n\n\n\n\n\n\nCategory\nExamples\nWhat to Look For\n\n\n\n\nHazard Models\nFlood frequency analysis, storm surge models, climate downscaling\nModel names (ADCIRC, HEC-RAS), data sources\n\n\nExposure Models\nBuilding inventories, population projections, land use maps\nGIS data, parcel databases, census data\n\n\nVulnerability Models\nDepth-damage curves, fragility functions, casualty rates\nHAZUS, custom damage functions\n\n\nEconomic Models\nBenefit-cost analysis, present value calculations\nDiscount rates, project lifetimes, valuation methods\n\n\n\nHow to Find Them:\n\nLook for methodology sections, technical appendices, model descriptions\nFind references to software tools or analytical frameworks\nNote how the plan goes from “if we build X” to “we expect Y reduction in damages”\n\nCommon Mistake: Describing data as relationships. “FEMA flood maps” is a data source; the relationship is “we assume the 100-year floodplain represents 1% annual probability of flooding.”\n\n\nIdentifying Metrics (M)\nMetrics are:\n\nQuantifiable measures of outcomes\nUsed to compare alternatives or evaluate success\nDefined with specific units and calculation methods\n\nExamples of Metrics:\n\n\n\n\n\n\n\n\nCategory\nExamples\nWhat to Look For\n\n\n\n\nRisk Metrics\nAnnual expected damages, lives at risk, properties flooded\nDollar amounts, counts, probabilities\n\n\nEconomic Metrics\nNet present value, benefit-cost ratio, internal rate of return\nBCA results, ranking of alternatives\n\n\nPerformance Metrics\nLevel of protection, residual risk, reliability\nDesign standards, performance targets\n\n\nEquity Metrics\nDistribution of benefits, vulnerable populations protected\nDemographic analysis, spatial distribution\n\n\n\nHow to Find Them:\n\nLook for tables comparing alternatives\nFind “success criteria” or “evaluation criteria” sections\nNote any targets or thresholds the plan sets\n\nCommon Mistake: Confusing metrics with goals. “Resilient communities” is a goal; “properties removed from the 100-year floodplain” is a metric."
+  },
+  {
+    "objectID": "assignments/final-project/topic-proposal.html#proposal-requirements",
+    "href": "assignments/final-project/topic-proposal.html#proposal-requirements",
+    "title": "Final Project: Topic Proposal",
+    "section": "Proposal Requirements",
+    "text": "Proposal Requirements\nSubmit a 1-page document (PDF) containing:\n\n1. Team Information\n\nTeam member names and whether each is enrolled in CEVE 421 or 521\nBrief statement of how you plan to divide work (e.g., “Team member A will lead Memo 1; member B will lead Memo 2…”)\n\n\n\n2. Document Selection\nProvide complete citation information:\n\nTitle: Full title of the document\nOrganization: Who published it (agency, city, consultant)\nYear: Publication date\nURL: Direct link to the PDF or landing page\nSummary: 2-3 sentences describing what the plan addresses and why you chose it\n\n\n\n3. Initial XLRM Mapping\nIdentify at least two examples of each XLRM component. For each example, provide:\n\nA brief description (1-2 sentences)\nA page number reference so we can verify\n\n\n\n\n\n\n\n\n\nComponent\nExample 1\nExample 2\n\n\n\n\nX (Uncertainties)\ne.g., “Sea level rise scenarios of 1, 2, and 4 feet by 2100 (p. 23)”\ne.g., “Population growth projections from 1.2M to 1.8M by 2050 (p. 45)”\n\n\nL (Levers)\ne.g., “Structural alternatives: 100-year vs. 500-year levee design (p. 67)”\ne.g., “Non-structural: voluntary buyout program for repetitive loss properties (p. 89)”\n\n\nR (Relationships)\ne.g., “HEC-RAS hydraulic model to estimate flood depths (Appendix C)”\ne.g., “HAZUS-MH depth-damage curves for residential structures (p. 112)”\n\n\nM (Metrics)\ne.g., “Annual expected damages in $ millions (Table 5-1)”\ne.g., “Benefit-cost ratio for each alternative (Table 6-2)”\n\n\n\n\n\n4. Confirmation Statement\nA brief statement (1-2 sentences) confirming that:\n\nThe document is publicly available (provide URL)\nThe document contains concrete decisions (not just aspirational goals)\nYour team has reviewed the full document (not just the executive summary)"
+  },
+  {
+    "objectID": "assignments/final-project/topic-proposal.html#example-strong-vs.-weak-proposals",
+    "href": "assignments/final-project/topic-proposal.html#example-strong-vs.-weak-proposals",
+    "title": "Final Project: Topic Proposal",
+    "section": "Example: Strong vs. Weak Proposals",
+    "text": "Example: Strong vs. Weak Proposals\n\nStrong Proposal Example\n\nDocument: Harris County Flood Control District, Buffalo Bayou and Tributaries Resiliency Study (2021). [Link to document]\nSummary: This USACE feasibility study evaluates structural and non-structural alternatives for reducing flood risk in the Buffalo Bayou watershed following Hurricane Harvey. We chose this document because it contains detailed BCA for multiple alternatives and explicitly addresses climate uncertainty.\n\n\n\n\n\n\n\n\nComponent\nExample 1\nExample 2\n\n\n\n\nX\nSea level rise scenarios (0.5-2.0 ft by 2085, p. 34)\nFuture land use scenarios (p. 67)\n\n\nL\nTunnel alternative vs. channel modification (p. 89)\nVoluntary buyout of 2,300 structures (p. 102)\n\n\nR\nHEC-HMS rainfall-runoff model (Appendix D)\nUSACE depth-damage curves (p. 156)\n\n\nM\nExpected annual damages ($890M baseline, p. 45)\nBCR ranging from 0.8 to 3.2 (Table 7-1)\n\n\n\n\n\n\nWeak Proposal Example\n\nDocument: City of Houston Climate Action Plan (2020)\nSummary: Houston’s plan to reduce emissions and adapt to climate change.\n\n\n\nComponent\nExample 1\nExample 2\n\n\n\n\nX\nClimate change\nFuture weather\n\n\nL\nReduce emissions\nBuild resilience\n\n\nR\nCity analysis\nExpert input\n\n\nM\nNet zero by 2050\nMore resilient city\n\n\n\n\nWhy is this weak?\n\nNo page numbers (evidence team didn’t read document carefully)\nExamples are too vague to verify\n“Reduce emissions” is a goal, not a specific lever\n“Net zero by 2050” is a target, not a metric for evaluating alternatives\nNo URL provided"
+  },
+  {
+    "objectID": "assignments/final-project/topic-proposal.html#submission",
+    "href": "assignments/final-project/topic-proposal.html#submission",
+    "title": "Final Project: Topic Proposal",
+    "section": "Submission",
+    "text": "Submission\nSubmit your proposal as a PDF to Canvas by 11:59 PM on the due date.\nFilename format: TeamName_TopicProposal.pdf"
+  },
+  {
+    "objectID": "assignments/final-project/topic-proposal.html#grading",
+    "href": "assignments/final-project/topic-proposal.html#grading",
+    "title": "Final Project: Topic Proposal",
+    "section": "Grading",
+    "text": "Grading\nThis proposal is graded Complete/Incomplete.\nA Complete proposal demonstrates:\n\nClear document selection with full citation and working URL\nAt least two plausible, specific examples for each XLRM component\nPage number references for each example\nEvidence that the team has reviewed the full document\n\nAn Incomplete proposal will be returned for revision if:\n\nExamples are too vague or cannot be verified\nThe document appears to lack decision-relevant content\nPage references are missing\nThe document is not publicly accessible\n\nYou will have one opportunity to revise an incomplete proposal within 48 hours."
+  },
+  {
+    "objectID": "assignments/final-project/topic-proposal.html#tips-for-success",
+    "href": "assignments/final-project/topic-proposal.html#tips-for-success",
+    "title": "Final Project: Topic Proposal",
+    "section": "Tips for Success",
+    "text": "Tips for Success\n\nStart Early: Finding the right document takes time. Don’t wait until the night before to search.\nSkim Before Committing: Read the executive summary AND flip through the full document. Many plans have great summaries but thin analysis.\nCheck the Appendices: The best material is often in technical appendices. A plan with detailed appendices is usually a good sign.\nLook for Tables: Plans with tables comparing alternatives (costs, benefits, BCRs) are usually analytically rich.\nConsider Your Interests: You’ll spend the semester with this document. Pick something you find genuinely interesting—your hometown, a hazard you care about, an engineering solution that fascinates you.\nAsk Early: If you’re unsure whether a document will work, email the instructor before the deadline. We can quickly tell you if it’s a good choice or suggest alternatives."
+  },
+  {
+    "objectID": "assignments/final-project/memo-2-evidence.html",
+    "href": "assignments/final-project/memo-2-evidence.html",
+    "title": "Audit Memo 2: Evidence Base",
+    "section": "",
+    "text": "Draft Material\n\n\nThis content is under development and subject to change."
+  },
+  {
+    "objectID": "assignments/final-project/memo-2-evidence.html#overview",
+    "href": "assignments/final-project/memo-2-evidence.html#overview",
+    "title": "Audit Memo 2: Evidence Base",
+    "section": "Overview",
+    "text": "Overview\nDue: Friday of Week 10\nThis memo examines the evidence base underlying your chosen climate plan. You will analyze the Valuation approaches and System Models (R) that connect actions to outcomes."
+  },
+  {
+    "objectID": "assignments/final-project/memo-2-evidence.html#learning-objectives",
+    "href": "assignments/final-project/memo-2-evidence.html#learning-objectives",
+    "title": "Audit Memo 2: Evidence Base",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy completing this memo, you will demonstrate your ability to:\n\nIdentify and critique valuation methods used in climate planning\nAssess the system models that link decisions to predicted outcomes\nEvaluate the appropriateness of modeling choices for the decision context"
+  },
+  {
+    "objectID": "assignments/final-project/memo-2-evidence.html#requirements",
+    "href": "assignments/final-project/memo-2-evidence.html#requirements",
+    "title": "Audit Memo 2: Evidence Base",
+    "section": "Requirements",
+    "text": "Requirements\nSubmit a 1-2 page memo (PDF) containing:\n\n1. Valuation Analysis\nIdentify how the plan values costs and benefits:\n\n\n\n\n\n\n\n\nValuation Element\nPlan’s Approach\nCritique\n\n\n\n\nDiscount rate\ne.g., 3% real\nIs this appropriate? Why?\n\n\nDamage estimation\ne.g., depth-damage curves\nSource? Limitations?\n\n\nNon-market values\ne.g., statistical value of life\nHow are these handled?\n\n\nTime horizon\ne.g., 50 years\nAppropriate for climate?\n\n\n\nAddress:\n\nAre valuation choices explicitly stated or implicit?\nDo the valuation methods align with best practices from the course?\nWhat values or perspectives might be underweighted?\n\n\n\n2. System Models Analysis\nIdentify the models used to predict outcomes:\n\n\n\n\n\n\n\n\nModel Component\nDescription\nKey Assumptions\n\n\n\n\nHazard model\ne.g., FEMA flood maps\nAssumes stationarity?\n\n\nExposure model\ne.g., parcel data\nCurrent or projected?\n\n\nVulnerability model\ne.g., depth-damage functions\nBuilding types?\n\n\n\nAddress:\n\nAre the models appropriate for the hazard and decision context?\nWhat simplifications or assumptions might affect results?\nAre model limitations acknowledged?\n\n\n\n3. Evidence Critique\nIn 1-2 paragraphs, assess the evidence base:\n\nTransparency: Are data sources and methods clearly documented?\nAppropriateness: Are the models suitable for the decision being made?\nGaps: What additional evidence would strengthen the analysis?"
+  },
+  {
+    "objectID": "assignments/final-project/memo-2-evidence.html#submission",
+    "href": "assignments/final-project/memo-2-evidence.html#submission",
+    "title": "Audit Memo 2: Evidence Base",
+    "section": "Submission",
+    "text": "Submission\nSubmit your memo as a PDF to Canvas by 11:59 PM on the due date."
+  },
+  {
+    "objectID": "assignments/final-project/memo-2-evidence.html#grading-rubric",
+    "href": "assignments/final-project/memo-2-evidence.html#grading-rubric",
+    "title": "Audit Memo 2: Evidence Base",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nCriterion\nPoints\n\n\n\n\nValuation methods clearly identified and critiqued\n30\n\n\nSystem models clearly identified and critiqued\n30\n\n\nThoughtful assessment of evidence quality\n20\n\n\nProfessional writing and formatting\n20\n\n\nTotal\n100"
+  },
+  {
+    "objectID": "assignments/final-project/index.html",
+    "href": "assignments/final-project/index.html",
+    "title": "Final Project: Climate Plan Audit",
+    "section": "",
+    "text": "Draft Material\n\n\nThis content is under development and subject to change."
+  },
+  {
+    "objectID": "assignments/final-project/index.html#overview",
+    "href": "assignments/final-project/index.html#overview",
+    "title": "Final Project: Climate Plan Audit",
+    "section": "Overview",
+    "text": "Overview\nWorking in small teams, you will act as expert consultants to audit a real-world climate planning document. Your chosen document must be decision-relevant—it should contain identifiable decisions (Levers) and measurable outcomes (Metrics).\nThe project is built through three “Audit Memos” (1–2 pages each) to ensure steady progress, culminating in an Executive Briefing presentation and a final Written Report."
+  },
+  {
+    "objectID": "assignments/final-project/index.html#timeline",
+    "href": "assignments/final-project/index.html#timeline",
+    "title": "Final Project: Climate Plan Audit",
+    "section": "Timeline",
+    "text": "Timeline\n\n\n\nDeadline\nDeliverable\nDescription\n\n\n\n\nWeek 3 (Friday)\nTopic Proposal\nSubmit document choice and confirm it contains identifiable Levers (L) and Metrics (M).\n\n\nWeek 7 (Friday)\nMemo 1 (Framework)\nMap the plan’s Levers (L) and Metrics (M). What choices are being made? What outcomes are being measured?\n\n\nWeek 10 (Friday)\nMemo 2 (Evidence)\nMap the plan’s Valuation approach and System Models (R). What models are used? Are they appropriate?\n\n\nWeek 12 (Friday)\nMemo 3 (Robustness)\nMap the plan’s consideration of Uncertainties (X) and Robustness. How does the plan handle deep uncertainty?\n\n\nWeek 13 (Friday)\nSlides Due\nAll teams must submit their presentation slides.\n\n\nWeek 14\nExecutive Briefing\nA 20-minute team presentation. Non-presenting teams act as the “Client Board.”\n\n\nFinals\nWritten Report\nA synthesis of your memos with a final recommendation."
+  },
+  {
+    "objectID": "assignments/final-project/index.html#team-formation",
+    "href": "assignments/final-project/index.html#team-formation",
+    "title": "Final Project: Climate Plan Audit",
+    "section": "Team Formation",
+    "text": "Team Formation\n\nTeams of 2-3 students\nMixed 421/521 teams encouraged\nForm teams by Week 2; confirm with instructor"
+  },
+  {
+    "objectID": "assignments/final-project/index.html#choosing-a-plan",
+    "href": "assignments/final-project/index.html#choosing-a-plan",
+    "title": "Final Project: Climate Plan Audit",
+    "section": "Choosing a Plan",
+    "text": "Choosing a Plan\nYour document must be:\n\nPublicly Available: The plan should be accessible online.\nDecision-Relevant: It should contain identifiable Levers (decisions) and Metrics (outcomes).\nClimate-Related: The plan should address climate hazards or climate change adaptation/mitigation.\n\nGood examples include:\n\nCity or regional climate action plans\nFlood risk management strategies\nCoastal resilience plans\nInfrastructure adaptation assessments"
+  },
+  {
     "objectID": "ai.html",
     "href": "ai.html",
     "title": "AI Policy",
@@ -575,46 +715,186 @@
     ]
   },
   {
-    "objectID": "exams/assignments/final-project.html",
-    "href": "exams/assignments/final-project.html",
-    "title": "Final Project",
+    "objectID": "assignments/final-project/executive-briefing.html",
+    "href": "assignments/final-project/executive-briefing.html",
+    "title": "Executive Briefing Guidelines",
     "section": "",
-    "text": "Working in small teams, you will act as expert consultants to audit a real-world climate planning document. Your chosen document must be decision-relevant—it should contain identifiable decisions (Levers) and measurable outcomes (Metrics).\nThe project is built through three “Audit Memos” (1–2 pages each) to ensure steady progress, culminating in an Executive Briefing presentation and a final Written Report."
+    "text": "Draft Material\n\n\nThis content is under development and subject to change."
   },
   {
-    "objectID": "exams/assignments/final-project.html#overview",
-    "href": "exams/assignments/final-project.html#overview",
-    "title": "Final Project",
+    "objectID": "assignments/final-project/executive-briefing.html#overview",
+    "href": "assignments/final-project/executive-briefing.html#overview",
+    "title": "Executive Briefing Guidelines",
+    "section": "Overview",
+    "text": "Overview\nPresentations: Week 14 (April 20, 22, 24) Slides Due: Friday of Week 13 (April 17)\nYour team will deliver a 20-minute Executive Briefing presenting your audit findings to a simulated “Client Board.” Non-presenting teams will role-play as board members and must ask substantive questions."
+  },
+  {
+    "objectID": "assignments/final-project/executive-briefing.html#format",
+    "href": "assignments/final-project/executive-briefing.html#format",
+    "title": "Executive Briefing Guidelines",
+    "section": "Format",
+    "text": "Format\n\nPresentation: 15 minutes\nQ&A: 5 minutes\nAudience: Your classmates role-play as the board that commissioned the audit"
+  },
+  {
+    "objectID": "assignments/final-project/executive-briefing.html#presentation-requirements",
+    "href": "assignments/final-project/executive-briefing.html#presentation-requirements",
+    "title": "Executive Briefing Guidelines",
+    "section": "Presentation Requirements",
+    "text": "Presentation Requirements\nYour briefing should address:\n\n1. Context (2-3 minutes)\n\nWhat plan did you audit? (Title, organization, scope)\nWhy does this plan matter? (Stakes, affected populations)\nWhat was your audit approach?\n\n\n\n2. Decision Framework (3-4 minutes)\n\nKey Levers: What decisions does the plan make?\nKey Metrics: How does the plan measure success?\nFramework Gaps: What’s missing from the decision structure?\n\n\n\n3. Evidence Base (3-4 minutes)\n\nValuation Methods: How are costs/benefits calculated?\nSystem Models: What models predict outcomes?\nEvidence Gaps: Where is the analysis weakest?\n\n\n\n4. Robustness (3-4 minutes)\n\nUncertainty Treatment: How does the plan handle uncertainty?\nVulnerability Analysis: Where might the plan fail?\nRobustness Gaps: What scenarios are ignored?\n\n\n\n5. Recommendation (2-3 minutes)\nProvide a clear verdict with justification:\n\nEndorse: The plan is sound; implement as proposed\nModify: The plan has merit but needs specific changes\nReject: The plan has fundamental flaws; redesign needed\n\nYour recommendation must be supported by specific findings from your audit."
+  },
+  {
+    "objectID": "assignments/final-project/executive-briefing.html#slide-requirements",
+    "href": "assignments/final-project/executive-briefing.html#slide-requirements",
+    "title": "Executive Briefing Guidelines",
+    "section": "Slide Requirements",
+    "text": "Slide Requirements\n\nMaximum 15 slides (excluding title slide)\nSlides due Friday of Week 13 by 11:59 PM\nSubmit as PDF to Canvas\nAll teams submit before any presentations (fairness)"
+  },
+  {
+    "objectID": "assignments/final-project/executive-briefing.html#audience-participation",
+    "href": "assignments/final-project/executive-briefing.html#audience-participation",
+    "title": "Executive Briefing Guidelines",
+    "section": "Audience Participation",
+    "text": "Audience Participation\nWhen you are not presenting, you are a Board Member. Board members must:\n\nAsk at least one substantive question per presentation\nQuestions should probe assumptions, methods, or conclusions\nAvoid softball questions; this is a professional audit review"
+  },
+  {
+    "objectID": "assignments/final-project/executive-briefing.html#grading-rubric",
+    "href": "assignments/final-project/executive-briefing.html#grading-rubric",
+    "title": "Executive Briefing Guidelines",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nCriterion\nPoints\n\n\n\n\nClear communication of audit findings\n25\n\n\nTechnical depth and accuracy\n25\n\n\nStrength of evidence for recommendation\n20\n\n\nResponse to Q&A\n15\n\n\nSlide quality and professionalism\n15\n\n\nTotal\n100\n\n\n\nAudience Participation (separate grade):\n\nQuality of questions asked during other presentations\nGraded as part of class participation"
+  },
+  {
+    "objectID": "assignments/final-project/memo-1-framework.html",
+    "href": "assignments/final-project/memo-1-framework.html",
+    "title": "Audit Memo 1: Decision Framework",
     "section": "",
-    "text": "Working in small teams, you will act as expert consultants to audit a real-world climate planning document. Your chosen document must be decision-relevant—it should contain identifiable decisions (Levers) and measurable outcomes (Metrics).\nThe project is built through three “Audit Memos” (1–2 pages each) to ensure steady progress, culminating in an Executive Briefing presentation and a final Written Report."
+    "text": "Draft Material\n\n\nThis content is under development and subject to change."
   },
   {
-    "objectID": "exams/assignments/final-project.html#timeline",
-    "href": "exams/assignments/final-project.html#timeline",
-    "title": "Final Project",
-    "section": "Timeline",
-    "text": "Timeline\n\n\n\n\n\n\n\n\nDeadline\nDeliverable\nDescription\n\n\n\n\nWeek 3 (Friday)\nTopic Proposal\nSubmit document choice and confirm it contains identifiable Levers (L) and Metrics (M).\n\n\nWeek 7 (Friday)\nMemo 1 (Framework)\nMap the plan’s Levers (L) and Metrics (M). What choices are being made? What outcomes are being measured?\n\n\nWeek 10 (Friday)\nMemo 2 (Evidence)\nMap the plan’s Valuation approach and System Models (R). What models are used? Are they appropriate?\n\n\nWeek 12 (Friday)\nMemo 3 (Robustness)\nMap the plan’s consideration of Uncertainties (X) and Robustness. How does the plan handle deep uncertainty?\n\n\nWeek 13 (Friday)\nSlides Due\nAll teams must submit their presentation slides. This ensures fairness so no team gains extra work time depending on their presentation slot.\n\n\nWeek 14\nExecutive Briefing\nA 20-minute team presentation. Non-presenting teams act as the “Client Board” and must ask rigorous questions.\n\n\nFinals\nWritten Report\nA synthesis of your memos with a final recommendation to Endorse, Reject, or Modify the plan."
+    "objectID": "assignments/final-project/memo-1-framework.html#overview",
+    "href": "assignments/final-project/memo-1-framework.html#overview",
+    "title": "Audit Memo 1: Decision Framework",
+    "section": "Overview",
+    "text": "Overview\nDue: Friday of Week 7\nThis memo maps the decision framework of your chosen climate plan. You will identify the Levers (L) and Metrics (M) that define the plan’s decision space."
   },
   {
-    "objectID": "exams/assignments/final-project.html#requirements",
-    "href": "exams/assignments/final-project.html#requirements",
-    "title": "Final Project",
+    "objectID": "assignments/final-project/memo-1-framework.html#learning-objectives",
+    "href": "assignments/final-project/memo-1-framework.html#learning-objectives",
+    "title": "Audit Memo 1: Decision Framework",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy completing this memo, you will demonstrate your ability to:\n\nExtract decision variables (Levers) from a real-world planning document\nIdentify performance measures (Metrics) used to evaluate success\nCritique the completeness and clarity of a plan’s decision framework"
+  },
+  {
+    "objectID": "assignments/final-project/memo-1-framework.html#requirements",
+    "href": "assignments/final-project/memo-1-framework.html#requirements",
+    "title": "Audit Memo 1: Decision Framework",
     "section": "Requirements",
-    "text": "Requirements\n[Project requirements will be posted here]"
+    "text": "Requirements\nSubmit a 1-2 page memo (PDF) containing:\n\n1. Levers Analysis\nCreate a table of the plan’s key decision variables:\n\n\n\n\n\n\n\n\n\nLever\nDescription\nRange/Options\nCurrently Proposed\n\n\n\n\nExample: Seawall height\nHeight of coastal protection\n0-15 ft\n10 ft\n\n\n\nFor each lever, address:\n\nIs the lever clearly defined with specific options?\nAre alternative options considered, or is only one choice presented?\nWhat constraints limit the lever’s range?\n\n\n\n2. Metrics Analysis\nCreate a table of the plan’s performance metrics:\n\n\n\n\n\n\n\n\n\nMetric\nDescription\nUnits\nTarget/Threshold\n\n\n\n\nExample: Annual expected damages\nProbabilistic flood losses\n$/year\n&lt; $10M\n\n\n\nFor each metric, address:\n\nIs the metric quantifiable and measurable?\nHow is the metric calculated or estimated?\nWhat time horizon does the metric consider?\n\n\n\n3. Framework Critique\nIn 1-2 paragraphs, assess the decision framework:\n\nCompleteness: Are there important levers or metrics missing?\nClarity: Are the levers and metrics well-defined?\nTrade-offs: Does the plan acknowledge trade-offs between metrics?"
   },
   {
-    "objectID": "exams/assignments/final-project.html#deliverables",
-    "href": "exams/assignments/final-project.html#deliverables",
-    "title": "Final Project",
-    "section": "Deliverables",
-    "text": "Deliverables\n[Detailed specifications for each memo will be posted here]"
+    "objectID": "assignments/final-project/memo-1-framework.html#submission",
+    "href": "assignments/final-project/memo-1-framework.html#submission",
+    "title": "Audit Memo 1: Decision Framework",
+    "section": "Submission",
+    "text": "Submission\nSubmit your memo as a PDF to Canvas by 11:59 PM on the due date."
   },
   {
-    "objectID": "exams/assignments/final-project.html#grading-and-rubric",
-    "href": "exams/assignments/final-project.html#grading-and-rubric",
-    "title": "Final Project",
-    "section": "Grading and Rubric",
-    "text": "Grading and Rubric\n[Detailed specifications will be posted here]"
+    "objectID": "assignments/final-project/memo-1-framework.html#grading-rubric",
+    "href": "assignments/final-project/memo-1-framework.html#grading-rubric",
+    "title": "Audit Memo 1: Decision Framework",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nCriterion\nPoints\n\n\n\n\nLevers clearly identified and described\n30\n\n\nMetrics clearly identified and described\n30\n\n\nThoughtful critique of framework completeness\n20\n\n\nProfessional writing and formatting\n20\n\n\nTotal\n100"
+  },
+  {
+    "objectID": "assignments/final-project/memo-3-robustness.html",
+    "href": "assignments/final-project/memo-3-robustness.html",
+    "title": "Audit Memo 3: Robustness Assessment",
+    "section": "",
+    "text": "Draft Material\n\n\nThis content is under development and subject to change."
+  },
+  {
+    "objectID": "assignments/final-project/memo-3-robustness.html#overview",
+    "href": "assignments/final-project/memo-3-robustness.html#overview",
+    "title": "Audit Memo 3: Robustness Assessment",
+    "section": "Overview",
+    "text": "Overview\nDue: Friday of Week 12\nThis memo examines how your chosen climate plan addresses uncertainty and robustness. You will analyze the Uncertainties (X) acknowledged and evaluate whether the plan’s recommendations are robust to deep uncertainty."
+  },
+  {
+    "objectID": "assignments/final-project/memo-3-robustness.html#learning-objectives",
+    "href": "assignments/final-project/memo-3-robustness.html#learning-objectives",
+    "title": "Audit Memo 3: Robustness Assessment",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy completing this memo, you will demonstrate your ability to:\n\nIdentify and categorize uncertainties in climate planning\nAssess whether a plan adequately addresses deep uncertainty\nApply robustness concepts to critique real-world decision-making"
+  },
+  {
+    "objectID": "assignments/final-project/memo-3-robustness.html#requirements",
+    "href": "assignments/final-project/memo-3-robustness.html#requirements",
+    "title": "Audit Memo 3: Robustness Assessment",
+    "section": "Requirements",
+    "text": "Requirements\nSubmit a 1-2 page memo (PDF) containing:\n\n1. Uncertainty Mapping\nIdentify the key uncertainties affecting the plan:\n\n\n\n\n\n\n\n\nUncertainty\nType\nHow Addressed\n\n\n\n\nClimate projections\nDeep (epistemic)\nMultiple scenarios? Single projection?\n\n\nPopulation growth\nParametric\nSensitivity analysis?\n\n\nDamage functions\nStructural\nAcknowledged?\n\n\n\nCategorize uncertainties as:\n\nParametric: Known unknowns with estimable ranges\nStructural: Model form uncertainty\nDeep: Fundamental disagreement or unknown unknowns\n\n\n\n2. Robustness Assessment\nEvaluate how the plan handles uncertainty:\n\n\n\nRobustness Element\nPresent?\nDescription\n\n\n\n\nMultiple scenarios\nYes/No\nWhich scenarios? How selected?\n\n\nSensitivity analysis\nYes/No\nWhat parameters varied?\n\n\nAdaptive strategies\nYes/No\nTrigger points? Decision rules?\n\n\nWorst-case analysis\nYes/No\nRegret minimization?\n\n\n\nAddress:\n\nDoes the plan optimize for a single “best guess” or consider a range of futures?\nAre there provisions for adapting if conditions differ from expectations?\nWhat vulnerabilities might emerge under scenarios not considered?\n\n\n\n3. Robustness Critique\nIn 1-2 paragraphs, provide your overall assessment:\n\nStrengths: What does the plan do well in handling uncertainty?\nWeaknesses: Where is the plan most vulnerable to surprise?\nRecommendations: What specific improvements would enhance robustness?"
+  },
+  {
+    "objectID": "assignments/final-project/memo-3-robustness.html#submission",
+    "href": "assignments/final-project/memo-3-robustness.html#submission",
+    "title": "Audit Memo 3: Robustness Assessment",
+    "section": "Submission",
+    "text": "Submission\nSubmit your memo as a PDF to Canvas by 11:59 PM on the due date."
+  },
+  {
+    "objectID": "assignments/final-project/memo-3-robustness.html#grading-rubric",
+    "href": "assignments/final-project/memo-3-robustness.html#grading-rubric",
+    "title": "Audit Memo 3: Robustness Assessment",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nCriterion\nPoints\n\n\n\n\nUncertainties clearly identified and categorized\n30\n\n\nRobustness assessment thorough and accurate\n30\n\n\nConstructive critique with specific recommendations\n20\n\n\nProfessional writing and formatting\n20\n\n\nTotal\n100"
+  },
+  {
+    "objectID": "assignments/final-project/written-report.html",
+    "href": "assignments/final-project/written-report.html",
+    "title": "Final Written Report Guidelines",
+    "section": "",
+    "text": "Draft Material\n\n\nThis content is under development and subject to change."
+  },
+  {
+    "objectID": "assignments/final-project/written-report.html#overview",
+    "href": "assignments/final-project/written-report.html#overview",
+    "title": "Final Written Report Guidelines",
+    "section": "Overview",
+    "text": "Overview\nDue: Finals Period (date TBD)\nThe Written Report is the capstone of your audit project. It synthesizes your three memos and incorporates feedback from your Executive Briefing into a polished final deliverable."
+  },
+  {
+    "objectID": "assignments/final-project/written-report.html#requirements",
+    "href": "assignments/final-project/written-report.html#requirements",
+    "title": "Final Written Report Guidelines",
+    "section": "Requirements",
+    "text": "Requirements\nSubmit a 5-7 page report (PDF, excluding references) containing:\n\n1. Executive Summary (1 page max)\nA standalone summary that a busy decision-maker could read in 5 minutes:\n\nWhat plan was audited?\nWhat are the key findings?\nWhat is your recommendation?\n\n\n\n2. Introduction (0.5-1 page)\n\nContext: What is the plan? Who commissioned it?\nScope: What aspects did you audit?\nApproach: How did you conduct the audit?\n\n\n\n3. Decision Framework Analysis (1-1.5 pages)\nSynthesize and expand on Memo 1:\n\nKey Levers and their ranges\nKey Metrics and their definitions\nAssessment of framework completeness\nIncorporate any feedback from presentation Q&A\n\n\n\n4. Evidence Base Analysis (1-1.5 pages)\nSynthesize and expand on Memo 2:\n\nValuation methods and their appropriateness\nSystem models and their assumptions\nAssessment of evidence quality\nIncorporate any feedback from presentation Q&A\n\n\n\n5. Robustness Analysis (1-1.5 pages)\nSynthesize and expand on Memo 3:\n\nUncertainties and how they’re treated\nRobustness assessment\nVulnerabilities and blind spots\nIncorporate any feedback from presentation Q&A\n\n\n\n6. Recommendation (0.5-1 page)\nYour final verdict with specific, actionable guidance:\n\nEndorse / Modify / Reject (with clear justification)\nSpecific recommendations for improvement (if Modify)\nAlternative approaches (if Reject)\n\n\n\n7. References\nCite all sources using a consistent format (APA, Chicago, etc.)"
+  },
+  {
+    "objectID": "assignments/final-project/written-report.html#formatting-requirements",
+    "href": "assignments/final-project/written-report.html#formatting-requirements",
+    "title": "Final Written Report Guidelines",
+    "section": "Formatting Requirements",
+    "text": "Formatting Requirements\n\nLength: 5-7 pages (excluding references)\nFont: 11pt or larger\nMargins: 1 inch\nSpacing: Single or 1.5 spacing\nFormat: PDF"
+  },
+  {
+    "objectID": "assignments/final-project/written-report.html#whats-new-vs.-memos",
+    "href": "assignments/final-project/written-report.html#whats-new-vs.-memos",
+    "title": "Final Written Report Guidelines",
+    "section": "What’s New vs. Memos",
+    "text": "What’s New vs. Memos\nThe report is not just your three memos stapled together. You should:\n\nSynthesize: Draw connections across the three analyses\nIncorporate Feedback: Address questions raised during your presentation\nRefine: Improve clarity and depth based on instructor feedback on memos\nPolish: Professional writing and formatting"
+  },
+  {
+    "objectID": "assignments/final-project/written-report.html#submission",
+    "href": "assignments/final-project/written-report.html#submission",
+    "title": "Final Written Report Guidelines",
+    "section": "Submission",
+    "text": "Submission\nSubmit your report as a PDF to Canvas by 11:59 PM on the due date."
+  },
+  {
+    "objectID": "assignments/final-project/written-report.html#grading-rubric",
+    "href": "assignments/final-project/written-report.html#grading-rubric",
+    "title": "Final Written Report Guidelines",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nCriterion\nPoints\n\n\n\n\nExecutive Summary (clear, standalone)\n10\n\n\nDecision Framework Analysis (depth, accuracy)\n20\n\n\nEvidence Base Analysis (depth, accuracy)\n20\n\n\nRobustness Analysis (depth, accuracy)\n20\n\n\nRecommendation (justified, specific)\n15\n\n\nWriting Quality (clarity, organization)\n10\n\n\nFormatting and References\n5\n\n\nTotal\n100"
   },
   {
     "objectID": "index.html",
@@ -801,6 +1081,13 @@
     "text": "References\n\n\nCrawford, S. (2025, December 5). Floods and Storms Are Ravaging the Jersey Shore. Why Do We Keep Building It Back? Retrieved December 5, 2025, from https://www.rollingstone.com/culture/culture-features/floods-storms-jersey-shore-beach-rebuilding-1235477927/\n\n\nFrank, T. (2022, August 22). Bold New Jersey Shore Flood Rules Could Be Blueprint for Entire U.S. Coast. Scientific American. Retrieved from https://www.scientificamerican.com/article/bold-new-jersey-shore-flood-rules-could-be-blueprint-for-entire-u-s-coast/\n\n\nSatija, N., Collier, K., & Shaw, A. (2016, December 7). Boomtown, flood town. ProPublica: Hell and High Water. Retrieved from https://projects.propublica.org/houston-cypress/"
   },
   {
+    "objectID": "lectures/week-03/index.html#references",
+    "href": "lectures/week-03/index.html#references",
+    "title": "Climate Science and Scenarios",
+    "section": "References",
+    "text": "References\n\n\nBonnafous, L., Lall, U., & Siegel, J. (2017). A water risk index for portfolio exposure to climatic extremes: Conceptualization and an application to the mining industry. Hydrology and Earth System Sciences, 21(4), 2075–2106. https://doi.org/10/f96k67\n\n\nCook, E. R., Seager, R., Heim Jr, R. R., Vose, R. S., Herweijer, C., & Woodhouse, C. (2010). Megadroughts in North America: Placing IPCC projections of hydroclimatic change in a long-term palaeoclimate context. Journal of Quaternary Science, 25(1), 48–61. https://doi.org/10.1002/jqs.1303\n\n\nDoss-Gollin, J., Farnham, D. J., Steinschneider, S., & Lall, U. (2019). Robust adaptation to multiscale climate variability. Earth’s Future, 7(7), 734–747. https://doi.org/10.1029/2019ef001154\n\n\nGimeno, L., Nieto, R., Vázquez, M., & Lavers, D. A. (2014). Atmospheric rivers: A mini-review. Frontiers in Earth Science, 2, 1063. https://doi.org/10.3389/feart.2014.00002\n\n\nHannachi, A., Straus, D. M., Franzke, C. L. E., Corti, S., & Woollings, T. (2017). Low-frequency nonlinearity and regime behavior in the Northern Hemisphere extratropical atmosphere. Reviews of Geophysics, 55(1), 199–234. https://doi.org/10.1002/2015rg000509\n\n\nHausfather, Z., & Peters, G. P. (2020). Emissions – the ’business as usual’ story is misleading. Nature, 577(7792, 7792), 618–620. https://doi.org/10.1038/d41586-020-00177-3\n\n\nVallis, G. K. (2006). Atmospheric and Oceanic Fluid Dynamics: Fundamentals and Large-Scale Circulation. Cambridge University Press."
+  },
+  {
     "objectID": "lectures/week-07/index.html#references",
     "href": "lectures/week-07/index.html#references",
     "title": "Optimal Static Decisions",
@@ -812,21 +1099,21 @@
     "href": "readings/week-03-reading.html",
     "title": "Week 3 Reading",
     "section": "",
-    "text": "Draft Material\n\n\nThis content is under development and subject to change."
+    "text": "As before, you are encouraged to use Zotero to manage your references. If you’re adding this to Zotero, you may find the IPCC-Bibtex project helpful.\n\n\n\nThis week’s reading is Seneviratne et al. (2021), the IPCC AR6 chapter on “Weather and Climate Extreme Events in a Changing Climate.”\n\n\nRead these sections to understand the chapter’s methodology:\n\nExecutive Summary (pp. 1517-1522): Overview of key findings and confidence levels\nSection 11.1 Introduction (pp. 1523-1527): Framing and scope\nSection 11.2 Data and Methods (pp. 1527-1536): How observations and models are used to study extremes\n\n\n\n\nChoose one of the following subsections and read it carefully. You will be asked to summarize it in class (and is fair game for the quiz).\n\n\n\nSection\nHazard Type\n\n\n\n\n11.3\nTemperature extremes (heat waves, cold spells)\n\n\n11.4\nHeavy precipitation and pluvial floods\n\n\n11.5\nFloods (fluvial and coastal)\n\n\n11.6\nDroughts\n\n\n11.7\nExtreme storms (tropical cyclones, extratropical storms)\n\n\n11.8\nCompound events\n\n\n\n\n\n\nPrepare a two-minute verbal summary of your deep-dive subsection to share during discussion. Focus on: What extremes are covered? How are they changing? What surprised you?"
   },
   {
-    "objectID": "readings/week-03-reading.html#assigned-readings",
-    "href": "readings/week-03-reading.html#assigned-readings",
+    "objectID": "readings/week-03-reading.html#assigned-reading",
+    "href": "readings/week-03-reading.html#assigned-reading",
     "title": "Week 3 Reading",
-    "section": "Assigned readings",
-    "text": "Assigned readings\n\n\n\n\n\n\nAs before, you are encouraged to use Zotero to manage your references (Zotero has great tools for highlighting and annotating PDFs, among other cool features. It’s also open source so your annotations aren’t locked into a proprietary system).\n\n\n\n\nSeneviratne et al. (2021):\n\nRead the Executive Summary\nRead the Introduction (section 11.1)\nRead the Data and Methods (section 11.2)\nRead one additional subsection (11.3, 11.4, …, or 11.8)\nIf you’re adding this to Zotero, you may find the IPCC-Bibtex project helpful.\n\nPrepare a two minute summary of key points from the “one additional subsection” that you read from Seneviratne et al. (2021). Be prepared to share your summary with the class."
+    "section": "",
+    "text": "As before, you are encouraged to use Zotero to manage your references. If you’re adding this to Zotero, you may find the IPCC-Bibtex project helpful.\n\n\n\nThis week’s reading is Seneviratne et al. (2021), the IPCC AR6 chapter on “Weather and Climate Extreme Events in a Changing Climate.”\n\n\nRead these sections to understand the chapter’s methodology:\n\nExecutive Summary (pp. 1517-1522): Overview of key findings and confidence levels\nSection 11.1 Introduction (pp. 1523-1527): Framing and scope\nSection 11.2 Data and Methods (pp. 1527-1536): How observations and models are used to study extremes\n\n\n\n\nChoose one of the following subsections and read it carefully. You will be asked to summarize it in class (and is fair game for the quiz).\n\n\n\nSection\nHazard Type\n\n\n\n\n11.3\nTemperature extremes (heat waves, cold spells)\n\n\n11.4\nHeavy precipitation and pluvial floods\n\n\n11.5\nFloods (fluvial and coastal)\n\n\n11.6\nDroughts\n\n\n11.7\nExtreme storms (tropical cyclones, extratropical storms)\n\n\n11.8\nCompound events\n\n\n\n\n\n\nPrepare a two-minute verbal summary of your deep-dive subsection to share during discussion. Focus on: What extremes are covered? How are they changing? What surprised you?"
   },
   {
     "objectID": "readings/week-03-reading.html#discussion-questions",
     "href": "readings/week-03-reading.html#discussion-questions",
     "title": "Week 3 Reading",
     "section": "Discussion questions",
-    "text": "Discussion questions\nComing soon"
+    "text": "Discussion questions\n\n\n\n\n\n\nThese questions are intended to guide your reading. You don’t need to turn in answers, but are encouraged to write answers and bring them to class to discuss.\n\n\n\n\nShare one climate extreme finding from your subsection that surprised you, and one that was less concerning than you expected. What drives the difference between high and low confidence statements in the IPCC report?\nSection 11.2 discusses using observations and models to understand extremes. What are the strengths and limitations of each approach?\nHow does confidence level vary across hazard types in the different subsections (11.3-11.8)? Why might some extremes be easier to project than others?\nIf advising a city on flood infrastructure, how would you translate IPCC confidence statements into actionable guidance?"
   },
   {
     "objectID": "readings/week-06-reading.html",
@@ -945,7 +1232,7 @@
     "href": "schedule.html",
     "title": "CEVE 421/521 Schedule",
     "section": "",
-    "text": "NoteNote\n\n\n\nCheck the page for each reading to see discussion questions. You will often be encouraged to focus only on part of relevant papers.\nFinal Project: Deliverables are due throughout the semester (see schedule below).\nCEVE 521 students: You will lead one Paper Discussion session. See Graduate Seminar Requirements.\n\n\n\n\n\nWeek\nDate\nWhat\n\n\n\n\n1\nMon., Jan. 12\nLecture: Intro to Climate Risk Management [ ]\n\n\n\nWed., Jan. 14\nTopical Discussion: Frank (2022) and Crawford (2025)\n\n\n\nFri., Jan. 16\nLab 1: Julia Setup & Hello World\n\n\n2\nMon., Jan. 19\nMartin Luther King, Jr. Day (No Class)\n\n\n\nWed., Jan. 21\nLecture: Hazard, Exposure, Vulnerability [ ]\n\n\n\nFri., Jan. 23\nLab 2: Intro to iCOW\n\n\n3\nMon., Jan. 26\nLecture: Climate Variability, Extremes, and Change [ ] in prep\n\n\n\nWed., Jan. 28\nPaper Discussion: Climate Extremes (IPCC) in prep\n\n\n\nFri., Jan. 30\nLab 3: Sea-Level Rise Scenarios with BRICK in prep / Project: Topic Proposal Due\n\n\n4\nMon., Feb. 2\nLecture: Uncertainty & Monte Carlo [ ] in prep\n\n\n\nWed., Feb. 4\nPaper Discussion: Monte Carlo & Fat Tails in prep\n\n\n\nFri., Feb. 6\nLab 4: Monte Carlo Hazard Modeling in prep\n\n\n5\nMon., Feb. 9\nLecture: Risk Metrics (EAD, VaR, CVaR) [ ] in prep\n\n\n\nWed., Feb. 11\nLab 5: Probabilistic Risk Analysis in prep\n\n\n\nFri., Feb. 13\nNo Class\n\n\n6\nMon., Feb. 16\nExam 1 (Covers Module 1)\n\n\n\nWed., Feb. 18\nLecture: Valuation & Benefit-Cost Analysis [ ] in prep\n\n\n\nFri., Feb. 20\nPaper Discussion: Discounting & BCA in prep\n\n\n7\nMon., Feb. 23\nLecture: Optimal Static Decisions [ ] in prep\n\n\n\nWed., Feb. 25\nPaper Discussion: Optimal Decisions in prep\n\n\n\nFri., Feb. 27\nLab 6: Simulation-Optimization in prep / Project: Memo 1 Due\n\n\n8\nMon., Mar. 2\nLecture: Sensitivity & Value of Information [ ] in prep\n\n\n\nWed., Mar. 4\nPaper Discussion: Value of Information in prep\n\n\n\nFri., Mar. 6\nLab 7: Value of Partial Information in prep\n\n\n9\nMon., Mar. 9\nLecture: Trade-offs & Values [ ] in prep\n\n\n\nWed., Mar. 11\nPaper Discussion: Trade-offs and Values in prep\n\n\n\nFri., Mar. 13\nExam 2 (Covers Module 2)\n\n\n\nMar. 16-20\nSpring Break\n\n\n10\nMon., Mar. 23\nLecture: Robustness & Deep Uncertainty [ ] in prep\n\n\n\nWed., Mar. 25\nPaper Discussion: Robustness & Deep Uncertainty in prep\n\n\n\nFri., Mar. 27\nLab 8: Robustness Metrics in prep / Project: Memo 2 Due\n\n\n11\nMon., Mar. 30\nLecture: Exploratory Modeling & Scenario Discovery [ ] in prep\n\n\n\nWed., Apr. 1\nPaper Discussion: Exploratory Modeling in prep\n\n\n\nFri., Apr. 3\nLab 9: Scenario Discovery in prep\n\n\n12\nMon., Apr. 6\nLecture: Sequential Decision Making [ ] in prep\n\n\n\nWed., Apr. 8\nPaper Discussion: Sequential Decision Making in prep\n\n\n\nFri., Apr. 10\nLab 10: Real Options & Dynamic Policy Search in prep / Project: Memo 3 Due\n\n\n13\nMon., Apr. 13\nLecture: Multi-Objective Optimization [ ] in prep\n\n\n\nWed., Apr. 15\nPaper Discussion: Multi-objective Optimization in prep\n\n\n\nFri., Apr. 17\nLab 11: Pareto Fronts in prep / Project: Slides Due\n\n\n14\nMon., Apr. 20\nFinal Project Presentations (Teams 1 & 2)\n\n\n\nWed., Apr. 22\nFinal Project Presentations (Teams 3 & 4)\n\n\n\nFri., Apr. 24\nFinal Project Presentations (Teams 5 & 6)\n\n\n\n\n\n\n\nReferences\n\nCrawford, S. (2025, December 5). Floods and Storms Are Ravaging the Jersey Shore. Why Do We Keep Building It Back? Retrieved December 5, 2025, from https://www.rollingstone.com/culture/culture-features/floods-storms-jersey-shore-beach-rebuilding-1235477927/\n\n\nFrank, T. (2022, August 22). Bold New Jersey Shore Flood Rules Could Be Blueprint for Entire U.S. Coast. Scientific American. Retrieved from https://www.scientificamerican.com/article/bold-new-jersey-shore-flood-rules-could-be-blueprint-for-entire-u-s-coast/",
+    "text": "NoteNote\n\n\n\nCheck the page for each reading to see discussion questions. You will often be encouraged to focus only on part of relevant papers.\nFinal Project: Climate Plan Audit in prep — Deliverables are due throughout the semester (see schedule below).\nCEVE 521 students: You will lead one Paper Discussion session. See Graduate Seminar Requirements.\n\n\n\n\n\nWeek\nDate\nWhat\n\n\n\n\n1\nMon., Jan. 12\nLecture: Intro to Climate Risk Management [ ]\n\n\n\nWed., Jan. 14\nTopical Discussion: Frank (2022) and Crawford (2025)\n\n\n\nFri., Jan. 16\nLab 1: Julia Setup & Hello World\n\n\n2\nMon., Jan. 19\nMartin Luther King, Jr. Day (No Class)\n\n\n\nWed., Jan. 21\nLecture: Hazard, Exposure, Vulnerability [ ]\n\n\n\nFri., Jan. 23\nLab 2: Hazard-Damage Convolution\n\n\n3\nMon., Jan. 26\nLecture: Climate Variability, Extremes, and Change [ ]\n\n\n\nWed., Jan. 28\nPaper Discussion: Climate Extremes (IPCC)\n\n\n\nFri., Jan. 30\nLab 3: Sea-Level Rise Scenarios and Uncertainty in prep / Project: Topic Proposal Due\n\n\n4\nMon., Feb. 2\nLecture: Uncertainty & Monte Carlo [ ] in prep\n\n\n\nWed., Feb. 4\nPaper Discussion: Monte Carlo & Fat Tails in prep\n\n\n\nFri., Feb. 6\nLab 4: Monte Carlo Hazard Modeling in prep\n\n\n5\nMon., Feb. 9\nLecture: Risk Metrics (EAD, VaR, CVaR) [ ] in prep\n\n\n\nWed., Feb. 11\nLab 5: Probabilistic Risk Analysis in prep\n\n\n\nFri., Feb. 13\nNo Class\n\n\n6\nMon., Feb. 16\nExam 1 (Covers Module 1)\n\n\n\nWed., Feb. 18\nLecture: Valuation & Benefit-Cost Analysis [ ] in prep\n\n\n\nFri., Feb. 20\nPaper Discussion: Discounting & BCA in prep\n\n\n7\nMon., Feb. 23\nLecture: Optimal Static Decisions [ ] in prep\n\n\n\nWed., Feb. 25\nPaper Discussion: Optimal Decisions in prep\n\n\n\nFri., Feb. 27\nLab 6: Simulation-Optimization in prep / Project: Memo 1 Due in prep\n\n\n8\nMon., Mar. 2\nLecture: Sensitivity & Value of Information [ ] in prep\n\n\n\nWed., Mar. 4\nPaper Discussion: Value of Information in prep\n\n\n\nFri., Mar. 6\nLab 7: Value of Partial Information in prep\n\n\n9\nMon., Mar. 9\nLecture: Trade-offs & Values [ ] in prep\n\n\n\nWed., Mar. 11\nPaper Discussion: Trade-offs and Values in prep\n\n\n\nFri., Mar. 13\nExam 2 (Covers Module 2)\n\n\n\nMar. 16-20\nSpring Break\n\n\n10\nMon., Mar. 23\nLecture: Robustness & Deep Uncertainty [ ] in prep\n\n\n\nWed., Mar. 25\nPaper Discussion: Robustness & Deep Uncertainty in prep\n\n\n\nFri., Mar. 27\nLab 8: Robustness Metrics in prep / Project: Memo 2 Due in prep\n\n\n11\nMon., Mar. 30\nLecture: Exploratory Modeling & Scenario Discovery [ ] in prep\n\n\n\nWed., Apr. 1\nPaper Discussion: Exploratory Modeling in prep\n\n\n\nFri., Apr. 3\nLab 9: Scenario Discovery in prep\n\n\n12\nMon., Apr. 6\nLecture: Sequential Decision Making [ ] in prep\n\n\n\nWed., Apr. 8\nPaper Discussion: Sequential Decision Making in prep\n\n\n\nFri., Apr. 10\nLab 10: Real Options & Dynamic Policy Search in prep / Project: Memo 3 Due in prep\n\n\n13\nMon., Apr. 13\nLecture: Multi-Objective Optimization [ ] in prep\n\n\n\nWed., Apr. 15\nPaper Discussion: Multi-objective Optimization in prep\n\n\n\nFri., Apr. 17\nLab 11: Pareto Fronts in prep / Project: Slides Due in prep\n\n\n14\nMon., Apr. 20\nFinal Project Presentations in prep (Teams 1 & 2)\n\n\n\nWed., Apr. 22\nFinal Project Presentations in prep (Teams 3 & 4)\n\n\n\nFri., Apr. 24\nFinal Project Presentations in prep (Teams 5 & 6)\n\n\nFinals\nTBD\nExam 3 (Covers Module 3) / Project: Written Report Due in prep\n\n\n\n\n\n\n\nReferences\n\nCrawford, S. (2025, December 5). Floods and Storms Are Ravaging the Jersey Shore. Why Do We Keep Building It Back? Retrieved December 5, 2025, from https://www.rollingstone.com/culture/culture-features/floods-storms-jersey-shore-beach-rebuilding-1235477927/\n\n\nFrank, T. (2022, August 22). Bold New Jersey Shore Flood Rules Could Be Blueprint for Entire U.S. Coast. Scientific American. Retrieved from https://www.scientificamerican.com/article/bold-new-jersey-shore-flood-rules-could-be-blueprint-for-entire-u-s-coast/",
     "crumbs": [
       "Schedule"
     ]
