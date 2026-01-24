@@ -1,0 +1,341 @@
+---
+title: "Final Project: Topic Proposal"
+subtitle: "CEVE 421/521"
+date: 2026-01-30
+status: published
+format:
+  html:
+    toc: true
+  typst:
+    toc: false
+    margin:
+      x: 1in
+      y: 1in
+---
+
+## Overview
+
+**Due:** Friday of Week 3
+
+This proposal confirms your team and document choice.
+The goal is to ensure your chosen plan contains enough decision-relevant content for a meaningful audit.
+
+A good topic proposal sets you up for success on all subsequent deliverables.
+Spending time now to find the right document will make Memos 1-3 much easier to write.
+
+## Choosing a Plan: The Key to Success
+
+The single most important decision you'll make is **which plan to audit**.
+A well-chosen plan will give you rich material for analysis; a poor choice will leave you struggling to find content for your memos.
+
+### What Makes a Good Plan?
+
+Your document should be:
+
+1. **Decision-Relevant:** The plan should contain specific, concrete decisions—not just aspirational goals.
+   Look for plans that answer "what will we build?" or "how much will we invest?" rather than just "what do we hope to achieve?"
+
+2. **Analytically Rich:** The plan should contain enough technical detail for you to critique.
+   You need to be able to identify models, data sources, and assumptions.
+
+3. **Appropriately Scoped:** The plan should be substantial enough for a semester-long project (typically 50+ pages) but focused enough to analyze thoroughly.
+
+4. **Publicly Available:** You must be able to share the document and cite specific page numbers.
+
+### Types of Documents That Work Well
+
+| Document Type | Why It Works | Example |
+| :--- | :--- | :--- |
+| **Flood Risk Management Plans** | Clear decisions (levee heights, buyouts), quantified metrics (damages avoided), explicit models (hydraulic, economic) | US Army Corps feasibility studies |
+| **Coastal Resilience Strategies** | Multiple levers (seawalls, living shorelines, retreat), scenario analysis, benefit-cost calculations | State coastal master plans |
+| **Climate Action Plans with Infrastructure Components** | Specific projects with costs, timelines, and expected outcomes | City infrastructure adaptation plans |
+| **Hazard Mitigation Plans** | Required to include risk assessment, mitigation actions, and benefit-cost analysis | FEMA-approved local hazard mitigation plans |
+
+### Types of Documents That Do NOT Work Well
+
+| Document Type | Why It Fails | Red Flags |
+| :--- | :--- | :--- |
+| **Aspirational Climate Pledges** | Goals without actions; no analysis to critique | "Net zero by 2050" with no implementation pathway |
+| **Policy Frameworks** | Describes what others should do, not what the organization will do | "Stakeholders should consider..." |
+| **Short White Papers** | Not enough depth for sustained analysis | Under 30 pages; no technical appendices |
+| **Purely Qualitative Reports** | No models or quantitative analysis to evaluate | No numbers, maps, or projections |
+| **Academic Papers** | Already peer-reviewed; your role is to audit practitioners | Published in journals |
+
+### Where to Find Good Plans
+
+**Federal Sources:**
+
+- **USACE (Army Corps):** Feasibility studies, post-flood reports, and flood risk management plans are excellent choices.
+  Search "USACE [city name] feasibility study" or browse the [USACE Digital Library](https://usace.contentdm.oclc.org/).
+- **FEMA:** Hazard Mitigation Plans are publicly available.
+  Check your state's emergency management agency website.
+
+**State Sources:**
+
+- **Louisiana Coastal Master Plan:** A gold-standard example of decision-relevant climate planning.
+- **Texas General Land Office:** Coastal resilience studies
+- **State climate adaptation plans:** Quality varies; look for ones with specific projects and costs.
+
+**City/Regional Sources:**
+
+- Major cities often have climate action plans, but quality varies widely.
+- Look for plans that include infrastructure investments with cost estimates.
+- Regional planning agencies (e.g., Houston-Galveston Area Council) often produce more technical documents.
+
+**International Sources:**
+
+- Netherlands Delta Programme
+- UK Environment Agency flood risk assessments
+- World Bank climate adaptation project appraisals
+
+### A Decision Checklist
+
+Before committing to a document, verify you can answer "yes" to all of these:
+
+- [ ] Can I identify at least 3 specific decisions (levers) the plan makes?
+- [ ] Does the plan include quantitative targets or metrics?
+- [ ] Can I find evidence of models or analysis (not just assertions)?
+- [ ] Is the full document available online?
+- [ ] Is the document substantial enough (50+ pages) for a semester project?
+- [ ] Does the plan address climate hazards (flooding, sea level rise, extreme heat, etc.)?
+
+## The XLRM Framework: Finding the Structure
+
+The XLRM framework helps you systematically analyze any decision problem:
+
+- **X (Uncertainties):** Factors outside the decision-maker's control that affect outcomes
+- **L (Levers):** Decisions or actions the decision-maker can take
+- **R (Relationships):** Models, assumptions, and causal links connecting levers to outcomes
+- **M (Metrics):** Quantifiable measures used to evaluate success
+
+Your proposal should demonstrate that your chosen plan contains all four components.
+
+### Identifying Uncertainties (X)
+
+Uncertainties are factors that:
+
+- Affect outcomes but are not controlled by the decision-maker
+- Could take on different values or unfold in different ways
+- May be acknowledged explicitly or hidden in assumptions
+
+**Examples of Uncertainties:**
+
+| Category | Examples | What to Look For |
+| :--- | :--- | :--- |
+| **Climate** | Future sea level rise, storm intensity, precipitation patterns | Scenario tables, climate projections, "under RCP 4.5..." |
+| **Socioeconomic** | Population growth, land use change, economic development | Demographic projections, development scenarios |
+| **Technical** | Infrastructure performance, model accuracy, failure modes | Sensitivity analyses, uncertainty ranges, caveats |
+| **Economic** | Discount rates, future costs, property values | Assumptions stated in BCA, "assuming 3% discount rate" |
+
+**How to Find Them:**
+
+- Look for words like "scenario," "projection," "assumption," "uncertainty," "may," "could"
+- Check appendices for sensitivity analyses or scenario descriptions
+- Note when the plan uses single values vs. ranges
+
+**Common Mistake:** Listing "climate change" as an uncertainty.
+Be more specific: *which aspect* of climate change? (e.g., "sea level rise between 1-4 feet by 2100")
+
+### Identifying Levers (L)
+
+Levers are actions that:
+
+- The decision-maker can choose to take (or not take)
+- Have associated costs and consequences
+- Come in different options or magnitudes
+
+**Examples of Levers:**
+
+| Category | Examples | What to Look For |
+| :--- | :--- | :--- |
+| **Structural** | Levee heights, seawall design, drainage capacity | Engineering specifications, design parameters |
+| **Non-structural** | Buyouts, zoning changes, building codes | Policy recommendations, program descriptions |
+| **Financial** | Insurance requirements, grant programs, tax incentives | Budget allocations, program designs |
+| **Operational** | Warning systems, evacuation plans, maintenance schedules | Operational protocols, trigger levels |
+
+**How to Find Them:**
+
+- Look for "the plan recommends," "we will construct," "the preferred alternative"
+- Find chapters on "alternatives considered" or "options analysis"
+- Note any decision points where different choices were possible
+
+**Common Mistake:** Confusing goals with levers.
+"Reduce flood risk" is a goal; "construct a 12-foot levee" is a lever.
+
+### Identifying Relationships (R)
+
+Relationships describe:
+
+- How levers connect to outcomes (causal mechanisms)
+- Models used to predict consequences
+- Assumptions about how systems behave
+
+**Examples of Relationships:**
+
+| Category | Examples | What to Look For |
+| :--- | :--- | :--- |
+| **Hazard Models** | Flood frequency analysis, storm surge models, climate downscaling | Model names (ADCIRC, HEC-RAS), data sources |
+| **Exposure Models** | Building inventories, population projections, land use maps | GIS data, parcel databases, census data |
+| **Vulnerability Models** | Depth-damage curves, fragility functions, casualty rates | HAZUS, custom damage functions |
+| **Economic Models** | Benefit-cost analysis, present value calculations | Discount rates, project lifetimes, valuation methods |
+
+**How to Find Them:**
+
+- Look for methodology sections, technical appendices, model descriptions
+- Find references to software tools or analytical frameworks
+- Note how the plan goes from "if we build X" to "we expect Y reduction in damages"
+
+**Common Mistake:** Describing data as relationships.
+"FEMA flood maps" is a data source; the *relationship* is "we assume the 100-year floodplain represents 1% annual probability of flooding."
+
+### Identifying Metrics (M)
+
+Metrics are:
+
+- Quantifiable measures of outcomes
+- Used to compare alternatives or evaluate success
+- Defined with specific units and calculation methods
+
+**Examples of Metrics:**
+
+| Category | Examples | What to Look For |
+| :--- | :--- | :--- |
+| **Risk Metrics** | Annual expected damages, lives at risk, properties flooded | Dollar amounts, counts, probabilities |
+| **Economic Metrics** | Net present value, benefit-cost ratio, internal rate of return | BCA results, ranking of alternatives |
+| **Performance Metrics** | Level of protection, residual risk, reliability | Design standards, performance targets |
+| **Equity Metrics** | Distribution of benefits, vulnerable populations protected | Demographic analysis, spatial distribution |
+
+**How to Find Them:**
+
+- Look for tables comparing alternatives
+- Find "success criteria" or "evaluation criteria" sections
+- Note any targets or thresholds the plan sets
+
+**Common Mistake:** Confusing metrics with goals.
+"Resilient communities" is a goal; "properties removed from the 100-year floodplain" is a metric.
+
+## Proposal Requirements
+
+Submit a **1-page document** (PDF) containing:
+
+### 1. Team Information
+
+- Team member names and whether each is enrolled in CEVE 421 or 521
+- Brief statement of how you plan to divide work (e.g., "Team member A will lead Memo 1; member B will lead Memo 2...")
+
+### 2. Document Selection
+
+Provide complete citation information:
+
+- **Title:** Full title of the document
+- **Organization:** Who published it (agency, city, consultant)
+- **Year:** Publication date
+- **URL:** Direct link to the PDF or landing page
+- **Summary:** 2-3 sentences describing what the plan addresses and why you chose it
+
+### 3. Initial XLRM Mapping
+
+Identify at least **two examples of each** XLRM component.
+For each example, provide:
+
+- A brief description (1-2 sentences)
+- A page number reference so we can verify
+
+| Component | Example 1 | Example 2 |
+| :--- | :--- | :--- |
+| **X (Uncertainties)** | *e.g., "Sea level rise scenarios of 1, 2, and 4 feet by 2100 (p. 23)"* | *e.g., "Population growth projections from 1.2M to 1.8M by 2050 (p. 45)"* |
+| **L (Levers)** | *e.g., "Structural alternatives: 100-year vs. 500-year levee design (p. 67)"* | *e.g., "Non-structural: voluntary buyout program for repetitive loss properties (p. 89)"* |
+| **R (Relationships)** | *e.g., "HEC-RAS hydraulic model to estimate flood depths (Appendix C)"* | *e.g., "HAZUS-MH depth-damage curves for residential structures (p. 112)"* |
+| **M (Metrics)** | *e.g., "Annual expected damages in $ millions (Table 5-1)"* | *e.g., "Benefit-cost ratio for each alternative (Table 6-2)"* |
+
+### 4. Confirmation Statement
+
+A brief statement (1-2 sentences) confirming that:
+
+- The document is publicly available (provide URL)
+- The document contains concrete decisions (not just aspirational goals)
+- Your team has reviewed the full document (not just the executive summary)
+
+## Example: Strong vs. Weak Proposals
+
+### Strong Proposal Example
+
+> **Document:** Harris County Flood Control District, *Buffalo Bayou and Tributaries Resiliency Study* (2021).
+> [Link to document]
+>
+> **Summary:** This USACE feasibility study evaluates structural and non-structural alternatives for reducing flood risk in the Buffalo Bayou watershed following Hurricane Harvey.
+> We chose this document because it contains detailed BCA for multiple alternatives and explicitly addresses climate uncertainty.
+>
+> | Component | Example 1 | Example 2 |
+> | :--- | :--- | :--- |
+> | **X** | Sea level rise scenarios (0.5-2.0 ft by 2085, p. 34) | Future land use scenarios (p. 67) |
+> | **L** | Tunnel alternative vs. channel modification (p. 89) | Voluntary buyout of 2,300 structures (p. 102) |
+> | **R** | HEC-HMS rainfall-runoff model (Appendix D) | USACE depth-damage curves (p. 156) |
+> | **M** | Expected annual damages ($890M baseline, p. 45) | BCR ranging from 0.8 to 3.2 (Table 7-1) |
+
+### Weak Proposal Example
+
+> **Document:** City of Houston Climate Action Plan (2020)
+>
+> **Summary:** Houston's plan to reduce emissions and adapt to climate change.
+>
+> | Component | Example 1 | Example 2 |
+> | :--- | :--- | :--- |
+> | **X** | Climate change | Future weather |
+> | **L** | Reduce emissions | Build resilience |
+> | **R** | City analysis | Expert input |
+> | **M** | Net zero by 2050 | More resilient city |
+
+**Why is this weak?**
+
+- No page numbers (evidence team didn't read document carefully)
+- Examples are too vague to verify
+- "Reduce emissions" is a goal, not a specific lever
+- "Net zero by 2050" is a target, not a metric for evaluating alternatives
+- No URL provided
+
+## Submission
+
+Submit your proposal as a PDF to Canvas by 11:59 PM on the due date.
+
+**Filename format:** `TeamName_TopicProposal.pdf`
+
+## Grading
+
+This proposal is graded **Complete/Incomplete**.
+
+A **Complete** proposal demonstrates:
+
+- [ ] Clear document selection with full citation and working URL
+- [ ] At least two plausible, specific examples for each XLRM component
+- [ ] Page number references for each example
+- [ ] Evidence that the team has reviewed the full document
+
+An **Incomplete** proposal will be returned for revision if:
+
+- Examples are too vague or cannot be verified
+- The document appears to lack decision-relevant content
+- Page references are missing
+- The document is not publicly accessible
+
+You will have one opportunity to revise an incomplete proposal within 48 hours.
+
+## Tips for Success
+
+1. **Start Early:** Finding the right document takes time.
+   Don't wait until the night before to search.
+
+2. **Skim Before Committing:** Read the executive summary AND flip through the full document.
+   Many plans have great summaries but thin analysis.
+
+3. **Check the Appendices:** The best material is often in technical appendices.
+   A plan with detailed appendices is usually a good sign.
+
+4. **Look for Tables:** Plans with tables comparing alternatives (costs, benefits, BCRs) are usually analytically rich.
+
+5. **Consider Your Interests:** You'll spend the semester with this document.
+   Pick something you find genuinely interesting—your hometown, a hazard you care about, an engineering solution that fascinates you.
+
+6. **Ask Early:** If you're unsure whether a document will work, email the instructor *before* the deadline.
+   We can quickly tell you if it's a good choice or suggest alternatives.
+

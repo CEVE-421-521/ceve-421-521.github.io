@@ -1,7 +1,7 @@
 ---
 title: "Week 3 Reading"
 subtitle: "Weather and climate extreme events in a changing climate"
-status: draft
+status: published
 
 format:
   html: 
@@ -9,21 +9,58 @@ format:
   typst: default
 ---
 
-## Assigned readings
+## Assigned Reading
 
 ::: {.callout-tip}
-As before, you are encouraged to use Zotero to manage your references (Zotero has great tools for highlighting and annotating PDFs, among other cool features. It's also open source so your annotations aren't locked into a proprietary system).
+As before, you are encouraged to use Zotero to manage your references.
+If you're adding this to Zotero, you may find the [IPCC-Bibtex](https://github.com/openclimatedata/ipcc-bibtex/) project helpful.
 :::
 
-- @seneviratne_IPCC:2021:
-    - Read the Executive Summary
-    - Read the Introduction (section 11.1)
-    - Read the Data and Methods (section 11.2)
-    - Read one additional subsection (11.3, 11.4, ..., or 11.8)
-    - If you're adding this to Zotero, you may find the [IPCC-Bibtex](https://github.com/openclimatedata/ipcc-bibtex/) project helpful.
-- Prepare a two minute summary of key points from the "one additional subsection" that you read from @seneviratne_IPCC:2021. Be prepared to share your summary with the class.
+This week's reading is @seneviratne_IPCC:2021, the IPCC AR6 chapter on "Weather and Climate Extreme Events in a Changing Climate."
+
+### Part 1: Background (Everyone)
+
+Read these sections to understand the chapter's methodology:
+
+- **Executive Summary** (pp. 1517-1522): Overview of key findings and confidence levels
+- **Section 11.1 Introduction** (pp. 1523-1527): Framing and scope
+- **Section 11.2 Data and Methods** (pp. 1527-1536): How observations and models are used to study extremes
+
+### Part 2: Deep Dive (Pick ONE Hazard)
+
+Choose **one** of the following subsections and read it carefully.
+You will be asked to summarize it in class (and is fair game for the quiz).
+
+| Section | Hazard Type |
+|---------|-------------|
+| 11.3 | Temperature extremes (heat waves, cold spells) |
+| 11.4 | Heavy precipitation and pluvial floods |
+| 11.5 | Floods (fluvial and coastal) |
+| 11.6 | Droughts |
+| 11.7 | Extreme storms (tropical cyclones, extratropical storms) |
+| 11.8 | Compound events |
+
+
+### Part 3: Class Contribution
+
+Prepare a **two-minute verbal summary** of your deep-dive subsection to share during discussion.
+Focus on: What extremes are covered? How are they changing? What surprised you?
 
 ## Discussion questions
 
-*Coming soon*
+::: {.callout-tip}
+These questions are intended to guide your reading.
+You don't need to turn in answers, but are encouraged to write answers and bring them to class to discuss.
+:::
+
+1. Share one climate extreme finding from your subsection that surprised you, and one that was less concerning than you expected.
+What drives the difference between high and low confidence statements in the IPCC report?
+
+2. Section 11.2 discusses using observations and models to understand extremes.
+What are the strengths and limitations of each approach?
+
+3. How does confidence level vary across hazard types in the different subsections (11.3-11.8)?
+Why might some extremes be easier to project than others?
+
+4. If advising a city on flood infrastructure, how would you translate IPCC confidence statements into actionable guidance?
 

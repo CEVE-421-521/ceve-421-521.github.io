@@ -1,0 +1,114 @@
+---
+title: "Final Written Report Guidelines"
+subtitle: "CEVE 421/521 Final Project"
+date: 2026-05-01
+status: draft
+format:
+  html:
+    toc: true
+  typst:
+    toc: false
+    margin:
+      x: 1in
+      y: 1in
+---
+
+## Overview
+
+**Due:** Finals Period (date TBD)
+
+The Written Report is the capstone of your audit project.
+It synthesizes your three memos and incorporates feedback from your Executive Briefing into a polished final deliverable.
+
+## Requirements
+
+Submit a **5-7 page report** (PDF, excluding references) containing:
+
+### 1. Executive Summary (1 page max)
+
+A standalone summary that a busy decision-maker could read in 5 minutes:
+
+- What plan was audited?
+- What are the key findings?
+- What is your recommendation?
+
+### 2. Introduction (0.5-1 page)
+
+- Context: What is the plan? Who commissioned it?
+- Scope: What aspects did you audit?
+- Approach: How did you conduct the audit?
+
+### 3. Decision Framework Analysis (1-1.5 pages)
+
+Synthesize and expand on Memo 1:
+
+- Key Levers and their ranges
+- Key Metrics and their definitions
+- Assessment of framework completeness
+- Incorporate any feedback from presentation Q&A
+
+### 4. Evidence Base Analysis (1-1.5 pages)
+
+Synthesize and expand on Memo 2:
+
+- Valuation methods and their appropriateness
+- System models and their assumptions
+- Assessment of evidence quality
+- Incorporate any feedback from presentation Q&A
+
+### 5. Robustness Analysis (1-1.5 pages)
+
+Synthesize and expand on Memo 3:
+
+- Uncertainties and how they're treated
+- Robustness assessment
+- Vulnerabilities and blind spots
+- Incorporate any feedback from presentation Q&A
+
+### 6. Recommendation (0.5-1 page)
+
+Your final verdict with specific, actionable guidance:
+
+- **Endorse / Modify / Reject** (with clear justification)
+- Specific recommendations for improvement (if Modify)
+- Alternative approaches (if Reject)
+
+### 7. References
+
+Cite all sources using a consistent format (APA, Chicago, etc.)
+
+## Formatting Requirements
+
+- **Length:** 5-7 pages (excluding references)
+- **Font:** 11pt or larger
+- **Margins:** 1 inch
+- **Spacing:** Single or 1.5 spacing
+- **Format:** PDF
+
+## What's New vs. Memos
+
+The report is not just your three memos stapled together.
+You should:
+
+1. **Synthesize:** Draw connections across the three analyses
+2. **Incorporate Feedback:** Address questions raised during your presentation
+3. **Refine:** Improve clarity and depth based on instructor feedback on memos
+4. **Polish:** Professional writing and formatting
+
+## Submission
+
+Submit your report as a PDF to Canvas by 11:59 PM on the due date.
+
+## Grading Rubric
+
+| Criterion | Points |
+| :--- | :---: |
+| Executive Summary (clear, standalone) | 10 |
+| Decision Framework Analysis (depth, accuracy) | 20 |
+| Evidence Base Analysis (depth, accuracy) | 20 |
+| Robustness Analysis (depth, accuracy) | 20 |
+| Recommendation (justified, specific) | 15 |
+| Writing Quality (clarity, organization) | 10 |
+| Formatting and References | 5 |
+| **Total** | **100** |
+

@@ -1,0 +1,89 @@
+---
+title: "Audit Memo 2: Evidence Base"
+subtitle: "CEVE 421/521 Final Project"
+date: 2026-03-27
+status: draft
+format:
+  html:
+    toc: true
+  typst:
+    toc: false
+    margin:
+      x: 1in
+      y: 1in
+---
+
+## Overview
+
+**Due:** Friday of Week 10
+
+This memo examines the evidence base underlying your chosen climate plan.
+You will analyze the Valuation approaches and System Models (R) that connect actions to outcomes.
+
+## Learning Objectives
+
+By completing this memo, you will demonstrate your ability to:
+
+1. Identify and critique valuation methods used in climate planning
+2. Assess the system models that link decisions to predicted outcomes
+3. Evaluate the appropriateness of modeling choices for the decision context
+
+## Requirements
+
+Submit a **1-2 page memo** (PDF) containing:
+
+### 1. Valuation Analysis
+
+Identify how the plan values costs and benefits:
+
+| Valuation Element | Plan's Approach | Critique |
+| :--- | :--- | :--- |
+| Discount rate | *e.g., 3% real* | *Is this appropriate? Why?* |
+| Damage estimation | *e.g., depth-damage curves* | *Source? Limitations?* |
+| Non-market values | *e.g., statistical value of life* | *How are these handled?* |
+| Time horizon | *e.g., 50 years* | *Appropriate for climate?* |
+
+Address:
+
+- Are valuation choices explicitly stated or implicit?
+- Do the valuation methods align with best practices from the course?
+- What values or perspectives might be underweighted?
+
+### 2. System Models Analysis
+
+Identify the models used to predict outcomes:
+
+| Model Component | Description | Key Assumptions |
+| :--- | :--- | :--- |
+| Hazard model | *e.g., FEMA flood maps* | *Assumes stationarity?* |
+| Exposure model | *e.g., parcel data* | *Current or projected?* |
+| Vulnerability model | *e.g., depth-damage functions* | *Building types?* |
+
+Address:
+
+- Are the models appropriate for the hazard and decision context?
+- What simplifications or assumptions might affect results?
+- Are model limitations acknowledged?
+
+### 3. Evidence Critique
+
+In 1-2 paragraphs, assess the evidence base:
+
+- **Transparency:** Are data sources and methods clearly documented?
+- **Appropriateness:** Are the models suitable for the decision being made?
+- **Gaps:** What additional evidence would strengthen the analysis?
+
+## Submission
+
+Submit your memo as a PDF to Canvas by 11:59 PM on the due date.
+
+## Grading Rubric
+
+| Criterion | Points |
+| :--- | :---: |
+| Valuation methods clearly identified and critiqued | 30 |
+| System models clearly identified and critiqued | 30 |
+| Thoughtful assessment of evidence quality | 20 |
+| Professional writing and formatting | 20 |
+| **Total** | **100** |
+

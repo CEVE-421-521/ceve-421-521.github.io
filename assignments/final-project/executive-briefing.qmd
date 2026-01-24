@@ -1,0 +1,99 @@
+---
+title: "Executive Briefing Guidelines"
+subtitle: "CEVE 421/521 Final Project"
+date: 2026-04-20
+status: draft
+format:
+  html:
+    toc: true
+  typst:
+    toc: false
+    margin:
+      x: 1in
+      y: 1in
+---
+
+## Overview
+
+**Presentations:** Week 14 (April 20, 22, 24)
+**Slides Due:** Friday of Week 13 (April 17)
+
+Your team will deliver a 20-minute Executive Briefing presenting your audit findings to a simulated "Client Board."
+Non-presenting teams will role-play as board members and must ask substantive questions.
+
+## Format
+
+- **Presentation:** 15 minutes
+- **Q&A:** 5 minutes
+- **Audience:** Your classmates role-play as the board that commissioned the audit
+
+## Presentation Requirements
+
+Your briefing should address:
+
+### 1. Context (2-3 minutes)
+
+- What plan did you audit? (Title, organization, scope)
+- Why does this plan matter? (Stakes, affected populations)
+- What was your audit approach?
+
+### 2. Decision Framework (3-4 minutes)
+
+- Key Levers: What decisions does the plan make?
+- Key Metrics: How does the plan measure success?
+- Framework Gaps: What's missing from the decision structure?
+
+### 3. Evidence Base (3-4 minutes)
+
+- Valuation Methods: How are costs/benefits calculated?
+- System Models: What models predict outcomes?
+- Evidence Gaps: Where is the analysis weakest?
+
+### 4. Robustness (3-4 minutes)
+
+- Uncertainty Treatment: How does the plan handle uncertainty?
+- Vulnerability Analysis: Where might the plan fail?
+- Robustness Gaps: What scenarios are ignored?
+
+### 5. Recommendation (2-3 minutes)
+
+Provide a clear verdict with justification:
+
+- **Endorse:** The plan is sound; implement as proposed
+- **Modify:** The plan has merit but needs specific changes
+- **Reject:** The plan has fundamental flaws; redesign needed
+
+Your recommendation must be supported by specific findings from your audit.
+
+## Slide Requirements
+
+- **Maximum 15 slides** (excluding title slide)
+- **Slides due Friday of Week 13** by 11:59 PM
+- Submit as PDF to Canvas
+- All teams submit before any presentations (fairness)
+
+## Audience Participation
+
+When you are not presenting, you are a **Board Member**.
+Board members must:
+
+- Ask at least **one substantive question** per presentation
+- Questions should probe assumptions, methods, or conclusions
+- Avoid softball questions; this is a professional audit review
+
+## Grading Rubric
+
+| Criterion | Points |
+| :--- | :---: |
+| Clear communication of audit findings | 25 |
+| Technical depth and accuracy | 25 |
+| Strength of evidence for recommendation | 20 |
+| Response to Q&A | 15 |
+| Slide quality and professionalism | 15 |
+| **Total** | **100** |
+
+**Audience Participation (separate grade):**
+
+- Quality of questions asked during other presentations
+- Graded as part of class participation
+

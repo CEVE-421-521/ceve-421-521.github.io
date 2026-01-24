@@ -1,0 +1,84 @@
+---
+title: "Audit Memo 1: Decision Framework"
+subtitle: "CEVE 421/521 Final Project"
+date: 2026-02-27
+status: draft
+format:
+  html:
+    toc: true
+  typst:
+    toc: false
+    margin:
+      x: 1in
+      y: 1in
+---
+
+## Overview
+
+**Due:** Friday of Week 7
+
+This memo maps the decision framework of your chosen climate plan.
+You will identify the Levers (L) and Metrics (M) that define the plan's decision space.
+
+## Learning Objectives
+
+By completing this memo, you will demonstrate your ability to:
+
+1. Extract decision variables (Levers) from a real-world planning document
+2. Identify performance measures (Metrics) used to evaluate success
+3. Critique the completeness and clarity of a plan's decision framework
+
+## Requirements
+
+Submit a **1-2 page memo** (PDF) containing:
+
+### 1. Levers Analysis
+
+Create a table of the plan's key decision variables:
+
+| Lever | Description | Range/Options | Currently Proposed |
+| :--- | :--- | :--- | :--- |
+| *Example: Seawall height* | *Height of coastal protection* | *0-15 ft* | *10 ft* |
+
+For each lever, address:
+
+- Is the lever clearly defined with specific options?
+- Are alternative options considered, or is only one choice presented?
+- What constraints limit the lever's range?
+
+### 2. Metrics Analysis
+
+Create a table of the plan's performance metrics:
+
+| Metric | Description | Units | Target/Threshold |
+| :--- | :--- | :--- | :--- |
+| *Example: Annual expected damages* | *Probabilistic flood losses* | *$/year* | *< $10M* |
+
+For each metric, address:
+
+- Is the metric quantifiable and measurable?
+- How is the metric calculated or estimated?
+- What time horizon does the metric consider?
+
+### 3. Framework Critique
+
+In 1-2 paragraphs, assess the decision framework:
+
+- **Completeness:** Are there important levers or metrics missing?
+- **Clarity:** Are the levers and metrics well-defined?
+- **Trade-offs:** Does the plan acknowledge trade-offs between metrics?
+
+## Submission
+
+Submit your memo as a PDF to Canvas by 11:59 PM on the due date.
+
+## Grading Rubric
+
+| Criterion | Points |
+| :--- | :---: |
+| Levers clearly identified and described | 30 |
+| Metrics clearly identified and described | 30 |
+| Thoughtful critique of framework completeness | 20 |
+| Professional writing and formatting | 20 |
+| **Total** | **100** |
+

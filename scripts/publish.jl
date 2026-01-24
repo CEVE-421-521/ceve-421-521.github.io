@@ -156,6 +156,13 @@ function publish_lab(lab_num::String, semester::String="S26")
         copy_file(joinpath(src_dir, filename), joinpath(target_dir, filename))
     end
 
+    # Copy Julia source files (.jl)
+    for item in readdir(src_dir)
+        if endswith(item, ".jl")
+            copy_file(joinpath(src_dir, item), joinpath(target_dir, item))
+        end
+    end
+
     # Copy data directory
     src_data = joinpath(src_dir, "data")
     if isdir(src_data)
@@ -267,13 +274,22 @@ function publish_site()
         println("✅ Readings synced")
     end
 
-    # Sanitize assignments
+    # Sanitize assignments (including subdirectories like final-project/)
     if isdir("assignments")
         for item in readdir("assignments")
             src_path = joinpath("assignments", item)
             dst_path = joinpath(PUBLIC_SITE, "assignments", item)
             if isfile(src_path) && endswith(item, ".qmd")
                 sanitize_file(src_path, dst_path)
+            elseif isdir(src_path)
+                # Handle subdirectories (e.g., final-project/)
+                for subitem in readdir(src_path)
+                    sub_src = joinpath(src_path, subitem)
+                    sub_dst = joinpath(dst_path, subitem)
+                    if isfile(sub_src) && endswith(subitem, ".qmd")
+                        sanitize_file(sub_src, sub_dst)
+                    end
+                end
             end
         end
         println("✅ Assignments synced")

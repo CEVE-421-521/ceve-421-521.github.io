@@ -1,9 +1,9 @@
 ---
-title: "Climate Variability, Extremes, and Change"
+title: "Climate Science and Scenarios"
 subtitle: "Lecture"
 date: 2026-01-26
 week: 3
-status: draft
+status: published
 
 format:
   revealjs: default
@@ -12,16 +12,502 @@ format:
 author: "{{< var instructor.name >}}"
 course: "{{< var course.number >}}, {{< var course.title >}}"
 institution: "{{< var course.institution >}}"
+
+bibliography: ../../references.bib
+---
+
+## Motivating Questions
+
+::: {.notes}
+Frame the lecture around these two questions.
+:::
+
+::: {.incremental}
+1. What causes climate hazards?
+2. What have we *not* observed that is still possible?
+3. How might these pattern change in the future?
+:::
+
+# The Climate System
+
+## A Fluid on a Rotating Sphere
+
+::: {.notes}
+Flash the equations---don't derive them.
+Point is: this is physics, not magic.
+:::
+
+Climate is governed by the Navier-Stokes equations on a rotating sphere, heated unevenly by the sun.
+
+::: {.incremental}
+- Conservation of mass, momentum, energy
+- Ocean + atmosphere + land + ice + water cycle
+- Nonlinear interactions across scales
+:::
+
+---
+
+::: {.notes}
+Don't explain the equations.
+Just show that climate models solve physics.
+:::
+
+::: {.columns}
+::: {.column width="45%"}
+### Equations of Motion
+:::
+::: {.column width="55%"}
+![@vallis_textbook:2006](vallis_textbook_2006.png)
+:::
+:::
+
 ---
 
 
-## Preparation
+::: {.columns}
+::: {.column width="70%"}
+![@hannachi_review:2017](hannachi_review_2017.png)
+:::
+::: {.column width="30%"}
+### Chaos and regimes
 
-There is no specific preparation required for this class.
-Get a head start on [the week's reading](/readings/week-03-reading.qmd)
+The climate behaves as a *nonlinear dynamical system* with characteristic *modes* or *regimes*.
+:::
+:::
 
-## Coming Soon
+## Weather vs. Climate
 
-This lecture is under development.
+
+::: {.columns}
+::: {.column .fragment width="50%"}
+#### Weather Prediction
+
+An *initial value problem*
+
+- Sensitive to starting conditions
+- Errors grow exponentially
+- Predictability limit: ~2 weeks
+:::
+::: {.column .fragment width="50%"}
+#### Climate Projection
+
+A *boundary value problem*
+
+- Driven by energy inputs/outputs
+- Shape of the attractor
+- Statistics over decades
+:::
+:::
+
+## What This Means for Risk
+
+We cannot predict what the weather will be on January 26, 2100.
+We *can* project the statistical properties:
+
+::: {.fragment}
+- What temperature will it be on average?
+- How likely is it that we get at least 2" of rain?
+- What is the probability distribution of maximum wind speeds?
+:::
+
+# What Generates Extremes?
+
+## Billion Dollar Disasters
+
+![U.S. billion-dollar weather and climate disasters. Source: NOAA NCEI](billion_dollar_disasters_2024.png){width="80%"}
+
+---
+
+::: {.notes}
+ARs are narrow corridors of concentrated moisture transport.
+They cause extreme precipitation when they make landfall.
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+![@gimeno_review:2014](gimeno_review_2014.jpg){width="80%"}
+:::
+::: {.column width="50%"}
+### Atmospheric Rivers
+
+Organized *moisture transport* from warm tropical and subtropical oceans drives a large fraction of midlatitude rainfall.
+:::
+:::
+
+## Tropical Cyclones
+
+::: {.notes}
+TCs are organized vortices that convert ocean heat to kinetic energy.
+Harvey, Maria, Katrina---these are the billion-dollar events.
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+![Hurricane Katrina (2005) from GOES-12 infrared satellite. Source: [NASA/NOAA](https://svs.gsfc.nasa.gov/3251/)](tc_katrina_2005.jpg){width="90%"}
+:::
+::: {.column width="50%"}
+Organized vortices that convert ocean heat to kinetic energy:
+
+::: {.incremental}
+- Require warm SSTs (> 26°C) and low wind shear
+- Strongest at landfall → storm surge, wind, rainfall
+- Examples: Harvey (2017), Maria (2017), Katrina (2005)
+:::
+:::
+:::
+
+## Mesoscale Convective Systems
+
+::: {.notes}
+MCS are clusters of thunderstorms that organize and persist.
+They cause flash floods and severe weather.
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+![Mesoscale convective complex over the Great Plains (July 8, 1997). Source: [CIMSS Wisconsin](https://cimss.ssec.wisc.edu/goes/misc/970708.html)](mcs_goes8_1997.gif){width="90%"}
+:::
+::: {.column width="50%"}
+Organized clusters of thunderstorms (10--100 km):
+
+::: {.incremental}
+- Persist longer than individual cells
+- Responsible for most warm-season extreme rainfall
+- Flash floods, derechos, hail
+:::
+:::
+:::
+
+## Blocking Patterns
+
+::: {.notes}
+Blocking = persistent high pressure that diverts the jet stream.
+Causes both heat waves and cold snaps depending on location.
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+![500 hPa geopotential height showing omega block over North America. Source: [Wikipedia](https://en.wikipedia.org/wiki/Block_(meteorology))](block_wikipedia.PNG){width="90%"}
+:::
+::: {.column width="50%"}
+Persistent high-pressure systems that "block" normal flow:
+
+::: {.incremental}
+- Divert the jet stream for days to weeks
+- Heat waves (2021 Pacific Northwest, 2003 Europe)
+- Can also cause persistent cold (Polar vortex disruptions)
+:::
+:::
+:::
+
+# Variability and Persistence
+
+## Climate Risks Cluster in Time
+
+::: {.notes}
+Key insight: climate risk is not white noise.
+Temporal clustering = compound risk.
+Use the megadrought figure to show multi-decade droughts.
+:::
+
+::: {.columns}
+::: {.column width="55%"}
+![Megadroughts in North America over the past 1200 years. @cook_megadroughts:2010](cook_megadroughts_2010.png)
+:::
+::: {.column width="45%"}
+Climate extremes are not independent events.
+
+- Droughts persist for years
+- Wet periods cluster together
+- Hurricane seasons vary dramatically
+:::
+:::
+
+## Climate Risks Cluster in Space
+
+::: {.notes}
+Use Bonnafous figure to show correlated risk across space.
+:::
+
+::: {.columns}
+::: {.column width="55%"}
+![Spatial clustering of water risk exposure. @bonnafous_waterrisk:2017](bonnafous_waterrisk_2017.png)
+:::
+::: {.column width="45%"}
+Extremes are spatially correlated.
+
+- Regional droughts affect portfolios
+- Flood losses cluster geographically
+- Insurance and infrastructure implications
+:::
+:::
+
+---
+
+::: {.columns}
+::: {.column width="55%"}
+![NOAA `climate.gov`](enso_global_impacts.png)
+:::
+::: {.column width="45%"}
+### ENSO
+
+The El Niño-Southern Oscillation (ENSO) is the leading mode of variability of the tropical Pacific, with global teleconnections.
+
+![NOAA `climate.gov`](enso_what_is.jpg)
+:::
+:::
+
+
+## Modes of Variability
+
+Large-scale patterns organize climate variability:
+
+::: {.incremental}
+- **PDO:** Pacific Decadal Oscillation (20--30 years)
+- **NAO:** North Atlantic Oscillation
+- **AMO:** Atlantic Multidecadal Oscillation
+:::
+
+## Multiscale Variability
+
+::: {.notes}
+Show the wavelet analysis---variability at multiple timescales.
+:::
+
+![Wavelet analysis reveals variability at multiple timescales. @doss-gollin_robustadaptation:2019](doss-gollin_robustadaptation_2019.png){width="80%"}
+
+## Not just climate change
+
+::: {.notes}
+Drive home the point.
+:::
+
+The paleo record shows:
+
+::: {.incremental}
+- Multi-decade droughts occurred without human influence
+- The instrumental record (150 years) is a small sample
+- *Even without climate change*, the recent past is a flawed predictor of future hazard.
+:::
+
+
+# Models and Their Limits
+
+## General Circulation Models
+
+::: {.notes}
+What GCMs actually do---numerical physics on a grid.
+:::
+
+**General Circulation Models (GCMs)** solve physics on a 3D grid:
+
+::: {.incremental}
+- Conservation equations for mass, energy, momentum
+- Atmosphere, ocean, land, ice components
+- Typical resolution: ~100 km grid cells
+:::
+
+## How GCMs Work
+
+::: {.notes}
+Use schematic to show grid structure.
+:::
+
+![Climate models divide Earth into a 3D grid of cells. Source: NOAA Climate.gov](climate_model_schematic.png){width="80%"}
+
+## Resolution Limits
+
+::: {.notes}
+Important for understanding what models can and cannot resolve.
+:::
+
+GCMs resolve features larger than ~100 km.
+
+Many hazards are smaller:
+
+| Hazard | Typical Scale |
+|--------|---------------|
+| Tropical cyclones | ~50 km eye |
+| Thunderstorms | ~10 km |
+| Tornadoes | ~1 km |
+
+::: {.fragment}
+Sub-grid processes must be *parameterized*, not resolved.
+:::
+
+## Downscaling
+
+::: {.notes}
+Two approaches, each with assumptions.
+:::
+
+Translating GCM output to local scales:
+
+::: {.columns}
+::: {.column width="50%"}
+**Statistical Downscaling**
+
+- Empirical relationships
+- Assumes stationarity of relationships
+- Computationally cheap
+:::
+::: {.column width="50%"}
+**Dynamical Downscaling**
+
+- Higher-resolution physics models
+- Computationally expensive
+- Inherits GCM biases
+:::
+:::
+
+## Critical Distinction: Scenarios vs. Projections
+
+::: {.notes}
+This distinction is CRITICAL for Lab 3.
+Make sure students understand the difference.
+:::
+
+| Concept | Definition | Example |
+|---------|------------|---------|
+| **Prediction** | What WILL happen | Tomorrow's weather |
+| **Projection** | What WOULD happen IF | Temperature if CO₂ doubles |
+| **Scenario** | Plausible pathway | RCP 8.5 emissions |
+
+::: {.fragment}
+Confusing these leads to poor decisions.
+:::
+
+---
+
+::: {.notes}
+RCP 8.5 ≠ business as usual.
+This sets up Wednesday's IPCC reading discussion.
+:::
+
+::: {.columns}
+::: {.column width="30%"}
+![@hausfather_scenarios:2020](hausfather_scenarios_2020.jpg)
+:::
+::: {.column width="70%"}
+### Scenarios Are Not Predictions
+
+::: {.incremental}
+- Scenarios are "what if" storylines
+- They bracket human choices
+- No probabilities attached
+:::
+:::
+:::
+
+# Sea Level Rise
+
+## Integrating Case Study
+
+::: {.notes}
+SLR is the Lab 3 topic---apply all the concepts.
+:::
+
+Sea level rise integrates everything we've discussed:
+
+::: {.incremental}
+- Physical system (thermal expansion, ice dynamics)
+- Variability (interannual, decadal)
+- Model limitations (ice sheet uncertainty)
+- Scenarios vs. projections
+:::
+
+## Components of Sea Level Rise
+
+::: {.notes}
+Use figure to explain multiple contributors.
+:::
+
+![Local sea level is affected by multiple processes. Source: NOAA](lsl-evolution.png){width="80%"}
+
+## Two Very Different Sources
+
+::: {.notes}
+Thermal expansion vs ice melt have very different uncertainty structures.
+:::
+
+::: {.columns}
+::: {.column width="50%"}
+**Thermal Expansion**
+
+- Simple physics (warmer water expands)
+- Well-constrained
+- Scenario-driven uncertainty
+:::
+::: {.column width="50%"}
+**Ice Sheet Melt**
+
+- Complex, threshold behaviors
+- MISI/MICI processes
+- Structural uncertainty dominates
+:::
+:::
+
+## The Ice Sheet Problem
+
+::: {.notes}
+MISI/MICI are the "synoptic generators" of SLR tail risk.
+:::
+
+Marine Ice Sheet Instability (MISI) and Marine Ice Cliff Instability (MICI):
+
+::: {.incremental}
+- Potential for rapid, irreversible ice loss
+- Physical processes are real but poorly constrained
+- This is the tail risk for SLR
+:::
+
+::: {.fragment}
+These processes are the "synoptic generators" of the SLR tail.
+:::
+
+## Local Factors
+
+::: {.notes}
+Why Norfolk sees faster rise than global average.
+:::
+
+Local sea level ≠ global mean:
+
+::: {.incremental}
+- **Land subsidence:** The ground is sinking
+- **Ocean circulation:** Gulf Stream effects
+- **Gravitational fingerprints:** Ice mass redistribution
+:::
+
+# Wrap Up
+
+## Key Takeaways
+
+::: {.notes}
+Summarize the five parts.
+:::
+
+1. **The System:** Climate is chaotic physics; weather ≠ climate
+2. **Synoptic Generators:** Extremes come from organized structures
+3. **Variability:** Risk clusters in time and space; paleo shows what's possible
+4. **Model Limits:** GCMs are useful but not magic; resolution matters
+5. **Sea Level Rise:** Integrates all uncertainties; Lab 3 case study
+
+## Looking Ahead
+
+::: {.notes}
+Connect to Wednesday's discussion and Friday's lab.
+:::
+
+**Wednesday:** IPCC reading discussion on observed and projected changes
+
+**Friday (Lab 3):**
+
+- Load NOAA scenarios and BRICK projections for Sewells Point
+- Compare scenario uncertainty vs. structural uncertainty
+- Ask: Which matters more for the tail?
 
 ## References
+
+::: {#refs}
+:::

@@ -23,7 +23,8 @@ function main()
     status = Dict{String,Dict{String,String}}(
         "lectures" => Dict{String,String}(),
         "labs" => Dict{String,String}(),
-        "readings" => Dict{String,String}()
+        "readings" => Dict{String,String}(),
+        "assignments" => Dict{String,String}()
     )
 
     # Lectures (weeks 1-13)
@@ -53,6 +54,31 @@ function main()
         if isfile(path)
             fm = extract_frontmatter(path)
             status["readings"][id] = get(fm, "status", "draft")
+        end
+    end
+
+    # Final project assignments
+    assignment_files = [
+        ("topic-proposal", "assignments/final-project/topic-proposal.qmd"),
+        ("memo-1", "assignments/final-project/memo-1-framework.qmd"),
+        ("memo-2", "assignments/final-project/memo-2-evidence.qmd"),
+        ("memo-3", "assignments/final-project/memo-3-robustness.qmd"),
+        ("slides", "assignments/final-project/executive-briefing.qmd"),
+        ("presentations", "assignments/final-project/executive-briefing.qmd"),
+        ("written-report", "assignments/final-project/written-report.qmd"),
+        ("final-project", "assignments/final-project/index.qmd")
+    ]
+    for (id, path) in assignment_files
+        if isfile(path)
+            fm = extract_frontmatter(path)
+            # Check both "status" and "draft" fields for compatibility
+            if haskey(fm, "status")
+                status["assignments"][id] = fm["status"]
+            elseif get(fm, "draft", false) == true
+                status["assignments"][id] = "draft"
+            else
+                status["assignments"][id] = "published"
+            end
         end
     end
 

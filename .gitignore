@@ -8,6 +8,9 @@ _freeze/
 *.html
 !mathjax-config.html
 */.cache/
+*.nav
+*.snm
+*.vrb
 
 # VS Code
 .vscode/
@@ -65,3 +68,6 @@ site_libs/*
 **/*.quarto_ipynb
 
 /.luarc.json
+
+# Temporary planning files
+_tmp/

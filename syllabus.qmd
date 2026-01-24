@@ -223,7 +223,7 @@ If there is an exam, lecture, or discussion on a Friday, you are expected to att
 Working in small teams, you will act as expert consultants to audit a real-world climate planning document.
 Through three progressive Audit Memos, you'll analyze the plan's decision framework, evidence base, and robustness to uncertainty—culminating in an Executive Briefing and Written Report.
 
-See [Final Project](exams/assignments/final-project.qmd) for full details and timeline.
+See [Final Project](assignments/final-project/index.qmd) for full details and timeline.
 
 
 ### Graduate Student Requirements (CEVE 521)
@@ -251,7 +251,7 @@ Updated versions will be posted on the course website.*
 | | **Module 1** | **Risk Analysis** | |
 | **1** | Jan 12, 14, 16 | Intro to Climate Risk Management | Lab 1: Julia Setup & Hello World | |
 | **2** | Jan 21, 23 | Hazard, Exposure, Vulnerability (XLRM) | Lab 2: Intro to iCOW | |
-| **3** | Jan 26, 28, 30 | Climate Science & Scenarios | Lab 3: Sea-Level Rise Scenarios with BRICK | Topic Proposal |
+| **3** | Jan 26, 28, 30 | Climate Science & Scenarios | Lab 3: Sea-Level Rise Scenarios and Uncertainty | Topic Proposal |
 | **4** | Feb 2, 4, 6 | Monte Carlo & Fat Tails | Lab 4: Monte Carlo Hazard Modeling | |
 | **5** | Feb 9, 11 | Risk Metrics (EAD, VaR, CVaR) | Lab 5: Probabilistic Risk Analysis | |
 | | **Module 2** | **Decision Analysis** | |

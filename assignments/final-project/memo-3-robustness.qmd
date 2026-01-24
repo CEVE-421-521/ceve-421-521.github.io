@@ -1,0 +1,89 @@
+---
+title: "Audit Memo 3: Robustness Assessment"
+subtitle: "CEVE 421/521 Final Project"
+date: 2026-04-10
+status: draft
+format:
+  html:
+    toc: true
+  typst:
+    toc: false
+    margin:
+      x: 1in
+      y: 1in
+---
+
+## Overview
+
+**Due:** Friday of Week 12
+
+This memo examines how your chosen climate plan addresses uncertainty and robustness.
+You will analyze the Uncertainties (X) acknowledged and evaluate whether the plan's recommendations are robust to deep uncertainty.
+
+## Learning Objectives
+
+By completing this memo, you will demonstrate your ability to:
+
+1. Identify and categorize uncertainties in climate planning
+2. Assess whether a plan adequately addresses deep uncertainty
+3. Apply robustness concepts to critique real-world decision-making
+
+## Requirements
+
+Submit a **1-2 page memo** (PDF) containing:
+
+### 1. Uncertainty Mapping
+
+Identify the key uncertainties affecting the plan:
+
+| Uncertainty | Type | How Addressed |
+| :--- | :--- | :--- |
+| *Climate projections* | *Deep (epistemic)* | *Multiple scenarios? Single projection?* |
+| *Population growth* | *Parametric* | *Sensitivity analysis?* |
+| *Damage functions* | *Structural* | *Acknowledged?* |
+
+Categorize uncertainties as:
+
+- **Parametric:** Known unknowns with estimable ranges
+- **Structural:** Model form uncertainty
+- **Deep:** Fundamental disagreement or unknown unknowns
+
+### 2. Robustness Assessment
+
+Evaluate how the plan handles uncertainty:
+
+| Robustness Element | Present? | Description |
+| :--- | :---: | :--- |
+| Multiple scenarios | Yes/No | *Which scenarios? How selected?* |
+| Sensitivity analysis | Yes/No | *What parameters varied?* |
+| Adaptive strategies | Yes/No | *Trigger points? Decision rules?* |
+| Worst-case analysis | Yes/No | *Regret minimization?* |
+
+Address:
+
+- Does the plan optimize for a single "best guess" or consider a range of futures?
+- Are there provisions for adapting if conditions differ from expectations?
+- What vulnerabilities might emerge under scenarios not considered?
+
+### 3. Robustness Critique
+
+In 1-2 paragraphs, provide your overall assessment:
+
+- **Strengths:** What does the plan do well in handling uncertainty?
+- **Weaknesses:** Where is the plan most vulnerable to surprise?
+- **Recommendations:** What specific improvements would enhance robustness?
+
+## Submission
+
+Submit your memo as a PDF to Canvas by 11:59 PM on the due date.
+
+## Grading Rubric
+
+| Criterion | Points |
+| :--- | :---: |
+| Uncertainties clearly identified and categorized | 30 |
+| Robustness assessment thorough and accurate | 30 |
+| Constructive critique with specific recommendations | 20 |
+| Professional writing and formatting | 20 |
+| **Total** | **100** |
+
