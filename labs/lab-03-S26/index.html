@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 3: Sea-level rise scenarios with BRICK – CEVE 421/521 – Spring 2026</title>
+<title>Lab 3: Sea-Level Rise Scenarios and Uncertainty – CEVE 421/521 – Spring 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,8 +115,9 @@ window.MathJax = {
 </script>
 
 
-<meta property="og:title" content="Lab 3: Sea-level rise scenarios with BRICK – CEVE 421/521 – Spring 2026">
+<meta property="og:title" content="Lab 3: Sea-Level Rise Scenarios and Uncertainty – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="CEVE 421/521">
+<meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-03-S26/index_files/figure-html/fig-first-look-output-1.svg">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -133,8 +134,17 @@ window.MathJax = {
    
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3</span> Exercises</a></li>
+  <li><a href="#before-lab" id="toc-before-lab" class="nav-link" data-scroll-target="#before-lab"><span class="header-section-number">2</span> Before Lab</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">3</span> Setup</a></li>
+  <li><a href="#working-with-climate-data" id="toc-working-with-climate-data" class="nav-link" data-scroll-target="#working-with-climate-data"><span class="header-section-number">4</span> Working with Climate Data</a></li>
+  <li><a href="#noaa-sea-level-rise-scenarios" id="toc-noaa-sea-level-rise-scenarios" class="nav-link" data-scroll-target="#noaa-sea-level-rise-scenarios"><span class="header-section-number">5</span> NOAA Sea-Level Rise Scenarios</a></li>
+  <li><a href="#brick-model-projections" id="toc-brick-model-projections" class="nav-link" data-scroll-target="#brick-model-projections"><span class="header-section-number">6</span> BRICK Model Projections</a></li>
+  <li><a href="#comparing-approaches" id="toc-comparing-approaches" class="nav-link" data-scroll-target="#comparing-approaches"><span class="header-section-number">7</span> Comparing Approaches</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="header-section-number">8</span> Reflection</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9</span> Summary</a></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission"><span class="header-section-number">10</span> Submission</a></li>
+  <li><a href="#checklist" id="toc-checklist" class="nav-link" data-scroll-target="#checklist">Checklist</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">11</span> References</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/labs/lab-03-S26/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -143,7 +153,7 @@ window.MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 3: Sea-level rise scenarios with BRICK</h1>
+<h1 class="title">Lab 3: Sea-Level Rise Scenarios and Uncertainty</h1>
 <p class="subtitle lead">CEVE 421/521</p>
 </div>
 
@@ -167,40 +177,797 @@ window.MathJax = {
 </header>
 
 
-<div class="callout callout-warning callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container"><i class="callout-icon"></i></div>
-<div class="callout-caption-container flex-fill">Draft Material</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This content is under development and subject to change.</p>
-</div>
-</div>
-
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>Lab objectives and context - to be written.</p>
+<p>Sea-level rise projections vary widely depending on future emissions and our understanding of ice sheet dynamics. This lab explores two different approaches to characterizing this uncertainty:</p>
+<ol type="1">
+<li><strong>NOAA Scenarios:</strong> Deterministic scenarios spanning a range of plausible futures (Low to High)</li>
+<li><strong>BRICK Model:</strong> Probabilistic projections with ensemble members representing parametric uncertainty</li>
+</ol>
+<p><strong>Learning Objectives:</strong></p>
+<ol type="1">
+<li>Work with NetCDF files using YAXArrays (indexing, slicing, computing statistics)</li>
+<li>Understand the difference between scenario-based and probabilistic projections</li>
+<li>Compare sea-level rise projections across different emissions pathways (RCPs)</li>
+<li>Interpret uncertainty ranges and how they grow with planning horizon</li>
+<li>Apply these skills to real climate projection data for decision-making</li>
+</ol>
 </section>
-<section id="setup" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2</span> Setup</h2>
+<section id="before-lab" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="before-lab"><span class="header-section-number">2</span> Before Lab</h2>
+<p><strong>Complete these steps BEFORE coming to lab:</strong></p>
+<ol type="1">
+<li><p><strong>Accept the GitHub Classroom assignment</strong> (link on Canvas)</p>
+<ul>
+<li>This creates your personal copy of the lab repository</li>
+</ul></li>
+<li><p><strong>Clone your repository:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/CEVE-421-521/lab-03-S26-yourusername.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab-03-S26-yourusername</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Install and precompile packages</strong> (this takes 5-10 minutes):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span> <span class="at">--project</span><span class="op">=</span>. <span class="at">-e</span> <span class="st">'using Pkg; Pkg.instantiate()'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This downloads all required packages and compiles them. <strong>Do this before lab</strong> so you’re ready to start working immediately.</p></li>
+<li><p><strong>Open the notebook:</strong></p>
+<ul>
+<li>In VS Code: Open the folder, then open <code>index.qmd</code></li>
+<li>Or use Quarto preview: <code>quarto preview index.qmd</code></li>
+</ul></li>
+<li><p><strong>Verify setup</strong>: Run the first code cell under “Package Setup” to ensure packages load without errors.</p></li>
+</ol>
+<div class="callout callout-style-simple callout-warning">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Troubleshooting:</strong></p>
+<ul>
+<li>If <code>Pkg.instantiate()</code> fails, check your internet connection</li>
+<li>If packages won’t load, try restarting Julia</li>
+<li>If you get “package not found” errors, make sure you’re in the lab directory when running Julia</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="setup" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="setup"><span class="header-section-number">3</span> Setup</h2>
+<section id="why-sewells-point-norfolk-va" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="why-sewells-point-norfolk-va"><span class="header-section-number">3.1</span> Why Sewells Point, Norfolk, VA?</h3>
+<p>Norfolk, Virginia is one of the most vulnerable cities to sea-level rise in the United States. Sewells Point is a tide gauge location at the world’s largest naval base (Naval Station Norfolk).</p>
+<p>Why is Norfolk especially vulnerable?</p>
+<ul>
+<li><strong>Land subsidence:</strong> The land is sinking due to groundwater extraction and post-glacial adjustment</li>
+<li><strong>Low elevation:</strong> Much of the city is only a few feet above current sea level</li>
+<li><strong>Military significance:</strong> Naval Station Norfolk is the world’s largest naval base</li>
+<li><strong>Growing flood frequency:</strong> The city already experiences regular “sunny day flooding”</li>
+</ul>
+<p>All sea-level rise projections in this lab are for Sewells Point, measured in meters above the year 2000 baseline.</p>
+</section>
+<section id="package-setup" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="package-setup"><span class="header-section-number">3.2</span> Package Setup</h3>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="st">"Manifest.toml"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dir_name <span class="op">=</span> <span class="fu">dirname</span>(<span class="pp">@__FILE__</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(dir_name)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="fu">joinpath</span>(dir_name, <span class="st">"Manifest.toml"</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="exercises" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3</span> Exercises</h2>
-<section id="exercise-1" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">3.1</span> Exercise 1</h3>
-<p>Exercise description - to be written.</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">YAXArrays</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DimensionalData</span>: dims</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">NetCDF</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-5" class="code-annotation-target"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="6">6</button><span id="annotated-cell-2-7" class="code-annotation-target"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"sea_level_data.jl"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">For creating figures</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="2">For working with multidimensional labeled arrays</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="3">For working with dimensions</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4" data-code-annotation="4">For reading NetCDF data files</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="5" data-code-annotation="5">For computing quantiles and means</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="7" data-code-annotation="6">Helper functions for convenient data access (we’ll build up to these)</span>
+</dd>
+</dl>
 </div>
-
-
+</div>
 </section>
+</section>
+<section id="working-with-climate-data" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="working-with-climate-data"><span class="header-section-number">4</span> Working with Climate Data</h2>
+<section id="what-is-netcdf" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="what-is-netcdf"><span class="header-section-number">4.1</span> What is NetCDF?</h3>
+<p>NetCDF (Network Common Data Form) is the standard file format for climate and earth science data. It stores multidimensional arrays with labeled dimensions and metadata.</p>
+<p>Think of NetCDF as a container that holds:</p>
+<ul>
+<li><strong>Data arrays</strong> (e.g., sea level rise values)</li>
+<li><strong>Dimensions</strong> (e.g., time, ensemble members, scenarios)</li>
+<li><strong>Coordinates</strong> (e.g., specific years, RCP names)</li>
+<li><strong>Metadata</strong> (e.g., units, descriptions, data sources)</li>
+</ul>
+</section>
+<section id="loading-a-netcdf-file" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="loading-a-netcdf-file"><span class="header-section-number">4.2</span> Loading a NetCDF File</h3>
+<p>Let’s open our sea-level data file and explore its structure:</p>
+<div id="6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_path <span class="op">=</span> <span class="fu">joinpath</span>(<span class="pp">@__DIR__</span>, <span class="st">"data"</span>, <span class="st">"sea_level_projections.nc"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> <span class="fu">open_dataset</span>(data_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="ansi-escaped-output">
+<pre>YAXArray Dataset
+Shared Axes: 
+  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">time</span> Sampled{Int64} <span style="color:rgb(255,135,95)">2000:1:2100</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
+
+<span class="ansi-bright-yellow-fg">Variables with additional axes:</span>
+<span class="ansi-bright-black-fg">  Additional Axes: </span>
+  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">ensemble</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:1:1000</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>,
+  <span style="color:rgb(0,135,215)">→ </span><span style="color:rgb(0,135,215)">rcp</span> Sampled{Int64} <span style="color:rgb(0,135,215)">1:4</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
+<span class="ansi-bright-blue-fg">  Variables: </span>
+  brick_slr
+
+<span class="ansi-bright-black-fg">  Additional Axes: </span>
+  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">noaa_scenario</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:5</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
+<span class="ansi-bright-blue-fg">  Variables: </span>
+  noaa_slr
+
+<span class="ansi-bright-yellow-fg">Properties: </span>Dict{String, Any}("history" =&gt; "Generated by generate_sample_data.jl", "note" =&gt; "For instructional purposes only", "source" =&gt; "Synthetic data based on BRICK and NOAA patterns", "title" =&gt; "Sea Level Rise Projections for Sewells Point, VA", "institution" =&gt; "Rice University CEVE 421/521")
+</pre>
+</div>
+</div>
+</div>
+<p>The dataset contains multiple variables. Let’s see what’s inside:</p>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="ansi-escaped-output">
+<pre>YAXArray Dataset
+Shared Axes: 
+  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">time</span> Sampled{Int64} <span style="color:rgb(255,135,95)">2000:1:2100</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
+
+<span class="ansi-bright-yellow-fg">Variables with additional axes:</span>
+<span class="ansi-bright-black-fg">  Additional Axes: </span>
+  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">ensemble</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:1:1000</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>,
+  <span style="color:rgb(0,135,215)">→ </span><span style="color:rgb(0,135,215)">rcp</span> Sampled{Int64} <span style="color:rgb(0,135,215)">1:4</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
+<span class="ansi-bright-blue-fg">  Variables: </span>
+  brick_slr
+
+<span class="ansi-bright-black-fg">  Additional Axes: </span>
+  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">noaa_scenario</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:5</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
+<span class="ansi-bright-blue-fg">  Variables: </span>
+  noaa_slr
+
+<span class="ansi-bright-yellow-fg">Properties: </span>Dict{String, Any}("history" =&gt; "Generated by generate_sample_data.jl", "note" =&gt; "For instructional purposes only", "source" =&gt; "Synthetic data based on BRICK and NOAA patterns", "title" =&gt; "Sea Level Rise Projections for Sewells Point, VA", "institution" =&gt; "Rice University CEVE 421/521")
+</pre>
+</div>
+</div>
+</div>
+<p>You should see two main data variables:</p>
+<ul>
+<li><code>brick_slr</code>: BRICK model projections (3D: time × ensemble × RCP)</li>
+<li><code>noaa_slr</code>: NOAA scenarios (2D: time × scenario)</li>
+</ul>
+</section>
+<section id="exploring-dimensions-and-coordinates" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="exploring-dimensions-and-coordinates"><span class="header-section-number">4.3</span> Exploring Dimensions and Coordinates</h3>
+<p>Let’s examine the dimensions:</p>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the time points?</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ds[<span class="st">"time"</span>][<span class="op">:</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="ansi-escaped-output">
+<pre><span style="color:rgb(255,135,95)">time</span> <span class="ansi-white-fg">2000:1:2100</span></pre>
+</div>
+</div>
+</div>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many ensemble members does BRICK have?</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ds[<span class="st">"ensemble"</span>][<span class="op">:</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="ansi-escaped-output">
+<pre><span style="color:rgb(255,135,95)">ensemble</span> <span class="ansi-white-fg">1:1:1000</span></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Look at the output above.</em></p>
+<p><em>What years does the data cover?</em> <em>How many ensemble members are in the BRICK projections?</em></p>
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="indexing-and-slicing" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="indexing-and-slicing"><span class="header-section-number">4.4</span> Indexing and Slicing</h3>
+<p>YAXArrays lets us select data by dimension names. Let’s extract NOAA projections:</p>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>noaa_slr <span class="op">=</span> ds[<span class="st">"noaa_slr"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-bright-black-fg">┌ </span><span style="color:rgb(255,135,95)">101</span>×<span style="color:rgb(0,135,215)">5</span> YAXArray{Float32, 2}<span style="color:rgb(0,175,175)"> NOAA sea level rise scenario</span><span class="ansi-bright-black-fg"> ┐</span>
+<span class="ansi-bright-black-fg">├─────────────────────────────────────────────────────────┴─── dims ┐</span>
+  <span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">time</span> Sampled{Int64} <span style="color:rgb(255,135,95)">2000:1:2100</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>,
+  <span style="color:rgb(0,135,215)">→ </span><span style="color:rgb(0,135,215)">noaa_scenario</span> Sampled{Int64} <span style="color:rgb(0,135,215)">1:5</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>
+<span class="ansi-bright-black-fg">├───────────────────────────────────────────────────────── metadata ┤</span>
+  Dict{String, Any} with 7 entries:
+  "units"     =&gt; "meters"
+  "name"      =&gt; "noaa_slr"
+  "location"  =&gt; "Sewells Point, Norfolk, VA"
+  "note"      =&gt; "Synthetic data for instructional purposes"
+  "long_name" =&gt; "NOAA sea level rise scenario"
+  "source"    =&gt; "Based on Sweet et al. 2017 patterns"
+  "baseline"  =&gt; "2000"
+<span class="ansi-bright-black-fg">├──────────────────────────────────────────────────── loaded lazily ┤</span>
+  data size: 1.97 KB
+<span class="ansi-bright-black-fg">└───────────────────────────────────────────────────────────────────┘</span></pre>
+</div>
+</div>
+</div>
+<p>This is a 2D array with dimensions (time, scenario). Let’s look at its size and dimensions:</p>
+<div id="16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">size</span>(noaa_slr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(101, 5)</code></pre>
+</div>
+</div>
+<div id="18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dims</span>(noaa_slr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="ansi-escaped-output">
+<pre>(<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">time</span> Sampled{Int64} <span style="color:rgb(255,135,95)">2000:1:2100</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>,
+<span style="color:rgb(0,135,215)">→ </span><span style="color:rgb(0,135,215)">noaa_scenario</span> Sampled{Int64} <span style="color:rgb(0,135,215)">1:5</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)</pre>
+</div>
+</div>
+</div>
+<p>Now let’s extract the “intermediate” scenario (index 3):</p>
+<div id="20" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="computing-statistics" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="computing-statistics"><span class="header-section-number">4.5</span> Computing Statistics</h3>
+<p>Let’s work with the BRICK data, which has an ensemble dimension. First, extract the RCP 8.5 scenario (index 4):</p>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>brick_slr <span class="op">=</span> ds[<span class="st">"brick_slr"</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>rcp85_slr <span class="op">=</span> brick_slr[rcp<span class="op">=</span><span class="fl">4</span>]  <span class="co"># 4th RCP is RCP 8.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-bright-black-fg">┌ </span><span style="color:rgb(255,135,95)">101</span>×<span style="color:rgb(0,135,215)">1000</span> YAXArray{Float32, 2}<span style="color:rgb(0,175,175)"> BRICK local sea level rise projection</span><span class="ansi-bright-black-fg"> ┐</span>
+<span class="ansi-bright-black-fg">├─────────────────────────────────────────────────────────────── dims ┤</span>
+  <span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">time</span> Sampled{Int64} <span style="color:rgb(255,135,95)">2000:1:2100</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>,
+  <span style="color:rgb(0,135,215)">→ </span><span style="color:rgb(0,135,215)">ensemble</span> Sampled{Int64} <span style="color:rgb(0,135,215)">1:1:1000</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>
+<span class="ansi-bright-black-fg">├─────────────────────────────────────────────────────────── metadata ┤</span>
+  Dict{String, Any} with 6 entries:
+  "units"     =&gt; "meters"
+  "name"      =&gt; "brick_slr"
+  "location"  =&gt; "Sewells Point, Norfolk, VA"
+  "note"      =&gt; "Synthetic data for instructional purposes"
+  "long_name" =&gt; "BRICK local sea level rise projection"
+  "baseline"  =&gt; "2000"
+<span class="ansi-bright-black-fg">├────────────────────────────────────────────────────── loaded lazily ┤</span>
+  data size: 394.53 KB
+<span class="ansi-bright-black-fg">└─────────────────────────────────────────────────────────────────────┘</span></pre>
+</div>
+</div>
+</div>
+<p>This gives us a 2D array (time × ensemble). Let’s compute the median across ensemble members for each year:</p>
+<div id="24" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Compute the 95th percentile of sea-level rise across ensemble members for RCP 8.5.</em></p>
+<p><em>Hint: Use <code>mapslices</code> with a function that computes the 95th percentile.</em> <em>You can use an anonymous function: <code>x -&gt; quantile(x, 0.95)</code></em> <em>Don’t forget to use <code>dropdims</code> to remove the singleton ensemble dimension!</em></p>
+</div>
+</div>
+<div id="26" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="quick-visualization" class="level3" data-number="4.6">
+<h3 data-number="4.6" class="anchored" data-anchor-id="quick-visualization"><span class="header-section-number">4.6</span> Quick Visualization</h3>
+<p>Now let’s visualize what we just computed. We’ll use the helper functions to make plotting easier:</p>
+<div id="cell-fig-first-look" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Load data using helper functions (easier than raw YAXArrays for plotting)</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    noaa_data <span class="op">=</span> <span class="fu">load_noaa_scenarios</span>()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    brick_data <span class="op">=</span> <span class="fu">load_brick_projections</span>()</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get specific scenarios</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    noaa_int <span class="op">=</span> <span class="fu">get_noaa_scenario</span>(noaa_data, <span class="st">"intermediate"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    brick_rcp85 <span class="op">=</span> <span class="fu">get_brick_scenario</span>(brick_data, <span class="st">"rcp85"</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    quantiles <span class="op">=</span> <span class="fu">brick_quantiles</span>(brick_rcp85, [<span class="fl">0.50</span>, <span class="fl">0.95</span>])</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">400</span>))</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Sea Level Rise (meters)"</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Sea-Level Rise: First Look"</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># NOAA intermediate scenario</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, noaa_data.years, noaa_int; label<span class="op">=</span><span class="st">"NOAA Intermediate"</span>, color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># BRICK RCP 8.5 median and 95th percentile</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">1</span>]; label<span class="op">=</span><span class="st">"BRICK RCP 8.5 Median"</span>, color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">2</span>]; label<span class="op">=</span><span class="st">"BRICK RCP 8.5 (95th percentile)"</span>,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>           color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>lt)</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-first-look" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-first-look-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-first-look-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-first-look-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: First look at sea-level rise projections: comparing NOAA and BRICK data.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>What do you notice about the relationship between the NOAA Intermediate scenario and the BRICK RCP 8.5 projections?</em></p>
+<p><em>Replace this text with your observations.</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="noaa-sea-level-rise-scenarios" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="noaa-sea-level-rise-scenarios"><span class="header-section-number">5</span> NOAA Sea-Level Rise Scenarios</h2>
+<p>NOAA provides deterministic scenarios that span a range of plausible futures. These are NOT probabilistic projections — they don’t have probabilities attached. Instead, they represent “what if” storylines.</p>
+<p>Now that you’ve learned the basics of working with NetCDF and YAXArrays, let’s use some helper functions to make our analysis more convenient.</p>
+<section id="loading-the-data" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="loading-the-data"><span class="header-section-number">5.1</span> Loading the Data</h3>
+<div id="30" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>noaa_data <span class="op">=</span> <span class="fu">load_noaa_scenarios</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"NOAA Scenarios: </span><span class="sc">$</span>(noaa_data.scenarios)<span class="st">"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Years: </span><span class="sc">$</span>(noaa_data.years[<span class="fl">1</span>])<span class="st"> to </span><span class="sc">$</span>(noaa_data.years[<span class="kw">end</span>])<span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NOAA Scenarios: ["low", "int_low", "intermediate", "int_high", "high"]
+Years: 2000 to 2100</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-the-scenarios" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="visualizing-the-scenarios"><span class="header-section-number">5.2</span> Visualizing the Scenarios</h3>
+<div id="cell-fig-noaa-scenarios" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Sea Level Rise (meters)"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"NOAA Sea-Level Rise Scenarios for Sewells Point, VA"</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> [<span class="op">:</span>green, <span class="op">:</span>blue, <span class="op">:</span>gold, <span class="op">:</span>orange, <span class="op">:</span>red]</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="st">"Low"</span>, <span class="st">"Intermediate-Low"</span>, <span class="st">"Intermediate"</span>, <span class="st">"Intermediate-High"</span>, <span class="st">"High"</span>]</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i, scenario) <span class="kw">in</span> <span class="fu">enumerate</span>(noaa_data.scenarios)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        slr <span class="op">=</span> <span class="fu">get_noaa_scenario</span>(noaa_data, scenario)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, noaa_data.years, slr; color<span class="op">=</span>colors[i], linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>labels[i])</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>lt)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-noaa-scenarios" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-noaa-scenarios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-noaa-scenarios-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-noaa-scenarios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: NOAA sea-level rise scenarios for Sewells Point, Norfolk, VA. Each scenario represents a plausible future, not a probability.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpreting-the-scenarios" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="interpreting-the-scenarios"><span class="header-section-number">5.3</span> Interpreting the Scenarios</h3>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Look at <a href="#fig-noaa-scenarios" class="quarto-xref">Figure&nbsp;2</a>. By 2100, the “High” scenario projects about 2.5 meters of sea-level rise, while “Low” projects only 0.3 meters.</em></p>
+<p><em>If you were advising a city planner, how would you explain what these scenarios mean? Why isn’t there a probability attached to each scenario?</em></p>
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="brick-model-projections" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="brick-model-projections"><span class="header-section-number">6</span> BRICK Model Projections</h2>
+<p>The BRICK model (Building blocks for Relevant Ice and Climate Knowledge) takes a different approach. For each emissions pathway (RCP), it generates an <strong>ensemble</strong> of projections representing parametric uncertainty.</p>
+<section id="loading-brick-data" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="loading-brick-data"><span class="header-section-number">6.1</span> Loading BRICK Data</h3>
+<div id="34" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>brick_data <span class="op">=</span> <span class="fu">load_brick_projections</span>()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"RCP Scenarios: </span><span class="sc">$</span>(brick_data.rcps)<span class="st">"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Ensemble members: </span><span class="sc">$</span>(<span class="fu">length</span>(brick_data.ensemble))<span class="st">"</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Years: </span><span class="sc">$</span>(brick_data.years[<span class="fl">1</span>])<span class="st"> to </span><span class="sc">$</span>(brick_data.years[<span class="kw">end</span>])<span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>RCP Scenarios: ["rcp26", "rcp45", "rcp60", "rcp85"]
+Ensemble members: 1000
+Years: 2000 to 2100</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-a-single-rcp" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="visualizing-a-single-rcp"><span class="header-section-number">6.2</span> Visualizing a Single RCP</h3>
+<p>Let’s look at RCP 8.5 (high emissions) first:</p>
+<div id="cell-fig-brick-rcp85" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    rcp85 <span class="op">=</span> <span class="fu">get_brick_scenario</span>(brick_data, <span class="st">"rcp85"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    quantiles <span class="op">=</span> <span class="fu">brick_quantiles</span>(rcp85, [<span class="fl">0.05</span>, <span class="fl">0.50</span>, <span class="fl">0.95</span>])</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Sea Level Rise (meters)"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"BRICK RCP 8.5 Projections (</span><span class="sc">$</span>(<span class="fu">length</span>(brick_data.ensemble))<span class="st"> ensemble members)"</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot a sample of ensemble members</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">:</span><span class="fu">length</span>(brick_data.ensemble)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, brick_data.years, rcp85[<span class="op">:</span>, i]; color<span class="op">=</span>(<span class="op">:</span>gray, <span class="fl">0.2</span>), linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot quantiles</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">1</span>]; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash, label<span class="op">=</span><span class="st">"5th percentile"</span>)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">2</span>]; color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"Median"</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">3</span>]; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash, label<span class="op">=</span><span class="st">"95th percentile"</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>lt)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-brick-rcp85" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-brick-rcp85-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-brick-rcp85-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brick-rcp85-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: BRICK sea-level rise projections for RCP 8.5 at Sewells Point. Gray lines show individual ensemble members; colored lines show quantiles.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-rcp-scenarios" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="comparing-rcp-scenarios"><span class="header-section-number">6.3</span> Comparing RCP Scenarios</h3>
+<p>Now let’s compare projections across all four RCP scenarios:</p>
+<div id="cell-fig-brick-all-rcps" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Sea Level Rise (meters)"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"BRICK Projections by RCP Scenario"</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> <span class="fu">Dict</span>(<span class="st">"rcp26"</span> <span class="op">=&gt;</span> <span class="op">:</span>green, <span class="st">"rcp45"</span> <span class="op">=&gt;</span> <span class="op">:</span>blue, <span class="st">"rcp60"</span> <span class="op">=&gt;</span> <span class="op">:</span>orange, <span class="st">"rcp85"</span> <span class="op">=&gt;</span> <span class="op">:</span>red)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> <span class="fu">Dict</span>(<span class="st">"rcp26"</span> <span class="op">=&gt;</span> <span class="st">"RCP 2.6"</span>, <span class="st">"rcp45"</span> <span class="op">=&gt;</span> <span class="st">"RCP 4.5"</span>, <span class="st">"rcp60"</span> <span class="op">=&gt;</span> <span class="st">"RCP 6.0"</span>, <span class="st">"rcp85"</span> <span class="op">=&gt;</span> <span class="st">"RCP 8.5"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> rcp <span class="kw">in</span> brick_data.rcps</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        scenario_data <span class="op">=</span> <span class="fu">get_brick_scenario</span>(brick_data, rcp)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        quantiles <span class="op">=</span> <span class="fu">brick_quantiles</span>(scenario_data, [<span class="fl">0.05</span>, <span class="fl">0.50</span>, <span class="fl">0.95</span>])</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Shaded uncertainty range</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">band!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">1</span>], quantiles[<span class="op">:</span>, <span class="fl">3</span>];</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>              color<span class="op">=</span>(colors[rcp], <span class="fl">0.2</span>))</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Median line</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">2</span>];</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>               color<span class="op">=</span>colors[rcp], linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>labels[rcp])</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>lt)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-brick-all-rcps" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-brick-all-rcps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-brick-all-rcps-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brick-all-rcps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: BRICK projections across all RCP scenarios. Shaded regions show 5th-95th percentile ranges; lines show medians.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="understanding-the-spread" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="understanding-the-spread"><span class="header-section-number">6.4</span> Understanding the Spread</h3>
+<p>Let’s look at the distribution of projections at 2050 and 2100 for RCP 8.5:</p>
+<div id="cell-fig-brick-distributions" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    slr_2050 <span class="op">=</span> <span class="fu">slr_at_year</span>(brick_data, <span class="st">"rcp85"</span>, <span class="fl">2050</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    slr_2100 <span class="op">=</span> <span class="fu">slr_at_year</span>(brick_data, <span class="st">"rcp85"</span>, <span class="fl">2100</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">350</span>))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]; xlabel<span class="op">=</span><span class="st">"Sea Level Rise (meters)"</span>, ylabel<span class="op">=</span><span class="st">"Density"</span>, title<span class="op">=</span><span class="st">"2050"</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax1, slr_2050; bins<span class="op">=</span><span class="fl">30</span>, normalization<span class="op">=:</span>pdf, color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.6</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vlines!</span>(ax1, [<span class="fu">median</span>(slr_2050)]; color<span class="op">=:</span>black, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash, label<span class="op">=</span><span class="st">"Median"</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>]; xlabel<span class="op">=</span><span class="st">"Sea Level Rise (meters)"</span>, ylabel<span class="op">=</span><span class="st">"Density"</span>, title<span class="op">=</span><span class="st">"2100"</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax2, slr_2100; bins<span class="op">=</span><span class="fl">30</span>, normalization<span class="op">=:</span>pdf, color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.6</span>))</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vlines!</span>(ax2, [<span class="fu">median</span>(slr_2100)]; color<span class="op">=:</span>black, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-brick-distributions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-brick-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-brick-distributions-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brick-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Distribution of sea-level rise projections at 2050 and 2100 for RCP 8.5.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Compare the distributions at 2050 and 2100 in <a href="#fig-brick-distributions" class="quarto-xref">Figure&nbsp;5</a>.</em></p>
+<p><em>How does the spread (uncertainty) change as we project further into the future? Why does this happen?</em></p>
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="comparing-approaches" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="comparing-approaches"><span class="header-section-number">7</span> Comparing Approaches</h2>
+<p>Now let’s overlay the NOAA scenarios and BRICK projections to see how they compare:</p>
+<div id="cell-fig-comparison" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    rcp85 <span class="op">=</span> <span class="fu">get_brick_scenario</span>(brick_data, <span class="st">"rcp85"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    quantiles <span class="op">=</span> <span class="fu">brick_quantiles</span>(rcp85, [<span class="fl">0.05</span>, <span class="fl">0.50</span>, <span class="fl">0.95</span>])</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">500</span>))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Sea Level Rise (meters)"</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"NOAA Scenarios vs BRICK RCP 8.5"</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># BRICK uncertainty range</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">band!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">1</span>], quantiles[<span class="op">:</span>, <span class="fl">3</span>];</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>          color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.2</span>), label<span class="op">=</span><span class="st">"BRICK 90% range"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, brick_data.years, quantiles[<span class="op">:</span>, <span class="fl">2</span>];</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>           color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"BRICK median"</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># NOAA scenarios</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    noaa_colors <span class="op">=</span> [<span class="op">:</span>green, <span class="op">:</span>blue, <span class="op">:</span>gold, <span class="op">:</span>orange, <span class="op">:</span>purple]</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    noaa_labels <span class="op">=</span> [<span class="st">"NOAA Low"</span>, <span class="st">"NOAA Int-Low"</span>, <span class="st">"NOAA Int"</span>, <span class="st">"NOAA Int-High"</span>, <span class="st">"NOAA High"</span>]</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i, scenario) <span class="kw">in</span> <span class="fu">enumerate</span>(noaa_data.scenarios)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        slr <span class="op">=</span> <span class="fu">get_noaa_scenario</span>(noaa_data, scenario)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, noaa_data.years, slr;</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>               color<span class="op">=</span>noaa_colors[i], linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash, label<span class="op">=</span>noaa_labels[i])</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>lt, nbanks<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-comparison-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Comparison of NOAA scenarios (dashed lines) and BRICK RCP 8.5 projections (shaded region with solid median).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="key-observations" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="key-observations"><span class="header-section-number">7.1</span> Key Observations</h3>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Looking at <a href="#fig-comparison" class="quarto-xref">Figure&nbsp;6</a>, answer these questions:</em></p>
+<ol type="1">
+<li><em>Where does the NOAA “High” scenario fall relative to the BRICK 90% range?</em></li>
+<li><em>What does this tell us about the relationship between these two approaches?</em></li>
+<li><em>The BRICK ensemble spread represents uncertainty in model parameters. What kinds of uncertainties might this capture?</em></li>
+<li><em>The choice between NOAA scenarios represents different possible futures. Why can’t we assign probabilities to these scenarios?</em></li>
+</ol>
+<p><em>Replace this text with your answers.</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="reflection" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="reflection"><span class="header-section-number">8</span> Reflection</h2>
+<section id="connecting-to-lecture-concepts" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="connecting-to-lecture-concepts"><span class="header-section-number">8.1</span> Connecting to Lecture Concepts</h3>
+<p>Think back to this week’s lectures on climate scenarios and projections.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>In the context of sea-level rise projections:</em></p>
+<ul>
+<li><em>What is the difference between a scenario (like NOAA’s “High” scenario) and a projection (like BRICK’s probabilistic ensemble)?</em></li>
+<li><em>Why do climate scientists use scenarios instead of making single predictions about the future?</em></li>
+</ul>
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="planning-horizons" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="planning-horizons"><span class="header-section-number">8.2</span> Planning Horizons</h3>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Consider two planning decisions:</em></p>
+<ol type="1">
+<li><em>Designing a seawall that must last until 2050</em></li>
+<li><em>Zoning restrictions for development in flood-prone areas (relevant through 2100 and beyond)</em></li>
+</ol>
+<p><em>How would you use these projections differently for each decision? Which approach (NOAA scenarios or BRICK probabilistic) would you prefer for each, and why?</em></p>
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="synthesis" class="level3" data-number="8.3">
+<h3 data-number="8.3" class="anchored" data-anchor-id="synthesis"><span class="header-section-number">8.3</span> Synthesis</h3>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>A city council member says: “These scientists can’t even agree on how much sea level will rise. Why should we spend money on adaptation when they don’t know what will happen?”</em></p>
+<p><em>How would you respond? Use concepts from both the lecture and this lab.</em></p>
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="summary" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="summary"><span class="header-section-number">9</span> Summary</h2>
+<p>In this lab, you learned to:</p>
+<ol type="1">
+<li><strong>Work with NetCDF files</strong> using YAXArrays (indexing, slicing, computing statistics across dimensions)</li>
+<li><strong>Distinguish</strong> between scenario-based (NOAA) and probabilistic (BRICK) approaches to projections</li>
+<li><strong>Compare</strong> projections across emissions pathways (RCPs)</li>
+<li><strong>Interpret</strong> uncertainty ranges and how they grow with planning horizon</li>
+<li><strong>Apply</strong> these data skills to real climate projection data for decision-making</li>
+</ol>
+<p>The key insight: <strong>Uncertainty is not a reason to delay action.</strong> Both scenarios and probabilistic projections are tools for making better decisions under uncertainty.</p>
+</section>
+<section id="submission" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="submission"><span class="header-section-number">10</span> Submission</h2>
+<ol type="1">
+<li>Push your completed notebook to GitHub</li>
+<li>If the formatter creates a pull request, approve it and re-render</li>
+<li>Submit the link to your repository on Canvas</li>
+</ol>
+</section>
+<section id="checklist" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="checklist">Checklist</h2>
+<p>Before submitting, verify you have completed:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>Setup</strong>: All packages load without error</label></li>
+<li><label><input type="checkbox"><strong>NetCDF basics</strong>: Answered questions about dimensions and coordinates</label></li>
+<li><label><input type="checkbox"><strong>YAXArrays exercise</strong>: Computed 95th percentile for RCP 8.5</label></li>
+<li><label><input type="checkbox"><strong>First visualization</strong>: Described observations from initial plot</label></li>
+<li><label><input type="checkbox"><strong>NOAA interpretation</strong>: Explained what scenarios mean vs probabilities</label></li>
+<li><label><input type="checkbox"><strong>BRICK distributions</strong>: Explained why uncertainty grows with time</label></li>
+<li><label><input type="checkbox"><strong>Comparison</strong>: Answered all four comparison questions</label></li>
+<li><label><input type="checkbox"><strong>Reflection Q1</strong>: Explained scenarios vs projections</label></li>
+<li><label><input type="checkbox"><strong>Reflection Q2</strong>: Discussed different uses for different planning horizons</label></li>
+<li><label><input type="checkbox"><strong>Reflection Q3</strong>: Addressed the skeptical council member</label></li>
+<li><label><input type="checkbox"><strong>Render</strong>: Re-rendered the notebook to ensure all outputs are current</label></li>
+</ul>
+</section>
+<section id="references" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="references"><span class="header-section-number">11</span> References</h2>
+
+
 </section>
 
 </main> <!-- /main -->
