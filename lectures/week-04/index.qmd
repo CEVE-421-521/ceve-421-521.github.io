@@ -65,7 +65,7 @@ Optional listening: [NYT Daily podcast on climate insurance](https://www.nytimes
 ::: {.column width="33%"}
 ![](yljf-jones-2025.png){width="100%"}
 
-@jones_theuninsurablefuture:2025
+@jones_uninsurable:2025
 :::
 ::: {.column width="33%"}
 [![](e360-gaul-2025-09-15.png){width="100%"}](https://e360.yale.edu/features/climate-change-home-insurance)
