@@ -1,6 +1,6 @@
 ---
-title: "Bridge: Trade-offs & Values"
-subtitle: "Lecture"
+title: "Trade-offs & Values"
+subtitle: "Lecture (Remote)"
 date: 2026-03-09
 week: 9
 status: draft

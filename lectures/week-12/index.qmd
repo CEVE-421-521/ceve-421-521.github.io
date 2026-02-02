@@ -1,5 +1,5 @@
 ---
-title: "Sequential Decision Making"
+title: "Multi-Objective Optimization"
 subtitle: "Lecture"
 date: 2026-04-06
 week: 12
@@ -21,14 +21,11 @@ This lecture is under development.
 
 Content to adapt from previous course:
 
-- Static vs. sequential decision framing
-- State evolution: $\mathbf{x}_{t+1} = f_t(\mathbf{x}_t, a_t, e_{t+1})$
-- Reward and value functions
-- Solution methods: open loop, dynamic programming, policy search
-- Real options and the value of flexibility
-
-## Preparation
-
-Read @herman_control:2020, in particular focusing on ...
+- Enriched notation diagram
+- Dominance definition and examples
+- Pareto front visualization
+- Weighted sum approach and limitations
+- Genetic algorithms / MOEAs
+- Convergence diagnostics (hypervolume)
 
 ## References

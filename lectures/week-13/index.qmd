@@ -1,5 +1,5 @@
 ---
-title: "Multi-Objective Optimization"
+title: "Case Studies"
 subtitle: "Lecture"
 date: 2026-04-13
 week: 13
@@ -19,13 +19,11 @@ institution: "{{< var course.institution >}}"
 
 This lecture is under development.
 
-Content to adapt from previous course:
+Possible content:
 
-- Enriched notation diagram
-- Dominance definition and examples
-- Pareto front visualization
-- Weighted sum approach and limitations
-- Genetic algorithms / MOEAs
-- Convergence diagnostics (hypervolume)
+- Real-world climate adaptation case studies
+- Integration of risk analysis, decision analysis, and optimization
+- Lessons learned from practice
+- Preparation for final project presentations
 
 ## References
