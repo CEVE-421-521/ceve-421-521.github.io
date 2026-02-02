@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Dr.&nbsp;James Doss-Gollin">
-  <title>CEVE 421/521 -- Spring 2026 – Uncertainty &amp; Monte Carlo</title>
+  <title>CEVE 421/521 -- Spring 2026 – Probabilistic Risk and Tail Risks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,7 +29,93 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f813b346ce809c8bbd246a85cc5c9db3.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -131,7 +217,7 @@
       }
     };
   </script>
-<meta property="og:title" content="Uncertainty &amp; Monte Carlo – CEVE 421/521 – Spring 2026">
+<meta property="og:title" content="Probabilistic Risk and Tail Risks – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="Lecture">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
@@ -140,7 +226,7 @@
     <div class="slides">
 
 <section class="quarto-title-block center">
-  <h1 class="title">Uncertainty &amp; Monte Carlo</h1>
+  <h1 class="title">Probabilistic Risk and Tail Risks</h1>
   <p class="subtitle">Lecture</p>
 
 <div class="quarto-title-authors">
@@ -154,25 +240,1134 @@ Dr.&nbsp;James Doss-Gollin
   <p class="date">Monday, February 2, 2026</p>
 </section>
 <section class="slide level2">
+<h2>From Climate Risk to Insurance Premiums</h2>
+<aside class="notes">
+<p>Target: 1:00. Open with current events that students have likely seen in the news. Don’t dive deep into insurance business—just use it as a hook.</p>
+<p>Discussion prompts (pick 1-2 if time):</p>
+<ul>
+<li>Why would an insurance company leave a market entirely rather than raise prices?</li>
+<li>What happens to homeowners who can’t get private insurance?</li>
+<li>If “100-year floods” keep happening every few years, what does that tell us about the models?</li>
+</ul>
+<p>Optional listening: <a href="https://www.nytimes.com/2024/05/15/podcasts/the-daily/climate-insurance.html">NYT Daily podcast on climate insurance</a></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><a href="https://www.nytimes.com/2024/07/09/climate/home-insurance-prices-climate-change.html"><img data-src="nyt-flavelle-2024-07-09.png" style="width:100.0%"></a></p>
+</div><div class="column" style="width:33%;">
+<p><img data-src="yljf-jones-2025.png" style="width:100.0%"></p>
+<p><span class="citation" data-cites="jones_theuninsurablefuture:2025">(<a href="#/references" role="doc-biblioref" onclick=""><strong>jones_theuninsurablefuture:2025?</strong></a>)</span></p>
+</div><div class="column" style="width:33%;">
+<p><a href="https://e360.yale.edu/features/climate-change-home-insurance"><img data-src="e360-gaul-2025-09-15.png" style="width:100.0%"></a> <a href="https://www.nationalmortgagenews.com/news/home-insurance-crisis-deepens-in-florida-california"><img data-src="nmn-finkelstein-2025-09-29.png" style="width:100.0%"></a></p>
+</div></div>
+<div class="fragment">
+<p><strong>The common thread:</strong> When the “worst case” keeps happening, models break down.</p>
+<p>Today: The vocabulary and tools to talk about these tail risks.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Building on Week 2</h2>
+<aside class="notes">
+<p>Target: 1:02. Connect to convolution—what happens when damage function meets hazard distribution. Key point: the integral is hard, so we approximate with Monte Carlo.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><span class="math display">\[
+\begin{aligned}
+E[D] &amp;= \int D(h) \cdot p(h) \, dh \\
+&amp; \approx \frac{1}{N} \sum_{i=1}^{N} D(h_i) &amp; \textrm{if } h_i \sim p(h)
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p><strong>The problem:</strong> With fat tails, this expectation is <em>hard</em> to estimate.</p>
+<ul>
+<li>Rare extreme events dominate the sum</li>
+<li>Different assumptions about tail shape → very different <span class="math inline">\(E[D]\)</span></li>
+</ul>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Today’s Roadmap</h2>
+<aside class="notes">
+<p>Target: 1:04. Quick roadmap.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<ol type="1">
+<li><strong>Vocabulary:</strong> Return periods and return levels</li>
+<li><strong>Fat tails:</strong> When extremes dominate</li>
+<li><strong>Risk metrics:</strong> EAD, VaR, CVaR</li>
+<li><strong>Monte Carlo:</strong> Computing any metric from samples</li>
+</ol>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Vocabulary: Extreme Value Statistics</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Vocabulary: Extreme Value Statistics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Fat Tails</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Risk Metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Monte Carlo for Risk Metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Two Ways to Ask the Same Question</h2>
+<aside class="notes">
+<p>Target: 1:07. Core vocabulary slide. These two questions are inverses of each other.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<h4>Return Period (<span class="math inline">\(T\)</span>)</h4>
+<p>“How often does a flood this big happen?”</p>
+<ul>
+<li>Average time between exceedances</li>
+<li><span class="math inline">\(T = 1/p\)</span> where <span class="math inline">\(p\)</span> is annual exceedance probability</li>
+</ul>
+</div><div class="column fragment" style="width:50%;">
+<h4>Return Level (<span class="math inline">\(x_T\)</span>)</h4>
+<p>“How big is a T-year flood?”</p>
+<ul>
+<li>The intensity exceeded once every <span class="math inline">\(T\)</span> years on average</li>
+<li><span class="math inline">\(x_T = F^{-1}(1 - 1/T)\)</span></li>
+</ul>
+</div></div>
+<div class="fragment">
+<p>These are <strong>inverse</strong> operations on the CDF.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>“100-Year Floods” and Your Mortgage</h2>
+<p>Over 30 years: <span class="math inline">\(1 - (0.99)^{30} = 26\%\)</span> chance of at least one</p>
+<ul>
+<li class="fragment">Houston experienced three “500-year” floods in three years (Harvey, Tax Day, Memorial Day)</li>
+<li class="fragment">What are possible explanations?</li>
+</ul>
+<aside class="notes">
+<p>Explanations include</p>
+<ul>
+<li>unlucky</li>
+<li>they were “500 year floods” in different dimensions and places over a big area</li>
+<li>climate change</li>
+<li>all of the above</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Return Level Calculation</h2>
+<aside class="notes">
+<p>Target: 1:12. Show how to compute return levels from a distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>For a GEV distribution with parameters <span class="math inline">\((\mu, \sigma, \xi)\)</span>:</p>
+<p><span class="math display">\[x_T = \mu + \frac{\sigma}{\xi}\left[\left(-\ln\left(1 - \frac{1}{T}\right)\right)^{-\xi} - 1\right]\]</span></p>
+<div class="fragment">
+<p>In Julia, this is just:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a><span class="fu">quantile</span>(gev_dist, <span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Return Levels in Practice</h2>
+<aside class="notes">
+<p>Target: 1:14. Code example showing return level calculation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div id="4" class="cell" data-fig-width="8" data-fig-height="4.5" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a></a><span class="co"># Define a GEV for storm surge (typical Gulf Coast parameters)</span></span>
+<span id="cb2-2"><a></a>gev <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(<span class="fl">5.0</span>, <span class="fl">1.5</span>, <span class="fl">0.2</span>)  <span class="co"># μ=5ft, σ=1.5ft, ξ=0.2</span></span>
+<span id="cb2-3"><a></a></span>
+<span id="cb2-4"><a></a><span class="co"># Calculate return levels</span></span>
+<span id="cb2-5"><a></a>return_periods <span class="op">=</span> [<span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">250</span>, <span class="fl">500</span>]</span>
+<span id="cb2-6"><a></a>return_levels <span class="op">=</span> [<span class="fu">quantile</span>(gev, <span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> T) for T <span class="kw">in</span> return_periods]</span>
+<span id="cb2-7"><a></a></span>
+<span id="cb2-8"><a></a><span class="co"># Plot</span></span>
+<span id="cb2-9"><a></a>fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">400</span>))</span>
+<span id="cb2-10"><a></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>],</span>
+<span id="cb2-11"><a></a>    xlabel<span class="op">=</span><span class="st">"Return Period (years)"</span>,</span>
+<span id="cb2-12"><a></a>    ylabel<span class="op">=</span><span class="st">"Return Level (ft)"</span>,</span>
+<span id="cb2-13"><a></a>    xscale<span class="op">=</span>log10,</span>
+<span id="cb2-14"><a></a>    title<span class="op">=</span><span class="st">"Storm Surge Return Levels"</span>)</span>
+<span id="cb2-15"><a></a><span class="fu">scatterlines!</span>(ax, return_periods, return_levels, markersize<span class="op">=</span><span class="fl">12</span>)</span>
+<span id="cb2-16"><a></a>ax.xticks <span class="op">=</span> return_periods</span>
+<span id="cb2-17"><a></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 
-<div class="callout callout-warning" style="margin-bottom: 1em;">
-<div class="callout-body"><strong>Draft:</strong> This content is under development.</div>
+</div>
+<img data-src="index_files/figure-revealjs/cell-3-output-1.svg" class="r-stretch"></section>
+<section class="slide level2" data-menu-title="ERCOT Feb 2021">
+<h2>2021 Texas Freeze</h2>
+<aside class="notes">
+<p>Target: 1:16. Start with the concrete example. Show the graph of electricity demand vs.&nbsp;generation during the freeze. Point out the multi-day duration of the shortage.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<img data-src="bartholomew-ercot-feb21.jpg" class="r-stretch quarto-figure-center" id="fig-bartholomew"><p class="caption">
+Figure&nbsp;1: Electricity demand (blue) exceeded supply (red) for multiple consecutive days. Source: <a href="https://twitter.com/BPBartholomew/status/1364446059028750337">Bryan Bartholomew on Twitter</a>
+</p></section>
+<section class="slide level2">
+<h2>How extreme was the cold?</h2>
+
+<img data-src="local_rt_era5.jpg" class="r-stretch quarto-figure-center" id="fig-txtreme-rp"><p class="caption">
+Figure&nbsp;2: Return period of heating demand as across space <span class="citation" data-cites="doss-gollin_txtreme:2021">(<a href="#/references" role="doc-biblioref" onclick="">Doss-Gollin et al., 2021</a>)</span>.
+</p></section>
+<section class="slide level2">
+<h2>Return Period vs.&nbsp;Duration</h2>
+<aside class="notes">
+<p>Target: 1:18. Show how the return period changes as a function of event duration. The 1-day event is relatively common, but the 5-day event is much rarer. This explains why the system wasn’t designed for it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+<img data-src="txtreme-fig2b.jpg" class="r-stretch quarto-figure-center" id="fig-txtreme-rp"><p class="caption">
+Figure&nbsp;3: Return period of heating demand during Feb 2021 as a function of event duration <span class="citation" data-cites="doss-gollin_txtreme:2021">(<a href="#/references" role="doc-biblioref" onclick="">Doss-Gollin et al., 2021</a>)</span>.
+</p></section>
+<section class="slide level2 smaller">
+<h2>Intensity Measures Matter</h2>
+<aside class="notes">
+<p>Target: 1:20. Draw out the unified lesson from ERCOT. How we define the hazard determines the return period. Use consistent table format throughout.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><strong>Key insight:</strong> Return period depends on how you define the event.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>ERCOT Example</th>
+<th>Return Period</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1-day cold snap</td>
+<td>~10 years</td>
+<td>Grid can handle</td>
+</tr>
+<tr class="even">
+<td>5-day cold snap</td>
+<td>~50 years</td>
+<td>Cascading failures</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>General principle:</strong> The choice of intensity measure affects everything downstream.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Hazard</th>
+<th>Intensity Measures</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cold snaps</td>
+<td>Peak temperature, duration, spatial extent</td>
+</tr>
+<tr class="even">
+<td>Floods</td>
+<td>Depth, duration, extent, velocity</td>
+</tr>
+<tr class="odd">
+<td>Heat waves</td>
+<td>Peak temperature, duration, humidity</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p>There are statistical approaches to specifying return periods for multivariate or <em>compound</em> extremes, such as copulas.</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Fat Tails</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Vocabulary: Extreme Value Statistics</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Fat Tails</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Risk Metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Monte Carlo for Risk Metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Normal vs.&nbsp;Fat-Tailed</h2>
+<aside class="notes">
+<p>Target: 1:22. Visual comparison is key here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div id="6" class="cell" data-fig-width="9" data-fig-height="4.5" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a></a><span class="kw">let</span></span>
+<span id="cb3-2"><a></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">400</span>))</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a>    <span class="co"># Define distributions with different tail behavior</span></span>
+<span id="cb3-5"><a></a>    <span class="co"># Match location/scale to make comparison "fair"</span></span>
+<span id="cb3-6"><a></a>    xmin <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb3-7"><a></a></span>
+<span id="cb3-8"><a></a>    <span class="co"># Pareto distributions with different tail indices (alpha)</span></span>
+<span id="cb3-9"><a></a>    <span class="co"># α ≥ 2: finite mean and variance (physically plausible)</span></span>
+<span id="cb3-10"><a></a>    <span class="co"># α ∈ [1, 2): finite mean, infinite variance (some extreme events)</span></span>
+<span id="cb3-11"><a></a>    <span class="co"># α &lt; 1: infinite mean and variance (very extreme, unlikely in nature)</span></span>
+<span id="cb3-12"><a></a>    pareto_α<span class="fl">2</span> <span class="op">=</span> <span class="fu">Pareto</span>(<span class="fl">2.0</span>, xmin)  <span class="co"># α = 2: physically plausible</span></span>
+<span id="cb3-13"><a></a>    pareto_α<span class="fl">15</span> <span class="op">=</span> <span class="fu">Pareto</span>(<span class="fl">1.5</span>, xmin)  <span class="co"># α = 1.5: very heavy tail</span></span>
+<span id="cb3-14"><a></a>    pareto_α<span class="fl">08</span> <span class="op">=</span> <span class="fu">Pareto</span>(<span class="fl">0.8</span>, xmin)  <span class="co"># α = 0.8: infinite mean/variance</span></span>
+<span id="cb3-15"><a></a></span>
+<span id="cb3-16"><a></a>    <span class="co"># LogNormal for comparison (light-tailed relative to Pareto)</span></span>
+<span id="cb3-17"><a></a>    lognormal <span class="op">=</span> <span class="fu">LogNormal</span>(<span class="fu">log</span>(<span class="fl">3</span>), <span class="fl">0.8</span>)</span>
+<span id="cb3-18"><a></a></span>
+<span id="cb3-19"><a></a>    <span class="co"># Left panel: PDFs</span></span>
+<span id="cb3-20"><a></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span>L<span class="st">"x"</span>, ylabel<span class="op">=</span>L<span class="st">"p(x)"</span>,</span>
+<span id="cb3-21"><a></a>        title<span class="op">=</span><span class="st">"Probability Density Functions"</span>)</span>
+<span id="cb3-22"><a></a>    x <span class="op">=</span> <span class="fu">range</span>(xmin, <span class="fl">10</span>, length<span class="op">=</span><span class="fl">1_000</span>)</span>
+<span id="cb3-23"><a></a>    <span class="fu">lines!</span>(ax1, x, <span class="fu">pdf</span>.(lognormal, x), label<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>text<span class="st">{LogNormal}</span><span class="sc">$</span><span class="st">", </span>linewidth<span class="st">=2, color=:blue)</span></span>
+<span id="cb3-24"><a></a>    <span class="fu">lines!</span>(ax1, x, <span class="fu">pdf</span>.(pareto_α<span class="fl">2</span>, x), label<span class="op">=</span>L<span class="st">"Pareto(</span><span class="sc">$</span><span class="st">\</span>alpha<span class="st">=2</span><span class="sc">$</span><span class="st">)",</span></span>
+<span id="cb3-25"><a></a><span class="st">        </span>linewidth<span class="st">=2, linestyle=:dash, color=:orange)</span></span>
+<span id="cb3-26"><a></a>    <span class="fu">lines!</span>(ax1, x, <span class="fu">pdf</span>.(pareto_α<span class="fl">15</span>, x), label<span class="op">=</span>L<span class="st">"Pareto(</span><span class="sc">$</span><span class="st">\</span>alpha<span class="st">=1.5</span><span class="sc">$</span><span class="st">)",</span></span>
+<span id="cb3-27"><a></a><span class="st">        </span>linewidth<span class="st">=2, linestyle=:dot, color=:red)</span></span>
+<span id="cb3-28"><a></a>    <span class="fu">axislegend</span>(ax1, position<span class="op">=:</span>rt)</span>
+<span id="cb3-29"><a></a></span>
+<span id="cb3-30"><a></a>    <span class="co"># Right panel: Log-scale to see tails</span></span>
+<span id="cb3-31"><a></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], xlabel<span class="op">=</span>L<span class="st">"x"</span>, ylabel<span class="op">=</span>L<span class="st">"\log(p(x))"</span>,</span>
+<span id="cb3-32"><a></a>        title<span class="op">=</span><span class="st">"Tails on Log Scale"</span>)</span>
+<span id="cb3-33"><a></a>    x2 <span class="op">=</span> <span class="fu">range</span>(<span class="fl">5</span>, <span class="fl">50</span>, length<span class="op">=</span><span class="fl">500</span>)</span>
+<span id="cb3-34"><a></a>    <span class="fu">lines!</span>(ax2, x2, <span class="fu">logpdf</span>.(lognormal, x2), label<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span><span class="st">\</span>text<span class="st">{LogNormal}</span><span class="sc">$</span><span class="st">",</span></span>
+<span id="cb3-35"><a></a><span class="st">        </span>linewidth<span class="st">=2, color=:blue)</span></span>
+<span id="cb3-36"><a></a>    <span class="fu">lines!</span>(ax2, x2, <span class="fu">logpdf</span>.(pareto_α<span class="fl">2</span>, x2), label<span class="op">=</span>L<span class="st">"Pareto(</span><span class="sc">$</span><span class="st">\</span>alpha<span class="st">=2</span><span class="sc">$</span><span class="st">)",</span></span>
+<span id="cb3-37"><a></a><span class="st">        </span>linewidth<span class="st">=2, linestyle=:dash, color=:orange)</span></span>
+<span id="cb3-38"><a></a>    <span class="fu">lines!</span>(ax2, x2, <span class="fu">logpdf</span>.(pareto_α<span class="fl">15</span>, x2), label<span class="op">=</span>L<span class="st">"Pareto(</span><span class="sc">$</span><span class="st">\</span>alpha<span class="st">=1.5</span><span class="sc">$</span><span class="st">)",</span></span>
+<span id="cb3-39"><a></a><span class="st">        </span>linewidth<span class="st">=2, linestyle=:dot, color=:red)</span></span>
+<span id="cb3-40"><a></a>    <span class="fu">lines!</span>(ax2, x2, <span class="fu">logpdf</span>.(pareto_α<span class="fl">08</span>, x2), label<span class="op">=</span>L<span class="st">"Pareto(</span><span class="sc">$</span><span class="st">\</span>alpha<span class="st">=0.8</span><span class="sc">$</span><span class="st">)",</span></span>
+<span id="cb3-41"><a></a><span class="st">        </span>linewidth<span class="st">=2, linestyle=:dashdot, color=:purple)</span></span>
+<span id="cb3-42"><a></a>    <span class="fu">axislegend</span>(ax2, position<span class="op">=:</span>rt)</span>
+<span id="cb3-43"><a></a></span>
+<span id="cb3-44"><a></a>    fig</span>
+<span id="cb3-45"><a></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/cell-4-output-1.svg" class="r-stretch"><aside class="notes">
+<p>Left panel shows they look similar near the center. Right panel (log scale) reveals the difference in the tails. LogNormal has exponential decay (light tail). Pareto has power-law decay - the smaller alpha, the heavier the tail.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>The Pareto Tail Index</h2>
+<aside class="notes">
+<p>Target: 1:24. Define alpha mathematically, show estimation formula, discuss pitfalls.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>For a Pareto distribution: <span class="math inline">\(P(X &gt; x) \sim x^{-\alpha}\)</span> as <span class="math inline">\(x \to \infty\)</span></p>
+<p><strong>Tail index</strong> <span class="math inline">\(\alpha\)</span> controls both tail heaviness and moment existence:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\alpha\)</span></th>
+<th>Mean</th>
+<th>Variance</th>
+<th>Physical Plausibility</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\alpha \geq 2\)</span></td>
+<td>Finite</td>
+<td>Finite</td>
+<td>Most climate/flood risks</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(1 &lt; \alpha &lt; 2\)</span></td>
+<td>Finite</td>
+<td>Infinite</td>
+<td>Some extreme events</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\alpha &lt; 1\)</span></td>
+<td>Infinite</td>
+<td>Infinite</td>
+<td>Unlikely in nature</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+<h2>Estimating the Tail Index</h2>
+<aside class="notes">
+<p>Target: 1:26. Show Hill estimator and its pitfalls.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><strong>Hill estimator</strong> for tail index from the <span class="math inline">\(k\)</span> largest observations:</p>
+<p><span class="math display">\[\hat{\alpha} = \left[\frac{1}{k}\sum_{i=1}^k \ln\frac{X_{(i)}}{X_{(k+1)}}\right]^{-1}\]</span></p>
+<div class="fragment">
+<p><strong>Pitfalls:</strong></p>
+<ul>
+<li class="fragment">Requires choosing threshold <span class="math inline">\(k\)</span> (how many extremes to use?)</li>
+<li class="fragment">Need <em>many</em> observations in the tail to estimate reliably</li>
+<li class="fragment">Historical data often too short for rare extremes</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+<h2>Why Do Fat Tails Matter?</h2>
+<aside class="notes">
+<p>Target: 1:28. Connect to the practical implication.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>For fat-tailed distributions:</p>
+<ul>
+<li class="fragment">The <strong>mean</strong> can be dominated by rare extreme events</li>
+<li class="fragment">Sample averages converge <strong>slowly</strong> to the true mean</li>
+<li class="fragment">Historical data undersamples the tail</li>
+</ul>
+<div class="fragment">
+<p><em>“The average is dominated by a small number of extreme values.”</em></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Slow Convergence of the Mean</h2>
+<aside class="notes">
+<p>Target: 1:30. Adapt the running mean plot from clt.jl. Show that GEV running mean is much noisier than Normal.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div id="8" class="cell" data-fig-width="9" data-fig-height="4.5" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a></a><span class="kw">let</span></span>
+<span id="cb4-2"><a></a>    <span class="kw">function</span> <span class="fu">running_mean</span>(samples)</span>
+<span id="cb4-3"><a></a>        n <span class="op">=</span> <span class="fu">length</span>(samples)</span>
+<span id="cb4-4"><a></a>        <span class="fu">cumsum</span>(samples) <span class="op">./</span> (<span class="fl">1</span><span class="op">:</span>n)</span>
+<span id="cb4-5"><a></a>    <span class="kw">end</span></span>
+<span id="cb4-6"><a></a></span>
+<span id="cb4-7"><a></a>    n_samples <span class="op">=</span> <span class="fl">2000</span></span>
+<span id="cb4-8"><a></a>    n_lines <span class="op">=</span> <span class="fl">8</span></span>
+<span id="cb4-9"><a></a></span>
+<span id="cb4-10"><a></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">400</span>))</span>
+<span id="cb4-11"><a></a></span>
+<span id="cb4-12"><a></a>    <span class="co"># LogNormal distribution (light tail)</span></span>
+<span id="cb4-13"><a></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span>L<span class="st">"n"</span>, ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\b</span><span class="st">ar{x}_n"</span>,</span>
+<span id="cb4-14"><a></a>        title<span class="op">=</span>L<span class="st">"LogNormal</span><span class="sc">$</span>()<span class="sc">$</span><span class="st">: </span>Light<span class="st"> Tail"</span>)</span>
+<span id="cb4-15"><a></a>    lognormal <span class="op">=</span> <span class="fu">LogNormal</span>(<span class="fu">log</span>(<span class="fl">3</span>), <span class="fl">0.8</span>)</span>
+<span id="cb4-16"><a></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_lines</span>
+<span id="cb4-17"><a></a>        samples <span class="op">=</span> <span class="fu">rand</span>(lognormal, n_samples)</span>
+<span id="cb4-18"><a></a>        <span class="fu">lines!</span>(ax1, <span class="fl">1</span><span class="op">:</span>n_samples, <span class="fu">running_mean</span>(samples), color<span class="op">=</span>(<span class="op">:</span>blue, <span class="fl">0.4</span>), linewidth<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb4-19"><a></a>    <span class="cf">end</span></span>
+<span id="cb4-20"><a></a>    <span class="fu">hlines!</span>(ax1, [<span class="fu">mean</span>(lognormal)], color<span class="op">=:</span>black, linestyle<span class="op">=:</span>dash, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="cb4-21"><a></a>        label<span class="op">=</span>L<span class="st">"\mu"</span>)</span>
+<span id="cb4-22"><a></a>    <span class="fu">axislegend</span>(ax1, position<span class="op">=:</span>rt)</span>
+<span id="cb4-23"><a></a>    <span class="fu">ylims!</span>(ax1, <span class="fl">1</span>, <span class="fl">6</span>)</span>
+<span id="cb4-24"><a></a></span>
+<span id="cb4-25"><a></a>    <span class="co"># Pareto distribution (α = 1.5, fat-tailed)</span></span>
+<span id="cb4-26"><a></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], xlabel<span class="op">=</span>L<span class="st">"n"</span>, ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">\b</span><span class="st">ar{x}_n"</span>,</span>
+<span id="cb4-27"><a></a>        title<span class="op">=</span>L<span class="st">"Pareto(</span><span class="sc">$</span><span class="st">\</span>alpha<span class="st">=1.25</span><span class="sc">$</span><span class="st">): </span>Fat<span class="st"> Tail"</span>)</span>
+<span id="cb4-28"><a></a>    pareto_fat <span class="op">=</span> <span class="fu">Pareto</span>(<span class="fl">1.25</span>, <span class="fl">1.0</span>)</span>
+<span id="cb4-29"><a></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_lines</span>
+<span id="cb4-30"><a></a>        samples <span class="op">=</span> <span class="fu">rand</span>(pareto_fat, n_samples)</span>
+<span id="cb4-31"><a></a>        <span class="fu">lines!</span>(ax2, <span class="fl">1</span><span class="op">:</span>n_samples, <span class="fu">running_mean</span>(samples), color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.4</span>), linewidth<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb4-32"><a></a>    <span class="cf">end</span></span>
+<span id="cb4-33"><a></a>    <span class="fu">hlines!</span>(ax2, [<span class="fu">mean</span>(pareto_fat)], color<span class="op">=:</span>black, linestyle<span class="op">=:</span>dash, linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="cb4-34"><a></a>        label<span class="op">=</span>L<span class="st">"\mu"</span>)</span>
+<span id="cb4-35"><a></a>    <span class="fu">axislegend</span>(ax2, position<span class="op">=:</span>rt)</span>
+<span id="cb4-36"><a></a>    <span class="fu">ylims!</span>(ax2, <span class="fl">0</span>, <span class="fl">15</span>)</span>
+<span id="cb4-37"><a></a></span>
+<span id="cb4-38"><a></a>    fig</span>
+<span id="cb4-39"><a></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/cell-5-output-1.svg" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Implications for Risk Assessment</h2>
+<aside class="notes">
+<p>Target: 1:32. Drive home the practical point. Key insight: sample average is usually BELOW true mean for fat tails.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>For fat-tailed hazards:</p>
+<ul>
+<li class="fragment"><strong>Usually</strong>, the average over N years is <em>less than</em> the true mean</li>
+<li class="fragment">The mean is dominated by rare extremes you probably haven’t observed yet</li>
+<li class="fragment">Occasionally you get unlucky and observe a tail event—then your estimate jumps</li>
+</ul>
+<div class="fragment">
+<p><strong>Implication:</strong> Historical averages systematically underestimate risk.</p>
+<p>We need metrics that focus specifically on the tail.</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Risk Metrics</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Vocabulary: Extreme Value Statistics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Fat Tails</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Risk Metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Monte Carlo for Risk Metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>From Expected Value to Tail Focus</h2>
+<aside class="notes">
+<p>Target: 1:34. Set up the progression of metrics.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><strong>Expected Annual Damage (EAD)</strong> averages over everything:</p>
+<p><span class="math display">\[\text{EAD} = E[D] = \int D(h) \cdot p(h) \, dh\]</span></p>
+<div class="fragment">
+<p>But decision-makers often care more about <strong>worst-case scenarios</strong>:</p>
+<ul>
+<li>“What’s the damage I should prepare for?”</li>
+<li>“What’s the catastrophic loss I might face?”</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+<h2>Value at Risk (VaR)</h2>
+<aside class="notes">
+<p>Target: 1:36. Introduce VaR with clear definition.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><strong>VaR at confidence level</strong> <span class="math inline">\(\alpha\)</span>: The <span class="math inline">\(\alpha\)</span>-quantile of the loss distribution.</p>
+<p><span class="math display">\[\text{VaR}_\alpha = F^{-1}_L(\alpha)\]</span></p>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<p><strong>Example:</strong> 95% VaR</p>
+<ul>
+<li>“5% of the time, losses exceed this value”</li>
+<li>Also called: 20-year loss (same concept, different vocab)</li>
+</ul>
+</div><div class="column fragment" style="width:50%;">
+<p><strong>In Julia:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a></a>VaR_95 <span class="op">=</span> <span class="fu">quantile</span>(losses, <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
+</section>
+<section class="slide level2 smaller">
+<h2>VaR Illustrated</h2>
+<div id="10" class="cell" data-fig-width="8" data-fig-height="4.5" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a></a><span class="co"># Generate damage samples (house at 3ft elevation, $200k value)</span></span>
+<span id="cb6-2"><a></a>n <span class="op">=</span> <span class="fl">25_000</span></span>
+<span id="cb6-3"><a></a>house_elevation <span class="op">=</span> <span class="fl">3.0</span></span>
+<span id="cb6-4"><a></a>house_value <span class="op">=</span> <span class="fl">200.0</span>  <span class="co"># in $1000s</span></span>
+<span id="cb6-5"><a></a>hazards <span class="op">=</span> <span class="fu">rand</span>(<span class="fu">GeneralizedExtremeValue</span>(<span class="fl">5.0</span>, <span class="fl">2.0</span>, <span class="fl">0.1</span>), n)</span>
+<span id="cb6-6"><a></a>damages <span class="op">=</span> [<span class="fu">depth_damage</span>(h <span class="op">-</span> house_elevation) <span class="op">*</span> house_value for h <span class="kw">in</span> hazards]</span>
+<span id="cb6-7"><a></a></span>
+<span id="cb6-8"><a></a>VaR_95 <span class="op">=</span> <span class="fu">quantile</span>(damages, <span class="fl">0.95</span>)</span>
+<span id="cb6-9"><a></a></span>
+<span id="cb6-10"><a></a>fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">400</span>))</span>
+<span id="cb6-11"><a></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span><span class="st">"Damage (\$1000s)"</span>, ylabel<span class="op">=</span><span class="st">"Probability Density"</span>, title<span class="op">=</span><span class="st">"Damage Distribution with 95% VaR"</span>)</span>
+<span id="cb6-12"><a></a><span class="fu">hist!</span>(ax, damages, bins<span class="op">=</span><span class="fl">50</span>, color<span class="op">=</span>(<span class="op">:</span>blue, <span class="fl">0.6</span>), normalization<span class="op">=:</span>pdf)</span>
+<span id="cb6-13"><a></a><span class="fu">vlines!</span>(ax, [VaR_95], color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">3</span>, label<span class="op">=</span><span class="st">"95% VaR = \$</span><span class="sc">$</span>(<span class="fu">round</span>(VaR_95, digits<span class="op">=</span><span class="fl">0</span>))<span class="st">k"</span>)</span>
+<span id="cb6-14"><a></a><span class="fu">axislegend</span>(ax, position<span class="op">=:</span>rt)</span>
+<span id="cb6-15"><a></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/cell-6-output-1.svg" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Conditional Value at Risk (CVaR)</h2>
+<aside class="notes">
+<p>Target: 1:42. CVaR as the solution. Also called Expected Shortfall (ES) or Tail VaR.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><strong>CVaR</strong> (Expected Shortfall): Average loss in the worst <span class="math inline">\(\alpha\)</span>% of cases.</p>
+<p><span class="math display">\[\text{CVaR}_\alpha = E[L \mid L &gt; \text{VaR}_\alpha]\]</span></p>
+<div class="fragment">
+<p><strong>In Julia:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a></a>VaR_95 <span class="op">=</span> <span class="fu">quantile</span>(losses, <span class="fl">0.95</span>)</span>
+<span id="cb7-2"><a></a>CVaR_95 <span class="op">=</span> <span class="fu">mean</span>(losses[losses <span class="op">.&gt;</span> VaR_95])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+<h2>VaR vs.&nbsp;CVaR Illustrated</h2>
+<div id="12" class="cell" data-fig-width="9" data-fig-height="4.5" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a></a><span class="co"># Compute VaR and CVaR</span></span>
+<span id="cb8-2"><a></a>VaR_95 <span class="op">=</span> <span class="fu">quantile</span>(damages, <span class="fl">0.95</span>)</span>
+<span id="cb8-3"><a></a>tail_losses <span class="op">=</span> damages[damages<span class="op">.&gt;=</span>VaR_95]  <span class="co"># Use &gt;= to ensure non-empty</span></span>
+<span id="cb8-4"><a></a>CVaR_95 <span class="op">=</span> <span class="fu">mean</span>(tail_losses)</span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a>fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">400</span>))</span>
+<span id="cb8-7"><a></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span><span class="st">"Damage (\$1000s)"</span>, ylabel<span class="op">=</span><span class="st">"Probability Density"</span>,</span>
+<span id="cb8-8"><a></a>    title<span class="op">=</span><span class="st">"VaR shows threshold; CVaR shows tail average"</span>)</span>
+<span id="cb8-9"><a></a></span>
+<span id="cb8-10"><a></a><span class="co"># Main histogram</span></span>
+<span id="cb8-11"><a></a><span class="fu">hist!</span>(ax, damages, bins<span class="op">=</span><span class="fl">50</span>, color<span class="op">=</span>(<span class="op">:</span>blue, <span class="fl">0.6</span>), normalization<span class="op">=:</span>pdf)</span>
+<span id="cb8-12"><a></a></span>
+<span id="cb8-13"><a></a><span class="co"># Add lines</span></span>
+<span id="cb8-14"><a></a><span class="fu">vlines!</span>(ax, [VaR_95], color<span class="op">=:</span>darkred, linewidth<span class="op">=</span><span class="fl">3</span>, linestyle<span class="op">=:</span>dash,</span>
+<span id="cb8-15"><a></a>    label<span class="op">=</span><span class="st">"VaR₉₅ = \$</span><span class="sc">$</span>(<span class="fu">round</span>(VaR_95, digits<span class="op">=</span><span class="fl">0</span>))<span class="st">k"</span>)</span>
+<span id="cb8-16"><a></a><span class="fu">vlines!</span>(ax, [CVaR_95], color<span class="op">=:</span>purple, linewidth<span class="op">=</span><span class="fl">3</span>,</span>
+<span id="cb8-17"><a></a>    label<span class="op">=</span><span class="st">"CVaR₉₅ = \$</span><span class="sc">$</span>(<span class="fu">round</span>(CVaR_95, digits<span class="op">=</span><span class="fl">0</span>))<span class="st">k"</span>)</span>
+<span id="cb8-18"><a></a></span>
+<span id="cb8-19"><a></a><span class="fu">axislegend</span>(ax, position<span class="op">=:</span>ct, backgroundcolor<span class="op">=:</span>white)</span>
+<span id="cb8-20"><a></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/cell-7-output-1.svg" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Why CVaR &gt; VaR</h2>
+<aside class="notes">
+<p>Target: 1:44. Use intuitive explanation, avoid jargon students don’t have background for.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>VaR tells you the <strong>threshold</strong>; CVaR tells you what happens <strong>beyond</strong> it.</p>
+<ul>
+<li class="fragment">VaR answers: “What loss do I exceed 5% of the time?”</li>
+<li class="fragment">CVaR answers: “When things go bad, <em>how bad</em> do they get on average?”</li>
+<li class="fragment">VaR says nothing about the <strong>severity</strong> of tail events</li>
+</ul>
+<div class="fragment">
+<p><strong>Example:</strong> If your 95% VaR is $100k, that just means 5% of outcomes are worse. But are they $101k worse or $1M worse? <strong>CVaR answers this.</strong></p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Worked Example: Same EAD, Different Tails</h2>
+<aside class="notes">
+<p>Target: 1:46. Key conceptual example. Parameters chosen so hazard distributions have similar means but different tail behavior. Distribution A: Gumbel (ξ=0) with higher location Distribution B: Fréchet (ξ=0.2) with lower location to compensate for heavier tail</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div id="14" class="cell" data-fig-width="9" data-fig-height="4" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a></a><span class="co"># Two GEV distributions calibrated to produce similar EAD but different tails</span></span>
+<span id="cb9-2"><a></a><span class="co"># A: Gumbel (light tail) with higher location</span></span>
+<span id="cb9-3"><a></a><span class="co"># B: Fréchet (fat tail) with lower location to match mean</span></span>
+<span id="cb9-4"><a></a>dist_A <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(<span class="fl">5.5</span>, <span class="fl">1.8</span>, <span class="fl">0.0</span>)   <span class="co"># Gumbel (light tail)</span></span>
+<span id="cb9-5"><a></a>dist_B <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(<span class="fl">4.5</span>, <span class="fl">1.5</span>, <span class="fl">0.25</span>)   <span class="co"># Fréchet (fat tail)</span></span>
+<span id="cb9-6"><a></a></span>
+<span id="cb9-7"><a></a>n <span class="op">=</span> <span class="fl">50000</span></span>
+<span id="cb9-8"><a></a>house_elev <span class="op">=</span> <span class="fl">4.0</span></span>
+<span id="cb9-9"><a></a>house_val <span class="op">=</span> <span class="fl">200.0</span>  <span class="co"># $1000s</span></span>
+<span id="cb9-10"><a></a>damages_A <span class="op">=</span> [<span class="fu">depth_damage</span>(h <span class="op">-</span> house_elev) <span class="op">*</span> house_val for h <span class="kw">in</span> <span class="fu">rand</span>(dist_A, n)]</span>
+<span id="cb9-11"><a></a>damages_B <span class="op">=</span> [<span class="fu">depth_damage</span>(h <span class="op">-</span> house_elev) <span class="op">*</span> house_val for h <span class="kw">in</span> <span class="fu">rand</span>(dist_B, n)]</span>
+<span id="cb9-12"><a></a></span>
+<span id="cb9-13"><a></a><span class="co"># Compute metrics (use &gt;= to ensure non-empty tail samples)</span></span>
+<span id="cb9-14"><a></a>VaR95_A <span class="op">=</span> <span class="fu">quantile</span>(damages_A, <span class="fl">0.95</span>)</span>
+<span id="cb9-15"><a></a>VaR95_B <span class="op">=</span> <span class="fu">quantile</span>(damages_B, <span class="fl">0.95</span>)</span>
+<span id="cb9-16"><a></a>metrics <span class="op">=</span> (</span>
+<span id="cb9-17"><a></a>    EAD_A<span class="op">=</span><span class="fu">mean</span>(damages_A),</span>
+<span id="cb9-18"><a></a>    EAD_B<span class="op">=</span><span class="fu">mean</span>(damages_B),</span>
+<span id="cb9-19"><a></a>    VaR95_A<span class="op">=</span>VaR95_A,</span>
+<span id="cb9-20"><a></a>    VaR95_B<span class="op">=</span>VaR95_B,</span>
+<span id="cb9-21"><a></a>    CVaR95_A<span class="op">=</span><span class="fu">mean</span>(damages_A[damages_A<span class="op">.&gt;=</span>VaR95_A]),</span>
+<span id="cb9-22"><a></a>    CVaR95_B<span class="op">=</span><span class="fu">mean</span>(damages_B[damages_B<span class="op">.&gt;=</span>VaR95_B])</span>
+<span id="cb9-23"><a></a>)</span>
+<span id="cb9-24"><a></a></span>
+<span id="cb9-25"><a></a>fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">350</span>))</span>
+<span id="cb9-26"><a></a>ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span><span class="st">"Damage (\$1000s)"</span>, ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="cb9-27"><a></a>    title<span class="op">=</span>L<span class="st">"GEV(</span><span class="sc">$</span><span class="st">\</span>xi<span class="st"> = 0</span><span class="sc">$</span><span class="st">) </span>(light tail)<span class="st">"</span>)</span>
+<span id="cb9-28"><a></a>ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>], xlabel<span class="op">=</span><span class="st">"Damage (\$1000s)"</span>, ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
+<span id="cb9-29"><a></a>    title<span class="op">=</span>L<span class="st">"GEV(</span><span class="sc">$</span><span class="st">\</span>xi<span class="st"> = 0.2</span><span class="sc">$</span><span class="st">) </span>(fatter tail)<span class="st">"</span>)</span>
+<span id="cb9-30"><a></a></span>
+<span id="cb9-31"><a></a><span class="fu">hist!</span>(ax1, damages_A, bins<span class="op">=</span><span class="fl">50</span>, color<span class="op">=</span>(<span class="op">:</span>blue, <span class="fl">0.6</span>), normalization<span class="op">=:</span>pdf)</span>
+<span id="cb9-32"><a></a><span class="fu">hist!</span>(ax2, damages_B, bins<span class="op">=</span><span class="fl">50</span>, color<span class="op">=</span>(<span class="op">:</span>red, <span class="fl">0.6</span>), normalization<span class="op">=:</span>pdf)</span>
+<span id="cb9-33"><a></a></span>
+<span id="cb9-34"><a></a><span class="fu">xlims!</span>(ax1, <span class="fl">0</span>, <span class="fl">250</span>)</span>
+<span id="cb9-35"><a></a><span class="fu">xlims!</span>(ax2, <span class="fl">0</span>, <span class="fl">250</span>)</span>
+<span id="cb9-36"><a></a><span class="fu">linkyaxes!</span>(ax1, ax2)</span>
+<span id="cb9-37"><a></a></span>
+<span id="cb9-38"><a></a>fig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="index_files/figure-revealjs/cell-8-output-1.svg" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Same EAD, Different Tail Risk</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Distribution A</th>
+<th>Distribution B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EAD</td>
+<td>$46.0k</td>
+<td>$36.0k</td>
+</tr>
+<tr class="even">
+<td>95% VaR</td>
+<td>$130.0k</td>
+<td>$137.0k</td>
+</tr>
+<tr class="odd">
+<td>95% CVaR</td>
+<td>$158.0k</td>
+<td>$174.0k</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Monte Carlo for Risk Metrics</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Vocabulary: Extreme Value Statistics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Fat Tails</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Risk Metrics</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Monte Carlo for Risk Metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>The Monte Carlo Workflow</h2>
+<aside class="notes">
+<p>Target: 1:48. Review from Week 2, add emphasis on “any metric.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<ol type="1">
+<li><strong>Sample</strong> hazard scenarios from distribution</li>
+<li><strong>Apply</strong> damage function to each scenario</li>
+<li><strong>Summarize</strong> the damage samples</li>
+</ol>
+<div class="fragment">
+<p>Once you have samples, <strong>any</strong> metric is trivial:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a></a>EAD <span class="op">=</span> <span class="fu">mean</span>(damages)</span>
+<span id="cb10-2"><a></a>VaR_95 <span class="op">=</span> <span class="fu">quantile</span>(damages, <span class="fl">0.95</span>)</span>
+<span id="cb10-3"><a></a>CVaR_95 <span class="op">=</span> <span class="fu">mean</span>(damages[damages <span class="op">.&gt;</span> VaR_95])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Computing All Metrics</h2>
+<aside class="notes">
+<p>Target: 1:50. Full worked example.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div id="16" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a></a><span class="co"># Complete Monte Carlo workflow (same setup as Lab 2)</span></span>
+<span id="cb11-2"><a></a>n_samples <span class="op">=</span> <span class="fl">100_000</span></span>
+<span id="cb11-3"><a></a></span>
+<span id="cb11-4"><a></a><span class="co"># 1. Sample hazards (GEV for storm surge, same as Lab 2)</span></span>
+<span id="cb11-5"><a></a>surge_dist <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(<span class="fl">5.0</span>, <span class="fl">2.0</span>, <span class="fl">0.1</span>)</span>
+<span id="cb11-6"><a></a>hazards <span class="op">=</span> <span class="fu">rand</span>(surge_dist, n_samples)</span>
+<span id="cb11-7"><a></a></span>
+<span id="cb11-8"><a></a><span class="co"># 2. Apply damage function (house at 4ft elevation, $300k value)</span></span>
+<span id="cb11-9"><a></a>base_elevation <span class="op">=</span> <span class="fl">4.0</span></span>
+<span id="cb11-10"><a></a>house_value <span class="op">=</span> <span class="fl">300_000</span></span>
+<span id="cb11-11"><a></a>damages <span class="op">=</span> [<span class="fu">depth_damage</span>(h <span class="op">-</span> base_elevation) <span class="op">*</span> house_value for h <span class="kw">in</span> hazards]</span>
+<span id="cb11-12"><a></a></span>
+<span id="cb11-13"><a></a><span class="co"># 3. Compute metrics</span></span>
+<span id="cb11-14"><a></a>EAD <span class="op">=</span> <span class="fu">mean</span>(damages)</span>
+<span id="cb11-15"><a></a>VaR_95 <span class="op">=</span> <span class="fu">quantile</span>(damages, <span class="fl">0.95</span>)</span>
+<span id="cb11-16"><a></a>VaR_99 <span class="op">=</span> <span class="fu">quantile</span>(damages, <span class="fl">0.99</span>)</span>
+<span id="cb11-17"><a></a>CVaR_95 <span class="op">=</span> <span class="fu">mean</span>(damages[damages<span class="op">.&gt;=</span>VaR_95])  <span class="co"># Use &gt;= to ensure non-empty</span></span>
+<span id="cb11-18"><a></a>CVaR_99 <span class="op">=</span> <span class="fu">mean</span>(damages[damages<span class="op">.&gt;=</span>VaR_99])</span>
+<span id="cb11-19"><a></a></span>
+<span id="cb11-20"><a></a><span class="fu">println</span>(<span class="st">"Risk Metrics (house value = \$300k, base elevation = 4ft)"</span>)</span>
+<span id="cb11-21"><a></a><span class="fu">println</span>(<span class="st">"━"</span><span class="op">^</span><span class="fl">50</span>)</span>
+<span id="cb11-22"><a></a><span class="fu">println</span>(<span class="st">"Expected Annual Damage (EAD):     \$</span><span class="sc">$</span>(<span class="fu">round</span>(EAD, digits<span class="op">=</span><span class="fl">0</span>))<span class="st">"</span>)</span>
+<span id="cb11-23"><a></a><span class="fu">println</span>(<span class="st">"95% VaR (20-year loss):           \$</span><span class="sc">$</span>(<span class="fu">round</span>(VaR_95, digits<span class="op">=</span><span class="fl">0</span>))<span class="st">"</span>)</span>
+<span id="cb11-24"><a></a><span class="fu">println</span>(<span class="st">"99% VaR (100-year loss):          \$</span><span class="sc">$</span>(<span class="fu">round</span>(VaR_99, digits<span class="op">=</span><span class="fl">0</span>))<span class="st">"</span>)</span>
+<span id="cb11-25"><a></a><span class="fu">println</span>(<span class="st">"95% CVaR (avg loss in worst 5%):  \$</span><span class="sc">$</span>(<span class="fu">round</span>(CVaR_95, digits<span class="op">=</span><span class="fl">0</span>))<span class="st">"</span>)</span>
+<span id="cb11-26"><a></a><span class="fu">println</span>(<span class="st">"99% CVaR (avg loss in worst 1%):  \$</span><span class="sc">$</span>(<span class="fu">round</span>(CVaR_99, digits<span class="op">=</span><span class="fl">0</span>))<span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Risk Metrics (house value = $300k, base elevation = 4ft)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Expected Annual Damage (EAD):     $67216.0
+95% VaR (20-year loss):           $223965.0
+99% VaR (100-year loss):          $300000.0
+95% CVaR (avg loss in worst 5%):  $264827.0
+99% CVaR (avg loss in worst 1%):  $300000.0</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Why Monte Carlo is Essential</h2>
+<aside class="notes">
+<p>Target: 1:52. Connect to fat tails.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>For fat-tailed distributions:</p>
+<ul>
+<li class="fragment">Analytical formulas often don’t exist</li>
+<li class="fragment">Numerical integration struggles with heavy tails</li>
+<li class="fragment">Monte Carlo naturally captures rare events (with enough samples)</li>
+</ul>
+<div class="fragment">
+<p><strong>Key insight:</strong> Increase sample size when tails matter more.</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Advanced Sampling (Preview)</h2>
+<aside class="notes">
+<p>Target: 1:54. Brief mention of advanced techniques—students should know these exist.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Naive Monte Carlo requires many samples to capture rare events:</p>
+<ul>
+<li>To get 10 samples of a 1-in-1000 event, you need ~10,000 runs</li>
+</ul>
+<div class="fragment">
+<p><strong>Advanced techniques</strong> can do better:</p>
+<ul>
+<li><strong>Importance sampling:</strong> Oversample the tail, then reweight</li>
+<li><strong>Stratified sampling:</strong> Ensure coverage across the distribution</li>
+</ul>
+<p>These are beyond our scope, but good to know they exist when you need them.</p>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Wrap Up</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Vocabulary: Extreme Value Statistics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Fat Tails</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Risk Metrics</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Monte Carlo for Risk Metrics</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Wrap Up</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Key Takeaways</h2>
+<aside class="notes">
+<p>Target: 1:56. Five bullets max.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<ol type="1">
+<li><strong>Return period</strong> and <strong>return level</strong> are inverse operations on the CDF</li>
+<li><strong>Fat tails</strong> mean extremes dominate</li>
+<li>We can measure fat tails using <span class="math inline">\(\alpha\)</span> or <span class="math inline">\(\xi\)</span></li>
+<li><strong>EAD</strong> averages over everything; <strong>VaR</strong> gives a threshold; <strong>CVaR</strong> captures the tail</li>
+<li><strong>Monte Carlo</strong> lets us compute metrics from samples</li>
+</ol>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-doss-gollin_txtreme:2021" class="csl-entry" role="listitem">
+Doss-Gollin, J., Farnham, D. J., Lall, U., &amp; Modi, V. (2021). How unprecedented was the <span>February</span> 2021 texas cold snap? <em>Environmental Research Letters</em>, <em>16</em>(6), 064056. <a href="https://doi.org/10.1088/1748-9326/ac0278">https://doi.org/10.1088/1748-9326/ac0278</a>
+</div>
 </div>
 
-</section>
-<section class="slide level2">
-<h2>Preparation</h2>
-<p>Sections 1 and 2 of <a href="https://jwmi.github.io/BMS/chapter5-monte-carlo.pdf">Jeff Miller’s BMS</a> book</p>
-</section>
-<section class="slide level2">
-<h2>Coming Soon</h2>
-<p>This lecture is under development.</p>
-</section>
-<section class="slide level2">
-<h2>References</h2>
 
-
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

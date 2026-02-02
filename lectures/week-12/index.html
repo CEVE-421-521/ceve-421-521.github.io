@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Dr.&nbsp;James Doss-Gollin">
-  <title>CEVE 421/521 -- Spring 2026 – Sequential Decision Making</title>
+  <title>CEVE 421/521 -- Spring 2026 – Multi-Objective Optimization</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,27 +29,7 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-      margin-bottom: 0em;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
+  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f813b346ce809c8bbd246a85cc5c9db3.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -151,7 +131,7 @@
       }
     };
   </script>
-<meta property="og:title" content="Sequential Decision Making – CEVE 421/521 – Spring 2026">
+<meta property="og:title" content="Multi-Objective Optimization – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="Lecture">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
@@ -160,7 +140,7 @@
     <div class="slides">
 
 <section class="quarto-title-block center">
-  <h1 class="title">Sequential Decision Making</h1>
+  <h1 class="title">Multi-Objective Optimization</h1>
   <p class="subtitle">Lecture</p>
 
 <div class="quarto-title-authors">
@@ -185,26 +165,18 @@ Dr.&nbsp;James Doss-Gollin
 <p>This lecture is under development.</p>
 <p>Content to adapt from previous course:</p>
 <ul>
-<li>Static vs.&nbsp;sequential decision framing</li>
-<li>State evolution: <span class="math inline">\(\mathbf{x}_{t+1} = f_t(\mathbf{x}_t, a_t, e_{t+1})\)</span></li>
-<li>Reward and value functions</li>
-<li>Solution methods: open loop, dynamic programming, policy search</li>
-<li>Real options and the value of flexibility</li>
+<li>Enriched notation diagram</li>
+<li>Dominance definition and examples</li>
+<li>Pareto front visualization</li>
+<li>Weighted sum approach and limitations</li>
+<li>Genetic algorithms / MOEAs</li>
+<li>Convergence diagnostics (hypervolume)</li>
 </ul>
 </section>
 <section class="slide level2">
-<h2>Preparation</h2>
-<p>Read <span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, in particular focusing on …</p>
-</section>
-<section class="slide level2 smaller scrollable" id="references">
 <h2>References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-herman_control:2020" class="csl-entry" role="listitem">
-Herman, J. D., Quinn, J. D., Steinschneider, S., Giuliani, M., &amp; Fletcher, S. (2020). Climate adaptation as a control problem: <span>Review</span> and perspectives on dynamic water resources planning under uncertainty. <em>Water Resources Research</em>, e24389. <a href="https://doi.org/10.1029/2019wr025502">https://doi.org/10.1029/2019wr025502</a>
-</div>
-</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
