@@ -28,7 +28,7 @@ You will often be encouraged to focus only on part of relevant papers.
 | | Wed., Jan. 28 | {{< material type="readings" id="week-03" label="Paper Discussion:" text="Climate Extremes (IPCC)" href="readings/week-03-reading.qmd" >}} |
 | | Fri., Jan. 30 | {{< material type="labs" id="lab-03-S26" label="Lab 3:" text="Sea-Level Rise Scenarios and Uncertainty" href="labs/lab-03-S26/index.qmd" >}} / {{< material type="assignments" id="topic-proposal" label="Project:" text="Topic Proposal Due" href="assignments/final-project/topic-proposal.qmd" >}} |
 | **4** | Mon., Feb. 2 | {{< material type="lectures" id="week-04" label="Lecture:" text="Uncertainty, Monte Carlo & Risk Metrics" href="lectures/week-04/index.qmd" slides="lectures/week-04/index.html" slidepdf="lectures/week-04/index.pptx" >}} |
-| | Wed., Feb. 4 | {{< material type="readings" id="week-04" label="Paper Discussion:" text="Monte Carlo & Risk Metrics" href="readings/week-04-reading.qmd" >}} |
+| | Wed., Feb. 4 | {{< material type="lectures" id="week-04-icow" label="Paper Discussion:" text="ICOW Framework" href="lectures/week-04-icow/index.qmd" slides="lectures/week-04-icow/index.html" slidepdf="lectures/week-04-icow/index.pptx" >}} |
 | | Fri., Feb. 6 | {{< material type="labs" id="lab-04-S26" label="Lab 4:" text="Monte Carlo & Risk Metrics" href="labs/lab-04-S26/index.qmd" >}} |
 | **5** | Mon., Feb. 9 | {{< material type="lectures" id="week-05" label="Lecture:" text="Optimal Static Decisions" href="lectures/week-05/index.qmd" slides="lectures/week-05/index.html" slidepdf="lectures/week-05/index.pptx" >}} |
 | | Wed., Feb. 11 | {{< material type="labs" id="lab-05-S26" label="Lab 5:" text="Simulation-Optimization" href="labs/lab-05-S26/index.qmd" >}} |

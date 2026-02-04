@@ -11,21 +11,78 @@ format: html
 
 In addition to the standard coursework, CEVE 521 students will **lead one Wednesday Paper Discussion session.**
 
-You will not simply present a paper; you will design an active learning experience.
+You will not simply present a paper; you will design an active learning experience that helps your classmates engage deeply with the material.
+
+## Available Dates
+
+Sign up for one of the following Wednesday sessions:
+
+| Week | Date | Topic Area |
+|:----:|:----:|:-----------|
+| 7 | Feb 25 | Decision Analysis |
+| 8 | Mar 4 | Decision Analysis |
+| 10 | Mar 25 | Deep Uncertainty |
+| 11 | Apr 1 | Exploratory Modeling |
+| 12 | Apr 8 | Sequential Decisions |
+| 13 | Apr 15 | Multi-Objective Optimization |
 
 ## Requirements
 
-1. **Curate:** Select a relevant paper and set pre-reading questions.
-2. **Design:** Create a lesson plan with at least one interactive element (e.g., Think-Pair-Share, Concept Map).
-3. **Lead:** Facilitate the 50-minute discussion.
+### 1. Curate a Paper
+
+Select a peer-reviewed paper that:
+
+- Connects to that week's lecture topic (see Topic Area above)
+- Is accessible to advanced undergraduates (not too specialized)
+- Has clear methods that can be discussed critically
+- Ideally includes a case study or application
+
+Submit your paper choice for approval **2 weeks before** your session.
+
+### 2. Design a Lesson Plan
+
+Create a 50-minute session that includes:
+
+- **Opening hook** (5 min): Why does this paper matter? Connect to course themes.
+- **Key concepts** (10 min): What must everyone understand? Use visuals, not just slides.
+- **Interactive element** (20 min): At least one structured activity such as:
+  - Think-Pair-Share on a critical question
+  - Small group analysis of a figure or table
+  - Concept mapping of the paper's framework
+  - Debate on methodological choices
+- **Synthesis** (10 min): What are the takeaways? How does this connect to the final project?
+- **Buffer** (5 min): Questions, discussion overflow
+
+### 3. Prepare Your Classmates
+
+Post to Canvas **1 week before** your session:
+
+- The paper (PDF or link)
+- 2-3 pre-reading questions to focus their reading
+- Any background material needed (optional)
+
+### 4. Lead the Discussion
+
+Facilitate the 50-minute session.
+You are not lecturing—you are guiding discussion and activities.
+The instructor will be present but will not intervene unless necessary.
 
 ## Timeline
 
-You must meet with the instructor **2 weeks prior** to your session to approve your plan.
+| Deadline | What |
+|:---------|:-----|
+| 2 weeks before | Paper choice approved; lesson plan submitted |
+| 1 week before | Pre-reading materials posted to Canvas |
+| Day of | Lead the 50-minute session |
 
-## Deliverables
+## Grading
 
-- Pre-reading questions (posted 1 week before your session)
-- Lesson plan (submitted 2 weeks before for approval)
-- Facilitation of the 50-minute discussion
+Your seminar leadership counts for 20% of your final grade (see syllabus).
+
+You will be evaluated on:
+
+- **Paper selection** (25%): Relevance, accessibility, discussion potential
+- **Lesson plan** (25%): Clear structure, realistic timing, thoughtful activities
+- **Facilitation** (35%): Engagement, time management, handling questions
+- **Preparation materials** (15%): Clear pre-reading questions, posted on time
 
