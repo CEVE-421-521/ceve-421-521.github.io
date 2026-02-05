@@ -16,7 +16,7 @@ As before, you are encouraged to use Zotero to manage your references.
 If you're adding this to Zotero, you may find the [IPCC-Bibtex](https://github.com/openclimatedata/ipcc-bibtex/) project helpful.
 :::
 
-This week's reading is @seneviratne_IPCC:2021, the IPCC AR6 chapter on "Weather and Climate Extreme Events in a Changing Climate."
+This week's reading is @seneviratne_wg1ch11:2021, the IPCC AR6 chapter on "Weather and Climate Extreme Events in a Changing Climate."
 
 ### Part 1: Background (Everyone)
 

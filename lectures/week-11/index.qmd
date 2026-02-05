@@ -1,5 +1,5 @@
 ---
-title: "Exploratory Modeling & Scenario Discovery"
+title: "Sequential Decision Making"
 subtitle: "Lecture"
 date: 2026-03-30
 week: 11
@@ -18,5 +18,17 @@ institution: "{{< var course.institution >}}"
 ## Coming Soon
 
 This lecture is under development.
+
+Content to adapt from previous course:
+
+- Static vs. sequential decision framing
+- State evolution: $\mathbf{x}_{t+1} = f_t(\mathbf{x}_t, a_t, e_{t+1})$
+- Reward and value functions
+- Solution methods: open loop, dynamic programming, policy search
+- Real options and the value of flexibility
+
+## Preparation
+
+Read @herman_control:2020, in particular focusing on ...
 
 ## References

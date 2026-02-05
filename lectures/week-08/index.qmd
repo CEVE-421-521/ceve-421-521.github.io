@@ -1,5 +1,5 @@
 ---
-title: "Sensitivity & Value of Information"
+title: "Robustness & Deep Uncertainty"
 subtitle: "Lecture"
 date: 2026-03-02
 week: 8
@@ -19,8 +19,19 @@ institution: "{{< var course.institution >}}"
 
 This lecture is under development.
 
-## Preparation
+Content to adapt from previous course:
 
-Read a piece of @runge_voi:2011, we will revisit it on Wednesday
+**From Robustness lecture:**
+
+- Definition: "insensitivity of system design to errors" (Matalas)
+- Robustness metrics taxonomy (Herman et al.)
+- Regret and satisficing approaches
+- Bottom-up vs. top-down analysis
+
+**From Deep Uncertainty lecture:**
+
+- Spectrum of uncertainty
+- Lempert-Schneider debate
+- When probabilities help vs. exploratory approaches
 
 ## References

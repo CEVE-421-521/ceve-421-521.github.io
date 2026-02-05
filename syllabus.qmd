@@ -250,22 +250,22 @@ Updated versions will be posted on the course website.*
 | :---- | :------ | :----------- | :----------- | :------ |
 | | **Module 1** | **Risk Analysis** | |
 | **1** | Jan 12, 14, 16 | Intro to Climate Risk Management | Lab 1: Julia Setup & Hello World | |
-| **2** | Jan 21, 23 | Hazard, Exposure, Vulnerability (XLRM) | Lab 2: Intro to iCOW | |
-| **3** | Jan 26, 28, 30 | Climate Science & Scenarios | Lab 3: Sea-Level Rise Scenarios and Uncertainty | Topic Proposal |
-| **4** | Feb 2, 4, 6 | Monte Carlo & Fat Tails | Lab 4: Monte Carlo Hazard Modeling | |
-| **5** | Feb 9, 11 | Risk Metrics (EAD, VaR, CVaR) | Lab 5: Probabilistic Risk Analysis | |
+| **2** | Jan 21, 23 | Hazard, Exposure, Vulnerability (XLRM) | Lab 2: Hazard-Damage Convolution | |
+| **3** | Jan 26, 28, 30 | Climate Variability, Extremes, and Change | Lab 3: Sea-Level Rise Scenarios and Uncertainty | Topic Proposal |
+| **4** | Feb 2, 4, 6 | Uncertainty, Monte Carlo & Risk Metrics | Lab 4: Monte Carlo & Risk Metrics | |
 | | **Module 2** | **Decision Analysis** | |
-| **6** | Feb 16, 18, 20 | Valuation & Benefit-Cost Analysis | **Exam 1** *(Covers Module 1)* | |
-| **7** | Feb 23, 25, 27 | Optimal Static Decisions | Lab 6: Simulation-Optimization | Memo 1 |
-| **8** | Mar 2, 4, 6 | Sensitivity & Value of Information | Lab 7: Value of Partial Information | |
-| **9** | Mar 9, 11, 13 | Bridge: Trade-offs & Values *(not on exam)* | **Exam 2** *(Covers Module 2)* | |
+| **5** | Feb 9, 11 | Optimal Static Decisions | Lab 5: Simulation-Optimization | |
+| **6** | Feb 16, 18, 20 | Valuation & Benefit-Cost Analysis | **Exam 1** *(Covers Weeks 1-4)* | |
+| **7** | Feb 23, 25, 27 | Sensitivity & Value of Information *(Mon. Remote)* | Lab 6: Value of Partial Information | Memo 1 |
+| **8** | Mar 2, 4, 6 | Robustness & Deep Uncertainty | Lab 7: Robustness Metrics | |
+| **9** | Mar 9, 11, 13 | Trade-offs & Values *(Mon. Remote)* | **Exam 2** *(Covers Weeks 5-8)* | |
 | | March 16-20 | *Spring Break (No Class)* | |
 | | **Module 3** | **Optimization Under Uncertainty** | |
-| **10** | Mar 23, 25, 27 | Robustness & Deep Uncertainty | Lab 8: Robustness Metrics | Memo 2 |
-| **11** | Mar 30, Apr 1, 3 | Exploratory Modeling & Scenario Discovery | Lab 9: Scenario Discovery | |
-| **12** | Apr 6, 8, 10 | Sequential Decision Making | Lab 10: Real Options & Dynamic Policy Search | Memo 3 |
-| **13** | Apr 13, 15, 17 | Multi-Objective Optimization | Lab 11: Pareto Fronts | Slides Due |
+| **10** | Mar 23, 25, 27 | Exploratory Modeling & Scenario Discovery | Lab 8: Scenario Discovery | Memo 2 |
+| **11** | Mar 30, Apr 1, 3 | Sequential Decision Making | Lab 9: Real Options & Dynamic Policy Search | |
+| **12** | Apr 6, 8, 10 | Multi-Objective Optimization | Lab 10: Pareto Fronts | Memo 3 |
+| **13** | Apr 13, 15, 17 | Case Studies | | Slides Due |
 | **14** | Apr 20, 22, 24 | Final Project Presentations | | |
-| **Final** | TBD | | **Exam 3** *(Covers Module 3)* | Written Report |
+| **Final** | TBD | | **Exam 3** *(Covers Weeks 9-13)* | Written Report |
 
 : {.striped .hover tbl-colwidths="[12,12,35,32,15]"}
