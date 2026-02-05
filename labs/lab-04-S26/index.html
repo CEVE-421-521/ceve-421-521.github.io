@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 4: Monte Carlo hazard modeling – CEVE 421/521 – Spring 2026</title>
+<title>Lab 4: ICOW Model - Risk Analysis – CEVE 421/521 – Spring 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -113,10 +113,43 @@ window.MathJax = {
     }
   };
 </script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-<meta property="og:title" content="Lab 4: Monte Carlo hazard modeling – CEVE 421/521 – Spring 2026">
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Lab 4: ICOW Model - Risk Analysis – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="CEVE 421/521">
+<meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-04-S26/index_files/figure-html/fig-one-surge-output-1.svg">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -133,8 +166,18 @@ window.MathJax = {
    
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3</span> Exercises</a></li>
+  <li><a href="#before-lab" id="toc-before-lab" class="nav-link" data-scroll-target="#before-lab"><span class="header-section-number">2</span> Before Lab</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">3</span> Setup</a></li>
+  <li><a href="#meet-the-model" id="toc-meet-the-model" class="nav-link" data-scroll-target="#meet-the-model"><span class="header-section-number">4</span> Meet the Model</a></li>
+  <li><a href="#stochastic-analysis-one-storm" id="toc-stochastic-analysis-one-storm" class="nav-link" data-scroll-target="#stochastic-analysis-one-storm"><span class="header-section-number">5</span> Stochastic Analysis: One Storm</a></li>
+  <li><a href="#stochastic-simulation-many-storms" id="toc-stochastic-simulation-many-storms" class="nav-link" data-scroll-target="#stochastic-simulation-many-storms"><span class="header-section-number">6</span> Stochastic Simulation: Many Storms</a></li>
+  <li><a href="#ead-mode-integration-instead-of-sampling" id="toc-ead-mode-integration-instead-of-sampling" class="nav-link" data-scroll-target="#ead-mode-integration-instead-of-sampling"><span class="header-section-number">7</span> EAD Mode: Integration Instead of Sampling</a></li>
+  <li><a href="#experiments-change-things-and-see-what-happens" id="toc-experiments-change-things-and-see-what-happens" class="nav-link" data-scroll-target="#experiments-change-things-and-see-what-happens"><span class="header-section-number">8</span> Experiments: Change Things and See What Happens</a></li>
+  <li><a href="#enrichment-optional" id="toc-enrichment-optional" class="nav-link" data-scroll-target="#enrichment-optional">Enrichment (Optional)</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9</span> Summary</a></li>
+  <li><a href="#your-answers" id="toc-your-answers" class="nav-link" data-scroll-target="#your-answers">Your Answers</a></li>
+  <li><a href="#sec-submission" id="toc-sec-submission" class="nav-link" data-scroll-target="#sec-submission"><span class="header-section-number">10</span> Submission</a></li>
+  <li><a href="#checklist" id="toc-checklist" class="nav-link" data-scroll-target="#checklist">Checklist</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/labs/lab-04-S26/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -143,7 +186,7 @@ window.MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 4: Monte Carlo hazard modeling</h1>
+<h1 class="title">Lab 4: ICOW Model - Risk Analysis</h1>
 <p class="subtitle lead">CEVE 421/521</p>
 </div>
 
@@ -167,40 +210,949 @@ window.MathJax = {
 </header>
 
 
-<div class="callout callout-warning callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container"><i class="callout-icon"></i></div>
-<div class="callout-caption-container flex-fill">Draft Material</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This content is under development and subject to change.</p>
-</div>
-</div>
-
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>Lab objectives and context - to be written.</p>
+<p>On Wednesday, you met the <strong>Island City On a Wedge (ICOW)</strong> model and estimated city geometry parameters using Google Maps. Today you’ll run the model to analyze flood risk for a city with a modest dike — enough protection to make things interesting, but not enough to stop big storms.</p>
+<p>We’ll use two complementary approaches:</p>
+<ol type="1">
+<li><strong>Stochastic simulation</strong>: Sample specific storms and compute individual damage outcomes</li>
+<li><strong>Expected Annual Damage (EAD)</strong>: Integrate over the surge distribution analytically</li>
+</ol>
+<p>This is the same hazard-damage convolution from Lab 2, but applied to a realistic city-scale model instead of a single house.</p>
+<p><strong>Learning Objectives:</strong></p>
+<ol type="1">
+<li>Understand the ICOW model and how it computes flood damage for a simplified coastal city</li>
+<li>Apply hazard-damage convolution (from Lab 2) to a realistic city-scale model</li>
+<li>Compare stochastic simulation (distribution of outcomes) vs.&nbsp;EAD (expected value via integration)</li>
+</ol>
+<p><strong>References:</strong></p>
+<ul>
+<li><a href="https://dossgollin-lab.github.io/ICOW.jl/">ICOW.jl documentation</a></li>
+<li><a href="https://dossgollin-lab.github.io/SimOptDecisions/">SimOptDecisions documentation</a></li>
+</ul>
 </section>
-<section id="setup" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2</span> Setup</h2>
+<section id="before-lab" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="before-lab"><span class="header-section-number">2</span> Before Lab</h2>
+<p><strong>Complete these steps BEFORE coming to lab:</strong></p>
+<ol type="1">
+<li><p><strong>Accept the GitHub Classroom assignment</strong> (link on Canvas)</p></li>
+<li><p><strong>Clone your repository:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/CEVE-421-521/lab-04-S26-yourusername.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab-04-S26-yourusername</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Open the notebook</strong> in VS Code or Quarto preview</p></li>
+<li><p><strong>Run the first code cell</strong> — it will automatically install any missing packages (this may take 10-15 minutes the first time)</p></li>
+</ol>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Submission:</strong> You will render this notebook to PDF and submit the PDF to Canvas. See <a href="#sec-submission" class="quarto-xref">Section&nbsp;10</a> for details.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="setup" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="setup"><span class="header-section-number">3</span> Setup</h2>
+<section id="load-packages" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">3.1</span> Load Packages</h3>
+<p>First, we load custom packages that have been developed for this class. These are installable Julia packages, but are not (yet) on the “registry” of Julia packages, so they need to be installed directly from GitHub. This motivates some slightly more complicated package-loading code.</p>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="st">"Manifest.toml"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install SimOptDecisions and ICOW</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">ICOW</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">catch</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> <span class="bu">Pkg</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"SimOptDecisions"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"ICOW"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/SimOptDecisions"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/ICOW.jl"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">ICOW</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ICOW.Stochastic</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ICOW.EAD</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="exercises" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3</span> Exercises</h2>
-<section id="exercise-1" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">3.1</span> Exercise 1</h3>
-<p>Exercise description - to be written.</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">2026</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>TaskLocalRNG()</code></pre>
 </div>
-
-
+</div>
+<p>ICOW has two submodules: <code>ICOW.Stochastic</code> for event-by-event simulation (with random dike failure), and <code>ICOW.EAD</code> for analytical expected damage via integration.</p>
 </section>
+</section>
+<section id="meet-the-model" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="meet-the-model"><span class="header-section-number">4</span> Meet the Model</h2>
+<p>Before running any code, let’s build a mental model of what ICOW computes.</p>
+<section id="the-city" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="the-city"><span class="header-section-number">4.1</span> The City</h3>
+<p>The default configuration represents Manhattan — the same parameters from Wednesday’s lecture.</p>
+<div id="6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">StochasticConfig</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>StochasticConfig{Float64}
+  Geometry      V_city=1.5e12  H_bldg=30.0  H_city=17.0  D_city=2000.0  W_city=43000.0  H_seawall=1.75
+  Dike          D_startup=2.0  w_d=3.0  s_dike=0.5  c_d=1000.0
+  Zones         r_prot=1.1  r_unprot=0.95
+  Withdrawal    f_w=1.0  f_l=0.01
+  Resistance    f_adj=1.25  f_lin=0.35  f_exp=0.115  t_exp=0.4  b_basement=3.0
+  Damage        f_damage=0.39  f_intact=0.03  f_failed=1.5  t_fail=0.95  p_min=0.05  f_runup=1.1
+  Threshold     d_thresh=4.0e9  f_thresh=1.0  gamma_thresh=1.01</code></pre>
+</div>
+</div>
+<p>Recall the key geometry parameters:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Default (Manhattan)</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(V_{\text{city}}\)</span></td>
+<td>$1.5 trillion</td>
+<td>Total city value</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(H_{\text{city}}\)</span></td>
+<td>17 m</td>
+<td>Peak elevation above sea level</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(H_{\text{seawall}}\)</span></td>
+<td>1.75 m</td>
+<td>Existing seawall height</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-baseline-policy" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="the-baseline-policy"><span class="header-section-number">4.2</span> The Baseline Policy</h3>
+<p>On Wednesday, you learned about ICOW’s five defense levers: Withdrawal (<span class="math inline">\(W\)</span>), Dike Base (<span class="math inline">\(B\)</span>), Dike Height (<span class="math inline">\(D\)</span>), Resistance Height (<span class="math inline">\(R\)</span>), and Resistance Fraction (<span class="math inline">\(P\)</span>).</p>
+<p>For this lab, we’ll give the city a modest dike (<code>a_frac=0.15</code> allocates 15% of the city’s elevation as dike height, or about 2.5m). This is enough to stop smaller storms but can fail during larger ones — which makes the stochastic simulation interesting.</p>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="op">=</span> <span class="fu">StaticPolicy</span>(;</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    a_frac<span class="op">=</span><span class="fl">0.3</span>,   <span class="co"># use 30% of city elevation as protection budget</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    w_frac<span class="op">=</span><span class="fl">0.1</span>,   <span class="co"># 10% of budget goes to withdrawal</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    b_frac<span class="op">=</span><span class="fl">0.2</span>,   <span class="co"># 20% of remaining budget goes to dike base</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    r_frac<span class="op">=</span><span class="fl">0.1</span>,   <span class="co"># resistance height = 10% of H_city</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    P<span class="op">=</span><span class="fl">0.5</span>,        <span class="co"># flood-proof 50% of buildings</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>fd <span class="op">=</span> <span class="fu">FloodDefenses</span>(baseline, config)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>fd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="stochastic-analysis-one-storm" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="stochastic-analysis-one-storm"><span class="header-section-number">5</span> Stochastic Analysis: One Storm</h2>
+<p>Let’s start with the simplest case — one specific surge height. Even a single surge produces a <em>distribution</em> of damages because of stochastic dike failure.</p>
+<section id="run-one-storm" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="run-one-storm"><span class="header-section-number">5.1</span> Run One Storm</h3>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>scenario <span class="op">=</span> <span class="fu">StochasticScenario</span>(</span>
+<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    surges<span class="op">=</span>[<span class="fl">4.0</span>],</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    mean_sea_level<span class="op">=</span>[<span class="fl">0.0</span>],</span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>    discount_rate<span class="op">=</span><span class="fl">0.0</span></span>
+<span id="annotated-cell-5-5"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-6" class="code-annotation-target"><a href="#annotated-cell-5-6" aria-hidden="true" tabindex="-1"></a>outcome, trace <span class="op">=</span> SimOptDecisions.<span class="fu">simulate_traced</span>(</span>
+<span id="annotated-cell-5-7"><a href="#annotated-cell-5-7" aria-hidden="true" tabindex="-1"></a>    config, scenario, baseline</span>
+<span id="annotated-cell-5-8"><a href="#annotated-cell-5-8" aria-hidden="true" tabindex="-1"></a>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="6" data-code-annotation="1"><code>simulate_traced</code> returns both the outcome and a trace object that records what happened at each time step.</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="inspect-the-trace" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="inspect-the-trace"><span class="header-section-number">5.2</span> Inspect the Trace</h3>
+<p>The trace records what ICOW computed internally. Let’s look at the step record for our single storm:</p>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>record <span class="op">=</span> trace.step_records[<span class="fl">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>(investment = 5.564637817575113e10, damage = 1.955224393832893e9, W = 0.51, R = 1.7000000000000002, P = 0.5, D = 3.6719999999999997, B = 0.918)</code></pre>
+</div>
+</div>
+<p>Each record contains: <code>investment</code> (cost of building defenses), <code>damage</code> (flood damage), and the defense levels (<code>W</code>, <code>R</code>, <code>P</code>, <code>D</code>, <code>B</code>). Notice that <code>D</code> is nonzero — that’s our modest dike.</p>
+</section>
+<section id="repeat-many-times" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="repeat-many-times"><span class="header-section-number">5.3</span> Repeat Many Times</h3>
+<p>The damage from a 4-meter surge isn’t deterministic — ICOW samples whether the dike fails using a random Bernoulli draw. Let’s run the same 4m surge many times to see the distribution of outcomes:</p>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-1" class="code-annotation-target"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a>damages_one_surge <span class="op">=</span> <span class="fu">map</span>(<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>) <span class="cf">do</span> _</span>
+<span id="annotated-cell-7-2"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>    outcome <span class="op">=</span> <span class="fu">simulate</span>(config, scenario, baseline)</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="2">2</button><span id="annotated-cell-7-3" class="code-annotation-target"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>    SimOptDecisions.<span class="fu">value</span>(outcome.damage)</span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="1" data-code-annotation="1"><code>map</code> with a <code>do</code> block applies the function to each element of <code>1:1000</code>, returning a vector of results. Each call advances the global RNG (seeded above), so the dike failure draw is different each time.</span>
+</dd>
+<dt data-target-cell="annotated-cell-7" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="3" data-code-annotation="2"><code>SimOptDecisions.value()</code> extracts the numeric value from an outcome field.</span>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="visualize" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="visualize"><span class="header-section-number">5.4</span> Visualize</h3>
+<div id="cell-fig-one-surge" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">600</span>, <span class="fl">350</span>))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Damage (\$B)"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Count"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Damage from a 4m surge (1,000 trials)"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, damages_one_surge <span class="op">./</span> <span class="fl">1e9</span>; bins<span class="op">=</span><span class="fl">30</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-one-surge" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-one-surge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-one-surge-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-one-surge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Distribution of damages from a 4-meter storm surge over 1,000 simulations. The two modes correspond to dike-intact and dike-failed outcomes.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The histogram in <a href="#fig-one-surge" class="quarto-xref">Figure&nbsp;1</a> shows two clusters of damage values for a single surge height. Why does the same surge produce different damage amounts? What physical mechanism in the ICOW model creates this pattern?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="stochastic-simulation-many-storms" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="stochastic-simulation-many-storms"><span class="header-section-number">6</span> Stochastic Simulation: Many Storms</h2>
+<p>Now let’s sample many different surge heights from a GEV distribution — this is the full Monte Carlo convolution from Lab 2, applied to the ICOW model.</p>
+<section id="sample-surges" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="sample-surges"><span class="header-section-number">6.1</span> Sample Surges</h3>
+<div id="18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>surge_dist <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(<span class="fl">3.0</span>, <span class="fl">1.0</span>, <span class="fl">0.15</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="fl">500</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>surges <span class="op">=</span> <span class="fu">rand</span>(surge_dist, n_samples)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This uses the same type of GEV distribution you worked with in Labs 2 and 3: location <span class="math inline">\(\mu = 3.0\)</span> m, scale <span class="math inline">\(\sigma = 1.0\)</span> m, and shape <span class="math inline">\(\xi = 0.15\)</span> (a heavy right tail).</p>
+</section>
+<section id="run-simulations" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="run-simulations"><span class="header-section-number">6.2</span> Run Simulations</h3>
+<div id="20" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>damages <span class="op">=</span> <span class="fu">map</span>(surges) <span class="cf">do</span> surge</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    scenario <span class="op">=</span> <span class="fu">StochasticScenario</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        surges<span class="op">=</span>[surge],</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        mean_sea_level<span class="op">=</span>[<span class="fl">0.0</span>],</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        discount_rate<span class="op">=</span><span class="fl">0.0</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    outcome <span class="op">=</span> <span class="fu">simulate</span>(config, scenario, baseline)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    SimOptDecisions.<span class="fu">value</span>(outcome.damage)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="visualize-surge-vs-damage" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="visualize-surge-vs-damage"><span class="header-section-number">6.3</span> Visualize: Surge vs Damage</h3>
+<div id="cell-fig-stochastic" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">350</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Storm Surge (m)"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Damage (\$B)"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Surge vs. Damage"</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax1, surges, damages <span class="op">./</span> <span class="fl">1e9</span>; markersize<span class="op">=</span><span class="fl">4</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">2</span>];</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Damage (\$B)"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Count"</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Damage Distribution"</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax2, damages <span class="op">./</span> <span class="fl">1e9</span>; bins<span class="op">=</span><span class="fl">30</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-stochastic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stochastic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-stochastic-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stochastic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Stochastic simulation results. Left: two branches visible (dike intact vs.&nbsp;failed) merging at high surges. Right: most samples cluster at low damages — the tail is sparsely sampled.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Look at the scatter plot in <a href="#fig-stochastic" class="quarto-xref">Figure&nbsp;2</a>. You should see two “branches” — one where the dike holds and one where it fails. At what surge height do the branches merge (the dike always fails)? Also: notice how few samples appear in the high-damage tail of the histogram. What does this tell you about the efficiency of naive Monte Carlo for estimating tail risk?</em></p>
+</div>
+</div>
+</section>
+<section id="risk-statistics" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="risk-statistics"><span class="header-section-number">6.4</span> Risk Statistics</h3>
+<div class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DataFrame</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    Metric<span class="op">=</span>[</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mean Annual Damage"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Prob(damage &gt; \$10B)"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Maximum Damage"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    Value<span class="op">=</span>[</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(<span class="fu">mean</span>(damages) <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">2</span>))<span class="st">B"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="sc">$</span>(<span class="fu">round</span>(<span class="fl">100</span> <span class="op">*</span> <span class="fu">mean</span>(damages <span class="op">.&gt;</span> <span class="fl">10e9</span>); digits<span class="op">=</span><span class="fl">1</span>))<span class="st">%"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(<span class="fu">maximum</span>(damages) <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">1</span>))<span class="st">B"</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-risk-stats" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-risk-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Summary risk statistics from stochastic simulation
+</figcaption>
+<div aria-describedby="tbl-risk-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>3×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Metric</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Value</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Mean Annual Damage</td>
+<td style="text-align: left;">$10.25B</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">Prob(damage &gt; $10B)</td>
+<td style="text-align: left;">10.2%</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: left;">Maximum Damage</td>
+<td style="text-align: left;">$171.6B</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>A city planner says: “Our expected annual damage is $X billion, so we should budget $X billion per year for flood recovery.” What’s wrong with this reasoning? Use the damage distribution in <a href="#fig-stochastic" class="quarto-xref">Figure&nbsp;2</a> to support your answer.</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="ead-mode-integration-instead-of-sampling" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="ead-mode-integration-instead-of-sampling"><span class="header-section-number">7</span> EAD Mode: Integration Instead of Sampling</h2>
+<p>In the stochastic section, we sampled storms and averaged damages. EAD mode computes the same expected value by <strong>integrating</strong> over the surge distribution — no sampling noise.</p>
+<p>This is the analytical counterpart to the stochastic mean: same GEV distribution, same damage function, but computed deterministically via numerical quadrature.</p>
+<section id="run-ead" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="run-ead"><span class="header-section-number">7.1</span> Run EAD</h3>
+<div id="26" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ead_config <span class="op">=</span> <span class="fu">EADConfig</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    n_years<span class="op">=</span><span class="fl">1</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    integrator<span class="op">=</span><span class="fu">QuadratureIntegrator</span>(rtol<span class="op">=</span><span class="fl">1e-6</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>ead_scenario <span class="op">=</span> <span class="fu">EADScenario</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    surge_loc<span class="op">=</span><span class="fl">3.0</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    surge_scale<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    surge_shape<span class="op">=</span><span class="fl">0.15</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    mean_sea_level<span class="op">=</span>[<span class="fl">0.0</span>],</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    discount_rate<span class="op">=</span><span class="fl">0.0</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>outcome_ead <span class="op">=</span> <span class="fu">simulate</span>(ead_config, ead_scenario, baseline)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>ead_quadrature <span class="op">=</span> SimOptDecisions.<span class="fu">value</span>(outcome_ead.expected_damage)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="compare-stochastic-vs.-ead" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="compare-stochastic-vs.-ead"><span class="header-section-number">7.2</span> Compare Stochastic vs.&nbsp;EAD</h3>
+<div class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mc_mean <span class="op">=</span> <span class="fu">mean</span>(damages)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pct_diff <span class="op">=</span> <span class="fu">round</span>(<span class="fl">100</span> <span class="op">*</span> <span class="fu">abs</span>(mc_mean <span class="op">-</span> ead_quadrature) <span class="op">/</span> ead_quadrature; digits<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">DataFrame</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    Method<span class="op">=</span>[<span class="st">"Stochastic Mean (</span><span class="sc">$</span>(n_samples)<span class="st"> samples)"</span>, <span class="st">"EAD (Quadrature)"</span>],</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    Annual_Damage<span class="op">=</span>[</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(mc_mean <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_quadrature <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-comparison" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Comparison of stochastic mean damage vs.&nbsp;EAD from quadrature integration
+</figcaption>
+<div aria-describedby="tbl-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>2×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Method</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Annual_Damage</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Stochastic Mean (500 samples)</td>
+<td style="text-align: left;">$10.249B</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">EAD (Quadrature)</td>
+<td style="text-align: left;">$9.478B</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div id="30" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"The stochastic mean differs from the EAD by about </span><span class="sc">$</span>(pct_diff)<span class="st">%."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The stochastic mean differs from the EAD by about 8.1%.</code></pre>
+</div>
+</div>
+<p>Both methods estimate the same quantity (expected annual damage) — the stochastic mean via sampling and the EAD via numerical integration.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 4">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Why don’t the stochastic mean and EAD match exactly? Which one would you trust more for a policy decision, and why?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="experiments-change-things-and-see-what-happens" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="experiments-change-things-and-see-what-happens"><span class="header-section-number">8</span> Experiments: Change Things and See What Happens</h2>
+<p>Each experiment changes one parameter and shows the effect on risk. Read the code, run it, and answer the questions.</p>
+<section id="experiment-fat-tails" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="experiment-fat-tails"><span class="header-section-number">8.1</span> Experiment: Fat Tails</h3>
+<p>The GEV shape parameter <span class="math inline">\(\xi\)</span> controls how heavy the right tail is. Let’s see what happens when we increase it from 0.15 to 0.3.</p>
+<p><strong>Stochastic mode:</strong></p>
+<div id="32" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>surge_dist_fat <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(<span class="fl">3.0</span>, <span class="fl">1.0</span>, <span class="fl">0.3</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>surges_fat <span class="op">=</span> <span class="fu">rand</span>(surge_dist_fat, n_samples)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>damages_fat <span class="op">=</span> <span class="fu">map</span>(surges_fat) <span class="cf">do</span> surge</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    scenario <span class="op">=</span> <span class="fu">StochasticScenario</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        surges<span class="op">=</span>[surge], mean_sea_level<span class="op">=</span>[<span class="fl">0.0</span>], discount_rate<span class="op">=</span><span class="fl">0.0</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    outcome <span class="op">=</span> <span class="fu">simulate</span>(config, scenario, baseline)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    SimOptDecisions.<span class="fu">value</span>(outcome.damage)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>mc_mean_fat <span class="op">=</span> <span class="fu">mean</span>(damages_fat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>EAD mode:</strong></p>
+<div id="34" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ead_scenario_fat <span class="op">=</span> <span class="fu">EADScenario</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    surge_loc<span class="op">=</span><span class="fl">3.0</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    surge_scale<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    surge_shape<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    mean_sea_level<span class="op">=</span>[<span class="fl">0.0</span>],</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    discount_rate<span class="op">=</span><span class="fl">0.0</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>outcome_fat <span class="op">=</span> <span class="fu">simulate</span>(ead_config, ead_scenario_fat, baseline)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>ead_fat <span class="op">=</span> SimOptDecisions.<span class="fu">value</span>(outcome_fat.expected_damage)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DataFrame</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    Scenario<span class="op">=</span>[<span class="st">"Baseline (ξ=0.15)"</span>, <span class="st">"Fat tails (ξ=0.3)"</span>],</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    Stochastic_Mean<span class="op">=</span>[</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(mc_mean <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(mc_mean_fat <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    EAD<span class="op">=</span>[</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_quadrature <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_fat <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-fat-tails" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fat-tails-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Effect of fatter tails (ξ = 0.3 vs.&nbsp;0.15) on risk estimates
+</figcaption>
+<div aria-describedby="tbl-fat-tails-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>2×3 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Scenario</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Stochastic_Mean</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">EAD</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Baseline (ξ=0.15)</td>
+<td style="text-align: left;">$10.249B</td>
+<td style="text-align: left;">$9.478B</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">Fat tails (ξ=0.3)</td>
+<td style="text-align: left;">$12.818B</td>
+<td style="text-align: left;">$14.549B</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>How did increasing the shape parameter (fatter tails) affect the EAD? Why might the stochastic estimate be less reliable when the distribution has fatter tails?</em></p>
+</div>
+</div>
+</section>
+<section id="experiment-sea-level-rise" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="experiment-sea-level-rise"><span class="header-section-number">8.2</span> Experiment: Sea-Level Rise</h3>
+<p>Now add 0.5 meters of sea-level rise to the baseline scenario.</p>
+<p><strong>EAD mode:</strong></p>
+<div id="38" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ead_scenario_slr <span class="op">=</span> <span class="fu">EADScenario</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    surge_loc<span class="op">=</span><span class="fl">3.0</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    surge_scale<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    surge_shape<span class="op">=</span><span class="fl">0.15</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    mean_sea_level<span class="op">=</span>[<span class="fl">0.5</span>],</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    discount_rate<span class="op">=</span><span class="fl">0.0</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>outcome_slr <span class="op">=</span> <span class="fu">simulate</span>(ead_config, ead_scenario_slr, baseline)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>ead_slr <span class="op">=</span> SimOptDecisions.<span class="fu">value</span>(outcome_slr.expected_damage)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pct_increase <span class="op">=</span> <span class="fu">round</span>(<span class="fl">100</span> <span class="op">*</span> (ead_slr <span class="op">-</span> ead_quadrature) <span class="op">/</span> ead_quadrature; digits<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">DataFrame</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    Scenario<span class="op">=</span>[<span class="st">"Baseline (MSL=0)"</span>, <span class="st">"SLR (MSL=+0.5m)"</span>],</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    EAD<span class="op">=</span>[</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_quadrature <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_slr <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    Change<span class="op">=</span>[<span class="st">"—"</span>, <span class="st">"+</span><span class="sc">$</span>(pct_increase)<span class="st">%"</span>]</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-slr" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-slr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Effect of 0.5m sea-level rise on Expected Annual Damage
+</figcaption>
+<div aria-describedby="tbl-slr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>2×3 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Scenario</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">EAD</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Change</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Baseline (MSL=0)</td>
+<td style="text-align: left;">$9.478B</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">SLR (MSL=+0.5m)</td>
+<td style="text-align: left;">$12.743B</td>
+<td style="text-align: left;">+34.4%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 6">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>How much did 0.5m of sea-level rise increase the EAD? Is the increase proportional to the SLR amount? What does this tell you about the relationship between sea-level rise and flood risk?</em></p>
+</div>
+</div>
+</section>
+<section id="experiment-your-city-from-wednesday" class="level3" data-number="8.3">
+<h3 data-number="8.3" class="anchored" data-anchor-id="experiment-your-city-from-wednesday"><span class="header-section-number">8.3</span> Experiment: Your City (from Wednesday)</h3>
+<p>Now it’s your turn — use the city parameters you estimated on Wednesday. Replace the placeholder values for <code>H_city</code>, <code>D_city</code>, <code>W_city</code>, and <code>H_seawall</code> with your city’s values, then run EAD to compare against Manhattan.</p>
+<p>See the <a href="https://dossgollin-lab.github.io/ICOW.jl/equations.html#parameters">ICOW parameter documentation</a> for the full list of parameters you can change — try adjusting others beyond the four listed here.</p>
+<div id="42" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>my_config <span class="op">=</span> <span class="fu">StochasticConfig</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    H_city<span class="op">=</span><span class="fl">10.0</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    D_city<span class="op">=</span><span class="fl">1500.0</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    W_city<span class="op">=</span><span class="fl">30000.0</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    H_seawall<span class="op">=</span><span class="fl">1.0</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>my_ead_config <span class="op">=</span> <span class="fu">EADConfig</span>(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    n_years<span class="op">=</span><span class="fl">1</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    integrator<span class="op">=</span><span class="fu">QuadratureIntegrator</span>(rtol<span class="op">=</span><span class="fl">1e-6</span>),</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    H_city<span class="op">=</span>my_config.H_city,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    D_city<span class="op">=</span>my_config.D_city,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    W_city<span class="op">=</span>my_config.W_city,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    H_seawall<span class="op">=</span>my_config.H_seawall</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>outcome_my <span class="op">=</span> <span class="fu">simulate</span>(my_ead_config, ead_scenario, baseline)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>ead_my <span class="op">=</span> SimOptDecisions.<span class="fu">value</span>(outcome_my.expected_damage)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">DataFrame</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    City<span class="op">=</span>[<span class="st">"Manhattan (default)"</span>, <span class="st">"Your city"</span>],</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    EAD<span class="op">=</span>[</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_quadrature <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"\$</span><span class="sc">$</span>(<span class="fu">round</span>(ead_my <span class="op">/</span> <span class="fl">1e9</span>; digits<span class="op">=</span><span class="fl">3</span>))<span class="st">B"</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tbl-my-city" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-my-city-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5: Your city’s baseline risk compared to Manhattan
+</figcaption>
+<div aria-describedby="tbl-my-city-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>2×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">City</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">EAD</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Manhattan (default)</td>
+<td style="text-align: left;">$9.478B</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">Your city</td>
+<td style="text-align: left;">$44.086B</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Question 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Question 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>How does your city’s baseline risk compare to Manhattan’s? What features of your city’s geometry (elevation, coastline length, seawall height) explain the difference?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="enrichment-optional" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="enrichment-optional">Enrichment (Optional)</h2>
+<p>If you finish early, try one of these extensions:</p>
+<ul>
+<li><strong>VaR and CVaR</strong>: Compute the 95th percentile damage (Value at Risk) and the average of damages exceeding that threshold (Conditional Value at Risk) from the stochastic samples</li>
+<li><strong>Damage function</strong>: For each surge height from 0 to 15m (in 0.1m steps), compute the expected damage. Plot the resulting damage function</li>
+<li><strong>No defenses</strong>: Try a true do-nothing policy (<code>a_frac=0.0</code>) — how does the scatter plot change? (Hint: what happens to the two branches?)</li>
+<li><strong>Stronger dike</strong>: Try <code>a_frac=0.3</code> — does doubling the dike height halve the EAD?</li>
+</ul>
+</section>
+<section id="summary" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="summary"><span class="header-section-number">9</span> Summary</h2>
+<p>Key takeaways from this lab:</p>
+<ol type="1">
+<li>ICOW computes flood damage for a simplified coastal city using a wedge geometry</li>
+<li><strong>Stochastic mode</strong> shows individual outcomes — you see the full variability and tail risk</li>
+<li><strong>EAD mode</strong> integrates over the surge distribution — you get the expected value deterministically</li>
+<li>Risk depends nonlinearly on surge height, GEV parameters, and city geometry</li>
+</ol>
+</section>
+<section id="your-answers" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="your-answers">Your Answers</h2>
+<p>Write your answers in the spaces below. Each question references a specific section above — scroll up to review the context if needed.</p>
+<section id="question-1-section-4-one-storm" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-1-section-4-one-storm">Question 1 (Section 4: One Storm)</h3>
+<p><em>The histogram shows two clusters of damage values for a single surge height. Why does the same surge produce different damage amounts? What physical mechanism in the ICOW model creates this pattern?</em></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="question-2-section-5-many-storms" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-2-section-5-many-storms">Question 2 (Section 5: Many Storms)</h3>
+<p><em>Look at the scatter plot. You should see two “branches” — one where the dike holds and one where it fails. At what surge height do the branches merge? Also: what does the sparse sampling in the high-damage tail tell you about Monte Carlo efficiency?</em></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="question-3-section-5-risk-statistics" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-3-section-5-risk-statistics">Question 3 (Section 5: Risk Statistics)</h3>
+<p><em>A city planner says: “Our expected annual damage is $X billion, so we should budget $X billion per year for flood recovery.” What’s wrong with this reasoning?</em></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="question-4-section-6-ead-mode" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-4-section-6-ead-mode">Question 4 (Section 6: EAD Mode)</h3>
+<p><em>Why don’t the stochastic mean and EAD match exactly? Which one would you trust more for a policy decision, and why?</em></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="question-5-section-7-fat-tails" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-5-section-7-fat-tails">Question 5 (Section 7: Fat Tails)</h3>
+<p><em>How did increasing the shape parameter (fatter tails) affect the EAD? Why might the stochastic estimate be less reliable when the distribution has fatter tails?</em></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="question-6-section-7-sea-level-rise" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-6-section-7-sea-level-rise">Question 6 (Section 7: Sea-Level Rise)</h3>
+<p><em>How much did 0.5m of sea-level rise increase the EAD? Is the increase proportional to the SLR amount?</em></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+<section id="question-7-section-7-your-city" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-7-section-7-your-city">Question 7 (Section 7: Your City)</h3>
+<p><em>How does your city’s baseline risk compare to Manhattan’s? What features of your city’s geometry explain the difference?</em></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Answer">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Answer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Replace this text with your answer.</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-submission" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="sec-submission"><span class="header-section-number">10</span> Submission</h2>
+<ol type="1">
+<li><p>Write your answers in the Answer Template section above</p></li>
+<li><p><strong>Render to PDF:</strong></p>
+<ul>
+<li>In VS Code: Open the command palette (<code>Cmd+Shift+P</code> / <code>Ctrl+Shift+P</code>) → “Quarto: Render Document” → select Typst PDF</li>
+<li>Or from the terminal: <code>quarto render index.qmd --to typst</code></li>
+</ul></li>
+<li><p><strong>Submit the PDF</strong> to the Lab 4 assignment on Canvas</p></li>
+<li><p><strong>Push your code</strong> to GitHub (for backup):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Lab 4 complete"</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+</section>
+<section id="checklist" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="checklist">Checklist</h2>
+<p>Before submitting:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Packages load without error</label></li>
+<li><label><input type="checkbox">Single storm simulation runs and trace is inspected</label></li>
+<li><label><input type="checkbox">Distribution of damages for one surge height visualized (<a href="#fig-one-surge" class="quarto-xref">Figure&nbsp;1</a>)</label></li>
+<li><label><input type="checkbox">Stochastic simulation (many surges) produces surge vs.&nbsp;damage figure (<a href="#fig-stochastic" class="quarto-xref">Figure&nbsp;2</a>)</label></li>
+<li><label><input type="checkbox">Risk statistics computed (<a href="#tbl-risk-stats" class="quarto-xref">Table&nbsp;1</a>)</label></li>
+<li><label><input type="checkbox">EAD computed via quadrature and compared to stochastic mean (<a href="#tbl-comparison" class="quarto-xref">Table&nbsp;2</a>)</label></li>
+<li><label><input type="checkbox">Fat tails experiment completed (<a href="#tbl-fat-tails" class="quarto-xref">Table&nbsp;3</a>)</label></li>
+<li><label><input type="checkbox">Sea-level rise experiment completed (<a href="#tbl-slr" class="quarto-xref">Table&nbsp;4</a>)</label></li>
+<li><label><input type="checkbox">Your city experiment completed (<a href="#tbl-my-city" class="quarto-xref">Table&nbsp;5</a>)</label></li>
+<li><label><input type="checkbox">All 7 questions answered in the Your Answers section</label></li>
+<li><label><input type="checkbox">Notebook renders to PDF without errors</label></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

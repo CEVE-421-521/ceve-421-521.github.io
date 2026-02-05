@@ -247,12 +247,23 @@ window.MathJax = {
 <section id="package-setup" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="package-setup"><span class="header-section-number">3.2</span> Package Setup</h3>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dir_name <span class="op">=</span> <span class="fu">dirname</span>(<span class="pp">@__FILE__</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">activate</span>(dir_name)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="fu">joinpath</span>(dir_name, <span class="st">"Manifest.toml"</span>))</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Activate the local project</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="pp">@__DIR__</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if Manifest exists, if not instantiate</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> !<span class="fu">isfile</span>(<span class="fu">joinpath</span>(<span class="pp">@__DIR__</span>, <span class="st">"Manifest.toml"</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Try to resolve any inconsistencies</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">resolve</span>()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="cf">catch</span> <span class="cn">e</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@warn</span> <span class="st">"Package environment setup failed, attempting recovery"</span> exception<span class="op">=</span><span class="cn">e</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">activate</span>(<span class="pp">@__DIR__</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode julia code-annotation-code code-with-copy code-annotated"><code class="sourceCode julia"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
@@ -320,15 +331,15 @@ Shared Axes:
 
 <span class="ansi-bright-yellow-fg">Variables with additional axes:</span>
 <span class="ansi-bright-black-fg">  Additional Axes: </span>
+  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">noaa_scenario</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:5</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
+<span class="ansi-bright-blue-fg">  Variables: </span>
+  noaa_slr
+
+<span class="ansi-bright-black-fg">  Additional Axes: </span>
   (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">ensemble</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:1:1000</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>,
   <span style="color:rgb(0,135,215)">→ </span><span style="color:rgb(0,135,215)">rcp</span> Sampled{Int64} <span style="color:rgb(0,135,215)">1:4</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
 <span class="ansi-bright-blue-fg">  Variables: </span>
   brick_slr
-
-<span class="ansi-bright-black-fg">  Additional Axes: </span>
-  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">noaa_scenario</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:5</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
-<span class="ansi-bright-blue-fg">  Variables: </span>
-  noaa_slr
 
 <span class="ansi-bright-yellow-fg">Properties: </span>Dict{String, Any}("history" =&gt; "Generated by generate_sample_data.jl", "note" =&gt; "For instructional purposes only", "source" =&gt; "Synthetic data based on BRICK and NOAA patterns", "title" =&gt; "Sea Level Rise Projections for Sewells Point, VA", "institution" =&gt; "Rice University CEVE 421/521")
 </pre>
@@ -346,15 +357,15 @@ Shared Axes:
 
 <span class="ansi-bright-yellow-fg">Variables with additional axes:</span>
 <span class="ansi-bright-black-fg">  Additional Axes: </span>
+  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">noaa_scenario</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:5</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
+<span class="ansi-bright-blue-fg">  Variables: </span>
+  noaa_slr
+
+<span class="ansi-bright-black-fg">  Additional Axes: </span>
   (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">ensemble</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:1:1000</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>,
   <span style="color:rgb(0,135,215)">→ </span><span style="color:rgb(0,135,215)">rcp</span> Sampled{Int64} <span style="color:rgb(0,135,215)">1:4</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
 <span class="ansi-bright-blue-fg">  Variables: </span>
   brick_slr
-
-<span class="ansi-bright-black-fg">  Additional Axes: </span>
-  (<span style="color:rgb(255,135,95)">↓ </span><span style="color:rgb(255,135,95)">noaa_scenario</span> Sampled{Int64} <span style="color:rgb(255,135,95)">1:5</span> <span style="color:rgb(128,128,128)">ForwardOrdered</span> <span style="color:rgb(128,128,128)">Regular</span> <span style="color:rgb(128,128,128)">Points</span>)
-<span class="ansi-bright-blue-fg">  Variables: </span>
-  noaa_slr
 
 <span class="ansi-bright-yellow-fg">Properties: </span>Dict{String, Any}("history" =&gt; "Generated by generate_sample_data.jl", "note" =&gt; "For instructional purposes only", "source" =&gt; "Synthetic data based on BRICK and NOAA patterns", "title" =&gt; "Sea Level Rise Projections for Sewells Point, VA", "institution" =&gt; "Rice University CEVE 421/521")
 </pre>
