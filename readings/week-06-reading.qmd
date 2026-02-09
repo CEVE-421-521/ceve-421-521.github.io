@@ -1,6 +1,6 @@
 ---
 title: "Week 6 Reading"
-subtitle: "Valuation, NPV, Benefit-Cost Analysis"
+subtitle: "Optimal Static Decisions"
 status: draft
 
 format:
@@ -10,16 +10,9 @@ format:
 
 ## Assignment
 
-Read @arrow_discount:2013.
-If you want to dig deeper, read @arrow_panel:2013 as well.
-Maybe will add a bit of @omb_a94:2023.
+No formal discussion this week (exam week).
 
+As preparation for Wednesday's lecture on Optimal Static Decisions, read the first few pages of @vandantzig_dike:1956.
+Focus on understanding the problem setup: how van Dantzig frames the trade-off between dike construction costs and expected flood damages.
 
-## Overview
-
-*Reading TBD.*
-
-## Discussion Questions
-
-1. *TBD*
-2. *TBD*
+## References

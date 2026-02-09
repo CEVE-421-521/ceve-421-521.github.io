@@ -1,0 +1,51 @@
+---
+title: "Week 5 Reading"
+subtitle: "Valuation, NPV, Benefit-Cost Analysis"
+status: published
+
+format:
+  html: default
+  typst: default
+---
+
+## Assignment
+
+Read @arrow_discount:2013.
+It's short — read the whole thing, paying attention to the two rationales for discounting and the argument for declining discount rates.
+
+Also read @omb_a94:2023.
+This is the 2023 revision of federal BCA guidance.
+Note that it may not reflect the current administration's priorities, which makes it an interesting case study in how policy guidance evolves.
+
+**Before class:** Look up how **one federal agency** (USACE, EPA, FEMA, or TWDB) conducts BCA.
+What discount rate do they use?
+What counts as a "benefit"?
+Come prepared to share what you found.
+
+## Overview
+
+Monday's lecture introduced benefit-cost analysis as a framework for comparing decisions under uncertainty.
+A key component is the discount rate: how much less we value future costs and benefits compared to present ones.
+This choice is especially consequential for climate adaptation decisions with long time horizons.
+
+@arrow_discount:2013 review two rationales for discounting (consumption-based and investment-based) and argue that uncertainty about future discount rates leads to an effectively declining discount rate over long horizons.
+@omb_a94:2023 shows how the federal government has formalized BCA practice, though its status may shift with changing administrations.
+You will also compare this guidance to how individual agencies implement BCA in practice.
+
+## Discussion Questions
+
+1. @arrow_discount:2013 describe two rationales for discounting (consumption-based and investment-based).
+Which do you find more convincing for climate adaptation decisions, and why?
+2. If discount rates are uncertain, @arrow_discount:2013 argue this is "equivalent to a declining discount rate."
+What are the practical implications of this for a 50-year infrastructure project?
+3. @omb_a94:2023 represents one attempt to formalize how the US government practices BCA.
+Identify one place where the guidance addresses (or fails to address) a critique we discussed in lecture.
+4. Share what you found about how a federal agency conducts BCA.
+How does their discount rate compare to what @arrow_discount:2013 recommend?
+Does their definition of "benefits" capture everything that matters?
+5. Consider your final project topic.
+What costs and benefits would you need to quantify?
+Which would be hardest to monetize?
+
+
+## References

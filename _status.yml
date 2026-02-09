@@ -1,4 +1,5 @@
 readings:
+  week-05: "published"
   week-14: "draft"
   week-13: "draft"
   week-12: "draft"
@@ -12,7 +13,7 @@ readings:
   week-11: "draft"
 lectures:
   week-02: "published"
-  week-05: "draft"
+  week-05: "published"
   week-13: "draft"
   week-12: "draft"
   week-10: "draft"

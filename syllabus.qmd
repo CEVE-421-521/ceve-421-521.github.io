@@ -254,8 +254,8 @@ Updated versions will be posted on the course website.*
 | **3** | Jan 26, 28, 30 | Climate Variability, Extremes, and Change | Lab 3: Sea-Level Rise Scenarios and Uncertainty | Topic Proposal |
 | **4** | Feb 2, 4, 6 | Uncertainty, Monte Carlo & Risk Metrics | Lab 4: Monte Carlo & Risk Metrics | |
 | | **Module 2** | **Decision Analysis** | |
-| **5** | Feb 9, 11 | Optimal Static Decisions | Lab 5: Simulation-Optimization | |
-| **6** | Feb 16, 18, 20 | Valuation & Benefit-Cost Analysis | **Exam 1** *(Covers Weeks 1-4)* | |
+| **5** | Feb 9, 11 | Valuation & Benefit-Cost Analysis | | |
+| **6** | Feb 16, 18, 20 | Optimal Static Decisions | Lab 5: Simulation-Optimization / **Exam 1** *(Covers Weeks 1-4)* | |
 | **7** | Feb 23, 25, 27 | Sensitivity & Value of Information *(Mon. Remote)* | Lab 6: Value of Partial Information | Memo 1 |
 | **8** | Mar 2, 4, 6 | Robustness & Deep Uncertainty | Lab 7: Robustness Metrics | |
 | **9** | Mar 9, 11, 13 | Trade-offs & Values *(Mon. Remote)* | **Exam 2** *(Covers Weeks 5-8)* | |

@@ -1,5 +1,5 @@
 ---
-title: "Valuation & Benefit-Cost Analysis"
+title: "Optimal Static Decisions"
 subtitle: "Lecture"
 date: 2026-02-18
 week: 6
@@ -15,13 +15,12 @@ institution: "{{< var course.institution >}}"
 ---
 
 
+## Preparation
+
+Read a part of @vandantzig_dike:1956 and then we will revisit it in the reading.
+
 ## Coming Soon
 
 This lecture is under development.
-
-## Preparation
-
-Revisit @zarekarizi_suboptimal:2020
-
 
 ## References

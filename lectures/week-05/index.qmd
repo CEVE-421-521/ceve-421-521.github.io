@@ -1,9 +1,10 @@
 ---
-title: "Optimal Static Decisions"
+title: "Valuation & Benefit-Cost Analysis"
 subtitle: "Lecture"
 date: 2026-02-09
 week: 5
-status: draft
+status: published
+engine: julia
 
 format:
   revealjs: default
@@ -15,12 +16,471 @@ institution: "{{< var course.institution >}}"
 ---
 
 
-## Preparation
+# A Decision Problem {.section-title}
 
-Read a part of @vandantzig_dike:1956 and then we will revisit it in the reading
+::: {.notes}
+Target: 1:00. Open with the hook — get students thinking about a concrete decision before introducing formalism.
+:::
 
-## Coming Soon
+## How Much Would You Pay?
 
-This lecture is under development.
+Imagine you own a home in Houston's Meyerland neighborhood.
+
+::: {.incremental}
+- Your house flooded in 2015, 2016, *and* 2017
+- A contractor offers to elevate your house by 5 feet for **\$80,000**
+- Should you do it?
+:::
+
+::: {.notes}
+Target: 1:02. Pause for a few hands. Cold call 1-2 students for their gut reaction. Key point: students will have intuitions, but we need a systematic framework.
+:::
+
+## What Do We Need to Know?
+
+::: {.incremental}
+- What does elevation cost? (up-front + disruption)
+- What are the benefits? (avoided flood damage, insurance savings, peace of mind)
+- How likely is future flooding?
+- How long do we plan to live there?
+- How do we compare costs *now* vs. benefits *later*?
+:::
+
+::: {.notes}
+Target: 1:05. This list motivates each piece of the BCA framework we'll develop.
+:::
+
+# Utility Theory {.section-title}
+
+## Utility Functions
+
+We need a way to score how "good" a decision is.
+Define a **utility function**:
+
+$$
+u(a, \mathbf{s}): \mathcal{A} \times \mathcal{S} \to \mathbb{R}
+$$
+
+::: {.incremental}
+- $a \in \mathcal{A}$: a decision (or **a**ction)
+- $\mathbf{s} \in \mathcal{S}$: the **s**tate of the world (everything uncertain)
+- $u$: maps (decision, state) to a real number
+:::
+
+::: {.notes}
+Target: 1:08. Emphasize that "utility" is just a general term — could be called objective function, loss function, etc. The key idea is a function that takes a decision and an uncertain state and returns a number.
+:::
+
+## Choosing Your Metric
+
+You are **free** to define "goodness" however you want.
+
+::: {.incremental}
+- Monetary cost
+- Lives saved
+- Acres of wetland preserved
+- Some weighted combination
+:::
+
+This is a feature, not a bug — but it means every BCA embeds **value judgments**.
+
+::: {.notes}
+Target: 1:10. The freedom to choose metrics is powerful but also means BCA is never "objective." Every choice of what to measure is a choice about what matters.
+:::
+
+## Money as a Common Unit
+
+Utility is often measured in **dollars**.
+
+Not because money is all that matters, but because it provides a common unit for comparing different things.
+
+::: {.callout-tip}
+For house elevation, monetary costs and benefits include:
+
+- Up-front construction cost
+- Change in flood insurance premiums
+- Change in property value
+- Expected future flood damages avoided
+:::
+
+::: {.notes}
+Target: 1:12. Transition to the harder question: what about things that are hard to monetize?
+:::
+
+## Opportunity Costs
+
+How do we put a dollar value on something that isn't traded in a market?
+
+**Opportunity cost**: the value of the next best alternative.
+
+::: {.incremental}
+- If we can protect one square mile of pristine wetland for \$1 million, that's the cost of *not* protecting a comparable square mile elsewhere
+- If a household spends 10 hours per flood event cleaning up, the value of their time is an opportunity cost
+- But: are these really substitutes?
+:::
+
+::: {.notes}
+Target: 1:14. Opportunity cost is the economist's main tool for monetizing non-market goods. It's useful but imperfect — the "but are they really substitutes?" question is genuine and unresolved.
+:::
+
+## Decreasing Marginal Utility {.smaller}
+
+A key insight from economics: the **more** you have of something, the **less** each additional unit is worth.
+
+```{julia}
+#| code-fold: true
+#| fig-cap: "Each additional dollar of consumption provides less additional utility."
+using CairoMakie
+
+let
+    fig = Figure(; size=(600, 350))
+    ax = Axis(
+        fig[1, 1];
+        xlabel="Consumption (\$)",
+        ylabel="Utility",
+        xticklabelsvisible=false,
+        yticklabelsvisible=false,
+        xgridvisible=false,
+        ygridvisible=false,
+    )
+    x = range(0.1, 10; length=200)
+    lines!(ax, x, log.(x); linewidth=3)
+    fig
+end
+```
+
+::: {.notes}
+Target: 1:16. Key example: \$1,000 means a lot more to someone earning \$30K/year than to someone earning \$300K/year. This matters because BCA typically ignores *who* bears the costs and benefits.
+:::
+
+## Implication: Distribution and Social Welfare
+
+If marginal utility decreases with wealth:
+
+::: {.incremental}
+- A dollar of damage hurts a low-income household **more** than a wealthy one
+- Standard BCA treats a dollar the same regardless of who receives it
+- And there is **no single "right" way** to aggregate individual welfare into social welfare
+:::
+
+We will revisit equity and values later in the semester.
+
+::: {.notes}
+Target: 1:18. Don't try to resolve this — just make sure students see that "total benefits > total costs" is not the whole story. We'll return to values and trade-offs in Week 9.
+:::
+
+# Dealing with Time {.section-title}
+
+## Costs Now, Benefits Later
+
+Climate adaptation costs and benefits are spread over **decades**.
+
+How should we weigh a dollar of benefit 30 years from now against a dollar of cost today?
+
+::: {.notes}
+Target: 1:21. Rhetorical question — transition to discounting.
+:::
+
+## Net Present Value
+
+**Discount** future values to the present using discount rate $r$:
+
+$$
+NPV(a, \mathbf{s}) = \sum_{t=0}^{T} \frac{B_t(a, \mathbf{s}) - C_t(a, \mathbf{s})}{(1 + r)^t}
+$$
+
+::: {.incremental}
+- $B_t - C_t$: net benefits (benefits minus costs) in year $t$
+- $r$: discount rate (e.g., 2% per year)
+- $\frac{1}{(1+r)^t}$: how much we value a dollar $t$ years from now
+- $T$: time horizon
+:::
+
+::: {.notes}
+Target: 1:23. Write the formula on the board if possible. Emphasize that this is a *choice* — the discount rate is not a law of nature.
+:::
+
+## Alternative Notation {.smaller}
+
+You will also see NPV written as:
+
+$$
+NPV(a, \mathbf{s}) = \sum_{t=0}^{T} (1 - \gamma)^t \left[ B_t(a, \mathbf{s}) - C_t(a, \mathbf{s}) \right]
+$$
+
+::: {.incremental}
+- These are **mathematically equivalent** — just different parameterizations
+- Our formula: discount rate $r$, discount factor $\frac{1}{(1+r)^t}$
+- Alternative: discount rate $\gamma$, discount factor $(1-\gamma)^t$
+- Relationship: $(1 - \gamma) = \frac{1}{1+r}$, so $\gamma = \frac{r}{1+r}$
+:::
+
+::: {.callout-important}
+Always check which convention a paper or report uses — a "2% discount rate" gives different numbers depending on the formula!
+:::
+
+::: {.notes}
+Target: 1:25. Important to flag because students will encounter both conventions. Don't spend too long here — just make sure they know to check.
+:::
+
+## Worked Example
+
+At $r = 2\%$, what is **\$1** in 10 years worth today?
+
+$$
+\frac{1}{(1.02)^{10}} \approx \$0.82
+$$
+
+::: {.fragment}
+What about **\$1** in 50 years?
+
+$$
+\frac{1}{(1.02)^{50}} \approx \$0.37
+$$
+:::
+
+::: {.fragment}
+At $r = 7\%$: \$1 in 50 years $= \frac{1}{(1.07)^{50}} \approx \$0.03$
+:::
+
+::: {.notes}
+Target: 1:27. The jump from 2% to 7% is dramatic — this foreshadows why the discount rate debate matters so much. Ask: "Which discount rate should we use for climate policy?"
+:::
+
+# Handling Uncertainty {.section-title}
+
+## How BCA Is Commonly Practiced
+
+Most real-world analyses pick a **single "best guess"** scenario.
+
+::: {.incremental}
+- A Houston water utility picks **one assumption** for each uncertain input (population, climate, regulations, costs)
+- Calculate NPV under this single scenario
+- If NPV > 0, the project "passes"
+:::
+
+::: {.notes}
+Target: 1:29. This is how most BCA is actually done, especially outside of academic settings. Set up the critique.
+:::
+
+## Why Single-Scenario BCA Is Fragile
+
+Decisions that look great under one scenario can fail badly under another.
+
+::: {.incremental}
+- Build a reservoir for future demand → but what if future is **drier** than expected? (Reservoir doesn't fill)
+- Build a reservoir for future demand → but what if future is **wetter** than expected? (Reservoir was unnecessary — funds should have gone to flood protection)
+- The "best guess" is almost certainly wrong in some dimension
+:::
+
+::: {.notes}
+Target: 1:31. This connects to a core theme of the course: single-scenario analysis is brittle. Students will encounter this again in robustness and exploratory modeling.
+:::
+
+## Expected Utility
+
+A better approach: pick the decision with the best **expected** NPV:
+
+$$
+a^* = \arg \max_a \; \mathbb{E}_{\mathbf{s}} \left[ NPV(a, \mathbf{s}) \right]
+$$
+
+::: {.fragment}
+Recall:
+
+$$
+\mathbb{E}_{\mathbf{s}} \left[ NPV(a, \mathbf{s}) \right] = \int p(\mathbf{s}) \, NPV(a, \mathbf{s}) \, d\mathbf{s}
+$$
+:::
+
+This requires a **probability distribution** over states of the world.
+
+::: {.notes}
+Target: 1:33. Connect to Monte Carlo from Week 4: "You already know how to compute expectations with samples!" NPV already sums over time; the expectation integrates over uncertainty.
+:::
+
+## Connecting to Monte Carlo
+
+You already know how to do this!
+
+::: {.incremental}
+1. Sample many states of the world $\mathbf{s}_1, \mathbf{s}_2, \ldots, \mathbf{s}_N$ from $p(\mathbf{s})$
+2. Compute $NPV(a, \mathbf{s}_i)$ for each sample
+3. Average: $\hat{\mathbb{E}}[NPV(a,\mathbf{s})] \approx \frac{1}{N}\sum_{i=1}^N NPV(a, \mathbf{s}_i)$
+4. Compare across actions $a \in \mathcal{A}$
+:::
+
+::: {.notes}
+Target: 1:35. This makes the abstract formalism concrete. Students did exactly this in Lab 4. Emphasize: BCA + Monte Carlo = expected utility analysis.
+:::
+
+## The Standard BCA Recipe
+
+::: {.incremental}
+1. Define the set of actions $\mathcal{A}$ (e.g., elevate by 0, 3, 5, or 8 feet)
+2. Define costs and benefits $B_t(a, \mathbf{s})$, $C_t(a, \mathbf{s})$
+3. Choose a discount rate $r$
+4. Estimate $p(\mathbf{s})$ — probability distribution over states of the world
+5. Pick $a^* = \arg \max_a \; \mathbb{E}[NPV(a, \mathbf{s})]$
+:::
+
+::: {.notes}
+Target: 1:36. Pause here. Now let's apply it.
+:::
+
+# Worked Example: House Elevation {.section-title}
+
+## Setting Up the Problem {.smaller}
+
+Return to our Meyerland homeowner.
+Two actions: **do nothing** ($a_0$) or **elevate 5 ft** ($a_1$).
+
+| | Do Nothing ($a_0$) | Elevate 5 ft ($a_1$) |
+|:---|:---:|:---:|
+| Up-front cost | \$0 | \$80,000 |
+| Annual flood probability | 5% | 0.5% |
+| Expected damage per flood | \$50,000 | \$5,000 |
+| **Expected annual damage** | **\$2,500** | **\$25** |
+
+::: {.notes}
+Target: 1:37. Walk through: EAD = probability $\times$ damage. These are simplified numbers — real analysis would integrate over all flood depths. Ask students to compute the EAD values themselves before revealing.
+:::
+
+## Computing NPV {.smaller}
+
+Annual benefit of elevation: $\$2{,}500 - \$25 = \$2{,}475$ per year in avoided damages.
+
+Over $T = 30$ years at discount rate $r$:
+
+$$
+NPV = -\$80{,}000 + \sum_{t=1}^{30} \frac{\$2{,}475}{(1+r)^t}
+$$
+
+::: {.fragment}
+| Discount rate $r$ | PV of benefits | NPV | Pass? |
+|:---:|:---:|:---:|:---:|
+| 2% | \$55,500 | **-\$24,500** | No |
+| 5% | \$38,000 | **-\$42,000** | No |
+| 7% | \$30,700 | **-\$49,300** | No |
+:::
+
+::: {.fragment}
+At these numbers, elevation doesn't pass BCA at *any* discount rate.
+What would need to change?
+:::
+
+::: {.notes}
+Target: 1:40. Pause and ask the class. Possible answers: higher flood probability, longer time horizon, include insurance savings, include non-monetary benefits. The point is that BCA forces you to articulate *why* you think a project is worthwhile.
+:::
+
+## Sensitivity: What If Flood Risk Is Higher? {.smaller}
+
+Suppose climate change increases annual flood probability to **10%** (EAD: \$5,000/yr, benefit: \$4,975/yr):
+
+| Discount rate $r$ | PV of benefits | NPV | Pass? |
+|:---:|:---:|:---:|:---:|
+| 2% | \$111,500 | **+\$31,500** | Yes |
+| 5% | \$76,500 | **-\$3,500** | Barely no |
+| 7% | \$61,700 | **-\$18,300** | No |
+
+::: {.fragment}
+The **same project** passes or fails depending on two assumptions: flood probability and discount rate.
+:::
+
+::: {.notes}
+Target: 1:43. This is the key pedagogical moment. BCA is not giving us "the answer" — it's showing us which assumptions drive the answer. This is why sensitivity analysis matters (Week 7).
+:::
+
+# Critiques & Defense {.section-title}
+
+## White House Circular A-94 {.smaller}
+
+The 2023 revision of federal BCA guidance [@omb_a94:2023]:
+
+::: {.incremental}
+- Intended to govern how federal agencies conduct BCA
+- Lowered the default discount rate from 7% to ~2%
+- Expanded guidance on equity and distributional effects
+- Its current status is uncertain under the new administration
+:::
+
+::: {.notes}
+Target: 1:44. The 2023 update was a significant shift — reflects decades of academic argument (including Arrow et al.) finally reaching policy. A shift from 7% to 2% can flip a project from "fails" to "passes," as we just saw in our worked example.
+:::
+
+## The Discount Rate Problem
+
+Two rationales for discounting [@arrow_discount:2013]:
+
+::: {.incremental}
+1. **Consumption-based** (~3%): Future generations will be richer, so an extra dollar matters less to them
+2. **Investment-based** (~7%): A dollar invested today yields more than a dollar in the future
+:::
+
+::: {.fragment}
+Both assume future generations are better off — what if climate change makes them *worse* off?
+:::
+
+::: {.notes}
+Target: 1:46. Preview for Wednesday's reading (Arrow et al.).
+:::
+
+## High Discount Rates Favor Inaction
+
+At $r = 7\%$, damages 50 years out are worth **\$0.03** today.
+
+::: {.incremental}
+- Infrastructure with 50-100 year lifetimes
+- Sea-level rise over centuries
+- Species extinction is permanent
+:::
+
+The discount rate can determine whether a project "passes" BCA — more than any other single parameter.
+
+::: {.notes}
+Target: 1:48. This is why the A-94 update mattered so much. A shift from 7% to 2% can flip a project from "fails" to "passes."
+:::
+
+## Decision-Support, Not Decision-Making
+
+::: {.callout-important}
+BCA is a tool for **informing** decisions, not **making** them.
+:::
+
+::: {.incremental}
+- It forces us to be explicit about our assumptions
+- Applied well, it's iterative refinement of understanding; applied poorly, it's a black box that justifies a decision already made
+- The number matters less than what you learn by computing it
+:::
+
+::: {.notes}
+Target: 1:50. This is the most important conceptual point of the lecture.
+:::
+
+# Wrap-Up {.section-title}
+
+## Key Takeaways
+
+::: {.incremental}
+1. BCA provides a systematic framework for comparing decisions — but every analysis embeds value judgments
+2. Utility theory gives us the math; opportunity costs, discounting, and expected value give us the tools
+3. The discount rate is a choice, not a fact — and it can flip a project from "fails" to "passes"
+4. BCA is decision-*support*: the assumptions matter more than the final number
+:::
+
+## Wednesday Preview
+
+**Paper Discussion:** Discounting & BCA
+
+::: {.incremental}
+- Read @arrow_discount:2013
+- Optional: skim @omb_a94:2023
+- Before class: look up how **one federal agency** (USACE, EPA, FEMA, or TWDB) conducts BCA — what discount rate do they use? What counts as a benefit?
+- Come ready to discuss: which rationale for discounting do you find most convincing?
+:::
+
+::: {.notes}
+Target: 1:53. Remind students of the reading assignment and discussion questions posted on the course website.
+:::
 
 ## References
