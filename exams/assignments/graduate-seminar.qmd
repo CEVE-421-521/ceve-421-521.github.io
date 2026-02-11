@@ -9,13 +9,13 @@ format: html
 
 ## Overview
 
-In addition to the standard coursework, CEVE 521 students will **lead one Wednesday Paper Discussion session.**
+In addition to the standard coursework, CEVE 521 students will **co-lead one Wednesday Paper Discussion session** in pairs.
 
 You will not simply present a paper; you will design an active learning experience that helps your classmates engage deeply with the material.
 
 ## Available Dates
 
-Sign up for one of the following Wednesday sessions:
+Each pair signs up for one of the following Wednesday sessions (3 pairs, 3 sessions):
 
 | Week | Date | Topic Area |
 |:----:|:----:|:-----------|
@@ -26,16 +26,20 @@ Sign up for one of the following Wednesday sessions:
 | 12 | Apr 8 | Sequential Decisions |
 | 13 | Apr 15 | Multi-Objective Optimization |
 
+The instructor will lead discussion on the remaining weeks.
+
 ## Requirements
 
 ### 1. Curate a Paper
 
-Select a peer-reviewed paper that:
+Select a peer-reviewed paper or government report that:
 
 - Connects to that week's lecture topic (see Topic Area above)
 - Is accessible to advanced undergraduates (not too specialized)
-- Has clear methods that can be discussed critically
+- Has clear methods or frameworks that can be discussed critically
 - Ideally includes a case study or application
+
+Acceptable sources include journal articles, government reports (e.g., IPCC chapters, NCA sections, agency guidelines), and published technical reports.
 
 Submit your paper choice for approval **2 weeks before** your session.
 
@@ -50,6 +54,8 @@ Create a 50-minute session that includes:
   - Small group analysis of a figure or table
   - Concept mapping of the paper's framework
   - Debate on methodological choices
+
+  For ideas on designing effective activities, see [Harvard's ABLConnect](https://ablconnect.harvard.edu/) and Chapter 1 of Lang (2016), *Small Teaching* (available from Fondren Library).
 - **Synthesis** (10 min): What are the takeaways? How does this connect to the final project?
 - **Buffer** (5 min): Questions, discussion overflow
 
@@ -63,8 +69,9 @@ Post to Canvas **1 week before** your session:
 
 ### 4. Lead the Discussion
 
-Facilitate the 50-minute session.
+Co-facilitate the 50-minute session with your partner.
 You are not lecturing—you are guiding discussion and activities.
+Divide responsibilities clearly (e.g., one leads the opening and key concepts, the other leads the interactive element and synthesis).
 The instructor will be present but will not intervene unless necessary.
 
 ## Timeline
@@ -78,6 +85,7 @@ The instructor will be present but will not intervene unless necessary.
 ## Grading
 
 Your seminar leadership counts for 20% of your final grade (see syllabus).
+Both partners receive the same grade.
 
 You will be evaluated on:
 

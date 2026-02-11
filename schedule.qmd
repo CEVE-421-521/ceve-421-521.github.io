@@ -30,12 +30,12 @@ You will often be encouraged to focus only on part of relevant papers.
 | **4** | Mon., Feb. 2 | {{< material type="lectures" id="week-04" label="Lecture:" text="Uncertainty, Monte Carlo & Risk Metrics" href="lectures/week-04/index.qmd" slides="lectures/week-04/index.html" slidepdf="lectures/week-04/index.pptx" >}} |
 | | Wed., Feb. 4 | {{< material type="lectures" id="week-04-icow" label="Paper Discussion:" text="ICOW Framework" href="lectures/week-04-icow/index.qmd" slides="lectures/week-04-icow/index.html" slidepdf="lectures/week-04-icow/index.pptx" >}} |
 | | Fri., Feb. 6 | {{< material type="labs" id="lab-04-S26" label="Lab 4:" text="Monte Carlo & Risk Metrics" href="labs/lab-04-S26/index.qmd" >}} |
-| **5** | Mon., Feb. 9 | {{< material type="lectures" id="week-05" label="Lecture:" text="Optimal Static Decisions" href="lectures/week-05/index.qmd" slides="lectures/week-05/index.html" slidepdf="lectures/week-05/index.pptx" >}} |
-| | Wed., Feb. 11 | {{< material type="labs" id="lab-05-S26" label="Lab 5:" text="Simulation-Optimization" href="labs/lab-05-S26/index.qmd" >}} |
+| **5** | Mon., Feb. 9 | {{< material type="lectures" id="week-05" label="Lecture:" text="Valuation & Benefit-Cost Analysis" href="lectures/week-05/index.qmd" slides="lectures/week-05/index.html" slidepdf="lectures/week-05/index.pptx" >}} |
+| | Wed., Feb. 11 | {{< material type="readings" id="week-05" label="Paper Discussion:" text="Discounting & BCA" href="readings/week-05-reading.qmd" >}} |
 | | Fri., Feb. 13 | *No Class* |
 | **6** | Mon., Feb. 16 | **Exam 1** (Covers Weeks 1-4) |
-| | Wed., Feb. 18 | {{< material type="lectures" id="week-06" label="Lecture:" text="Valuation & Benefit-Cost Analysis" href="lectures/week-06/index.qmd" slides="lectures/week-06/index.html" slidepdf="lectures/week-06/index.pptx" >}} |
-| | Fri., Feb. 20 | {{< material type="readings" id="week-06" label="Paper Discussion:" text="Discounting & BCA" href="readings/week-06-reading.qmd" >}} |
+| | Wed., Feb. 18 | {{< material type="lectures" id="week-06" label="Lecture:" text="Optimal Static Decisions" href="lectures/week-06/index.qmd" slides="lectures/week-06/index.html" slidepdf="lectures/week-06/index.pptx" >}} |
+| | Fri., Feb. 20 | {{< material type="labs" id="lab-05-S26" label="Lab 5:" text="Simulation-Optimization" href="labs/lab-05-S26/index.qmd" >}} |
 | **7** | Mon., Feb. 23 | {{< material type="lectures" id="week-07" label="Lecture:" text="Sensitivity & Value of Information" href="lectures/week-07/index.qmd" slides="lectures/week-07/index.html" slidepdf="lectures/week-07/index.pptx" >}} *(Remote)* |
 | | Wed., Feb. 25 | {{< material type="readings" id="week-07" label="Paper Discussion:" text="Sensitivity & Value of Information" href="readings/week-07-reading.qmd" >}} |
 | | Fri., Feb. 27 | {{< material type="labs" id="lab-06-S26" label="Lab 6:" text="Value of Partial Information" href="labs/lab-06-S26/index.qmd" >}} / {{< material type="assignments" id="memo-1" label="Project:" text="Memo 1 Due" href="assignments/final-project/memo-1-framework.qmd" >}} |
