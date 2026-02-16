@@ -33,8 +33,8 @@ You will often be encouraged to focus only on part of relevant papers.
 | **5** | Mon., Feb. 9 | {{< material type="lectures" id="week-05" label="Lecture:" text="Valuation & Benefit-Cost Analysis" href="lectures/week-05/index.qmd" slides="lectures/week-05/index.html" slidepdf="lectures/week-05/index.pptx" >}} |
 | | Wed., Feb. 11 | {{< material type="readings" id="week-05" label="Paper Discussion:" text="Discounting & BCA" href="readings/week-05-reading.qmd" >}} |
 | | Fri., Feb. 13 | *No Class* |
-| **6** | Mon., Feb. 16 | **Exam 1** (Covers Weeks 1-4) |
-| | Wed., Feb. 18 | {{< material type="lectures" id="week-06" label="Lecture:" text="Optimal Static Decisions" href="lectures/week-06/index.qmd" slides="lectures/week-06/index.html" slidepdf="lectures/week-06/index.pptx" >}} |
+| **6** | Mon., Feb. 16 | {{< material type="lectures" id="week-06" label="Lecture:" text="Optimal Static Decisions" href="lectures/week-06/index.qmd" slides="lectures/week-06/index.html" slidepdf="lectures/week-06/index.pptx" >}} |
+| | Wed., Feb. 18 | **Exam 1** (Covers Weeks 1-4) |
 | | Fri., Feb. 20 | {{< material type="labs" id="lab-05-S26" label="Lab 5:" text="Simulation-Optimization" href="labs/lab-05-S26/index.qmd" >}} |
 | **7** | Mon., Feb. 23 | {{< material type="lectures" id="week-07" label="Lecture:" text="Sensitivity & Value of Information" href="lectures/week-07/index.qmd" slides="lectures/week-07/index.html" slidepdf="lectures/week-07/index.pptx" >}} *(Remote)* |
 | | Wed., Feb. 25 | {{< material type="readings" id="week-07" label="Paper Discussion:" text="Sensitivity & Value of Information" href="readings/week-07-reading.qmd" >}} |
