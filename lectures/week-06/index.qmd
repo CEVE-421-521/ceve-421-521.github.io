@@ -3,7 +3,7 @@ title: "Optimal Static Decisions"
 subtitle: "Lecture"
 date: 2026-02-16
 week: 6
-status: draft
+status: published
 engine: julia
 
 format:
@@ -59,7 +59,9 @@ Historical approach: build to the height of the highest observed flood.
 - Higher dikes cost more money to build
 - Lower dikes mean more expected flood damage
 
+::: {.fragment}
 **The question:** what is the *right* height?
+:::
 
 ::: {.notes}
 Target: 1:05. Pause here. Let the tension sit. "This is fundamentally an optimization problem. And in 1956, a mathematician named van Dantzig figured out how to solve it."
@@ -78,16 +80,16 @@ Where does optimization fit?
 Target: 1:07. Briefly review the notation diagram. Optimization is about choosing the **levers** (decision variables) to achieve the best **metrics** (objective) given the **states of the world** (scenarios/uncertainties) and the **relationships** (constraints and system model).
 :::
 
-## The Ingredients of Optimization
+## Structure of an Optimization Problem
 
-Every optimization problem has the same ingredients:
+Every optimization problem has four components:
 
+::: {.incremental}
 1. **Decision variables:** What can we control?
 2. **Objective function:** What are we trying to minimize or maximize?
 3. **Constraints:** What limits our choices?
 4. **Scenarios / states of the world:** What uncertainties affect the outcome?
-
-We'll see how van Dantzig filled in each of these.
+:::
 
 ::: {.notes}
 Target: 1:10. Write these four on the board. We'll keep coming back to them.
@@ -108,10 +110,9 @@ Target: 1:10. Transition to the formal model. Emphasize that every assumption wa
 ::: {.column width="60%"}
 Published in *Econometrica*, 1956.
 
-There were essentially no computers available.
-So every modeling assumption had to enable a **closed-form solution**.
+Models always trade off realism for tractability --- they answer questions and inform decisions, not provide a 1:1 map of the real world.
 
-This shaped the whole model --- the assumptions are driven by what's mathematically tractable, not what's most realistic.
+With no computers available, van Dantzig needed a **closed-form solution** --- so every assumption was chosen to keep the math tractable.
 :::
 ::::
 
@@ -138,7 +139,10 @@ $$
 - $\alpha$ = shape parameter
 
 The straight line on the log plot is the exponential fit.
+
+::: {.fragment}
 Why exponential? Because it makes the integral tractable.
+:::
 :::
 ::::
 
@@ -156,9 +160,6 @@ $$
 
 where $V$ is the total value of all goods, buildings, farms, cattle, and industry in the polder.
 
-Obviously this isn't realistic --- a 1 cm overtopping doesn't destroy everything.
-But it makes the expected loss just $p(H) \cdot V$, which keeps the math simple.
-
 ::: {.notes}
 Target: 1:17. Students who did Lab 2 (hazard-damage convolution) know that damage is graduated. Ask: "What would change if we used a more realistic damage model?"
 :::
@@ -168,13 +169,17 @@ Target: 1:17. Students who did Lab 2 (hazard-damage convolution) know that damag
 **Construction cost** (linear approximation):
 $$I(X) = I_0 + kX$$
 
+::: {.fragment}
 **Expected annual flood loss** (probability $\times$ total value at risk):
 $$p_0 \cdot V \cdot e^{-\alpha X}$$
+:::
 
+::: {.fragment}
 **Present value** of ALL future expected losses (discounting!):
 $$L(X) = \frac{100 \, p_0 \, V \, e^{-\alpha X}}{\delta}$$
 
 where $\delta$ is the interest rate (in percent) --- this is NPV, just like Week 5.
+:::
 
 ::: {.notes}
 Target: 1:20. The 100/δ comes from summing the infinite geometric series of discounted annual losses. This is the same present value calculation from last week.
@@ -189,7 +194,7 @@ $$
 ```{julia}
 #| echo: false
 #| label: fig-u-shaped
-#| fig-cap: "van Dantzig's optimization using his actual parameter values: α = 2.6, p₀ = 0.0038, V = 10¹⁰ guilders, δ = 4%, k = 42 × 10⁶ guilders/m."
+#| fig-cap: "The classic trade-off: construction costs rise with dike height, expected losses fall. The optimum balances them. How would the optimum shift if the curves changed shape?"
 
 let
     # Actual van Dantzig (1956) parameter values (p. 284)
@@ -238,12 +243,14 @@ $$
 X^* = \frac{1}{\alpha} \ln\!\left(\frac{100 \, p_0 \, V \, \alpha}{\delta \, k}\right)
 $$
 
+::: {.fragment}
 Interpretation:
 
-- Optimal height **increases** when value $V$ is high (more to protect)
-- Optimal height **increases** when flood probability $p_0$ is high (more risk)
-- Optimal height **decreases** when discount rate $\delta$ is high (future matters less)
-- Optimal height **decreases** when construction cost $k$ is high (building is expensive)
+- Optimal height **increases** when value $V$ is high
+- Optimal height **increases** when flood probability $p_0$ is high
+- Optimal height **decreases** when discount rate $\delta$ is high
+- Optimal height **decreases** when construction cost $k$ is high
+:::
 
 ::: {.notes}
 Target: 1:26. Don't derive --- show the result and focus on interpretation. Ask: "Which of these parameters do we know well? Which are uncertain?"
@@ -279,7 +286,13 @@ van Dantzig estimates $\delta \approx 3.5\text{--}4.5\%$ and $\gamma \approx 1.5
 
 A smaller effective discount rate means future losses matter more --- and the optimal dike gets taller.
 
+::: {.fragment}
 What happens if $\gamma \geq \delta$?
+:::
+
+::: {.fragment}
+The present value of future losses **diverges** --- there is no finite optimum.
+:::
 
 ::: {.notes}
 Target: 1:32. If wealth growth equals the discount rate, the present value of future losses diverges. Connect to discounting debates from Week 5.
@@ -298,8 +311,10 @@ Most of his parameters are "rather badly known":
 
 Which of these can we learn? Which are fundamentally unknowable?
 
+We'll return to this distinction when we study **robustness** later in the semester.
+
 ::: {.notes}
-Target: 1:35. A 1956 paper grappling with the same uncertainty challenges we discuss today.
+Target: 1:35. A 1956 paper grappling with the same uncertainty challenges we discuss today. Flag the connection to Week 8 (robustness and deep uncertainty).
 :::
 
 ## The "Safe Side" Approach
@@ -311,6 +326,12 @@ van Dantzig's solution to parameter uncertainty:
 Take the highest reasonable $p_0$, $V$, $\eta$ and the lowest reasonable $k$, $\delta'$.
 
 This is a **minimax** strategy --- minimize cost under the worst-case parameter values.
+
+::: {.fragment}
+The trade-off: minimax will **overdesign** relative to the expected case.
+Choosing to err on the side of safety is defensible --- but overdesign has real costs.
+:::
+
 We'll return to robustness more formally in Week 8.
 
 ::: {.notes}
@@ -321,11 +342,9 @@ Target: 1:37. He's doing robust optimization before the term existed.
 
 :::: {.columns}
 ::: {.column width="55%"}
-With safe-side parameter values ($\alpha = 2.6$, $p_0 = 0.0038$, $V = 10^{10}$ guilders, $\delta' = 2$, $k = 42 \times 10^6$ guilders/m):
+The paper considers additional parameters and processes (wealth growth, land subsidence, safe-side estimates) that shift both curves --- pushing the optimum higher.
 
-The optimal heightening is approximately $X \approx 6$ meters.
-
-van Dantzig concludes that roughly 6 meters "may be considered as a sufficiently safe height."
+van Dantzig concludes that a dike height of roughly 6 meters "may be considered as a sufficiently safe height."
 
 This informed the Delta Commission's decisions --- and ultimately the Delta Works.
 :::
@@ -354,11 +373,73 @@ But the dikes should be higher than pure material-loss optimization suggests.
 Target: 1:42. Ask: "Is it ethical to put a dollar value on human life? Is it ethical *not* to, when making infrastructure decisions?" The value of a statistical life is still debated today.
 :::
 
-# From Optimization to Policy Search
+# Optimization and Policy Search
+
+van Dantzig used optimization to inform an engineering design decision.
+Let's formalize the general framework.
 
 ::: {.notes}
-Target: 1:42. Transition from analytical to computational approaches.
+Target: 1:42. "We've just seen one concrete example of using optimization to inform design. Now let's name the pieces so you can recognize them in any context."
 :::
+
+## Optimization Fundamentals {.smaller}
+
+Every optimization problem has the same mathematical structure:
+
+$$
+\begin{align}
+\min_{\mathbf{x}} \quad & f(\mathbf{x}) \\
+\text{subject to} \quad & g_j(\mathbf{x}) \leq 0, & j = 1, \ldots, J \\
+& h_k(\mathbf{x}) = 0, & k = 1, \ldots, K
+\end{align}
+$$
+
+| Notation | Meaning | van Dantzig |
+| :--- | :--- | :--- |
+| $\mathbf{x}$ | Decision variables | $X$ = dike heightening |
+| $f(\mathbf{x})$ | Objective function | Total cost $I(X) + L(X)$ |
+| $g_j \leq 0$ | Constraints | $X \geq 0$ |
+
+::: {.notes}
+Target: 1:45. Write the canonical form on the board. "This notation is universal across engineering, economics, and operations research. If you can read this, you can read any optimization paper." Map each piece to van Dantzig. One variable, one constraint, closed-form objective --- the simplest possible case.
+:::
+
+## Stochastic Optimization: How Uncertainty Enters {.smaller}
+
+van Dantzig averaged over flood uncertainty analytically.
+More generally, when the objective or constraints depend on uncertain quantities $\boldsymbol{\theta}$:
+
+| Approach | Formulation | Plain English |
+| :--- | :--- | :--- |
+| Expected value | $\min_\mathbf{x} \; \mathbb{E}[f(\mathbf{x}, \boldsymbol{\theta})]$ | Minimize the average outcome |
+| Chance constraint | $\Pr[g(\mathbf{x}, \boldsymbol{\theta}) \leq 0] \geq 1 - \epsilon$ | Meet constraints with high probability |
+| Robust | $\min_\mathbf{x} \max_{\boldsymbol{\theta}} f(\mathbf{x}, \boldsymbol{\theta})$ | Minimize the worst case |
+
+van Dantzig used **expected value** for losses and **robust** ("safe side") for parameters --- decades before "robust optimization" had a name.
+
+::: {.notes}
+Target: 1:47. Just vocabulary. Students should recognize these terms when they see them in papers. The question for any study is: "how does uncertainty enter the optimization?" Different answers give very different solutions. Connect to Week 8 (robustness).
+:::
+
+## Classes of Optimization Algorithms {.smaller}
+
+The choice of algorithm depends on what structure is available in $f(\mathbf{x})$:
+
+::: {.fragment}
+| Method | What it needs | Strength | Limitation |
+| :--- | :--- | :--- | :--- |
+| Analytical | Closed form + derivatives | Exact, interpretable | Needs tractable math |
+| Linear programming | Linear $f$ and constraints | Fast, scalable, global optimum | Real problems aren't linear |
+| Gradient descent | Computable $\nabla f$ | Efficient for smooth problems | Gets stuck in local optima |
+| Evolutionary algorithms | Only function evaluations | Handles any black-box model | Slow, no optimality guarantee |
+:::
+
+**The less structure you can exploit, the more computation you need.**
+
+::: {.notes}
+Target: 1:49. One sentence per row. The organizing principle: "what structure does your problem have?" Other courses cover each technique in depth. Here we need to understand the tradeoffs between them.
+:::
+
 
 ## Optimization vs. Policy Search
 
@@ -367,63 +448,19 @@ But it's only optimal within our model and assumptions.
 
 I prefer the term **policy search**: using computers to suggest promising alternatives.
 
-This gives us a set of good options to evaluate, not a single "answer."
-
-::: {.notes}
-Target: 1:44. We'll use "policy search" for the rest of the course. It changes how we think about and present results.
+::: {.incremental}
+- van Dantzig's answer was optimal --- in a model with binary damage and exponential floods
+- In practice, a set of good options to evaluate beats a single "optimal" answer
 :::
 
-## The Landscape of Solution Methods
-
-Different problem structures call for different tools:
-
-| Method | When to use | Trade-off |
-| :--- | :--- | :--- |
-| Analytical (van Dantzig) | Tractable math | Elegant but requires strong simplifications |
-| Linear programming | Linear structure | Fast and scalable, but real problems aren't linear |
-| Gradient-based | Differentiable objective | Efficient but can get stuck in local optima |
-| Simulation-optimization | Complex black-box models | Handles anything, but slow ("smart guess and check") |
-
-In this course, we care about framing problems, not mastering techniques.
-
 ::: {.notes}
-Target: 1:46. Don't linger --- one row per method. Other courses cover the techniques; we want to understand the landscape.
+Target: 1:55. We'll use "policy search" for the rest of the course. It changes how we think about and present results.
 :::
 
-## ICOW Relaxes van Dantzig's Assumptions
 
-You already know ICOW from Week 4 --- same problem class as van Dantzig (coastal flood risk).
+# Evaluating Optimization Claims
 
-| | van Dantzig (1956) | ICOW (2019) |
-| :--- | :--- | :--- |
-| Decision levers | 1 (dike height) | 5 (withdrawal, dike base, dike height, resistance height, resistance fraction) |
-| Damage model | Binary (flood = total loss) | Graduated (damage scales with depth) |
-| Dike failure | Deterministic (overtopping) | Fragility curves (probabilistic) |
-| Solution method | Analytical (calculus) | Brute force policy search |
-| Compute required | Pencil and paper | Modern computer |
-
-::: {.notes}
-Target: 1:48. Same fundamental question, very different tools --- 70 years apart.
-:::
-
-## How Does Uncertainty Enter the Search?
-
-**ICOW approach:** evaluate every candidate decision across the full representation of uncertainty (brute force).
-Works when the decision space is small enough to search exhaustively.
-
-**For larger problems:** stochastic optimization methods handle uncertainty inside the solver --- but this is computationally hard.
-
-The critical question: are we searching over **one scenario**, a few, or a **full representation** of uncertainty?
-
-In Lab 5 on Friday, you'll do policy search in ICOW yourselves.
-
-::: {.notes}
-Target: 1:50.
-:::
-
-# Being a Critical Consumer
-
-## Four Questions to Always Ask
+## Four Key Questions
 
 When someone presents an "optimal" solution:
 
@@ -433,7 +470,7 @@ When someone presents an "optimal" solution:
 4. **Scenarios:** Over what states of the world is this "optimal"? One scenario, a few, or a full representation of uncertainty?
 
 ::: {.notes}
-These four questions apply to van Dantzig, to ICOW, and to any optimization result you'll encounter.
+Target: 1:58. These four questions apply to van Dantzig, to ICOW, and to any optimization result you'll encounter.
 :::
 
 ## What's Next
@@ -442,13 +479,5 @@ These four questions apply to van Dantzig, to ICOW, and to any optimization resu
 - **Friday:** Lab 5 --- Policy search with ICOW
 - **Coming up in Module 2:** sensitivity analysis, value of information, robustness --- all about what happens when your model assumptions are wrong
 
-## Learn More
-
-- Vivek Srikrishnan's [BEE 4750](https://viveks.me/environmental-systems-analysis/schedule.html) at Cornell has lecture notes on optimization
-- Our [CMOR](https://cmor.rice.edu/) department (and others) offers numerous courses on optimization
-
-::: {.notes}
-Brief logistics. Remind about exam coverage. Good luck on the exam!
-:::
 
 ## References

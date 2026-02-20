@@ -45,20 +45,20 @@ end
 #                              resolve command                                  #
 # ---------------------------------------------------------------------------- #
 
-function resolve_lab(lab_dir::String)
-    lab_name = basename(lab_dir)
-    project_file = joinpath(lab_dir, "Project.toml")
-    manifest_file = joinpath(lab_dir, "Manifest.toml")
+function resolve_env(env_dir::String)
+    env_name = basename(env_dir)
+    project_file = joinpath(env_dir, "Project.toml")
+    manifest_file = joinpath(env_dir, "Manifest.toml")
 
     if !isfile(project_file)
-        @warn "No Project.toml in $lab_name, skipping"
+        @warn "No Project.toml in $env_name, skipping"
         return
     end
 
-    println("\n=== $lab_name ===")
-    Pkg.activate(lab_dir)
+    println("\n=== $env_name ===")
+    Pkg.activate(env_dir)
 
-    # figure out which GitHub packages this lab uses
+    # figure out which GitHub packages this env uses
     proj_deps = keys(Pkg.project().dependencies)
     gh_present = filter(name -> name in proj_deps, GITHUB_PACKAGE_NAMES)
 
@@ -70,7 +70,6 @@ function resolve_lab(lab_dir::String)
 
     # resolve for the current Julia version
     println("  Resolving...")
-    Pkg.instantiate()
     Pkg.resolve()
 
     # re-add GitHub packages
@@ -87,23 +86,23 @@ function resolve_lab(lab_dir::String)
     println("  Done.")
 end
 
-function resolve_lab_with_recovery(lab_dir::String)
+function resolve_env_with_recovery(env_dir::String)
     try
-        resolve_lab(lab_dir)
+        resolve_env(env_dir)
     catch e
-        lab_name = basename(lab_dir)
-        @error "Failed to resolve $lab_name" exception = e
+        env_name = basename(env_dir)
+        @error "Failed to resolve $env_name" exception = e
 
-        manifest_file = joinpath(lab_dir, "Manifest.toml")
+        manifest_file = joinpath(env_dir, "Manifest.toml")
         @warn "Attempting recovery: deleting Manifest.toml and reinstantiating..."
         try
-            Pkg.activate(lab_dir)
+            Pkg.activate(env_dir)
             isfile(manifest_file) && rm(manifest_file)
             Pkg.instantiate()
             Pkg.precompile()
-            println("  Recovery succeeded for $lab_name")
+            println("  Recovery succeeded for $env_name")
         catch recovery_error
-            @error "Recovery failed for $lab_name" exception = recovery_error
+            @error "Recovery failed for $env_name" exception = recovery_error
         end
     end
 end
@@ -114,8 +113,13 @@ function cmd_resolve()
     println("Julia version: $(VERSION)")
     println("="^50)
 
+    # resolve the base directory first
+    println("\n--- Base environment ---")
+    resolve_env_with_recovery(BASE_DIR)
+
+    # resolve each lab environment
     for lab_dir in lab_dirs
-        resolve_lab_with_recovery(lab_dir)
+        resolve_env_with_recovery(lab_dir)
     end
 
     Pkg.activate(BASE_DIR)
