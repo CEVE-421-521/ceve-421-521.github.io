@@ -1,6 +1,6 @@
 ---
 title: "Week 7 Reading"
-subtitle: "Optimal Static Decisions"
+subtitle: "Sensitivity & Value of Information"
 status: draft
 
 format:
@@ -8,11 +8,18 @@ format:
   typst: default
 ---
 
-## Overview
+## Assigned Readings
 
-@vandantzig_dike:1956
+1. @murphy_voi:1985 -- "Repetitive Decision Making and the Value of Forecasts in the Cost-Loss Ratio Situation." Introduces the cost-loss framework for quantifying the economic value of weather forecasts, extending from a static to a dynamic (multi-period) setting.
+
+2. @runge_voi:2011 -- "Which Uncertainty?" Uses expected value of perfect information (EVPI) and partial EVPI to identify which uncertainties most impede management of endangered whooping cranes. A clear worked example of VOI applied to real decision-making.
 
 ## Discussion Questions
 
-1. *TBD*
-2. *TBD*
+1. In the Runge et al. case study, "restore meadows" is the best strategy under uncertainty, but it is not the best strategy under *any* individual hypothesis. How is this possible? What does this imply about decision-making under uncertainty?
+
+2. The partial EVPI analysis shows that resolving the "black fly" hypothesis captures 54% of the total information value. What does this mean for how the wildlife refuge should allocate its monitoring budget?
+
+3. In Murphy et al.'s dynamic cost-loss model, the decision threshold changes from $C/L$ (static) to $C/(L-C)$ (two-period). Why does anticipating the future raise the threshold for protection? What's the intuition?
+
+4. Murphy et al. show that the value of imperfect forecasts is always non-negative (Blackwell's theorem). Can you think of a real-world situation where acting on a forecast made things worse? How do you reconcile this with the theorem?
