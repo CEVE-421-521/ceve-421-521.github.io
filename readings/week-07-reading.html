@@ -99,9 +99,38 @@ window.MathJax = {
   };
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="Week 7 Reading – CEVE 421/521 – Spring 2026">
-<meta property="og:description" content="Optimal Static Decisions">
+<meta property="og:description" content="Sensitivity &amp; Value of Information">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -117,7 +146,7 @@ window.MathJax = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#assigned-readings" id="toc-assigned-readings" class="nav-link active" data-scroll-target="#assigned-readings">Assigned Readings</a></li>
   <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions">Discussion Questions</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/readings/week-07-reading.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week-07-reading.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
@@ -128,7 +157,7 @@ window.MathJax = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Week 7 Reading</h1>
-<p class="subtitle lead">Optimal Static Decisions</p>
+<p class="subtitle lead">Sensitivity &amp; Value of Information</p>
 </div>
 
 
@@ -155,15 +184,20 @@ window.MathJax = {
 </div>
 </div>
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p><span class="citation" data-cites="vandantzig_dike:1956">van Dantzig (<a href="#ref-vandantzig_dike:1956" role="doc-biblioref">1956</a>)</span></p>
+<section id="assigned-readings" class="level2">
+<h2 class="anchored" data-anchor-id="assigned-readings">Assigned Readings</h2>
+<ol type="1">
+<li><p><span class="citation" data-cites="murphy_voi:1985">Murphy et al. (<a href="#ref-murphy_voi:1985" role="doc-biblioref">1985</a>)</span> – “Repetitive Decision Making and the Value of Forecasts in the Cost-Loss Ratio Situation.” Introduces the cost-loss framework for quantifying the economic value of weather forecasts, extending from a static to a dynamic (multi-period) setting.</p></li>
+<li><p><span class="citation" data-cites="runge_voi:2011">Runge et al. (<a href="#ref-runge_voi:2011" role="doc-biblioref">2011</a>)</span> – “Which Uncertainty?” Uses expected value of perfect information (EVPI) and partial EVPI to identify which uncertainties most impede management of endangered whooping cranes. A clear worked example of VOI applied to real decision-making.</p></li>
+</ol>
 </section>
 <section id="discussion-questions" class="level2">
 <h2 class="anchored" data-anchor-id="discussion-questions">Discussion Questions</h2>
 <ol type="1">
-<li><em>TBD</em></li>
-<li><em>TBD</em></li>
+<li><p>In the Runge et al.&nbsp;case study, “restore meadows” is the best strategy under uncertainty, but it is not the best strategy under <em>any</em> individual hypothesis. How is this possible? What does this imply about decision-making under uncertainty?</p></li>
+<li><p>The partial EVPI analysis shows that resolving the “black fly” hypothesis captures 54% of the total information value. What does this mean for how the wildlife refuge should allocate its monitoring budget?</p></li>
+<li><p>In Murphy et al.’s dynamic cost-loss model, the decision threshold changes from <span class="math inline">\(C/L\)</span> (static) to <span class="math inline">\(C/(L-C)\)</span> (two-period). Why does anticipating the future raise the threshold for protection? What’s the intuition?</p></li>
+<li><p>Murphy et al.&nbsp;show that the value of imperfect forecasts is always non-negative (Blackwell’s theorem). Can you think of a real-world situation where acting on a forecast made things worse? How do you reconcile this with the theorem?</p></li>
 </ol>
 
 
@@ -171,8 +205,11 @@ window.MathJax = {
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-vandantzig_dike:1956" class="csl-entry" role="listitem">
-van Dantzig, D. (1956). Economic <span>Decision Problems</span> for <span>Flood Prevention</span>. <em>Econometrica</em>, <em>24</em>(3), 276–287. <a href="https://doi.org/10.2307/1911632">https://doi.org/10.2307/1911632</a>
+<div id="ref-murphy_voi:1985" class="csl-entry" role="listitem">
+Murphy, A. H., Katz, R. W., Winkler, R. L., &amp; Hsu, W.-R. (1985). Repetitive <span>Decision Making</span> and the <span>Value</span> of <span>Forecasts</span> in the <span>Cost</span>‐<span>Loss Ratio Situation</span>: <span>A Dynamic Model</span>. <em>Monthly Weather Review</em>, <em>113</em>(5), 801–813. <a href="https://doi.org/10.1175/1520-0493(1985)113<0801:RDMATV>2.0.CO;2">https://doi.org/10.1175/1520-0493(1985)113&lt;0801:RDMATV&gt;2.0.CO;2</a>
+</div>
+<div id="ref-runge_voi:2011" class="csl-entry" role="listitem">
+Runge, M. C., Converse, S. J., &amp; Lyons, J. E. (2011). Which uncertainty? <span>Using</span> expert elicitation and expected value of information to design an adaptive program. <em>Biological Conservation</em>, <em>144</em>(4), 1214–1223. <a href="https://doi.org/10.1016/j.biocon.2010.12.020">https://doi.org/10.1016/j.biocon.2010.12.020</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

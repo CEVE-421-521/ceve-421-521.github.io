@@ -1,704 +1,845 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dr.&nbsp;James Doss-Gollin">
+
+<title>Value of Information – CEVE 421/521 – Spring 2026</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.27">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bc9becdb3611716201d8cdea9c6d50f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<!-- MathJax 3 -->
+<script>
+window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+</script>
 
-  <meta name="author" content="Dr.&nbsp;James Doss-Gollin">
-  <title>CEVE 421/521 -- Spring 2026 – Sensitivity &amp; Value of Information</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-      vertical-align: middle;
-    }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-      margin-bottom: 0em;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f813b346ce809c8bbd246a85cc5c9db3.css">
-  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-    .reveal div.sourceCode {
-      margin: 0;
-      overflow: auto;
-    }
-    .reveal div.hanging-indent {
-      margin-left: 1em;
-      text-indent: -1em;
-    }
-    .reveal .slide:not(.center) {
-      height: 100%;
-      overflow-y: auto;
-    }
-    .reveal .slide.scrollable {
-      overflow-y: auto;
-    }
-    .reveal .footnotes {
-      height: 100%;
-      overflow-y: auto;
-    }
-    .reveal .slide .absolute {
-      position: absolute;
-      display: block;
-    }
-    .reveal .footnotes ol {
-      counter-reset: ol;
-      list-style-type: none; 
-      margin-left: 0;
-    }
-    .reveal .footnotes ol li:before {
-      counter-increment: ol;
-      content: counter(ol) ". "; 
-    }
-    .reveal .footnotes ol li > p:first-child {
-      display: inline-block;
-    }
-    .reveal .slide ul,
-    .reveal .slide ol {
-      margin-bottom: 0.5em;
-    }
-    .reveal .slide ul li,
-    .reveal .slide ol li {
-      margin-top: 0.4em;
-      margin-bottom: 0.2em;
-    }
-    .reveal .slide ul[role="tablist"] li {
-      margin-bottom: 0;
-    }
-    .reveal .slide ul li > *:first-child,
-    .reveal .slide ol li > *:first-child {
-      margin-block-start: 0;
-    }
-    .reveal .slide ul li > *:last-child,
-    .reveal .slide ol li > *:last-child {
-      margin-block-end: 0;
-    }
-    .reveal .slide .columns:nth-child(3) {
-      margin-block-start: 0.8em;
-    }
-    .reveal blockquote {
-      box-shadow: none;
-    }
-    .reveal .tippy-content>* {
-      margin-top: 0.2em;
-      margin-bottom: 0.7em;
-    }
-    .reveal .tippy-content>*:last-child {
-      margin-bottom: 0.2em;
-    }
-    .reveal .slide > img.stretch.quarto-figure-center,
-    .reveal .slide > img.r-stretch.quarto-figure-center {
-      display: block;
-      margin-left: auto;
-      margin-right: auto; 
-    }
-    .reveal .slide > img.stretch.quarto-figure-left,
-    .reveal .slide > img.r-stretch.quarto-figure-left  {
-      display: block;
-      margin-left: 0;
-      margin-right: auto; 
-    }
-    .reveal .slide > img.stretch.quarto-figure-right,
-    .reveal .slide > img.r-stretch.quarto-figure-right  {
-      display: block;
-      margin-left: auto;
-      margin-right: 0; 
-    }
-  </style>
-  <!-- MathJax 3 -->
-  <script>
-  window.MathJax = {
-      tex: {
-        tags: 'ams'
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
       }
-    };
-  </script>
-<meta property="og:title" content="Sensitivity &amp; Value of Information – CEVE 421/521 – Spring 2026">
-<meta property="og:description" content="Lecture (Remote)">
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Value of Information – CEVE 421/521 – Spring 2026">
+<meta property="og:description" content="Lecture">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
+
 <body class="quarto-light">
-  <div class="reveal">
-    <div class="slides">
 
-<section class="quarto-title-block center">
-  <h1 class="title">Sensitivity &amp; Value of Information</h1>
-  <p class="subtitle">Lecture (Remote)</p>
-
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Dr.&nbsp;James Doss-Gollin 
-</div>
-</div>
-</div>
-
-  <p class="date">Monday, February 23, 2026</p>
-</section>
-<section class="slide level2">
-
-<div class="callout callout-warning" style="margin-bottom: 1em;">
-<div class="callout-body"><strong>Draft:</strong> This content is under development.</div>
-</div>
-
-</section>
-<section class="slide level2">
-<h2>Coming Soon</h2>
-<p>This lecture is under development.</p>
-</section>
-<section class="slide level2">
-<h2>Preparation</h2>
-<p>Read a piece of <span class="citation" data-cites="runge_voi:2011">Runge et al. (<a href="#/references" role="doc-biblioref" onclick="">2011</a>)</span>, we will revisit it on Wednesday</p>
-</section>
-<section class="slide level2 smaller scrollable" id="references">
-<h2>References</h2>
-
-
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-runge_voi:2011" class="csl-entry" role="listitem">
-Runge, M. C., Converse, S. J., &amp; Lyons, J. E. (2011). Which uncertainty? <span>Using</span> expert elicitation and expected value of information to design an adaptive program. <em>Biological Conservation</em>, <em>144</em>(4), 1214–1223. <a href="https://doi.org/10.1016/j.biocon.2010.12.020">https://doi.org/10.1016/j.biocon.2010.12.020</a>
-</div>
-</div>
-</section>
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-umbrella-problem" id="toc-the-umbrella-problem" class="nav-link active" data-scroll-target="#the-umbrella-problem"><span class="header-section-number">1</span> The Umbrella Problem</a></li>
+  <li><a href="#expected-value-of-perfect-information" id="toc-expected-value-of-perfect-information" class="nav-link" data-scroll-target="#expected-value-of-perfect-information"><span class="header-section-number">2</span> Expected Value of Perfect Information</a>
+  <ul class="collapse">
+  <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example"><span class="header-section-number">2.1</span> Worked Example</a></li>
+  <li><a href="#when-is-evpi-zero" id="toc-when-is-evpi-zero" class="nav-link" data-scroll-target="#when-is-evpi-zero"><span class="header-section-number">2.2</span> When is EVPI Zero?</a></li>
+  </ul></li>
+  <li><a href="#the-cost-loss-ratio" id="toc-the-cost-loss-ratio" class="nav-link" data-scroll-target="#the-cost-loss-ratio"><span class="header-section-number">3</span> The Cost-Loss Ratio</a></li>
+  <li><a href="#partial-information-which-uncertainty-to-resolve" id="toc-partial-information-which-uncertainty-to-resolve" class="nav-link" data-scroll-target="#partial-information-which-uncertainty-to-resolve"><span class="header-section-number">4</span> Partial Information: Which Uncertainty to Resolve?</a>
+  <ul class="collapse">
+  <li><a href="#an-example-flood-insurance-pricing" id="toc-an-example-flood-insurance-pricing" class="nav-link" data-scroll-target="#an-example-flood-insurance-pricing"><span class="header-section-number">4.1</span> An Example: Flood Insurance Pricing</a></li>
+  <li><a href="#the-evpxi-formula" id="toc-the-evpxi-formula" class="nav-link" data-scroll-target="#the-evpxi-formula"><span class="header-section-number">4.2</span> The EVPXI Formula</a></li>
+  </ul></li>
+  <li><a href="#voi-requires-probabilities" id="toc-voi-requires-probabilities" class="nav-link" data-scroll-target="#voi-requires-probabilities"><span class="header-section-number">5</span> VOI Requires Probabilities</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">6</span> Looking Ahead</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6.1</span> References</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/lectures/week-07/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
-  <div class="quarto-auto-generated-content" style="display: none;">
-<div class="footer footer-default">
-<p>Dr.&nbsp;James Doss-Gollin</p>
-</div>
-</div></div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
-  <!-- reveal.js plugins -->
-  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Value of Information</h1>
+<p class="subtitle lead">Lecture</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dr.&nbsp;James Doss-Gollin </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Monday, February 23, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
   
 
-  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
-  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
-  <script>
+</header>
 
-      // Full list of configuration options available at:
-      // https://revealjs.com/config/
-      Reveal.initialize({
-'controlsAuto': true,
-'previewLinksAuto': true,
-'pdfSeparateFragments': false,
-'autoAnimateEasing': "ease",
-'autoAnimateDuration': 1,
-'autoAnimateUnmatched': true,
-'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"numbers":true},
-'smaller': false,
- 
-        // Display controls in the bottom right corner
-        controls: false,
 
-        // Help the user learn the controls by providing hints, for example by
-        // bouncing the down arrow when they first encounter a vertical slide
-        controlsTutorial: false,
+<section id="the-umbrella-problem" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> The Umbrella Problem</h1>
+<p>Consider the simplest possible decision under uncertainty. You’re heading out the door and must decide whether to bring an umbrella:</p>
+<ul>
+<li>Bringing the umbrella costs you some hassle: <span class="math inline">\(C\)</span></li>
+<li>If it rains and you don’t have one, you get soaked: loss <span class="math inline">\(L\)</span></li>
+<li>The probability of rain is <span class="math inline">\(p\)</span></li>
+</ul>
+<p>The expected cost of bringing the umbrella is simply <span class="math inline">\(C\)</span> (you pay regardless of weather). The expected cost of leaving it is <span class="math inline">\(pL\)</span> (you pay the loss only when it rains, which happens with probability <span class="math inline">\(p\)</span>).</p>
+<p>The optimal rule is: <strong>bring the umbrella</strong> whenever <span class="math inline">\(C &lt; pL\)</span>, i.e., when</p>
+<p><span id="eq-cost-loss"><span class="math display">\[
+p &gt; \frac{C}{L}
+\tag{1}\]</span></span></p>
+<p>The ratio <span class="math inline">\(C/L\)</span> is the <strong>cost-loss ratio</strong>. It’s the probability threshold above which protection is worthwhile. If protection is cheap relative to the potential loss, you should protect even at low probabilities.</p>
+<p>To make this concrete, suppose <span class="math inline">\(C = \$5\)</span> and <span class="math inline">\(L = \$50\)</span>, so <span class="math inline">\(C/L = 0.1\)</span>. The payoff table is:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Bring umbrella</th>
+<th style="text-align: center;">Don’t bring</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Rain (<span class="math inline">\(p\)</span>)</td>
+<td style="text-align: center;"><span class="math inline">\(-5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-50\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">No rain (<span class="math inline">\(1-p\)</span>)</td>
+<td style="text-align: center;"><span class="math inline">\(-5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>For what values of <span class="math inline">\(p\)</span> would you leave the umbrella at home? From <a href="#eq-cost-loss" class="quarto-xref">Equation&nbsp;1</a>, you need <span class="math inline">\(p &lt; C/L = 5/50 = 0.10\)</span>. Only if the chance of rain is below 10% is it worth skipping the umbrella.</p>
+<p>Now suppose a weather oracle offers to tell you <strong>for certain</strong> whether it will rain. With perfect information, you bring the umbrella <em>only when it rains</em> — you protect when needed and avoid the hassle when it’s dry.</p>
+<ul>
+<li>Without the oracle: you either always protect (<span class="math inline">\(C\)</span>) or always gamble (<span class="math inline">\(pL\)</span>), whichever is cheaper</li>
+<li>With the oracle: you pay <span class="math inline">\(C\)</span> only a fraction <span class="math inline">\(p\)</span> of the time</li>
+</ul>
+<p>How much should you pay the oracle? That question — the maximum you’d pay for perfect information before making your decision — is the <strong>expected value of perfect information</strong> (EVPI).</p>
+</section>
+<section id="expected-value-of-perfect-information" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Expected Value of Perfect Information</h1>
+<p>The core idea of VOI is simple: <strong>compare your optimized decision with the information to your optimized decision without it.</strong> The difference is what the information is worth.</p>
+<p>For EVPI, this means comparing two ways to make a decision. Let <span class="math inline">\(a\)</span> denote the action (e.g., dike height), <span class="math inline">\(s\)</span> the uncertain scenario, <span class="math inline">\(p(s)\)</span> the probability of scenario <span class="math inline">\(s\)</span>, and <span class="math inline">\(U(a, s)\)</span> the payoff from taking action <span class="math inline">\(a\)</span> in scenario <span class="math inline">\(s\)</span>.</p>
+<p><strong>Without information</strong> (“average then optimize”), you must choose the best action <em>before</em> learning which scenario is true. You evaluate each action by averaging its payoff over all scenarios, then pick the best one:</p>
+<p><span id="eq-prior"><span class="math display">\[
+\max_a \int U(a, s) \, p(s) \, ds
+\tag{2}\]</span></span></p>
+<p><strong>With perfect information</strong> (“optimize then average”), you choose the best action <em>after</em> learning which scenario is true. For each scenario, you pick the action that maximizes payoff in that scenario. Since you don’t know in advance which scenario you’ll observe, you take the expectation:</p>
+<p><span id="eq-clairvoyant"><span class="math display">\[
+\int \max_a \, U(a, s) \, p(s) \, ds
+\tag{3}\]</span></span></p>
+<p>The EVPI is the gap between <a href="#eq-clairvoyant" class="quarto-xref">Equation&nbsp;3</a> and <a href="#eq-prior" class="quarto-xref">Equation&nbsp;2</a>:</p>
+<p><span id="eq-evpi"><span class="math display">\[
+\text{EVPI} = \int \max_a \, U(a,s) \, p(s) \, ds \;-\; \max_a \int U(a,s) \, p(s) \, ds
+\tag{4}\]</span></span></p>
+<p>This is always <span class="math inline">\(\geq 0\)</span>. The reason is Jensen’s inequality: the max function is convex, so <span class="math inline">\(E[\max] \geq \max[E]\)</span>. Intuitively, information can never make you worse off — you can always ignore it and revert to your prior decision.</p>
+<p>The EVPI has a clean interpretation: it is the <strong>maximum you should pay a clairvoyant</strong>. If the EVPI is small, don’t bother gathering more information. If it’s large, invest in learning.</p>
+<section id="worked-example" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="worked-example"><span class="header-section-number">2.1</span> Worked Example</h2>
+<p>Return to the umbrella with <span class="math inline">\(p = 0.30\)</span>, <span class="math inline">\(C = 5\)</span>, <span class="math inline">\(L = 50\)</span>. Here the scenarios are discrete (rain or no rain), so the integrals in <a href="#eq-evpi" class="quarto-xref">Equation&nbsp;4</a> become sums.</p>
+<p><strong>Without information</strong> (<a href="#eq-prior" class="quarto-xref">Equation&nbsp;2</a>): bring the umbrella (cost <span class="math inline">\(= 5\)</span>), since <span class="math inline">\(5 &lt; 0.3 \times 50 = 15\)</span>.</p>
+<p><strong>With perfect information</strong> (<a href="#eq-clairvoyant" class="quarto-xref">Equation&nbsp;3</a>):</p>
+<ul>
+<li>When it rains (prob 0.3): bring umbrella, cost <span class="math inline">\(= 5\)</span></li>
+<li>When it doesn’t rain (prob 0.7): leave it, cost <span class="math inline">\(= 0\)</span></li>
+<li>Expected cost <span class="math inline">\(= 0.3 \times 5 + 0.7 \times 0 = 1.50\)</span></li>
+</ul>
+<p><span class="math display">\[\text{EVPI} = 5.00 - 1.50 = \$3.50\]</span></p>
+<p>You’d pay up to $3.50 for a perfect rain forecast. The savings come entirely from avoiding unnecessary protection on dry days.</p>
+</section>
+<section id="when-is-evpi-zero" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="when-is-evpi-zero"><span class="header-section-number">2.2</span> When is EVPI Zero?</h2>
+<p>EVPI <span class="math inline">\(= 0\)</span> when the <strong>same action is optimal under all scenarios</strong>. In that case, learning which scenario is true wouldn’t change your decision.</p>
+<p>Example: if <span class="math inline">\(p = 0.50\)</span> and <span class="math inline">\(C/L = 0.1\)</span>, you bring the umbrella regardless — a forecast wouldn’t change anything.</p>
+<p>This is an important conceptual point: <strong>uncertainty and information value are not the same thing.</strong> You can have enormous uncertainty about which scenario will occur but zero EVPI, if the uncertainty doesn’t affect which action is best. Conversely, a small amount of uncertainty can have high EVPI if you’re right on the decision boundary.</p>
+</section>
+</section>
+<section id="the-cost-loss-ratio" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> The Cost-Loss Ratio</h1>
+<p><span class="citation" data-cites="murphy_voi:1985">Murphy et al. (<a href="#ref-murphy_voi:1985" role="doc-biblioref">1985</a>)</span> generalize the umbrella problem into a canonical framework for valuing weather forecasts. The setup is the same:</p>
+<ul>
+<li><strong>Protect</strong> (cost <span class="math inline">\(C\)</span>): no loss regardless of weather</li>
+<li><strong>Don’t protect</strong>: lose <span class="math inline">\(L\)</span> if the adverse event occurs</li>
+</ul>
+<p>The innovation is distinguishing three types of information available to the decision-maker:</p>
+<ol type="1">
+<li><strong>Climatological information</strong>: you only know the base rate <span class="math inline">\(p_\theta\)</span> (the long-run frequency of the adverse event)</li>
+<li><strong>Perfect information</strong>: you know exactly whether the event will occur</li>
+<li><strong>Imperfect forecasts</strong>: a forecast system with hit rate <span class="math inline">\(p_1 = P(\text{event} \mid \text{forecast yes})\)</span> and miss rate <span class="math inline">\(p_0 = P(\text{event} \mid \text{forecast no})\)</span></li>
+</ol>
+<p>With only climatological information, the minimum expected expense is:</p>
+<p><span id="eq-climatological"><span class="math display">\[
+E_C = \min(p_\theta L, \; C)
+\tag{5}\]</span></span></p>
+<p>You either always protect or never protect, whichever is cheaper. With perfect forecasts, you protect only when the event occurs:</p>
+<p><span id="eq-perfect-forecast"><span class="math display">\[
+E_P = p_\theta C
+\tag{6}\]</span></span></p>
+<p>The value of perfect forecasts is:</p>
+<p><span id="eq-vp"><span class="math display">\[
+V_P = E_C - E_P
+\tag{7}\]</span></span></p>
+<p>This is our EVPI again, expressed in Murphy’s notation. It is positive whenever <span class="math inline">\(0 &lt; p_\theta &lt; 1\)</span> and <span class="math inline">\(C &lt; L\)</span>.</p>
+<p>Real forecasts aren’t perfect. An imperfect forecast is characterized by its conditional probabilities:</p>
+<ul>
+<li><span class="math inline">\(p_1 = P(\text{event} \mid \text{forecast of event})\)</span> — the hit rate</li>
+<li><span class="math inline">\(p_0 = P(\text{event} \mid \text{forecast of no event})\)</span> — the miss rate</li>
+</ul>
+<p>A key result, due to Blackwell (1953), is that the value of any properly calibrated forecast is bounded:</p>
+<p><span id="eq-blackwell"><span class="math display">\[
+0 \leq V_F \leq V_P
+\tag{8}\]</span></span></p>
+<p>Imperfect forecasts can <strong>never have negative expected value</strong> — as long as they’re properly calibrated, acting on them is always at least as good as ignoring them. But the relationship between forecast quality and forecast value is <strong>nonlinear</strong>:</p>
+<ul>
+<li>When <span class="math inline">\(C/L \approx p_\theta\)</span> (you’re “on the fence” about whether to protect), even a modest forecast improvement has high value</li>
+<li>When <span class="math inline">\(C/L\)</span> is far from <span class="math inline">\(p_\theta\)</span> (the decision is obvious either way), even a large improvement in forecast quality has little value</li>
+</ul>
+<p>The practical implication: forecasts are most valuable to decision-makers who are near the decision boundary. If the right action is obvious, no amount of forecast improvement will change anything.</p>
+</section>
+<section id="partial-information-which-uncertainty-to-resolve" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Partial Information: Which Uncertainty to Resolve?</h1>
+<p>Real decisions involve <strong>many</strong> sources of uncertainty. For flood risk, these include the SLR trajectory, the discount rate, the surge distribution, the depth-damage function, and more. Resolving all of them is expensive or impossible. But not all of them affect the decision.</p>
+<p>If you can only learn about <em>one</em> source of uncertainty, which one should it be?</p>
+<section id="an-example-flood-insurance-pricing" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="an-example-flood-insurance-pricing"><span class="header-section-number">4.1</span> An Example: Flood Insurance Pricing</h2>
+<p>Suppose you’re an insurer pricing flood policies. Your premium depends on uncertain inputs: the local flood probability, the building’s elevation, the depth-damage relationship, and so on. Which uncertainty should you invest in reducing?</p>
+<p>If you’re insuring <strong>100,000 houses in the same floodplain</strong>, investing in a better flood model pays off handsomely. The flood hazard uncertainty is shared across every policy in the portfolio — resolving it improves all 100,000 pricing decisions at once.</p>
+<p>But if you’re insuring <strong>one house</strong>, improving the regional flood model barely changes your premium. You’d be better off sending an inspector to measure the building’s actual first-floor elevation and check for flood-proofing — that building-specific uncertainty is what drives your pricing error for this particular policy.</p>
+<p>The “most uncertain” input isn’t necessarily the one worth resolving. What matters is which uncertainty, if resolved, would most change your decision. That’s what EVPXI measures.</p>
+</section>
+<section id="the-evpxi-formula" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="the-evpxi-formula"><span class="header-section-number">4.2</span> The EVPXI Formula</h2>
+<p>The same principle applies formally. We decompose the uncertain scenario <span class="math inline">\(s\)</span> into two parts: <span class="math inline">\(s_i\)</span> (one source of uncertainty, e.g., the SLR trajectory) and <span class="math inline">\(s_i^c\)</span> (everything else, e.g., the discount rate and surge parameters).</p>
+<p>If we learn <span class="math inline">\(s_i\)</span> but everything else stays uncertain, we can pick the best action for each value of <span class="math inline">\(s_i\)</span>, while still hedging over <span class="math inline">\(s_i^c\)</span>. For a given revealed value of <span class="math inline">\(s_i\)</span>, the best we can do is:</p>
+<p><span id="eq-conditional-opt"><span class="math display">\[
+\max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c
+\tag{9}\]</span></span></p>
+<p>This is the optimal decision conditional on knowing <span class="math inline">\(s_i\)</span>, averaging over the remaining uncertainty <span class="math inline">\(s_i^c\)</span>.</p>
+<p>Since we don’t know in advance which <span class="math inline">\(s_i\)</span> we’ll observe, we average <a href="#eq-conditional-opt" class="quarto-xref">Equation&nbsp;9</a> over <span class="math inline">\(s_i\)</span>:</p>
+<p><span id="eq-evpxi-informed"><span class="math display">\[
+\int \left[ \max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c \right] p(s_i) \, ds_i
+\tag{10}\]</span></span></p>
+<p>The <strong>expected value of partial perfect information</strong> (EVPXI) is the improvement of <a href="#eq-evpxi-informed" class="quarto-xref">Equation&nbsp;10</a> over the prior decision (<a href="#eq-prior" class="quarto-xref">Equation&nbsp;2</a>):</p>
+<p><span id="eq-evpxi"><span class="math display">\[
+\text{EVPXI}(s_i) = \int \left[ \max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c \right] p(s_i) \, ds_i \;-\; \max_a \int U(a,s) \, p(s) \, ds
+\tag{11}\]</span></span></p>
+<p>Reading <a href="#eq-evpxi" class="quarto-xref">Equation&nbsp;11</a> from left to right: resolve <span class="math inline">\(s_i\)</span>, optimize given what you learned (but still average over everything you don’t know), then average over what you might learn. Subtract the best you could do without any information.</p>
+<p>By comparing EVPXI across different uncertainty sources, you can <strong>prioritize research and monitoring investments</strong>. Spend money learning about the uncertainties with the highest EVPXI, not necessarily the “most uncertain” parameters.</p>
+<p>An important caveat: partial EVPIs are <strong>not additive</strong>.</p>
+<p><span id="eq-non-additive"><span class="math display">\[
+\text{EVPXI}(A) + \text{EVPXI}(B) \neq \text{EVPXI}(A \cup B) \quad \text{in general}
+\tag{12}\]</span></span></p>
+<p>The information from <span class="math inline">\(A\)</span> may change which action is best, and that changes the value of learning <span class="math inline">\(B\)</span>. Uncertainties can be <strong>complementary</strong> (together worth more than the sum) or <strong>substitutes</strong> (together worth less).</p>
+</section>
+</section>
+<section id="voi-requires-probabilities" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> VOI Requires Probabilities</h1>
+<p>Notice that <strong>every VOI calculation requires a probability distribution <span class="math inline">\(p(s)\)</span> over the scenarios.</strong> The integrals in <a href="#eq-evpi" class="quarto-xref">Equation&nbsp;4</a> and <a href="#eq-evpxi" class="quarto-xref">Equation&nbsp;11</a> are only defined if you can write down <span class="math inline">\(p(s)\)</span>. Without probabilities, these quantities are undefined.</p>
+<p>This is a real limitation. In many climate risk problems, we face <strong>deep uncertainty</strong>: situations where we cannot confidently assign probabilities to the scenarios. We might disagree about the right probability model, or the range of plausible futures might be so wide that any single distribution feels arbitrary.</p>
+<p>When that happens, VOI breaks down — and we need different tools. That is exactly what we’ll tackle in Week 8: robustness and decision-making under deep uncertainty, where the goal shifts from “optimize given probabilities” to “find strategies that perform acceptably across many possible futures.”</p>
+</section>
+<section id="looking-ahead" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Looking Ahead</h1>
+<p><strong>Wednesday:</strong> Global Sensitivity Analysis — a complementary tool. VOI asks “which uncertainty affects the <em>decision</em>?” Sensitivity analysis asks “which uncertainty affects the <em>output</em>?” These are not the same thing, and understanding both is essential.</p>
+<p><strong>Friday (Lab 6):</strong> You’ll compute EVPI and EVPXI on the ICOW flood risk problem from Lab 5, determining whether the SLR trajectory or the discount rate matters more for the dike height decision.</p>
+<section id="references" class="level2" data-number="6.1">
 
-        // Determines where controls appear, "edges" or "bottom-right"
-        controlsLayout: 'edges',
 
-        // Visibility rule for backwards navigation arrows; "faded", "hidden"
-        // or "visible"
-        controlsBackArrows: 'faded',
 
-        // Display a presentation progress bar
-        progress: true,
 
-        // Display the page number of the current slide
-        slideNumber: 'c/t',
+</section>
+</section>
 
-        // 'all', 'print', or 'speaker'
-        showSlideNumber: 'all',
-
-        // Add the current slide number to the URL hash so that reloading the
-        // page/copying the URL will return you to the same slide
-        hash: true,
-
-        // Start with 1 for the hash rather than 0
-        hashOneBasedIndex: false,
-
-        // Flags if we should monitor the hash and change slides accordingly
-        respondToHashChanges: true,
-
-        // Push each slide change to the browser history
-        history: false,
-
-        // Enable keyboard shortcuts for navigation
-        keyboard: true,
-
-        // Enable the slide overview mode
-        overview: true,
-
-        // Disables the default reveal.js slide layout (scaling and centering)
-        // so that you can use custom CSS layout
-        disableLayout: false,
-
-        // Vertical centering of slides
-        center: false,
-
-        // Enables touch navigation on devices with touch input
-        touch: true,
-
-        // Loop the presentation
-        loop: false,
-
-        // Change the presentation direction to be RTL
-        rtl: false,
-
-        // see https://revealjs.com/vertical-slides/#navigation-mode
-        navigationMode: 'linear',
-
-        // Randomizes the order of slides each time the presentation loads
-        shuffle: false,
-
-        // Turns fragments on and off globally
-        fragments: true,
-
-        // Flags whether to include the current fragment in the URL,
-        // so that reloading brings you to the same fragment position
-        fragmentInURL: false,
-
-        // Flags if the presentation is running in an embedded mode,
-        // i.e. contained within a limited portion of the screen
-        embedded: false,
-
-        // Flags if we should show a help overlay when the questionmark
-        // key is pressed
-        help: true,
-
-        // Flags if it should be possible to pause the presentation (blackout)
-        pause: true,
-
-        // Flags if speaker notes should be visible to all viewers
-        showNotes: false,
-
-        // Global override for autoplaying embedded media (null/true/false)
-        autoPlayMedia: null,
-
-        // Global override for preloading lazy-loaded iframes (null/true/false)
-        preloadIframes: null,
-
-        // Number of milliseconds between automatically proceeding to the
-        // next slide, disabled when set to 0, this value can be overwritten
-        // by using a data-autoslide attribute on your slides
-        autoSlide: 0,
-
-        // Stop auto-sliding after user input
-        autoSlideStoppable: true,
-
-        // Use this method for navigation when auto-sliding
-        autoSlideMethod: null,
-
-        // Specify the average time in seconds that you think you will spend
-        // presenting each slide. This is used to show a pacing timer in the
-        // speaker view
-        defaultTiming: null,
-
-        // Enable slide navigation via mouse wheel
-        mouseWheel: false,
-
-        // The display mode that will be used to show slides
-        display: 'block',
-
-        // Hide cursor if inactive
-        hideInactiveCursor: true,
-
-        // Time before the cursor is hidden (in ms)
-        hideCursorTime: 5000,
-
-        // Opens links in an iframe preview overlay
-        previewLinks: false,
-
-        // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'none',
-
-        // Transition speed (default/fast/slow)
-        transitionSpeed: 'default',
-
-        // Transition style for full page slide backgrounds
-        // (none/fade/slide/convex/concave/zoom)
-        backgroundTransition: 'none',
-
-        // Number of slides away from the current that are visible
-        viewDistance: 3,
-
-        // Number of slides away from the current that are visible on mobile
-        // devices. It is advisable to set this to a lower number than
-        // viewDistance in order to save resources.
-        mobileViewDistance: 2,
-
-        // The "normal" size of the presentation, aspect ratio will be preserved
-        // when the presentation is scaled to fit different resolutions. Can be
-        // specified using percentage units.
-        width: 1280,
-
-        height: 720,
-
-        // Factor of the display size that should remain empty around the content
-        margin: 0.1,
-
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
-        // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
-
-          RevealMath,
-          RevealNotes,
-          RevealSearch,
-          RevealZoom
-        ]
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">6.1 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-murphy_voi:1985" class="csl-entry" role="listitem">
+Murphy, A. H., Katz, R. W., Winkler, R. L., &amp; Hsu, W.-R. (1985). Repetitive <span>Decision Making</span> and the <span>Value</span> of <span>Forecasts</span> in the <span>Cost</span>‐<span>Loss Ratio Situation</span>: <span>A Dynamic Model</span>. <em>Monthly Weather Review</em>, <em>113</em>(5), 801–813. <a href="https://doi.org/10.1175/1520-0493(1985)113<0801:RDMATV>2.0.CO;2">https://doi.org/10.1175/1520-0493(1985)113&lt;0801:RDMATV&gt;2.0.CO;2</a>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
-    </script>
-    <script id="quarto-html-after-body" type="application/javascript">
-      window.document.addEventListener("DOMContentLoaded", function (event) {
-        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
-        tabsets.forEach(function(tabset) {
-          const tabby = new Tabby('#' + tabset.id);
-        });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ceve-421-521\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
             }
           }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
           }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
             }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
-          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-          var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/ceve-421-521\.github\.io\/");
-          var isInternal = (href) => {
-              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-          }
-          // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-          for (var i=0; i<links.length; i++) {
-            const link = links[i];
-            if (!isInternal(link.href)) {
-              // undo the damage that might have been done by quarto-nav.js in the case of
-              // links that we want to consider external
-              if (link.dataset.originalHref !== undefined) {
-                link.href = link.dataset.originalHref;
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
               }
-                // target, if specified
-                link.setAttribute("target", "_blank");
-                if (link.getAttribute("rel") === null) {
-                  link.setAttribute("rel", "noopener");
-                }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
             }
           }
-        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
-            maxWidth: 500,
-            delay: 100,
-            arrow: false,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
             appendTo: function(el) {
-                return el.closest('section.slide') || el.parentElement;
+              return el.parentElement.parentElement.parentElement;
             },
             interactive: true,
             interactiveBorder: 10,
-            theme: 'light-border',
-            placement: 'bottom-start',
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
           };
-          if (contentFn) {
-            config.content = contentFn;
-          }
-          if (onTriggerFn) {
-            config.onTrigger = onTriggerFn;
-          }
-          if (onUntriggerFn) {
-            config.onUntrigger = onUntriggerFn;
-          }
-            config['offset'] = [0,0];
-            config['maxWidth'] = 700;
-          window.tippy(el, config); 
+          window.tippy(annoteTarget, config); 
         }
-        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-        for (var i=0; i<noterefs.length; i++) {
-          const ref = noterefs[i];
-          tippyHover(ref, function() {
-            // use id or data attribute instead here
-            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-            try { href = new URL(href).hash; } catch {}
-            const id = href.replace(/^#\/?/, "");
-            const note = window.document.getElementById(id);
-            if (note) {
-              return note.innerHTML;
-            } else {
-              return "";
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
             }
+            popup.appendChild(citeDiv);
           });
-        }
-            let selectedAnnoteEl;
-            const selectorForAnnotation = ( cell, annotation) => {
-              let cellAttr = 'data-code-cell="' + cell + '"';
-              let lineAttr = 'data-code-annotation="' +  annotation + '"';
-              const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-              return selector;
-            }
-            const selectCodeLines = (annoteEl) => {
-              const doc = window.document;
-              const targetCell = annoteEl.getAttribute("data-target-cell");
-              const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-              const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-              const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-              const lineIds = lines.map((line) => {
-                return targetCell + "-" + line;
-              })
-              let top = null;
-              let height = null;
-              let parent = null;
-              if (lineIds.length > 0) {
-                  //compute the position of the single el (top and bottom and make a div)
-                  const el = window.document.getElementById(lineIds[0]);
-                  top = el.offsetTop;
-                  height = el.offsetHeight;
-                  parent = el.parentElement.parentElement;
-                if (lineIds.length > 1) {
-                  const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-                  const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-                  height = bottom - top;
-                }
-                if (top !== null && height !== null && parent !== null) {
-                  // cook up a div (if necessary) and position it 
-                  let div = window.document.getElementById("code-annotation-line-highlight");
-                  if (div === null) {
-                    div = window.document.createElement("div");
-                    div.setAttribute("id", "code-annotation-line-highlight");
-                    div.style.position = 'absolute';
-                    parent.appendChild(div);
-                  }
-                  div.style.top = top - 2 + "px";
-                  div.style.height = height + 4 + "px";
-                  div.style.left = 0;
-                  let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-                  if (gutterDiv === null) {
-                    gutterDiv = window.document.createElement("div");
-                    gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                    gutterDiv.style.position = 'absolute';
-                    const codeCell = window.document.getElementById(targetCell);
-                    const gutter = codeCell.querySelector('.code-annotation-gutter');
-                    gutter.appendChild(gutterDiv);
-                  }
-                  gutterDiv.style.top = top - 2 + "px";
-                  gutterDiv.style.height = height + 4 + "px";
-                }
-                selectedAnnoteEl = annoteEl;
-              }
-            };
-            const unselectCodeLines = () => {
-              const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-              elementsIds.forEach((elId) => {
-                const div = window.document.getElementById(elId);
-                if (div) {
-                  div.remove();
-                }
-              });
-              selectedAnnoteEl = undefined;
-            };
-              // Handle positioning of the toggle
-          window.addEventListener(
-            "resize",
-            throttle(() => {
-              elRect = undefined;
-              if (selectedAnnoteEl) {
-                selectCodeLines(selectedAnnoteEl);
-              }
-            }, 10)
-          );
-          function throttle(fn, ms) {
-          let throttle = false;
-          let timer;
-            return (...args) => {
-              if(!throttle) { // first call gets through
-                  fn.apply(this, args);
-                  throttle = true;
-              } else { // all the others get throttled
-                  if(timer) clearTimeout(timer); // cancel #2
-                  timer = setTimeout(() => {
-                    fn.apply(this, args);
-                    timer = throttle = false;
-                  }, ms);
-              }
-            };
-          }
-            // Attach click handler to the DT
-            const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-            for (const annoteDlNode of annoteDls) {
-              annoteDlNode.addEventListener('click', (event) => {
-                const clickedEl = event.target;
-                if (clickedEl !== selectedAnnoteEl) {
-                  unselectCodeLines();
-                  const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-                  if (activeEl) {
-                    activeEl.classList.remove('code-annotation-active');
-                  }
-                  selectCodeLines(clickedEl);
-                  clickedEl.classList.add('code-annotation-active');
-                } else {
-                  // Unselect the line
-                  unselectCodeLines();
-                  clickedEl.classList.remove('code-annotation-active');
-                }
-              });
-            }
-        const findCites = (el) => {
-          const parentEl = el.parentElement;
-          if (parentEl) {
-            const cites = parentEl.dataset.cites;
-            if (cites) {
-              return {
-                el,
-                cites: cites.split(' ')
-              };
-            } else {
-              return findCites(el.parentElement)
-            }
-          } else {
-            return undefined;
-          }
-        };
-        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-        for (var i=0; i<bibliorefs.length; i++) {
-          const ref = bibliorefs[i];
-          const citeInfo = findCites(ref);
-          if (citeInfo) {
-            tippyHover(citeInfo.el, function() {
-              var popup = window.document.createElement('div');
-              citeInfo.cites.forEach(function(cite) {
-                var citeDiv = window.document.createElement('div');
-                citeDiv.classList.add('hanging-indent');
-                citeDiv.classList.add('csl-entry');
-                var biblioDiv = window.document.getElementById('ref-' + cite);
-                if (biblioDiv) {
-                  citeDiv.innerHTML = biblioDiv.innerHTML;
-                }
-                popup.appendChild(citeDiv);
-              });
-              return popup.innerHTML;
-            });
-          }
-        }
-      });
-      </script>
-    
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Content <i class="fa-solid fa-copyright" aria-label="copyright"></i> 2026 by <a href="https://jdossgollin.github.io">James Doss-Gollin</a>. All content licensed under a <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license (CC BY-NC-SA 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p><strong>Page still under construction.</strong></p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/lectures/week-07/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Made with <a href="https://julialang.org">Julia</a> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://www.github.com/CEVE-421-521/ceve-421-521.github.io">View the source on <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></p>
+</div>
+  </div>
+</footer>
+
+
+
 
 </body></html>
