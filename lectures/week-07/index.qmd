@@ -135,138 +135,16 @@ You can have enormous uncertainty about which scenario will occur but zero EVPI,
 Conversely, a small amount of uncertainty can have high EVPI if you're right on the decision boundary.
 
 
-# The Cost-Loss Ratio
+# Generalizing: The Cost-Loss Framework
 
-@murphy_voi:1985 generalize the umbrella problem into a canonical framework for valuing weather forecasts.
-The setup is the same:
+The umbrella is a special case of a general **protect-or-not** problem studied by @murphy_voi:1985.
+Any time you face a binary choice --- protect (cost $C$) or gamble on a loss ($L$) --- the cost-loss ratio $C/L$ determines the decision threshold, and the EVPI measures the value of resolving uncertainty before acting.
 
-- **Protect** (cost $C$): no loss regardless of weather
-- **Don't protect**: lose $L$ if the adverse event occurs
-
-The innovation is distinguishing three types of information available to the decision-maker:
-
-1. **Climatological information**: you only know the base rate $p_\theta$ (the long-run frequency of the adverse event)
-2. **Perfect information**: you know exactly whether the event will occur
-3. **Imperfect forecasts**: a forecast system with hit rate $p_1 = P(\text{event} \mid \text{forecast yes})$ and miss rate $p_0 = P(\text{event} \mid \text{forecast no})$
-
-
-With only climatological information, the minimum expected expense is:
-
-$$
-E_C = \min(p_\theta L, \; C)
-$$ {#eq-climatological}
-
-You either always protect or never protect, whichever is cheaper.
-With perfect forecasts, you protect only when the event occurs:
-
-$$
-E_P = p_\theta C
-$$ {#eq-perfect-forecast}
-
-The value of perfect forecasts is:
-
-$$
-V_P = E_C - E_P
-$$ {#eq-vp}
-
-This is our EVPI again, expressed in Murphy's notation.
-It is positive whenever $0 < p_\theta < 1$ and $C < L$.
-
-
-Real forecasts aren't perfect.
-An imperfect forecast is characterized by its conditional probabilities:
-
-- $p_1 = P(\text{event} \mid \text{forecast of event})$ --- the hit rate
-- $p_0 = P(\text{event} \mid \text{forecast of no event})$ --- the miss rate
-
-A key result, due to Blackwell (1953), is that the value of any properly calibrated forecast is bounded:
-
-$$
-0 \leq V_F \leq V_P
-$$ {#eq-blackwell}
-
-Imperfect forecasts can **never have negative expected value** --- as long as they're properly calibrated, acting on them is always at least as good as ignoring them.
-But the relationship between forecast quality and forecast value is **nonlinear**:
-
-- When $C/L \approx p_\theta$ (you're "on the fence" about whether to protect), even a modest forecast improvement has high value
-- When $C/L$ is far from $p_\theta$ (the decision is obvious either way), even a large improvement in forecast quality has little value
-
-The practical implication: forecasts are most valuable to decision-makers who are near the decision boundary.
-If the right action is obvious, no amount of forecast improvement will change anything.
-
-
-# Partial Information: Which Uncertainty to Resolve?
-
-Real decisions involve **many** sources of uncertainty.
-For flood risk, these include the SLR trajectory, the discount rate, the surge distribution, the depth-damage function, and more.
-Resolving all of them is expensive or impossible.
-But not all of them affect the decision.
-
-If you can only learn about *one* source of uncertainty, which one should it be?
-
-## An Example: Flood Insurance Pricing
-
-Suppose you're an insurer pricing flood policies.
-Your premium depends on uncertain inputs: the local flood probability, the building's elevation, the depth-damage relationship, and so on.
-Which uncertainty should you invest in reducing?
-
-If you're insuring **100,000 houses in the same floodplain**, investing in a better flood model pays off handsomely.
-The flood hazard uncertainty is shared across every policy in the portfolio --- resolving it improves all 100,000 pricing decisions at once.
-
-But if you're insuring **one house**, improving the regional flood model barely changes your premium.
-You'd be better off sending an inspector to measure the building's actual first-floor elevation and check for flood-proofing --- that building-specific uncertainty is what drives your pricing error for this particular policy.
-
-The "most uncertain" input isn't necessarily the one worth resolving.
-What matters is which uncertainty, if resolved, would most change your decision.
-That's what EVPXI measures.
-
-
-## The EVPXI Formula
-
-The same principle applies formally.
-We decompose the uncertain scenario $s$ into two parts: $s_i$ (one source of uncertainty, e.g., the SLR trajectory) and $s_i^c$ (everything else, e.g., the discount rate and surge parameters).
-
-If we learn $s_i$ but everything else stays uncertain, we can pick the best action for each value of $s_i$, while still hedging over $s_i^c$.
-For a given revealed value of $s_i$, the best we can do is:
-
-$$
-\max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c
-$$ {#eq-conditional-opt}
-
-This is the optimal decision conditional on knowing $s_i$, averaging over the remaining uncertainty $s_i^c$.
-
-Since we don't know in advance which $s_i$ we'll observe, we average @eq-conditional-opt over $s_i$:
-
-$$
-\int \left[ \max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c \right] p(s_i) \, ds_i
-$$ {#eq-evpxi-informed}
-
-The **expected value of partial perfect information** (EVPXI) is the improvement of @eq-evpxi-informed over the prior decision (@eq-prior):
-
-$$
-\text{EVPXI}(s_i) = \int \left[ \max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c \right] p(s_i) \, ds_i \;-\; \max_a \int U(a,s) \, p(s) \, ds
-$$ {#eq-evpxi}
-
-Reading @eq-evpxi from left to right: resolve $s_i$, optimize given what you learned (but still average over everything you don't know), then average over what you might learn.
-Subtract the best you could do without any information.
-
-By comparing EVPXI across different uncertainty sources, you can **prioritize research and monitoring investments**.
-Spend money learning about the uncertainties with the highest EVPXI, not necessarily the "most uncertain" parameters.
-
-
-An important caveat: partial EVPIs are **not additive**.
-
-$$
-\text{EVPXI}(A) + \text{EVPXI}(B) \neq \text{EVPXI}(A \cup B) \quad \text{in general}
-$$ {#eq-non-additive}
-
-The information from $A$ may change which action is best, and that changes the value of learning $B$.
-Uncertainties can be **complementary** (together worth more than the sum) or **substitutes** (together worth less).
 
 # VOI Requires Probabilities
 
 Notice that **every VOI calculation requires a probability distribution $p(s)$ over the scenarios.**
-The integrals in @eq-evpi and @eq-evpxi are only defined if you can write down $p(s)$.
+The integrals in @eq-evpi are only defined if you can write down $p(s)$.
 Without probabilities, these quantities are undefined.
 
 This is a real limitation.
@@ -279,11 +157,8 @@ That is exactly what we'll tackle in Week 8: robustness and decision-making unde
 
 # Looking Ahead
 
-**Wednesday:** Global Sensitivity Analysis --- a complementary tool.
-VOI asks "which uncertainty affects the *decision*?"
-Sensitivity analysis asks "which uncertainty affects the *output*?"
-These are not the same thing, and understanding both is essential.
+**Wednesday:** We'll extend EVPI to imperfect information (EVII) using decision trees and Bayes' rule, then introduce Global Sensitivity Analysis --- a complementary tool that asks "which uncertainty affects the *output*?" rather than "which uncertainty affects the *decision*?"
 
-**Friday (Lab 6):** You'll compute EVPI and EVPXI on the ICOW flood risk problem from Lab 5, determining whether the SLR trajectory or the discount rate matters more for the dike height decision.
+**Friday (Lab 6):** You'll compute EVPI on the ICOW flood risk problem from Lab 5 to determine which uncertainties matter most for the dike height decision.
 
 ## References

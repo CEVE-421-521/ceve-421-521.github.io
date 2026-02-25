@@ -36,8 +36,8 @@ You will often be encouraged to focus only on part of relevant papers.
 | **6** | Mon., Feb. 16 | {{< material type="lectures" id="week-06" label="Lecture:" text="Optimal Static Decisions" href="lectures/week-06/index.qmd" slides="lectures/week-06/index.html" slidepdf="lectures/week-06/index.pptx" >}} |
 | | Wed., Feb. 18 | **Exam 1** (Covers Weeks 1-4) |
 | | Fri., Feb. 20 | {{< material type="labs" id="lab-05-S26" label="Lab 5:" text="Simulation-Optimization" href="labs/lab-05-S26/index.qmd" >}} |
-| **7** | Mon., Feb. 23 | {{< material type="lectures" id="week-07" label="Lecture:" text="Value of Information" href="lectures/week-07/index.qmd" slides="lectures/week-07/index.html" slidepdf="lectures/week-07/index.pptx" >}} |
-| | Wed., Feb. 25 | {{< material type="lectures" id="week-07-wed" label="Lecture:" text="Global Sensitivity Analysis" href="lectures/week-07/wednesday.qmd" slides="lectures/week-07/wednesday.html" slidepdf="lectures/week-07/wednesday.pptx" >}} *(Remote)* |
+| **7** | Mon., Feb. 23 | {{< material type="lectures" id="week-07" label="Lecture:" text="Value of Information" href="lectures/week-07/index.qmd" >}} |
+| | Wed., Feb. 25 | {{< material type="lectures" id="week-07-evii" label="Lecture:" text="Value of Imperfect Information" href="lectures/week-07/evii.qmd" >}} / {{< material type="lectures" id="week-07-gsa" label="Lecture:" text="Global Sensitivity Analysis" href="lectures/week-07/gsa.qmd" slides="lectures/week-07/gsa.html" >}} |
 | | Fri., Feb. 27 | {{< material type="labs" id="lab-06-S26" label="Lab 6:" text="Value of Partial Information" href="labs/lab-06-S26/index.qmd" >}} / {{< material type="assignments" id="memo-1" label="Project:" text="Memo 1 Due" href="assignments/final-project/memo-1-framework.qmd" >}} |
 | **8** | Mon., Mar. 2 | {{< material type="lectures" id="week-08" label="Lecture:" text="Robustness & Deep Uncertainty" href="lectures/week-08/index.qmd" slides="lectures/week-08/index.html" slidepdf="lectures/week-08/index.pptx" >}} |
 | | Wed., Mar. 4 | {{< material type="readings" id="week-08" label="Paper Discussion:" text="Robustness & Deep Uncertainty" href="readings/week-08-reading.qmd" >}} |

@@ -118,6 +118,7 @@ format:
         numbers: true
     scrollable: true
     preview-links: auto
+    chalkboard: true
 
     # code, links, and refs
     link-external-newwindow: true

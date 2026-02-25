@@ -5,8 +5,9 @@ using Pkg
 Pkg.activate(".")
 
 # Configuration
-const INSTRUCTOR_DIV_START = r"^\s*::: \{\.instructor\}"
-const DIV_END = r"^\s*:::"
+const INSTRUCTOR_DIV_START = r"^\s*:::+\s+\{\.instructor\}"
+const DIV_OPEN = r"^\s*:::+\s*\{"
+const DIV_CLOSE = r"^\s*:::+\s*$"
 const SOLUTION_TAG = r"# SOLUTION"
 const INSTRUCTOR_TAG = r"# INSTRUCTOR"
 
@@ -44,22 +45,22 @@ end
 function sanitize_content(content::String)::String
     lines = split(content, '\n')
     output_lines = String[]
-    is_inside_instructor_block = false
+    instructor_depth = 0
     is_inside_solution_block = false
 
     for line in lines
-        # Handle Instructor Div Blocks
-        if occursin(INSTRUCTOR_DIV_START, line)
-            is_inside_instructor_block = true
+        # Handle Instructor Div Blocks (with nesting support)
+        if instructor_depth == 0 && occursin(INSTRUCTOR_DIV_START, line)
+            instructor_depth = 1
             continue
         end
 
-        if is_inside_instructor_block && occursin(DIV_END, line)
-            is_inside_instructor_block = false
-            continue
-        end
-
-        if is_inside_instructor_block
+        if instructor_depth > 0
+            if occursin(DIV_OPEN, line)
+                instructor_depth += 1
+            elseif occursin(DIV_CLOSE, line)
+                instructor_depth -= 1
+            end
             continue
         end
 

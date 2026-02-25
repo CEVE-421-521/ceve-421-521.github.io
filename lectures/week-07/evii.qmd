@@ -1,0 +1,491 @@
+---
+title: "Value of Imperfect Information"
+subtitle: "Lecture"
+date: 2026-02-25
+week: 7
+status: draft
+
+format:
+  revealjs: default
+  pptx: default
+
+author: "{{< var instructor.name >}}"
+course: "{{< var course.number >}}, {{< var course.title >}}"
+institution: "{{< var course.institution >}}"
+---
+
+## Recap: Monday's Umbrella Problem
+
+| | Bring umbrella | Don't bring |
+|:---|:---:|:---:|
+| Rain ($p = 0.3$) | $-5$ | $-50$ |
+| No rain ($1 - p = 0.7$) | $-5$ | $0$ |
+
+- **Without information:** bring the umbrella, expected cost $= \$5.00$
+- **With perfect information:** expected cost $= 0.3 \times 5 + 0.7 \times 0 = \$1.50$
+- **EVPI** $= 5.00 - 1.50 = \$3.50$
+
+::: {.notes}
+Target: 1:00.
+"Let's make sure everyone has the key result from Monday."
+Have the payoff table visible.
+Give 15 seconds for students to recall the EVPI formula.
+:::
+
+## Decision Trees
+
+A decision tree represents a decision problem as a sequence of nodes.
+
+- **Squares** are decisions (you choose)
+- **Circles** are chance events (nature chooses)
+- The order of nodes matches the order of $\max$ and $\sum$ in the formula
+
+::: {.notes}
+Target: 1:03.
+"A decision tree is just a picture of the formula. Let me show you what I mean."
+:::
+
+## Tree: No Information {.smaller}
+
+You choose *before* nature reveals the state.
+The decision node comes first --- this computes $\max_a \sum_s U(a,s) \, p(s)$.
+
+```{dot}
+//| label: fig-tree-no-info
+//| fig-cap: "Decision tree without information. You choose first, then nature reveals the state."
+//| code-fold: true
+digraph {
+    rankdir=LR
+    node [fontname="Helvetica", fontsize=11]
+    edge [fontname="Helvetica", fontsize=10]
+
+    D [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
+
+    NB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
+    ND [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
+
+    p1 [shape=plaintext, label="-$5"]
+    p2 [shape=plaintext, label="-$5"]
+    p3 [shape=plaintext, label="-$50"]
+    p4 [shape=plaintext, label="$0"]
+
+    D -> NB [label="  Bring umbrella", penwidth=2.5]
+    D -> ND [label="  Don't bring"]
+
+    NB -> p1 [label="  Rain (0.3)"]
+    NB -> p2 [label="  No rain (0.7)"]
+
+    ND -> p3 [label="  Rain (0.3)"]
+    ND -> p4 [label="  No rain (0.7)"]
+}
+```
+
+::: {.notes}
+Target: 1:06.
+"Decision first, then nature. You have to commit before you know."
+"The formula says the same thing: $\max$ is on the outside, $\sum$ is on the inside."
+:::
+
+## Solving the No-Information Tree
+
+Work from the leaves back to the root:
+
+**"Bring" branch:**
+$$E[\text{cost}] = 0.3 \times 5 + 0.7 \times 5 = 5$$
+
+**"Don't bring" branch:**
+$$E[\text{cost}] = 0.3 \times 50 + 0.7 \times 0 = 15$$
+
+Best action: **bring the umbrella**. Expected cost $= \$5.00$.
+
+::: {.notes}
+Target: 1:08.
+Walk through each branch on the board, pointing back to the tree.
+"The decision node picks the branch with the lower expected cost."
+:::
+
+## Tree: Perfect Information {.smaller}
+
+Nature reveals the state *before* you decide.
+The chance node comes first --- this computes $\sum_s \max_a U(a,s) \, p(s)$.
+
+```{dot}
+//| label: fig-tree-perfect-info
+//| fig-cap: "Decision tree with perfect information. Nature reveals the state, then you choose."
+//| code-fold: true
+digraph {
+    rankdir=LR
+    node [fontname="Helvetica", fontsize=11]
+    edge [fontname="Helvetica", fontsize=10]
+
+    N [shape=circle, label="Nature", width=1.0, style=filled, fillcolor="#e0e0e0"]
+
+    DR [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
+    DD [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
+
+    p1 [shape=plaintext, label="-$5"]
+    p2 [shape=plaintext, label="-$50"]
+    p3 [shape=plaintext, label="-$5"]
+    p4 [shape=plaintext, label="$0"]
+
+    N -> DR [label="  Rain (0.3)"]
+    N -> DD [label="  No rain (0.7)"]
+
+    DR -> p1 [label="  Bring", penwidth=2.5]
+    DR -> p2 [label="  Don't", style=dashed, color="#999999"]
+
+    DD -> p3 [label="  Bring", style=dashed, color="#999999"]
+    DD -> p4 [label="  Don't", penwidth=2.5]
+}
+```
+
+::: {.notes}
+Target: 1:10.
+"Now nature goes first. If you know it's raining, bring the umbrella. If you know it's dry, leave it."
+:::
+
+## Solving the Perfect-Information Tree
+
+At each decision node, pick the cheapest action:
+
+- **Rain** (prob 0.3): bring umbrella, cost $= 5$ (vs. 50 without)
+- **No rain** (prob 0.7): leave umbrella, cost $= 0$ (vs. 5 with)
+
+Average over nature:
+
+$$E[\text{cost}] = 0.3 \times 5 + 0.7 \times 0 = \$1.50$$
+
+::: {.notes}
+Target: 1:12.
+"With perfect information, you never pay the loss AND you skip the umbrella hassle on dry days."
+:::
+
+## EVPI From the Trees
+
+The EVPI is the gap between the two trees:
+
+$$\text{EVPI} = 5.00 - 1.50 = \$3.50$$
+
+The **only difference** is the order of the square and the circle --- which is the order of $\max$ and $\sum$ in the formula.
+
+**Scaling note:** imagine drawing a tree for the dike problem.
+The decision node fans into infinitely many heights, each into branches for sea level rise, storm surge, discount rate...
+The integral $\int \max_a U(a,s) \, p(s) \, ds$ is the compact version of an infinite tree.
+
+::: {.notes}
+Target: 1:15.
+Key point: "The only difference between these two trees is the order of the square and the circle. The tree is just a picture of the math."
+
+Scaling: "For the umbrella, the tree and the formula say the same thing. For hard problems, you need the formula."
+:::
+
+## An Imperfect Forecast
+
+No real forecast is perfect.
+A forecast's accuracy is characterized by two conditional probabilities:
+
+- **Hit rate:** $P(\text{f. rain} \mid \text{rain}) = 0.90$
+- **Correct rejection rate:** $P(\text{f. dry} \mid \text{dry}) = 0.80$
+
+These describe the forecast system, independent of the base rate.
+
+To draw the imperfect-information tree, we need $P(\text{f. rain})$ and $P(\text{rain} \mid \text{f. rain})$ --- those require Bayes' rule.
+
+::: {.notes}
+Target: 1:18.
+"On Monday the oracle was always right. Now the oracle is your weather app --- and sometimes it's wrong."
+
+"We know the hit rate and the correct rejection rate. But to build the tree, we need different numbers. Bayes' rule bridges the gap."
+:::
+
+## Building the Tree: Signal Probabilities {.smaller}
+
+First, the complementary likelihoods:
+
+$$P(\text{f. dry} \mid \text{rain}) = 1 - 0.90 = 0.10, \qquad P(\text{f. rain} \mid \text{dry}) = 1 - 0.80 = 0.20$$
+
+Then the law of total probability gives the signal probabilities:
+
+$$
+P(\text{f. rain}) = \underbrace{0.90 \times 0.30}_{0.27} + \underbrace{0.20 \times 0.70}_{0.14} = 0.41
+$$
+
+$$
+P(\text{f. dry}) = 1 - 0.41 = 0.59
+$$
+
+These are the **first branches** of the imperfect-information tree.
+
+::: {.notes}
+Target: 1:22.
+Walk through each step on the board.
+"We start with two numbers (hit rate, correct rejection) and the base rate. Total probability gives us how often the forecast says rain vs. dry."
+:::
+
+## The Incomplete Tree {.smaller}
+
+We can draw the first two layers, but the nature nodes need posterior probabilities we haven't computed yet.
+
+```{dot}
+//| label: fig-tree-incomplete
+//| fig-cap: "Incomplete imperfect-information tree. The signal and decision layers are known, but the posterior probabilities at the nature nodes require Bayes' rule."
+//| code-fold: true
+digraph {
+    rankdir=LR
+    node [fontname="Helvetica", fontsize=11]
+    edge [fontname="Helvetica", fontsize=10]
+
+    F [shape=circle, label="Signal", width=1.0, style=filled, fillcolor="#e0e0e0"]
+
+    DR [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
+    DD [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
+
+    NRB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#ffe0e0"]
+    NRD [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#ffe0e0"]
+    NDB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#ffe0e0"]
+    NDD [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#ffe0e0"]
+
+    F -> DR [label="  Forecast rain (0.41)"]
+    F -> DD [label="  Forecast dry (0.59)"]
+
+    DR -> NRB [label="  Bring"]
+    DR -> NRD [label="  Don't"]
+
+    DD -> NDB [label="  Bring"]
+    DD -> NDD [label="  Don't"]
+
+    NRB -> QRB1 [label="  Rain (???)"]
+    NRB -> QRB2 [label="  Dry (???)"]
+    NRD -> QRD1 [label="  Rain (???)"]
+    NRD -> QRD2 [label="  Dry (???)"]
+    NDB -> QDB1 [label="  Rain (???)"]
+    NDB -> QDB2 [label="  Dry (???)"]
+    NDD -> QDD1 [label="  Rain (???)"]
+    NDD -> QDD2 [label="  Dry (???)"]
+
+    QRB1 [shape=plaintext, label="-$5"]
+    QRB2 [shape=plaintext, label="-$5"]
+    QRD1 [shape=plaintext, label="-$50"]
+    QRD2 [shape=plaintext, label="$0"]
+    QDB1 [shape=plaintext, label="-$5"]
+    QDB2 [shape=plaintext, label="-$5"]
+    QDD1 [shape=plaintext, label="-$50"]
+    QDD2 [shape=plaintext, label="$0"]
+}
+```
+
+::: {.notes}
+Target: 1:24.
+"We know the signal probabilities and the payoffs. But to fill in the nature nodes, we need the posterior probabilities: what's the chance of rain *given* the forecast? That's Bayes' rule."
+
+Point to the red-highlighted nature nodes.
+:::
+
+## Building the Tree: Posterior Probabilities {.smaller}
+
+Apply Bayes' rule to fill in the nature nodes:
+
+$$
+P(\text{rain} \mid \text{f. rain}) = \frac{P(\text{f. rain} \mid \text{rain}) \cdot p}{P(\text{f. rain})} = \frac{0.90 \times 0.30}{0.41} = \frac{0.27}{0.41} \approx 0.66
+$$
+
+$$
+P(\text{rain} \mid \text{f. dry}) = \frac{P(\text{f. dry} \mid \text{rain}) \cdot p}{P(\text{f. dry})} = \frac{0.10 \times 0.30}{0.59} = \frac{0.03}{0.59} \approx 0.05
+$$
+
+The forecast shifts the probability from the base rate of 0.30 to **0.66** (forecast rain) or **0.05** (forecast dry).
+
+::: {.notes}
+Target: 1:28.
+"Bayes' rule does the rest. 0.27 / 0.41 = 0.66."
+"If the forecast says rain, the chance of rain jumps from 30% to 66%. If it says dry, the chance drops to 5%."
+
+Key normalization: the denominator P(f. rain) = 0.41 ensures the posteriors are proper probabilities.
+:::
+
+## The Complete Tree {.smaller}
+
+Now we can fill in every number.
+Three layers: **Signal** (chance) $\to$ **Decision** (you) $\to$ **Nature** (chance).
+
+```{dot}
+//| label: fig-tree-imperfect
+//| fig-cap: "Decision tree with an imperfect forecast. Posterior probabilities from Bayes' rule replace the prior at the nature nodes."
+//| code-fold: true
+digraph {
+    rankdir=LR
+    node [fontname="Helvetica", fontsize=11]
+    edge [fontname="Helvetica", fontsize=10]
+
+    F [shape=circle, label="Signal", width=1.0, style=filled, fillcolor="#e0e0e0"]
+
+    DR [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
+    DD [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
+
+    NRB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
+    NRD [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
+    NDB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
+    NDD [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
+
+    p1 [shape=plaintext, label="-$5"]
+    p2 [shape=plaintext, label="-$5"]
+    p3 [shape=plaintext, label="-$50"]
+    p4 [shape=plaintext, label="$0"]
+    p5 [shape=plaintext, label="-$5"]
+    p6 [shape=plaintext, label="-$5"]
+    p7 [shape=plaintext, label="-$50"]
+    p8 [shape=plaintext, label="$0"]
+
+    F -> DR [label="  Forecast rain (0.41)"]
+    F -> DD [label="  Forecast dry (0.59)"]
+
+    DR -> NRB [label="  Bring", penwidth=2.5]
+    DR -> NRD [label="  Don't", style=dashed, color="#999999"]
+
+    DD -> NDB [label="  Bring", style=dashed, color="#999999"]
+    DD -> NDD [label="  Don't", penwidth=2.5]
+
+    NRB -> p1 [label="  Rain (0.66)"]
+    NRB -> p2 [label="  Dry (0.34)"]
+
+    NRD -> p3 [label="  Rain (0.66)"]
+    NRD -> p4 [label="  Dry (0.34)"]
+
+    NDB -> p5 [label="  Rain (0.05)"]
+    NDB -> p6 [label="  Dry (0.95)"]
+
+    NDD -> p7 [label="  Rain (0.05)"]
+    NDD -> p8 [label="  Dry (0.95)"]
+}
+```
+
+::: {.notes}
+Target: 1:30.
+"Compare the three trees. Without info: Decision → Nature. Perfect info: Nature → Decision. Imperfect info: Signal → Decision → Nature."
+
+"The signal doesn't tell you the state directly --- it shifts your probability via Bayes' rule. That's the whole story of EVII in one picture."
+
+Note: the bold/dashed branches already show the optimal actions --- we'll verify that next.
+:::
+
+## Solving the Tree: Optimal Actions
+
+At each decision node, apply Monday's cost-loss rule: bring the umbrella when $P(\text{rain}) \times L > C$.
+
+- **Forecast rain** ($P(\text{rain}) = 0.66$): $0.66 \times 50 = 33 > 5$ $\Rightarrow$ **bring umbrella**
+- **Forecast dry** ($P(\text{rain}) = 0.05$): $0.05 \times 50 = 2.50 < 5$ $\Rightarrow$ **leave umbrella**
+
+The bold branches in the tree confirm the optimal action at each decision node.
+
+::: {.notes}
+Target: 1:33.
+"The cost-loss rule from Monday works at every decision node --- just use the posterior probability instead of the prior."
+
+"When the forecast says rain, expected loss without protection is $33 --- much more than $5, so bring it. When the forecast says dry, expected loss is only $2.50 --- not worth the $5 hassle."
+:::
+
+## Solving the Tree: Expected Cost
+
+Roll back to the signal node.
+The expected cost along each optimal branch:
+
+- **Forecast rain** (prob 0.41): bring umbrella $\to$ cost $= \$5.00$
+- **Forecast dry** (prob 0.59): leave umbrella $\to$ expected cost $= 0.05 \times 50 + 0.95 \times 0 = \$2.50$
+
+Average over the signal:
+
+$$
+E[\text{cost with forecast}] = 0.41 \times 5.00 + 0.59 \times 2.50 = 2.05 + 1.475 = \$3.55
+$$
+
+::: {.notes}
+Target: 1:36.
+"For each signal, we've already solved the optimal action. Now we average across the two signals, weighting by how often each signal occurs."
+
+Note for precision: with exact (unrounded) posteriors, this equals exactly $3.55 because $0.41 \times 5 + 0.03 \times 50 = 2.05 + 1.50 = 3.55$.
+:::
+
+## EVII
+
+| Scenario | Expected cost |
+|:---|:---:|
+| No information | $\$5.00$ |
+| Imperfect forecast | $\$3.55$ |
+| Perfect information | $\$1.50$ |
+
+$$
+\text{EVII} = 5.00 - 3.55 = \$1.45
+$$
+
+$$
+\text{EVPI} = 5.00 - 1.50 = \$3.50
+$$
+
+The forecast captures $1.45 / 3.50 \approx 41\%$ of the perfect-information value.
+
+::: {.notes}
+Target: 1:39.
+"The forecast isn't perfect, but it's still worth $1.45 --- about 41% of what a perfect oracle would give."
+
+"The dangerous branch is forecast dry + actually rains: you get soaked. But that only happens about 3% of the time (0.10 × 0.30)."
+
+Ask: "What would make the forecast more or less valuable?"
+Key answers: better hit/rejection rates increase EVII; if the base rate is far from $C/L$, the decision is already obvious and the forecast adds little.
+:::
+
+## The General Formula {.smaller}
+
+The umbrella illustrates a general three-step pattern:
+
+1. **Enumerate signals:** each possible signal $z$ has probability $p(z)$
+2. **Update and optimize:** for each signal, compute the posterior $p(s \mid z)$ via Bayes' rule, then choose the best action
+3. **Average over signals**
+
+$$
+\text{EVII} = \underbrace{\int \left[ \max_a \int U(a, s) \, p(s \mid z) \, ds \right] p(z) \, dz}_{\text{get signal, update, optimize, average}} \;-\; \underbrace{\max_a \int U(a, s) \, p(s) \, ds}_{\text{optimize with prior alone}}
+$$
+
+This reduces to EVPI when the signal perfectly reveals $s$, and to zero when the signal is pure noise ($p(s \mid z) = p(s)$).
+
+::: {.notes}
+Target: 1:42.
+Walk through the three steps verbally before showing the formula.
+"EVPI is the ceiling --- you proved that with the umbrella numbers."
+
+On scaling: "The decision tree for EVII has three layers: signal, decision, nature.
+For the umbrella, that's manageable --- 2 signals × 2 actions × 2 states = 8 leaves.
+For the dike problem with a continuous forecast, you'd need to integrate over all possible signals.
+The formula handles this naturally. The tree would be infinite."
+:::
+
+## Blackwell's Theorem
+
+A key result [@blackwell_comparison:1953]: $0 \leq \text{EVII} \leq \text{EVPI}$.
+
+An imperfect forecast can never hurt in expectation.
+
+The relationship between forecast quality and value is **nonlinear**.
+Forecasts are most valuable near the **decision boundary** ($C/L \approx p$).
+When the decision is already obvious, even a much better forecast adds little value.
+
+::: {.notes}
+Target: 1:45.
+"Forecasts are most valuable to decision-makers who are on the fence."
+Draw a number line with $C/L$ and $p$ marked.
+When they're close, a nudge from the forecast flips the decision.
+When they're far apart, no forecast can change the outcome.
+"Spending money to improve a forecast is only worthwhile if the forecast actually changes decisions."
+:::
+
+## Summary
+
+1. **Decision trees** visualize the order of $\max$ and $\sum$ in expected value calculations. The EVPI is the gap between "nature first" and "decision first" trees.
+2. **EVII** extends this to noisy signals: Signal $\to$ Decision $\to$ Nature. Bayes' rule computes posteriors; Blackwell's theorem guarantees $0 \leq \text{EVII} \leq \text{EVPI}$.
+3. For continuous or high-dimensional problems, trees become intractable --- the integral formulation is the compact representation.
+
+::: {.notes}
+Target: 1:48.
+"Three things to remember: trees picture the formula, EVII adds a signal layer, and integrals replace trees when the problem gets big."
+:::
+
+## References
