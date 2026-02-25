@@ -153,16 +153,11 @@ window.Quarto = {
   <li><a href="#worked-example" id="toc-worked-example" class="nav-link" data-scroll-target="#worked-example"><span class="header-section-number">2.1</span> Worked Example</a></li>
   <li><a href="#when-is-evpi-zero" id="toc-when-is-evpi-zero" class="nav-link" data-scroll-target="#when-is-evpi-zero"><span class="header-section-number">2.2</span> When is EVPI Zero?</a></li>
   </ul></li>
-  <li><a href="#the-cost-loss-ratio" id="toc-the-cost-loss-ratio" class="nav-link" data-scroll-target="#the-cost-loss-ratio"><span class="header-section-number">3</span> The Cost-Loss Ratio</a></li>
-  <li><a href="#partial-information-which-uncertainty-to-resolve" id="toc-partial-information-which-uncertainty-to-resolve" class="nav-link" data-scroll-target="#partial-information-which-uncertainty-to-resolve"><span class="header-section-number">4</span> Partial Information: Which Uncertainty to Resolve?</a>
+  <li><a href="#generalizing-the-cost-loss-framework" id="toc-generalizing-the-cost-loss-framework" class="nav-link" data-scroll-target="#generalizing-the-cost-loss-framework"><span class="header-section-number">3</span> Generalizing: The Cost-Loss Framework</a></li>
+  <li><a href="#voi-requires-probabilities" id="toc-voi-requires-probabilities" class="nav-link" data-scroll-target="#voi-requires-probabilities"><span class="header-section-number">4</span> VOI Requires Probabilities</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">5</span> Looking Ahead</a>
   <ul class="collapse">
-  <li><a href="#an-example-flood-insurance-pricing" id="toc-an-example-flood-insurance-pricing" class="nav-link" data-scroll-target="#an-example-flood-insurance-pricing"><span class="header-section-number">4.1</span> An Example: Flood Insurance Pricing</a></li>
-  <li><a href="#the-evpxi-formula" id="toc-the-evpxi-formula" class="nav-link" data-scroll-target="#the-evpxi-formula"><span class="header-section-number">4.2</span> The EVPXI Formula</a></li>
-  </ul></li>
-  <li><a href="#voi-requires-probabilities" id="toc-voi-requires-probabilities" class="nav-link" data-scroll-target="#voi-requires-probabilities"><span class="header-section-number">5</span> VOI Requires Probabilities</a></li>
-  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead"><span class="header-section-number">6</span> Looking Ahead</a>
-  <ul class="collapse">
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6.1</span> References</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5.1</span> References</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/lectures/week-07/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
@@ -284,95 +279,21 @@ p &gt; \frac{C}{L}
 <p>This is an important conceptual point: <strong>uncertainty and information value are not the same thing.</strong> You can have enormous uncertainty about which scenario will occur but zero EVPI, if the uncertainty doesn’t affect which action is best. Conversely, a small amount of uncertainty can have high EVPI if you’re right on the decision boundary.</p>
 </section>
 </section>
-<section id="the-cost-loss-ratio" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> The Cost-Loss Ratio</h1>
-<p><span class="citation" data-cites="murphy_voi:1985">Murphy et al. (<a href="#ref-murphy_voi:1985" role="doc-biblioref">1985</a>)</span> generalize the umbrella problem into a canonical framework for valuing weather forecasts. The setup is the same:</p>
-<ul>
-<li><strong>Protect</strong> (cost <span class="math inline">\(C\)</span>): no loss regardless of weather</li>
-<li><strong>Don’t protect</strong>: lose <span class="math inline">\(L\)</span> if the adverse event occurs</li>
-</ul>
-<p>The innovation is distinguishing three types of information available to the decision-maker:</p>
-<ol type="1">
-<li><strong>Climatological information</strong>: you only know the base rate <span class="math inline">\(p_\theta\)</span> (the long-run frequency of the adverse event)</li>
-<li><strong>Perfect information</strong>: you know exactly whether the event will occur</li>
-<li><strong>Imperfect forecasts</strong>: a forecast system with hit rate <span class="math inline">\(p_1 = P(\text{event} \mid \text{forecast yes})\)</span> and miss rate <span class="math inline">\(p_0 = P(\text{event} \mid \text{forecast no})\)</span></li>
-</ol>
-<p>With only climatological information, the minimum expected expense is:</p>
-<p><span id="eq-climatological"><span class="math display">\[
-E_C = \min(p_\theta L, \; C)
-\tag{5}\]</span></span></p>
-<p>You either always protect or never protect, whichever is cheaper. With perfect forecasts, you protect only when the event occurs:</p>
-<p><span id="eq-perfect-forecast"><span class="math display">\[
-E_P = p_\theta C
-\tag{6}\]</span></span></p>
-<p>The value of perfect forecasts is:</p>
-<p><span id="eq-vp"><span class="math display">\[
-V_P = E_C - E_P
-\tag{7}\]</span></span></p>
-<p>This is our EVPI again, expressed in Murphy’s notation. It is positive whenever <span class="math inline">\(0 &lt; p_\theta &lt; 1\)</span> and <span class="math inline">\(C &lt; L\)</span>.</p>
-<p>Real forecasts aren’t perfect. An imperfect forecast is characterized by its conditional probabilities:</p>
-<ul>
-<li><span class="math inline">\(p_1 = P(\text{event} \mid \text{forecast of event})\)</span> — the hit rate</li>
-<li><span class="math inline">\(p_0 = P(\text{event} \mid \text{forecast of no event})\)</span> — the miss rate</li>
-</ul>
-<p>A key result, due to Blackwell (1953), is that the value of any properly calibrated forecast is bounded:</p>
-<p><span id="eq-blackwell"><span class="math display">\[
-0 \leq V_F \leq V_P
-\tag{8}\]</span></span></p>
-<p>Imperfect forecasts can <strong>never have negative expected value</strong> — as long as they’re properly calibrated, acting on them is always at least as good as ignoring them. But the relationship between forecast quality and forecast value is <strong>nonlinear</strong>:</p>
-<ul>
-<li>When <span class="math inline">\(C/L \approx p_\theta\)</span> (you’re “on the fence” about whether to protect), even a modest forecast improvement has high value</li>
-<li>When <span class="math inline">\(C/L\)</span> is far from <span class="math inline">\(p_\theta\)</span> (the decision is obvious either way), even a large improvement in forecast quality has little value</li>
-</ul>
-<p>The practical implication: forecasts are most valuable to decision-makers who are near the decision boundary. If the right action is obvious, no amount of forecast improvement will change anything.</p>
+<section id="generalizing-the-cost-loss-framework" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Generalizing: The Cost-Loss Framework</h1>
+<p>The umbrella is a special case of a general <strong>protect-or-not</strong> problem studied by <span class="citation" data-cites="murphy_voi:1985">Murphy et al. (<a href="#ref-murphy_voi:1985" role="doc-biblioref">1985</a>)</span>. Any time you face a binary choice — protect (cost <span class="math inline">\(C\)</span>) or gamble on a loss (<span class="math inline">\(L\)</span>) — the cost-loss ratio <span class="math inline">\(C/L\)</span> determines the decision threshold, and the EVPI measures the value of resolving uncertainty before acting.</p>
 </section>
-<section id="partial-information-which-uncertainty-to-resolve" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Partial Information: Which Uncertainty to Resolve?</h1>
-<p>Real decisions involve <strong>many</strong> sources of uncertainty. For flood risk, these include the SLR trajectory, the discount rate, the surge distribution, the depth-damage function, and more. Resolving all of them is expensive or impossible. But not all of them affect the decision.</p>
-<p>If you can only learn about <em>one</em> source of uncertainty, which one should it be?</p>
-<section id="an-example-flood-insurance-pricing" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="an-example-flood-insurance-pricing"><span class="header-section-number">4.1</span> An Example: Flood Insurance Pricing</h2>
-<p>Suppose you’re an insurer pricing flood policies. Your premium depends on uncertain inputs: the local flood probability, the building’s elevation, the depth-damage relationship, and so on. Which uncertainty should you invest in reducing?</p>
-<p>If you’re insuring <strong>100,000 houses in the same floodplain</strong>, investing in a better flood model pays off handsomely. The flood hazard uncertainty is shared across every policy in the portfolio — resolving it improves all 100,000 pricing decisions at once.</p>
-<p>But if you’re insuring <strong>one house</strong>, improving the regional flood model barely changes your premium. You’d be better off sending an inspector to measure the building’s actual first-floor elevation and check for flood-proofing — that building-specific uncertainty is what drives your pricing error for this particular policy.</p>
-<p>The “most uncertain” input isn’t necessarily the one worth resolving. What matters is which uncertainty, if resolved, would most change your decision. That’s what EVPXI measures.</p>
-</section>
-<section id="the-evpxi-formula" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="the-evpxi-formula"><span class="header-section-number">4.2</span> The EVPXI Formula</h2>
-<p>The same principle applies formally. We decompose the uncertain scenario <span class="math inline">\(s\)</span> into two parts: <span class="math inline">\(s_i\)</span> (one source of uncertainty, e.g., the SLR trajectory) and <span class="math inline">\(s_i^c\)</span> (everything else, e.g., the discount rate and surge parameters).</p>
-<p>If we learn <span class="math inline">\(s_i\)</span> but everything else stays uncertain, we can pick the best action for each value of <span class="math inline">\(s_i\)</span>, while still hedging over <span class="math inline">\(s_i^c\)</span>. For a given revealed value of <span class="math inline">\(s_i\)</span>, the best we can do is:</p>
-<p><span id="eq-conditional-opt"><span class="math display">\[
-\max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c
-\tag{9}\]</span></span></p>
-<p>This is the optimal decision conditional on knowing <span class="math inline">\(s_i\)</span>, averaging over the remaining uncertainty <span class="math inline">\(s_i^c\)</span>.</p>
-<p>Since we don’t know in advance which <span class="math inline">\(s_i\)</span> we’ll observe, we average <a href="#eq-conditional-opt" class="quarto-xref">Equation&nbsp;9</a> over <span class="math inline">\(s_i\)</span>:</p>
-<p><span id="eq-evpxi-informed"><span class="math display">\[
-\int \left[ \max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c \right] p(s_i) \, ds_i
-\tag{10}\]</span></span></p>
-<p>The <strong>expected value of partial perfect information</strong> (EVPXI) is the improvement of <a href="#eq-evpxi-informed" class="quarto-xref">Equation&nbsp;10</a> over the prior decision (<a href="#eq-prior" class="quarto-xref">Equation&nbsp;2</a>):</p>
-<p><span id="eq-evpxi"><span class="math display">\[
-\text{EVPXI}(s_i) = \int \left[ \max_a \int U(a, s_i, s_i^c) \, p(s_i^c \mid s_i) \, ds_i^c \right] p(s_i) \, ds_i \;-\; \max_a \int U(a,s) \, p(s) \, ds
-\tag{11}\]</span></span></p>
-<p>Reading <a href="#eq-evpxi" class="quarto-xref">Equation&nbsp;11</a> from left to right: resolve <span class="math inline">\(s_i\)</span>, optimize given what you learned (but still average over everything you don’t know), then average over what you might learn. Subtract the best you could do without any information.</p>
-<p>By comparing EVPXI across different uncertainty sources, you can <strong>prioritize research and monitoring investments</strong>. Spend money learning about the uncertainties with the highest EVPXI, not necessarily the “most uncertain” parameters.</p>
-<p>An important caveat: partial EVPIs are <strong>not additive</strong>.</p>
-<p><span id="eq-non-additive"><span class="math display">\[
-\text{EVPXI}(A) + \text{EVPXI}(B) \neq \text{EVPXI}(A \cup B) \quad \text{in general}
-\tag{12}\]</span></span></p>
-<p>The information from <span class="math inline">\(A\)</span> may change which action is best, and that changes the value of learning <span class="math inline">\(B\)</span>. Uncertainties can be <strong>complementary</strong> (together worth more than the sum) or <strong>substitutes</strong> (together worth less).</p>
-</section>
-</section>
-<section id="voi-requires-probabilities" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> VOI Requires Probabilities</h1>
-<p>Notice that <strong>every VOI calculation requires a probability distribution <span class="math inline">\(p(s)\)</span> over the scenarios.</strong> The integrals in <a href="#eq-evpi" class="quarto-xref">Equation&nbsp;4</a> and <a href="#eq-evpxi" class="quarto-xref">Equation&nbsp;11</a> are only defined if you can write down <span class="math inline">\(p(s)\)</span>. Without probabilities, these quantities are undefined.</p>
+<section id="voi-requires-probabilities" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> VOI Requires Probabilities</h1>
+<p>Notice that <strong>every VOI calculation requires a probability distribution <span class="math inline">\(p(s)\)</span> over the scenarios.</strong> The integrals in <a href="#eq-evpi" class="quarto-xref">Equation&nbsp;4</a> are only defined if you can write down <span class="math inline">\(p(s)\)</span>. Without probabilities, these quantities are undefined.</p>
 <p>This is a real limitation. In many climate risk problems, we face <strong>deep uncertainty</strong>: situations where we cannot confidently assign probabilities to the scenarios. We might disagree about the right probability model, or the range of plausible futures might be so wide that any single distribution feels arbitrary.</p>
 <p>When that happens, VOI breaks down — and we need different tools. That is exactly what we’ll tackle in Week 8: robustness and decision-making under deep uncertainty, where the goal shifts from “optimize given probabilities” to “find strategies that perform acceptably across many possible futures.”</p>
 </section>
-<section id="looking-ahead" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Looking Ahead</h1>
-<p><strong>Wednesday:</strong> Global Sensitivity Analysis — a complementary tool. VOI asks “which uncertainty affects the <em>decision</em>?” Sensitivity analysis asks “which uncertainty affects the <em>output</em>?” These are not the same thing, and understanding both is essential.</p>
-<p><strong>Friday (Lab 6):</strong> You’ll compute EVPI and EVPXI on the ICOW flood risk problem from Lab 5, determining whether the SLR trajectory or the discount rate matters more for the dike height decision.</p>
-<section id="references" class="level2" data-number="6.1">
+<section id="looking-ahead" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Looking Ahead</h1>
+<p><strong>Wednesday:</strong> We’ll extend EVPI to imperfect information (EVII) using decision trees and Bayes’ rule, then introduce Global Sensitivity Analysis — a complementary tool that asks “which uncertainty affects the <em>output</em>?” rather than “which uncertainty affects the <em>decision</em>?”</p>
+<p><strong>Friday (Lab 6):</strong> You’ll compute EVPI on the ICOW flood risk problem from Lab 5 to determine which uncertainties matter most for the dike height decision.</p>
+<section id="references" class="level2" data-number="5.1">
 
 
 
@@ -380,7 +301,7 @@ V_P = E_C - E_P
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">6.1 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">5.1 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-murphy_voi:1985" class="csl-entry" role="listitem">
 Murphy, A. H., Katz, R. W., Winkler, R. L., &amp; Hsu, W.-R. (1985). Repetitive <span>Decision Making</span> and the <span>Value</span> of <span>Forecasts</span> in the <span>Cost</span>‐<span>Loss Ratio Situation</span>: <span>A Dynamic Model</span>. <em>Monthly Weather Review</em>, <em>113</em>(5), 801–813. <a href="https://doi.org/10.1175/1520-0493(1985)113<0801:RDMATV>2.0.CO;2">https://doi.org/10.1175/1520-0493(1985)113&lt;0801:RDMATV&gt;2.0.CO;2</a>
 </div>
