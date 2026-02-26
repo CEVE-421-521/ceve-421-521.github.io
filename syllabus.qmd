@@ -256,9 +256,9 @@ Updated versions will be posted on the course website.*
 | | **Module 2** | **Decision Analysis** | |
 | **5** | Feb 9, 11 | Valuation & Benefit-Cost Analysis | | |
 | **6** | Feb 16, 18, 20 | Optimal Static Decisions | Lab 5: Simulation-Optimization / **Exam 1** *(Covers Weeks 1-4)* | |
-| **7** | Feb 23, 25, 27 | Sensitivity & Value of Information *(Mon. Remote)* | Lab 6: Value of Partial Information | Memo 1 |
+| **7** | Feb 23, 25, 27 | Sensitivity & Value of Information *(Mon. Remote)* | Lab 6: Value of Partial Information | |
 | **8** | Mar 2, 4, 6 | Robustness & Deep Uncertainty | Lab 7: Robustness Metrics | |
-| **9** | Mar 9, 11, 13 | Trade-offs & Values *(Mon. Remote)* | **Exam 2** *(Covers Weeks 5-8)* | |
+| **9** | Mar 9, 11, 13 | Trade-offs & Values *(Mon. Remote)* | **Exam 2** *(Covers Weeks 5-8)* | Memo 1 |
 | | March 16-20 | *Spring Break (No Class)* | |
 | | **Module 3** | **Optimization Under Uncertainty** | |
 | **10** | Mar 23, 25, 27 | Exploratory Modeling & Scenario Discovery | Lab 8: Scenario Discovery | Memo 2 |

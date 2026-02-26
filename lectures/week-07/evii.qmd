@@ -3,7 +3,7 @@ title: "Value of Imperfect Information"
 subtitle: "Lecture"
 date: 2026-02-25
 week: 7
-status: draft
+status: published
 
 format:
   revealjs: default

@@ -159,6 +159,6 @@ That is exactly what we'll tackle in Week 8: robustness and decision-making unde
 
 **Wednesday:** We'll extend EVPI to imperfect information (EVII) using decision trees and Bayes' rule, then introduce Global Sensitivity Analysis --- a complementary tool that asks "which uncertainty affects the *output*?" rather than "which uncertainty affects the *decision*?"
 
-**Friday (Lab 6):** You'll compute EVPI on the ICOW flood risk problem from Lab 5 to determine which uncertainties matter most for the dike height decision.
+**Friday (Lab 6):** You'll compute EVPI and EVII for a homeowner deciding how high to elevate their house above the floodplain, where the key uncertainty is which sea-level rise pathway the world follows.
 
 ## References

@@ -3,7 +3,7 @@ title: "Global Sensitivity Analysis"
 subtitle: "Lecture"
 date: 2026-02-25
 week: 7
-status: draft
+status: published
 
 format:
   revealjs: default
@@ -237,7 +237,7 @@ That's Week 8."
 
 ::: {.notes}
 "Two complementary tools, same requirement. Next week we break that requirement."
-"Friday's lab puts VOI to work on the dike problem from Lab 5."
+"Friday's lab puts VOI to work on a house elevation problem under sea-level rise uncertainty."
 :::
 
 ## References
