@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 6: Simulation-optimization – CEVE 421/521 – Spring 2026</title>
+<title>Lab 6: Value of Information – CEVE 421/521 – Spring 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -114,9 +134,39 @@ window.MathJax = {
   };
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Lab 6: Simulation-optimization – CEVE 421/521 – Spring 2026">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Lab 6: Value of Information – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="CEVE 421/521">
+<meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-06-S26/index_files/figure-html/fig-slr-output-1.svg">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -133,8 +183,15 @@ window.MathJax = {
    
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3</span> Exercises</a></li>
+  <li><a href="#before-lab" id="toc-before-lab" class="nav-link" data-scroll-target="#before-lab"><span class="header-section-number">2</span> Before Lab</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">3</span> Setup</a></li>
+  <li><a href="#build-the-payoff-table" id="toc-build-the-payoff-table" class="nav-link" data-scroll-target="#build-the-payoff-table"><span class="header-section-number">4</span> Build the Payoff Table</a></li>
+  <li><a href="#computing-evpi" id="toc-computing-evpi" class="nav-link" data-scroll-target="#computing-evpi"><span class="header-section-number">5</span> Computing EVPI</a></li>
+  <li><a href="#computing-evii" id="toc-computing-evii" class="nav-link" data-scroll-target="#computing-evii"><span class="header-section-number">6</span> Computing EVII</a></li>
+  <li><a href="#extensions-optional" id="toc-extensions-optional" class="nav-link" data-scroll-target="#extensions-optional">Extensions (Optional)</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7</span> Summary</a></li>
+  <li><a href="#sec-submission" id="toc-sec-submission" class="nav-link" data-scroll-target="#sec-submission"><span class="header-section-number">8</span> Submission</a></li>
+  <li><a href="#checklist" id="toc-checklist" class="nav-link" data-scroll-target="#checklist">Checklist</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/labs/lab-06-S26/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -143,7 +200,7 @@ window.MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 6: Simulation-optimization</h1>
+<h1 class="title">Lab 6: Value of Information</h1>
 <p class="subtitle lead">CEVE 421/521</p>
 </div>
 
@@ -179,49 +236,440 @@ window.MathJax = {
 
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>Lab objectives and context - to be written.</p>
+<p>In Labs 4 and 5 you found optimal flood defenses for a city. Today we switch scales: a <strong>homeowner in Norfolk, VA</strong> must decide how high to elevate their house above the floodplain.</p>
+<p>The key uncertainty is <strong>sea-level rise (SLR)</strong>, which depends on the global emissions pathway. Two futures are possible:</p>
+<ol type="1">
+<li><strong>Aggressive mitigation (RCP 2.6)</strong> — the world cuts emissions sharply, SLR stays modest.</li>
+<li><strong>Business as usual (RCP 8.5)</strong> — emissions continue growing, SLR accelerates.</li>
+</ol>
+<p>The homeowner doesn’t know which pathway the world will follow, but must decide on an elevation height <strong>now</strong> (construction happens once). Today you’ll compute the <strong>Expected Value of Perfect Information (EVPI)</strong> and the <strong>Expected Value of Imperfect Information (EVII)</strong> to determine how much it’s worth to learn about future emissions before committing.</p>
+<p><strong>References:</strong></p>
+<ul>
+<li><a href="https://dossgollin-lab.github.io/SimOptDecisions/">SimOptDecisions documentation</a> — the optimization framework</li>
+<li><span class="citation" data-cites="ruckert_flood:2019">Ruckert et al. (<a href="#ref-ruckert_flood:2019" role="doc-biblioref">2019</a>)</span> — BRICK sea-level rise projections</li>
+<li><span class="citation" data-cites="zarekarizi_suboptimal:2020">Zarekarizi et al. (<a href="#ref-zarekarizi_suboptimal:2020" role="doc-biblioref">2020</a>)</span> — house elevation cost model</li>
+</ul>
 </section>
-<section id="setup" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2</span> Setup</h2>
+<section id="before-lab" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="before-lab"><span class="header-section-number">2</span> Before Lab</h2>
+<p><strong>Complete these steps BEFORE coming to lab:</strong></p>
+<ol type="1">
+<li><p><strong>Accept the GitHub Classroom assignment</strong> (link on Canvas)</p></li>
+<li><p><strong>Clone your repository:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/CEVE-421-521/lab-06-S26-yourusername.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab-06-S26-yourusername</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Open the notebook</strong> in VS Code or Quarto preview</p></li>
+<li><p><strong>Run the first code cell</strong> — it will automatically install any missing packages (this may take 10-15 minutes the first time)</p></li>
+</ol>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Submission:</strong> You will render this notebook to PDF and submit the PDF to Canvas. See <a href="#sec-submission" class="quarto-xref">Section&nbsp;8</a> for details.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Computation note:</strong> This lab uses deterministic trapezoidal integration (not Monte Carlo), so all cells should run in a few seconds.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="setup" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="setup"><span class="header-section-number">3</span> Setup</h2>
+<section id="load-packages" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="load-packages"><span class="header-section-number">3.1</span> Load Packages</h3>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install SimOptDecisions and ICOW</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">ICOW</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">catch</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> <span class="bu">Pkg</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"SimOptDecisions"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"ICOW"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/SimOptDecisions"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/ICOW.jl"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">ICOW</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ICOW.Stochastic</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ICOW.EAD</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Package installation (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install SimOptDecisions</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">catch</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> <span class="bu">Pkg</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"SimOptDecisions"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/SimOptDecisions"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
-</section>
-<section id="exercises" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3</span> Exercises</h2>
-<section id="exercise-1" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">3.1</span> Exercise 1</h3>
-<p>Exercise description - to be written.</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CSV</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Interpolations</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">NetCDF</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"house_elevation.jl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="build-the-house" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="build-the-house"><span class="header-section-number">3.2</span> Build the House</h3>
+<p>We use a HAZUS depth-damage function for a single-story house with no basement, typical of Norfolk’s coastal housing stock. The house sits at 8 ft above the local tide gauge.</p>
+<div id="6" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>House construction (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>haz_fl_dept <span class="op">=</span> CSV.<span class="fu">read</span>(<span class="st">"data/haz_fl_dept.csv"</span>, DataFrame)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Single-story, no basement, A-Zone (FIA DmgFnId 105)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ddf_row <span class="op">=</span> <span class="fu">filter</span>(r <span class="op">-&gt;</span> r.DmgFnId <span class="op">==</span> <span class="fl">105</span>, haz_fl_dept)[<span class="fl">1</span>, <span class="op">:</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>house <span class="op">=</span> <span class="fu">House</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    ddf_row;</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    value_usd<span class="op">=</span><span class="fl">250_000</span>,     <span class="co"># house value</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    area_ft2<span class="op">=</span><span class="fl">1_500</span>,        <span class="co"># floor area</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    height_above_gauge_ft<span class="op">=</span><span class="fl">8.0</span>,  <span class="co"># first-floor elevation above tide gauge</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="sea-level-rise-from-brick" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="sea-level-rise-from-brick"><span class="header-section-number">3.3</span> Sea-Level Rise from BRICK</h3>
+<p>We load BRICK sea-level rise projections <span class="citation" data-cites="ruckert_flood:2019">(<a href="#ref-ruckert_flood:2019" role="doc-biblioref">Ruckert et al., 2019</a>)</span> for Sewells Point, Norfolk, VA. The BRICK ensemble contains thousands of SLR trajectories under each RCP scenario.</p>
+<p>The two states of the world correspond to the <strong>emissions pathway</strong> the world follows:</p>
+<ol type="1">
+<li><strong>RCP 2.6</strong> — aggressive mitigation (10th percentile of BRICK ensemble)</li>
+<li><strong>RCP 8.5</strong> — business as usual (90th percentile of BRICK ensemble)</li>
+</ol>
+<p>We use tail percentiles (not ensemble means) to sharpen the contrast: RCP 2.6 with a low climate response, vs RCP 8.5 with a high climate response.</p>
+<div id="8" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Load BRICK projections (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> M_TO_FT <span class="op">=</span> <span class="fl">3.28084</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>slr_data <span class="op">=</span> <span class="kw">let</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    slr_nc <span class="op">=</span> <span class="fu">joinpath</span>(<span class="pp">@__DIR__</span>, <span class="st">"data"</span>, <span class="st">"sea_level_projections.nc"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    brick_years <span class="op">=</span> <span class="fu">Int</span>.(<span class="fu">ncread</span>(slr_nc, <span class="st">"time"</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    brick_slr <span class="op">=</span> <span class="fu">Float64</span>.(<span class="fu">ncread</span>(slr_nc, <span class="st">"brick_slr"</span>))  <span class="co"># (time, ensemble, rcp)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    rcps <span class="op">=</span> [<span class="st">"rcp26"</span>, <span class="st">"rcp45"</span>, <span class="st">"rcp60"</span>, <span class="st">"rcp85"</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    (years<span class="op">=</span>brick_years, slr<span class="op">=</span>brick_slr, rcps<span class="op">=</span>rcps)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">brick_percentile</span>(data, rcp, p)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> <span class="fu">findfirst</span>(<span class="op">==</span>(rcp), data.rcps)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    ensemble <span class="op">=</span> data.slr[<span class="op">:</span>, <span class="op">:</span>, idx]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="fu">quantile</span>(ensemble[t, <span class="op">:</span>], p) for t <span class="kw">in</span> <span class="fu">axes</span>(ensemble, <span class="fl">1</span>)]</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>slr_low_m <span class="op">=</span> <span class="fu">brick_percentile</span>(slr_data, <span class="st">"rcp26"</span>, <span class="fl">0.10</span>)   <span class="co"># optimistic: low emissions + low sensitivity</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>slr_high_m <span class="op">=</span> <span class="fu">brick_percentile</span>(slr_data, <span class="st">"rcp85"</span>, <span class="fl">0.90</span>)   <span class="co"># pessimistic: high emissions + high sensitivity</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prior: 50/50 chance of high vs low emissions</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>p_high <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>p_low <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> p_high</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fixed parameters</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>surge_dist <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(<span class="fl">3.0</span>, <span class="fl">1.5</span>, <span class="fl">0.1</span>)  <span class="co"># annual max storm surge (ft)</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>discount_rate <span class="op">=</span> <span class="fl">0.04</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> <span class="fu">collect</span>(<span class="fl">2026</span><span class="op">:</span><span class="fl">2100</span>)  <span class="co"># 75-year planning horizon</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Map BRICK years to our planning horizon and convert to feet</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>brick_year_start <span class="op">=</span> <span class="fu">findfirst</span>(<span class="op">==</span>(<span class="fl">2026</span>), slr_data.years)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>brick_year_end <span class="op">=</span> <span class="fu">findfirst</span>(<span class="op">==</span>(<span class="fl">2100</span>), slr_data.years)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>slr_low_ft <span class="op">=</span> slr_low_m[brick_year_start<span class="op">:</span>brick_year_end] <span class="op">.*</span> M_TO_FT</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>slr_high_ft <span class="op">=</span> slr_high_m[brick_year_start<span class="op">:</span>brick_year_end] <span class="op">.*</span> M_TO_FT</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Build configs and scenarios</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">HouseConfig</span>(house, years, surge_dist)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>scenario_low <span class="op">=</span> <span class="fu">SLRScenario</span>(slr_low_ft, discount_rate)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>scenario_high <span class="op">=</span> <span class="fu">SLRScenario</span>(slr_high_ft, discount_rate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-fig-slr" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    yr <span class="op">=</span> slr_data.years</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">350</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Year"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Sea Level Rise (ft)"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Sea-Level Rise: RCP 2.6 (P10) vs RCP 8.5 (P90)"</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, yr, slr_low_m <span class="op">.*</span> M_TO_FT; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"RCP 2.6 P10 (optimistic)"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, yr, slr_high_m <span class="op">.*</span> M_TO_FT; color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"RCP 8.5 P90 (pessimistic)"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vlines!</span>(ax, [<span class="fl">2026</span>, <span class="fl">2100</span>]; color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dot, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>lt)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-slr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-slr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-slr-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-slr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: BRICK SLR projections. Blue: RCP 2.6, 10th percentile (optimistic). Red: RCP 8.5, 90th percentile (pessimistic). Dashed lines mark the planning horizon.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="build-the-payoff-table" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="build-the-payoff-table"><span class="header-section-number">4</span> Build the Payoff Table</h2>
+<p>We sweep a grid of elevation heights and compute total cost (construction + NPV of expected flood damages) under each SLR future.</p>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>height_grid <span class="op">=</span> <span class="fl">0.0</span><span class="op">:</span><span class="fl">0.5</span><span class="op">:</span><span class="fl">14.0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>costs_low <span class="op">=</span> [<span class="fu">compute_total_cost</span>(config, scenario_low, h) for h <span class="kw">in</span> height_grid]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>costs_high <span class="op">=</span> [<span class="fu">compute_total_cost</span>(config, scenario_high, h) for h <span class="kw">in</span> height_grid]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>costs_prior <span class="op">=</span> p_high <span class="op">.*</span> costs_high <span class="op">.+</span> p_low <span class="op">.*</span> costs_low</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-fig-payoff" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Elevation Height (ft)"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Total Cost (USD)"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Payoff Table: Elevation Decision Under SLR Uncertainty"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    hg <span class="op">=</span> <span class="fu">collect</span>(height_grid)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, hg, costs_low; color<span class="op">=:</span>blue, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"RCP 2.6 (mitigation)"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, hg, costs_high; color<span class="op">=:</span>red, linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span><span class="st">"RCP 8.5 (business as usual)"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, hg, costs_prior; color<span class="op">=:</span>black, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash, label<span class="op">=</span><span class="st">"Prior (50/50)"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mark optima</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    idx_low <span class="op">=</span> <span class="fu">argmin</span>(costs_low)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    idx_high <span class="op">=</span> <span class="fu">argmin</span>(costs_high)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    idx_prior <span class="op">=</span> <span class="fu">argmin</span>(costs_prior)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax, [hg[idx_low]], [costs_low[idx_low]]; color<span class="op">=:</span>blue, markersize<span class="op">=</span><span class="fl">15</span>, marker<span class="op">=:</span>star5)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax, [hg[idx_high]], [costs_high[idx_high]]; color<span class="op">=:</span>red, markersize<span class="op">=</span><span class="fl">15</span>, marker<span class="op">=:</span>star5)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax, [hg[idx_prior]], [costs_prior[idx_prior]]; color<span class="op">=:</span>black, markersize<span class="op">=</span><span class="fl">15</span>, marker<span class="op">=:</span>star5)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>rt)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-payoff" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-payoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-payoff-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-payoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Total cost (construction + NPV of expected damages) vs.&nbsp;elevation height under each emissions pathway. Blue: RCP 2.6. Red: RCP 8.5. Dashed black: prior-weighted average (50/50). Stars mark the optimum for each curve.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Look at <a href="#fig-payoff" class="quarto-xref">Figure&nbsp;2</a>.</em></p>
+<ol type="1">
+<li><em>How do the optimal elevation heights differ between the two SLR futures? Why does this make intuitive sense?</em></li>
+<li><em>Why are the cost curves U-shaped? What happens at very low vs.&nbsp;very high elevation?</em></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="computing-evpi" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="computing-evpi"><span class="header-section-number">5</span> Computing EVPI</h2>
+<p>Use the payoff table to compute the Expected Value of Perfect Information. Since we’re minimizing cost (not maximizing utility), the formula uses <span class="math inline">\(\min\)</span> instead of <span class="math inline">\(\max\)</span>:</p>
+<p><span class="math display">\[
+\text{EVPI} = \underbrace{\min_a \sum_s p(s) \cdot C(a, s)}_{\text{cost without info}} - \underbrace{\sum_s p(s) \cdot \min_a C(a, s)}_{\text{cost with perfect info}}
+\]</span></p>
+<p>where <span class="math inline">\(a\)</span> is the elevation height, <span class="math inline">\(s\)</span> is the SLR state, <span class="math inline">\(p(s)\)</span> is the prior probability, and <span class="math inline">\(C(a, s)\)</span> is total cost.</p>
+<div id="18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tbl-evpi" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-evpi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: EVPI for the elevation decision under SLR uncertainty
+</figcaption>
+<div aria-describedby="tbl-evpi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Look at <a href="#tbl-evpi" class="quarto-xref">Table&nbsp;1</a>.</em></p>
+<ol type="1">
+<li><em>Interpret the EVPI in dollars. How much would this homeowner pay for a perfect forecast of the future emissions pathway?</em></li>
+<li><em>What fraction of the house value ($250,000) does the EVPI represent?</em></li>
+<li><em>Is this EVPI large enough to justify funding climate policy research? What other homeowners might benefit from the same information?</em></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="computing-evii" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="computing-evii"><span class="header-section-number">6</span> Computing EVII</h2>
+<p>Suppose an international <strong>Climate Policy Progress Report</strong> rates the likelihood of meeting Paris Agreement goals as either “on track” or “off track.” The report isn’t perfectly accurate: it tends to say “on track” when emissions are following RCP 2.6, and “off track” when following RCP 8.5, but it sometimes gets it wrong.</p>
+<section id="signal-accuracy" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="signal-accuracy"><span class="header-section-number">6.1</span> Signal Accuracy</h3>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p_offtrack_given_85 <span class="op">=</span> <span class="fl">0.85</span>   <span class="co"># P(report = "off track" | RCP 8.5)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p_ontrack_given_26 <span class="op">=</span> <span class="fl">0.90</span>    <span class="co"># P(report = "on track" | RCP 2.6)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-bayes-rule" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="exercise-bayes-rule"><span class="header-section-number">6.2</span> Exercise: Bayes’ Rule</h3>
+<p>Use Bayes’ rule to compute the posterior probability of RCP 8.5 given each report signal.</p>
+<div id="24" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-evii" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="exercise-evii"><span class="header-section-number">6.3</span> Exercise: EVII</h3>
+<p>Re-weight the payoff table using the posterior probabilities and compute EVII. No new simulations needed — just re-weight the same cost arrays with updated beliefs.</p>
+<p><span class="math display">\[
+\text{EVII} = \underbrace{\min_a \sum_s p(s) \cdot C(a, s)}_{\text{cost without info}} - \underbrace{\sum_z p(z) \min_a \sum_s p(s|z) \cdot C(a, s)}_{\text{cost with signal}}
+\]</span></p>
+<p>where <span class="math inline">\(z\)</span> is the report signal and <span class="math inline">\(p(s|z)\)</span> is the posterior from Bayes’ rule.</p>
+<div id="26" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tbl-voi" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-voi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Summary of information value: no information, policy report, and perfect information
+</figcaption>
+<div aria-describedby="tbl-voi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</figure>
+</div>
+<div id="fig-evii" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-evii-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-evii-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>What fraction of the EVPI does the policy report capture? Why is EVII &lt; EVPI? What would make the report more valuable?</em></p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 4">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The homeowner is considering two research investments:</em></p>
+<ol type="1">
+<li><em>Fund a climate policy analysis that would perfectly predict the future emissions pathway.</em></li>
+<li><em>Fund a tide gauge network that would reduce storm surge uncertainty.</em></li>
+</ol>
+<p><em>Based on your EVPI result, what is the maximum value of investment (1)? Why might investment (2) have a different (possibly larger or smaller) ceiling?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="extensions-optional" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="extensions-optional">Extensions (Optional)</h2>
+<p>If you finish early, try one of these:</p>
+<ul>
+<li><strong>Change the prior:</strong> What happens to EVPI if RCP 8.5 is 80% likely instead of 50/50? At what prior does EVPI become negligible?</li>
+<li><strong>Change signal accuracy:</strong> What if the policy report is only 60% accurate? 99% accurate? Plot EVII vs.&nbsp;accuracy.</li>
+<li><strong>More RCP scenarios:</strong> Add RCP 4.5 and RCP 6.0 as additional states. How does EVPI change with more emissions pathways?</li>
+</ul>
+</section>
+<section id="summary" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="summary"><span class="header-section-number">7</span> Summary</h2>
+<p>Key takeaways from this lab:</p>
+<ol type="1">
+<li><strong>EVPI</strong> is the gap between “optimize then average” and “average then optimize” — the maximum value of any information source about a given uncertainty.</li>
+<li><strong>EVII</strong> extends EVPI to imperfect signals via Bayes’ rule — re-weight the same payoff table with posterior beliefs, no new simulations needed.</li>
+<li><strong>Information is only valuable when it changes the optimal decision.</strong> If the optimal action is the same regardless of the state, EVPI is zero.</li>
+<li>The EVPI for one uncertainty bounds the value of any research into that uncertainty — use it to prioritize research investments.</li>
+</ol>
+</section>
+<section id="sec-submission" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="sec-submission"><span class="header-section-number">8</span> Submission</h2>
+<ol type="1">
+<li><p>Write your answers in the response boxes above.</p></li>
+<li><p><strong>Render to PDF:</strong></p>
+<ul>
+<li>In VS Code: Open the command palette (<code>Cmd+Shift+P</code> / <code>Ctrl+Shift+P</code>) → “Quarto: Render Document” → select Typst PDF</li>
+<li>Or from the terminal: <code>quarto render index.qmd --to typst</code></li>
+</ul></li>
+<li><p><strong>Submit the PDF</strong> to the Lab 6 assignment on Canvas.</p></li>
+<li><p><strong>Push your code</strong> to GitHub (for backup):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Lab 6 complete"</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+</section>
+<section id="checklist" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="checklist">Checklist</h2>
+<p>Before submitting:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Packages load without error</label></li>
+<li><label><input type="checkbox">SLR trajectories plotted (<a href="#fig-slr" class="quarto-xref">Figure&nbsp;1</a>)</label></li>
+<li><label><input type="checkbox">Payoff table visualized (<a href="#fig-payoff" class="quarto-xref">Figure&nbsp;2</a>)</label></li>
+<li><label><input type="checkbox">Question 1 answered (interpret cost curves)</label></li>
+<li><label><input type="checkbox">EVPI computed (<a href="#tbl-evpi" class="quarto-xref">Table&nbsp;1</a>)</label></li>
+<li><label><input type="checkbox">Question 2 answered (interpret EVPI)</label></li>
+<li><label><input type="checkbox">Bayes’ rule posteriors computed</label></li>
+<li><label><input type="checkbox">EVII computed and summary table generated (<a href="#tbl-voi" class="quarto-xref">Table&nbsp;2</a>)</label></li>
+<li><label><input type="checkbox">EVII visualization (<a href="#fig-evii" class="quarto-xref">Figure&nbsp;3</a>)</label></li>
+<li><label><input type="checkbox">Questions 3 and 4 answered</label></li>
+<li><label><input type="checkbox">Notebook renders to PDF without errors</label></li>
+</ul>
+
 
 
 </section>
-</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-ruckert_flood:2019" class="csl-entry" role="listitem">
+Ruckert, K. L., Srikrishnan, V., &amp; Keller, K. (2019). Characterizing the deep uncertainties surrounding coastal flood hazard projections: A case study for <span>Norfolk</span>, <span>VA</span>. <em>Scientific Reports</em>, <em>9</em>(1), 11373. <a href="https://doi.org/10.1038/s41598-019-47587-6">https://doi.org/10.1038/s41598-019-47587-6</a>
+</div>
+<div id="ref-zarekarizi_suboptimal:2020" class="csl-entry" role="listitem">
+Zarekarizi, M., Srikrishnan, V., &amp; Keller, K. (2020). Neglecting uncertainties biases house-elevation decisions to manage riverine flood risks. <em>Nature Communications</em>, <em>11</em>(1, 1), 5361. <a href="https://doi.org/10.1038/s41467-020-19188-9">https://doi.org/10.1038/s41467-020-19188-9</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -563,64 +1011,25 @@ window.MathJax = {
           }
         };
       }
-        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
-        for (let i=0; i<annoteTargets.length; i++) {
-          const annoteTarget = annoteTargets[i];
-          const targetCell = annoteTarget.getAttribute("data-target-cell");
-          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
-          const contentFn = () => {
-            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-            if (content) {
-              const tipContent = content.cloneNode(true);
-              tipContent.classList.add("code-annotation-tip-content");
-              return tipContent.outerHTML;
-            }
-          }
-          const config = {
-            allowHTML: true,
-            content: contentFn,
-            onShow: (instance) => {
-              selectCodeLines(instance.reference);
-              instance.reference.classList.add('code-annotation-active');
-              window.tippy.hideAll();
-            },
-            onHide: (instance) => {
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
               unselectCodeLines();
-              instance.reference.classList.remove('code-annotation-active');
-            },
-            maxWidth: 300,
-            delay: [50, 0],
-            duration: [200, 0],
-            offset: [5, 10],
-            arrow: true,
-            appendTo: function(el) {
-              return el.parentElement.parentElement.parentElement;
-            },
-            interactive: true,
-            interactiveBorder: 10,
-            theme: 'quarto',
-            placement: 'right',
-            popperOptions: {
-              modifiers: [
-              {
-                name: 'flip',
-                options: {
-                  flipVariations: false, // true by default
-                  allowedAutoPlacements: ['right'],
-                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
-                },
-              },
-              {
-                name: 'preventOverflow',
-                options: {
-                  mainAxis: false,
-                  altAxis: false
-                }
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
               }
-              ]        
-            }      
-          };
-          window.tippy(annoteTarget, config); 
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
         }
     const findCites = (el) => {
       const parentEl = el.parentElement;
