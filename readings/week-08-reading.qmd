@@ -1,6 +1,6 @@
 ---
 title: "Week 8 Reading"
-subtitle: "Sensitivity and Value of Information"
+subtitle: "Robustness & Deep Uncertainty"
 status: draft
 
 format:
@@ -8,11 +8,34 @@ format:
   typst: default
 ---
 
-## Overview
+## Assigned Readings
 
-@runge_voi:2011
+1. @lempert_robust:2000 -- "Robust Strategies for Abating Climate Change." Argues that prediction-based policy analysis is inadequate for long-horizon climate decisions and proposes exploratory modeling to find *robust* strategies that perform reasonably well across a wide range of plausible futures.
+
+2. @schneider_scenarios:2002 -- "Can We Estimate the Likelihood of Climatic Changes at 2100?" Makes the case that risk management requires probabilities, demonstrating that the probability of exceeding dangerous warming thresholds is highly sensitive to scenario and climate sensitivity assumptions.
 
 ## Discussion Questions
 
-1. *TBD*
-2. *TBD*
+1. Lempert gives two reasons why "optimum policies" are problematic under deep uncertainty: (a) they are brittle in the face of surprises, and (b) they fail to build consensus among stakeholders with different expectations.
+Which argument do you find more compelling, and why?
+
+2. Schneider uses the asteroid example: "if consequences alone were the basis for decision-making, we should all switch professions to preventing asteroid collisions."
+What point is he making?
+Do you agree that probability is essential for prioritizing risks?
+
+3. Schneider's Figure 2 shows that the probability of exceeding 3.5 C warming by 2100 ranges from 23% to 39% depending on which scenarios and GCM sensitivities are included.
+What does this sensitivity tell us about the challenge of assigning probabilities to climate outcomes?
+
+4. Both authors care about supporting good decisions under uncertainty.
+If scientists refuse to assign probabilities, what happens?
+Schneider argues that policy makers will impute probabilities anyway --- but without expert guidance.
+Lempert argues that whoever controls the probability assumptions controls the policy conclusion.
+Who is more worried about the *absence* of probabilities, and who is more worried about their *presence*?
+Is it better for scientists to give imperfect probabilistic estimates, or to give no estimates and let decision-makers guess?
+
+5. In Lab 6, you assigned a 50/50 prior probability over RCP 2.6 and RCP 8.5 to compute EVPI.
+Was that a "Schneider" move (assign subjective probabilities and optimize) or a "Lempert" move (explore across futures)?
+Could you have done the lab without assigning a prior?
+
+
+## References

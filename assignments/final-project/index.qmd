@@ -25,7 +25,8 @@ The project is built through three "Audit Memos" (1–2 pages each) to ensure st
 | Deadline | Deliverable | Description |
 | :--- | :--- | :----- |
 | **Week 3 (Friday)** | [Topic Proposal](topic-proposal.qmd) | Submit document choice and confirm it contains identifiable Levers (L) and Metrics (M). |
-| **Week 7 (Friday)** | [Memo 1 (Framework)](memo-1-framework.qmd) | Map the plan's Levers (L) and Metrics (M). What choices are being made? What outcomes are being measured? |
+| **Week 8 (Monday)** | Teams & Plans Assigned | Instructor assigns teams and plans in class. |
+| **Week 9 (Wednesday)** | [Memo 1 (Framework)](memo-1-framework.qmd) | Map the plan's Levers (L) and Metrics (M). What choices are being made? What outcomes are being measured? |
 | **Week 10 (Friday)** | [Memo 2 (Evidence)](memo-2-evidence.qmd) | Map the plan's Valuation approach and System Models (R). What models are used? Are they appropriate? |
 | **Week 12 (Friday)** | [Memo 3 (Robustness)](memo-3-robustness.qmd) | Map the plan's consideration of Uncertainties (X) and Robustness. How does the plan handle deep uncertainty? |
 | **Week 13 (Friday)** | Slides Due | All teams must submit their presentation slides. |
@@ -34,9 +35,9 @@ The project is built through three "Audit Memos" (1–2 pages each) to ensure st
 
 ## Team Formation
 
-- Teams of 2-3 students
+- Teams of 2-3 students, assigned by the instructor in Week 8
 - Mixed 421/521 teams encouraged
-- Form teams by Week 2; confirm with instructor
+- Each team is assigned a climate plan to audit
 
 ## Choosing a Plan
 

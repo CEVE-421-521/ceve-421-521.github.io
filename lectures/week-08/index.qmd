@@ -6,8 +6,10 @@ week: 8
 status: draft
 
 format:
-  revealjs: default
-  pptx: default
+  html:
+    number-sections: true
+  typst:
+    number-sections: true
 
 author: "{{< var instructor.name >}}"
 course: "{{< var course.number >}}, {{< var course.title >}}"
@@ -15,23 +17,359 @@ institution: "{{< var course.institution >}}"
 ---
 
 
-## Coming Soon
+# Review
 
-This lecture is under development.
 
-Content to adapt from previous course:
+Over the past few weeks we built three tools.
+Each requires a probability distribution $p(s)$ over states of the world.
 
-**From Robustness lecture:**
+**Benefit-cost analysis and policy search** (Labs 5--6).
+Choose the action $a$ that maximizes expected net benefit:
 
-- Definition: "insensitivity of system design to errors" (Matalas)
-- Robustness metrics taxonomy (Herman et al.)
-- Regret and satisficing approaches
-- Bottom-up vs. top-down analysis
+$$
+a^* = \arg\max_a \sum_s U(a, s) \, p(s)
+$$ {#eq-bca}
 
-**From Deep Uncertainty lecture:**
+In Lab 5, you searched over dike heights to find the cost-minimizing action --- that search is **policy search** (or simulation-optimization).
 
-- Spectrum of uncertainty
-- Lempert-Schneider debate
-- When probabilities help vs. exploratory approaches
+**Value of information** (Week 7).
+The expected value of perfect information is the gap between optimizing with and without knowledge of $s$:
 
-## References
+$$
+\text{EVPI} = E_s\!\left[\max_a U(a, s)\right] - \max_a E_s\!\left[U(a, s)\right]
+$$ {#eq-evpi}
+
+EVII extends this to imperfect signals that update $p(s)$ via Bayes' rule.
+
+**Global sensitivity analysis** (Week 7 Wednesday).
+Sobol indices decompose output variance by input.
+The first-order index $S_i$ measures the fraction of $\text{Var}[Y]$ explained by $X_i$ alone:
+
+$$
+S_i = \frac{\text{Var}_{X_i}\!\left[E[Y \mid X_i]\right]}{\text{Var}[Y]}
+$$ {#eq-sobol}
+
+## Laplace's Principle
+
+What if we don't know $p(s)$?
+A starting point: set $p(s) \propto 1$ (equal weight on every scenario).
+This is **Laplace's principle of insufficient reason**:
+
+$$
+a^*_{\text{Laplace}} = \arg\max_a \frac{1}{|S|} \sum_s U(a, s)
+$$ {#eq-laplace}
+
+This is @eq-bca with a uniform prior.
+It is not assumption-free --- it assumes every scenario is equally likely.
+
+
+# Deep Uncertainty
+
+
+A spectrum of uncertainty:
+
+- **Certainty** --- single known future (Lab 5 under one RCP 8.5 trajectory)
+- **Objective probabilities** --- well-characterized distributions from data (GEV for storm surge, Labs 3--4)
+- **Subjective probabilities** --- expert-informed distributions (50/50 RCP prior in Lab 6)
+- **Deep uncertainty** --- experts disagree on which outcomes are even possible (SLR in 2150, tipping points, socioeconomic futures)
+
+The boundary between subjective and deep uncertainty is fuzzy.
+The practical point: when $p(s)$ is shaky, optimizing expected performance can give brittle answers.
+
+@lempert_robust:2000: whoever controls the probability assumptions controls the policy conclusion.
+BCA's value is transparency, not correctness.
+
+
+# Robustness
+
+
+@matalas:1977 defined robustness as:
+
+> "The insensitivity of system design to errors, random or otherwise, in the estimates of those parameters affecting design choice."
+
+A robust solution performs well not because we got the assumptions right, but because it doesn't depend too heavily on any particular assumption.
+
+A **robustness metric** maps a performance matrix $U(a,s)$ to a scalar score for each action, without requiring $p(s)$.
+The rest of this lecture develops several such metrics and compares what they recommend.
+
+## Notation and Case Study
+
+We use a discrete example to build intuition, but the goal is to think about continuous action and scenario spaces.
+
+- $A = \{a_1, \ldots, a_m\}$: available actions (dike heights, elevations, policies)
+- $S = \{s_1, \ldots, s_n\}$: plausible scenarios (SLR pathways, climate states)
+- $|S| = n$: the number of scenarios (not absolute value)
+- $U(a, s)$: performance (net benefit) of action $a$ under scenario $s$
+- $U$ with $m$ actions and $n$ scenarios is an $m \times n$ **payoff matrix**
+
+Three dike heights, three SLR scenarios.
+Entries are net benefit in \$M (avoided damages minus construction cost):
+
+| | $s_1$ (Low SLR) | $s_2$ (Med SLR) | $s_3$ (High SLR) |
+|:---|:---:|:---:|:---:|
+| $a_1$ (Low dike) | 9 | 2 | $-6$ |
+| $a_2$ (Med dike) | 3 | 4 | 1 |
+| $a_3$ (High dike) | $-2$ | 3 | 8 |
+
+
+# Regret
+
+
+Regret measures how much worse a solution performs compared to a reference point.
+@herman_robustness:2015 distinguish two types.
+
+## Baseline Regret
+
+**Baseline regret** compares performance to the action's own average performance:
+
+$$
+R_{\text{base}}(a, s) = \bar{U}(a) - U(a, s), \quad \bar{U}(a) = \frac{1}{|S|} \sum_{s} U(a, s)
+$$ {#eq-baseline-regret}
+
+Interpretation: how much worse did I do than my average?
+High baseline regret means this scenario was unusually bad for my chosen action --- it's a measure of getting unlucky.
+
+
+## Opportunity-Cost Regret
+
+**Opportunity-cost regret** (Savage regret) compares performance to the best possible action in that scenario:
+
+$$
+R_{\text{opp}}(a, s) = \max_{a'} U(a', s) - U(a, s)
+$$ {#eq-opp-regret}
+
+Interpretation: how much did I leave on the table?
+
+
+Best action per scenario: $\max_{a'} U(a', s_1) = 9$, $\max_{a'} U(a', s_2) = 4$, $\max_{a'} U(a', s_3) = 8$.
+
+The **regret matrix**:
+
+| | $s_1$ | $s_2$ | $s_3$ |
+|:---|:---:|:---:|:---:|
+| $a_1$ | $9 - 9 = 0$ | $4 - 2 = 2$ | $8 - (-6) = 14$ |
+| $a_2$ | $9 - 3 = 6$ | $4 - 4 = 0$ | $8 - 1 = 7$ |
+| $a_3$ | $9 - (-2) = 11$ | $4 - 3 = 1$ | $8 - 8 = 0$ |
+
+Every action has zero regret in the scenario it's best for.
+
+**Connection to VOI:** Opportunity-cost regret under perfect information is zero --- you'd always pick the best action.
+EVPI (@eq-evpi) measures the expected value of eliminating this regret.
+Regret and value of information are two views of the same gap.
+
+**Connection to BCA:** In BCA we chose the action maximizing expected net benefit.
+Minimax regret asks instead: which action minimizes the worst gap between what I got and what I could have gotten?
+
+## Minimax Regret
+
+$$
+a^*_{\text{minimax}} = \arg\min_a \max_s R_{\text{opp}}(a, s)
+$$ {#eq-minimax}
+
+Worst-case regret for each action:
+
+- $a_1$: $\max(0, 2, 14) = 14$
+- $a_2$: $\max(6, 0, 7) = 7$
+- $a_3$: $\max(11, 1, 0) = 11$
+
+$$
+\boxed{a^*_{\text{minimax}} = a_2 \quad (\text{max regret} = 7)}
+$$
+
+
+## Expected Regret
+
+$$
+a^*_{\text{exp}} = \arg\min_a \sum_s w(s) \, R_{\text{opp}}(a, s)
+$$ {#eq-expected-regret}
+
+The weights $w(s)$ do not have to be equal.
+Equal weights ($w(s) = 1/|S|$) are often assumed, but you can also set $w(s) = p(s)$ --- and then expected regret reduces to the expected opportunity cost of not having perfect information, which links directly back to BCA.
+
+With equal weights:
+
+- $a_1$: $(0 + 2 + 14)/3 = 5.3$
+- $a_2$: $(6 + 0 + 7)/3 = 4.3$
+- $a_3$: $(11 + 1 + 0)/3 = 4.0$
+
+$$
+\boxed{a^*_{\text{exp}} = a_3 \quad (\text{mean regret} = 4.0)}
+$$
+
+
+# Satisficing
+
+
+Regret asks "how far am I from the best?"
+A different family asks "is my performance good enough?" --- these are **satisficing** metrics [@mcphail_robustness:2019].
+
+## Domain Criterion
+
+The **domain criterion** measures the fraction of scenarios in which a solution meets a performance threshold $\tau$:
+
+$$
+D(a) = \frac{1}{|S|} \sum_{s \in S} \mathbf{1}\!\left[ U(a, s) \geq \tau \right]
+$$ {#eq-domain}
+
+where $|S| = n$ is the number of scenarios.
+
+This is meaningful when hard thresholds exist in practice:
+
+- A levee must not be overtopped
+- A budget must not be exceeded
+- A species population must not drop below a viability threshold
+- A road must remain passable during a design storm
+
+The domain criterion counts: over what fraction of futures does my solution avoid failure?
+
+Set $\tau = 1$ (net benefit at least \$1M):
+
+- $a_1$: $U = 9 \geq 1$ ✓, $U = 2 \geq 1$ ✓, $U = -6 < 1$ ✗ → $D(a_1) = 2/3$
+- $a_2$: $U = 3 \geq 1$ ✓, $U = 4 \geq 1$ ✓, $U = 1 \geq 1$ ✓ → $D(a_2) = 3/3 = 1.0$
+- $a_3$: $U = -2 < 1$ ✗, $U = 3 \geq 1$ ✓, $U = 8 \geq 1$ ✓ → $D(a_3) = 2/3$
+
+$$
+\boxed{a^*_{\text{domain}} = a_2 \quad (D = 1.0)}
+$$
+
+The result depends on $\tau$.
+If $\tau = 4$: three-way tie.
+If $\tau = 3$: tie between $a_2$ and $a_3$.
+The threshold is a value judgment.
+
+
+## Maximin
+
+$$
+a^*_{\text{maximin}} = \arg\max_a \min_s U(a, s)
+$$ {#eq-maximin}
+
+Worst-case performance:
+
+- $a_1$: $\min(9, 2, -6) = -6$
+- $a_2$: $\min(3, 4, 1) = 1$
+- $a_3$: $\min(-2, 3, 8) = -2$
+
+$$
+\boxed{a^*_{\text{maximin}} = a_2 \quad (\text{worst case} = 1)}
+$$
+
+Maximin on payoffs and minimax on regrets are related: both focus on worst-case protection.
+Maximin asks "what's the worst that can happen to me?"
+Minimax regret asks "what's the worst gap between my choice and the best I could have made?"
+
+## Maximax
+
+$$
+a^*_{\text{maximax}} = \arg\max_a \max_s U(a, s)
+$$ {#eq-maximax}
+
+Best-case performance:
+
+- $a_1$: $\max(9, 2, -6) = 9$
+- $a_2$: $\max(3, 4, 1) = 4$
+- $a_3$: $\max(-2, 3, 8) = 8$
+
+$$
+\boxed{a^*_{\text{maximax}} = a_1 \quad (\text{best case} = 9)}
+$$
+
+
+# Synthesis
+
+
+Six metrics, same payoff matrix, three different winners:
+
+| Metric | Winner | What it measures |
+|:---|:---|:---|
+| Minimax regret | $a_2$ | Worst-case regret = 7 |
+| Expected regret | $a_3$ | Mean regret = 4.0 |
+| Domain ($\tau = 1$) | $a_2$ | Fraction meeting threshold = 1.0 |
+| Maximin | $a_2$ | Worst-case payoff = 1 |
+| Maximax | $a_1$ | Best-case payoff = 9 |
+| Laplace | $a_3$ | Mean payoff = 3.0 |
+
+Same physical system, same scenarios, same payoffs --- the answer changed because the *question* changed.
+
+
+The structural driver is **performance crossovers** [@mcphail_robustness:2019].
+$a_1$ outperforms $a_3$ under low SLR ($9$ vs. $-2$), but $a_3$ outperforms $a_1$ under high SLR ($8$ vs. $-6$).
+When performance curves cross, the metric's risk attitude breaks the tie.
+If one action dominated another across all scenarios, every metric would agree.
+
+The choice of metric embeds assumptions about:
+
+- What "good enough" means ($\tau$ in the domain criterion)
+- How much you care about worst cases vs. averages (minimax vs. Laplace)
+- What the reference point is (regret from baseline vs. regret from best)
+
+These choices should be made explicitly and transparently.
+
+## Robustness and Probability
+
+
+Write the domain criterion in continuous form.
+In general, the satisficing constraint may be on any performance metric $g(a, s)$ (cost, damage, reliability, etc.), not just raw utility:
+
+$$
+D(a) = \int \mathbf{1}\!\left[g(a, s) \geq \tau\right] p(s) \, ds
+$$ {#eq-domain-continuous}
+
+where $p(s)$ is the sampling density over scenarios.
+In our case study $g = U$, but in multi-objective problems we might have separate thresholds on cost, flood depth, ecosystem impact, etc.
+
+- Sample 1000 SLR scenarios uniformly on $[0, 2]$ meters: $D = 0.70$
+- Sample 1000 scenarios concentrated around $[0.3, 0.7]$ meters: $D = 0.90$
+
+Same dike, same threshold, same physics --- different score.
+The sampling distribution $p(s)$ changed the answer.
+
+Similarly, Laplace's criterion (@eq-laplace) computes mean performance with equal weights --- identical to expected utility under a uniform prior.
+
+Robustness metrics make implicit distributional assumptions through their choice of which scenarios to include and how to weight them.
+The claim that robustness avoids probabilities is, at best, incomplete.
+
+A related warning from @matalas:1977: a design yielding payoff 2 in every scenario scores well on maximin ($\min = 2$) and the domain criterion ($D = 1.0$ for $\tau \leq 2$), but is never optimal under any scenario.
+Robustness is a property you want your solution to have, not the only property you care about.
+
+
+## Looking Ahead
+
+**Wednesday:** The Lempert-Schneider debate.
+@lempert_robust:2000 argues that prediction-based policy analysis breaks down under deep uncertainty and that we should search for robust strategies using exploratory modeling.
+@schneider_scenarios:2002 argues that risk management *requires* probabilities --- without them, we can't prioritize.
+Both papers are in this week's reading guide.
+Come ready to take sides.
+
+One constructive response: @doss-gollin_subjective:2022 propose making distributional assumptions explicit, computing performance under multiple probability distributions, and calling a solution robust only if it holds up across different distributional assumptions --- not just across different parameter values.
+
+## Final Project
+
+Teams and plans are assigned today.
+Key deadlines:
+
+| Deadline | Deliverable |
+|:---|:---|
+| **Week 9** (Wed., Mar. 11) | Memo 1: Framework (Levers & Metrics) |
+| **Week 10** (Fri., Mar. 27) | Memo 2: Evidence (Valuation & System Models) |
+| **Week 12** (Fri., Apr. 10) | Memo 3: Robustness (Uncertainties & Deep Uncertainty) |
+| **Week 13** (Fri., Apr. 17) | Slides Due |
+| **Week 14** | Executive Briefing (Presentations) |
+| **Finals** | Written Report |
+
+See [Final Project](../../assignments/final-project/index.qmd) for full details.
+
+### Graduate Seminar (CEVE 521)
+
+Graduate students lead one Wednesday paper discussion session in small groups.
+Paper approval is due **2 weeks before** your session.
+
+| Group | Session | Topic | Paper Approval By | Materials Posted By |
+|:---|:---|:---|:---|:---|
+| Group 1 | Wed., Mar. 25 (Week 10) | Deep Uncertainty | Mar. 11 | Mar. 18 |
+| Group 2 | Wed., Apr. 1 (Week 11) | Exploratory Modeling | Mar. 18 | Mar. 25 |
+| Group 3 | Wed., Apr. 8 (Week 12) | Sequential Decisions | Mar. 25 | Apr. 1 |
+
+See [Graduate Seminar Requirements](../../exams/assignments/graduate-seminar.qmd) for full details.
+
+# References

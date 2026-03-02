@@ -1,7 +1,7 @@
 ---
 title: "Audit Memo 1: Decision Framework"
 subtitle: "CEVE 421/521 Final Project"
-date: 2026-02-27
+date: 2026-03-11
 status: draft
 format:
   html:
@@ -15,7 +15,7 @@ format:
 
 ## Overview
 
-**Due:** Friday of Week 7
+**Due:** Wednesday of Week 9 (March 11)
 
 This memo maps the decision framework of your chosen climate plan.
 You will identify the Levers (L) and Metrics (M) that define the plan's decision space.

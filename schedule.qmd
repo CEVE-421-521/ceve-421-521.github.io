@@ -43,8 +43,8 @@ You will often be encouraged to focus only on part of relevant papers.
 | | Wed., Mar. 4 | {{< material type="readings" id="week-08" label="Paper Discussion:" text="Robustness & Deep Uncertainty" href="readings/week-08-reading.qmd" >}} |
 | | Fri., Mar. 6 | {{< material type="labs" id="lab-07-S26" label="Lab 7:" text="Robustness Metrics" href="labs/lab-07-S26/index.qmd" >}} |
 | **9** | Mon., Mar. 9 | {{< material type="lectures" id="week-09" label="Lecture:" text="Trade-offs & Values" href="lectures/week-09/index.qmd" slides="lectures/week-09/index.html" slidepdf="lectures/week-09/index.pptx" >}} *(Remote)* |
-| | Wed., Mar. 11 | {{< material type="readings" id="week-09" label="Paper Discussion:" text="Trade-offs & Values" href="readings/week-09-reading.qmd" >}} |
-| | Fri., Mar. 13 | **Exam 2** (Covers Weeks 5-8) / {{< material type="assignments" id="memo-1" label="Project:" text="Memo 1 Due" href="assignments/final-project/memo-1-framework.qmd" >}} |
+| | Wed., Mar. 11 | {{< material type="readings" id="week-09" label="Paper Discussion:" text="Trade-offs & Values" href="readings/week-09-reading.qmd" >}} / {{< material type="assignments" id="memo-1" label="Project:" text="Memo 1 Due" href="assignments/final-project/memo-1-framework.qmd" >}} |
+| | Fri., Mar. 13 | **Exam 2** (Covers Weeks 5-8) |
 | | *Mar. 16-20* | *Spring Break* |
 | **10** | Mon., Mar. 23 | {{< material type="lectures" id="week-10" label="Lecture:" text="Exploratory Modeling & Scenario Discovery" href="lectures/week-10/index.qmd" slides="lectures/week-10/index.html" slidepdf="lectures/week-10/index.pptx" >}} |
 | | Wed., Mar. 25 | {{< material type="readings" id="week-10" label="Paper Discussion:" text="Exploratory Modeling & Scenario Discovery" href="readings/week-10-reading.qmd" >}} |

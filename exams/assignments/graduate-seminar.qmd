@@ -9,24 +9,22 @@ format: html
 
 ## Overview
 
-In addition to the standard coursework, CEVE 521 students will **co-lead one Wednesday Paper Discussion session** in pairs.
+In addition to the standard coursework, CEVE 521 students will **lead one Wednesday Paper Discussion session** in small groups.
 
 You will not simply present a paper; you will design an active learning experience that helps your classmates engage deeply with the material.
 
-## Available Dates
+## Schedule
 
-Each pair signs up for one of the following Wednesday sessions (3 pairs, 3 sessions):
+Groups are assigned by the instructor.
+Each group leads one of the following Wednesday sessions (3 groups, 3 sessions):
 
 | Week | Date | Topic Area |
 |:----:|:----:|:-----------|
-| 7 | Feb 25 | Decision Analysis |
-| 8 | Mar 4 | Decision Analysis |
 | 10 | Mar 25 | Deep Uncertainty |
 | 11 | Apr 1 | Exploratory Modeling |
 | 12 | Apr 8 | Sequential Decisions |
-| 13 | Apr 15 | Multi-Objective Optimization |
 
-The instructor will lead discussion on the remaining weeks.
+The instructor leads discussion on all other weeks.
 
 ## Requirements
 
@@ -41,7 +39,7 @@ Select a peer-reviewed paper or government report that:
 
 Acceptable sources include journal articles, government reports (e.g., IPCC chapters, NCA sections, agency guidelines), and published technical reports.
 
-Submit your paper choice for approval **2 weeks before** your session.
+Submit your paper choice for approval **at least 2 weeks before** your session (see Timeline below).
 
 ### 2. Design a Lesson Plan
 
@@ -69,23 +67,23 @@ Post to Canvas **1 week before** your session:
 
 ### 4. Lead the Discussion
 
-Co-facilitate the 50-minute session with your partner.
+Facilitate the 50-minute session with your group.
 You are not lecturing—you are guiding discussion and activities.
-Divide responsibilities clearly (e.g., one leads the opening and key concepts, the other leads the interactive element and synthesis).
+Divide responsibilities clearly (e.g., one person leads the opening and key concepts, another leads the interactive element and synthesis).
 The instructor will be present but will not intervene unless necessary.
 
 ## Timeline
 
-| Deadline | What |
-|:---------|:-----|
-| 2 weeks before | Paper choice approved; lesson plan submitted |
-| 1 week before | Pre-reading materials posted to Canvas |
-| Day of | Lead the 50-minute session |
+| Group | Session Date | Paper Approval By | Materials Posted By |
+|:------|:-------------|:-------------------|:--------------------|
+| Group 1 | Wed, Mar 25 | Mar 11 | Mar 18 |
+| Group 2 | Wed, Apr 1 | Mar 18 | Mar 25 |
+| Group 3 | Wed, Apr 8 | Mar 25 | Apr 1 |
 
 ## Grading
 
 Your seminar leadership counts for 20% of your final grade (see syllabus).
-Both partners receive the same grade.
+All group members receive the same grade.
 
 You will be evaluated on:
 
