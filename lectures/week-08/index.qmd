@@ -3,7 +3,7 @@ title: "Robustness & Deep Uncertainty"
 subtitle: "Lecture"
 date: 2026-03-02
 week: 8
-status: draft
+status: published
 
 format:
   html:
@@ -36,7 +36,7 @@ In Lab 5, you searched over dike heights to find the cost-minimizing action --- 
 The expected value of perfect information is the gap between optimizing with and without knowledge of $s$:
 
 $$
-\text{EVPI} = E_s\!\left[\max_a U(a, s)\right] - \max_a E_s\!\left[U(a, s)\right]
+\text{EVPI} = E_s\left[\max_a U(a, s)\right] - \max_a E_s\left[U(a, s)\right]
 $$ {#eq-evpi}
 
 EVII extends this to imperfect signals that update $p(s)$ via Bayes' rule.
@@ -46,7 +46,7 @@ Sobol indices decompose output variance by input.
 The first-order index $S_i$ measures the fraction of $\text{Var}[Y]$ explained by $X_i$ alone:
 
 $$
-S_i = \frac{\text{Var}_{X_i}\!\left[E[Y \mid X_i]\right]}{\text{Var}[Y]}
+S_i = \frac{\text{Var}_{X_i}\left[E[Y \mid X_i]\right]}{\text{Var}[Y]}
 $$ {#eq-sobol}
 
 ## Laplace's Principle
@@ -208,7 +208,7 @@ A different family asks "is my performance good enough?" --- these are **satisfi
 The **domain criterion** measures the fraction of scenarios in which a solution meets a performance threshold $\tau$:
 
 $$
-D(a) = \frac{1}{|S|} \sum_{s \in S} \mathbf{1}\!\left[ U(a, s) \geq \tau \right]
+D(a) = \frac{1}{|S|} \sum_{s \in S} \mathbf{1}\left[ U(a, s) \geq \tau \right]
 $$ {#eq-domain}
 
 where $|S| = n$ is the number of scenarios.
@@ -312,7 +312,7 @@ Write the domain criterion in continuous form.
 In general, the satisficing constraint may be on any performance metric $g(a, s)$ (cost, damage, reliability, etc.), not just raw utility:
 
 $$
-D(a) = \int \mathbf{1}\!\left[g(a, s) \geq \tau\right] p(s) \, ds
+D(a) = \int \mathbf{1}\left[g(a, s) \geq \tau\right] p(s) \, ds
 $$ {#eq-domain-continuous}
 
 where $p(s)$ is the sampling density over scenarios.
