@@ -101,7 +101,7 @@ window.MathJax = {
 
 
 <meta property="og:title" content="Week 8 Reading – CEVE 421/521 – Spring 2026">
-<meta property="og:description" content="Sensitivity and Value of Information">
+<meta property="og:description" content="Robustness &amp; Deep Uncertainty">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -117,8 +117,9 @@ window.MathJax = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#assigned-readings" id="toc-assigned-readings" class="nav-link active" data-scroll-target="#assigned-readings">Assigned Readings</a></li>
   <li><a href="#discussion-questions" id="toc-discussion-questions" class="nav-link" data-scroll-target="#discussion-questions">Discussion Questions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/readings/week-08-reading.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week-08-reading.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -128,7 +129,7 @@ window.MathJax = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Week 8 Reading</h1>
-<p class="subtitle lead">Sensitivity and Value of Information</p>
+<p class="subtitle lead">Robustness &amp; Deep Uncertainty</p>
 </div>
 
 
@@ -155,24 +156,36 @@ window.MathJax = {
 </div>
 </div>
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p><span class="citation" data-cites="runge_voi:2011">Runge et al. (<a href="#ref-runge_voi:2011" role="doc-biblioref">2011</a>)</span></p>
+<section id="assigned-readings" class="level2">
+<h2 class="anchored" data-anchor-id="assigned-readings">Assigned Readings</h2>
+<ol type="1">
+<li><p><span class="citation" data-cites="lempert_robust:2000">Lempert &amp; Schlesinger (<a href="#ref-lempert_robust:2000" role="doc-biblioref">2000</a>)</span> – “Robust Strategies for Abating Climate Change.” Argues that prediction-based policy analysis is inadequate for long-horizon climate decisions and proposes exploratory modeling to find <em>robust</em> strategies that perform reasonably well across a wide range of plausible futures.</p></li>
+<li><p><span class="citation" data-cites="schneider_scenarios:2002">Schneider (<a href="#ref-schneider_scenarios:2002" role="doc-biblioref">2002</a>)</span> – “Can We Estimate the Likelihood of Climatic Changes at 2100?” Makes the case that risk management requires probabilities, demonstrating that the probability of exceeding dangerous warming thresholds is highly sensitive to scenario and climate sensitivity assumptions.</p></li>
+</ol>
 </section>
 <section id="discussion-questions" class="level2">
 <h2 class="anchored" data-anchor-id="discussion-questions">Discussion Questions</h2>
 <ol type="1">
-<li><em>TBD</em></li>
-<li><em>TBD</em></li>
+<li><p>Lempert gives two reasons why “optimum policies” are problematic under deep uncertainty: (a) they are brittle in the face of surprises, and (b) they fail to build consensus among stakeholders with different expectations. Which argument do you find more compelling, and why?</p></li>
+<li><p>Schneider uses the asteroid example: “if consequences alone were the basis for decision-making, we should all switch professions to preventing asteroid collisions.” What point is he making? Do you agree that probability is essential for prioritizing risks?</p></li>
+<li><p>Schneider’s Figure 2 shows that the probability of exceeding 3.5 C warming by 2100 ranges from 23% to 39% depending on which scenarios and GCM sensitivities are included. What does this sensitivity tell us about the challenge of assigning probabilities to climate outcomes?</p></li>
+<li><p>Both authors care about supporting good decisions under uncertainty. If scientists refuse to assign probabilities, what happens? Schneider argues that policy makers will impute probabilities anyway — but without expert guidance. Lempert argues that whoever controls the probability assumptions controls the policy conclusion. Who is more worried about the <em>absence</em> of probabilities, and who is more worried about their <em>presence</em>? Is it better for scientists to give imperfect probabilistic estimates, or to give no estimates and let decision-makers guess?</p></li>
+<li><p>In Lab 6, you assigned a 50/50 prior probability over RCP 2.6 and RCP 8.5 to compute EVPI. Was that a “Schneider” move (assign subjective probabilities and optimize) or a “Lempert” move (explore across futures)? Could you have done the lab without assigning a prior?</p></li>
 </ol>
+</section>
+<section id="references" class="level2">
+
 
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-runge_voi:2011" class="csl-entry" role="listitem">
-Runge, M. C., Converse, S. J., &amp; Lyons, J. E. (2011). Which uncertainty? <span>Using</span> expert elicitation and expected value of information to design an adaptive program. <em>Biological Conservation</em>, <em>144</em>(4), 1214–1223. <a href="https://doi.org/10.1016/j.biocon.2010.12.020">https://doi.org/10.1016/j.biocon.2010.12.020</a>
+<div id="ref-lempert_robust:2000" class="csl-entry" role="listitem">
+Lempert, R. J., &amp; Schlesinger, M. E. (2000). Robust strategies for abating climate change. <em>Climatic Change</em>, <em>45</em>(3–4), 387–401. <a href="https://doi.org/10.1023/A:1005698407365">https://doi.org/10.1023/A:1005698407365</a>
+</div>
+<div id="ref-schneider_scenarios:2002" class="csl-entry" role="listitem">
+Schneider, S. H. (2002). Can we estimate the likelihood of climatic changes at 2100? <em>Climatic Change</em>, <em>52</em>(4), 441–451. https://doi.org/<a href="http://dx.doi.org/10.1023/A:1014276210717">http://dx.doi.org/10.1023/A:1014276210717</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
