@@ -20,9 +20,9 @@ Each group leads one of the following Wednesday sessions (3 groups, 3 sessions):
 
 | Week | Date | Topic Area |
 |:----:|:----:|:-----------|
-| 10 | Mar 25 | Deep Uncertainty |
-| 11 | Apr 1 | Exploratory Modeling |
-| 12 | Apr 8 | Sequential Decisions |
+| 10 | Mar 25 | Exploratory Modeling & Scenario Discovery |
+| 11 | Apr 1 | Sequential Decision Making |
+| 12 | Apr 8 | Multi-Objective Optimization |
 
 The instructor leads discussion on all other weeks.
 
@@ -72,13 +72,20 @@ You are not lecturing—you are guiding discussion and activities.
 Divide responsibilities clearly (e.g., one person leads the opening and key concepts, another leads the interactive element and synthesis).
 The instructor will be present but will not intervene unless necessary.
 
+::: {.callout-note}
+## Weekly Quiz Policy
+
+The weekly reading quiz will still occur during student-led sessions.
+Presenting group members are exempt from that week's quiz.
+:::
+
 ## Timeline
 
 | Group | Session Date | Paper Approval By | Materials Posted By |
 |:------|:-------------|:-------------------|:--------------------|
-| Group 1 | Wed, Mar 25 | Mar 11 | Mar 18 |
-| Group 2 | Wed, Apr 1 | Mar 18 | Mar 25 |
-| Group 3 | Wed, Apr 8 | Mar 25 | Apr 1 |
+| Group 1 | Wed, Mar 25 | Wed, Mar 11 | Fri, Mar 13 |
+| Group 2 | Wed, Apr 1 | Fri, Mar 13 | Wed, Mar 25 |
+| Group 3 | Wed, Apr 8 | Wed, Mar 25 | Wed, Apr 1 |
 
 ## Grading
 

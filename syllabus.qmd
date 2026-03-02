@@ -221,7 +221,7 @@ If there is an exam, lecture, or discussion on a Friday, you are expected to att
 ### Final Project
 
 Working in small teams, you will act as expert consultants to audit a real-world climate planning document.
-Through three progressive Audit Memos, you'll analyze the plan's decision framework, evidence base, and robustness to uncertainty—culminating in an Executive Briefing and Written Report.
+Through two progressive Audit Memos, you'll analyze the plan's XLRM decision framework, evidence base, and robustness to uncertainty—culminating in an Executive Briefing and Written Report.
 
 See [Final Project](assignments/final-project/index.qmd) for full details and timeline.
 
@@ -258,12 +258,12 @@ Updated versions will be posted on the course website.*
 | **6** | Feb 16, 18, 20 | Optimal Static Decisions | Lab 5: Simulation-Optimization / **Exam 1** *(Covers Weeks 1-4)* | |
 | **7** | Feb 23, 25, 27 | Sensitivity & Value of Information *(Mon. Remote)* | Lab 6: Value of Partial Information | |
 | **8** | Mar 2, 4, 6 | Robustness & Deep Uncertainty | Lab 7: Robustness Metrics | |
-| **9** | Mar 9, 11, 13 | Trade-offs & Values *(Mon. Remote)* | **Exam 2** *(Covers Weeks 5-8)* | Memo 1 (Wed) |
+| **9** | Mar 9, 11, 13 | Trade-offs & Values *(Mon. Remote)* | **Exam 2** *(Covers Weeks 5-8)* | |
 | | March 16-20 | *Spring Break (No Class)* | |
 | | **Module 3** | **Optimization Under Uncertainty** | |
-| **10** | Mar 23, 25, 27 | Exploratory Modeling & Scenario Discovery | Lab 8: Scenario Discovery | Memo 2 |
+| **10** | Mar 23, 25, 27 | Exploratory Modeling & Scenario Discovery | Lab 8: Scenario Discovery | Memo 1 |
 | **11** | Mar 30, Apr 1, 3 | Sequential Decision Making | Lab 9: Real Options & Dynamic Policy Search | |
-| **12** | Apr 6, 8, 10 | Multi-Objective Optimization | Lab 10: Pareto Fronts | Memo 3 |
+| **12** | Apr 6, 8, 10 | Multi-Objective Optimization | Lab 10: Pareto Fronts | Memo 2 |
 | **13** | Apr 13, 15, 17 | Case Studies | | Slides Due |
 | **14** | Apr 20, 22, 24 | Final Project Presentations | | |
 | **Final** | TBD | | **Exam 3** *(Covers Weeks 9-13)* | Written Report |

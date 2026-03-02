@@ -350,9 +350,8 @@ Key deadlines:
 
 | Deadline | Deliverable |
 |:---|:---|
-| **Week 9** (Wed., Mar. 11) | Memo 1: Framework (Levers & Metrics) |
-| **Week 10** (Fri., Mar. 27) | Memo 2: Evidence (Valuation & System Models) |
-| **Week 12** (Fri., Apr. 10) | Memo 3: Robustness (Uncertainties & Deep Uncertainty) |
+| **Week 10** (Fri., Mar. 27) | Memo 1: XLRM Framework (Uncertainties, Levers, Models, Metrics) |
+| **Week 12** (Fri., Apr. 10) | Memo 2: Evidence & Robustness (Valuation & Deep Uncertainty) |
 | **Week 13** (Fri., Apr. 17) | Slides Due |
 | **Week 14** | Executive Briefing (Presentations) |
 | **Finals** | Written Report |

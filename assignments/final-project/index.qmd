@@ -18,7 +18,7 @@ format:
 Working in small teams, you will act as expert consultants to audit a real-world climate planning document.
 Your chosen document must be **decision-relevant**—it should contain identifiable decisions (Levers) and measurable outcomes (Metrics).
 
-The project is built through three "Audit Memos" (1–2 pages each) to ensure steady progress, culminating in an Executive Briefing presentation and a final Written Report.
+The project is built through two Audit Memos to ensure steady progress, culminating in an Executive Briefing presentation and a final Written Report.
 
 ## Timeline
 
@@ -26,17 +26,16 @@ The project is built through three "Audit Memos" (1–2 pages each) to ensure st
 | :--- | :--- | :----- |
 | **Week 3 (Friday)** | [Topic Proposal](topic-proposal.qmd) | Submit document choice and confirm it contains identifiable Levers (L) and Metrics (M). |
 | **Week 8 (Monday)** | Teams & Plans Assigned | Instructor assigns teams and plans in class. |
-| **Week 9 (Wednesday)** | [Memo 1 (Framework)](memo-1-framework.qmd) | Map the plan's Levers (L) and Metrics (M). What choices are being made? What outcomes are being measured? |
-| **Week 10 (Friday)** | [Memo 2 (Evidence)](memo-2-evidence.qmd) | Map the plan's Valuation approach and System Models (R). What models are used? Are they appropriate? |
-| **Week 12 (Friday)** | [Memo 3 (Robustness)](memo-3-robustness.qmd) | Map the plan's consideration of Uncertainties (X) and Robustness. How does the plan handle deep uncertainty? |
+| **Week 10 (Friday)** | [Memo 1 (XLRM Framework)](memo-1-framework.qmd) | Map the plan's Uncertainties (X), Levers (L), System Models (R), and Metrics (M). What is the complete decision framework? |
+| **Week 12 (Friday)** | [Memo 2 (Evidence & Robustness)](memo-2-evidence.qmd) | Critique the plan's Valuation approach and Robustness. How strong is the evidence? How does the plan handle deep uncertainty? |
 | **Week 13 (Friday)** | Slides Due | All teams must submit their presentation slides. |
-| **Week 14** | [Executive Briefing](executive-briefing.qmd) | A 20-minute team presentation. Non-presenting teams act as the "Client Board." |
+| **Week 14** | [Executive Briefing](executive-briefing.qmd) | A 20-minute team presentation with 5 minutes of Q&A. |
 | **Finals** | [Written Report](written-report.qmd) | A synthesis of your memos with a final recommendation. |
 
 ## Team Formation
 
-- Teams of 2-3 students, assigned by the instructor in Week 8
-- Mixed 421/521 teams encouraged
+- Students submit individual topic proposals in Week 3
+- In Week 8, the instructor assigns teams of 2-3 students based on topic overlap and interest
 - Each team is assigned a climate plan to audit
 
 ## Choosing a Plan
@@ -53,4 +52,17 @@ Good examples include:
 - Flood risk management strategies
 - Coastal resilience plans
 - Infrastructure adaptation assessments
+
+## Grading
+
+| Deliverable | Weight |
+|:---|:---:|
+| Topic Proposal | 5% |
+| Memo 1 | 15% |
+| Memo 2 | 15% |
+| Executive Briefing | 30% |
+| Written Report | 35% |
+
+Memos are progress checks that build toward the final deliverables.
+The executive briefing and written report together make up the bulk of the grade.
 

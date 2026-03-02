@@ -17,11 +17,11 @@ format:
 
 **Due:** Friday of Week 3
 
-This proposal confirms your team and document choice.
+This proposal confirms your document choice.
 The goal is to ensure your chosen plan contains enough decision-relevant content for a meaningful audit.
 
 A good topic proposal sets you up for success on all subsequent deliverables.
-Spending time now to find the right document will make Memos 1-3 much easier to write.
+Spending time now to find the right document will make both Audit Memos much easier to write.
 
 ## Choosing a Plan: The Key to Success
 
@@ -218,12 +218,7 @@ Metrics are:
 
 Submit a **1-page document** (PDF) containing:
 
-### 1. Team Information
-
-- Team member names and whether each is enrolled in CEVE 421 or 521
-- Brief statement of how you plan to divide work (e.g., "Team member A will lead Memo 1; member B will lead Memo 2...")
-
-### 2. Document Selection
+### 1. Document Selection
 
 Provide complete citation information:
 
@@ -233,7 +228,7 @@ Provide complete citation information:
 - **URL:** Direct link to the PDF or landing page
 - **Summary:** 2-3 sentences describing what the plan addresses and why you chose it
 
-### 3. Initial XLRM Mapping
+### 2. Initial XLRM Mapping
 
 Identify at least **two examples of each** XLRM component.
 For each example, provide:
@@ -248,13 +243,13 @@ For each example, provide:
 | **R (Relationships)** | *e.g., "HEC-RAS hydraulic model to estimate flood depths (Appendix C)"* | *e.g., "HAZUS-MH depth-damage curves for residential structures (p. 112)"* |
 | **M (Metrics)** | *e.g., "Annual expected damages in $ millions (Table 5-1)"* | *e.g., "Benefit-cost ratio for each alternative (Table 6-2)"* |
 
-### 4. Confirmation Statement
+### 3. Confirmation Statement
 
 A brief statement (1-2 sentences) confirming that:
 
 - The document is publicly available (provide URL)
 - The document contains concrete decisions (not just aspirational goals)
-- Your team has reviewed the full document (not just the executive summary)
+- You have reviewed the full document (not just the executive summary)
 
 ## Example: Strong vs. Weak Proposals
 
@@ -288,7 +283,7 @@ A brief statement (1-2 sentences) confirming that:
 
 **Why is this weak?**
 
-- No page numbers (evidence team didn't read document carefully)
+- No page numbers (suggests the document wasn't read carefully)
 - Examples are too vague to verify
 - "Reduce emissions" is a goal, not a specific lever
 - "Net zero by 2050" is a target, not a metric for evaluating alternatives
@@ -298,18 +293,18 @@ A brief statement (1-2 sentences) confirming that:
 
 Submit your proposal as a PDF to Canvas by 11:59 PM on the due date.
 
-**Filename format:** `TeamName_TopicProposal.pdf`
+**Filename format:** `LastName_TopicProposal.pdf`
 
 ## Grading
 
-This proposal is graded **Complete/Incomplete**.
+This proposal is worth **5% of your final project grade** and is graded **Complete/Incomplete** (you receive full credit for a complete proposal).
 
 A **Complete** proposal demonstrates:
 
 - [ ] Clear document selection with full citation and working URL
 - [ ] At least two plausible, specific examples for each XLRM component
 - [ ] Page number references for each example
-- [ ] Evidence that the team has reviewed the full document
+- [ ] Evidence that you have reviewed the full document
 
 An **Incomplete** proposal will be returned for revision if:
 
