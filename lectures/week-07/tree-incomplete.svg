@@ -1,0 +1,185 @@
+<svg width="960" height="480" viewbox="0.00 0.00 528.27 422.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 418)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-418 524.27,-418 524.27,4 -4,4"></polygon>
+<!-- F -->
+<g id="node1" class="node">
+<title>F</title>
+<ellipse fill="#e0e0e0" stroke="black" cx="36" cy="-201" rx="36" ry="36"></ellipse>
+<text text-anchor="middle" x="36" y="-197.7" font-family="Helvetica,sans-Serif" font-size="11.00">Signal</text>
+</g>
+<!-- DR -->
+<g id="node2" class="node">
+<title>DR</title>
+<polygon fill="#cde0f5" stroke="black" points="259.09,-265 200.72,-265 200.72,-229 259.09,-229 259.09,-265"></polygon>
+<text text-anchor="middle" x="229.9" y="-243.7" font-family="Helvetica,sans-Serif" font-size="11.00">Decision</text>
+</g>
+<!-- F&#45;&gt;DR -->
+<g id="edge1" class="edge">
+<title>F-&gt;DR</title>
+<path fill="none" stroke="black" d="M71.31,-209.22C104.87,-217.27 155.87,-229.49 190.7,-237.84"></path>
+<polygon fill="black" stroke="black" points="189.97,-241.27 200.51,-240.19 191.61,-234.46 189.97,-241.27"></polygon>
+<text text-anchor="middle" x="136.41" y="-238" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Forecast rain (0.41)</text>
+</g>
+<!-- DD -->
+<g id="node3" class="node">
+<title>DD</title>
+<polygon fill="#cde0f5" stroke="black" points="259.09,-184 200.72,-184 200.72,-148 259.09,-148 259.09,-184"></polygon>
+<text text-anchor="middle" x="229.9" y="-162.7" font-family="Helvetica,sans-Serif" font-size="11.00">Decision</text>
+</g>
+<!-- F&#45;&gt;DD -->
+<g id="edge2" class="edge">
+<title>F-&gt;DD</title>
+<path fill="none" stroke="black" d="M71.75,-194.66C105.23,-188.56 155.76,-179.34 190.44,-173.02"></path>
+<polygon fill="black" stroke="black" points="191.44,-176.39 200.65,-171.15 190.19,-169.5 191.44,-176.39"></polygon>
+<text text-anchor="middle" x="136.41" y="-193" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Forecast dry (0.59)</text>
+</g>
+<!-- NRB -->
+<g id="node4" class="node">
+<title>NRB</title>
+<ellipse fill="#ffe0e0" stroke="black" cx="350.96" cy="-342" rx="27.12" ry="27.12"></ellipse>
+<text text-anchor="middle" x="350.96" y="-338.7" font-family="Helvetica,sans-Serif" font-size="11.00">Nature</text>
+</g>
+<!-- DR&#45;&gt;NRB -->
+<g id="edge3" class="edge">
+<title>DR-&gt;NRB</title>
+<path fill="none" stroke="black" d="M253.58,-265.09C272.88,-280.49 300.69,-302.69 321.49,-319.28"></path>
+<polygon fill="black" stroke="black" points="319.36,-322.06 329.36,-325.56 323.73,-316.59 319.36,-322.06"></polygon>
+<text text-anchor="middle" x="291.45" y="-308" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Bring</text>
+</g>
+<!-- NRD -->
+<g id="node5" class="node">
+<title>NRD</title>
+<ellipse fill="#ffe0e0" stroke="black" cx="350.96" cy="-247" rx="27.12" ry="27.12"></ellipse>
+<text text-anchor="middle" x="350.96" y="-243.7" font-family="Helvetica,sans-Serif" font-size="11.00">Nature</text>
+</g>
+<!-- DR&#45;&gt;NRD -->
+<g id="edge4" class="edge">
+<title>DR-&gt;NRD</title>
+<path fill="none" stroke="black" d="M259.12,-247C275.29,-247 295.77,-247 313.19,-247"></path>
+<polygon fill="black" stroke="black" points="313.58,-250.5 323.58,-247 313.58,-243.5 313.58,-250.5"></polygon>
+<text text-anchor="middle" x="291.45" y="-250" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Don't</text>
+</g>
+<!-- NDB -->
+<g id="node6" class="node">
+<title>NDB</title>
+<ellipse fill="#ffe0e0" stroke="black" cx="350.96" cy="-166" rx="27.12" ry="27.12"></ellipse>
+<text text-anchor="middle" x="350.96" y="-162.7" font-family="Helvetica,sans-Serif" font-size="11.00">Nature</text>
+</g>
+<!-- DD&#45;&gt;NDB -->
+<g id="edge5" class="edge">
+<title>DD-&gt;NDB</title>
+<path fill="none" stroke="black" d="M259.12,-166C275.29,-166 295.77,-166 313.19,-166"></path>
+<polygon fill="black" stroke="black" points="313.58,-169.5 323.58,-166 313.58,-162.5 313.58,-169.5"></polygon>
+<text text-anchor="middle" x="291.45" y="-169" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Bring</text>
+</g>
+<!-- NDD -->
+<g id="node7" class="node">
+<title>NDD</title>
+<ellipse fill="#ffe0e0" stroke="black" cx="350.96" cy="-72" rx="27.12" ry="27.12"></ellipse>
+<text text-anchor="middle" x="350.96" y="-68.7" font-family="Helvetica,sans-Serif" font-size="11.00">Nature</text>
+</g>
+<!-- DD&#45;&gt;NDD -->
+<g id="edge6" class="edge">
+<title>DD-&gt;NDD</title>
+<path fill="none" stroke="black" d="M253.86,-147.88C272.98,-132.78 300.33,-111.19 320.96,-94.9"></path>
+<polygon fill="black" stroke="black" points="323.39,-97.44 329.07,-88.49 319.05,-91.94 323.39,-97.44"></polygon>
+<text text-anchor="middle" x="291.45" y="-130" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Don't</text>
+</g>
+<!-- QRB1 -->
+<g id="node8" class="node">
+<title>QRB1</title>
+<text text-anchor="middle" x="493.27" y="-392.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$5</text>
+</g>
+<!-- NRB&#45;&gt;QRB1 -->
+<g id="edge7" class="edge">
+<title>NRB-&gt;QRB1</title>
+<path fill="none" stroke="black" d="M376.4,-351.41C398.58,-359.94 431.56,-372.63 456.67,-382.3"></path>
+<polygon fill="black" stroke="black" points="455.61,-385.64 466.2,-385.97 458.13,-379.11 455.61,-385.64"></polygon>
+<text text-anchor="middle" x="422.14" y="-381" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Rain (???)</text>
+</g>
+<!-- QRB2 -->
+<g id="node9" class="node">
+<title>QRB2</title>
+<text text-anchor="middle" x="493.27" y="-338.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$5</text>
+</g>
+<!-- NRB&#45;&gt;QRB2 -->
+<g id="edge8" class="edge">
+<title>NRB-&gt;QRB2</title>
+<path fill="none" stroke="black" d="M378.02,-342C399.84,-342 431.22,-342 455.57,-342"></path>
+<polygon fill="black" stroke="black" points="455.87,-345.5 465.87,-342 455.87,-338.5 455.87,-345.5"></polygon>
+<text text-anchor="middle" x="422.14" y="-345" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Dry (???)</text>
+</g>
+<!-- QRD1 -->
+<g id="node10" class="node">
+<title>QRD1</title>
+<text text-anchor="middle" x="493.27" y="-284.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$50</text>
+</g>
+<!-- NRD&#45;&gt;QRD1 -->
+<g id="edge9" class="edge">
+<title>NRD-&gt;QRD1</title>
+<path fill="none" stroke="black" d="M377.04,-254.33C399.07,-260.77 431.39,-270.21 456.19,-277.46"></path>
+<polygon fill="black" stroke="black" points="455.39,-280.87 465.97,-280.32 457.35,-274.15 455.39,-280.87"></polygon>
+<text text-anchor="middle" x="422.14" y="-277" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Rain (???)</text>
+</g>
+<!-- QRD2 -->
+<g id="node11" class="node">
+<title>QRD2</title>
+<text text-anchor="middle" x="493.27" y="-230.7" font-family="Helvetica,sans-Serif" font-size="11.00">$0</text>
+</g>
+<!-- NRD&#45;&gt;QRD2 -->
+<g id="edge10" class="edge">
+<title>NRD-&gt;QRD2</title>
+<path fill="none" stroke="black" d="M378.02,-244.59C399.93,-242.55 431.5,-239.63 455.9,-237.37"></path>
+<polygon fill="black" stroke="black" points="456.23,-240.85 465.87,-236.45 455.59,-233.88 456.23,-240.85"></polygon>
+<text text-anchor="middle" x="422.14" y="-245" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Dry (???)</text>
+</g>
+<!-- QDB1 -->
+<g id="node12" class="node">
+<title>QDB1</title>
+<text text-anchor="middle" x="493.27" y="-176.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$5</text>
+</g>
+<!-- NDB&#45;&gt;QDB1 -->
+<g id="edge11" class="edge">
+<title>NDB-&gt;QDB1</title>
+<path fill="none" stroke="black" d="M378.02,-168.6C399.93,-170.79 431.5,-173.94 455.9,-176.37"></path>
+<polygon fill="black" stroke="black" points="455.57,-179.86 465.87,-177.37 456.26,-172.89 455.57,-179.86"></polygon>
+<text text-anchor="middle" x="422.14" y="-178" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Rain (???)</text>
+</g>
+<!-- QDB2 -->
+<g id="node13" class="node">
+<title>QDB2</title>
+<text text-anchor="middle" x="493.27" y="-122.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$5</text>
+</g>
+<!-- NDB&#45;&gt;QDB2 -->
+<g id="edge12" class="edge">
+<title>NDB-&gt;QDB2</title>
+<path fill="none" stroke="black" d="M377.37,-158.76C399.44,-152.46 431.65,-143.28 456.36,-136.24"></path>
+<polygon fill="black" stroke="black" points="457.44,-139.57 466.1,-133.46 455.52,-132.84 457.44,-139.57"></polygon>
+<text text-anchor="middle" x="422.14" y="-156" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Dry (???)</text>
+</g>
+<!-- QDD1 -->
+<g id="node14" class="node">
+<title>QDD1</title>
+<text text-anchor="middle" x="493.27" y="-68.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$50</text>
+</g>
+<!-- NDD&#45;&gt;QDD1 -->
+<g id="edge13" class="edge">
+<title>NDD-&gt;QDD1</title>
+<path fill="none" stroke="black" d="M378.02,-72C399.84,-72 431.22,-72 455.57,-72"></path>
+<polygon fill="black" stroke="black" points="455.87,-75.5 465.87,-72 455.87,-68.5 455.87,-75.5"></polygon>
+<text text-anchor="middle" x="422.14" y="-75" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Rain (???)</text>
+</g>
+<!-- QDD2 -->
+<g id="node15" class="node">
+<title>QDD2</title>
+<text text-anchor="middle" x="493.27" y="-14.7" font-family="Helvetica,sans-Serif" font-size="11.00">$0</text>
+</g>
+<!-- NDD&#45;&gt;QDD2 -->
+<g id="edge14" class="edge">
+<title>NDD-&gt;QDD2</title>
+<path fill="none" stroke="black" d="M376.4,-62.59C398.58,-54.06 431.56,-41.37 456.67,-31.7"></path>
+<polygon fill="black" stroke="black" points="458.13,-34.89 466.2,-28.03 455.61,-28.36 458.13,-34.89"></polygon>
+<text text-anchor="middle" x="422.14" y="-57" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Dry (???)</text>
+</g>
+</g>
+</svg>

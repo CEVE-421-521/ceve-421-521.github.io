@@ -1,0 +1,85 @@
+<svg width="960" height="480" viewbox="0.00 0.00 377.47 210.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 206)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-206 373.47,-206 373.47,4 -4,4"></polygon>
+<!-- D -->
+<g id="node1" class="node">
+<title>D</title>
+<polygon fill="#cde0f5" stroke="black" points="58.28,-120 -0.09,-120 -0.09,-84 58.28,-84 58.28,-120"></polygon>
+<text text-anchor="middle" x="29.09" y="-98.7" font-family="Helvetica,sans-Serif" font-size="11.00">Decision</text>
+</g>
+<!-- NB -->
+<g id="node2" class="node">
+<title>NB</title>
+<ellipse fill="#e0e0e0" stroke="black" cx="191.27" cy="-139" rx="27.12" ry="27.12"></ellipse>
+<text text-anchor="middle" x="191.27" y="-135.7" font-family="Helvetica,sans-Serif" font-size="11.00">Nature</text>
+</g>
+<!-- D&#45;&gt;NB -->
+<g id="edge1" class="edge">
+<title>D-&gt;NB</title>
+<path fill="none" stroke="black" stroke-width="2.5" d="M58.36,-108.53C85.28,-114.75 125.87,-124.12 154.92,-130.83"></path>
+<polygon fill="black" stroke="black" stroke-width="2.5" points="154.14,-134.24 164.67,-133.08 155.71,-127.42 154.14,-134.24"></polygon>
+<text text-anchor="middle" x="111.2" y="-131" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Bring umbrella</text>
+</g>
+<!-- ND -->
+<g id="node3" class="node">
+<title>ND</title>
+<ellipse fill="#e0e0e0" stroke="black" cx="191.27" cy="-67" rx="27.12" ry="27.12"></ellipse>
+<text text-anchor="middle" x="191.27" y="-63.7" font-family="Helvetica,sans-Serif" font-size="11.00">Nature</text>
+</g>
+<!-- D&#45;&gt;ND -->
+<g id="edge2" class="edge">
+<title>D-&gt;ND</title>
+<path fill="none" stroke="black" d="M58.36,-95.82C85.16,-89.97 125.52,-81.15 154.54,-74.81"></path>
+<polygon fill="black" stroke="black" points="155.64,-78.15 164.67,-72.6 154.15,-71.31 155.64,-78.15"></polygon>
+<text text-anchor="middle" x="111.2" y="-94" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Don't bring</text>
+</g>
+<!-- p1 -->
+<g id="node4" class="node">
+<title>p1</title>
+<text text-anchor="middle" x="342.47" y="-180.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$5</text>
+</g>
+<!-- NB&#45;&gt;p1 -->
+<g id="edge3" class="edge">
+<title>NB-&gt;p1</title>
+<path fill="none" stroke="black" d="M217.58,-146.63C241.69,-153.9 278.22,-164.92 305.38,-173.11"></path>
+<polygon fill="black" stroke="black" points="304.7,-176.56 315.28,-176.1 306.72,-169.86 304.7,-176.56"></polygon>
+<text text-anchor="middle" x="266.9" y="-173" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Rain (0.3)</text>
+</g>
+<!-- p2 -->
+<g id="node5" class="node">
+<title>p2</title>
+<text text-anchor="middle" x="342.47" y="-126.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$5</text>
+</g>
+<!-- NB&#45;&gt;p2 -->
+<g id="edge4" class="edge">
+<title>NB-&gt;p2</title>
+<path fill="none" stroke="black" d="M218.6,-137.41C242.68,-135.96 278.51,-133.8 305.27,-132.18"></path>
+<polygon fill="black" stroke="black" points="305.63,-135.67 315.4,-131.57 305.21,-128.68 305.63,-135.67"></polygon>
+<text text-anchor="middle" x="266.9" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;No rain (0.7)</text>
+</g>
+<!-- p3 -->
+<g id="node6" class="node">
+<title>p3</title>
+<text text-anchor="middle" x="342.47" y="-68.7" font-family="Helvetica,sans-Serif" font-size="11.00">-$50</text>
+</g>
+<!-- ND&#45;&gt;p3 -->
+<g id="edge5" class="edge">
+<title>ND-&gt;p3</title>
+<path fill="none" stroke="black" d="M218.6,-67.88C242.68,-68.69 278.51,-69.89 305.27,-70.79"></path>
+<polygon fill="black" stroke="black" points="305.29,-74.29 315.4,-71.13 305.53,-67.29 305.29,-74.29"></polygon>
+<text text-anchor="middle" x="266.9" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;Rain (0.3)</text>
+</g>
+<!-- p4 -->
+<g id="node7" class="node">
+<title>p4</title>
+<text text-anchor="middle" x="342.47" y="-14.7" font-family="Helvetica,sans-Serif" font-size="11.00">$0</text>
+</g>
+<!-- ND&#45;&gt;p4 -->
+<g id="edge6" class="edge">
+<title>ND-&gt;p4</title>
+<path fill="none" stroke="black" d="M217.42,-58.37C223.6,-56.26 230.2,-54.04 236.34,-52 259.23,-44.4 285,-36.06 305.3,-29.55"></path>
+<polygon fill="black" stroke="black" points="306.62,-32.8 315.08,-26.41 304.49,-26.13 306.62,-32.8"></polygon>
+<text text-anchor="middle" x="266.9" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00"> &nbsp;No rain (0.7)</text>
+</g>
+</g>
+</svg>
