@@ -50,35 +50,7 @@ Target: 1:03.
 You choose *before* nature reveals the state.
 The decision node comes first --- this computes $\max_a \sum_s U(a,s) \, p(s)$.
 
-```{dot}
-//| label: fig-tree-no-info
-//| fig-cap: "Decision tree without information. You choose first, then nature reveals the state."
-//| code-fold: true
-digraph {
-    rankdir=LR
-    node [fontname="Helvetica", fontsize=11]
-    edge [fontname="Helvetica", fontsize=10]
-
-    D [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
-
-    NB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
-    ND [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
-
-    p1 [shape=plaintext, label="-$5"]
-    p2 [shape=plaintext, label="-$5"]
-    p3 [shape=plaintext, label="-$50"]
-    p4 [shape=plaintext, label="$0"]
-
-    D -> NB [label="  Bring umbrella", penwidth=2.5]
-    D -> ND [label="  Don't bring"]
-
-    NB -> p1 [label="  Rain (0.3)"]
-    NB -> p2 [label="  No rain (0.7)"]
-
-    ND -> p3 [label="  Rain (0.3)"]
-    ND -> p4 [label="  No rain (0.7)"]
-}
-```
+![Decision tree without information. You choose first, then nature reveals the state.](tree-no-info.svg){#fig-tree-no-info}
 
 ::: {.notes}
 Target: 1:06.
@@ -109,35 +81,7 @@ Walk through each branch on the board, pointing back to the tree.
 Nature reveals the state *before* you decide.
 The chance node comes first --- this computes $\sum_s \max_a U(a,s) \, p(s)$.
 
-```{dot}
-//| label: fig-tree-perfect-info
-//| fig-cap: "Decision tree with perfect information. Nature reveals the state, then you choose."
-//| code-fold: true
-digraph {
-    rankdir=LR
-    node [fontname="Helvetica", fontsize=11]
-    edge [fontname="Helvetica", fontsize=10]
-
-    N [shape=circle, label="Nature", width=1.0, style=filled, fillcolor="#e0e0e0"]
-
-    DR [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
-    DD [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
-
-    p1 [shape=plaintext, label="-$5"]
-    p2 [shape=plaintext, label="-$50"]
-    p3 [shape=plaintext, label="-$5"]
-    p4 [shape=plaintext, label="$0"]
-
-    N -> DR [label="  Rain (0.3)"]
-    N -> DD [label="  No rain (0.7)"]
-
-    DR -> p1 [label="  Bring", penwidth=2.5]
-    DR -> p2 [label="  Don't", style=dashed, color="#999999"]
-
-    DD -> p3 [label="  Bring", style=dashed, color="#999999"]
-    DD -> p4 [label="  Don't", penwidth=2.5]
-}
-```
+![Decision tree with perfect information. Nature reveals the state, then you choose.](tree-perfect-info.svg){#fig-tree-perfect-info}
 
 ::: {.notes}
 Target: 1:10.
@@ -226,53 +170,7 @@ Walk through each step on the board.
 
 We can draw the first two layers, but the nature nodes need posterior probabilities we haven't computed yet.
 
-```{dot}
-//| label: fig-tree-incomplete
-//| fig-cap: "Incomplete imperfect-information tree. The signal and decision layers are known, but the posterior probabilities at the nature nodes require Bayes' rule."
-//| code-fold: true
-digraph {
-    rankdir=LR
-    node [fontname="Helvetica", fontsize=11]
-    edge [fontname="Helvetica", fontsize=10]
-
-    F [shape=circle, label="Signal", width=1.0, style=filled, fillcolor="#e0e0e0"]
-
-    DR [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
-    DD [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
-
-    NRB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#ffe0e0"]
-    NRD [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#ffe0e0"]
-    NDB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#ffe0e0"]
-    NDD [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#ffe0e0"]
-
-    F -> DR [label="  Forecast rain (0.41)"]
-    F -> DD [label="  Forecast dry (0.59)"]
-
-    DR -> NRB [label="  Bring"]
-    DR -> NRD [label="  Don't"]
-
-    DD -> NDB [label="  Bring"]
-    DD -> NDD [label="  Don't"]
-
-    NRB -> QRB1 [label="  Rain (???)"]
-    NRB -> QRB2 [label="  Dry (???)"]
-    NRD -> QRD1 [label="  Rain (???)"]
-    NRD -> QRD2 [label="  Dry (???)"]
-    NDB -> QDB1 [label="  Rain (???)"]
-    NDB -> QDB2 [label="  Dry (???)"]
-    NDD -> QDD1 [label="  Rain (???)"]
-    NDD -> QDD2 [label="  Dry (???)"]
-
-    QRB1 [shape=plaintext, label="-$5"]
-    QRB2 [shape=plaintext, label="-$5"]
-    QRD1 [shape=plaintext, label="-$50"]
-    QRD2 [shape=plaintext, label="$0"]
-    QDB1 [shape=plaintext, label="-$5"]
-    QDB2 [shape=plaintext, label="-$5"]
-    QDD1 [shape=plaintext, label="-$50"]
-    QDD2 [shape=plaintext, label="$0"]
-}
-```
+![Incomplete imperfect-information tree. The signal and decision layers are known, but the posterior probabilities at the nature nodes require Bayes' rule.](tree-incomplete.svg){#fig-tree-incomplete}
 
 ::: {.notes}
 Target: 1:24.
@@ -308,56 +206,7 @@ Key normalization: the denominator P(f. rain) = 0.41 ensures the posteriors are 
 Now we can fill in every number.
 Three layers: **Signal** (chance) $\to$ **Decision** (you) $\to$ **Nature** (chance).
 
-```{dot}
-//| label: fig-tree-imperfect
-//| fig-cap: "Decision tree with an imperfect forecast. Posterior probabilities from Bayes' rule replace the prior at the nature nodes."
-//| code-fold: true
-digraph {
-    rankdir=LR
-    node [fontname="Helvetica", fontsize=11]
-    edge [fontname="Helvetica", fontsize=10]
-
-    F [shape=circle, label="Signal", width=1.0, style=filled, fillcolor="#e0e0e0"]
-
-    DR [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
-    DD [shape=box, label="Decision", style=filled, fillcolor="#cde0f5"]
-
-    NRB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
-    NRD [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
-    NDB [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
-    NDD [shape=circle, label="Nature", width=0.7, style=filled, fillcolor="#e0e0e0"]
-
-    p1 [shape=plaintext, label="-$5"]
-    p2 [shape=plaintext, label="-$5"]
-    p3 [shape=plaintext, label="-$50"]
-    p4 [shape=plaintext, label="$0"]
-    p5 [shape=plaintext, label="-$5"]
-    p6 [shape=plaintext, label="-$5"]
-    p7 [shape=plaintext, label="-$50"]
-    p8 [shape=plaintext, label="$0"]
-
-    F -> DR [label="  Forecast rain (0.41)"]
-    F -> DD [label="  Forecast dry (0.59)"]
-
-    DR -> NRB [label="  Bring", penwidth=2.5]
-    DR -> NRD [label="  Don't", style=dashed, color="#999999"]
-
-    DD -> NDB [label="  Bring", style=dashed, color="#999999"]
-    DD -> NDD [label="  Don't", penwidth=2.5]
-
-    NRB -> p1 [label="  Rain (0.66)"]
-    NRB -> p2 [label="  Dry (0.34)"]
-
-    NRD -> p3 [label="  Rain (0.66)"]
-    NRD -> p4 [label="  Dry (0.34)"]
-
-    NDB -> p5 [label="  Rain (0.05)"]
-    NDB -> p6 [label="  Dry (0.95)"]
-
-    NDD -> p7 [label="  Rain (0.05)"]
-    NDD -> p8 [label="  Dry (0.95)"]
-}
-```
+![Decision tree with an imperfect forecast. Posterior probabilities from Bayes' rule replace the prior at the nature nodes.](tree-imperfect.svg){#fig-tree-imperfect}
 
 ::: {.notes}
 Target: 1:30.
