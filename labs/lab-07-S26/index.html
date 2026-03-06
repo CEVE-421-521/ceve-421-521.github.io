@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 7: Value of Partial Information – CEVE 421/521 – Spring 2026</title>
+<title>Lab 7: Robustness Metrics – CEVE 421/521 – Spring 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,10 +55,30 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -113,10 +133,43 @@ window.MathJax = {
     }
   };
 </script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-<meta property="og:title" content="Lab 7: Value of Partial Information – CEVE 421/521 – Spring 2026">
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Lab 7: Robustness Metrics – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="CEVE 421/521">
+<meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-07-S26/index_files/figure-html/fig-emulator-output-1.svg">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -133,8 +186,13 @@ window.MathJax = {
    
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3</span> Exercises</a></li>
+  <li><a href="#before-lab" id="toc-before-lab" class="nav-link" data-scroll-target="#before-lab"><span class="header-section-number">2</span> Before Lab</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">3</span> Setup</a></li>
+  <li><a href="#act-1-unweighted-robustness" id="toc-act-1-unweighted-robustness" class="nav-link" data-scroll-target="#act-1-unweighted-robustness"><span class="header-section-number">4</span> Act 1: Unweighted Robustness</a></li>
+  <li><a href="#act-2-sensitivity-to-scenario-selection" id="toc-act-2-sensitivity-to-scenario-selection" class="nav-link" data-scroll-target="#act-2-sensitivity-to-scenario-selection"><span class="header-section-number">5</span> Act 2: Sensitivity to Scenario Selection</a></li>
+  <li><a href="#act-3-weighted-robustness" id="toc-act-3-weighted-robustness" class="nav-link" data-scroll-target="#act-3-weighted-robustness"><span class="header-section-number">6</span> Act 3: Weighted Robustness</a></li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="header-section-number">7</span> Wrap-Up</a></li>
+  <li><a href="#sec-submission" id="toc-sec-submission" class="nav-link" data-scroll-target="#sec-submission"><span class="header-section-number">8</span> Submission</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/labs/lab-07-S26/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -143,7 +201,7 @@ window.MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 7: Value of Partial Information</h1>
+<h1 class="title">Lab 7: Robustness Metrics</h1>
 <p class="subtitle lead">CEVE 421/521</p>
 </div>
 
@@ -179,49 +237,1151 @@ window.MathJax = {
 
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>Lab objectives and context - to be written.</p>
+<p>In Lab 6 you computed the <strong>value of information</strong> for a homeowner deciding how high to elevate their house. That analysis used two SLR scenarios (RCP 2.6 and RCP 8.5) and assumed a 50/50 prior.</p>
+<p>But what if we don’t trust those probabilities? What if someone asks: “will this decision still work if we’re wrong about the future?” That’s a question about <strong>robustness</strong>.</p>
+<p>Today you’ll evaluate the house elevation decision against <strong>10,000 sea-level rise trajectories</strong> spanning four physical models and four emissions pathways. You’ll compute robustness metrics that don’t require probabilities, discover that these metrics are sensitive to <em>which</em> scenarios you include, and then apply a principled weighting approach to make the subjective assumptions transparent.</p>
+<p><strong>References:</strong></p>
+<ul>
+<li><span class="citation" data-cites="herman_robustness:2015">Herman et al. (<a href="#ref-herman_robustness:2015" role="doc-biblioref">2015</a>)</span> — Robustness metrics taxonomy</li>
+<li><span class="citation" data-cites="doss-gollin_subjective:2023">Doss-Gollin &amp; Keller (<a href="#ref-doss-gollin_subjective:2023" role="doc-biblioref">2023</a>)</span> — Subjective Bayesian framework for synthesizing deep uncertainties</li>
+<li><span class="citation" data-cites="ruckert_flood:2019">Ruckert et al. (<a href="#ref-ruckert_flood:2019" role="doc-biblioref">2019</a>)</span> — BRICK sea-level rise projections</li>
+</ul>
 </section>
-<section id="setup" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2</span> Setup</h2>
+<section id="before-lab" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="before-lab"><span class="header-section-number">2</span> Before Lab</h2>
+<p><strong>Complete these steps BEFORE coming to lab:</strong></p>
+<ol type="1">
+<li><p><strong>Accept the GitHub Classroom assignment</strong> (link on Canvas)</p></li>
+<li><p><strong>Clone your repository:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/CEVE-421-521/lab-07-S26-yourusername.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab-07-S26-yourusername</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Open the notebook</strong> in VS Code or Quarto preview</p></li>
+<li><p><strong>Run the first code cell</strong> — it will install any missing packages (may take 10-15 minutes the first time)</p></li>
+</ol>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Submission:</strong> You will render this notebook to PDF and submit the PDF to Canvas. See <a href="#sec-submission" class="quarto-xref">Section&nbsp;8</a> for details.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Computation note:</strong> This lab uses a pre-built EAD emulator, so evaluating all 10,000 trajectories across all elevation heights takes only a few seconds.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="setup" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="setup"><span class="header-section-number">3</span> Setup</h2>
+<p>Run the cells in this section to load packages, build the house model, and load the SLR data. You don’t need to modify any of this code — just run it and read the comments to understand what it does.</p>
+<section id="packages" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">3.1</span> Packages</h3>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install SimOptDecisions and ICOW</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">ICOW</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">catch</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> <span class="bu">Pkg</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"SimOptDecisions"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"ICOW"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/SimOptDecisions"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/ICOW.jl"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">ICOW</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ICOW.Stochastic</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ICOW.EAD</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="st">"Manifest.toml"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> <span class="bu">Pkg</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CSV</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Interpolations</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">NetCDF</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">YAXArrays</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DimensionalData</span>: dims</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"house_elevation.jl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3</span> Exercises</h2>
-<section id="exercise-1" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">3.1</span> Exercise 1</h3>
-<p>Exercise description - to be written.</p>
+<section id="house-and-surge-model" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="house-and-surge-model"><span class="header-section-number">3.2</span> House and Surge Model</h3>
+<p>Same house and storm surge distribution as Lab 6: a single-story home in Norfolk, VA with no basement, valued at $250,000, sitting 8 ft above the tide gauge. We hold the storm surge distribution fixed (GEV with <span class="math inline">\(\mu=3\)</span>, <span class="math inline">\(\sigma=1\)</span>, <span class="math inline">\(\xi=0.15\)</span>) so we can isolate the effect of SLR uncertainty.</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>House and surge setup (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>haz_fl_dept <span class="op">=</span> CSV.<span class="fu">read</span>(<span class="st">"data/haz_fl_dept.csv"</span>, DataFrame)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ddf_row <span class="op">=</span> <span class="fu">filter</span>(r <span class="op">-&gt;</span> r.DmgFnId <span class="op">==</span> <span class="fl">105</span>, haz_fl_dept)[<span class="fl">1</span>, <span class="op">:</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>house <span class="op">=</span> <span class="fu">House</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    ddf_row;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    value_usd<span class="op">=</span><span class="fl">250_000</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    area_ft2<span class="op">=</span><span class="fl">1_500</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    height_above_gauge_ft<span class="op">=</span><span class="fl">8.0</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>surge_dist <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(<span class="fl">3.0</span>, <span class="fl">1.0</span>, <span class="fl">0.15</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
+</section>
+<section id="ead-emulator" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="ead-emulator"><span class="header-section-number">3.3</span> EAD Emulator</h3>
+<p>Rather than recomputing the trapezoidal EAD integral for every (trajectory, year, elevation) combination, we pre-compute EAD as a function of <strong>clearance</strong> (house floor height above sea level) and interpolate. This turns an expensive integral into a fast table lookup.</p>
+<div id="6" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>EAD emulator construction (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ead_emulator <span class="op">=</span> <span class="fu">build_ead_emulator</span>(house, surge_dist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-fig-emulator" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    clearances <span class="op">=</span> <span class="fu">range</span>(<span class="op">-</span><span class="fl">5</span>, <span class="fl">25</span>; length<span class="op">=</span><span class="fl">200</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    eads <span class="op">=</span> <span class="fu">ead_emulator</span>.(clearances)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">650</span>, <span class="fl">350</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]; xlabel<span class="op">=</span><span class="st">"Clearance (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Expected Annual Damage (USD)"</span>, title<span class="op">=</span><span class="st">"EAD Emulator"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, <span class="fu">collect</span>(clearances), eads; linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-emulator" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-emulator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-emulator-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-emulator-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: EAD emulator: expected annual damage as a function of clearance (house floor height above sea level). At low clearance, flooding is frequent and damages are high. At high clearance, the house is well above most storms.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="slr-trajectories" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="slr-trajectories"><span class="header-section-number">3.4</span> SLR Trajectories</h3>
+<p>We load 10,000 sea-level rise trajectories from four physical models and four emissions pathways. The four <strong>physical models</strong> differ in how they represent ice sheet dynamics:</p>
+<ul>
+<li><strong>BRICK Slow:</strong> Conservative ice sheet response <span class="citation" data-cites="wong_brick:2017">(<a href="#ref-wong_brick:2017" role="doc-biblioref">Wong et al., 2017</a>)</span></li>
+<li><strong>BRICK Fast:</strong> Rapid ice sheet dynamics <span class="citation" data-cites="wong_brick:2017">(<a href="#ref-wong_brick:2017" role="doc-biblioref">Wong et al., 2017</a>)</span></li>
+<li><strong>K14:</strong> Kopp et al.&nbsp;(2014) probabilistic projections <span class="citation" data-cites="kopp_probabilistic:2014">(<a href="#ref-kopp_probabilistic:2014" role="doc-biblioref">Kopp et al., 2014</a>)</span></li>
+<li><strong>DP16:</strong> DeConto &amp; Pollard (2016) — fast Antarctic ice sheet collapse <span class="citation" data-cites="deconto_contribution:2016">(<a href="#ref-deconto_contribution:2016" role="doc-biblioref">DeConto &amp; Pollard, 2016</a>)</span></li>
+</ul>
+<p>Each model is run under four <strong>RCP scenarios</strong> (2.6, 4.5, 6.0, 8.5), yielding 16 model-scenario combinations with 625 trajectories each.</p>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> <span class="fu">open_dataset</span>(<span class="st">"data/slr_scenarios.nc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> M_TO_FT <span class="op">=</span> <span class="fl">3.28084</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> MODEL_NAMES <span class="op">=</span> [<span class="st">"BRICK_slow"</span>, <span class="st">"BRICK_fast"</span>, <span class="st">"K14"</span>, <span class="st">"DP16"</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> RCP_NAMES <span class="op">=</span> [<span class="st">"rcp26"</span>, <span class="st">"rcp45"</span>, <span class="st">"rcp60"</span>, <span class="st">"rcp85"</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>slr_m <span class="op">=</span> <span class="fu">Array</span>(ds.slr[<span class="op">:</span>, <span class="op">:</span>])              <span class="co"># (time, trajectory) in meters</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>model_ids <span class="op">=</span> <span class="fu">Int</span>.(<span class="fu">Array</span>(ds.model_id[<span class="op">:</span>]))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>rcp_ids <span class="op">=</span> <span class="fu">Int</span>.(<span class="fu">Array</span>(ds.rcp_id[<span class="op">:</span>]))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>slr_years <span class="op">=</span> <span class="fu">Int</span>.(<span class="fu">Array</span>(ds.time[<span class="op">:</span>]))     <span class="co"># 2026:2125</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>n_traj <span class="op">=</span> <span class="fu">size</span>(slr_m, <span class="fl">2</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Loaded </span><span class="sc">$</span>n_traj<span class="st"> SLR trajectories, </span><span class="sc">$</span>(<span class="fu">length</span>(slr_years))<span class="st"> years"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-fig-slr-ensemble" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">750</span>, <span class="fl">400</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]; xlabel<span class="op">=</span><span class="st">"Year"</span>, ylabel<span class="op">=</span><span class="st">"Sea Level Rise (ft)"</span>, title<span class="op">=</span><span class="st">"SLR Ensemble: 4 Models × 4 RCPs"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> [<span class="op">:</span>blue, <span class="op">:</span>red, <span class="op">:</span>green, <span class="op">:</span>purple]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> mid <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> model_ids <span class="op">.==</span> mid</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        trajs_ft <span class="op">=</span> slr_m[<span class="op">:</span>, mask] <span class="op">.*</span> M_TO_FT</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Plot a random subset for readability</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        n_plot <span class="op">=</span> <span class="fu">min</span>(<span class="fl">200</span>, <span class="fu">size</span>(trajs_ft, <span class="fl">2</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        idxs <span class="op">=</span> <span class="fu">randperm</span>(<span class="fu">size</span>(trajs_ft, <span class="fl">2</span>))[<span class="fl">1</span><span class="op">:</span>n_plot]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> idxs</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">lines!</span>(ax, slr_years, trajs_ft[<span class="op">:</span>, j]; color<span class="op">=</span>(colors[mid], <span class="fl">0.05</span>), linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Dummy line for legend (use NaN to avoid affecting axis limits)</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, [<span class="cn">NaN</span>], [<span class="cn">NaN</span>]; color<span class="op">=</span>colors[mid], linewidth<span class="op">=</span><span class="fl">2</span>, label<span class="op">=</span>MODEL_NAMES[mid])</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>lt)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-slr-ensemble" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-slr-ensemble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-slr-ensemble-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-slr-ensemble-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: 10,000 SLR trajectories at Sewells Point, VA. Color indicates physical model. The spread reflects deep uncertainty in both emissions and ice sheet dynamics.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="performance-table" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="performance-table"><span class="header-section-number">3.5</span> Performance Table</h3>
+<p>The function below computes the <strong>total cost</strong> (investment + discounted lifetime damages) for a given elevation height across all 10,000 SLR trajectories. We then sweep over a grid of elevation heights (0 to 14 ft) and stack the results into a single <code>DataFrame</code> called <code>perf</code>.</p>
+<p>Each row of <code>perf</code> represents one (elevation, trajectory) combination with columns:</p>
+<ul>
+<li><code>:elevation_ft</code> — how high we elevate (0–14 ft)</li>
+<li><code>:model</code> and <code>:rcp</code> — which physical model and emissions scenario</li>
+<li><code>:trajectory</code> — trajectory index (1–10,000)</li>
+<li><code>:investment</code> — one-time construction cost</li>
+<li><code>:expected_damage</code> — discounted lifetime damages under this SLR trajectory</li>
+<li><code>:total_cost</code> — investment + expected damage (the number we want to minimize)</li>
+</ul>
+<div id="16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> DISCOUNT_RATE <span class="op">=</span> <span class="fl">0.04</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PLAN_START <span class="op">=</span> <span class="fl">2026</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PLAN_END <span class="op">=</span> <span class="fl">2100</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PLAN_IDX <span class="op">=</span> <span class="fu">findfirst</span>(<span class="op">==</span>(PLAN_START), slr_years)<span class="op">:</span><span class="fu">findfirst</span>(<span class="op">==</span>(PLAN_END), slr_years)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PLAN_YEARS <span class="op">=</span> slr_years[PLAN_IDX]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="18" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Performance function (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">Compute performance for one elevation height across all trajectories.</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">Returns a DataFrame with one row per trajectory.</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculate_performance</span>(h_ft, house, slr_m, model_ids, rcp_ids)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    investment <span class="op">=</span> <span class="fu">elevation_cost</span>(house, h_ft)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="fu">size</span>(slr_m, <span class="fl">2</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> <span class="fu">Vector</span><span class="dt">{NamedTuple}</span>(<span class="cn">undef</span>, n)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        led <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (i, year) <span class="kw">in</span> <span class="fu">enumerate</span>(PLAN_YEARS)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            slr_ft <span class="op">=</span> slr_m[PLAN_IDX[i], j] <span class="op">*</span> M_TO_FT</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            clearance <span class="op">=</span> house.height_above_gauge_ft <span class="op">+</span> h_ft <span class="op">-</span> slr_ft</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            ead <span class="op">=</span> <span class="fu">ead_emulator</span>(clearance)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            led <span class="op">+=</span> ead <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">+</span> DISCOUNT_RATE)<span class="op">^</span>(year <span class="op">-</span> PLAN_START)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        results[j] <span class="op">=</span> (</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>            elevation_ft<span class="op">=</span>h_ft,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            model<span class="op">=</span>MODEL_NAMES[model_ids[j]],</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>            rcp<span class="op">=</span>RCP_NAMES[rcp_ids[j]],</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>            trajectory<span class="op">=</span>j,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>            investment<span class="op">=</span>investment,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>            expected_damage<span class="op">=</span>led,</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>            total_cost<span class="op">=</span>investment <span class="op">+</span> led,</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">DataFrame</span>(results)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Main.Notebook.calculate_performance</code></pre>
+</div>
+</div>
+<div id="20" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>height_grid <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">1</span><span class="op">:</span><span class="fl">14</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>perf <span class="op">=</span> <span class="fu">vcat</span>([<span class="fu">calculate_performance</span>(h, house, slr_m, model_ids, rcp_ids) for h <span class="kw">in</span> height_grid]<span class="op">...</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Performance table: </span><span class="sc">$</span>(<span class="fu">nrow</span>(perf))<span class="st"> rows (</span><span class="sc">$</span>(<span class="fu">length</span>(height_grid))<span class="st"> heights × </span><span class="sc">$</span>n_traj<span class="st"> trajectories)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="act-1-unweighted-robustness" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="act-1-unweighted-robustness"><span class="header-section-number">4</span> Act 1: Unweighted Robustness</h2>
+<p>With the <code>perf</code> table in hand, we can compute robustness metrics that treat every trajectory equally. We’ll compute three metrics from <span class="citation" data-cites="herman_robustness:2015">Herman et al. (<a href="#ref-herman_robustness:2015" role="doc-biblioref">2015</a>)</span>. All three answer the question “which elevation is best?” — but they define “best” differently.</p>
+<section id="expected-cost" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="expected-cost"><span class="header-section-number">4.1</span> Expected Cost</h3>
+<p>The simplest metric: the mean total cost across all trajectories. <span class="math display">\[
+\bar{C}(h) = \frac{1}{N} \sum_{j=1}^{N} C(h, s_j)
+\]</span></p>
+<p>The code below uses <code>groupby</code> to split <code>perf</code> by elevation height, then <code>combine</code> to compute the <code>mean</code> of <code>:total_cost</code> within each group. This is the DataFrames equivalent of a SQL <code>GROUP BY</code> with an aggregate function.</p>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>expected_costs <span class="op">=</span> <span class="fu">combine</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">groupby</span>(perf, <span class="op">:</span>elevation_ft),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>total_cost <span class="op">=&gt;</span> mean <span class="op">=&gt;</span> <span class="op">:</span>expected_cost,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>15×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">elevation_ft</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">expected_cost</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">75709.9</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.84259e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.66994e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.57834e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">152966.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.50381e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">150020.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1.50525e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.5116e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1.55258e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.62474e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1.69843e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">1.77268e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">14</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1.84684e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">15</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">1.92092e5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="satisficing" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="satisficing"><span class="header-section-number">4.2</span> Satisficing</h3>
+<p>What fraction of trajectories keep total cost below a threshold <span class="math inline">\(\tau\)</span>? <span class="math display">\[
+R_{\text{sat}}(h; \tau) = \frac{1}{N} \sum_{j=1}^{N} \mathbb{1}\left[C(h, s_j) &lt; \tau\right]
+\]</span></p>
+<p>Higher is better — we want a decision that “works” in as many futures as possible.</p>
+<p>The function below has the same structure as <code>expected_costs</code> above, but instead of <code>mean(costs)</code> you need to compute the <strong>fraction of costs below the threshold</strong>.</p>
+<div id="24" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>τ <span class="op">=</span> <span class="fl">150_000</span>  <span class="co"># cost threshold (USD)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>150000</code></pre>
+</div>
+</div>
+<p>The function below computes satisficing, but it has a <strong>bug</strong>: it always returns <code>0.0</code> instead of the actual fraction. <strong>Your task:</strong> fix the line marked <code>FIX ME</code> so that <code>frac</code> equals the fraction of costs below <code>τ</code>. The function runs as-is (so the notebook renders), but the satisficing plot will be flat at zero until you fix it.</p>
+<div id="26" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">satisficing</span>(df, τ)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">combine</span>(<span class="fu">groupby</span>(df, <span class="op">:</span>elevation_ft)) <span class="cf">do</span> gdf</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        costs <span class="op">=</span> gdf.total_cost</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        frac <span class="op">=</span> <span class="fl">0.0</span>  <span class="co"># FIX ME: compute the fraction of costs below τ</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        (fraction_satisfactory<span class="op">=</span>frac,)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>satisficing (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled" title="Hint">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>costs .&lt; τ</code> gives a vector of <code>true</code>/<code>false</code>. Taking the <code>mean</code> of a Boolean vector gives the fraction that are <code>true</code>. So: <code>frac = mean(costs .&lt; τ)</code>.</p>
+</div>
+</div>
+</div>
+<div id="28" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sat_results <span class="op">=</span> <span class="fu">satisficing</span>(perf, τ)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>15×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">elevation_ft</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">fraction_satisfactory</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">14</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">15</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled" title="Hint">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>costs .&lt; τ</code> gives a vector of <code>true</code>/<code>false</code>. Taking the <code>mean</code> of a Boolean vector gives the fraction that are <code>true</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="minimax-regret" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="minimax-regret"><span class="header-section-number">4.3</span> Minimax Regret</h3>
+<p>Regret measures how much worse your choice is compared to the best possible choice <em>in that particular future</em>. For each trajectory <span class="math inline">\(j\)</span>, the best possible cost is <span class="math inline">\(C^*(s_j) = \min_{h'} C(h', s_j)\)</span>. <span class="math display">\[
+\text{Regret}(h, s_j) = C(h, s_j) - C^*(s_j)
+\]</span></p>
+<p>Minimax regret finds the elevation that minimizes the worst-case regret: <span class="math display">\[
+R_{\text{regret}}(h) = \max_j \text{Regret}(h, s_j)
+\]</span></p>
+<p>The code below computes this in three steps:</p>
+<ol type="1">
+<li>For each trajectory, find the minimum cost across all elevation heights (the “best you could have done” in that future)</li>
+<li>Join that back to <code>perf</code> and compute regret as the difference</li>
+<li>For each elevation, take the maximum regret across all trajectories</li>
+</ol>
+<div id="30" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: best possible cost in each trajectory</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>best_per_traj <span class="op">=</span> <span class="fu">combine</span>(<span class="fu">groupby</span>(perf, <span class="op">:</span>trajectory), <span class="op">:</span>total_cost <span class="op">=&gt;</span> minimum <span class="op">=&gt;</span> <span class="op">:</span>best_cost)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: join back and compute regret</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>perf_with_regret <span class="op">=</span> <span class="fu">leftjoin</span>(perf, best_per_traj; on<span class="op">=:</span>trajectory)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>perf_with_regret.regret <span class="op">=</span> perf_with_regret.total_cost <span class="op">.-</span> perf_with_regret.best_cost</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: worst-case regret for each elevation</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>regret_results <span class="op">=</span> <span class="fu">combine</span>(</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">groupby</span>(perf_with_regret, <span class="op">:</span>elevation_ft),</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>regret <span class="op">=&gt;</span> maximum <span class="op">=&gt;</span> <span class="op">:</span>max_regret,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>15×2 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">elevation_ft</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">max_regret</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Int64">Int64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.31887e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.64408e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.84533e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">125601.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.06312e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.04949e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.05162e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1.06191e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">9</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.06901e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">10</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1.11328e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.18597e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">12</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1.2606e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">1.33493e5</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">14</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1.409e5</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">15</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">1.48302e5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-the-three-metrics" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="comparing-the-three-metrics"><span class="header-section-number">4.4</span> Comparing the Three Metrics</h3>
+<div id="cell-fig-metrics" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">350</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    hg <span class="op">=</span> <span class="fu">collect</span>(height_grid)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Expected cost</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]; xlabel<span class="op">=</span><span class="st">"Elevation (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Expected Cost (USD)"</span>, title<span class="op">=</span><span class="st">"Expected Cost"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    ec <span class="op">=</span> expected_costs.expected_cost</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax1, hg, ec; linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>black)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> <span class="fu">argmin</span>(ec)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax1, [hg[idx]], [ec[idx]]; color<span class="op">=:</span>black, markersize<span class="op">=</span><span class="fl">15</span>, marker<span class="op">=:</span>star5)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Satisficing</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>]; xlabel<span class="op">=</span><span class="st">"Elevation (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Fraction Satisfactory"</span>, title<span class="op">=</span><span class="st">"Satisficing (τ = \$</span><span class="sc">$</span>(τ<span class="op">÷</span><span class="fl">1000</span>)<span class="st">K)"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    sf <span class="op">=</span> sat_results.fraction_satisfactory</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax2, hg, sf; linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>teal)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> <span class="fu">argmax</span>(sf)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax2, [hg[idx]], [sf[idx]]; color<span class="op">=:</span>teal, markersize<span class="op">=</span><span class="fl">15</span>, marker<span class="op">=:</span>star5)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Minimax regret</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    ax3 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">3</span>]; xlabel<span class="op">=</span><span class="st">"Elevation (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Max Regret (USD)"</span>, title<span class="op">=</span><span class="st">"Minimax Regret"</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    mr <span class="op">=</span> regret_results.max_regret</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax3, hg, mr; linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=:</span>firebrick)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> <span class="fu">argmin</span>(mr)</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax3, [hg[idx]], [mr[idx]]; color<span class="op">=:</span>firebrick, markersize<span class="op">=</span><span class="fl">15</span>, marker<span class="op">=:</span>star5)</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-metrics" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-metrics-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Three robustness metrics as a function of elevation height. Left: expected cost (lower is better). Center: satisficing at $150K threshold (higher is better). Right: minimax regret (lower is better). Stars mark the best elevation under each metric.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Do the three metrics agree on the best elevation height? If they disagree, explain intuitively why each metric favors a different choice. Which metric would you use if advising a homeowner? Why?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="act-2-sensitivity-to-scenario-selection" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="act-2-sensitivity-to-scenario-selection"><span class="header-section-number">5</span> Act 2: Sensitivity to Scenario Selection</h2>
+<p>The robustness metrics above treated all 10,000 trajectories equally. But the set of trajectories we included was itself a choice — we picked 4 models and 4 RCPs. What happens if we change that choice?</p>
+<p>No new simulations needed — we just <code>filter</code> the <code>perf</code> DataFrame to keep only certain models or RCPs, then recompute the same metrics on each subset. The function <code>compute_metrics</code> wraps up the three metric computations from Act 1 so we can apply them to different subsets easily.</p>
+<div id="34" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>compute_metrics function (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">compute_metrics</span>(df, τ)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    ec <span class="op">=</span> <span class="fu">combine</span>(<span class="fu">groupby</span>(df, <span class="op">:</span>elevation_ft), <span class="op">:</span>total_cost <span class="op">=&gt;</span> mean <span class="op">=&gt;</span> <span class="op">:</span>expected_cost)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    sat <span class="op">=</span> <span class="fu">combine</span>(<span class="fu">groupby</span>(df, <span class="op">:</span>elevation_ft), <span class="op">:</span>total_cost <span class="op">=&gt;</span> (c <span class="op">-&gt;</span> <span class="fu">mean</span>(c <span class="op">.&lt;</span> τ)) <span class="op">=&gt;</span> <span class="op">:</span>fraction_satisfactory)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    best <span class="op">=</span> <span class="fu">combine</span>(<span class="fu">groupby</span>(df, <span class="op">:</span>trajectory), <span class="op">:</span>total_cost <span class="op">=&gt;</span> minimum <span class="op">=&gt;</span> <span class="op">:</span>best_cost)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    df_r <span class="op">=</span> <span class="fu">leftjoin</span>(df, best; on<span class="op">=:</span>trajectory)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    df_r.regret <span class="op">=</span> df_r.total_cost <span class="op">.-</span> df_r.best_cost</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    reg <span class="op">=</span> <span class="fu">combine</span>(<span class="fu">groupby</span>(df_r, <span class="op">:</span>elevation_ft), <span class="op">:</span>regret <span class="op">=&gt;</span> maximum <span class="op">=&gt;</span> <span class="op">:</span>max_regret)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (expected_cost<span class="op">=</span>ec, satisficing<span class="op">=</span>sat, regret<span class="op">=</span>reg)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>compute_metrics (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div id="36" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>subsets <span class="op">=</span> [</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"All scenarios"</span>, perf),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Drop RCP 8.5"</span>, <span class="fu">filter</span>(r <span class="op">-&gt;</span> r.rcp <span class="op">!=</span> <span class="st">"rcp85"</span>, perf)),</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Drop RCP 2.6"</span>, <span class="fu">filter</span>(r <span class="op">-&gt;</span> r.rcp <span class="op">!=</span> <span class="st">"rcp26"</span>, perf)),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"Drop DP16"</span>, <span class="fu">filter</span>(r <span class="op">-&gt;</span> r.model <span class="op">!=</span> <span class="st">"DP16"</span>, perf)),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"BRICK Slow + RCP 4.5 only"</span>, <span class="fu">filter</span>(r <span class="op">-&gt;</span> r.model <span class="op">==</span> <span class="st">"BRICK_slow"</span> <span class="op">&amp;&amp;</span> r.rcp <span class="op">==</span> <span class="st">"rcp45"</span>, perf)),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="ansi-escaped-output">
+<pre>5-element Vector{Tuple{String, DataFrame}}:
+ ("All scenarios", <span class="ansi-bold">150000×7 DataFrame</span>
+<span class="ansi-bold">    Row </span>│<span class="ansi-bold"> elevation_ft </span><span class="ansi-bold"> model      </span><span class="ansi-bold"> rcp    </span><span class="ansi-bold"> trajectory </span><span class="ansi-bold"> investment </span><span class="ansi-bold"> expected_d</span> ⋯
+<span class="ansi-bold">        </span>│<span class="ansi-bright-black-fg"> Int64        </span><span class="ansi-bright-black-fg"> String     </span><span class="ansi-bright-black-fg"> String </span><span class="ansi-bright-black-fg"> Int64      </span><span class="ansi-bright-black-fg"> Float64    </span><span class="ansi-bright-black-fg"> Float64   </span> ⋯
+────────┼───────────────────────────────────────────────────────────────────────
+      1 │            0  BRICK_fast  rcp26            1         0.0        5981 ⋯
+      2 │            0  BRICK_fast  rcp26            2         0.0        7405
+      3 │            0  BRICK_fast  rcp26            3         0.0        6249
+      4 │            0  BRICK_fast  rcp26            4         0.0        6054
+      5 │            0  BRICK_fast  rcp26            5         0.0        6012 ⋯
+      6 │            0  BRICK_fast  rcp26            6         0.0        5695
+      7 │            0  BRICK_fast  rcp26            7         0.0        6170
+      8 │            0  BRICK_fast  rcp26            8         0.0        6132
+   ⋮    │      ⋮            ⋮         ⋮         ⋮           ⋮              ⋮   ⋱
+ 149994 │           14  K14         rcp85         9994    191370.0          74 ⋯
+ 149995 │           14  K14         rcp85         9995    191370.0          72
+ 149996 │           14  K14         rcp85         9996    191370.0          72
+ 149997 │           14  K14         rcp85         9997    191370.0          73
+ 149998 │           14  K14         rcp85         9998    191370.0          71 ⋯
+ 149999 │           14  K14         rcp85         9999    191370.0          71
+ 150000 │           14  K14         rcp85        10000    191370.0          69
+<span class="ansi-cyan-fg">                                               2 columns and 149985 rows omitted</span>)
+ ("Drop RCP 8.5", <span class="ansi-bold">112500×7 DataFrame</span>
+<span class="ansi-bold">    Row </span>│<span class="ansi-bold"> elevation_ft </span><span class="ansi-bold"> model      </span><span class="ansi-bold"> rcp    </span><span class="ansi-bold"> trajectory </span><span class="ansi-bold"> investment </span><span class="ansi-bold"> expected_d</span> ⋯
+<span class="ansi-bold">        </span>│<span class="ansi-bright-black-fg"> Int64        </span><span class="ansi-bright-black-fg"> String     </span><span class="ansi-bright-black-fg"> String </span><span class="ansi-bright-black-fg"> Int64      </span><span class="ansi-bright-black-fg"> Float64    </span><span class="ansi-bright-black-fg"> Float64   </span> ⋯
+────────┼───────────────────────────────────────────────────────────────────────
+      1 │            0  BRICK_fast  rcp26            1         0.0        5981 ⋯
+      2 │            0  BRICK_fast  rcp26            2         0.0        7405
+      3 │            0  BRICK_fast  rcp26            3         0.0        6249
+      4 │            0  BRICK_fast  rcp26            4         0.0        6054
+      5 │            0  BRICK_fast  rcp26            5         0.0        6012 ⋯
+      6 │            0  BRICK_fast  rcp26            6         0.0        5695
+      7 │            0  BRICK_fast  rcp26            7         0.0        6170
+      8 │            0  BRICK_fast  rcp26            8         0.0        6132
+   ⋮    │      ⋮            ⋮         ⋮         ⋮           ⋮              ⋮   ⋱
+ 112494 │           14  K14         rcp60         9369    191370.0          71 ⋯
+ 112495 │           14  K14         rcp60         9370    191370.0          67
+ 112496 │           14  K14         rcp60         9371    191370.0          69
+ 112497 │           14  K14         rcp60         9372    191370.0          74
+ 112498 │           14  K14         rcp60         9373    191370.0          70 ⋯
+ 112499 │           14  K14         rcp60         9374    191370.0          74
+ 112500 │           14  K14         rcp60         9375    191370.0          71
+<span class="ansi-cyan-fg">                                               2 columns and 112485 rows omitted</span>)
+ ("Drop RCP 2.6", <span class="ansi-bold">112500×7 DataFrame</span>
+<span class="ansi-bold">    Row </span>│<span class="ansi-bold"> elevation_ft </span><span class="ansi-bold"> model      </span><span class="ansi-bold"> rcp    </span><span class="ansi-bold"> trajectory </span><span class="ansi-bold"> investment </span><span class="ansi-bold"> expected_d</span> ⋯
+<span class="ansi-bold">        </span>│<span class="ansi-bright-black-fg"> Int64        </span><span class="ansi-bright-black-fg"> String     </span><span class="ansi-bright-black-fg"> String </span><span class="ansi-bright-black-fg"> Int64      </span><span class="ansi-bright-black-fg"> Float64    </span><span class="ansi-bright-black-fg"> Float64   </span> ⋯
+────────┼───────────────────────────────────────────────────────────────────────
+      1 │            0  BRICK_fast  rcp45          626         0.0        7126 ⋯
+      2 │            0  BRICK_fast  rcp45          627         0.0        6644
+      3 │            0  BRICK_fast  rcp45          628         0.0        6648
+      4 │            0  BRICK_fast  rcp45          629         0.0        9261
+      5 │            0  BRICK_fast  rcp45          630         0.0        6136 ⋯
+      6 │            0  BRICK_fast  rcp45          631         0.0        6774
+      7 │            0  BRICK_fast  rcp45          632         0.0        6224
+      8 │            0  BRICK_fast  rcp45          633         0.0        6259
+   ⋮    │      ⋮            ⋮         ⋮         ⋮           ⋮              ⋮   ⋱
+ 112494 │           14  K14         rcp85         9994    191370.0          74 ⋯
+ 112495 │           14  K14         rcp85         9995    191370.0          72
+ 112496 │           14  K14         rcp85         9996    191370.0          72
+ 112497 │           14  K14         rcp85         9997    191370.0          73
+ 112498 │           14  K14         rcp85         9998    191370.0          71 ⋯
+ 112499 │           14  K14         rcp85         9999    191370.0          71
+ 112500 │           14  K14         rcp85        10000    191370.0          69
+<span class="ansi-cyan-fg">                                               2 columns and 112485 rows omitted</span>)
+ ("Drop DP16", <span class="ansi-bold">112500×7 DataFrame</span>
+<span class="ansi-bold">    Row </span>│<span class="ansi-bold"> elevation_ft </span><span class="ansi-bold"> model      </span><span class="ansi-bold"> rcp    </span><span class="ansi-bold"> trajectory </span><span class="ansi-bold"> investment </span><span class="ansi-bold"> expected_d</span> ⋯
+<span class="ansi-bold">        </span>│<span class="ansi-bright-black-fg"> Int64        </span><span class="ansi-bright-black-fg"> String     </span><span class="ansi-bright-black-fg"> String </span><span class="ansi-bright-black-fg"> Int64      </span><span class="ansi-bright-black-fg"> Float64    </span><span class="ansi-bright-black-fg"> Float64   </span> ⋯
+────────┼───────────────────────────────────────────────────────────────────────
+      1 │            0  BRICK_fast  rcp26            1         0.0        5981 ⋯
+      2 │            0  BRICK_fast  rcp26            2         0.0        7405
+      3 │            0  BRICK_fast  rcp26            3         0.0        6249
+      4 │            0  BRICK_fast  rcp26            4         0.0        6054
+      5 │            0  BRICK_fast  rcp26            5         0.0        6012 ⋯
+      6 │            0  BRICK_fast  rcp26            6         0.0        5695
+      7 │            0  BRICK_fast  rcp26            7         0.0        6170
+      8 │            0  BRICK_fast  rcp26            8         0.0        6132
+   ⋮    │      ⋮            ⋮         ⋮         ⋮           ⋮              ⋮   ⋱
+ 112494 │           14  K14         rcp85         9994    191370.0          74 ⋯
+ 112495 │           14  K14         rcp85         9995    191370.0          72
+ 112496 │           14  K14         rcp85         9996    191370.0          72
+ 112497 │           14  K14         rcp85         9997    191370.0          73
+ 112498 │           14  K14         rcp85         9998    191370.0          71 ⋯
+ 112499 │           14  K14         rcp85         9999    191370.0          71
+ 112500 │           14  K14         rcp85        10000    191370.0          69
+<span class="ansi-cyan-fg">                                               2 columns and 112485 rows omitted</span>)
+ ("BRICK Slow + RCP 4.5 only", <span class="ansi-bold">9375×7 DataFrame</span>
+<span class="ansi-bold">  Row </span>│<span class="ansi-bold"> elevation_ft </span><span class="ansi-bold"> model      </span><span class="ansi-bold"> rcp    </span><span class="ansi-bold"> trajectory </span><span class="ansi-bold"> investment </span><span class="ansi-bold"> expected_dam</span> ⋯
+<span class="ansi-bold">      </span>│<span class="ansi-bright-black-fg"> Int64        </span><span class="ansi-bright-black-fg"> String     </span><span class="ansi-bright-black-fg"> String </span><span class="ansi-bright-black-fg"> Int64      </span><span class="ansi-bright-black-fg"> Float64    </span><span class="ansi-bright-black-fg"> Float64     </span> ⋯
+──────┼─────────────────────────────────────────────────────────────────────────
+    1 │            0  BRICK_slow  rcp45         3126         0.0        61726. ⋯
+    2 │            0  BRICK_slow  rcp45         3127         0.0        60408.
+    3 │            0  BRICK_slow  rcp45         3128         0.0        65041.
+    4 │            0  BRICK_slow  rcp45         3129         0.0        66624.
+    5 │            0  BRICK_slow  rcp45         3130         0.0        70243. ⋯
+    6 │            0  BRICK_slow  rcp45         3131         0.0        60148.
+    7 │            0  BRICK_slow  rcp45         3132         0.0        61740.
+    8 │            0  BRICK_slow  rcp45         3133         0.0        60651.
+  ⋮   │      ⋮            ⋮         ⋮         ⋮           ⋮              ⋮     ⋱
+ 9369 │           14  BRICK_slow  rcp45         3744    191370.0          707. ⋯
+ 9370 │           14  BRICK_slow  rcp45         3745    191370.0          702.
+ 9371 │           14  BRICK_slow  rcp45         3746    191370.0          705.
+ 9372 │           14  BRICK_slow  rcp45         3747    191370.0          716.
+ 9373 │           14  BRICK_slow  rcp45         3748    191370.0          712. ⋯
+ 9374 │           14  BRICK_slow  rcp45         3749    191370.0          715.
+ 9375 │           14  BRICK_slow  rcp45         3750    191370.0          710.
+<span class="ansi-cyan-fg">                                                 2 columns and 9360 rows omitted</span>)</pre>
+</div>
+</div>
+</div>
+<div id="cell-fig-sensitivity" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">350</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    hg <span class="op">=</span> <span class="fu">collect</span>(height_grid)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> Makie.<span class="fu">wong_colors</span>()</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]; xlabel<span class="op">=</span><span class="st">"Elevation (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Expected Cost (USD)"</span>, title<span class="op">=</span><span class="st">"Expected Cost"</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>]; xlabel<span class="op">=</span><span class="st">"Elevation (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Fraction Satisfactory"</span>, title<span class="op">=</span><span class="st">"Satisficing (τ = \$</span><span class="sc">$</span>(τ<span class="op">÷</span><span class="fl">1000</span>)<span class="st">K)"</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    ax3 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">3</span>]; xlabel<span class="op">=</span><span class="st">"Elevation (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Max Regret (USD)"</span>, title<span class="op">=</span><span class="st">"Minimax Regret"</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i, (label, df)) <span class="kw">in</span> <span class="fu">enumerate</span>(subsets)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> <span class="fu">compute_metrics</span>(df, τ)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax1, hg, m.expected_cost.expected_cost; linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=</span>colors[i], label<span class="op">=</span>label)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax2, hg, m.satisficing.fraction_satisfactory; linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=</span>colors[i], label<span class="op">=</span>label)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax3, hg, m.regret.max_regret; linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=</span>colors[i], label<span class="op">=</span>label)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Legend</span>(fig[<span class="fl">2</span>, <span class="op">:</span>], ax1; orientation<span class="op">=:</span>horizontal, tellwidth<span class="op">=</span><span class="cn">false</span>, tellheight<span class="op">=</span><span class="cn">true</span>)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-sensitivity" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-sensitivity-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sensitivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Sensitivity of robustness metrics to scenario selection. Each color represents a different subset of the SLR ensemble. The ‘best’ elevation shifts depending on which futures are included — even though no explicit probabilities were assigned.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>How much do the robustness metrics change when you drop RCP 8.5? When you drop DP16? What does this tell you about the relationship between “robustness” and the choice of scenario ensemble? Is it defensible to claim a decision is “robust” without specifying which futures were considered?</em></p>
+</div>
+</div>
+</section>
+<section id="act-3-weighted-robustness" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="act-3-weighted-robustness"><span class="header-section-number">6</span> Act 3: Weighted Robustness</h2>
+<p><span class="citation" data-cites="doss-gollin_subjective:2023">Doss-Gollin &amp; Keller (<a href="#ref-doss-gollin_subjective:2023" role="doc-biblioref">2023</a>)</span> propose a framework for making subjective beliefs about SLR explicit. Instead of treating all trajectories equally, we assign <strong>weights</strong> based on a prior belief about how much sea level will rise.</p>
+<section id="weighting-method-and-priors" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="weighting-method-and-priors"><span class="header-section-number">6.1</span> Weighting Method and Priors</h3>
+<p>We project each trajectory onto a single number: SLR at the end of the planning horizon (2100). Then we define a probability distribution <span class="math inline">\(p_{\text{belief}}(\psi)\)</span> over that value and compute weights:</p>
+<p><span class="math display">\[
+w_j = F_{\text{belief}}\left(\frac{\psi_j + \psi_{j+1}}{2}\right) - F_{\text{belief}}\left(\frac{\psi_{j-1} + \psi_j}{2}\right)
+\]</span></p>
+<p>where <span class="math inline">\(F_{\text{belief}}\)</span> is the CDF of the prior and <span class="math inline">\(\psi_j\)</span> are the sorted SLR values. This assigns more weight to trajectories near the center of the belief distribution and less to trajectories in the tails.</p>
+<p>Following <span class="citation" data-cites="doss-gollin_subjective:2023">Doss-Gollin &amp; Keller (<a href="#ref-doss-gollin_subjective:2023" role="doc-biblioref">2023</a>)</span>, we define three Gamma priors over SLR at Sewells Point in 2100 (in feet). These represent different beliefs about how much sea level will rise — from optimistic to pessimistic.</p>
+<div id="40" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>priors <span class="op">=</span> [</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    (name<span class="op">=</span><span class="st">"Slow SLR"</span>, dist<span class="op">=</span><span class="fu">Gamma</span>(<span class="fl">3.0</span>, <span class="fl">0.5</span>)),         <span class="co"># E[X] = 1.5 ft</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    (name<span class="op">=</span><span class="st">"Moderate SLR"</span>, dist<span class="op">=</span><span class="fu">Gamma</span>(<span class="fl">3.0</span>, <span class="fl">1.0</span>)),      <span class="co"># E[X] = 3.0 ft</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    (name<span class="op">=</span><span class="st">"Rapid SLR"</span>, dist<span class="op">=</span><span class="fu">Gamma</span>(<span class="fl">5.0</span>, <span class="fl">1.0</span>)),         <span class="co"># E[X] = 5.0 ft</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>make_weights</code> function below extracts SLR in 2100 for each trajectory, sorts them, computes CDF-based weights, normalizes to sum to 1, and maps the weights back to the original trajectory order. You don’t need to modify this — just understand that <code>make_weights(prior, slr_values)</code> returns a vector of weights (one per trajectory) that sum to 1.</p>
+<div id="42" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>make_weights function (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>idx_2100 <span class="op">=</span> <span class="fu">findfirst</span>(<span class="op">==</span>(<span class="fl">2100</span>), slr_years)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>slr_2100_ft <span class="op">=</span> slr_m[idx_2100, <span class="op">:</span>] <span class="op">.*</span> M_TO_FT</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""Compute trajectory weights from a prior distribution over SLR in 2100 (ft)."""</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">make_weights</span>(prior_dist, slr_values)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="fu">length</span>(slr_values)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    order <span class="op">=</span> <span class="fu">sortperm</span>(slr_values)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    ψ <span class="op">=</span> slr_values[order]</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute CDF at midpoints between sorted values</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> <span class="fu">zeros</span>(n)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> j <span class="op">==</span> <span class="fl">1</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>            upper <span class="op">=</span> (ψ[<span class="fl">1</span>] <span class="op">+</span> ψ[<span class="fl">2</span>]) <span class="op">/</span> <span class="fl">2</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>            w[j] <span class="op">=</span> <span class="fu">cdf</span>(prior_dist, upper)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elseif</span> j <span class="op">==</span> n</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>            lower <span class="op">=</span> (ψ[n <span class="op">-</span> <span class="fl">1</span>] <span class="op">+</span> ψ[n]) <span class="op">/</span> <span class="fl">2</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>            w[j] <span class="op">=</span> <span class="fl">1.0</span> <span class="op">-</span> <span class="fu">cdf</span>(prior_dist, lower)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>            upper <span class="op">=</span> (ψ[j] <span class="op">+</span> ψ[j <span class="op">+</span> <span class="fl">1</span>]) <span class="op">/</span> <span class="fl">2</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>            lower <span class="op">=</span> (ψ[j <span class="op">-</span> <span class="fl">1</span>] <span class="op">+</span> ψ[j]) <span class="op">/</span> <span class="fl">2</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>            w[j] <span class="op">=</span> <span class="fu">cdf</span>(prior_dist, upper) <span class="op">-</span> <span class="fu">cdf</span>(prior_dist, lower)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize and unsort</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    w <span class="op">./=</span> <span class="fu">sum</span>(w)</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="fu">similar</span>(w)</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    result[order] <span class="op">=</span> w</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Main.Notebook.make_weights</code></pre>
+</div>
+</div>
+<div id="cell-fig-priors" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">350</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]; xlabel<span class="op">=</span><span class="st">"SLR in 2100 (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Density"</span>, title<span class="op">=</span><span class="st">"SLR Priors vs. Ensemble Distribution"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist!</span>(ax, slr_2100_ft; bins<span class="op">=</span><span class="fl">80</span>, normalization<span class="op">=:</span>pdf, color<span class="op">=</span>(<span class="op">:</span>gray, <span class="fl">0.3</span>), strokewidth<span class="op">=</span><span class="fl">0.5</span>, strokecolor<span class="op">=:</span>gray)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="fu">range</span>(<span class="op">-</span><span class="fl">1</span>, <span class="fl">15</span>; length<span class="op">=</span><span class="fl">500</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> [<span class="op">:</span>blue, <span class="op">:</span>orange, <span class="op">:</span>red]</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i, p) <span class="kw">in</span> <span class="fu">enumerate</span>(priors)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, <span class="fu">collect</span>(x), <span class="fu">pdf</span>.(<span class="fu">Ref</span>(p.dist), x); linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=</span>colors[i], label<span class="op">=</span>p.name)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>rt)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-priors" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-priors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-priors-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-priors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Three prior beliefs about SLR at Sewells Point in 2100 (ft), overlaid with the histogram of the 10,000 ensemble trajectories. The priors span a range from optimistic (Slow SLR) to pessimistic (Rapid SLR).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="weighted-metrics" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="weighted-metrics"><span class="header-section-number">6.2</span> Weighted Metrics</h3>
+<p>With weights, expected cost becomes a <strong>weighted sum</strong> instead of a simple mean: <span class="math display">\[
+\bar{C}_w(h) = \sum_{j=1}^{N} w_j \cdot C(h, s_j)
+\]</span></p>
+<p>The two functions below have the same structure as the unweighted metrics, but they have <strong>bugs</strong>: they ignore the weights and just compute the unweighted versions. <strong>Your task:</strong> fix the lines marked <code>FIX ME</code> so that:</p>
+<ul>
+<li><code>weighted_expected_cost</code> computes a <strong>weighted sum</strong> of costs instead of a simple mean</li>
+<li><code>weighted_satisficing</code> computes a <strong>weighted fraction</strong> below the threshold instead of an unweighted fraction</li>
+</ul>
+<p>The variable <code>w</code> contains the weights for this group’s trajectories (already extracted for you) and <code>costs</code> contains the total costs. Both functions run as-is, but the weighted plot will look identical to the unweighted plot until you fix them.</p>
+<div id="46" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">weighted_expected_cost</span>(df, weights)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">combine</span>(<span class="fu">groupby</span>(df, <span class="op">:</span>elevation_ft)) <span class="cf">do</span> gdf</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> weights[gdf.trajectory]</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        costs <span class="op">=</span> gdf.total_cost</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        (expected_cost<span class="op">=</span><span class="fu">mean</span>(costs),)  <span class="co"># FIX ME: use weights instead of simple mean</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">weighted_satisficing</span>(df, weights, τ)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">combine</span>(<span class="fu">groupby</span>(df, <span class="op">:</span>elevation_ft)) <span class="cf">do</span> gdf</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> weights[gdf.trajectory]</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>        costs <span class="op">=</span> gdf.total_cost</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>        (fraction_satisfactory<span class="op">=</span><span class="fu">mean</span>(costs <span class="op">.&lt;</span> τ),)  <span class="co"># FIX ME: use weights instead of simple mean</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>weighted_satisficing (generic function with 1 method)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled" title="Hint">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The unweighted <code>mean(costs)</code> treats every trajectory as equally likely (<span class="math inline">\(1/N\)</span> each). With weights, replace <code>mean(costs)</code> with <code>sum(costs .* w)</code>, and <code>mean(costs .&lt; τ)</code> with <code>sum(w .* (costs .&lt; τ))</code>.</p>
+</div>
+</div>
+</div>
+<div id="cell-fig-weighted" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">350</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    hg <span class="op">=</span> <span class="fu">collect</span>(height_grid)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> [<span class="op">:</span>blue, <span class="op">:</span>orange, <span class="op">:</span>red]</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">1</span>]; xlabel<span class="op">=</span><span class="st">"Elevation (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Expected Cost (USD)"</span>, title<span class="op">=</span><span class="st">"Weighted Expected Cost"</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>]; xlabel<span class="op">=</span><span class="st">"Elevation (ft)"</span>, ylabel<span class="op">=</span><span class="st">"Fraction Satisfactory"</span>, title<span class="op">=</span><span class="st">"Weighted Satisficing (τ = \$</span><span class="sc">$</span>(τ<span class="op">÷</span><span class="fl">1000</span>)<span class="st">K)"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i, p) <span class="kw">in</span> <span class="fu">enumerate</span>(priors)</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>        w <span class="op">=</span> <span class="fu">make_weights</span>(p.dist, slr_2100_ft)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>        wec <span class="op">=</span> <span class="fu">weighted_expected_cost</span>(perf, w)</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        wsat <span class="op">=</span> <span class="fu">weighted_satisficing</span>(perf, w, τ)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax1, hg, wec.expected_cost; linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=</span>colors[i], label<span class="op">=</span>p.name)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax2, hg, wsat.fraction_satisfactory; linewidth<span class="op">=</span><span class="fl">2</span>, color<span class="op">=</span>colors[i], label<span class="op">=</span>p.name)</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Legend</span>(fig[<span class="fl">2</span>, <span class="op">:</span>], ax1; orientation<span class="op">=:</span>horizontal, tellwidth<span class="op">=</span><span class="cn">false</span>, tellheight<span class="op">=</span><span class="cn">true</span>)</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-weighted" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-weighted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-weighted-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-weighted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Weighted robustness metrics under three subjective priors. Left: expected cost (lower is better). Right: satisficing (higher is better). The belief about SLR shifts the optimal elevation, but the analysis is now transparent about which assumptions drive the recommendation.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Compare the weighted results to the unweighted results from Act 1. How does the choice of prior change the recommended elevation? Does the weighting stabilize the results compared to the subset sensitivity in Act 2?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="wrap-up" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">7</span> Wrap-Up</h2>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 4">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>You are advising a city council in Norfolk, VA on setting minimum elevation requirements for new construction.</em></p>
+<ol type="1">
+<li><em>Which elevation height would you recommend, and which robustness metric would you use to justify your recommendation?</em></li>
+<li><em>A council member asks: “Is this robust?” How do you respond?</em></li>
+<li><em>What are the trade-offs between the three approaches (expected cost, satisficing, minimax regret)?</em></li>
+</ol>
+</div>
+</div>
+<p>Key takeaways:</p>
+<ol type="1">
+<li><strong>Robustness metrics</strong> let you evaluate decisions across many uncertain futures without requiring probabilities.</li>
+<li><strong>No metric is “objective”</strong>: the choice of scenarios, thresholds, and metrics all involve subjective judgments.</li>
+<li><strong>Making assumptions explicit</strong> (via weighted robustness) is more transparent than hiding them in the choice of scenario ensemble.</li>
+<li><strong>Different metrics favor different decisions</strong>: expected cost, satisficing, and minimax regret encode different attitudes toward risk and uncertainty.</li>
+</ol>
+</section>
+<section id="sec-submission" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="sec-submission"><span class="header-section-number">8</span> Submission</h2>
+<ol type="1">
+<li><p>Write your answers in the response boxes above.</p></li>
+<li><p><strong>Render to PDF:</strong></p>
+<ul>
+<li>In VS Code: Open the command palette (<code>Cmd+Shift+P</code> / <code>Ctrl+Shift+P</code>) → “Quarto: Render Document” → select Typst PDF</li>
+<li>Or from the terminal: <code>quarto render index.qmd --to typst</code></li>
+</ul></li>
+<li><p><strong>Submit the PDF</strong> to the Lab 7 assignment on Canvas.</p></li>
+<li><p><strong>Push your code</strong> to GitHub (for backup):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Lab 7 complete"</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<section id="checklist" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="checklist">Checklist</h3>
+<p>Before submitting:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Packages load without error</label></li>
+<li><label><input type="checkbox">EAD emulator plotted (<a href="#fig-emulator" class="quarto-xref">Figure&nbsp;1</a>)</label></li>
+<li><label><input type="checkbox">SLR ensemble plotted (<a href="#fig-slr-ensemble" class="quarto-xref">Figure&nbsp;2</a>)</label></li>
+<li><label><input type="checkbox">Performance table computed (all heights × all trajectories)</label></li>
+<li><label><input type="checkbox">Satisficing function completed (<a href="#fig-metrics" class="quarto-xref">Figure&nbsp;3</a>)</label></li>
+<li><label><input type="checkbox">Question 1 answered (comparing metrics)</label></li>
+<li><label><input type="checkbox">Scenario sensitivity plotted (<a href="#fig-sensitivity" class="quarto-xref">Figure&nbsp;4</a>)</label></li>
+<li><label><input type="checkbox">Question 2 answered (sensitivity interpretation)</label></li>
+<li><label><input type="checkbox">Weighted expected cost and satisficing completed (<a href="#fig-weighted" class="quarto-xref">Figure&nbsp;6</a>)</label></li>
+<li><label><input type="checkbox">Question 3 answered (weighted vs.&nbsp;unweighted)</label></li>
+<li><label><input type="checkbox">Question 4 answered (recommendation)</label></li>
+<li><label><input type="checkbox">Notebook renders to PDF without errors</label></li>
+</ul>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-deconto_contribution:2016" class="csl-entry" role="listitem">
+DeConto, R. M., &amp; Pollard, D. (2016). Contribution of <span>Antarctica</span> to past and future sea-level rise. <em>Nature</em>, <em>531</em>(7596), 591–597. <a href="https://doi.org/10.1038/nature17145">https://doi.org/10.1038/nature17145</a>
+</div>
+<div id="ref-doss-gollin_subjective:2023" class="csl-entry" role="listitem">
+Doss-Gollin, J., &amp; Keller, K. (2023). A subjective <span>Bayesian</span> framework for synthesizing deep uncertainties in climate risk management. <em>Earth’s Future</em>, <em>11</em>(1), e2022EF003044. <a href="https://doi.org/10.1029/2022EF003044">https://doi.org/10.1029/2022EF003044</a>
+</div>
+<div id="ref-herman_robustness:2015" class="csl-entry" role="listitem">
+Herman, J. D., Reed, P. M., Zeff, H. B., &amp; Characklis, G. W. (2015). How should robustness be defined for water systems planning under change? <em>Journal of Water Resources Planning and Management</em>, <em>141</em>(10), 04015012. <a href="https://doi.org/10.1061/(asce)wr.1943-5452.0000509">https://doi.org/10.1061/(asce)wr.1943-5452.0000509</a>
+</div>
+<div id="ref-kopp_probabilistic:2014" class="csl-entry" role="listitem">
+Kopp, R. E., Horton, R. M., Little, C. M., Mitrovica, J. X., Oppenheimer, M., Rasmussen, D. J., et al. (2014). Probabilistic 21st and 22nd century sea-level projections at a global network of tide-gauge sites. <em>Earth’s Future</em>, <em>2</em>(8), 383–406. <a href="https://doi.org/10.1002/2014ef000239">https://doi.org/10.1002/2014ef000239</a>
+</div>
+<div id="ref-ruckert_flood:2019" class="csl-entry" role="listitem">
+Ruckert, K. L., Srikrishnan, V., &amp; Keller, K. (2019). Characterizing the deep uncertainties surrounding coastal flood hazard projections: A case study for <span>Norfolk</span>, <span>VA</span>. <em>Scientific Reports</em>, <em>9</em>(1), 11373. <a href="https://doi.org/10.1038/s41598-019-47587-6">https://doi.org/10.1038/s41598-019-47587-6</a>
+</div>
+<div id="ref-wong_brick:2017" class="csl-entry" role="listitem">
+Wong, T. E., Bakker, A. M. R., Ruckert, K., Applegate, P., Slangen, A. B. A., &amp; Keller, K. (2017). <span>BRICK</span> v0.2, a simple, accessible, and transparent model framework for climate and regional sea-level projections. <em>Geoscientific Model Development</em>, <em>10</em>(7), 2741–2760. <a href="https://doi.org/10.5194/gmd-10-2741-2017">https://doi.org/10.5194/gmd-10-2741-2017</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -563,64 +1723,25 @@ window.MathJax = {
           }
         };
       }
-        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
-        for (let i=0; i<annoteTargets.length; i++) {
-          const annoteTarget = annoteTargets[i];
-          const targetCell = annoteTarget.getAttribute("data-target-cell");
-          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
-          const contentFn = () => {
-            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-            if (content) {
-              const tipContent = content.cloneNode(true);
-              tipContent.classList.add("code-annotation-tip-content");
-              return tipContent.outerHTML;
-            }
-          }
-          const config = {
-            allowHTML: true,
-            content: contentFn,
-            onShow: (instance) => {
-              selectCodeLines(instance.reference);
-              instance.reference.classList.add('code-annotation-active');
-              window.tippy.hideAll();
-            },
-            onHide: (instance) => {
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
               unselectCodeLines();
-              instance.reference.classList.remove('code-annotation-active');
-            },
-            maxWidth: 300,
-            delay: [50, 0],
-            duration: [200, 0],
-            offset: [5, 10],
-            arrow: true,
-            appendTo: function(el) {
-              return el.parentElement.parentElement.parentElement;
-            },
-            interactive: true,
-            interactiveBorder: 10,
-            theme: 'quarto',
-            placement: 'right',
-            popperOptions: {
-              modifiers: [
-              {
-                name: 'flip',
-                options: {
-                  flipVariations: false, // true by default
-                  allowedAutoPlacements: ['right'],
-                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
-                },
-              },
-              {
-                name: 'preventOverflow',
-                options: {
-                  mainAxis: false,
-                  altAxis: false
-                }
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
               }
-              ]        
-            }      
-          };
-          window.tippy(annoteTarget, config); 
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
         }
     const findCites = (el) => {
       const parentEl = el.parentElement;
