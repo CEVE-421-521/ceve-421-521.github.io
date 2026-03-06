@@ -15,47 +15,43 @@ format:
 
 ## Overview
 
-**Presentations:** Week 14 (April 20, 22, 24)
+**Presentations:** Week 14 (April 20 & 22)
 **Slides Due:** Friday of Week 13 (April 17)
 
-Your team will deliver a 20-minute Executive Briefing presenting your audit findings to a simulated "Client Board."
-Non-presenting teams will role-play as board members and must ask substantive questions.
+Your team will deliver a 25-minute Executive Briefing presenting your audit findings.
+Non-presenting students are expected to ask substantive questions during Q&A.
 
 ## Format
 
-- **Presentation:** 15 minutes
+- **Presentation:** 20 minutes
 - **Q&A:** 5 minutes
-- **Audience:** Your classmates role-play as the board that commissioned the audit
 
 ## Presentation Requirements
 
 Your briefing should address:
 
-### 1. Context (2-3 minutes)
+### 1. Context (3-4 minutes)
 
 - What plan did you audit? (Title, organization, scope)
 - Why does this plan matter? (Stakes, affected populations)
 - What was your audit approach?
 
-### 2. Decision Framework (3-4 minutes)
+### 2. XLRM Framework (5-7 minutes)
 
+- Key Uncertainties: What could go wrong?
 - Key Levers: What decisions does the plan make?
+- System Models: What models link actions to outcomes?
 - Key Metrics: How does the plan measure success?
-- Framework Gaps: What's missing from the decision structure?
+- Framework Gaps: What's missing?
 
-### 3. Evidence Base (3-4 minutes)
+### 3. Evidence & Robustness (5-7 minutes)
 
 - Valuation Methods: How are costs/benefits calculated?
-- System Models: What models predict outcomes?
+- Robustness: How does the plan handle deep uncertainty?
+- Vulnerabilities: Where might the plan fail?
 - Evidence Gaps: Where is the analysis weakest?
 
-### 4. Robustness (3-4 minutes)
-
-- Uncertainty Treatment: How does the plan handle uncertainty?
-- Vulnerability Analysis: Where might the plan fail?
-- Robustness Gaps: What scenarios are ignored?
-
-### 5. Recommendation (2-3 minutes)
+### 4. Recommendation (3-4 minutes)
 
 Provide a clear verdict with justification:
 
@@ -67,7 +63,6 @@ Your recommendation must be supported by specific findings from your audit.
 
 ## Slide Requirements
 
-- **Maximum 15 slides** (excluding title slide)
 - **Slides due Friday of Week 13** by 11:59 PM
 - Submit as PDF to Canvas
 - All teams submit before any presentations (fairness)
@@ -85,15 +80,11 @@ Board members must:
 
 | Criterion | Points |
 | :--- | :---: |
-| Clear communication of audit findings | 25 |
-| Technical depth and accuracy | 25 |
+| Clear communication of audit findings | 20 |
+| Technical depth and accuracy | 20 |
 | Strength of evidence for recommendation | 20 |
 | Response to Q&A | 15 |
 | Slide quality and professionalism | 15 |
+| Audience participation (questions during other presentations) | 10 |
 | **Total** | **100** |
-
-**Audience Participation (separate grade):**
-
-- Quality of questions asked during other presentations
-- Graded as part of class participation
 

@@ -1,8 +1,8 @@
 ---
-title: "Audit Memo 1: Decision Framework"
+title: "Audit Memo 1: XLRM Framework"
 subtitle: "CEVE 421/521 Final Project"
-date: 2026-02-27
-status: draft
+date: 2026-03-27
+status: published
 format:
   html:
     toc: true
@@ -15,24 +15,41 @@ format:
 
 ## Overview
 
-**Due:** Friday of Week 7
+**Due:** Friday of Week 10 (March 27)
 
-This memo maps the decision framework of your chosen climate plan.
-You will identify the Levers (L) and Metrics (M) that define the plan's decision space.
+This memo maps the complete XLRM decision framework of your chosen climate plan.
+You will identify the Uncertainties (X), Levers (L), Relationships/System Models (R), and Metrics (M) that define the plan's decision context.
 
 ## Learning Objectives
 
 By completing this memo, you will demonstrate your ability to:
 
-1. Extract decision variables (Levers) from a real-world planning document
-2. Identify performance measures (Metrics) used to evaluate success
-3. Critique the completeness and clarity of a plan's decision framework
+1. Apply the XLRM framework to a real-world climate planning document
+2. Extract decision variables, performance measures, system models, and key uncertainties
+3. Critique the completeness of a plan's decision framework
 
 ## Requirements
 
-Submit a **1-2 page memo** (PDF) containing:
+Submit a **3-4 page memo** (PDF) containing the following.
+Focus on the most important items — aim for 3-5 entries per table rather than an exhaustive list.
 
-### 1. Levers Analysis
+### 1. Uncertainties (X)
+
+Identify the key uncertainties affecting the plan:
+
+| Uncertainty | Type | How Addressed |
+| :--- | :--- | :--- |
+| *Climate projections* | *Deep (epistemic)* | *Multiple scenarios? Single projection?* |
+| *Population growth* | *Parametric* | *Sensitivity analysis?* |
+| *Damage functions* | *Structural* | *Acknowledged?* |
+
+Categorize uncertainties as:
+
+- **Parametric:** Known unknowns with estimable ranges
+- **Structural:** Model form uncertainty
+- **Deep:** Fundamental disagreement or unknown unknowns
+
+### 2. Levers (L)
 
 Create a table of the plan's key decision variables:
 
@@ -46,7 +63,23 @@ For each lever, address:
 - Are alternative options considered, or is only one choice presented?
 - What constraints limit the lever's range?
 
-### 2. Metrics Analysis
+### 3. Relationships / System Models (R)
+
+Identify the models used to predict outcomes:
+
+| Model Component | Description | Key Assumptions |
+| :--- | :--- | :--- |
+| Hazard model | *e.g., FEMA flood maps* | *Assumes stationarity?* |
+| Exposure model | *e.g., parcel data* | *Current or projected?* |
+| Vulnerability model | *e.g., depth-damage functions* | *Building types?* |
+
+For each model, address:
+
+- Are the models appropriate for the hazard and decision context?
+- What simplifications or assumptions might affect results?
+- Are model limitations acknowledged?
+
+### 4. Metrics (M)
 
 Create a table of the plan's performance metrics:
 
@@ -60,13 +93,20 @@ For each metric, address:
 - How is the metric calculated or estimated?
 - What time horizon does the metric consider?
 
-### 3. Framework Critique
+### 5. Framework Critique
 
-In 1-2 paragraphs, assess the decision framework:
+In 1-2 paragraphs, assess the overall XLRM framework:
 
-- **Completeness:** Are there important levers or metrics missing?
-- **Clarity:** Are the levers and metrics well-defined?
-- **Trade-offs:** Does the plan acknowledge trade-offs between metrics?
+- **Completeness:** Are there important uncertainties, levers, models, or metrics missing?
+- **Clarity:** Are the components well-defined and specific?
+- **Connections:** Does the plan clearly link uncertainties to models to metrics?
+
+## Citations
+
+Use proper citations when referencing specific sections, data, or claims from the plan.
+Include page numbers or section references so the reader can verify your analysis (e.g., "City of Houston, 2020, p. 42").
+Use [American Geophysical Union (AGU) reference style](https://www.agu.org/publish-with-agu/publish/author-resources/grammar-style-guide#referenceformat).
+You may use any reference management software; we recommend Zotero with the MS Word plugin or BibTeX with LaTeX/Typst.
 
 ## Submission
 
@@ -76,8 +116,10 @@ Submit your memo as a PDF to Canvas by 11:59 PM on the due date.
 
 | Criterion | Points |
 | :--- | :---: |
-| Levers clearly identified and described | 30 |
-| Metrics clearly identified and described | 30 |
+| Uncertainties clearly identified and categorized | 15 |
+| Levers clearly identified and described | 15 |
+| System models clearly identified with assumptions | 15 |
+| Metrics clearly identified and described | 15 |
 | Thoughtful critique of framework completeness | 20 |
 | Professional writing and formatting | 20 |
 | **Total** | **100** |

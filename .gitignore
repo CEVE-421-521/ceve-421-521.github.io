@@ -11,6 +11,8 @@ _freeze/
 *.nav
 *.snm
 *.vrb
+*.pptx
+*_files/
 
 # VS Code
 .vscode/
@@ -49,6 +51,7 @@ _freeze/
 *.pdf
 !lectures/*.pdf
 *.svg
+!lectures/**/*.svg
 *.ipynb
 *.json
 *.typ
@@ -71,3 +74,4 @@ site_libs/*
 
 # Temporary planning files
 _tmp/
+docs/plans/

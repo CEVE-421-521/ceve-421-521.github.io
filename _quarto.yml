@@ -57,6 +57,10 @@ website:
         text: Syllabus
       - text: Schedule
         href: schedule.qmd
+      - text: Final Project
+        href: assignments/final-project/index.qmd
+      - text: Graduate Seminar (521)
+        href: exams/assignments/graduate-seminar.qmd
       - text: Resources
         href: resources.qmd
       - text: AI Policy
