@@ -74,3 +74,4 @@ site_libs/*
 
 # Temporary planning files
 _tmp/
+docs/plans/

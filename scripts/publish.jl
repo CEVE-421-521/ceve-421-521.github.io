@@ -153,7 +153,7 @@ function publish_lab(lab_num::String, semester::String="S26")
     sanitize_file(joinpath(src_dir, "index.qmd"), joinpath(target_dir, "index.qmd"))
 
     # Copy supporting files
-    for filename in ["Project.toml", "README.md", ".gitignore"]
+    for filename in ["Project.toml", "README.md", ".gitignore", "references.bib"]
         copy_file(joinpath(src_dir, filename), joinpath(target_dir, filename))
     end
 

@@ -341,7 +341,7 @@ Robustness is a property you want your solution to have, not the only property y
 Both papers are in this week's reading guide.
 Come ready to take sides.
 
-One constructive response: @doss-gollin_subjective:2022 propose making distributional assumptions explicit, computing performance under multiple probability distributions, and calling a solution robust only if it holds up across different distributional assumptions --- not just across different parameter values.
+One constructive response: @doss-gollin_subjective:2023 propose making distributional assumptions explicit, computing performance under multiple probability distributions, and calling a solution robust only if it holds up across different distributional assumptions --- not just across different parameter values.
 
 ## Final Project
 
