@@ -342,7 +342,7 @@
     "href": "lectures/week-07/gsa.html#references",
     "title": "Global Sensitivity Analysis",
     "section": "References",
-    "text": "References\n\n\n\n\nPianosi, F., Beven, K., Freer, J., Hall, J. W., Rougier, J., Stephenson, D. B., & Wagener, T. (2016). Sensitivity analysis of environmental models: A systematic review with practical workflow. Environmental Modelling & Software, 79, 214–232. https://doi.org/10/f8n6zw\n\n\nReed, P. M., Hadjimichael, A., Malek, K., Karimi, T., Vernon, C. R., Srikrishnan, V., et al. (2022). Addressing uncertainty in multisector dynamics research. Zenodo. Retrieved from https://doi.org/10.5281/zenodo.6110623\n\n\nSaltelli, A., Ratto, M., Andres, T., Campolongo, F., Cariboni, J., Gatelli, D., et al. (2008). Global sensitivity analysis: The primer. John Wiley & Sons, Ltd. Retrieved from http://onlinelibrary.wiley.com/doi/abs/10.1002/9780470725184.ch1"
+    "text": "References\n\n\n\n\nPianosi, F., Beven, K., Freer, J., Hall, J. W., Rougier, J., Stephenson, D. B., & Wagener, T. (2016). Sensitivity analysis of environmental models: A systematic review with practical workflow. Environmental Modelling & Software, 79, 214–232. https://doi.org/10/f8n6zw\n\n\nReed, P. M., Hadjimichael, A., Moss, R. H., Brelsford, C., Burleyson, C. D., Cohen, S., et al. (2022). Multisector Dynamics: Advancing the Science of Complex Adaptive Human-Earth Systems. Earth’s Future, 10(3), e2021EF002621. https://doi.org/10.1029/2021EF002621\n\n\nSaltelli, A., Ratto, M., Andres, T., Campolongo, F., Cariboni, J., Gatelli, D., et al. (2008). Global sensitivity analysis: The primer. John Wiley & Sons, Ltd. Retrieved from http://onlinelibrary.wiley.com/doi/abs/10.1002/9780470725184.ch1"
   },
   {
     "objectID": "lectures/week-06/index.html#references",
@@ -1537,13 +1537,6 @@
     "text": "References\n\n\n\n\nArrow, K., Cropper, M., Gollier, C., Groom, B., Heal, G., Newell, R., et al. (2013). Determining benefits and costs for future generations. Science, 341(6144), 349–350. https://doi.org/10.1126/science.1235665\n\n\nU.S. Office of Management and Budget. (2023). Circular No. A-94: Guidelines and Discount Rates for Benefit-Cost Analysis of Federal Programs (Circular). Executive Office of the President. Retrieved from https://www.whitehouse.gov/wp-content/uploads/2023/11/CircularA-94.pdf"
   },
   {
-    "objectID": "lectures/week-07/evii.html#references",
-    "href": "lectures/week-07/evii.html#references",
-    "title": "Value of Imperfect Information",
-    "section": "References",
-    "text": "References\n\n\n\n\nBlackwell, D. (1953). Equivalent comparisons of experiments. The Annals of Mathematical Statistics, 24(2), 265–272. https://doi.org/10.1214/aoms/1177729032"
-  },
-  {
     "objectID": "lectures/week-07/index.html",
     "href": "lectures/week-07/index.html",
     "title": "Value of Information",
@@ -1563,6 +1556,13 @@
     "title": "Value of Information",
     "section": "2.2 When is EVPI Zero?",
     "text": "2.2 When is EVPI Zero?\nEVPI \\(= 0\\) when the same action is optimal under all scenarios. In that case, learning which scenario is true wouldn’t change your decision.\nExample: if \\(p = 0.50\\) and \\(C/L = 0.1\\), you bring the umbrella regardless — a forecast wouldn’t change anything.\nThis is an important conceptual point: uncertainty and information value are not the same thing. You can have enormous uncertainty about which scenario will occur but zero EVPI, if the uncertainty doesn’t affect which action is best. Conversely, a small amount of uncertainty can have high EVPI if you’re right on the decision boundary."
+  },
+  {
+    "objectID": "lectures/week-09/index.html#references",
+    "href": "lectures/week-09/index.html#references",
+    "title": "Trade-offs & Values",
+    "section": "References",
+    "text": "References\n\n\n\n\nDaw, T. M., Coulthard, S., Cheung, W. W. L., Brown, K., Abunge, C., Galafassi, D., et al. (2015). Evaluating taboo trade-offs in ecosystems services and human well-being. Proceedings of the National Academy of Sciences, 112(22), 6949–6954. https://doi.org/10.1073/pnas.1414900112\n\n\nFletcher, S., Hadjimichael, A., Quinn, J., Osman, K., Giuliani, M., Gold, D., et al. (2022). Equity in Water Resources Planning: A Path Forward for Decision Support Modelers. Journal of Water Resources Planning and Management, 148(7), 02522005. https://doi.org/10.1061/(ASCE)WR.1943-5452.0001573\n\n\nHarris County Flood Control District. (2022). 2022 Prioritization Framework for the Allocation of Funds from the Harris County Flood Resilience Trust. Houston, TX. Retrieved from https://www.hcfcd.org/Portals/62/Documents/2022%2004%2026%20Prioritization%20Framework%20for%20the%20Allocation%20of%20Flood%20Resilience%20Trust%20Funding.pdf\n\n\nKeller, K., Helgeson, C., & Srikrishnan, V. (2021). Climate risk management. Annual Review of Earth and Planetary Sciences, 49(1), 95–116. https://doi.org/10.1146/annurev-earth-080320-055847\n\n\nPollack, A. B., Helgeson, C., Kousky, C., & Keller, K. (2024). Developing more useful equity measurements for flood-risk management. Nature Sustainability, 7(6), 823–832. https://doi.org/10.1038/s41893-024-01345-3\n\n\nPollack, A. B., Santamaria-Aguilar, S., Maduwantha, P., Helgeson, C., Wahl, T., & Keller, K. (2025). Funding rules that promote equity in climate adaptation outcomes. Proceedings of the National Academy of Sciences, 122(2), e2418711121. https://doi.org/10.1073/pnas.2418711121"
   },
   {
     "objectID": "lectures/week-11/index.html#references",

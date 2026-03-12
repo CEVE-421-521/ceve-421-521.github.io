@@ -29,7 +29,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f813b346ce809c8bbd246a85cc5c9db3.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -153,7 +173,7 @@ Dr.&nbsp;James Doss-Gollin
 </div>
 </div>
 
-  <p class="date">Monday, March 9, 2026</p>
+  <p class="date">Wednesday, March 11, 2026</p>
 </section>
 <section class="slide level2">
 
@@ -162,15 +182,625 @@ Dr.&nbsp;James Doss-Gollin
 </div>
 
 </section>
-<section class="slide level2">
-<h2>Coming Soon</h2>
-<p>This lecture is under development.</p>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Subjectivity in Decision-Making</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Subjectivity in Decision-Making</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Equity</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:10. Transition from exam review. “The exam practice problems all had a single objective: net benefits. But even that framing embedded choices. Let’s name them.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
+<h2>Recall: Module 2</h2>
+<p>In Weeks 5–8, we built a rigorous decision framework:</p>
+<ul>
+<li class="fragment">Model uncertainty explicitly: <span class="math inline">\(\mathbf{s}\)</span> is a distribution, not a point estimate</li>
+<li class="fragment">Propagate uncertainty through costs and benefits</li>
+<li class="fragment">Analyze sensitivity: which uncertainties drive the outcome?</li>
+<li class="fragment">Ask: is more information worth getting? (VOI)</li>
+<li class="fragment">Choose <span class="math inline">\(a^* = \arg\max_a \; \mathbb{E}[\text{NPV}(a, \mathbf{s})]\)</span></li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>BCA Key Assumptions</h2>
+<p>Every BCA embeds value judgments:</p>
+<ul>
+<li class="fragment">Everything can be converted to a common unit (usually dollars)</li>
+<li class="fragment">The “right” trade-off between present and future is captured by the discount rate</li>
+<li class="fragment">Expectations are sufficient (any risk aversion goes in the utility function)</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Taboo Trade-Offs</h2>
+<p>Some conversions feel morally unacceptable <span class="citation" data-cites="daw_taboo:2015">(<a href="#/references" role="doc-biblioref" onclick="">Daw et al., 2015</a>)</span>:</p>
+<ul>
+<li class="fragment">“How many species extinctions are worth $X billion in economic growth?”</li>
+<li class="fragment">“How many additional flood deaths are acceptable to save $Y in infrastructure costs?”</li>
+<li class="fragment">“Is it okay to displace a community if the aggregate NPV is positive?”</li>
+</ul>
+<p>These are <strong>taboo trade-offs</strong> — converting them to dollars feels wrong, even if the math works.</p>
+<aside class="notes">
+<p>Target: 1:18. Let students sit with the discomfort. Ask in chat: “Can you think of a trade-off in climate adaptation that feels taboo to put a dollar value on?” Expect: loss of cultural heritage, displacement, loss of life. Daw et al.&nbsp;studied Kenyan fisheries where aggregate “ecosystem services” masked that some families lost their livelihoods while others gained.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Values in Decision-Making</h2>
+
+<img data-src="keller_values.jpg" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="keller_management:2021">Keller et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p><aside class="notes">
+<p>Target: 1:20. Values permeate every stage of risk management — from problem framing to metric choice to model structure. BCA is not “objective” just because it uses numbers. The choice of <em>what to measure</em> is itself a value judgment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Multiple Objectives</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Subjectivity in Decision-Making</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Equity</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:23. If value choices are unavoidable, how do we handle multiple competing values at once? MCDA is a family of approaches for this. Keep conceptual here — formal multi-objective optimization with Pareto fronts comes in Week 12.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Case Study: Harris County Flood Resilience Trust</h2>
+<p>After Hurricane Harvey, Harris County passed a <strong>$2.5 billion flood bond</strong> (2018). Limited Resilience Trust funds must be allocated across 200+ competing projects.</p>
+<div class="fragment">
+<p><strong>The question:</strong> which projects get funded?</p>
+<ul>
+<li class="fragment">Pure BCR? Favors neighborhoods with the most property value</li>
+<li class="fragment">HCFCD instead built a <strong>multi-criteria weighted scoring system</strong> <span class="citation" data-cites="hcfcd_prioritization:2022">(<a href="#/references" role="doc-biblioref" onclick="">Harris County Flood Control District, 2022</a>)</span></li>
+<li class="fragment">Each project scored 0–10 on seven criteria, combined with explicit weights</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:25. This is the running example for the rest of the lecture — refer back to it at each abstract point. The framework is publicly available, so students can look it up. Key thing to flag now: HCFCD explicitly rejected pure BCR. Their stated mission is “worst first” — but watch how that principle plays out (or doesn’t) in the actual weights.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>What’s Hard to Compare?</h2>
+<p><strong>Chat question:</strong> Give an example for</p>
+<ul>
+<li><ol type="a">
+<li>coastal adaptation in Galveston</li>
+</ol></li>
+<li><ol start="2" type="a">
+<li>a case study of interest to you</li>
+</ol></li>
+</ul>
+<p>where two important things are genuinely hard to compare as apples to apples.</p>
+</section>
+<section class="slide level2">
+<h2>Multiple Objectives in Practice</h2>
+<p>HCFCD’s 2022 framework scores each project on seven criteria <span class="citation" data-cites="hcfcd_prioritization:2022">(<a href="#/references" role="doc-biblioref" onclick="">Harris County Flood Control District, 2022</a>)</span>:</p>
+<ul>
+<li><strong>Cost per structure</strong> benefited in a 100-year event (30%)</li>
+<li><strong>Cost per person</strong> benefited in a 100-year event (15%)</li>
+<li><strong>Existing conditions</strong>: how severely does the area currently flood? (20%)</li>
+<li><strong>Social Vulnerability Index</strong> of the affected community (20%)</li>
+<li>Long-term maintenance costs (5%)</li>
+<li>Environmental impacts (5%)</li>
+<li>Potential for multiple benefits — recreation, ecology (5%)</li>
+</ul>
+<p>These may <em>conflict</em>, leading to <em>trade-offs</em>.</p>
+</section>
+<section class="slide level2 scrollable">
+<h2>Three Approaches</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Weighted sum</strong>: Collapse into one number <span class="math display">\[w_1 \cdot \text{cost} + w_2 \cdot \text{risk} + w_3 \cdot \text{equity}\]</span> Simple, but hides the trade-offs.</p></li>
+<li class="fragment"><p><strong>Satisficing / constraints</strong>: Set minimum thresholds (“<span class="math inline">\(BCR \geq 1\)</span>”) and optimize remaining objectives. Avoids explicit weighting but requires choosing thresholds.</p></li>
+<li class="fragment"><p><strong>Pareto analysis</strong>: Find solutions where no objective can improve without worsening another. Reveals trade-offs without choosing weights. <em>(We’ll formalize this in Week 12.)</em></p></li>
+</ol>
+<aside class="notes">
+<p>HCFCD uses the weighted sum approach — scores on seven criteria combined with explicit percentage weights. The weights (30/15/20/20/5/5/5) are public and debatable. Why does cost-per-structure get 2× the weight of cost-per-person? That’s a value judgment dressed up as a technical parameter.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Equity</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Subjectivity in Decision-Making</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Equity</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:33. Transition: we’ve been talking abstractly about “incommensurable values.” Now use equity as a concrete case — something everyone agrees is important, but where the measurement choices are deeply contested.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Equity as a Case Study</h2>
+<p>MCDA asks us to handle multiple competing objectives. What do we do when one of those objectives is <strong>“be fair”</strong>?</p>
+<ul>
+<li>Everyone agrees it matters</li>
+<li>But measuring it requires explicit value choices at every step</li>
+<li>Those choices are often hidden — which is exactly the problem this lecture is about</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:34. Two-sentence bridge. The MCDA section showed that value choices are unavoidable. Equity shows <em>where</em> those choices live and <em>how</em> to make them deliberately.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Equity in Climate Risk</h2>
+<p><strong>Chat question:</strong> Where have you heard people talking about equity in climate risk or infrastructure?</p>
+<div class="fragment">
+<ul>
+<li>Which neighborhoods get buyouts after floods — and which don’t</li>
+<li>Who is consulted in flood protection planning</li>
+<li>Whether FEMA flood maps reflect cumulative environmental burdens</li>
+<li>Which communities receive green infrastructure investment</li>
+<li>Federal funding formulas for disaster recovery</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:36. Wait for chat responses — 60 seconds. The point is that students have already encountered these debates; they just may not have had a framework for them. Pick 2–3 responses and connect them to the analytical challenge: in each case, someone had to define what “fair” means before they could act.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 smaller">
+<h2>Equity in Policy</h2>
+<p>How to account for equity is actively contested in law and policy:</p>
+<ul>
+<li class="fragment"><p><strong>Justice40</strong> (Biden, 2021): 40% of benefits from certain federal climate investments must flow to disadvantaged communities — Equity operationalized via investment targeting; specifies outcome + characteristics, but leaves principle implicit</p></li>
+<li class="fragment"><p><strong>Executive Order 14173</strong> (Trump, 2025): Prohibits federal agencies from using protected characteristics (race, sex) in decision-making — Restricts which <em>characteristics</em> axis options are legally available for federal programs</p></li>
+</ul>
+<aside class="notes">
+<p>Target: 1:38. Present neutrally — this is an analytical observation, not a political one. Justice40 is essentially an equity indicator: funding outcome, disadvantaged communities as characteristics, implicitly invoking an environmental justice rationale. The Trump EO directly constrains the characteristics axis — race cannot be used as a grouping variable in federal analysis, which changes which equity indicators are legally permissible. The key analytical point: even the legal framework reflects value choices about what equity means. This directly motivates the next question: so what <em>should</em> it mean?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>What Do We Mean by Equity?</h2>
+<p><strong>Chat question:</strong> When you hear “equity” or “environmental justice,” what comes to mind?</p>
+<aside class="notes">
+<p>Target: 1:38. Wait for chat responses — 60–90 seconds is worth it. Read a few aloud and note the variety. The point: equity is not a single thing. Reasonable people with good intentions disagree about what it means. This isn’t a problem to solve by picking the “right” definition — it’s a reason to be explicit about which definition you’re using.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 smaller scrollable">
+<h2>Normative Frameworks</h2>
+<p>How should we evaluate whether a distribution is fair? Some key frameworks:</p>
+<ol type="1">
+<li class="fragment"><p><strong>Worst-first</strong> (Rawlsian maximin): prioritize the least well-off — The same principle as the maximin rule from your exam, now applied to <em>people</em></p></li>
+<li class="fragment"><p><strong>Maximize aggregate welfare</strong> (utilitarian): best average outcome — This is what standard BCA does</p></li>
+<li class="fragment"><p><strong>Restore past wrongs</strong> (reparative / corrective justice): address historical injustice — Redlining, discriminatory flood insurance, and underinvestment shaped today’s disparities</p></li>
+<li class="fragment"><p><strong>Equal treatment</strong> (egalitarian): same outcomes or resources for everyone</p></li>
+<li class="fragment"><p><strong>Sufficiency</strong> (sufficientarian): everyone gets “enough” — a minimum threshold</p></li>
+</ol>
+<aside class="notes">
+<p>Target: 1:41. Not a philosophy course — these are entry-level descriptions. The key point: these are not interchangeable. They can recommend different actions from the same data. The reparative framework is directly relevant to US flood policy — redlining shaped which neighborhoods got levees and which didn’t. For more depth: Jafino et al.&nbsp;(2021) provides a good overview of operationalizing these in flood-risk analysis.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Maximin, Revisited</h2>
+<p>On the exam, you applied maximin to uncertain <em>scenarios</em>:</p>
+<p><span class="math display">\[a^* = \arg\max_a \min_s \; U(a, s)\]</span></p>
+<p><em>Choose the action whose worst-case outcome is best.</em></p>
+<div class="fragment">
+<p>The Rawlsian framework applies the same logic to <em>people</em>:</p>
+<p><span class="math display">\[\text{choose the policy that most benefits the least well-off person}\]</span></p>
+<p><em>Same structure — “worst case” is now the worst-off individual.</em></p>
+<aside class="notes">
+<p>Target: 1:43. This connection is pedagogically powerful — students just practiced this rule in the exam review at the start of class, and will apply it on Friday’s exam. The insight: moral philosophy and decision theory share mathematical structure. Maximin as a decision rule = Rawlsian justice = worst-first principle. The only difference is what “worst” refers to: a future scenario, or a person’s position in society.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 smaller">
+<h2>Measuring Equity: A Taxonomy</h2>
+<p>Before we can <em>measure</em> equity, we must answer four questions <span class="citation" data-cites="pollack_equity:2024">(<a href="#/references" role="doc-biblioref" onclick="">Pollack et al., 2024</a>)</span>:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 40%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Axis</th>
+<th style="text-align: left;">Question</th>
+<th style="text-align: left;">Options</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Outcome</strong></td>
+<td style="text-align: left;">Equity in <em>what</em>?</td>
+<td style="text-align: left;">Exposure, risk, funding, benefits, recovery</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Scale</strong></td>
+<td style="text-align: left;">At <em>what level</em>?</td>
+<td style="text-align: left;">Individual, neighborhood, city, region</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Characteristics</strong></td>
+<td style="text-align: left;">Across <em>whom</em>?</td>
+<td style="text-align: left;">Income, race, environmental burden, history</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Principle</strong></td>
+<td style="text-align: left;"><em>Why</em> is that unfair?</td>
+<td style="text-align: left;">Worst-first, utilitarian, reparative, egalitarian, sufficientarian</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Target: 1:44. Pollack et al.&nbsp;(2024) surveyed 167 papers invoking equity in flood-risk management. Only 11 of 99 quantitative studies actually measured equity with all four axes specified and a transparent justification. Most papers claim to measure equity but leave the axes implicit — hiding value judgments inside the analysis. This pattern is exactly what this lecture is about: subjectivity that’s present but unnamed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 smaller">
+<h2>Why the Taxonomy Matters</h2>
+<p>The same program can look equitable <em>or</em> inequitable depending on which axes you choose:</p>
+<ul>
+<li>Equal <strong>funding</strong> per household may still leave the poorest with the highest residual <strong>risk</strong></li>
+<li><strong>City-level</strong> exposure looks equitable; <strong>neighborhood-level</strong> reveals disparities</li>
+<li><strong>Utilitarian</strong> benefits may favor wealthy areas (more property value to protect)</li>
+</ul>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>Policy A</strong>: protect densest district</p>
+<ul>
+<li>Utilitarian: ✓ higher aggregate benefit</li>
+<li>Worst-first: ✗ skips the poorest</li>
+</ul>
+</div><div class="column" style="width:48%;">
+<p><strong>Policy B</strong>: protect poorest district</p>
+<ul>
+<li>Utilitarian: ✗ lower aggregate benefit</li>
+<li>Worst-first: ✓ helps the least well-off</li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Target: 1:46. The two-column schematic is based on a study comparing Rawlsian, egalitarian, and utilitarian frameworks for flood adaptation in Vietnam (cited in Pollack et al.). Same model, same data — different axis-4 (principle) choice, different recommended policy. This is the core pattern of Module 3: subjectivity that was always there, now made visible. HCFCD callback: their “cost per structure” metric (30%) is essentially utilitarian — favors dense, high-value areas. Their SVI criterion (20%) + “cost per person” metric (15%) pull in the worst-first direction. The weights are the value judgment: why does property get twice the weight of people?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Funding Rules and Equity</h2>
+<p><span class="citation" data-cites="pollack_fundingrules:2025">Pollack et al. (<a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span> studied how federal funding allocation rules affect equity:</p>
+<ul>
+<li class="fragment">Rules that maximize aggregate benefit-cost ratio tend to direct funding to wealthy areas (more property value to protect)</li>
+<li class="fragment">Rules that prioritize social vulnerability scores direct funding to disadvantaged communities</li>
+<li class="fragment"><strong>The funding formula is a policy lever</strong> — it encodes a moral framework whether intended or not</li>
+</ul>
+<div class="fragment">
+<p>HCFCD’s framework is a local example: cost-per-structure (30%) vs.&nbsp;SVI (20%) vs.&nbsp;cost-per-person (15%) <span class="citation" data-cites="hcfcd_prioritization:2022">(<a href="#/references" role="doc-biblioref" onclick="">Harris County Flood Control District, 2022</a>)</span></p>
+<aside class="notes">
+<p>Target: 1:47. This is the punchline connecting MCDA to equity: the “weights” are often hidden in bureaucratic formulas (cost-share ratios, eligibility criteria, scoring rubrics). Making them explicit lets us debate them as the value choices they are. HCFCD made their weights public and explicit — that’s actually unusual and worth noting. Even so, the choice of 30/15 for structures vs.&nbsp;people is a value judgment that was probably not debated publicly. Directly relevant to students’ final projects if they work on flood risk.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Procedural Equity</h2>
+<p>Equity is not only about outcomes — it’s also about <strong>process</strong> <span class="citation" data-cites="fletcher_waterresourcesequity:2022">(<a href="#/references" role="doc-biblioref" onclick="">Fletcher et al., 2022</a>)</span>:</p>
+<ul>
+<li>Who gets to participate in planning decisions?</li>
+<li>Whose knowledge counts?</li>
+<li>Who has the power to set the agenda?</li>
+</ul>
+<div class="fragment">
+<p>Simply inviting marginalized communities to meetings is not enough if power dynamics remain unchanged.</p>
+<aside class="notes">
+<p>Target: 1:48. Brief but important. This is the dimension of equity that quantitative modelers tend to overlook. Fletcher et al.&nbsp;argue that modelers should explicitly engage with procedural equity, not just distributional outcomes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Logistics</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Subjectivity in Decision-Making</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Equity</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Logistics</p>
+</div></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+<h2>Exam 2</h2>
+<ul>
+<li>Friday, in class, 50 minutes</li>
+<li>Closed book</li>
+<li>Bring just a pencil</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Module 3: Complementary Tools</h2>
+<p>These approaches work together — they are not alternatives:</p>
+<ul>
+<li class="fragment"><strong>Robustness</strong> (Week 10): Does my recommended policy hold up across scenarios and across value frameworks?</li>
+<li class="fragment"><strong>Scenario discovery</strong> (Week 11): What conditions or assumptions drive my conclusions?</li>
+<li class="fragment"><strong>Multi-objective optimization</strong> (Week 12): Map the Pareto front — show decision-makers the trade-offs rather than collapsing to one number</li>
+<li class="fragment"><strong>Sequential decision-making</strong> (Week 13): Make decisions over time as we learn what we value and how the system behaves</li>
+</ul>
+<div class="fragment">
+<p>None of these <em>resolve</em> value questions — they make the choices <strong>visible and tractable</strong>.</p>
+<aside class="notes">
+<p>Target: 1:50. Stress: these tools don’t eliminate subjectivity. They surface it. A decision-maker who sees the Pareto front can make an informed choice about which trade-off they prefer. A decision-maker who only sees a single NPV number doesn’t know what they’re choosing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Looking Ahead</h2>
+<ul>
+<li><strong>Wednesday</strong>: Paper discussion</li>
+<li><strong>Friday</strong>: Exam 2 (covers Module 2)</li>
+<li><strong>Next Monday</strong> (Week 10): Robustness and Deep Uncertainty — entering Module 3</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:50. Remind students about exam Friday. Point them to the practice questions we reviewed at the start. Office hours Wednesday afternoon for last-minute exam questions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
 <h2>References</h2>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-daw_taboo:2015" class="csl-entry" role="listitem">
+Daw, T. M., Coulthard, S., Cheung, W. W. L., Brown, K., Abunge, C., Galafassi, D., et al. (2015). Evaluating taboo trade-offs in ecosystems services and human well-being. <em>Proceedings of the National Academy of Sciences</em>, <em>112</em>(22), 6949–6954. <a href="https://doi.org/10.1073/pnas.1414900112">https://doi.org/10.1073/pnas.1414900112</a>
+</div>
+<div id="ref-fletcher_waterresourcesequity:2022" class="csl-entry" role="listitem">
+Fletcher, S., Hadjimichael, A., Quinn, J., Osman, K., Giuliani, M., Gold, D., et al. (2022). Equity in <span>Water Resources Planning</span>: <span>A Path Forward</span> for <span>Decision Support Modelers</span>. <em>Journal of Water Resources Planning and Management</em>, <em>148</em>(7), 02522005. <a href="https://doi.org/10.1061/(ASCE)WR.1943-5452.0001573">https://doi.org/10.1061/(ASCE)WR.1943-5452.0001573</a>
+</div>
+<div id="ref-hcfcd_prioritization:2022" class="csl-entry" role="listitem">
+Harris County Flood Control District. (2022). <em>2022 <span>Prioritization Framework</span> for the <span>Allocation</span> of <span>Funds</span> from the <span>Harris</span> <span>County Flood Resilience Trust</span></em>. Houston, TX. Retrieved from <a href="https://www.hcfcd.org/Portals/62/Documents/2022%2004%2026%20Prioritization%20Framework%20for%20the%20Allocation%20of%20Flood%20Resilience%20Trust%20Funding.pdf">https://www.hcfcd.org/Portals/62/Documents/2022%2004%2026%20Prioritization%20Framework%20for%20the%20Allocation%20of%20Flood%20Resilience%20Trust%20Funding.pdf</a>
+</div>
+<div id="ref-keller_management:2021" class="csl-entry" role="listitem">
+Keller, K., Helgeson, C., &amp; Srikrishnan, V. (2021). Climate risk management. <em>Annual Review of Earth and Planetary Sciences</em>, <em>49</em>(1), 95–116. <a href="https://doi.org/10.1146/annurev-earth-080320-055847">https://doi.org/10.1146/annurev-earth-080320-055847</a>
+</div>
+<div id="ref-pollack_equity:2024" class="csl-entry" role="listitem">
+Pollack, A. B., Helgeson, C., Kousky, C., &amp; Keller, K. (2024). Developing more useful equity measurements for flood-risk management. <em>Nature Sustainability</em>, <em>7</em>(6), 823–832. <a href="https://doi.org/10.1038/s41893-024-01345-3">https://doi.org/10.1038/s41893-024-01345-3</a>
+</div>
+<div id="ref-pollack_fundingrules:2025" class="csl-entry" role="listitem">
+Pollack, A. B., Santamaria-Aguilar, S., Maduwantha, P., Helgeson, C., Wahl, T., &amp; Keller, K. (2025). Funding rules that promote equity in climate adaptation outcomes. <em>Proceedings of the National Academy of Sciences</em>, <em>122</em>(2), e2418711121. <a href="https://doi.org/10.1073/pnas.2418711121">https://doi.org/10.1073/pnas.2418711121</a>
+</div>
+</div>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
