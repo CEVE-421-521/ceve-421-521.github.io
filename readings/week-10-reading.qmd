@@ -1,19 +1,37 @@
 ---
 title: "Week 10 Reading"
-subtitle: "Robustness and Deep Uncertainty"
-status: draft
-
+subtitle: "Exploratory Modeling & Scenario Discovery"
 format:
   html: default
   typst: default
 ---
 
-
 ## Overview
 
-@lempert_robust:2000 and @schneider_scenarios:2002.
+Read @lamontagne_abatement:2019.
+Focus on the main text and figures (skip the Methods section and Supplementary Material unless you're curious).
 
-## Discussion Questions
+## Wednesday Discussion: Figure Jigsaw
 
-1. *TBD*
-2. *TBD*
+On Wednesday, each person will lead a **3-minute explanation** of one figure or figure group from the paper.
+Sign up for your slot on Monday in class.
+
+| Slot | Figure(s) | Focus |
+|:-----|:----------|:------|
+| 1 | Fig 1a | How did they sample the policy space? Why exponential growth in abatement? |
+| 2 | Fig 1b–d | What do the tradeoff clouds show? How is "tolerable" defined? |
+| 3 | Fig 2a | Which factors dominate each metric? What's surprising? |
+| 4 | Fig 2b–d | How do factor sensitivities shift over time? What's the policy implication? |
+| 5 | Fig 3a–b | How do robust abatement pathways narrow as climate sensitivity rises? |
+| 6 | Fig 3c + conclusion | What happens at median climate sensitivity? What's the headline message? |
+
+For your presentation, address:
+
+1. **What** the figure shows (axes, colors, key features)
+2. **So what** — the main takeaway
+3. **What assumption or choice** would change the result
+
+## Prep Question
+
+Each person should also prepare **one discussion question** about the paper (not necessarily about your figure).
+Good questions connect the paper's methods or findings to concepts from earlier in the course or to your final project context.

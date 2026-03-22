@@ -309,7 +309,7 @@ The formula handles this naturally. The tree would be infinite."
 
 ## Blackwell's Theorem
 
-A key result [@blackwell_comparison:1953]: $0 \leq \text{EVII} \leq \text{EVPI}$.
+A key result: $0 \leq \text{EVII} \leq \text{EVPI}$.
 
 An imperfect forecast can never hurt in expectation.
 

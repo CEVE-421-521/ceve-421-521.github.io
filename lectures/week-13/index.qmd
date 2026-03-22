@@ -14,16 +14,420 @@ course: "{{< var course.number >}}, {{< var course.title >}}"
 institution: "{{< var course.institution >}}"
 ---
 
+## The Problem with Perfect Plans
 
-## Coming Soon
+In 1953, catastrophic flooding killed over 1,800 people in the Netherlands.
 
-This lecture is under development.
+The Dutch response: the Delta Works — a massive system of dams, sluices, and storm surge barriers.
 
-Possible content:
+Designed to last 200 years.
 
-- Real-world climate adaptation case studies
-- Integration of risk analysis, decision analysis, and optimization
-- Lessons learned from practice
-- Preparation for final project presentations
+::: {.notes}
+Target: 1:02.
+Open with the hook — no framing yet, just the story.
+The Delta Works are an engineering marvel. But they were designed under a paradigm of "find the optimal solution and build it."
+What happens when the assumptions behind that solution change?
+Sea-level rise projections in 1953 looked very different from today's.
+Let the students sit with the tension: you can't just optimize once for infrastructure that lasts centuries.
+:::
+
+## You've Spent 13 Weeks Building a Toolkit
+
+. . .
+
+Today we look at how someone actually used it.
+
+. . .
+
+A real case study of climate adaptation planning in the Netherlands — one that's become a model for coastal cities around the world.
+
+. . .
+
+Then we turn the lens on your own projects.
+
+::: {.notes}
+Target: 1:05.
+This is the hook and framing slide. Keep it brief.
+The point: students have been learning methods in isolation. Today is about synthesis.
+Emphasize the celebration: they have actually built a serious toolkit. That's worth acknowledging.
+:::
+
+# The Adaptive Pathways Approach {.section-title}
+
+::: {.notes}
+Target: 1:06.
+Section break. Transition to the Haasnoot case study.
+:::
+
+## The Core Challenge
+
+The Netherlands faces deep uncertainty about:
+
+::: {.incremental}
+- How much sea level will rise (and when)
+- How socioeconomic conditions will change
+- Whether existing infrastructure will be adequate in 50 or 100 years
+:::
+
+. . .
+
+Large infrastructure investments have **very long lifetimes** and **high lock-in**.
+
+::: {.notes}
+Target: 1:09.
+This motivates why standard optimization fails here.
+Lock-in is key: once you build a dike to a certain height, you can't easily unbuild it.
+The decision is irreversible (or very costly to reverse), and the uncertainty is deep.
+Connect to Week 8: this is precisely the setting where robustness frameworks matter most.
+:::
+
+## The Key Insight
+
+There is no single "optimal" plan under deep uncertainty.
+
+. . .
+
+Instead: design **pathways** — sequences of actions that can be adjusted as we learn.
+
+. . .
+
+A pathway is a sequence of decisions where transitions are triggered by **observable conditions**.
+
+::: {.notes}
+Target: 1:12.
+This is the conceptual core of the lecture.
+Pathway = sequence of actions + adaptive triggers.
+The trigger might be: "when observed sea level rise exceeds X cm" or "when flood frequency exceeds Y per decade."
+The key word is "observable" — the trigger has to be something you can actually measure.
+Draw this on the board if helpful: a timeline with decision points branching into multiple futures.
+:::
+
+## A Pathway Map
+
+:::{.callout-note}
+**Pathway Map** — a diagram showing possible sequences of actions across time, with transitions triggered by observed conditions.
+:::
+
+::: {.incremental}
+- Each path represents a sequence of policy decisions
+- **Trigger conditions** mark when to switch from one action to another
+- Multiple paths accommodate multiple possible futures
+- No single path is "the plan" — the map *is* the plan
+:::
+
+::: {.notes}
+Target: 1:15.
+The pathway map is the central deliverable in Haasnoot et al.
+Walk through what it looks like: a horizontal timeline, branching action sequences, trigger thresholds marked.
+Key conceptual shift: the output of the analysis is not a recommendation but a structured menu of options with conditions for choosing among them.
+This is very different from "find the optimal policy."
+:::
+
+## What Makes Pathways Different
+
+| Traditional Approach | Adaptive Pathways |
+|---|---|
+| Optimize for one scenario | Perform under many scenarios |
+| Static plan | Triggers for adaptation |
+| Single recommendation | Menu of options |
+| Uncertainty as risk | Uncertainty as driver of design |
+
+::: {.notes}
+Target: 1:17.
+A quick contrast to anchor the idea.
+Don't dwell — students should see this as a synthesis of ideas they already know.
+The bottom row is the most important: uncertainty isn't something to minimize or quantify — it's the thing that shapes how you design the system.
+:::
+
+# Methods in the Wild {.section-title}
+
+::: {.notes}
+Target: 1:18.
+Section 2: show how this case study uses each Module 3 tool.
+The goal is for students to see their course content as an integrated pipeline, not a list of separate methods.
+:::
+
+## Exploratory Modeling → Identify the Landscape
+
+Run the system model across a large ensemble of futures:
+
+::: {.incremental}
+- Vary: sea-level rise trajectories, precipitation, demand, socioeconomic growth
+- **Not**: calibrate to a single best estimate
+- Goal: map out *where* current strategies succeed and *where* they fail
+:::
+
+::: {.notes}
+Target: 1:21.
+This is Week 10 content: exploratory modeling.
+The emphasis is on mapping the performance landscape, not finding the optimal solution.
+Key framing: you're not asking "what's the best plan?" — you're asking "under what conditions does any given plan fail?"
+:::
+
+## Scenario Discovery → Find the Triggers
+
+Use PRIM or similar to find:
+
+> "Under what combinations of future conditions does the current strategy become inadequate?"
+
+. . .
+
+Those failure conditions become the **trigger thresholds** in the pathway map.
+
+::: {.notes}
+Target: 1:24.
+This is Week 10 content: PRIM / scenario discovery.
+The connection is direct: scenario discovery finds the conditions that define decision points.
+Example: "Strategy A fails when SLR > 40 cm AND population growth > 1.5%/year."
+That box-shaped region in scenario space becomes a trigger: "switch to Strategy B when you observe these conditions."
+This is a beautiful integration — scenario discovery literally generates the adaptive triggers.
+:::
+
+## Sequential Decisions → Design the Pathways
+
+Once you know the triggers, design the sequences:
+
+::: {.incremental}
+- What actions are available at each decision point?
+- What are the path dependencies? (some options foreclose others)
+- Which sequences are robust across many futures?
+:::
+
+. . .
+
+This is Week 11 content applied at the **portfolio level**, not just the individual decision level.
+
+::: {.notes}
+Target: 1:27.
+Week 11: sequential decision making.
+Path dependencies are important: if you build a very tall dike now, you may foreclose the option to later convert to managed retreat.
+The pathway map visualizes these dependencies explicitly.
+"Portfolio level": instead of optimizing one sequence, you design a set of sequences that together cover many futures.
+:::
+
+## Multi-Objective → Evaluate the Pathways
+
+Pathways are evaluated on multiple objectives simultaneously:
+
+::: {.incremental}
+- **Cost**: upfront and lifecycle
+- **Safety**: flood risk reduction across scenarios
+- **Flexibility**: how many options remain open?
+- **Co-benefits**: ecosystem services, recreation, equity
+:::
+
+. . .
+
+No single pathway dominates on all objectives → trade-off visualization (Week 12).
+
+::: {.notes}
+Target: 1:30.
+Week 12: multi-objective optimization.
+The pathway map doesn't produce a single recommendation — it produces a Pareto front of pathways.
+Decision-makers can then navigate trade-offs explicitly: "do we want the cheapest pathway, or the one that keeps the most options open?"
+Flexibility is worth calling out: this is a genuine objective, not just a constraint. Some pathways are more reversible than others, and that has real value under deep uncertainty.
+:::
+
+## The Integrated Analysis Pipeline
+
+```
+Exploratory Modeling
+        ↓
+  large ensemble of futures
+
+Scenario Discovery
+        ↓
+  trigger conditions (when to adapt)
+
+Sequential Decision Design
+        ↓
+  pathway sequences (what to do)
+
+Multi-Objective Evaluation
+        ↓
+  pathway trade-offs (which to recommend)
+```
+
+::: {.notes}
+Target: 1:32.
+This is the key synthesis slide of the lecture.
+The pipeline shows how the four Module 3 methods connect into a coherent workflow.
+Take a moment here: ask students if they can trace their own project through this pipeline.
+Not every project will use all four stages, but most will touch at least three.
+:::
+
+# Reading a Case Study {.section-title}
+
+::: {.notes}
+Target: 1:33.
+Section 3: prepare students for Wednesday's discussion with Dongwook.
+Give them analytical vocabulary to bring to the paper.
+:::
+
+## Five Questions for Any Case Study
+
+::: {.incremental}
+1. **Decision context**: Who decides? What's at stake? What are the constraints?
+2. **System model**: What's captured? What's left out?
+3. **Uncertainty characterization**: Deep or well-characterized? How sampled?
+4. **Decision framework**: Static or adaptive? Single or multi-objective?
+5. **Limits**: What does this analysis NOT answer?
+:::
+
+::: {.notes}
+Target: 1:36.
+These five questions give students a scaffold for Wednesday's discussion.
+They should arrive having thought through each of these for Haasnoot et al.
+Question 5 is often the most revealing: good papers are honest about what they can't answer.
+For Haasnoot: what's NOT captured? Implementation costs? Political feasibility? Equity across communities?
+Encourage students to push on the limits — that's where the interesting science lives.
+:::
+
+## Discussion Prep: Haasnoot et al. (2012)
+
+**For Wednesday:** Dongwook leads discussion on @haasnoot_pathways:2012
+
+Come ready to address:
+
+::: {.incremental}
+- What is the *specific* decision the pathways are designed for?
+- What triggers are proposed, and how were they derived?
+- What trade-offs does the paper surface — and which does it leave aside?
+- How would you apply this approach somewhere other than the Netherlands?
+:::
+
+::: {.notes}
+Target: 1:38.
+Specific prep questions for Wednesday.
+Dongwook will lead — your job is to set the stage so students come prepared.
+The last question (transferability) is particularly interesting: the Netherlands has specific institutional capacity, data quality, and political will. Does the method transfer to, say, a small island developing state?
+Don't answer these here — just plant the questions.
+:::
+
+# Your Final Projects {.section-title}
+
+::: {.notes}
+Target: 1:39.
+Section 4: connect everything to the final projects.
+This should feel energizing, not stressful. Students have done the work — now help them see it.
+:::
+
+## You've Already Done the Analysis
+
+Your project follows the same logic as Haasnoot et al.:
+
+::: {.incremental}
+- **Memo 1**: Characterized uncertainties (X) and levers (L); built your model (R) and chose metrics (M)
+- **Memo 2**: Evaluated evidence and robustness across scenarios
+- **Now**: Synthesize into a coherent recommendation (or structured trade-offs)
+:::
+
+. . .
+
+The pipeline you've built *is* the analysis. The presentation is how you communicate it.
+
+::: {.notes}
+Target: 1:41.
+Reassurance slide: students have done substantial work.
+The framing here is important: their memo work wasn't just homework — it was the actual analytical pipeline.
+The final presentation is not a new task; it's communicating what they've already done.
+:::
+
+## The Executive Briefing Challenge
+
+A decision-maker doesn't want to hear about your methodology.
+
+. . .
+
+They want to know:
+
+::: {.incremental}
+- **What's at stake** — why should they care?
+- **What you found** — what does the evidence say?
+- **What to do** — your recommendation, even if hedged
+- **What could change your mind** — the key uncertainties
+:::
+
+::: {.notes}
+Target: 1:43.
+This is the transition from "technical analysis" to "communication."
+The executive briefing is a genre with its own conventions.
+The biggest mistake students make: leading with methods. No one cares.
+Lead with the decision. Lead with what's at stake. Then bring in the evidence.
+"What could change your mind" is actually a sign of analytical sophistication, not weakness.
+:::
+
+## Slide Structure Suggestion
+
+| Slide | Content |
+|---|---|
+| 1 | **What's at stake** — the decision, the stakes |
+| 2 | **The key uncertainty** — what you don't know and why it matters |
+| 3–5 | **What you found** — your main results |
+| 6–7 | **Recommendation** — what to do, with conditions and limits |
+
+. . .
+
+15 minutes goes fast. Cut ruthlessly. Practice out loud.
+
+::: {.notes}
+Target: 1:45.
+Practical slide structure advice.
+7 slides for 15 minutes is about right — roughly 2 minutes per slide.
+"Cut ruthlessly" is the key message. Most students try to show everything they did.
+The presentation is not a summary of your work; it's a persuasive argument for a recommendation.
+Practice out loud: this is not optional. Timing matters, and you can't know your timing without actually speaking.
+:::
+
+## One Reflection Prompt
+
+**Think about your project for 60 seconds:**
+
+> What is the single most important figure or finding you want your audience to remember after they leave the room?
+
+. . .
+
+That figure should be on slide 3 or 4. Everything else supports it.
+
+::: {.notes}
+Target: 1:47.
+Give students 60 seconds of actual silence to think.
+This is a design exercise: what is the load-bearing finding?
+If they can't answer in 60 seconds, their narrative isn't clear yet — and that's a signal to work on.
+After the pause, cold call 2–3 students to share their one key finding.
+This doubles as a preview of what presentations will cover next week.
+:::
+
+# Looking Ahead {.section-title}
+
+::: {.notes}
+Target: 1:48.
+Closing section — brief.
+:::
+
+## This Week and Next
+
+::: {.incremental}
+- **Wednesday**: Dongwook leads discussion of @haasnoot_pathways:2012
+  — Come with your five questions answered
+- **Friday, Apr 17**: Slides due
+  — Treat this deadline seriously; practice requires finished slides
+- **Week 14 (Apr 20–24)**: Executive Briefings
+  — Treat it like a real client presentation
+:::
+
+. . .
+
+This is the end of the formal curriculum.
+
+Everything from here is yours to use.
+
+::: {.notes}
+Target: 1:50.
+Close with genuine warmth — this is the last lecture.
+The final line ("everything from here is yours to use") is the send-off.
+The toolkit they've built — Monte Carlo, robustness, scenario discovery, multi-objective trade-offs — is genuinely useful in the world. That's worth saying out loud.
+Optional: brief acknowledgment that you've enjoyed the semester, invite questions in office hours, etc.
+:::
 
 ## References

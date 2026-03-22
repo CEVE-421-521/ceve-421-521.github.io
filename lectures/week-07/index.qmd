@@ -137,7 +137,7 @@ Conversely, a small amount of uncertainty can have high EVPI if you're right on 
 
 # Generalizing: The Cost-Loss Framework
 
-The umbrella is a special case of a general **protect-or-not** problem studied by @murphy_voi:1985.
+The umbrella is a special case of a general **protect-or-not** problem studied by @murphy_repetitive:1985.
 Any time you face a binary choice --- protect (cost $C$) or gamble on a loss ($L$) --- the cost-loss ratio $C/L$ determines the decision threshold, and the EVPI measures the value of resolving uncertainty before acting.
 
 

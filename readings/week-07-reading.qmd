@@ -10,7 +10,7 @@ format:
 
 ## Assigned Readings
 
-1. @murphy_voi:1985 -- "Repetitive Decision Making and the Value of Forecasts in the Cost-Loss Ratio Situation." Introduces the cost-loss framework for quantifying the economic value of weather forecasts, extending from a static to a dynamic (multi-period) setting.
+1. @murphy_repetitive:1985 -- "Repetitive Decision Making and the Value of Forecasts in the Cost-Loss Ratio Situation." Introduces the cost-loss framework for quantifying the economic value of weather forecasts, extending from a static to a dynamic (multi-period) setting.
 
 2. @runge_voi:2011 -- "Which Uncertainty?" Uses expected value of perfect information (EVPI) and partial EVPI to identify which uncertainties most impede management of endangered whooping cranes. A clear worked example of VOI applied to real decision-making.
 

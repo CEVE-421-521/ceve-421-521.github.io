@@ -16,7 +16,7 @@ institution: "{{< var course.institution >}}"
 
 ## Reading
 
-- [Sensitivity Analysis: The Basics](https://uc-ebook.org/docs/html/3_sensitivity_analysis_the_basics.html) from @reed_msdbook:2022
+- [Sensitivity Analysis: The Basics](https://uc-ebook.org/docs/html/3_sensitivity_analysis_the_basics.html) from @reed_multisectordynamics:2022
 - @pianosi_sensitivity:2016
 - @saltelli_global:2008
 

@@ -1,6 +1,6 @@
 ---
 title: "Week 13 Reading"
-subtitle: "Multi-objective Optimization"
+subtitle: "Case Studies"
 status: draft
 
 format:
@@ -11,7 +11,7 @@ format:
 
 ## Overview
 
-For now, @kasprzyk_mordm:2013
+@haasnoot_pathways:2012
 
 ## Discussion Questions
 

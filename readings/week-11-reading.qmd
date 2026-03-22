@@ -1,6 +1,6 @@
 ---
 title: "Week 11 Reading"
-subtitle: "Exploratory Modeling and Scenario Discovery"
+subtitle: "Sequential Decision Making"
 status: draft
 
 format:
@@ -11,9 +11,13 @@ format:
 
 ## Overview
 
-@bankes_exploratory:1993
+@garner_slrise:2018 and @deneufville_parkinggarage:2006
+
+Please note that **there is an error in @garner_slrise:2018**; the units of storm surge are off by a factor of 10.
+Watch out for your unit conversions!
+This means that sea-level rise is emphasized relative to storm surge in the model.
+Regardless, the methods and qualitative findings are interesting.
 
 ## Discussion Questions
 
-1. *TBD*
-2. *TBD*
+*Discussion questions will be posted by the graduate student discussion leader.*

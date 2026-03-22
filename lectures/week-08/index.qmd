@@ -83,7 +83,7 @@ BCA's value is transparency, not correctness.
 # Robustness
 
 
-@matalas:1977 defined robustness as:
+@matalas_planning:1977 defined robustness as:
 
 > "The insensitivity of system design to errors, random or otherwise, in the estimates of those parameters affecting design choice."
 
@@ -329,7 +329,7 @@ Similarly, Laplace's criterion (@eq-laplace) computes mean performance with equa
 Robustness metrics make implicit distributional assumptions through their choice of which scenarios to include and how to weight them.
 The claim that robustness avoids probabilities is, at best, incomplete.
 
-A related warning from @matalas:1977: a design yielding payoff 2 in every scenario scores well on maximin ($\min = 2$) and the domain criterion ($D = 1.0$ for $\tau \leq 2$), but is never optimal under any scenario.
+A related warning from @matalas_planning:1977: a design yielding payoff 2 in every scenario scores well on maximin ($\min = 2$) and the domain criterion ($D = 1.0$ for $\tau \leq 2$), but is never optimal under any scenario.
 Robustness is a property you want your solution to have, not the only property you care about.
 
 

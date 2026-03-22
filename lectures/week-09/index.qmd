@@ -3,7 +3,7 @@ title: "Trade-offs & Values"
 subtitle: "Lecture (Remote)"
 date: 2026-03-11
 week: 9
-status: draft
+status: published
 
 format:
   revealjs: default

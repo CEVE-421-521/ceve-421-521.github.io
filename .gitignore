@@ -18,6 +18,9 @@ _freeze/
 .vscode/
 .luarc.json
 
+# Scratchpad
+.claude/SCRATCHPAD.md
+
 # OS
 .DS_Store
 
