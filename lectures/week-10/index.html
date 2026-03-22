@@ -10,7 +10,7 @@
 <link href="../../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.27">
 
-  <meta name="author" content="Dr.&nbsp;James Doss-Gollin">
+  <meta name="author" content="James Doss-Gollin">
   <title>CEVE 421/521 -- Spring 2026 – Exploratory Modeling &amp; Scenario Discovery</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -29,7 +29,27 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f813b346ce809c8bbd246a85cc5c9db3.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -148,7 +168,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dr.&nbsp;James Doss-Gollin 
+James Doss-Gollin 
 </div>
 </div>
 </div>
@@ -156,25 +176,933 @@ Dr.&nbsp;James Doss-Gollin
   <p class="date">Monday, March 23, 2026</p>
 </section>
 <section class="slide level2">
-
-<div class="callout callout-warning" style="margin-bottom: 1em;">
-<div class="callout-body"><strong>Draft:</strong> This content is under development.</div>
+<h2>From Lab 7: What Drove Failure?</h2>
+<p>So far you have three tools for analyzing decisions under uncertainty:</p>
+<ul>
+<li class="fragment"><strong>GSA</strong> (Week 7): which inputs explain the most variance in outcomes?</li>
+<li class="fragment"><strong>Value of Information</strong> (Week 8): would learning more change your decision?</li>
+<li class="fragment"><strong>Robustness</strong> (Week 8): how well does a policy hold up across scenarios?</li>
+</ul>
+<div class="fragment">
+<p>Today: <strong>which conditions in that ensemble actually drove failure?</strong></p>
+<aside class="notes">
+<p>Target: 1:03. “What drives failure?” is fundamentally different from “what’s the best policy?” — it doesn’t require aggregating over scenarios.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
+</section>
+<section class="slide level2 smaller">
+<h2>Uncertainty in Simulation Models</h2>
+<p><span class="citation" data-cites="srikrishnan_uncertainty:2022">Srikrishnan et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> distinguish three sources of uncertainty in coupled human-natural systems:</p>
+<ul>
+<li class="fragment"><p><strong>Parametric uncertainty</strong>: we know the model structure, but not the exact parameter values<br>
+<em>Example: climate sensitivity, damage function coefficients</em><br>
+This is the target of Monte Carlo sampling and GSA (Weeks 4, 7).</p></li>
+<li class="fragment"><p><strong>Structural uncertainty</strong>: we don’t agree on which equations represent the system<br>
+<em>Example: ice sheet dynamics, damage function form, discount rate model</em><br>
+Requires running multiple model structures — a multi-model ensemble.</p></li>
+<li class="fragment"><p><strong>Sampling uncertainty</strong>: finite samples from stochastic processes<br>
+<em>Example: 30 years of storm surge records from a non-stationary climate</em><br>
+Addressable with more data or better sampling designs, but never fully eliminated.</p></li>
+</ul>
+<aside class="notes">
+<p>Target: 1:06. Parametric = what we’ve been sampling (MC, GSA). Structural = harder, requires multi-model ensembles. When both are large → deep uncertainty → need exploratory modeling.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Defining uncertainty</h2>
 
+<img data-src="srikrishnan_fig1.png" class="r-stretch quarto-figure-center" id="fig-srikrishnan-fig1"><p class="caption">
+Figure&nbsp;1: <span class="citation" data-cites="srikrishnan_uncertainty:2022">Srikrishnan et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>
+</p><aside class="notes">
+<p>Target: 1:08.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Exploratory Modeling</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>Exploratory Modeling</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Scenario Discovery</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:08.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 smaller">
+<h2>Consolidative vs.&nbsp;Exploratory Modeling</h2>
+<p><span class="citation" data-cites="bankes_exploratory:1993">Bankes (<a href="#/references" role="doc-biblioref" onclick="">1993</a>)</span> identifies two fundamentally different uses of simulation models:</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<p><strong>Consolidative modeling</strong></p>
+<ul>
+<li>Synthesize all available knowledge into one best model</li>
+<li>Use it to <strong>predict</strong> outcomes</li>
+<li>Works when you can validate the model against data over the relevant horizon</li>
+</ul>
+<p><em>Examples: calibrated GCMs for physical climate projection, structural engineering load analysis, tidal prediction</em></p>
+</div><div class="column" style="width:48%;">
+<p><strong>Exploratory modeling</strong></p>
+<ul>
+<li>Use computation to systematically explore the <em>space</em> of plausible models and assumptions</li>
+<li>Each run is a <strong>computational experiment</strong> probing one corner of the assumption space</li>
+</ul>
+<p><em>Examples: century-scale climate adaptation, integrated assessment of climate policy</em></p>
+</div></div>
+<div class="fragment">
+<p>The key criterion: <strong>can you validate the model?</strong> For decadal-to-century scale socio-environmental systems, the answer is usually no.</p>
+<aside class="notes">
+<p>Target: 1:14. Key pushback response: “Can you validate a 2100 SLR projection? No.&nbsp;So what do we do with those models?” Not admitting defeat — using computation for what it’s good at: exploring a large space systematically.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
 </section>
 <section class="slide level2">
-<h2>Coming Soon</h2>
-<p>This lecture is under development.</p>
+<h2>Discussion: When Is Consolidative Modeling Enough?</h2>
+<div title="Think-Pair-Share (90 seconds)">
+<div class="callout callout-note no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Think-Pair-Share (90 seconds)</strong></p>
+</div>
+<div class="callout-content">
+<p>Give two examples of problems where a consolidative model is appropriate, and one where it is not. What distinguishes them?</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Target: 1:17. 60s think, 30s pair, cold-call 2-3. Consolidative: weather (&lt; 10 days), bridge loads, orbits. Exploratory: 50-year flood risk, pandemic policy, energy transitions. Distinguishing factor: can you validate on the relevant timescale?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
+<h2>What Exploratory Modeling Requires</h2>
+<p>Running thousands of scenarios across uncertain parameters <em>and</em> policy choices:</p>
+<p><span class="math display">\[(\mathbf{X}, \mathbf{L}) \xrightarrow{\mathbf{R}} \mathbf{M}\]</span></p>
+<div class="fragment">
+<ul>
+<li><strong>X</strong>: uncertain inputs — varied across their plausible range</li>
+<li><strong>L</strong>: policy levers — varied to compare strategies</li>
+<li><strong>R</strong>: system model — the simulation being run</li>
+<li><strong>M</strong>: metrics — the outcomes we track</li>
+</ul>
+</div>
+<div class="fragment">
+<p>A large ensemble maps the <strong>outcome space</strong>: how metrics vary across the full space of assumptions and decisions.</p>
+<aside class="notes">
+<p>Target: 1:19. Key distinction from standard MC: exploratory modeling varies X and L simultaneously — “what happens under different policies AND different futures?”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Scenario Discovery</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Exploratory Modeling</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Scenario Discovery</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:20.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 smaller scrollable">
+<h2>The Scenario Discovery Workflow</h2>
+<ol type="1">
+<li class="fragment"><strong>Define</strong> one or many policies to evaluate<br>
+<em>e.g., elevate house by 1 meter; or compare 0.5m, 1m, 1.5m elevations</em></li>
+<li class="fragment"><strong>Run</strong> the model across a large ensemble: <span class="math inline">\(N\)</span> draws of uncertain inputs <span class="math inline">\(\mathbf{X}\)</span></li>
+<li class="fragment"><strong>Label</strong> each run: success (<span class="math inline">\(y=0\)</span>) or failure (<span class="math inline">\(y=1\)</span>) based on a metric threshold</li>
+<li class="fragment"><strong>Classify</strong>: find which regions of <span class="math inline">\(\mathbf{X}\)</span>-space concentrate failures</li>
+<li class="fragment"><strong>Interpret</strong>: translate the classification into narrative scenarios</li>
+</ol>
+<div class="fragment">
+<p>Sometimes we want to find what breaks a <em>single</em> policy. Sometimes we want to compare which scenarios break <em>different</em> policies.</p>
+<aside class="notes">
+<p>Target: 1:23. Step 3 is a value judgment — the failure threshold is the analyst’s choice. Lab 8 implements all five steps. Multi-policy example: Lamontagne et al.&nbsp;vary the policy lever alongside uncertainties.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 smaller">
+<h2>How Do We Classify? A Spectrum of Methods</h2>
+<p>Three common approaches, each with different tradeoffs:</p>
+<div class="fragment">
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Strength</th>
+<th style="text-align: left;">Weakness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Logistic regression</strong></td>
+<td style="text-align: left;">Familiar; interpretable coefficients; probabilistic output</td>
+<td style="text-align: left;">Assumes linear decision boundary</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>CART</strong></td>
+<td style="text-align: left;">Visual; handles interactions; no linearity assumption</td>
+<td style="text-align: left;">Can overfit; splits can be unstable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>PRIM</strong></td>
+<td style="text-align: left;">Designed for scenario discovery; coverage/density tradeoff</td>
+<td style="text-align: left;">Less familiar; requires tuning</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p>The right choice depends on the problem — interpretability often matters more than classification accuracy.</p>
+<aside class="notes">
+<p>Target: 1:25. Lab 8 uses PRIM. Today: logistic regression via Lamontagne, then PRIM.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>CART: Recursive Splitting</h2>
+<p>CART partitions the input space by recursive binary splits. At each node, find the variable <span class="math inline">\(X_k\)</span> and threshold <span class="math inline">\(t\)</span> that minimizes <strong>Gini impurity</strong> in the two resulting child nodes:</p>
+<p><span class="math display">\[G_m = 2\, p_m\,(1 - p_m)\]</span></p>
+<p>where <span class="math inline">\(p_m\)</span> is the fraction of failures in node <span class="math inline">\(m\)</span> (<span class="math inline">\(G_m = 0\)</span> is pure; <span class="math inline">\(G_m = 0.5\)</span> is maximally mixed).</p>
+<div class="fragment">
+<p><span class="math display">\[\text{Best split: } \underset{X_k,\, t}{\arg\min}\; \frac{N_L}{N} G_L + \frac{N_R}{N} G_R\]</span></p>
+</div>
+<div class="fragment">
+<p>Why minimize Gini? Each split should make the children as <em>pure</em> as possible — nodes where almost all scenarios are failures, or almost none are.</p>
+<aside class="notes">
+<p>Target: 1:28. Greedy algorithm — locally optimal splits, not globally optimal. This is why trees can be unstable. Gini penalizes impurity quadratically: 50/50 is much worse than 70/30, driving the algorithm to find the most informative splits first.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 smaller">
+<h2>CART vs.&nbsp;Random Forests</h2>
+<p>A single CART tree is a <strong>deterministic</strong> partition: one tree, one set of rules.</p>
+<div class="fragment">
+<p>A <strong>random forest</strong> builds hundreds of trees, each on a random subsample of the data and features, then averages their predictions.</p>
+<ul>
+<li class="fragment">Random forests are more accurate and more stable</li>
+<li class="fragment">But the output is a black box — you can’t read off simple “if/then” rules</li>
+<li class="fragment">For scenario discovery, we want <em>interpretable boundaries</em>, not maximum accuracy</li>
+</ul>
+</div>
+<div class="fragment">
+<div title="Discussion">
+<div class="callout callout-note no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Discussion</strong></p>
+</div>
+<div class="callout-content">
+<p>Why might a decision-maker prefer a single, less accurate tree over a more accurate but opaque ensemble?</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Target: 1:31. 30s think, then 2-3 responses. Key answer: communicability. “Fails when SLR &gt; X and discount rate &lt; Y” can go in a report. A forest gives a probability but no simple explanation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>CART: From Tree to Partition</h2>
+<p>Each leaf predicts the <strong>majority class</strong> — failure (<span class="math inline">\(y=1\)</span>) if more than half its scenarios are failures.</p>
+<div class="fragment">
+<p>Example: a two-level tree on SLR rate and flood damage might produce:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Leaf</th>
+<th style="text-align: center;">SLR (m/century)</th>
+<th style="text-align: center;">Flood Damage ($B)</th>
+<th style="text-align: center;">Majority</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: center;"><span class="math inline">\(\leq 0.5\)</span></td>
+<td style="text-align: center;">any</td>
+<td style="text-align: center;">success</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: center;"><span class="math inline">\(&gt; 0.5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\leq 2\)</span></td>
+<td style="text-align: center;">success</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: center;"><span class="math inline">\(&gt; 0.5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(&gt; 2\)</span></td>
+<td style="text-align: center;"><strong>failure</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p>Result: interpretable “if/then” rules — but boundaries are fixed top-down, not iteratively refined.</p>
+<aside class="notes">
+<p>Target: 1:33. Same geometry as PRIM boxes, but CART splits top-down while PRIM peels from outside in. Draw the 2D partition on the board if time allows.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Think-Pair-Share: Labeling Failures</h2>
+<div title="Scenario">
+<div class="callout callout-note no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Scenario</strong></p>
+</div>
+<div class="callout-content">
+<p>A city is evaluating a coastal sea wall sized for a 1-in-50-year storm surge, at a cost of $200M. Uncertain inputs: storm surge magnitude, sea level rise rate, future population exposure, discount rate, construction cost overrun.</p>
+</div>
+</div>
+</div>
+</div>
+<div title="Write (90 seconds)">
+<div class="callout callout-tip no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Write (90 seconds)</strong></p>
+</div>
+<div class="callout-content">
+<p>In one sentence, define what “failure” means for this decision. Then write which two inputs you expect most drive failures and why.</p>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Pair</strong>: Compare with your neighbor. Did you define failure the same way?</p>
+<aside class="notes">
+<p>Target: 1:35. 90s write, 60s pairs, cold-call 2-3. Key point: failure definition is a value judgment — different definitions → different scenario discovery results. Their intuition may be wrong; that’s what SD is for.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Logistic Regression: The Model</h2>
+<p>For scenario <span class="math inline">\(i\)</span> with input vector <span class="math inline">\(\mathbf{z}_i\)</span>, model the log-odds of failure:</p>
+<p><span class="math display">\[\log \frac{p_i}{1 - p_i} = b_0 + b_1 z_{i1} + b_2 z_{i2} + \cdots = \mathbf{b}^\top \mathbf{z}_i\]</span></p>
+<div class="fragment">
+<p>Solving for <span class="math inline">\(p_i\)</span> gives the <strong>sigmoid function</strong>:</p>
+<p><span class="math display">\[p_i = \frac{1}{1 + e^{-\mathbf{b}^\top \mathbf{z}_i}}\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(p_i \in (0, 1)\)</span> always. Classify as failure if <span class="math inline">\(p_i \geq 0.5\)</span>, which is equivalent to <span class="math inline">\(\mathbf{b}^\top \mathbf{z}_i \geq 0\)</span>.</p>
+<aside class="notes">
+<p>Target: 1:37. Not predicting which scenario is “likely” — asking: given this combination of inputs, what’s the probability of failure? Key limitation: decision boundary is a hyperplane (flat). Failures in a corner of input space require interaction terms.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 smaller">
+<h2>Interpreting Logistic Regression</h2>
+<p>The quantity <span class="math inline">\(\log \frac{p}{1-p}\)</span> is the <strong>log-odds</strong> — the logarithm of the odds of failure. A fitted coefficient <span class="math inline">\(b_k\)</span> tells you: a one-unit increase in <span class="math inline">\(X_k\)</span> shifts the log-odds by <span class="math inline">\(b_k\)</span>.</p>
+<div class="fragment">
+<p>The <strong>odds ratio</strong> <span class="math inline">\(e^{b_k}\)</span> gives a multiplicative interpretation:</p>
+<blockquote>
+<p>“A one-unit increase in <span class="math inline">\(X_k\)</span> multiplies the odds of failure by <span class="math inline">\(e^{b_k}\)</span>.”</p>
+</blockquote>
+<p><em>Example: if <span class="math inline">\(b_k = 0.7\)</span>, then <span class="math inline">\(e^{0.7} \approx 2\)</span> — a unit increase in <span class="math inline">\(X_k\)</span> doubles the odds of failure.</em></p>
+</div>
+<div class="fragment">
+<p>Rank inputs by <span class="math inline">\(|b_k|\)</span> (after standardizing) to answer: <strong>which inputs most drive failure?</strong></p>
+<aside class="notes">
+<p>Target: 1:40. Connection to GSA: Sobol indices rank by variance explained; logistic regression ranks by log-odds and gives direction (positive/negative).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Lamontagne et al.&nbsp;(2019): The Setup</h2>
+<p><span class="citation" data-cites="lamontagne_abatement:2019">Lamontagne et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> ask: what abatement pathways lead to <em>tolerable</em> climate/economic futures, given deep uncertainty about human-Earth system (HES) dynamics?</p>
+<div class="fragment">
+<p><strong>Model</strong>: DICE integrated assessment model (climate + economy coupled)</p>
+<p><strong>Ensemble</strong>: 5,200,000 scenarios — 24 HES uncertain parameters + abatement growth rate (<span class="math inline">\(\alpha\)</span>)</p>
+<p><strong>Failure label</strong>: “intolerable” if warming <span class="math inline">\(&gt; 2^\circ\)</span>C in 2100, OR abatement cost <span class="math inline">\(&gt; 3\%\)</span> of GWP, OR climate damages <span class="math inline">\(&gt; 2\%\)</span> of GWP</p>
+</div>
+<div class="fragment">
+<p>Their methodology combines two tools you already know:</p>
+<ol type="1">
+<li class="fragment"><strong>Sobol sensitivity analysis</strong> (Week 7) to rank the 24 uncertain parameters by importance — identifying which factors explain the most variance</li>
+<li class="fragment"><strong>Logistic regression</strong> (scenario discovery) to map how failure probability varies across the dominant factors — identifying <em>where</em> in the input space failure concentrates</li>
+</ol>
+<aside class="notes">
+<p>Target: 1:42. GSA and scenario discovery complement each other: GSA tells you which factors matter, SD tells you where things go wrong. Wednesday digs into the figures.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Lamontagne et al.&nbsp;(2019): The Finding</h2>
+<p>After labeling 5.2M runs as tolerable/intolerable, logistic regression on the dominant inputs shows:</p>
+<div class="fragment">
+<p>The primary control on 2100 warming is the <strong>abatement growth rate</strong> — a societal choice, not an exogenous physical uncertainty.</p>
+</div>
+<div class="fragment">
+<p>Near-term warming is controlled by climate sensitivity (a physical parameter). Long-term warming is controlled by earlier abatement actions (a policy choice).</p>
+</div>
+<div class="fragment">
+<p>It is mostly a question of <strong>whether we choose</strong> to limit warming — not whether we <em>can</em>.</p>
+</div>
+<div class="fragment">
+<p>Wednesday we will dig into the figures: how the Sobol indices shift over time (Fig 2), and what the logistic regression contours look like (Fig 3).</p>
+<aside class="notes">
+<p>Target: 1:44. Near-term warming is locked in (physics); long-term depends on what we do now. SD gives you “what drives outcomes,” not “what will happen.” For Wednesday: why do time-varying Sobol indices (Fig 2b-d) tell a different story than time-aggregated (Fig 2a)?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>PRIM: Patient Rule Induction Method</h2>
+<p>PRIM finds a <strong>box</strong> in the input space that concentrates failures:</p>
+<p><span class="math display">\[a_k \leq X_k \leq b_k \quad \text{for each input } k\]</span></p>
+<div class="fragment">
+<p><strong>Interpretation</strong>: “The strategy fails when SLR <span class="math inline">\(&gt; 0.8\,\text{m}\)</span> AND storm surge return period <span class="math inline">\(&lt; 25\,\text{years}\)</span>” is a PRIM box in two dimensions.</p>
+</div>
+<div class="fragment">
+<p>“Patient” refers to the algorithm: PRIM peels small slices from the box one at a time. Each peel removes the thinnest slice with the fewest failures.</p>
+<aside class="notes">
+<p>Target: 1:46. Box = axis-aligned rectangle. Key design choice: interpretability — communicable to non-technical audiences. “Patient” contrasts with CART’s larger splits. Students implement PRIM in Lab 8.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>PRIM: Coverage and Density</h2>
+<p>For a box <span class="math inline">\(B\)</span> over an ensemble with <span class="math inline">\(N\)</span> total runs, <span class="math inline">\(N_f\)</span> of which are failures:</p>
+<div class="fragment">
+<p><span class="math display">\[\text{Coverage} = \frac{|\{\text{failures inside } B\}|}{N_f} \qquad \text{(recall)}\]</span></p>
+<p><em>What fraction of all failures does the box capture?</em></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[\text{Density} = \frac{|\{\text{failures inside } B\}|}{|\{\text{scenarios inside } B\}|} \qquad \text{(precision)}\]</span></p>
+<p><em>Of all scenarios in the box, what fraction are failures?</em></p>
+<aside class="notes">
+<p>Target: 1:47. Coverage = recall. Density = precision. Full space → coverage 1, density = base rate. Tiny box → density ~1, low coverage.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>The Coverage–Density Trade-off</h2>
+<p>PRIM starts with the full input space and <strong>peels</strong> away small slices to increase density, recording coverage as it goes.</p>
+<div class="fragment">
+<p>The output is a <strong>peeling trajectory</strong>: a set of nested boxes tracing the Pareto frontier in coverage–density space.</p>
+<ul>
+<li class="fragment">Start: large box, high coverage, low density</li>
+<li class="fragment">Peel: remove slices where failures are sparse</li>
+<li class="fragment">End: small box, high density, low coverage</li>
+<li class="fragment">The analyst <strong>chooses</strong> the box that best matches their decision context</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:48. Analogy: fishing net. Large net = high coverage, lots of bycatch. Fine mesh = high density, small haul. Safety-critical → prefer coverage. Communication → prefer density. Knee-point usually works well.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 smaller">
+<h2>Write-and-Respond: Interpreting a PRIM Box</h2>
+<p>PRIM analysis of a 1-meter house elevation policy returns:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Box</th>
+<th style="text-align: center;">SLR Rate (m/century)</th>
+<th style="text-align: center;">Storm Return Period</th>
+<th style="text-align: center;">Coverage</th>
+<th style="text-align: center;">Density</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: center;"><span class="math inline">\(&gt; 0.4\)</span></td>
+<td style="text-align: center;">any</td>
+<td style="text-align: center;">94%</td>
+<td style="text-align: center;">31%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: center;"><span class="math inline">\(&gt; 0.8\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(&lt; 25\)</span> yr</td>
+<td style="text-align: center;">71%</td>
+<td style="text-align: center;">82%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C</td>
+<td style="text-align: center;"><span class="math inline">\(&gt; 1.1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(&lt; 10\)</span> yr</td>
+<td style="text-align: center;">34%</td>
+<td style="text-align: center;">96%</td>
+</tr>
+</tbody>
+</table>
+<div title="Write (60 seconds)">
+<div class="callout callout-tip no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Write (60 seconds)</strong></p>
+</div>
+<div class="callout-content">
+<p>In one sentence, interpret Box B. Then answer: if you are advising a city that faces severe storm surge risk <em>and</em> deep uncertainty in SLR, which box would you recommend and why?</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Target: 1:49. 60s write, 3-4 responses. Box A: high coverage, low density. Box B: good balance. Box C: very specific, misses most failures. No “right” answer — the choice depends on values and context.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Friday’s Lab: The Eijgenraam Dike Model</h2>
+<p>In Lab 8 you’ll apply scenario discovery to a real flood protection problem from the Netherlands <span class="citation" data-cites="eijgenraam_flooding:2014">(<a href="#/references" role="doc-biblioref" onclick="">Eijgenraam et al., 2014</a>)</span>.</p>
+<div class="fragment">
+<p>You know the Van Dantzig problem: how high should we build the dike? Eijgenraam extends it — investment costs grow <strong>exponentially</strong> with height, and flood risk grows over time with sea level rise and economic growth. (<a href="https://github.com/Project-Platypus/Rhodium/tree/master/examples/Eijgenraam">Rhodium example</a>)</p>
+</div>
+<div class="fragment">
+<p>The decision: <strong>when</strong> to heighten the dike and by <strong>how much</strong>.</p>
+<ul>
+<li>Deferring saves money (discounting) but the dike ring is unprotected while we wait</li>
+<li>Building higher is safer but exponentially more expensive</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:50. Preview only — keep conceptual, math is on next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>The Eijgenraam Model: Key Equation</h2>
+<p>The annual <strong>flood probability</strong> at year <span class="math inline">\(t\)</span> is:</p>
+<p><span class="math display">\[P(t) = P_0 \exp\bigl(\alpha \eta\, t - \alpha\, H(t)\bigr)\]</span></p>
+<ul>
+<li><span class="math inline">\(P_0\)</span>: initial flood probability</li>
+<li><span class="math inline">\(\alpha\)</span>: sensitivity of flood probability to water level (1/cm)</li>
+<li><span class="math inline">\(\eta\)</span>: rate of water level rise (cm/year)</li>
+<li><span class="math inline">\(H(t)\)</span>: cumulative dike heightening at time <span class="math inline">\(t\)</span></li>
+</ul>
+<div class="fragment">
+<p>This assumes an <strong>exponential distribution</strong> for water levels — analytically convenient, though real flood distributions have heavier tails.</p>
+</div>
+<div class="fragment">
+<p>Notice: <span class="math inline">\(\alpha\)</span> appears <strong>twice</strong> — it makes risk grow faster (<span class="math inline">\(\alpha \eta t\)</span>) <em>and</em> makes each cm of dike more effective (<span class="math inline">\(-\alpha H\)</span>). Its effect on failure is <strong>non-monotonic</strong>.</p>
+<aside class="notes">
+<p>Target: 1:50. High alpha → more sensitive to water level (bad for risk growth, good for dike effectiveness). Students will discover this through PRIM on Friday.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Lab 8: The XLRM Setup</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 46%">
+<col style="width: 53%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">XLRM</th>
+<th style="text-align: left;">Lab 8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>X</strong> (uncertainties)</td>
+<td style="text-align: left;"><span class="math inline">\(P_0\)</span>, <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\eta\)</span>, <span class="math inline">\(V_0\)</span>, <span class="math inline">\(\delta\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>L</strong> (levers)</td>
+<td style="text-align: left;"><span class="math inline">\((T_{\text{heighten}},\; \Delta H)\)</span> — when to heighten, how much</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>R</strong> (model)</td>
+<td style="text-align: left;">Eijgenraam cost-benefit model</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>M</strong> (metrics)</td>
+<td style="text-align: left;">Max failure probability, total cost</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p>Your task: fix a policy, run 1,000 scenarios, label success/failure, and use PRIM to find <strong>which uncertainties drive failure</strong>.</p>
+</div>
+<div class="fragment">
+<p>The twist: changing <em>how you define failure</em> changes <em>which uncertainties matter</em>.</p>
+<aside class="notes">
+<p>Target: 1:50. Don’t spoil the twist — let them discover that changing the failure definition changes which uncertainties matter.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Looking Ahead</h2>
+<p><strong>Wednesday</strong>: Figure discussion of <span class="citation" data-cites="lamontagne_abatement:2019">Lamontagne et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></p>
+<p><strong>Friday</strong>: Lab 8 — Scenario Discovery on the Eijgenraam dike model + <strong>Memo 1 due</strong></p>
+<aside class="notes">
+<p>Target: 1:50. Memo 1 reminder: students should have a complete XLRM diagram and narrative.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 smaller">
+<h2>Figure Discussion Sign-Up</h2>
+<p>Wednesday’s discussion: each person leads a <strong>3-minute walkthrough</strong> of one figure from <span class="citation" data-cites="lamontagne_abatement:2019">Lamontagne et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Slot</th>
+<th style="text-align: left;">Figure(s)</th>
+<th style="text-align: left;">Focus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Fig 1a</td>
+<td style="text-align: left;">Sampling the policy space</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Fig 1b–d</td>
+<td style="text-align: left;">Tradeoff clouds &amp; “tolerable” windows</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Fig 2a</td>
+<td style="text-align: left;">Time-aggregated Sobol sensitivities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Fig 2b–d</td>
+<td style="text-align: left;">Time-varying sensitivities</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Fig 3a–b</td>
+<td style="text-align: left;">Robust pathways at low climate sensitivity</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Fig 3c + conclusion</td>
+<td style="text-align: left;">Median sensitivity &amp; headline message</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sign up now!</strong></p>
+<aside class="notes">
+<p>Target: 1:50. Take names verbally. Each person also preps one discussion question. &lt; 6 students: combine slots 5+6. &gt; 6: split Fig 2b-d into individual panels.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
 <h2>References</h2>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-bankes_exploratory:1993" class="csl-entry" role="listitem">
+Bankes, S. (1993). Exploratory modeling for policy analysis. <em>Operations Research</em>, <em>41</em>(3), 435–449. <a href="https://doi.org/10/c7rgcr">https://doi.org/10/c7rgcr</a>
+</div>
+<div id="ref-eijgenraam_flooding:2014" class="csl-entry" role="listitem">
+Eijgenraam, C., Kind, J., Bak, C., Brekelmans, R., den Hertog, D., Duits, M., et al. (2014). Economically efficient standards to protect the <span>Netherlands</span> against flooding. <em>INFORMS Journal on Applied Analytics</em>, <em>44</em>(1), 7–21. <a href="https://doi.org/10.1287/inte.2013.0721">https://doi.org/10.1287/inte.2013.0721</a>
+</div>
+<div id="ref-lamontagne_abatement:2019" class="csl-entry" role="listitem">
+Lamontagne, J. R., Reed, P. M., Marangoni, G., Keller, K., &amp; Garner, G. G. (2019). Robust abatement pathways to tolerable climate futures require immediate global action. <em>Nature Climate Change</em>, <em>9</em>(4), 290–294. <a href="https://doi.org/10.1038/s41558-019-0426-8">https://doi.org/10.1038/s41558-019-0426-8</a>
+</div>
+<div id="ref-srikrishnan_uncertainty:2022" class="csl-entry" role="listitem">
+Srikrishnan, V., Lafferty, D. C., Wong, T. E., Lamontagne, J. R., Quinn, J. D., Sharma, S., et al. (2022). Uncertainty analysis in multi-sector systems: Considerations for risk analysis, projection, and planning for complex systems. <em>Earth’s Future</em>, <em>10</em>(8), e2021EF002644. <a href="https://doi.org/10.1029/2021EF002644">https://doi.org/10.1029/2021EF002644</a>
+</div>
+</div>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Dr.&nbsp;James Doss-Gollin</p>
+<p>James Doss-Gollin</p>
 </div>
 </div></div>
 

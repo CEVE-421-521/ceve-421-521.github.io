@@ -101,7 +101,7 @@ window.MathJax = {
 
 
 <meta property="og:title" content="Week 12 Reading – CEVE 421/521 – Spring 2026">
-<meta property="og:description" content="Sequential Decision Making">
+<meta property="og:description" content="Multi-Objective Optimization">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -128,7 +128,7 @@ window.MathJax = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Week 12 Reading</h1>
-<p class="subtitle lead">Sequential Decision Making</p>
+<p class="subtitle lead">Multi-Objective Optimization</p>
 </div>
 
 
@@ -157,14 +157,16 @@ window.MathJax = {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p><span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span></p>
-<p>Please note that <strong>there is an error in this paper</strong>; the units of storm surge are off by a factor of 10. Watch out for your unit conversions! This means that sea-level rise is emphasized relative to storm surge in the model. Regardless, the methods and qualitative findings are interesting.</p>
+<p><span class="citation" data-cites="yang_multiobjective:2023">Yang et al. (<a href="#ref-yang_multiobjective:2023" role="doc-biblioref">2023</a>)</span></p>
 </section>
 <section id="discussion-questions" class="level2">
 <h2 class="anchored" data-anchor-id="discussion-questions">Discussion Questions</h2>
 <ol type="1">
-<li><em>TBD</em></li>
-<li><em>TBD</em></li>
+<li><p>Yang et al.&nbsp;optimize for both flood reduction benefits and ecosystem co-benefits of nature-based solutions. Why do the authors treat these as separate objectives? What information would a weighted sum lose?</p></li>
+<li><p>The paper uses NSGA-II to approximate the Pareto front. What role does the choice of algorithm play in the results? How would you assess whether the algorithm has converged to a good approximation of the true front?</p></li>
+<li><p>Look at the Pareto front figures in the paper. Pick two solutions on opposite ends of the front and describe the trade-off a decision-maker would face in choosing between them. Is there a “knee” — a region where small sacrifices on one objective yield large gains on the other?</p></li>
+<li><p>The authors apply their framework to Sint Maarten, a small island recovering from Hurricane Irma. How does the local context (limited resources, post-disaster recovery, small geographic scale) shape which objectives matter and how results should be communicated to decision-makers?</p></li>
+<li><p>Compare this paper’s approach to the benefit-cost analysis framework from Week 6. Under what conditions is BCA sufficient? What does multi-objective optimization provide that BCA does not?</p></li>
 </ol>
 
 
@@ -172,8 +174,8 @@ window.MathJax = {
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-garner_slrise:2018" class="csl-entry" role="listitem">
-Garner, G. G., &amp; Keller, K. (2018). Using direct policy search to identify robust strategies in adapting to uncertain sea-level rise and storm surge. <em>Environmental Modelling &amp; Software</em>, <em>107</em>, 96–104. <a href="https://doi.org/10.1016/j.envsoft.2018.05.006">https://doi.org/10.1016/j.envsoft.2018.05.006</a>
+<div id="ref-yang_multiobjective:2023" class="csl-entry" role="listitem">
+Yang, S., Ruangpan, L., Torres, A. S., &amp; Vojinovic, Z. (2023). Multi-objective <span>Optimisation Framework</span> for <span>Assessment</span> of <span>Trade-Offs</span> between <span>Benefits</span> and <span class="nocase">Co-benefits</span> of <span class="nocase">Nature-based Solutions</span>. <em>Water Resources Management</em>, <em>37</em>(6–7), 2325–2345. <a href="https://doi.org/10.1007/s11269-023-03470-8">https://doi.org/10.1007/s11269-023-03470-8</a>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

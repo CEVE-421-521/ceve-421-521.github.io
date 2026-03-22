@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -10,7 +10,7 @@
 <link href="../../site_libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.27">
 
-  <meta name="author" content="Dr.&nbsp;James Doss-Gollin">
+  <meta name="author" content="James Doss-Gollin">
   <title>CEVE 421/521 -- Spring 2026 – Multi-Objective Optimization</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -29,7 +29,93 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f813b346ce809c8bbd246a85cc5c9db3.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -133,8 +219,12 @@
       }
     };
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <meta property="og:title" content="Multi-Objective Optimization – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="Lecture">
+<meta property="og:image" content="https://ceve-421-521.github.io/lectures/week-12/data:image/png;base64, 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CQhFotRUVHBH/4R3Jycli7di2VlZXsafTo0dx+++1s2LCBL5OWlsZusViMzMxMdovFYlRWVrI3PXr0oLCwkO9/vMmjWLlJQUVq1axapVq6isrGTevHns9oc/IE9VVRUkJKSgqS9C0g6qBYsWEDv3r1J2Lp1K5988gnvv/8+ffv25Yu0b9+eTz/9lPz8fPbHgw8+yPTp05k+fToJc+bMIWHevHkMGDCAhPvvv5+XXnqJoUOH0qtXLwYMGEBdq66uZvz48dx444106dKF1atX89FHHzFkyBD++Mc/MnjwYHZbtGgRe1q/fj0dO3ZE0t4FJB1Ub731FpdeeikJTZs2pVOnTrz/vvUZsCAAbz++uuceuqpJGzfvp158+axatUqCgoKaNWqFW+99RZLlixh+fLlpKens3DhQjZu3MiqVato1qwZ69evZ/Hixaxdu5bc3FwWLFhATU0NSUlJ/OpXv+LMM88kIyODK664glGjRnHvvfcycOBAFi5cyLZt25g3bx7HHHMM8+bNY9WqVRQUFNCqVSveeustlixZwvLly0lPT2fhwoVs3LiRVatWkZyczHvvvUfCpk2buOOOO2jSpAmnnnoqH3/8MTfddBM/elPOf7443n77be55ZZbGDlyJB999BHZ2dnsafPmzbRr1w5JexeQdNBUVVWxevVqOnfuzL4YMGAADz/8MLuVl5fTu3dvHnroIUpKSsjKymLYsGEMHz6ckpISYrEYkyZNIhaLUVpayvDhwznllFMoKCigb9++nHzyySxZsoTc3FwWLVrEtddeS9OmTUno2bMnU6dOpaamhqqqKqqrq3nllVeorq6mvLyc3r1789BDD1FSUkJWVhbDhg1j+PDhlJSUEIvFmDRpErFYjNLSUiorK7n00kuJxWLs2rWLkSNHMmTIEAoKCki45JJL6NatGwm/OUv2bp1K8uWLePkk08mIyOD3bZs2ULXrl1p1KgRkvYuIOlrV1VVxZVXXsl5553HaaedRiwWY18NHDiQgoICunXrRvPmzTnxxBPZU05ODntq3749e0pNTaVnz57s1qlTJxJ69+7Nnrp168aeTjrpJPZ04oknsqecnBz21L59e/bUsWNHdmvXrh21adq0Kb179+azpkyZwg9/+EMkfbGApK9dTU0NO3bs4Omnn+a6665jt5KSEl544QUWLVrE8uXL6dChA19k7Nix3HnnnXTu3Jl4PE5DsXLlSnJycjjiiCOQ9MUCkr52IQRuvvlmKisrycnJYbeMjAwuv/xyLr/8cr6KCy64gDfffJMTTjiBhmLJkiWMHDkSSbULSDooWrVqxYFKTU3lhBNOoCE55ZRTkPTlApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCny/g9F+VhKhe5e2QAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 <body class="quarto-light">
@@ -148,7 +238,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Dr.&nbsp;James Doss-Gollin 
+James Doss-Gollin 
 </div>
 </div>
 </div>
@@ -163,27 +253,795 @@ Dr.&nbsp;James Doss-Gollin
 
 </section>
 <section class="slide level2">
-<h2>Coming Soon</h2>
-<p>This lecture is under development.</p>
-<p>Content to adapt from previous course:</p>
+<h2>The Problem with Weights</h2>
+<p>In Week 9, HCFCD evaluated flood control projects across 7 criteria using weighted scores.</p>
+<div class="fragment">
+<p>Where do the weights come from?</p>
+</div>
+<div class="fragment">
 <ul>
-<li>Enriched notation diagram</li>
-<li>Dominance definition and examples</li>
-<li>Pareto front visualization</li>
-<li>Weighted sum approach and limitations</li>
-<li>Genetic algorithms / MOEAs</li>
-<li>Convergence diagnostics (hypervolume)</li>
+<li class="fragment">Weights reflect values — whose values?</li>
+<li class="fragment">Different stakeholders have different priorities</li>
+<li class="fragment">Aggregation requires weights whether they are stated explicitly or embedded in a formula</li>
 </ul>
+<aside class="notes">
+<p>Target: 1:05. Spend 5 min on this hook. The goal is to motivate multi-objective framing as a way to make value trade-offs explicit rather than hiding them in aggregation. Ask: “Raise your hand if you’d feel comfortable defending the choice of w₁ = 0.3 to a community that gets flooded.” Then pivot: “What if instead we showed decision-makers the full range of trade-offs and let them choose?”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>From Single to Multiple Objectives</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-active">
+<p>From Single to Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Dominance and Pareto Optimality</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Weighted Sum and Its Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Multi-Objective Evolutionary Algorithms</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Reading and Using the Pareto Front</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>When to Use Multi-Objective Framing</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:08. Transition into formal setup.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
+<h2>Single-Objective Optimization</h2>
+<p>Benefit-cost analysis frames adaptation as a single-objective problem:</p>
+<p><span class="math display">\[a^* = \arg\max_a \; \mathbb{E}[\text{NPV}(a, \mathbf{s})]\]</span></p>
+<div class="fragment">
+<p>This requires that <strong>all values can be monetized and aggregated</strong>.</p>
+</div>
+<div class="fragment">
+<p>Many adaptation objectives — equity, ecosystem health, cultural preservation — resist monetization.</p>
+<aside class="notes">
+<p>Target: 1:11. Quick slide. Emphasize that BCA is not wrong — it’s a tool with assumptions. When those assumptions hold (everything can be monetized, one decision-maker, shared values), BCA is great. Multi-objective framing is for when they don’t.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Multiple Conflicting Objectives</h2>
+<p>A multi-objective problem has several objectives that <strong>cannot all be maximized simultaneously</strong>:</p>
+<p><span class="math display">\[\max_a \; \{f_1(a),\; f_2(a),\; \ldots,\; f_k(a)\}\]</span></p>
+<div class="fragment">
+<p><strong>Coastal adaptation example:</strong></p>
+<ul>
+<li class="fragment"><span class="math inline">\(f_1(a)\)</span>: minimize expected flood damages</li>
+<li class="fragment"><span class="math inline">\(f_2(a)\)</span>: minimize construction cost</li>
+<li class="fragment"><span class="math inline">\(f_3(a)\)</span>: maximize equity — benefits to vulnerable communities</li>
+</ul>
+</div>
+<div class="fragment">
+<p>Improving on <span class="math inline">\(f_1\)</span> generally requires accepting worse <span class="math inline">\(f_2\)</span>. There is no single “best” solution.</p>
+<aside class="notes">
+<p>Target: 1:15. Spend about 4 min here. Draw on board if helpful: two axes, each a different objective. Ask students: “Can you think of another pair of objectives in climate adaptation that are in tension?” (e.g., speed of deployment vs.&nbsp;community buy-in; near-term cost vs.&nbsp;long-term resilience).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Dominance and Pareto Optimality</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>From Single to Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Dominance and Pareto Optimality</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Weighted Sum and Its Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Multi-Objective Evolutionary Algorithms</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Reading and Using the Pareto Front</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>When to Use Multi-Objective Framing</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:18. This is the conceptual core. Take 10 min here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>What Does “Better” Mean?</h2>
+<p>With multiple objectives we need a new comparison rule.</p>
+<p><strong>Dominance:</strong> Solution <span class="math inline">\(a\)</span> <strong>dominates</strong> solution <span class="math inline">\(b\)</span> if:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(a\)</span> is <strong>at least as good</strong> as <span class="math inline">\(b\)</span> on every objective</li>
+<li class="fragment"><span class="math inline">\(a\)</span> is <strong>strictly better</strong> than <span class="math inline">\(b\)</span> on at least one objective</li>
+</ul>
+<div class="fragment">
+<p>If <span class="math inline">\(a\)</span> dominates <span class="math inline">\(b\)</span>, there is no reason to choose <span class="math inline">\(b\)</span> — you can do better.</p>
+<aside class="notes">
+<p>Target: 1:21. Walk through this carefully. Emphasize: “at least as good on ALL, strictly better on AT LEAST ONE.” This is a partial order — many solutions won’t be comparable (neither dominates the other).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Dominance: Example</h2>
+<p>Three house elevation strategies, two objectives (minimize both):</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Strategy</th>
+<th style="text-align: center;">Expected Damages (<span class="math inline">\(M) | Construction Cost (\)</span>M)</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A: Elevate 1 ft</td>
+<td style="text-align: center;">4.0</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B: Elevate 3 ft</td>
+<td style="text-align: center;">2.0</td>
+<td style="text-align: center;">1.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C: Elevate 5 ft</td>
+<td style="text-align: center;">1.8</td>
+<td style="text-align: center;">3.0</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<ul>
+<li>Does A dominate B? No — A is cheaper but has higher damages.</li>
+<li>Does B dominate C? <strong>Yes</strong> — B is better on cost (1.5 &lt; 3.0) and nearly as good on damages (2.0 vs 1.8)… wait, 2.0 &gt; 1.8, so B is <em>worse</em> on damages. <strong>No</strong> — neither dominates.</li>
+<li>The Pareto front is {A, B, C} — all three are non-dominated.</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:23. Walk through the table row by row. Let students work out the dominance comparisons before you reveal. The “wait” moment is intentional — students often jump to conclusions about dominance. Make them check both objectives carefully.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 smaller">
+<h2>Dominance: Visualized</h2>
+<div id="4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a></a><span class="kw">let</span></span>
+<span id="cb1-2"><a></a>    points <span class="op">=</span> [(<span class="fl">2</span>, <span class="fl">2</span>), (<span class="fl">1</span>, <span class="fl">4</span>), (<span class="fl">4</span>, <span class="fl">1</span>), (<span class="fl">3</span>, <span class="fl">3</span>), (<span class="fl">5</span>, <span class="fl">2</span>)]</span>
+<span id="cb1-3"><a></a>    labels <span class="op">=</span> [<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span>, <span class="st">"5"</span>]</span>
+<span id="cb1-4"><a></a>    colors <span class="op">=</span> [<span class="op">:</span>steelblue, <span class="op">:</span>steelblue, <span class="op">:</span>steelblue, <span class="op">:</span>tomato, <span class="op">:</span>steelblue]</span>
+<span id="cb1-5"><a></a></span>
+<span id="cb1-6"><a></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">500</span>, <span class="fl">450</span>))</span>
+<span id="cb1-7"><a></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb1-8"><a></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb1-9"><a></a>        xlabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span>f_1<span class="st">$ (maximize)"</span>,</span>
+<span id="cb1-10"><a></a>        ylabel<span class="op">=</span>L<span class="st">"</span><span class="sc">$</span>f_2<span class="st">$ (minimize)"</span>,</span>
+<span id="cb1-11"><a></a>        xticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb1-12"><a></a>        xticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb1-13"><a></a>        yticksvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb1-14"><a></a>        yticklabelsvisible<span class="op">=</span><span class="cn">false</span>,</span>
+<span id="cb1-15"><a></a>        limits<span class="op">=</span>(<span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">0</span>, <span class="fl">5.5</span>),</span>
+<span id="cb1-16"><a></a>    )</span>
+<span id="cb1-17"><a></a>    <span class="cf">for</span> (i, (x, y)) <span class="kw">in</span> <span class="fu">enumerate</span>(points)</span>
+<span id="cb1-18"><a></a>        <span class="fu">scatter!</span>(ax, [x], [y]; markersize<span class="op">=</span><span class="fl">22</span>, color<span class="op">=</span>colors[i])</span>
+<span id="cb1-19"><a></a>        <span class="fu">text!</span>(ax, x <span class="op">-</span> <span class="fl">0.2</span>, y <span class="op">+</span> <span class="fl">0.25</span>; text<span class="op">=</span>labels[i], fontsize<span class="op">=</span><span class="fl">18</span>, font<span class="op">=:</span>bold)</span>
+<span id="cb1-20"><a></a>    <span class="cf">end</span></span>
+<span id="cb1-21"><a></a></span>
+<span id="cb1-22"><a></a>    <span class="co"># Arrow from 1 to 4 showing dominance</span></span>
+<span id="cb1-23"><a></a>    <span class="fu">arrows!</span>(ax, [<span class="fl">2.15</span>], [<span class="fl">2.15</span>], [<span class="fl">0.65</span>], [<span class="fl">0.65</span>]; linewidth<span class="op">=</span><span class="fl">1.5</span>, color<span class="op">=:</span>gray50)</span>
+<span id="cb1-24"><a></a>    <span class="fu">text!</span>(ax, <span class="fl">2.7</span>, <span class="fl">2.85</span>; text<span class="op">=</span><span class="st">"dominates"</span>, fontsize<span class="op">=</span><span class="fl">12</span>, color<span class="op">=:</span>gray50, rotation<span class="op">=</span><span class="cn">π</span> <span class="op">/</span> <span class="fl">4</span>)</span>
+<span id="cb1-25"><a></a></span>
+<span id="cb1-26"><a></a>    fig</span>
+<span id="cb1-27"><a></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-yellow-fg ansi-bold">┌ </span><span class="ansi-yellow-fg ansi-bold">Warning: </span>`arrows` are deprecated in favor of `arrows2d` and `arrows3d`.
+<span class="ansi-yellow-fg ansi-bold">└ </span><span class="ansi-bright-black-fg">@ Makie ~/.julia/packages/Makie/kJl0u/src/basic_recipes/arrows.jl:166</span>
+</pre>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<img width="500" height="450" style="object-fit: contain; height: auto;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAfQAAAHCCAYAAAAZ9Ts6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAIABJREFUeAHtwQl81uWBqO375X2SkJ0dCRiBsIlGZMeigFUrCqK0IFBA3Gu1HVtbHWvH2uq0U8e21lat1aqjaFGUgqIC7k5RUXBBXCKyb0HWEAIh+znv+X3MxyhGgQj5k/u6Qs3/hSRJirSAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8QD1z5513smjRItq3b48kSQ3BihUryM/P5/LLL2d/BeqZf/7zn6xYsYLs7GxUu+LiYrKyslDtysrKSEhJSUG1Ky4uJisrC9WurKyMhJSUFFS74uJisrKyUO3effddioqKuPzyy9lfgXqmffv2tG/fnv/4j/9AtVu1ahW5ubmodtu2bSMhOzsb1W7VqlXk5uai2m3bto2E7OxsVLtVq1aRm5uLavezn/2MAxWQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXUL1RXV3NihUrWLt2LXl5eeTk5CBJ0lcRUL3w7LPP8r3vfY8VK1awW8+ePbnrrrvo168fkiTVJqBDbsmSJZx99tns2rWLxo0bk5eXx+LFi3nnnXc4/fTTWbRoEe3atUOSpC8S0CH3pz/9iV27dpGens7ChQvJy8tj7ty5nHTSSRQVFXHnnXfym9/8BkmSvkhAh9yHH35IwimnnEJeXh4JJ554Inl5eSxdupT33nsPSZJqE9Ahd9FFFzF8+HC6d+/OnkIIJKSkpCBJUm0COuTGjRvHZ/3jH//g448/JmHEiBFIklSbgOqdKVOmcP7555Nw9tlnM3HiRCRJqk1A9cauXbu48sorufvuu0m46KKLuPPOO2nUqBGSJNUmoHph9erVnHPOObz99ts0btyYP/3pT1xyySVIkvRVBHTIbd++ndNPP52PPvqI7Oxsnn/+efr06YMkSV9VQIfcn//8Zz766CMSjj/+eJ566imeeuopduvUqRMTJkxAkqQvEtAhN336dHZ75ZVXeOWVV9jT6aefzoQJE5Ak6YsEdMi1bduW9PR0vshxxx2HJEm1CeiQmzFjBpIkHYiAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAiowZ4/eP1/PeHhSxdX8zWkl00zVhO3hFZDO6ew4CurYkhSWqIAoqEtVt28Nt/vMPiwm3safuuElZtKuGl99fRJacJ1327J22apiFJalgCqveWb9jO1Q++zvbSCmqzeF0R/3Lvq9xy3gDat8pEktRwBFSvlZZXcsOj89leWsFXUVxazi+nLuCv3xtESlIcSVLDEFC9Nv2NFXxaVMq+KNy6k+lvLmfswE5IkhqGgOq1ZxeuZn/Mfmc1Ywd2QpLUMARUb23YVkrh1p3sj8KtO9lYXErLrFQkSYe/QD20c+dONm3aREO39NMSDsSS1Z8Sa51BQ1dcXExCRUUFqt2WLVtIS0tDtSsuLiahoqIC1W7Lli2kpaWh2u3cuZO0tDQORKAeSkpKIi0tjYYuO6OaA9EkI420tDQausrKShLS0tJQ7VJTU0lLS0O1q6ysJCEtLQ3VLjU1lbS0NFS7pKQkDlSgHkpKSiItLY2GLrd1Eo1iMaprathX8UYxjjqiGWkpgYauoqKChLS0NFS71NRU0tLSUO0qKipISEtLQ7VLTU0lLS0N1S4pKYkDFVC9ldE4iWNzm/Heys3sq/zcZqSlBCRJDUNA9dq538jjvZWb2VdjBnZCktRwBFSv9e3UklPy2/LCorV8Vaf1aEevji2QJDUcAdV7Pxp+HDvLK3n940/5Mt/oegT/cmY+kqSGJaB6Lzk04obRvZm5YCUP/fcnbNtZzmc1SU9m/KAunNXnKGJIkhqagCIhFosxom97zuyVy7srNrNk/TbWfrqZtq2b07lNNj2Oak6IN0KS1DAFFCkh3og+eS3pk9eSVauSyc3NRZKkgCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryApMPerFmzePXVV0n4xje+wZlnnomkw0tA0mFt06ZNjB8/nq1bt5Jw5ZVXcuaZZyLp8BKQdFi79tpr2bp1K3Vh165dzJw5kyVLlvDNb36T/v37I6l+CEg6bL355pvcd999jBkzhhkzZlBWVsaBmDFjBk2bNuXiiy8mKyuLiooKQgjEYjEkHVoBSYel6upqrrjiCjIyMvjDH/7AjBkzOBDl5eV88skn/OxnP6O8vJznn3+et99+m+zsbC655BJSU1ORdOgEJB2W7rnnHhYsWMCtt95KTk4OByopKYlWrVpx//33s3XrVnr16sVVV13F9OnTWbx4MT169EDSoROQdNjZvHkzP//5zzn++OP54Q9/yP6qqamhoKCA0tJS2rVrx3nnncfSpUvJzc0lKyuLsrIyNm/eTE5ODpIOrYCkw87Pf/5ztmzZwsyZM4nH4+yP6upqJk+eTGpqKk2aNOH555/nlFNOoXfv3syfP581a9awevVq+vXrR8uWLZF0aAUkHVa2bdvGPffcQ3Z2Nrfddhu33XYbCRUVFSTMmjWLiooK7rjjDmrz3nvvkZGRwXe+8x127NjBypUradasGTt27KBTp06UlZXRu3dvcnNzkXToBSQdVioqKqiurqaoqIhHH32Uz1q8eDE7duzgjjvuYE9Lly4loaamhlgsRnFxMc2aNWPHjh1MmTKFU089leTkZB5//HEmTZrEiSeeiKT6IyDpsJKRkcGtt97KZ1199dVUVlYyaNAgzjvvPD5r6dKlLFmyhNTUVMaMGUOnTp2YMmUKS5cu5ZRTTqFDhw6sXr2aiooKJNU/AUmHlcaNG/OjH/2Iz7r22muprKykZ8+eXHTRRXzWSSedxDvvvENCPB4nJyeHnj178t5771FTU8P69euZPXs2/fv3R1L9E5Ck/yuEwMknn8yWLVuYPHkyEydO5Jvf/CbNmzfnxRdfpKamhgEDBpCfn4+k+icgqUF49tlnqa6upl27duypsrKSBQsWUFNTQ5s2bejXrx+zZ89m8uTJTJw4kaOPPpoePXogqX4LSGoQBg0axGdVVFTwwAMPkJGRwa5du/jggw84//zzGTp0KLNnz+buu+8mhMCll15KPB5HUv0VqEMrVqxgypQpLFq0iDVr1pDQtm1b8vPzGTduHB06dEBS/TF37lxatmzJ2WefzapVq3jwwQd55JFHGDt2LEOHDqVjx44cccQRxONxJNVvgTqwevVq/vKXv5CWlsZpp53GpZdeSvPmzUnYvHkzS5Ys4e9//zslJSVcfvnlHHnkkUg69IqLi8nOzqaqqornn3+eM844g4KCAiZPnkybNm0YOnQokqIhcIAWLFjA8uXLuemmm4jH43xW8+bNad68Of3796eqqop//OMfFBYW0q9fPyQdWgMHDiSEwGuvvcaRRx5Jy5Ytqaio4NNPP6VTp05Iio7AAcrMzGT06NF8FfF4nNGjR1NQUICkg6+srIwZM2awcuVKTjrpJE444QQSli5dyoknnkhlZSXvvPMO5513Hunp6UiKjsAB6tq1K3vz9ttvk52dTYsWLaiqqqJZs2bs1q1bNyQdfC+//DItWrSgb9++zJ49m/LycgYPHkx+fj6PP/448XicwYMHk56ejqRoCdSxsrIyvvOd71BdXc2wYcP4/ve/z7333suoUaNo2rQpkg6Oqqoqdu7cSWZmJjU1NcyfP58dO3bw7W9/m4RJkybxwAMPUFNTw5AhQ2jXrh0bNmwgPz8fSdETqGNPPPEEt956K507d2bOnDk0atSIiy++mKeeeoqzzjoLSQfH66+/zuLFi7nwwgtJ2LBhA++//z6nnHIK2dnZpKenM2nSJB544AEaNWrEoEGDKCsrQ1I0BepYCIG8vDz2VF5ezpYtW5B08Jxwwgkce+yxzJ07l759+zJs2DASpk6dynnnnUdKSgrp6elMmjSJjRs3IinaAnXsuOOO44orruDSSy9l+/btfPDBB9x8883cdNNNSDp44vE42dnZFBUVMXnyZCZOnMiwYcN4+umnmTx5MhMnTiQlJYX09HTS09ORFG2BOtapUyfOOeccRo8ezdKlSzniiCP461//ylFHHYWkg6OyspJly5bRtm1bhg0bxtNPP83kyZOZOHEiw4YN4+mnn2bKlCmcf/75SDo8BOpYTU0Np59+OkuWLKGoqIh4PE5mZiaSDo7q6momT57M1q1bqaysZOLEiQwbNoynn36ayZMnM3HiRIYNG8bGjRuRdPgI1LGbb76Z7du3c+ONN5Kens5TTz3FtGnT6NWrF1dddRWSvl4rVqygWbNmXHDBBXz44Yc8/PDDjB8/nmHDhvH0008zZcoUzj//fFq1aoWkw0egjnXo0IGXX36ZIUOGMGXKFEaOHMnw4cO5/fbbkfT1KSsr44UXXmDNmjV0796dhO7duxOPx3n44YcZP348w4YNY+PGjXzO1s2weinpq1ZA0Xo4Mg+aNkdSdATqWHJyMn/5y1947LHHGDx4MLfddhvDhw/niCOOQNLXZ86cOcTjcXJycnjzzTc57rjjyMrKomvXriQ8+uij/OAHP6BVq1b8j4J34YnJsORDqKmhOf+fWAw6dYdzJkHX45BU/wXq2Lp166isrGT06NH06tWLsWPH8vLLL3P88ccjqe7V1NQwf/58iouLmTBhAgnz58/ngQceYNKkSWRlZdG1a1dyc3MJIfD/1NTA9P+CZx5lr2pq4JMP4Hf/CmeOhXPOg1gMSfVXoI6lpKTwk5/8hDPOOIOhQ4fy6quvcvXVV7Ny5Uok1b1YLMaWLVtYvnw527dvJzMzk759+5LwwAMPMGnSJLKyskhNTeV/zHwYnnmUL1VTA09PgaQkGP5dJNVfgTp28cUXs6fk5GRuu+02qqqqkPT1GDp0KAmPPvooEydOJCUlhb59+xKLxdi0aRNZWVn8jxWLYebD7JMnJkN+XziqM5Lqp0AdqKmpYcuWLTRv3py9KS8v5+677+YHP/gBkg5cWVkZs2bNYvHixTRv3pxTTz2VoUOHMnv2bCZPnszEiRNJSUmhT58+fM7Tj0BNDfukpgaefgQuvx5J9VOgDtx///388pe/ZNWqVfz617/mt7/9LY0bN2a3nTt3cv311yOpbkyfPp3mzZtzxRVXsGzZMh599FFGjBjB0KFDmT17NlOmTOH888/nc8rL4IMF7Jf3F0B5OSQnI6n+CdSBMWPG0LdvXxKSkpJYv3496enp7LZr1y7uuusuJO27zZs389Zbb3HaaacRi8UoKytj2bJljBkzhlgsRn5+PtnZ2TzyyCPk5eUxdOhQNm7cyF5tLITycvZLeRlsWg85uUiqfwJ1ID09nfz8fBKuueYaPqtx48acd955SNp3WVlZFBYW8uSTTzJixAhCCDRq1IitW7fSrFkzEnJzc2natCmFhYXk5ubSsmVL9mrXTg5IaQmS6qfA16S6upqKigoSduzYwX333cdPf/pTJO2bpKQkvvvd7/L3v/+dJ598khEjRjBw4EAef/xxJkyYQFpaGmVlZZSUlNC0aVNqldmEA5LVFEn1U6COrV69mjPPPJN169bRqFEjEkpLS/m3f/s3JO27srIy5syZw86dO1mxYgUJZ511Fjt37uSOO+6gU6dOrF27loEDB5KZmUmtWraB7KawbSv7LKsptDgCSfVToI7NmTOHJ554go4dO7JbZWUld9xxB5L23axZs0hLS+Oyyy6jqKiIadOmMXPmTEaMGEHPnj1Zt24dAwcOpFWrVnypWAz6DobnZ7DP+p8MsRiS6qdAHevRowdt27ZlTyEERo8ejaR998knn3DhhRcSi8Vo2rQp48eP54477mDmzJmcddZZtGrVin1y5hh47XnYWcJXlp4JZ45BUv0VqGM9e/bk8ccfJzc3l9atW5NQXFzMSy+9xFVXXYWkfdOiRQuWL19O8+bNSUhNTaVTp05s376dDRs20Lp1a/ZJVlO49Fr40w1QXcWXige49FrIzEZS/RWoY8uXL+fqq68mMzOTeDxOQnFxMZdddhmS9t2pp57Kww8/TJMmTejUqROlpaWsXbuW888/n/T0dPbLsX3gx7+Gu/8Dtm/jC2U1hUuvhW49kFS/BerYq6++ysKFC2nWrBl7uvvuu5G074488khGjRrF9OnTSUlJoaysjCFDhpCens4BOfp4+M398MITsOC/Yc1y/p9YDNp1gD4nwSnnQONUJNV/gTp2zDHHkJSUxGedfPLJSNo/nTp14qqrrqKwsJDs7GwyMzOpE6lpMHwcDB8HVZWsXVxA2y7dIB6QFC2BOpabm8t//dd/kZOTQ4sWLUgoLi7m448/5qc//SmS9k88Hqddu3Z8beKBqvQsiAckRU+gjt1111089dRTtGjRgt2Ki4sZPnw4kiTp6xGoY0cddRTz58/nsx555BEkSdLXI1DHzj//fPama9euSJKkr0egDrz77rtMnz6dX/3qV7z66qvMnTuXPe3YsYP09HR69uyJJEmqe4E6UFRUxPLly0l44YUXKC0tpUWLFuwWi8WIxWJI+npt376dwsJCunTpgqSGJVAHhgwZwpAhQ0g4/fTT6d+/P5/16quvIqnu1dTUsHTpUv75z3+yYcMGsrOz6dKlC5IalkAd69+/P3vz6aefIqlu1dTUcO+997JhwwbKy8tJSUnh5JNPRlLDE6hj1dXV3H777SxcuJDy8nISduzYQb9+/ZBUt2KxGN/5znf429/+Rnl5OampqXTp0gVJDU+gjk2dOpW1a9dy+umnE4/HSSguLmbTpk1IqlvV1dW88sor9O7dm/nz59O3b19isRiSGp5AHcvIyODmm2/msxYtWoSkulNdXc2MGTNo164d/fr147jjjiMrKwtJDVOgjvXp04d58+YxYMAA9rRw4ULy8/ORdOCqqqqYNm0aXbp04fjjjyehRYsWSGq4AnXsn//8J3/+85/ZunUrLVq0IKG4uJhRo0Yh6cBVVlYybdo0unXrRo8ePZCkhEAd+/jjj7nmmmto2bIluxUXF7Nw4UIkHZiKigqmTp1Kz5496d69O5K0W6COjRs3jry8PD6rU6dOSNp/5eXlPPbYY/Tu3Ztu3bohSXsK1LG8vDz2ZtGiRXTo0AFJ+668vJypU6fSt29funbtiiR9VqAOzJw5kz/84Q+89NJLPPzwwzz00EPsaceOHZxxxhmMGDECSftm165dPProo5x44onk5eUhSXsTqAPHHHMM48ePJ2HFihX86Ec/okWLFuxWXFzM22+/jaR9U1paytSpUxk0aBAdOnRAkr5IoA507NiRjh07knDBBReQk5PDZ3Xo0AFJX92OHTuYOnUqp556KkceeSSSVJtAHcvJyWFvXnzxRS688EIkfbmSkhKmTp3Kt771Ldq1a4ckfZlAHSstLeXqq69m0aJFlJeXk7Bjxw7GjRuHpC9XUlLC1KlTOf3002nbti2S9FUE6tgjjzxCr169uPTSS4nH4yQUFxfz2muvIal227Zt4/HHH2f48OG0bt0aSfqqAnWsffv2nHzyyXzWkUceiaQvVlRUxLRp0zjrrLNo1aoVkrQvAnWsT58+PPnkkwwbNox4PE5CdXU106dP54c//CGSPm/z5s1MmzaNkSNH0rJlSyRpXwXqWGVlJX/84x8ZM2YMLVq0IGHHjh1cc801SPq8TZs28cQTTzBq1CiaNWuGJO2PQB2bMWMGV199Nb179yYej5NQXFzM9OnTkfS/bdy4kSeffJJvf/vbNG3aFEnaX4E61rFjRwYNGkQsFmO35s2bc+655yLp/1dYWMgzzzzD6NGjycrKQpIORKCO9enTh1mzZtG/f3+aN29Owvbt23nsscf48Y9/jCRYt24ds2bN4txzzyUzMxNJOlCBOnbnnXfyn//5n5SUlLBbRUUF//7v/45U16qqqkiIx+NExapVq3j22WcZM2YMmZmZSFFRXV1NdXU1exOPx4nFYujQCdSxqqoqlixZQnZ2NruVlpby17/+FakuLV++nM6dO3P88cezYMEComDlypW8+OKLfPe73yUtLQ0pSi655BLuu+8+9mbmzJkMHz4cHTqBOnbVVVeRnJzMnlJTU7n88suR6sr777/P+PHjqaqqIipWrFjByy+/zNixY0lNTUWKmoKCAlR/BQ7Q448/zjnnnEMIgYTk5GT2Jjk5mYTKykpmzJjBqFGjkPbV97//fZ5//nmWLFlClCxZsoTXXnuNcePGkZKSghRFBQUFNG7cmFmzZvFZ+fn56NAKHKDhw4fz17/+lU6dOvGtb32LWCzG3tTU1PDcc8+xePFiLrroIqT98fHHH1NYWEh6ejq7du2iqqqK+m7x4sW88cYbjBkzhpSUFKQo2rBhA1u2bCE/P58hQ4ag+idwgBo3bswVV1zBK6+8wve//30qKio46qijaNGiBQmbNm1i5cqVJCUlMXbsWH7wgx8g7a8XX3yR3YYOHcqcOXOozz788EPeeustxowZQ3JyMlJUffTRRyQ0b96cK6+8krlz59KsWTNOO+00fvzjH5OUlIQOrUAdGTx4MIMHD6aoqIiCggJWr15NQq9evejWrRtNmjRBakjef/99Fi1axNixY0lKSkKKsoKCAhJefvllXn75ZXZ7/vnnmTlzJq+88gqNGjVCh06gjjVp0oQBAwYwYMAApIZq0aJFfPDBB4wePZoQAlLUFRQUkJCZmcm9995Lly5duOuuu7jrrruYO3cu999/PxdddBE6dAKS6tTbb7/NsmXLGD16NPF4HOlwcP311/OTn/yEtLQ0mjVrRsLtt9/OU089xZo1a3jxxRe56KKL0KETkFRnFixYwMqVK/n2t79No0aNkA4XzZo1o1mzZuwpHo/TsWNH1qxZw9q1a9GhFZBUJ15//XUKCwsZOXIkjRo1QjqcDBw4kG3btnH22Wfz61//moTy8nIWL15MQpcuXdChFZB0wF599VW2bNnCyJEjicViSIeb9PR0XnvtNVauXEl2djbHHnssf/vb31i/fj0JI0aMQIdWQNIBmTt3LkVFRQwfPpxYLIZ0OLr11lvp378/JSUl/Ou//it7uvjiixk+fDg6tAJfo9dff50f//jHNG/enH/5l3+hf//+3HbbbQwfPpzevXsjHYjjjjuOXbt20bVrVw6Vl156iYqKCoYNG0YsFkM6XB1zzDF88MEH/Pu//ztvvvkmJSUldO/enUmTJjFq1Ch06AXqQGVlJSEEPmvlypXMmzePhMcff5z58+fTtm1bSkpKkA7Uf/7nf3IovfDCC1RXV/Otb30LqSE46qijuOeee1D9FDhAr732GjfccAOXXnopo0ePpqqqing8TkKHDh2YPXs2vXr1YtSoUSxfvpwnnniCzp07I0VVTU0Nc+bMIYTAaaedhiTVB4EDVFxczOjRo+nZsycJ99xzD5dddhkJ/fv3Z8GCBWRmZpLQoUMHfvvb31JWVoYURTU1NcyaNYv09HQGDx6MJNUXgQM0dOhQHnroIS6++GJWrFhBcnIy69ato0+fPvTp04c+ffqwp4yMDDIyMpCiprq6mpkzZ9KqVStOOOEEJKk+CdSBCRMmMGHCBCorK/nFL37BkUceyTPPPMNNN93Exo0byc/PZ8CAAQwfPpwePXogRU11dTVPPvkkbdq0oX///khSfROoQyEExo8fzzHHHMMll1xCQnl5Oe+//z7z58/nlltuISkpiVtuuYUWLVogRUF1dTUzZsygXbt29OvXD0mqjwJ17JhjjmFPycnJ9OrVi169ejFw4EDWrVvHiy++yLnnnotU31VVVTFt2jQ6d+5Mz549kaT6KnAQxeNx5s2bx+WXX45U31VWVjJt2jS6detGjx49kKT6LHAQHX300fziF79Aqu8qKip47LHHOP744+nevTuSVN8FJP0v5eXlPPbYY/Tq1Yujjz4aSYqCgKT/UVNTw9SpU+nfvz+dO3dGkqIiIOl/xGIxRo4cSXp6OpIUJQFJ/0t6ejqSFDUBSZIUeQHpMLSjrJKXP1jHgiUbWb+1hIQ2zTLondeSIcfkkJ4SkPT1+GjNVv77w0I+KdzG1pJSmmaspXObbAYdk8PRbZugr0dAOszMeXc1f3u+gOLScva0bEMJrxas54GXPuaSU4/mtB7tkFR3tpSU8YeZC5m/ZCN7WrOllEWrtvCPN5bTr3MrrjrrOJqmp6C6FZAOI//10sdMmbuE2mzbWc7vnlxI4dadnDekC5IO3Pqinfz0gXlsLC6lNm9+soF/ufdVfnfeCbRukorqTkA6TLy4aC1T5i7hq3r4n5+Q2zKDIcfkIGn/VVRV84tHFrCxuJSvYsO2Um6YuoDbLxpIiDdCdSOs8e7KAAARg0lEQVQgHQbKKqq45/mP2Ff3PPcRJ3RtTUqII2n/PLVgJSs3bmdfLP+0mKfeWsU5/dqjuhGQDgOvL/6ULSVl7KtN23fxxuINDOreBkn75+m3V7E/nnl7Fef0a4/qRkA6DLy7YjP7653lmxjUvQ2S9t2m7btYvamE/bFy43a2lJTRLCMFHbhAPVRaWsqWLVtQ7YqKisjIyEBQuLmY/VW4eTtbtmxBUFRUREZGBqpdcXExCVVVVTR0yzeUcCCWrvkUWmXQ0JWWlpKamsqBCNRD8Xic5ORkVLukpCSSk5MRhHic/RVCI5KTkxEkJSWRnJyMapecnExCcnIyDV1KUhIHonFyMsnJyTR08XicAxWoh5KTk8nIyEC1S09PJyMjA0G7FpksWLaZ/dGuRRYZGRkI0tPTycjIQLWrqqoiISMjg4aufTyZWCxGTU0N+yoWi9G+TXMyUpNo6JKTkzlQAekw0LdTK2a8uYL90a9TKyTtn6zUZLrlZPPR2iL21dFtm5CZmoTqRkA6DPTu2IK8I7JYur6YfdGhdRY9OzRH0v779oCO/Hra2+yrUSd0RHUnIB0GYrEYlw89hn+d/AaVVdV8FSHeiCvPPJZYLIak/XdS9zb0W9iKN5ds4Ksa0KU13+h2BKo7AekwceyRzfjpiB78/smFVFRVU5ukeCN+enYPjm7XFEkHJgb87Ns9uX7KfN5fvYUvc2xuM/71nOOJoboUkA4jJx+bQ06zNO6Y9QEfrytib7q1bcIVZxxLlzbZSKobaSmBmyf256H//oR/vLGcsooqPqtxUpzvnNCR757YiRBvhOpWQDrMdM1pwm0XDWTxuiIWLN3I6g3bSDiyVTZ981rSOacJMSTVtRBvxPknd+U7AzryxiefsqSwmMJNW2nToimd2mTRv3NrMlOT0NcjIB2GYkDXnCZ0zWnCtm3bSMjOzkbS1y8zNYlTj2vHqcfBqlWryM3NRV+/gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJEmKvIAkSYq8gCRJiryAJDVwO3fu5Omnn+aTTz4hMzOT3r17841vfAMpSgKS1IAtWLCAkSNHsmbNGvZ05pln8o9//IOUlBSkKAhIUgNVVVXFxIkTWbNmDTk5OZx77rm8/vrrvPHGGzzzzDP8+te/5sYbb0SKgoAkNVCffPIJBQUFJDz22GN84xvfoKamhqOOOorVq1fz7LPPcuONNyJFQUCSGqiioiIGDx5MQs+ePUmIxWJ0796d1atXk52djRQVAUlqoAYMGMDLL7/MbsXFxTz33HO8/PLLhBC47LLLkKIiIEli/fr1tGnTht2uvfZaRo4ciRQVAUkSjRs35rTTTmPRokWsX7+e3/72tzRu3JgbbrgBKQoCkiSaNGnCs88+S1VVFRdccAGTJ0/mpptu4pJLLiEnJwepvgtIUgP15ptv8uyzzxKLxbjuuuuIxWLE43HGjRvH5MmTqaqqYsmSJeTk5CDVdwFJaqDWrVvH9ddfT8LQoUPp3bs3CW+88Qa75eXlIUVBQJIaqJNOOonmzZuzefNmhg0bxoQJE9iwYQMPP/wwCf3796dt27ZIURCQpAaqefPm3HfffUyYMIFPP/2U3//+9+yWl5fH5MmTkaIiIEkN2IgRIygoKODhhx+moKCAjIwMevTowfjx40lJSUGKioAkNXA5OTlcffXVSFEWkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCRJkReQJEmRF5AkSZEXkCR9ZYVbd7KicBsJ7auTaNM0Dak+CEiSalVRVc1TC1by5IKVrNuygz3lNEvn7L7tGd47lxBvhHSoBCRJX2jT9l388tEFfFK4jb1Zt2UHf5nzAXPeXc2vxvShVXYq0qEQkCTt1fbSCq55cB5rt+zgyyz7tJhrJs/jtgsHkp2WjHSwBSRJe3XH7PdZu2UHX1Xh1p3c/dxHXH12D6SDLSBJ+pzVm0p4+YNC9tULi9Yy7sROtGuejnQwBSRJnzO3YD01NTXsq5qaGl4tWM+YgXlIB1NAkvQ5yz4tZn8t+7QY6WALSJI+p2RXBfuruLQc6WALSJI+Jzstmf3VJD0F6WALSJI+p3ObbF56fx37o0ubbKSDLSBJ+pwTu7XhvhcKqKyuYV+ERjEGdjsC6WALSJI+p3WTVM7olcvMBSvZF8P7HEWr7FSkgy0gSdqrS049mo/WFrGkcBtfRec22Vx4SjekQyEgSdqrlKQ4N0/oz6+nvc3byzZRmz55LfnZt3uSEuJIh0JAkvSFMhon8Zvx/fnnh4U8MX8FH67eSnVNDQmNYjGOObIpI/q256TubYghHToBSVKtYsCg7m0Y1L0NpeWVLFu7kYSObVuSmhyQ6oOAJOkrS00OtGuWRkJqckCqLwKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfIC9cyaNWtYsWIFN954I6rdtm3byM7ORrXbtWsXCY0bN0a127ZtG9nZ2ah2u3btIqFx48aodtu2bSM7OxvVbu7cubRv354DEahn8vPz2blzJ1u3bkVfbuvWreirKS0tRV9u69at6KspLS1FX27r1q2odq1atSI/P58DEahnrrnmGiRJ0r4JSJKkyAtIkqTIC0iKlO3bt5OZmUlDsX37djIzM5FUu4CkQ+K5555j3bp1nHDCCXTp0oWvYu7cuWRmZtKjRw8aitmzZzNo0CBat26NpC8WkHTQlZSU8Jvf/Ibx48fz+OOPc9111/Fl1q9fz+rVqxk3bhwH05o1a7juuuu46667SEtLY1/98Y9/5IgjjmDs2LHsj9GjR3PLLbdw9dVXI+mLBSQddM899xzHHnsso0aNIikpia/iz3/+MzfccAOHQk1NDTU1NeyP6upqDlS/fv148sknGTFiBJL2LiDpoHvjjTfo378/TZo04asoKiqitLSU5ORkDrZ27doxefJk9tdVV13FgRo0aBAXXHABI0aMQNLeBSQdVPfeey/Tpk0jHo+zYMEC+vTpw5d55plnOOGEE9ht6dKl/O53v6N169acddZZFBYWMnfuXH7yk5+wfPly1qxZw1tvvcXPf/5z0tLSSJg3bx67du3i3XffJT8/n1NOOYWEqVOnMmPGDEpLS/n73//OE088wUMPPUTfvn254YYb+NWvfsVrr73GnDlzWLp0Kb/73e9o3bo1Z511FoWFhcydO5ef/OQnLF++nDVr1vDWW2/x85//nLS0NN544w1uvfVWzj77bMaNG8ddd93FypUr6d27Nwl33303f/vb38jNzaWwsJAnnniCJk2aUFZWxqRJk9gtFouxa9cuSkpKyMjIQNLnBSQdVBdeeCE33HADN910E40aNeKr+PjjjznjjDPYLS8vj7Fjx3LllVdy4YUX0rt3b5YtW8b48eN56KGH6NevHwsWLODBBx/ksssuY8uWLUyYMIF33nmHIUOGMGjQIFq1akV+fj7nnnsunTt35pJLLqGmpob09HS+973vcdZZZ5Fw/fXX06xZMxLy8vIYO3YsV155JRdeeCG9e/dm2bJljB8/noceeoh+/fqxYMECHnzwQS677DL69+9Pfn4+q1atIqGoqIjf/OY3xGIxrrvuOjp37kxubi7btm1jxIgRvPDCC2RlZXHLLbdwxx13cMUVV7Bb27ZtWbp0KT169EDS5wUkHVRLliwhLy+PRo0a8VVt2LCBJk2asKfGjRuTkpJCbm4uCTk5OaSlpdGqVSsScnJyWLt2LQlNmzbl97//PZmZmSQcc8wxvP322+Tn55PQs2dPfvjDH/Ld736XCRMmMGrUKHZr1KgRSUlJ7Na4cWNSUlLIzc0lIScnh7S0NFq1akVCTk4Oa9euZbfGjRtTWVlJwhlnnEEsFuPZZ59l9uzZvPbaayTcf//9dOzYkZSUFMrKyvjmN7/J1VdfzRVXXMFuTZs2Zf369fTo0QNJnxeQdFC99dZb9OnTh90WL17Mtm3b6Nu3L18kJSWFiooKPistLY3dYrEYmZmZ7BaLxaisrCQhFotRUVHBH//4R3Jycli7di2VlZXsafTo0dx+++1s2LCBL5OWlsZusViMzMxMdovFYlRWVrI3PXr0oLCwkO9///vMmjWLlJQUVq1axapVq6isrGTevHns9oc//IE9VVRUkJKSgqS9C0g6qBYsWEDv3r1J2Lp1K5988gnvv/8+ffv25Yu0b9+eTz/9lPz8fPbHgw8+yPTp05k+fToJc+bMIWHevHkMGDCAhPvvv5+XXnqJoUOH0qtXLwYMGEBdq66uZvz48dx444106dKF1atX89FHHzFkyBD++Mc/MnjwYHZbtGgRe1q/fj0dO3ZE0t4FJB1Ub731FpdeeikJTZs2pVOnTrz//vvUZsCAAbz++uuceuqpJGzfvp158+axatUqCgoKaNWqFW+99RZLlixh+fLlpKens3DhQjZu3MiqVato1qwZ69evZ/Hixaxdu5bc3FwWLFhATU0NSUlJ/OpXv+LMM88kIyODK664glGjRnHvvfcycOBAFi5cyLZt25g3bx7HHHMM8+bNY9WqVRQUFNCqVSveeustlixZwvLly0lPT2fhwoVs3LiRVatWkZyczHvvvUfCpk2buOOOO2jSpAmnnnoqH3/8MTfddBM//elPOf7443n77be55ZZbGDlyJB999BHZ2dnsafPmzbRr1w5JexeQdNBUVVWxevVqOnfuzL4YMGAADz/8MLuVl5fTu3dvHnroIUpKSsjKymLYsGEMHz6ckpISYrEYkyZNIhaLUVpayvDhwznllFMoKCigb9++nHzyySxZsoTc3FwWLVrEtddeS9OmTUno2bMnU6dOpaamhqqqKqqrq3nllVeorq6mvLyc3r1789BDD1FSUkJWVhbDhg1j+PDhlJSUEIvFmDRpErFYjNLSUiorK7n00kuJxWLs2rWLkSNHMmTIEAoKCki45JJL6NatGwm//OUv2bp1K8uWLePkk08mIyOD3bZs2ULXrl1p1KgRkvYuIOlrV1VVxZVXXsl5553HaaedRiwWY18NHDiQgoICunXrRvPmzTnxxBPZU05ODntq3749e0pNTaVnz57s1qlTJxJ69+7Nnrp168aeTjrpJPZ04oknsqecnBz21L59e/bUsWNHdmvXrh21adq0Kb179+azpkyZwg9/+EMkfbGApK9dTU0NO3bs4Omnn+a6665jt5KSEl544QUWLVrE8uXL6dChA19k7Nix3HnnnXTu3Jl4PE5DsXLlSnJycjjiiCOQ9MUCkr52IQRuvvlmKisrycnJYbeMjAwuv/xyLr/8cr6KCy64gDfffJMTTjiBhmLJkiWMHDkSSbULSDooWrVqxYFKTU3lhBNOoCE55ZRTkPTlApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCnyApIkKfICkiQp8gKSJCny/g9F+VhKhe5e2QAAAABJRU5ErkJggg==">
+<p>Five candidate solutions. Point 4 (red) is dominated by point 1: worse on both objectives. Points 1, 2, 3, 5 are mutually non-dominated.</p>
+</div>
+</div>
+<aside class="notes">
+<p>Target: 1:25. Cold call 2-3 students before revealing. Key: 1 dominates 4 (better on both — higher <span class="math inline">\(f_1\)</span>, lower <span class="math inline">\(f_2\)</span>). No other dominance pairs among 1, 2, 3, 5. Point 4 (red) is dominated. Ask: “Which points form the Pareto front?” → {1, 2, 3, 5}.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>The Pareto Front</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>The <strong>Pareto front</strong> is the set of all non-dominated solutions.</p>
+<ul>
+<li class="fragment">No solution on the front can be improved on one objective without worsening another</li>
+<li class="fragment">Reveals <strong>trade-offs</strong> without requiring weights</li>
+<li class="fragment">The “efficient frontier” of feasible performance</li>
+</ul>
+<p>. . .</p>
+<p>The Pareto front identifies <strong>which solutions are worth considering</strong>. Choosing among them is a separate decision that requires values.</p>
+</div><div class="column" style="width:45%;">
+<div id="fig-pareto-front" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-pareto-front-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="smith_pareto_2022_fig1.png">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pareto-front-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A Pareto front in two objectives. Source: <span class="citation" data-cites="smith_pareto:2022">Smith et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>
+</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Target: 1:29. Analogy: the efficient frontier in portfolio theory (risk vs.&nbsp;return). Emphasize the division of labor: analysts find the front, decision-makers choose from it. This is a more honest process than embedding values in weights.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Weighted Sum and Its Limits</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>From Single to Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Dominance and Pareto Optimality</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Weighted Sum and Its Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Multi-Objective Evolutionary Algorithms</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Reading and Using the Pareto Front</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>When to Use Multi-Objective Framing</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:31. Short section — 5 min.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Can Weighted Sum Find the Pareto Front?</h2>
+<p>We can <em>scalarize</em> the problem:</p>
+<p><span class="math display">\[\min F(a) = \sum_i w_i f_i(a)\]</span></p>
+<div class="fragment">
+<p>Sweeping weights <span class="math inline">\(w_i\)</span> can recover parts of the Pareto front — but not all of it.</p>
+<ul>
+<li class="fragment">Weighted sum only finds solutions on the <strong>convex hull</strong> of the front</li>
+<li class="fragment">Non-convex regions (common in engineering problems) are <strong>unreachable</strong> by any weighting</li>
+<li class="fragment">You can miss important solutions entirely</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:34. The key takeaway: weighted sum is a useful approximation but has fundamental limits. Multi-objective evolutionary algorithms avoid this problem.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Convex vs.&nbsp;Non-Convex Fronts</h2>
+<div id="fig-moo-convex-nonconvex" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-moo-convex-nonconvex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Sudhoff-convex.png"></p>
+<figcaption>Convex: weighted sum works</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Sudhoff-nonconvex.png"></p>
+<figcaption>Non-convex: weighted sum misses the red region</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-moo-convex-nonconvex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: From Sudhoff, “Engineering Analysis and Design Using Genetic Algorithms,” Purdue.
+</figcaption>
+</figure>
+</div>
+<aside class="notes">
+<p>Target: 1:37. Walk through both panels. Left: any w₁/w₂ combination traces the full front. Right: the concave region (red) has no tangent weight vector — weighted sum can never find those solutions. Ask: which one do you think is more common in real engineering problems? (Non-convex, generally.)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Multi-Objective Evolutionary Algorithms</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>From Single to Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Dominance and Pareto Optimality</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Weighted Sum and Its Limits</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Multi-Objective Evolutionary Algorithms</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>Reading and Using the Pareto Front</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>When to Use Multi-Objective Framing</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:38. Students don’t need to implement MOEAs — just understand the conceptual machinery well enough to interpret results.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>How MOEAs Work</h2>
+<p>Multi-objective evolutionary algorithms (MOEAs) search for an <strong>approximation of the full Pareto front simultaneously</strong>.</p>
+<div class="fragment">
+<p>Core ideas:</p>
+<ul>
+<li class="fragment">Maintain a <strong>population</strong> of candidate solutions that evolves over generations</li>
+<li class="fragment"><strong>Selection</strong> favors non-dominated solutions (dominance-based ranking)</li>
+<li class="fragment"><strong>Diversity preservation</strong> spreads solutions across the front — not just one cluster</li>
+<li class="fragment">Repeat until convergence</li>
+</ul>
+</div>
+<div class="fragment">
+<p>Result: a set of solutions approximating the full trade-off curve — including non-convex regions.</p>
+<aside class="notes">
+<p>Target: 1:42. Analogy: each solution is a “design.” The MOEA runs many designs in parallel and iteratively improves them. The diversity mechanism is key: without it, the algorithm collapses to one region of the front.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Common MOEAs in Climate/Water Work</h2>
+<ul>
+<li class="fragment"><strong>NSGA-II</strong>: Classic; uses crowding distance for diversity</li>
+<li class="fragment"><strong>Borg</strong>: Widely used in water resources; adaptive population, epsilon-dominance archiving</li>
+<li class="fragment">Both widely used; Borg tends to perform better on complex, many-objective problems</li>
+</ul>
+<div class="fragment">
+<p><strong>Convergence diagnostics:</strong></p>
+<ul>
+<li class="fragment">Repeat with different random seeds — do results change significantly?</li>
+<li class="fragment"><em>Hypervolume indicator</em>: measures how much of the objective space the front covers</li>
+<li class="fragment">Compare to weighted-sum benchmarks to detect missed regions</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:45. These algorithms are heuristics — they don’t guarantee a global optimum. The diagnostics are how we build confidence. Hypervolume is the standard metric: larger = better coverage of the front.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>What Does Many-Objective Look Like?</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>With 2 objectives: a curve.</p>
+<p>With 3+ objectives: a surface — impossible to visualize directly.</p>
+<p><strong>Parallel axis plots</strong> show all objectives simultaneously.</p>
+<p>Each line = one non-dominated solution.</p>
+</div><div class="column" style="width:55%;">
+<div id="fig-parallel-axis" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-parallel-axis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="kasprzyk_mordm_2013_fig5.png">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-parallel-axis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Parallel axis plot of non-dominated solutions across six objectives. Source: <span class="citation" data-cites="kasprzyk_mordm:2013">Kasprzyk et al. (<a href="#/references" role="doc-biblioref" onclick="">2013</a>)</span>
+</figcaption>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<p>Target: 1:47. Walk through the parallel axis plot: each vertical axis is one objective (cost, reliability, market use), each colored line is a solution. Solutions that do well on reliability tend to do worse on cost — that’s the trade-off. Color = which model case. This is from a water portfolio problem in the Rio Grande Valley. Point out: 6 objectives, ~1000 non-dominated solutions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>Reading and Using the Pareto Front</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>From Single to Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Dominance and Pareto Optimality</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Weighted Sum and Its Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Multi-Objective Evolutionary Algorithms</p>
+</div></li>
+<li><div class="agenda-active">
+<p>Reading and Using the Pareto Front</p>
+</div></li>
+<li><div class="agenda-inactive agenda-post-active">
+<p>When to Use Multi-Objective Framing</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:48. Quick section — 5 min.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Reading a Pareto Front</h2>
+<p>On a Pareto front plot, each axis is one objective and each point is a non-dominated solution.</p>
+<div class="fragment">
+<p><strong>The “knee” of the front:</strong></p>
+<ul>
+<li class="fragment">Region of high curvature — large gains on one objective for small losses on another</li>
+<li class="fragment">Often a practical default if no strong preference exists</li>
+<li class="fragment">Not always present; depends on problem structure</li>
+</ul>
+</div>
+<div class="fragment">
+<p>The analyst generates the front; the decision-maker selects a solution from it.</p>
+<aside class="notes">
+<p>Target: 1:50. Preview Lab 10: students will generate a Pareto front for the house elevation problem (cost vs.&nbsp;expected damages) and identify the knee. This is directly connected to Memo 2 — does your project have multiple objectives that BCA collapses?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>How Many Objectives?</h2>
+<p>More objectives → richer problem representation, but real costs:</p>
+<ul>
+<li class="fragment"><strong>Computational:</strong> exponentially more solutions needed to cover the front</li>
+<li class="fragment"><strong>Conceptual:</strong> harder to reason about trade-offs in high dimensions</li>
+<li class="fragment"><strong>Communication:</strong> harder to show decision-makers and stakeholders</li>
+</ul>
+<div class="fragment">
+<p><strong>Rule of thumb:</strong> use as few objectives as possible. Combining objectives into a scalar is often a good idea — <em>when the assumptions hold</em>.</p>
+<aside class="notes">
+<p>Target: 1:52. This is the counterweight to the earlier motivation. Multi-objective framing is powerful but not free. The question is always: are the objectives genuinely incommensurable, or can they be reasonably combined? Connect to student projects: most have 2–3 meaningful objectives at most.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section class="title-slide slide level1 agenda-slide center scrollable">
+<h1>When to Use Multi-Objective Framing</h1>
+<div class="agenda-heading">
+<p>Today</p>
+</div>
+<div class="agenda">
+<ol>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>From Single to Multiple Objectives</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Dominance and Pareto Optimality</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Weighted Sum and Its Limits</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Multi-Objective Evolutionary Algorithms</p>
+</div></li>
+<li><div class="agenda-inactive agenda-pre-active">
+<p>Reading and Using the Pareto Front</p>
+</div></li>
+<li><div class="agenda-active">
+<p>When to Use Multi-Objective Framing</p>
+</div></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Target: 1:52. Very short section — 1 min.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+<h2>Choosing the Right Tool</h2>
+<p><strong>Use multi-objective framing when:</strong></p>
+<ul>
+<li class="fragment">Stakeholders genuinely disagree on how to weight objectives</li>
+<li class="fragment">Objectives are incommensurable — not easily reduced to dollars</li>
+<li class="fragment">You want to make trade-offs <strong>explicit and visible</strong> to decision-makers</li>
+</ul>
+<div class="fragment">
+<p><strong>Stick with single-objective (BCA) when:</strong></p>
+<ul>
+<li class="fragment">One objective clearly dominates</li>
+<li class="fragment">Stakeholders agree on how to aggregate</li>
+<li class="fragment">Speed and simplicity matter more than exploring trade-offs</li>
+</ul>
+<aside class="notes">
+<p>Target: 1:53. Connect to Memo 2: “Look at your project — does your system have conflicting objectives that BCA collapses? If so, multi-objective framing may give a more honest picture.” Don’t frame this as “multi-objective is always better” — it adds complexity and requires more from decision-makers.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2">
+<h2>Looking Ahead</h2>
+<p><strong>This week:</strong></p>
+<ul>
+<li class="fragment">Wednesday: Madison leads discussion of <span class="citation" data-cites="yang_multiobjective:2023">Yang et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span> — come prepared to discuss objectives, algorithm choice, and how results inform decisions</li>
+<li class="fragment">Friday: Lab 10 — generate and visualize Pareto fronts for the house elevation problem</li>
+<li class="fragment">Friday: <strong>Memo 2 due</strong> (Evidence &amp; Robustness)</li>
+</ul>
+<div class="fragment">
+<p><strong>Week 13 (Monday):</strong> Putting it all together — how robustness, scenario discovery, sequential decisions, and multi-objective optimization connect in real projects.</p>
+<aside class="notes">
+<p>Target: 1:53. End class here. Remind students that Madison is leading discussion on Wednesday — they should read Yang et al.&nbsp;with attention to: (1) what are the objectives? (2) how is the Pareto front generated and interpreted? (3) how do the authors handle trade-offs with decision-makers?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section class="slide level2 smaller scrollable" id="references">
 <h2>References</h2>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-kasprzyk_mordm:2013" class="csl-entry" role="listitem">
+Kasprzyk, J. R., Nataraj, S., Reed, P. M., &amp; Lempert, R. J. (2013). Many objective robust decision making for complex environmental systems undergoing change. <em>Environmental Modelling &amp; Software</em>, <em>42</em>, 55–71. <a href="https://doi.org/10.1016/j.envsoft.2012.12.007">https://doi.org/10.1016/j.envsoft.2012.12.007</a>
+</div>
+<div id="ref-smith_pareto:2022" class="csl-entry" role="listitem">
+Smith, S., Southerby, M., Setiniyaz, S., Apsimon, R., &amp; Burt, G. (2022). Multiobjective optimization and <span>Pareto</span> front visualization techniques applied to normal conducting rf accelerating structures. <em>Physical Review Accelerators and Beams</em>, <em>25</em>(6), 062002. <a href="https://doi.org/10.1103/PhysRevAccelBeams.25.062002">https://doi.org/10.1103/PhysRevAccelBeams.25.062002</a>
+</div>
+<div id="ref-yang_multiobjective:2023" class="csl-entry" role="listitem">
+Yang, S., Ruangpan, L., Torres, A. S., &amp; Vojinovic, Z. (2023). Multi-objective <span>Optimisation Framework</span> for <span>Assessment</span> of <span>Trade-Offs</span> between <span>Benefits</span> and <span class="nocase">Co-benefits</span> of <span class="nocase">Nature-based Solutions</span>. <em>Water Resources Management</em>, <em>37</em>(6–7), 2325–2345. <a href="https://doi.org/10.1007/s11269-023-03470-8">https://doi.org/10.1007/s11269-023-03470-8</a>
+</div>
+</div>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>Dr.&nbsp;James Doss-Gollin</p>
+<p>James Doss-Gollin</p>
 </div>
 </div></div>
 

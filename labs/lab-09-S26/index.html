@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 9: Real Options &amp; Dynamic Policy Search – CEVE 421/521 – Spring 2026</title>
+<title>Lab 9: Real Options &amp; the Parking Garage – CEVE 421/521 – Spring 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,10 +55,30 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -113,10 +133,43 @@ window.MathJax = {
     }
   };
 </script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-<meta property="og:title" content="Lab 9: Real Options &amp; Dynamic Policy Search – CEVE 421/521 – Spring 2026">
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Lab 9: Real Options &amp; the Parking Garage – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="CEVE 421/521">
+<meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-09-S26/index_files/figure-html/fig-npv-deterministic-output-1.svg">
 <meta property="og:site_name" content="CEVE 421/521 -- Spring 2026">
 </head>
 
@@ -133,8 +186,13 @@ window.MathJax = {
    
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3</span> Exercises</a></li>
+  <li><a href="#before-lab" id="toc-before-lab" class="nav-link" data-scroll-target="#before-lab"><span class="header-section-number">2</span> Before Lab</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">3</span> Setup</a></li>
+  <li><a href="#section-1-deterministic-npv" id="toc-section-1-deterministic-npv" class="nav-link" data-scroll-target="#section-1-deterministic-npv"><span class="header-section-number">4</span> Section 1: Deterministic NPV</a></li>
+  <li><a href="#section-2-demand-uncertainty" id="toc-section-2-demand-uncertainty" class="nav-link" data-scroll-target="#section-2-demand-uncertainty"><span class="header-section-number">5</span> Section 2: Demand Uncertainty</a></li>
+  <li><a href="#section-3-the-flexible-design" id="toc-section-3-the-flexible-design" class="nav-link" data-scroll-target="#section-3-the-flexible-design"><span class="header-section-number">6</span> Section 3: The Flexible Design</a></li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="header-section-number">7</span> Wrap-Up</a></li>
+  <li><a href="#sec-submission" id="toc-sec-submission" class="nav-link" data-scroll-target="#sec-submission"><span class="header-section-number">8</span> Submission</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/labs/lab-09-S26/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -143,7 +201,7 @@ window.MathJax = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lab 9: Real Options &amp; Dynamic Policy Search</h1>
+<h1 class="title">Lab 9: Real Options &amp; the Parking Garage</h1>
 <p class="subtitle lead">CEVE 421/521</p>
 </div>
 
@@ -155,7 +213,7 @@ window.MathJax = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Friday, April 10, 2026</p>
+      <p class="date">Friday, April 3, 2026</p>
     </div>
   </div>
   
@@ -179,49 +237,568 @@ window.MathJax = {
 
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>Lab objectives and context - to be written.</p>
+<p>In Monday’s lecture you saw how <strong>real options</strong> — the right, but not the obligation, to take an action in the future — can dramatically improve infrastructure design under uncertainty. The Tagus bridge reserved space for rail; the Bluewater parking garage reinforced its columns for future expansion. Both paid a small premium upfront to preserve flexibility.</p>
+<p>In this lab you’ll build the parking garage model from <span class="citation" data-cites="deneufville_parkinggarage:2006">Neufville et al. (<a href="#ref-deneufville_parkinggarage:2006" role="doc-biblioref">2006</a>)</span> and discover three things:</p>
+<ol type="1">
+<li>The <strong>deterministic optimum</strong> (build big) is wrong when demand is uncertain</li>
+<li>Uncertainty creates <strong>asymmetric payoffs</strong> that penalize over-building</li>
+<li>A <strong>flexible design</strong> with an expansion option dominates the rigid design on every metric</li>
+</ol>
+<p>You’ll write all the code from scratch — good Julia practice.</p>
+<p><strong>Reference:</strong></p>
+<ul>
+<li><span class="citation" data-cites="deneufville_parkinggarage:2006">Neufville et al. (<a href="#ref-deneufville_parkinggarage:2006" role="doc-biblioref">2006</a>)</span> — the case study for this lab</li>
+</ul>
 </section>
-<section id="setup" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="setup"><span class="header-section-number">2</span> Setup</h2>
+<section id="before-lab" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="before-lab"><span class="header-section-number">2</span> Before Lab</h2>
+<p><strong>Complete these steps BEFORE coming to lab:</strong></p>
+<ol type="1">
+<li><p><strong>Accept the GitHub Classroom assignment</strong> (link on Canvas)</p></li>
+<li><p><strong>Clone your repository:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/CEVE-421-521/lab-09-S26-yourusername.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab-09-S26-yourusername</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Open the notebook</strong> in VS Code or Quarto preview</p></li>
+<li><p><strong>Run the first code cell</strong> — it will install any missing packages (may take 10-15 minutes the first time)</p></li>
+</ol>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Submission:</strong> You will render this notebook to PDF and submit the PDF to Canvas. See <a href="#sec-submission" class="quarto-xref">Section&nbsp;8</a> for details.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="setup" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="setup"><span class="header-section-number">3</span> Setup</h2>
+<p>Run the cells in this section to load packages and define parameters. You don’t need to modify any of this code — just run it and read the comments.</p>
+<section id="packages" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">3.1</span> Packages</h3>
 <div id="2" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install SimOptDecisions and ICOW</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">ICOW</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">catch</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> <span class="bu">Pkg</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"SimOptDecisions"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Pkg</span>.<span class="fu">rm</span>(<span class="st">"ICOW"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">catch</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/SimOptDecisions"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">add</span>(; url<span class="op">=</span><span class="st">"https://github.com/dossgollin-lab/ICOW.jl"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">SimOptDecisions</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="im">using</span> <span class="bu">ICOW</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ICOW.Stochastic</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">ICOW.EAD</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="st">"Manifest.toml"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> <span class="bu">Pkg</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Pkg</span>.<span class="fu">instantiate</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">2026</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3</span> Exercises</h2>
-<section id="exercise-1" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">3.1</span> Exercise 1</h3>
-<p>Exercise description - to be written.</p>
+<section id="model-parameters" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="model-parameters"><span class="header-section-number">3.2</span> Model Parameters</h3>
+<p>These parameters come from <span class="citation" data-cites="deneufville_parkinggarage:2006">Neufville et al. (<a href="#ref-deneufville_parkinggarage:2006" role="doc-biblioref">2006</a>)</span>. We’ll use them throughout the lab.</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demand</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> INITIAL_DEMAND <span class="op">=</span> <span class="fl">750</span>      <span class="co"># spaces on opening day</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> GROWTH_RATE <span class="op">=</span> <span class="fl">0.08</span> <span class="co"># ~8%/year; calibrated so 6-floor garage is deterministic optimum</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Revenue and cost</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> REVENUE_PER_SPACE <span class="op">=</span> <span class="fl">10_000</span>  <span class="co"># $/year per space used</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> OPERATING_COST_PER_SPACE <span class="op">=</span> <span class="fl">2_000</span>  <span class="co"># $/year per space available</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> LAND_LEASE <span class="op">=</span> <span class="fl">3_600_000</span>     <span class="co"># $/year</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> CONSTRUCTION_COST_PER_SPACE <span class="op">=</span> <span class="fl">16_000</span>  <span class="co"># $ per space (ground level)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> LEVEL_COST_INCREASE <span class="op">=</span> <span class="fl">1.10</span>  <span class="co"># 10% more per level above ground</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Design</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> SPACES_PER_LEVEL <span class="op">=</span> <span class="fl">200</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> MAX_LEVELS <span class="op">=</span> <span class="fl">8</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Economics</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> DISCOUNT_RATE <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> HORIZON <span class="op">=</span> <span class="fl">20</span>  <span class="co"># years</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncertainty</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> VOLATILITY <span class="op">=</span> <span class="fl">0.15</span>  <span class="co"># annual demand volatility</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Flexibility</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> RETROFIT_PREMIUM <span class="op">=</span> <span class="fl">1.10</span>  <span class="co"># 10% extra cost for adding levels later</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+</section>
+<section id="section-1-deterministic-npv" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="section-1-deterministic-npv"><span class="header-section-number">4</span> Section 1: Deterministic NPV</h2>
+<p>First, let’s compute the net present value (NPV) of a parking garage assuming we know future demand perfectly. This is standard engineering economics.</p>
+<section id="deterministic-demand" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="deterministic-demand"><span class="header-section-number">4.1</span> Deterministic Demand</h3>
+<p>The forecast assumes demand grows exponentially from 750 spaces:</p>
+<p><span class="math display">\[D(t) = D_0 \cdot e^{g \cdot t}\]</span></p>
+<p>where <span class="math inline">\(D_0 = 750\)</span> and <span class="math inline">\(g = 0.08\)</span>/year (approximately 8% annual growth).</p>
+<div id="6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>demand_deterministic <span class="op">=</span> [INITIAL_DEMAND <span class="op">*</span> <span class="fu">exp</span>(GROWTH_RATE <span class="op">*</span> t) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>HORIZON]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="implement-calculate_npv" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="implement-calculate_npv"><span class="header-section-number">4.2</span> Implement <code>calculate_npv</code></h3>
+<p>Write a function that computes the NPV of a rigid (fixed-size) parking garage.</p>
+<p>The key equations are:</p>
+<ul>
+<li><strong>Capacity</strong> = <code>n_levels × 200</code> spaces</li>
+<li><strong>Construction cost</strong> = <span class="math inline">\(\sum_{l=1}^{n} 16{,}000 \times 200 \times 1.1^{(l-1)}\)</span></li>
+<li><strong>Annual revenue</strong> = <span class="math inline">\(\min(D(t),\; \text{capacity}) \times \$10{,}000\)</span></li>
+<li><strong>Annual operating cost</strong> = <span class="math inline">\(\text{capacity} \times \$2{,}000 + \$3{,}600{,}000\)</span></li>
+<li><strong>NPV</strong> = <span class="math inline">\(-\text{construction cost} + \sum_{t=1}^{20} \frac{\text{revenue}(t) - \text{operating cost}}{(1 + r)^t}\)</span></li>
+</ul>
+<p><strong>Your task:</strong> replace the <code>return 0.0</code> placeholder with the actual NPV calculation using the equations above.</p>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">    calculate_npv(n_levels, demand)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">Compute the NPV of a rigid parking garage with `n_levels` levels,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">given a demand trajectory `demand` (a vector of length `HORIZON`).</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">Returns the NPV in dollars.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculate_npv</span>(n_levels, demand)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.0</span>  <span class="co"># </span><span class="al">TODO</span><span class="co">: replace this with your implementation</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Main.Notebook.calculate_npv</code></pre>
+</div>
+</div>
+</section>
+<section id="sweep-garage-sizes" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="sweep-garage-sizes"><span class="header-section-number">4.3</span> Sweep Garage Sizes</h3>
+<p>Compute the deterministic NPV for garages with 3 to 8 levels and plot the results.</p>
+<div id="10" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>levels_range <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>npvs_deterministic <span class="op">=</span> [<span class="fu">calculate_npv</span>(n, demand_deterministic) for n <span class="kw">in</span> levels_range]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-fig-npv-deterministic" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">600</span>, <span class="fl">400</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Number of Levels"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"NPV (\$ millions)"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Deterministic NPV vs. Garage Size"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        xticks<span class="op">=</span><span class="fu">collect</span>(levels_range),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">barplot!</span>(ax, <span class="fu">collect</span>(levels_range), npvs_deterministic <span class="op">./</span> <span class="fl">1e6</span>; color<span class="op">=:</span>steelblue)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-npv-deterministic" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-npv-deterministic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-npv-deterministic-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-npv-deterministic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Deterministic NPV for different garage sizes. The optimal design under perfect foresight is 6 levels.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Checkpoint:</strong> Your 6-floor NPV should be approximately $10.8M and 6 floors should be the optimal size. If your numbers are significantly different, double-check your construction cost and discounting.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Which garage size maximizes NPV? Why does NPV eventually decrease for larger garages?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="section-2-demand-uncertainty" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="section-2-demand-uncertainty"><span class="header-section-number">5</span> Section 2: Demand Uncertainty</h2>
+<p>The deterministic forecast assumes we know the future perfectly. In reality, demand could be much higher or lower than projected. Let’s see what happens when we account for this uncertainty.</p>
+<section id="implement-simulate_demand" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="implement-simulate_demand"><span class="header-section-number">5.1</span> Implement <code>simulate_demand</code></h3>
+<p>Model demand as a <strong>geometric Brownian motion</strong> (GBM):</p>
+<p><span class="math display">\[D_{t+1} = D_t \cdot \exp\!\left[\left(\mu - \frac{\sigma^2}{2}\right) + \sigma\,\varepsilon_t\right], \quad \varepsilon_t \sim \mathcal{N}(0,1)\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> = <code>GROWTH_RATE</code> (the same 0.08 from Section 1) and <span class="math inline">\(\sigma\)</span> = <code>VOLATILITY</code> (0.15).</p>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The <span class="math inline">\(-\sigma^2/2\)</span> correction ensures that the <em>expected</em> demand path matches the deterministic trajectory from Section 1. Without it, the average of many GBM paths would drift above the deterministic forecast.</p>
+</div>
+</div>
+</div>
+<p><strong>Your task:</strong> replace the placeholder with a loop that generates the GBM trajectory.</p>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">    simulate_demand(n_years; mean_growth_rate, volatility, initial_demand)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">Simulate one demand trajectory of length `n_years` using geometric Brownian motion.</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">Returns a vector of demand values for years 1 through `n_years`.</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">simulate_demand</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    n_years; mean_growth_rate<span class="op">=</span>GROWTH_RATE, volatility<span class="op">=</span>VOLATILITY, initial_demand<span class="op">=</span>INITIAL_DEMAND</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: replace this with your GBM implementation</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [initial_demand <span class="op">*</span> <span class="fu">exp</span>(mean_growth_rate <span class="op">*</span> t) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_years]  <span class="co"># deterministic placeholder</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Main.Notebook.simulate_demand</code></pre>
+</div>
+</div>
+</section>
+<section id="monte-carlo-simulation" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="monte-carlo-simulation"><span class="header-section-number">5.2</span> Monte Carlo Simulation</h3>
+<p>Generate 2,000 demand trajectories and compute the NPV for each garage size under each trajectory.</p>
+<div id="16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n_scenarios <span class="op">=</span> <span class="fl">2_000</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>demand_scenarios <span class="op">=</span> [<span class="fu">simulate_demand</span>(HORIZON) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_scenarios]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute NPV for each scenario and each garage size</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>npv_results <span class="op">=</span> <span class="fu">DataFrame</span>(;</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    scenario<span class="op">=</span><span class="fu">repeat</span>(<span class="fl">1</span><span class="op">:</span>n_scenarios; inner<span class="op">=</span><span class="fu">length</span>(levels_range)),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    n_levels<span class="op">=</span><span class="fu">repeat</span>(<span class="fu">collect</span>(levels_range); outer<span class="op">=</span>n_scenarios),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    npv<span class="op">=</span><span class="dt">Float64</span>[</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">calculate_npv</span>(n, demand_scenarios[s]) for s <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_scenarios for</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        n <span class="kw">in</span> levels_range</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="18" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute ENPV for each garage size</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>enpv_by_size <span class="op">=</span> <span class="fu">combine</span>(<span class="fu">groupby</span>(npv_results, <span class="op">:</span>n_levels), <span class="op">:</span>npv <span class="op">=&gt;</span> mean <span class="op">=&gt;</span> <span class="op">:</span>enpv)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Expected NPV by garage size:"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> <span class="fu">eachrow</span>(enpv_by_size)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"  </span><span class="sc">$</span>(row.n_levels)<span class="st"> levels: \$</span><span class="sc">$</span>(<span class="fu">round</span>(row.enpv <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">2</span>))<span class="st">M"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Expected NPV by garage size:
+  3 levels: $0.0M
+  4 levels: $0.0M
+  5 levels: $0.0M
+  6 levels: $0.0M
+  7 levels: $0.0M
+  8 levels: $0.0M</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Checkpoint:</strong> The 6-floor ENPV should be approximately $5.8M. The 5-floor ENPV should be approximately $6.6M — noticeably higher. Your exact numbers will vary with the random seed, but 5 floors should beat 6.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="var-curves" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="var-curves"><span class="header-section-number">5.3</span> VaR Curves</h3>
+<p>Plot the cumulative distribution of NPV for the 5- and 6-floor designs. This is the <strong>Value at Risk</strong> (VaR) curve — it shows the probability that NPV falls below any given threshold.</p>
+<div id="cell-fig-var-rigid" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    npv_5 <span class="op">=</span> <span class="fu">sort</span>(npv_results[npv_results.n_levels <span class="op">.==</span> <span class="fl">5</span>, <span class="op">:</span>npv])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    npv_6 <span class="op">=</span> <span class="fu">sort</span>(npv_results[npv_results.n_levels <span class="op">.==</span> <span class="fl">6</span>, <span class="op">:</span>npv])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>; stop<span class="op">=</span><span class="fl">1</span>, length<span class="op">=</span>n_scenarios)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">650</span>, <span class="fl">400</span>))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"NPV (\$ millions)"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Cumulative Probability"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Value at Risk: Rigid Designs"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, npv_5 <span class="op">./</span> <span class="fl">1e6</span>, probs; label<span class="op">=</span><span class="st">"5 levels"</span>, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, npv_6 <span class="op">./</span> <span class="fl">1e6</span>, probs; label<span class="op">=</span><span class="st">"6 levels"</span>, linewidth<span class="op">=</span><span class="fl">2</span>, linestyle<span class="op">=:</span>dash)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vlines!</span>(ax, [<span class="fl">0</span>]; color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dot, linewidth<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>rb)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-var-rigid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-var-rigid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-var-rigid-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-var-rigid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Value at Risk curves for 5-floor and 6-floor rigid designs. The 6-floor design has more downside risk from over-building.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Why does the optimal size shrink from 6 to 5 floors when you account for uncertainty? What asymmetry in the payoffs causes this?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="section-3-the-flexible-design" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="section-3-the-flexible-design"><span class="header-section-number">6</span> Section 3: The Flexible Design</h2>
+<p>What if you could build small now and expand later — but only if demand justifies it? That’s a <strong>real option</strong>: the right, but not the obligation, to add capacity in the future.</p>
+<p>The premium: reinforce the columns during initial construction so that additional levels can be added later. This costs 10% more per space for the initial levels, but lets you defer the decision to expand.</p>
+<section id="implement-simulate_flexible_garage" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="implement-simulate_flexible_garage"><span class="header-section-number">6.1</span> Implement <code>simulate_flexible_garage</code></h3>
+<p>Write a function that simulates a flexible garage with an expansion rule.</p>
+<p><strong>The expansion rule:</strong></p>
+<blockquote class="blockquote">
+<p>Each year, if occupancy (demand / current capacity) exceeds <code>expand_threshold</code> (default 80%), add one level. Each added level costs <span class="math inline">\(16{,}000 \times 200 \times 1.1^{(l-1)} \times 1.1\)</span>, where <span class="math inline">\(l\)</span> is the level number being added and the extra <span class="math inline">\(\times 1.1\)</span> is the retrofit premium. Maximum total levels = <code>max_levels</code>.</p>
+</blockquote>
+<p><strong>Initial construction cost</strong> includes the retrofit premium on all initial levels:</p>
+<p><span class="math display">\[\text{Initial cost} = \sum_{l=1}^{n_0} 16{,}000 \times 200 \times 1.1^{(l-1)} \times 1.1\]</span></p>
+<p><strong>Your task:</strong> replace the placeholder with the expansion logic. You’ll need to track <code>current_levels</code> and <code>capacity</code> as they change over time.</p>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">    simulate_flexible_garage(initial_levels, demand_trajectory; expand_threshold=0.8, max_levels=MAX_LEVELS)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="st">Simulate a flexible parking garage that starts with `initial_levels` levels</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="st">and can expand by one level per year when occupancy exceeds `expand_threshold`.</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="st">Returns a NamedTuple with fields:</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="st">- `npv`: net present value</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="st">- `final_levels`: number of levels at end of horizon</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="st">- `expansions`: number of times the garage was expanded</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">simulate_flexible_garage</span>(</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    initial_levels,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    demand_trajectory;</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    expand_threshold<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    max_levels<span class="op">=</span>MAX_LEVELS,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: replace this with your implementation</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Hint: start by computing the initial construction cost (with retrofit premium),</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># then loop over years. Each year, check if occupancy &gt; threshold and expand if so.</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    npv <span class="op">=</span> <span class="fu">calculate_npv</span>(initial_levels, demand_trajectory)  <span class="co"># placeholder: ignores flexibility</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (; npv, final_levels<span class="op">=</span>initial_levels, expansions<span class="op">=</span><span class="fl">0</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>Main.Notebook.simulate_flexible_garage</code></pre>
+</div>
+</div>
+</section>
+<section id="compare-rigid-vs.-flexible" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="compare-rigid-vs.-flexible"><span class="header-section-number">6.2</span> Compare Rigid vs.&nbsp;Flexible</h3>
+<p>Run 2,000 scenarios for the flexible 4-floor garage and compare against the rigid 6-floor design.</p>
+<div id="24" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>flexible_results <span class="op">=</span> <span class="fu">map</span>(demand_scenarios) <span class="cf">do</span> d</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">simulate_flexible_garage</span>(<span class="fl">4</span>, d)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>flexible_npvs <span class="op">=</span> [r.npv for r <span class="kw">in</span> flexible_results]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>rigid_npvs <span class="op">=</span> npv_results[npv_results.n_levels <span class="op">.==</span> <span class="fl">6</span>, <span class="op">:</span>npv]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Build the comparison table:</p>
+<div id="26" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="op">=</span> <span class="fu">DataFrame</span>(;</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    Metric<span class="op">=</span>[</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Initial investment (\$M)"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ENPV (\$M)"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"5th percentile NPV (\$M)"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"99.5th percentile NPV (\$M)"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    Rigid_6_floors<span class="op">=</span>[</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sum</span>(</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                CONSTRUCTION_COST_PER_SPACE <span class="op">*</span> SPACES_PER_LEVEL <span class="op">*</span> LEVEL_COST_INCREASE<span class="op">^</span>(l <span class="op">-</span> <span class="fl">1</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                for l <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            ) <span class="op">/</span> <span class="fl">1e6</span>;</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            digits<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">mean</span>(rigid_npvs) <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">2</span>),</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">quantile</span>(rigid_npvs, <span class="fl">0.05</span>) <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">2</span>),</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">quantile</span>(rigid_npvs, <span class="fl">0.995</span>) <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">2</span>),</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    Flexible_4_plus_option<span class="op">=</span>[</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sum</span>(</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                CONSTRUCTION_COST_PER_SPACE <span class="op">*</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>                SPACES_PER_LEVEL <span class="op">*</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>                LEVEL_COST_INCREASE<span class="op">^</span>(l <span class="op">-</span> <span class="fl">1</span>) <span class="op">*</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>                RETROFIT_PREMIUM for l <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>            ) <span class="op">/</span> <span class="fl">1e6</span>;</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>            digits<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">mean</span>(flexible_npvs) <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">2</span>),</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">quantile</span>(flexible_npvs, <span class="fl">0.05</span>) <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">2</span>),</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(<span class="fu">quantile</span>(flexible_npvs, <span class="fl">0.995</span>) <span class="op">/</span> <span class="fl">1e6</span>; digits<span class="op">=</span><span class="fl">2</span>),</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>comparison</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div><div style="float: left;"><span>4×3 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame caption-top table table-sm table-striped small">
+<thead>
+<tr class="columnLabelRow header">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Metric</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Rigid_6_floors</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Flexible_4_plus_option</th>
+</tr>
+<tr class="columnLabelRow even">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="String">String</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: left;">Initial investment ($M)</td>
+<td style="text-align: right;">24.69</td>
+<td style="text-align: right;">16.34</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: left;">ENPV ($M)</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow odd">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: left;">5th percentile NPV ($M)</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="dataRow even">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">4</td>
+<td style="text-align: left;">99.5th percentile NPV ($M)</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="var-comparison" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="var-comparison"><span class="header-section-number">6.3</span> VaR Comparison</h3>
+<p>Plot the VaR curves for rigid and flexible designs on the same axes.</p>
+<div id="cell-fig-var-comparison" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    rigid_sorted <span class="op">=</span> <span class="fu">sort</span>(<span class="fu">collect</span>(rigid_npvs))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    flexible_sorted <span class="op">=</span> <span class="fu">sort</span>(flexible_npvs)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0</span>; stop<span class="op">=</span><span class="fl">1</span>, length<span class="op">=</span>n_scenarios)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">650</span>, <span class="fl">400</span>))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"NPV (\$ millions)"</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Cumulative Probability"</span>,</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Value at Risk: Rigid vs. Flexible"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, rigid_sorted <span class="op">./</span> <span class="fl">1e6</span>, probs; label<span class="op">=</span><span class="st">"Rigid (6 floors)"</span>, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        ax,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        flexible_sorted <span class="op">./</span> <span class="fl">1e6</span>,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        probs;</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Flexible (4 + option)"</span>,</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=:</span>orange,</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vlines!</span>(ax, [<span class="fl">0</span>]; color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dot, linewidth<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>rb)</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-var-comparison" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-var-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-var-comparison-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-var-comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Value at Risk: rigid 6-floor vs.&nbsp;flexible 4-floor-with-option. The flexible design shifts the entire distribution rightward — less downside, similar upside.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Your Response — Question 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The flexible design wins on every metric in the comparison table — lower initial cost, higher ENPV, less downside, more upside. In one sentence, explain the source of this “free lunch.” Then: under what conditions might the rigid design actually be preferable?</em></p>
+</div>
+</div>
+</section>
+</section>
+<section id="wrap-up" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">7</span> Wrap-Up</h2>
+<p>Key takeaways:</p>
+<ol type="1">
+<li><strong>The deterministic optimum can be wrong</strong> — uncertainty changes the best decision because payoffs are asymmetric (capped upside, uncapped downside from over-building)</li>
+<li><strong>Flexibility has quantifiable value</strong> — the option to expand shifts the entire VaR curve rightward: less downside, more upside, lower initial cost</li>
+<li><strong>A real option is a policy with a rule</strong> — “expand when occupancy &gt; 80%” is a simple policy mapping an observation (current occupancy) to an action (expand or not) via a parameter (the threshold)</li>
+<li><strong>Connection to the lecture</strong> — this expansion rule is exactly the kind of policy Monday’s lecture calls “direct policy search”: a parameterized mapping from observable information to actions, evaluated across many uncertain scenarios</li>
+</ol>
+</section>
+<section id="sec-submission" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="sec-submission"><span class="header-section-number">8</span> Submission</h2>
+<ol type="1">
+<li><p>Write your answers in the response boxes above.</p></li>
+<li><p><strong>Render to PDF:</strong></p>
+<ul>
+<li>In VS Code: Open the command palette (<code>Cmd+Shift+P</code> / <code>Ctrl+Shift+P</code>) → “Quarto: Render Document” → select Typst PDF</li>
+<li>Or from the terminal: <code>quarto render index.qmd --to typst</code></li>
+</ul></li>
+<li><p><strong>Submit the PDF</strong> to the Lab 9 assignment on Canvas.</p></li>
+<li><p><strong>Push your code</strong> to GitHub (for backup):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Lab 9 complete"</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<section id="checklist" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="checklist">Checklist</h3>
+<p>Before submitting:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Packages load without error</label></li>
+<li><label><input type="checkbox"><code>calculate_npv</code> implemented and deterministic sweep plotted (<a href="#fig-npv-deterministic" class="quarto-xref">Figure&nbsp;1</a>)</label></li>
+<li><label><input type="checkbox">Question 1 answered (deterministic optimum)</label></li>
+<li><label><input type="checkbox"><code>simulate_demand</code> implemented and Monte Carlo run (2,000 scenarios)</label></li>
+<li><label><input type="checkbox">VaR curves plotted for rigid designs (<a href="#fig-var-rigid" class="quarto-xref">Figure&nbsp;2</a>)</label></li>
+<li><label><input type="checkbox">Question 2 answered (flaw of averages)</label></li>
+<li><label><input type="checkbox"><code>simulate_flexible_garage</code> implemented with expansion rule</label></li>
+<li><label><input type="checkbox">Comparison table computed</label></li>
+<li><label><input type="checkbox">VaR comparison plotted (<a href="#fig-var-comparison" class="quarto-xref">Figure&nbsp;3</a>)</label></li>
+<li><label><input type="checkbox">Question 3 answered (source of flexibility value)</label></li>
+<li><label><input type="checkbox">Notebook renders to PDF without errors</label></li>
+</ul>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-deneufville_parkinggarage:2006" class="csl-entry" role="listitem">
+Neufville, R. de, Scholtes, S., &amp; Wang, T. (2006). Real options by spreadsheet: Parking garage case example. <em>Journal of Infrastructure Systems</em>, <em>12</em>(2), 107–111. <a href="https://doi.org/10.1061/(asce)1076-0342(2006)12:2(107)">https://doi.org/10.1061/(asce)1076-0342(2006)12:2(107)</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -563,64 +1140,25 @@ window.MathJax = {
           }
         };
       }
-        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
-        for (let i=0; i<annoteTargets.length; i++) {
-          const annoteTarget = annoteTargets[i];
-          const targetCell = annoteTarget.getAttribute("data-target-cell");
-          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
-          const contentFn = () => {
-            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-            if (content) {
-              const tipContent = content.cloneNode(true);
-              tipContent.classList.add("code-annotation-tip-content");
-              return tipContent.outerHTML;
-            }
-          }
-          const config = {
-            allowHTML: true,
-            content: contentFn,
-            onShow: (instance) => {
-              selectCodeLines(instance.reference);
-              instance.reference.classList.add('code-annotation-active');
-              window.tippy.hideAll();
-            },
-            onHide: (instance) => {
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
               unselectCodeLines();
-              instance.reference.classList.remove('code-annotation-active');
-            },
-            maxWidth: 300,
-            delay: [50, 0],
-            duration: [200, 0],
-            offset: [5, 10],
-            arrow: true,
-            appendTo: function(el) {
-              return el.parentElement.parentElement.parentElement;
-            },
-            interactive: true,
-            interactiveBorder: 10,
-            theme: 'quarto',
-            placement: 'right',
-            popperOptions: {
-              modifiers: [
-              {
-                name: 'flip',
-                options: {
-                  flipVariations: false, // true by default
-                  allowedAutoPlacements: ['right'],
-                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
-                },
-              },
-              {
-                name: 'preventOverflow',
-                options: {
-                  mainAxis: false,
-                  altAxis: false
-                }
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
               }
-              ]        
-            }      
-          };
-          window.tippy(annoteTarget, config); 
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
         }
     const findCites = (el) => {
       const parentEl = el.parentElement;
