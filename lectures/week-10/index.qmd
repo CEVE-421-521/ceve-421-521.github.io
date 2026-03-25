@@ -3,6 +3,7 @@ title: "Exploratory Modeling & Scenario Discovery"
 subtitle: "Lecture"
 date: 2026-03-23
 week: 10
+status: published
 
 format:
   revealjs: default
