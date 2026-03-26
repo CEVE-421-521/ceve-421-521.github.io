@@ -20,4 +20,17 @@ Regardless, the methods and qualitative findings are interesting.
 
 ## Discussion Questions
 
-*Discussion questions will be posted by the graduate student discussion leader.*
+These questions refer to @deneufville_parkinggarage:2006.
+
+1. What are the key takeaways from the three-step analysis presented in Table 3, particularly when comparing the strategies of "Build Small, Expand Later" versus "Build Big Now"?
+
+2. Should designers and engineers prioritize maximizing expected profit or minimizing financial risk when making infrastructure decisions?
+   What is your opinion?
+   What are your supporting arguments on that?
+
+3. What other types of infrastructure projects could benefit from a simplified spreadsheet-based decision analysis approach, beyond the parking garage example presented in the paper?
+
+4. What are the potential tradeoffs associated with incorporating flexibility into infrastructure design (e.g., higher initial costs, delays, operational complexity)?
+
+5. Under what conditions does flexibility (e.g., phased expansion) lose its value or become ineffective?
+   Can you think of any real-world examples where flexibility may not be beneficial?
