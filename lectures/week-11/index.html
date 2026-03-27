@@ -179,13 +179,6 @@ James Doss-Gollin
   <p class="date">Monday, March 30, 2026</p>
 </section>
 <section class="slide level2">
-
-<div class="callout callout-warning" style="margin-bottom: 1em;">
-<div class="callout-body"><strong>Draft:</strong> This content is under development.</div>
-</div>
-
-</section>
-<section class="slide level2">
 <h2>Three Infrastructure Puzzles</h2>
 <ul>
 <li class="fragment"><p>The <strong>Tagus River bridge</strong> (Lisbon, 1966) was built for road traffic. Rail was added in 1999 — because the original design reserved the option.</p></li>
@@ -273,14 +266,10 @@ James Doss-Gollin
 </table>
 <p>Option value ≈ <strong>$2.25M</strong> — the flexible design wins on ENPV, minimum NPV, and initial cost.</p>
 </div><div class="column" style="width:45%;">
-<div id="fig-deneufville-fig3" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-deneufville-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="deneufville_fig3.png">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-deneufville-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The flexible design shifts the entire VaR curve rightward: less downside, more upside. Source: <span class="citation" data-cites="deneufville_parkinggarage:2006">de Neufville et al. (<a href="#/references" role="doc-biblioref" onclick="">2006</a>)</span>
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="deneufville_fig3.png"></p>
+<figcaption><span class="citation" data-cites="deneufville_parkinggarage:2006">de Neufville et al. (<a href="#/references" role="doc-biblioref" onclick="">2006</a>)</span></figcaption>
 </figure>
 </div>
 </div></div>
@@ -328,11 +317,9 @@ Figure&nbsp;1: The flexible design shifts the entire VaR curve rightward: less d
 </section>
 <section class="slide level2">
 <h2>Two Paradigms for Planning Under Uncertainty</h2>
-<p><span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> classify decision support frameworks for water resources planning under climate change into two families.</p>
+<p><span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> classifies decision support frameworks for water resources planning under climate change into two families:</p>
 
-<img data-src="herman_fig1.png" class="r-stretch quarto-figure-center" id="fig-herman-fig1"><p class="caption">
-Figure&nbsp;2: We have already covered robust planning (Weeks 7–8). Today focuses on dynamic planning — the highlighted column.
-</p><aside class="notes">
+<img data-src="herman_fig1.png" class="r-stretch quarto-figure-center"><p class="caption"><span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p><aside class="notes">
 <p>Target: 1:15. Robust planning (Weeks 7–9): find alternatives that hold up across scenarios. Bottom-up, scenario-based. Students know this well. Dynamic planning (today): design policies that <em>respond</em> to new observations over time. Higher dependence on uncertainty characterization because you’re optimizing a sequence of decisions through time, not just a single action. A dynamic plan can also be robust; static robust plans tend toward overdesign because they can’t exploit information as it arrives. Point to the figure: dynamic planning is highlighted. Note that both can co-exist in practice.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -350,9 +337,7 @@ Figure&nbsp;2: We have already covered robust planning (Weeks 7–8). Today focu
 <h2>The Control Problem: Components</h2>
 <p>Dynamic planning has four components: policy structure, uncertainty characterization, solution method, and validation.</p>
 
-<img data-src="herman_fig3.png" class="r-stretch quarto-figure-center" id="fig-herman-fig3"><p class="caption">
-Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left box) observes the system and selects actions <span class="math inline">\(a_t\)</span>. Forcing <span class="math inline">\(\mathbf{e}_t\)</span> propagates through the climate-hydrology chain into the human-environmental system, producing performance metrics <span class="math inline">\(J\)</span>. From <span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>.
-</p><aside class="notes">
+<img data-src="herman_fig3.png" class="r-stretch quarto-figure-center"><p class="caption">The control policy <span class="math inline">\(\pi\)</span> (left box) observes the system and selects actions <span class="math inline">\(a_t\)</span>. Forcing <span class="math inline">\(\mathbf{e}_t\)</span> propagates through the climate-hydrology chain into the human-environmental system, producing performance metrics <span class="math inline">\(J\)</span>. From <span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>.</p><aside class="notes">
 <p>Target: 1:17. Walk students through the diagram carefully — this is the conceptual map for the lecture. Left box: the policy. Two flavors shown — SDP (value function Q, discretized states) and policy search (ANN or tree mapping I_t to a_t). We’ll discuss both. Top: the chain of forcing uncertainty — GHG emissions → GCM → regional climate → hydrology. This is the “cascade of uncertainty” from Herman. Center: the human-environmental system with its state transition f_t. This is where dike heights, reservoir levels, and infrastructure capacity live. Right: performance metrics J — cost, damages, reliability. The non-climate forcing arrow (economic, regulatory) is a nice reminder that human systems are also uncertain.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -366,7 +351,7 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
           display:block!important;
       }</style></aside>
 </section>
-<section class="slide level2">
+<section class="slide level2 smaller">
 <h2>State, Action, Forcing</h2>
 <p>Formal setup: at each time step <span class="math inline">\(t\)</span>,</p>
 <table class="caption-top">
@@ -406,8 +391,8 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
 </tbody>
 </table>
 <div class="fragment">
-<p><strong>State transition:</strong> <span class="math display">\[\mathbf{x}_{t+1} = f_t(\mathbf{x}_t,\; a_t,\; \mathbf{e}_{t+1})\]</span></p>
-<p>Actions are chosen <em>after</em> observing <span class="math inline">\(\mathbf{x}_t\)</span> — this is what makes the problem sequential.</p>
+<p><strong>State transition:</strong> <span class="math inline">\(\mathbf{x}_{t+1} = f_t(\mathbf{x}_t,\; a_t,\; \mathbf{e}_{t+1})\)</span></p>
+<p><strong>Convention:</strong> actions are chosen <em>after</em> observing <span class="math inline">\(\mathbf{x}_t\)</span></p>
 <aside class="notes">
 <p>Target: 1:20. Walk through the table one row at a time. “The dike height is a state — it’s a number we observe before we decide. The forcing is stochastic — we don’t know next year’s storm surge, but we do know the dike height right now.” The state transition equation: given where we are, what we do, and what happens, where do we end up?</p>
 <style type="text/css">
@@ -423,7 +408,7 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
       }</style></aside>
 </div>
 </section>
-<section class="slide level2">
+<section class="slide level2 smaller">
 <h2>Policy and Objective</h2>
 <p>The agent applies a <strong>policy</strong> <span class="math inline">\(\pi\)</span> to observable information <span class="math inline">\(\mathbf{I}_t\)</span>:</p>
 <p><span class="math display">\[a_t = \pi(\mathbf{I}_t)\]</span></p>
@@ -433,8 +418,7 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
 <p><span class="math display">\[\min_\pi \; \mathbb{E}_{\mathbf{e}}\!\left[\sum_{t=0}^{H-1} J_t(\mathbf{x}_t,\; a_t,\; \mathbf{e}_{t+1})\right]\]</span></p>
 </div>
 <div class="fragment">
-<p>We are optimizing <strong>a rule</strong>, not a sequence of actions.</p>
-<p>Different solution methods disagree on <em>how</em> to find the best <span class="math inline">\(\pi\)</span> — that’s the rest of this lecture.</p>
+<p>We are optimizing <strong>a rule</strong>, not a sequence of actions. Solution methods specify <em>how</em> to find the best <span class="math inline">\(\pi\)</span></p>
 <aside class="notes">
 <p>Target: 1:23. Dwell on the distinction: optimizing a rule vs.&nbsp;optimizing actions. In the static case, we pick numbers (dike height = 3.5m). In the sequential case, we pick a function (“raise the dike when the observed water level exceeds the buffer by X cm”). The expectation is over all the uncertainty in forcing — this connects to scenarios they’ve been using all semester. The subscript on the expectation, E_e, is important: we’re averaging over possible forcing trajectories. Each trajectory is a scenario. The last line sets up the three solution methods to follow.</p>
 <style type="text/css">
@@ -450,7 +434,7 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
       }</style></aside>
 </div>
 </section>
-<section class="slide level2 scrollable">
+<section class="slide level2 smaller scrollable">
 <h2>Why Is This Hard? Three Sources of Uncertainty</h2>
 <p><span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span> identify three distinct sources:</p>
 <ol type="1">
@@ -459,6 +443,7 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
 <li class="fragment"><p><strong>Endogenous human-environment uncertainty</strong> — water demand, land use, institutional capacity. <em>Often exceeds climate uncertainty on decadal planning horizons.</em></p></li>
 </ol>
 <div class="fragment">
+<p>Similar to <span class="citation" data-cites="srikrishnan_uncertainty:2022">Srikrishnan et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> framing, more tailored to water resources.</p>
 <p>A policy optimized against a narrow set of scenarios may fail outside that envelope.</p>
 <aside class="notes">
 <p>Target: 1:27. This taxonomy is directly from the paper. It’s useful because different uncertainty types call for different responses. Key insight: thermodynamic changes (SLR, snowpack loss) are more detectable and plannable around than dynamic changes (precipitation trends). That affects what indicator variables are useful. The last line is critical — foreshadows the validation discussion at the end.</p>
@@ -481,9 +466,8 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
 <p><span class="math display">\[\{a_0,\; a_1,\; \ldots,\; a_{H-1}\} = \pi(t)\]</span></p>
 <p>Actions depend only on <strong>time</strong>, not on observations.</p>
 <ul>
-<li class="fragment">Equivalent to extended static BCA: optimize once, execute forever</li>
+<li class="fragment">Optimize once, then execute</li>
 <li class="fragment">No feedback — same dike-heightening schedule regardless of whether SLR is fast or slow</li>
-<li class="fragment">To meet reliability constraints under all futures, must <strong>over-build</strong> for the worst case</li>
 <li class="fragment">Computationally simple; 300-year problem = 300 decision variables</li>
 </ul>
 <aside class="notes">
@@ -500,7 +484,7 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
           display:block!important;
       }</style></aside>
 </section>
-<section class="slide level2">
+<section class="slide level2 smaller">
 <h2>Solution Method 2: Stochastic Dynamic Programming</h2>
 <p>Closed-loop: work backward from the terminal state using <strong>Bellman’s equation</strong>.</p>
 <p><span class="math display">\[Q_t(\mathbf{x}_t) = \min_{a_t} \; \mathbb{E}_{\mathbf{e}_{t+1}}\!\left[\; J(\mathbf{x}_t,\; a_t,\; \mathbf{e}_{t+1})\; +\; \gamma\, Q_{t+1}(\mathbf{x}_{t+1})\; \right]\]</span></p>
@@ -524,7 +508,7 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
           display:block!important;
       }</style></aside>
 </section>
-<section class="slide level2">
+<section class="slide level2 smaller">
 <h2>Solution Method 3: Direct Policy Search</h2>
 <p>Instead of solving for the value function, <strong>parameterize the policy directly</strong>:</p>
 <p><span class="math display">\[a_t = \pi(\mathbf{I}_t,\; \theta)\]</span></p>
@@ -533,9 +517,6 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
 <p>Optimize <span class="math inline">\(\theta\)</span> by <strong>evaluating the policy over an ensemble of scenarios</strong>:</p>
 <p><span class="math display">\[\min_\theta \; \frac{1}{N}\sum_{i=1}^{N} \sum_{t=0}^{H-1} J_t^{(i)}(\mathbf{x}_t,\; \pi(\mathbf{I}_t,\; \theta),\; \mathbf{e}_{t+1}^{(i)})\]</span></p>
 <p>where <span class="math inline">\(i\)</span> indexes scenarios.</p>
-</div>
-<div class="fragment">
-<p>This is the <strong>scenario framework you’ve been using all semester</strong> — simulate forward, aggregate performance.</p>
 <aside class="notes">
 <p>Target: 1:38. This is the key insight to land hard. In SDP, you encode uncertainty into a probability model inside the equation. In DPS, you draw scenarios and simulate. Students have been drawing scenarios and simulating since Week 4. Function classes for π: simple threshold rules, radial basis functions, neural networks. The choice is a modeling decision. DPS scales much better than SDP: 10 parameters instead of a full value function over a discretized state space. Optimizer: often an evolutionary algorithm (can handle non-smooth, high-dimensional θ search).</p>
 <style type="text/css">
@@ -553,19 +534,20 @@ Figure&nbsp;3: The control policy <span class="math inline">\(\pi\)</span> (left
 </section>
 <section class="slide level2">
 <h2>DPS in Action: The Levee Problem</h2>
-<p>Intertemporal (open-loop): prescribe annual heightenings <span class="math inline">\(u_1, \ldots, u_{300}\)</span> at the start. Same schedule for every future.</p>
-<div class="fragment">
-<p>DPS (closed-loop): observe the <strong>rate of water rise</strong> and <strong>variability around the trend</strong>. Apply a rule: “heighten by enough to restore the buffer, plus freeboard.”</p>
-<div id="fig-garner-fig3" class="quarto-float quarto-figure quarto-figure-center">
-<figure class="quarto-float quarto-float-fig">
-<div aria-describedby="fig-garner-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img data-src="garner_fig3.png" style="width:70.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-garner-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Dike height trajectories under DPS (colored) vs.&nbsp;intertemporal (solid black), for three scenarios. Source: <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span>
-</figcaption>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li>Intertemporal (open-loop): prescribe annual heightenings <span class="math inline">\(u_1, \ldots, u_{300}\)</span> at the start. Same schedule for every future.</li>
+<li>DPS (closed-loop): observe the <strong>rate of water rise</strong> and <strong>variability around the trend</strong>. Apply a rule: “heighten by enough to restore the buffer, plus freeboard.”</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="garner_fig3.png" style="width:70.0%"></p>
+<figcaption><span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span></figcaption>
 </figure>
 </div>
+</div></div>
 <aside class="notes">
 <p>Target: 1:41. The figure makes the idea vivid without requiring students to have read the paper. Key observation: the intertemporal policy is a single rigid staircase — same for every scenario. The DPS policy adapts: under the high-SLR scenario (red) it builds aggressively; under the low-SLR scenario (green) it barely builds at all. Result: DPS achieves lower cost AND lower damages — it dominates the intertemporal approach. Save the detailed mechanics (what exactly the state variables are, the Pareto comparison) for Wednesday’s discussion.</p>
 <style type="text/css">
@@ -579,10 +561,9 @@ Figure&nbsp;4: Dike height trajectories under DPS (colored) vs.&nbsp;intertempor
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</div>
 </section>
-<section class="slide level2">
-<h2>Indicator Variables: What Do You Observe?</h2>
+<section class="slide level2 smaller">
+<h2>Choosing Indicator Variables</h2>
 <p>The policy <span class="math inline">\(\pi(\mathbf{I}_t, \theta)\)</span> is only as useful as the information in <span class="math inline">\(\mathbf{I}_t\)</span>.</p>
 <ul>
 <li class="fragment"><p>An <strong>indicator</strong> = variable + timescale + aggregation window + transform <em>“30-year moving average of annual inflow”</em> <em>“Rate of water rise over the prior 30 simulation years”</em></p></li>
@@ -662,11 +643,9 @@ Figure&nbsp;4: Dike height trajectories under DPS (colored) vs.&nbsp;intertempor
 </section>
 <section class="slide level2">
 <h2>Validation: How Good Is Your Policy?</h2>
-<p>Test the optimized policy against scenarios <em>not used in optimization</em>. Five possible outcomes (<span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, Fig. 6):</p>
+<p>Test the optimized policy against scenarios <em>not used in optimization</em>.</p>
 
-<img data-src="herman_fig6.png" style="width:90.0%" class="r-stretch quarto-figure-center" id="fig-herman-fig6"><p class="caption">
-Figure&nbsp;5: NA = no action; V = validation; O = optimization; P = perfect foresight.
-</p><aside class="notes">
+<img data-src="herman_fig6.png" style="width:90.0%" class="r-stretch quarto-figure-center" id="fig-herman-fig6"><p class="caption"><span class="citation" data-cites="herman_control:2020">Herman et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p><aside class="notes">
 <p>Target: 1:49. Five possible outcomes for a policy tested out-of-sample: 1. Meets requirement — good 2. Overfit — performs well in training, not in validation; need more/different scenarios 3. Action-constrained — even perfect foresight can’t meet target; need different actions 4. Information-constrained — perfect foresight works but your policy doesn’t; need better indicator variables 5. No adaptation needed — target met without doing anything; maybe you already have enough robustness The distinction between cases 3 and 4 is especially useful: it tells you whether you need to change WHAT you can do vs.&nbsp;WHAT you observe.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -680,7 +659,7 @@ Figure&nbsp;5: NA = no action; V = validation; O = optimization; P = perfect for
           display:block!important;
       }</style></aside>
 </section>
-<section class="slide level2">
+<section class="slide level2 smaller">
 <h2>Summary</h2>
 <ul>
 <li class="fragment"><strong>Real options</strong>: build in the right to act later; option value = ENPV gain from flexibility</li>
@@ -691,10 +670,9 @@ Figure&nbsp;5: NA = no action; V = validation; O = optimization; P = perfect for
 <li class="fragment"><strong>Validation</strong>: evaluating ≠ designing; test out-of-sample or risk overfit to your training scenarios</li>
 </ul>
 <div class="fragment">
-<p><strong>Wednesday:</strong> Fuad leads discussion of <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> and <span class="citation" data-cites="deneufville_parkinggarage:2006">de Neufville et al. (<a href="#/references" role="doc-biblioref" onclick="">2006</a>)</span>.</p>
-<p>Note: there is a known unit error in <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#/references" role="doc-biblioref" onclick="">2018</a>)</span> — storm surge is off by a factor of 10, over-weighting SLR. Methods and qualitative findings remain valid.</p>
+<p><strong>Wednesday:</strong> Fuad leads discussion of <span class="citation" data-cites="deneufville_parkinggarage:2006">de Neufville et al. (<a href="#/references" role="doc-biblioref" onclick="">2006</a>)</span>.</p>
 <aside class="notes">
-<p>Target: 1:50. Flag the error in Garner/Keller clearly so students know before discussion. The summary list should feel like a coherent arc, not a bag of concepts.</p>
+<p>Target: 1:50. The summary list should feel like a coherent arc, not a bag of concepts.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -734,6 +712,9 @@ Herman, J. D., Quinn, J. D., Steinschneider, S., Giuliani, M., &amp; Fletcher, S
 </div>
 <div id="ref-deneufville_parkinggarage:2006" class="csl-entry" role="listitem">
 de Neufville, R., Scholtes, S., &amp; Wang, T. (2006). Real <span>Options</span> by <span>Spreadsheet</span>: <span>Parking Garage Case Example</span>. <em>Journal of Infrastructure Systems</em>, <em>12</em>(2), 107–111. <a href="https://doi.org/10.1061/(asce)1076-0342(2006)12:2(107)">https://doi.org/10.1061/(asce)1076-0342(2006)12:2(107)</a>
+</div>
+<div id="ref-srikrishnan_uncertainty:2022" class="csl-entry" role="listitem">
+Srikrishnan, V., Lafferty, D. C., Wong, T. E., Lamontagne, J. R., Quinn, J. D., Sharma, S., et al. (2022). Uncertainty analysis in multi-sector systems: Considerations for risk analysis, projection, and planning for complex systems. <em>Earth’s Future</em>, <em>10</em>(8), e2021EF002644. <a href="https://doi.org/10.1029/2021EF002644">https://doi.org/10.1029/2021EF002644</a>
 </div>
 </div>
 </section>
