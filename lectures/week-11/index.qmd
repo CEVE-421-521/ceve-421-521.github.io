@@ -3,7 +3,7 @@ title: "Sequential Decision Making"
 subtitle: "Lecture"
 date: 2026-03-30
 week: 11
-status: draft
+status: published
 
 format:
   revealjs: default
@@ -80,12 +80,7 @@ This will connect naturally to the formal framework — a real option IS a polic
 Option value ≈ **\$2.25M** — the flexible design wins on ENPV, minimum NPV, and initial cost.
 :::
 ::: {.column width="45%"}
-:::{#fig-deneufville-fig3}
-![](deneufville_fig3.png)
-
-The flexible design shifts the entire VaR curve rightward: less downside, more upside.
-Source: @deneufville_parkinggarage:2006
-:::
+![@deneufville_parkinggarage:2006](deneufville_fig3.png)
 :::
 :::
 
@@ -123,14 +118,10 @@ Make the transition crisp. This is the pivot from Module 2 to today.
 
 ## Two Paradigms for Planning Under Uncertainty
 
-@herman_control:2020 classify decision support frameworks for water resources planning under climate change into two families.
+@herman_control:2020 classifies decision support frameworks for water resources planning under climate change into two families:
 
-:::{#fig-herman-fig1}
-![](herman_fig1.png)
+![@herman_control:2020](herman_fig1.png)
 
-We have already covered robust planning (Weeks 7–8).
-Today focuses on dynamic planning — the highlighted column.
-:::
 
 ::: {.notes}
 Target: 1:15.
@@ -144,13 +135,9 @@ Point to the figure: dynamic planning is highlighted. Note that both can co-exis
 
 Dynamic planning has four components: policy structure, uncertainty characterization, solution method, and validation.
 
-:::{#fig-herman-fig3}
-![](herman_fig3.png)
-
-The control policy $\pi$ (left box) observes the system and selects actions $a_t$.
+![The control policy $\pi$ (left box) observes the system and selects actions $a_t$.
 Forcing $\mathbf{e}_t$ propagates through the climate-hydrology chain into the human-environmental system, producing performance metrics $J$.
-From @herman_control:2020.
-:::
+From @herman_control:2020.](herman_fig3.png)
 
 ::: {.notes}
 Target: 1:17.
@@ -162,7 +149,7 @@ Right: performance metrics J — cost, damages, reliability.
 The non-climate forcing arrow (economic, regulatory) is a nice reminder that human systems are also uncertain.
 :::
 
-## State, Action, Forcing
+## State, Action, Forcing {.smaller}
 
 Formal setup: at each time step $t$,
 
@@ -176,9 +163,10 @@ Formal setup: at each time step $t$,
 . . .
 
 **State transition:**
-$$\mathbf{x}_{t+1} = f_t(\mathbf{x}_t,\; a_t,\; \mathbf{e}_{t+1})$$
+$\mathbf{x}_{t+1} = f_t(\mathbf{x}_t,\; a_t,\; \mathbf{e}_{t+1})$
 
-Actions are chosen *after* observing $\mathbf{x}_t$ — this is what makes the problem sequential.
+**Convention:**
+actions are chosen *after* observing $\mathbf{x}_t$
 
 ::: {.notes}
 Target: 1:20.
@@ -187,7 +175,7 @@ The forcing is stochastic — we don't know next year's storm surge, but we do k
 The state transition equation: given where we are, what we do, and what happens, where do we end up?
 :::
 
-## Policy and Objective
+## Policy and Objective {.smaller}
 
 The agent applies a **policy** $\pi$ to observable information $\mathbf{I}_t$:
 
@@ -204,8 +192,7 @@ $$\min_\pi \; \mathbb{E}_{\mathbf{e}}\!\left[\sum_{t=0}^{H-1} J_t(\mathbf{x}_t,\
 . . .
 
 We are optimizing **a rule**, not a sequence of actions.
-
-Different solution methods disagree on *how* to find the best $\pi$ — that's the rest of this lecture.
+Solution methods specify *how* to find the best $\pi$
 
 ::: {.notes}
 Target: 1:23.
@@ -216,7 +203,7 @@ The subscript on the expectation, E_e, is important: we're averaging over possib
 The last line sets up the three solution methods to follow.
 :::
 
-## Why Is This Hard? Three Sources of Uncertainty
+## Why Is This Hard? Three Sources of Uncertainty {.smaller}
 
 @herman_control:2020 identify three distinct sources:
 
@@ -232,6 +219,8 @@ The last line sets up the three solution methods to follow.
 :::
 
 . . .
+
+Similar to @srikrishnan_uncertainty:2022 framing, more tailored to water resources.
 
 A policy optimized against a narrow set of scenarios may fail outside that envelope.
 
@@ -251,9 +240,8 @@ $$\{a_0,\; a_1,\; \ldots,\; a_{H-1}\} = \pi(t)$$
 Actions depend only on **time**, not on observations.
 
 ::: {.incremental}
-- Equivalent to extended static BCA: optimize once, execute forever
+- Optimize once, then execute
 - No feedback — same dike-heightening schedule regardless of whether SLR is fast or slow
-- To meet reliability constraints under all futures, must **over-build** for the worst case
 - Computationally simple; 300-year problem = 300 decision variables
 :::
 
@@ -263,7 +251,7 @@ This is what the Garner/Keller "intertemporal" formulation does — 300 annual h
 Students can intuit the problem: if you set a schedule in 2025 assuming median SLR, you'll under-build in the high-SLR future and over-build in the low-SLR future. The policy can't adapt.
 :::
 
-## Solution Method 2: Stochastic Dynamic Programming
+## Solution Method 2: Stochastic Dynamic Programming {.smaller}
 
 Closed-loop: work backward from the terminal state using **Bellman's equation**.
 
@@ -283,7 +271,7 @@ Emphasize the key constraint: SDP requires you to specify a probability distribu
 Curse of dimensionality: doubling the number of state variables squares the state space. Practical limit is about 3-4 continuous state variables.
 :::
 
-## Solution Method 3: Direct Policy Search
+## Solution Method 3: Direct Policy Search {.smaller}
 
 Instead of solving for the value function, **parameterize the policy directly**:
 
@@ -299,10 +287,6 @@ $$\min_\theta \; \frac{1}{N}\sum_{i=1}^{N} \sum_{t=0}^{H-1} J_t^{(i)}(\mathbf{x}
 
 where $i$ indexes scenarios.
 
-. . .
-
-This is the **scenario framework you've been using all semester** — simulate forward, aggregate performance.
-
 ::: {.notes}
 Target: 1:38.
 This is the key insight to land hard. In SDP, you encode uncertainty into a probability model inside the equation. In DPS, you draw scenarios and simulate. Students have been drawing scenarios and simulating since Week 4.
@@ -313,19 +297,14 @@ Optimizer: often an evolutionary algorithm (can handle non-smooth, high-dimensio
 
 ## DPS in Action: The Levee Problem
 
-Intertemporal (open-loop): prescribe annual heightenings $u_1, \ldots, u_{300}$ at the start.
-Same schedule for every future.
-
-. . .
-
-DPS (closed-loop): observe the **rate of water rise** and **variability around the trend**.
-Apply a rule: "heighten by enough to restore the buffer, plus freeboard."
-
-:::{#fig-garner-fig3}
-![](garner_fig3.png){width=70%}
-
-Dike height trajectories under DPS (colored) vs. intertemporal (solid black), for three scenarios.
-Source: @garner_slrise:2018
+::: {.columns}
+::: {.column width="55%"}
+- Intertemporal (open-loop): prescribe annual heightenings $u_1, \ldots, u_{300}$ at the start. Same schedule for every future.
+- DPS (closed-loop): observe the **rate of water rise** and **variability around the trend**. Apply a rule: "heighten by enough to restore the buffer, plus freeboard."
+:::
+::: {.column width="45%"}
+![@garner_slrise:2018](garner_fig3.png){width=70%}
+:::
 :::
 
 ::: {.notes}
@@ -337,7 +316,7 @@ Result: DPS achieves lower cost AND lower damages — it dominates the intertemp
 Save the detailed mechanics (what exactly the state variables are, the Pareto comparison) for Wednesday's discussion.
 :::
 
-## Indicator Variables: What Do You Observe?
+## Choosing Indicator Variables {.smaller}
 
 The policy $\pi(\mathbf{I}_t, \theta)$ is only as useful as the information in $\mathbf{I}_t$.
 
@@ -416,12 +395,9 @@ The distinction matters practically: a policy evaluated robustly may still have 
 ## Validation: How Good Is Your Policy?
 
 Test the optimized policy against scenarios *not used in optimization*.
-Five possible outcomes (@herman_control:2020, Fig. 6):
 
 :::{#fig-herman-fig6}
-![](herman_fig6.png){width=90%}
-
-NA = no action; V = validation; O = optimization; P = perfect foresight.
+![@herman_control:2020](herman_fig6.png){width=90%}
 :::
 
 ::: {.notes}
@@ -435,7 +411,7 @@ Five possible outcomes for a policy tested out-of-sample:
 The distinction between cases 3 and 4 is especially useful: it tells you whether you need to change WHAT you can do vs. WHAT you observe.
 :::
 
-## Summary
+## Summary {.smaller}
 
 ::: {.incremental}
 - **Real options**: build in the right to act later; option value = ENPV gain from flexibility
@@ -448,13 +424,10 @@ The distinction between cases 3 and 4 is especially useful: it tells you whether
 
 . . .
 
-**Wednesday:** Fuad leads discussion of @garner_slrise:2018 and @deneufville_parkinggarage:2006.
-
-Note: there is a known unit error in @garner_slrise:2018 — storm surge is off by a factor of 10, over-weighting SLR. Methods and qualitative findings remain valid.
+**Wednesday:** Fuad leads discussion of @deneufville_parkinggarage:2006.
 
 ::: {.notes}
 Target: 1:50.
-Flag the error in Garner/Keller clearly so students know before discussion.
 The summary list should feel like a coherent arc, not a bag of concepts.
 :::
 
