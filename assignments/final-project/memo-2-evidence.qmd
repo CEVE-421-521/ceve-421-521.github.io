@@ -78,9 +78,14 @@ In 1-2 paragraphs, provide your overall assessment:
 ## Citations
 
 Use proper citations when referencing specific sections, data, or claims from the plan.
-Include page numbers or section references so the reader can verify your analysis (e.g., "City of Houston, 2020, p. 42").
 Use [American Geophysical Union (AGU) reference style](https://www.agu.org/publish-with-agu/publish/author-resources/grammar-style-guide#referenceformat).
 You may use any reference management software; we recommend Zotero with the MS Word plugin or BibTeX with LaTeX/Typst.
+
+**Include page numbers** when citing long reports or plans so the reader can verify your analysis.
+For example, write "City of Houston [2020, p. 42]" rather than just "City of Houston [2020]."
+In Zotero, you can add page numbers by typing `p.42` after selecting an item in the citation dialog, or by clicking the blue citation bubble and entering the page number in the locator field.
+See [Zotero's word processor plugin documentation](https://www.zotero.org/support/word_processor_plugin_usage) for details.
+In BibTeX/Quarto, use the suffix syntax: `[@cityofhouston2020, p. 42]`.
 
 ## Submission
 

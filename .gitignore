@@ -58,6 +58,7 @@ _freeze/
 *.ipynb
 *.json
 *.typ
+!exams/typst-template.typ
 
 # Labs and tutorials HTML
 labs/*/*.html

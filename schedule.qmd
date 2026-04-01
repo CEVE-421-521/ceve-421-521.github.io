@@ -51,7 +51,7 @@ You will often be encouraged to focus only on part of relevant papers.
 | | Fri., Mar. 27 | {{< material type="labs" id="lab-08-S26" label="Lab 8:" text="Scenario Discovery" href="labs/lab-08-S26/index.qmd" >}} / {{< material type="assignments" id="memo-1" label="Project:" text="Memo 1 Due" href="assignments/final-project/memo-1-framework.qmd" >}} |
 | **11** | Mon., Mar. 30 | {{< material type="lectures" id="week-11" label="Lecture:" text="Sequential Decision Making" href="lectures/week-11/index.qmd" slides="lectures/week-11/index.html" slidepdf="lectures/week-11/index.pptx" >}} |
 | | Wed., Apr. 1 | {{< material type="readings" id="week-11" label="Paper Discussion:" text="Sequential Decision Making" href="readings/week-11-reading.qmd" >}} |
-| | Fri., Apr. 3 | {{< material type="labs" id="lab-09-S26" label="Lab 9:" text="Real Options & Dynamic Policy Search" href="labs/lab-09-S26/index.qmd" >}} |
+| | Fri., Apr. 3 | {{< material type="labs" id="lab-09-S26" label="Lab 9:" text="Real Options & the Parking Garage" href="labs/lab-09-S26/index.qmd" >}} |
 | **12** | Mon., Apr. 6 | {{< material type="lectures" id="week-12" label="Lecture:" text="Multi-Objective Optimization" href="lectures/week-12/index.qmd" slides="lectures/week-12/index.html" slidepdf="lectures/week-12/index.pptx" >}} |
 | | Wed., Apr. 8 | {{< material type="readings" id="week-12" label="Paper Discussion:" text="Multi-Objective Optimization" href="readings/week-12-reading.qmd" >}} |
 | | Fri., Apr. 10 | {{< material type="labs" id="lab-10-S26" label="Lab 10:" text="Pareto Fronts" href="labs/lab-10-S26/index.qmd" >}} / {{< material type="assignments" id="memo-2" label="Project:" text="Memo 2 Due" href="assignments/final-project/memo-2-evidence.qmd" >}} |
