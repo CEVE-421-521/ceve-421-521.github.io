@@ -33,7 +33,7 @@ We are combining two threads from earlier in the course:
 - **Multiple criteria** (from the Values lecture): some things are hard to compare on a single scale.
 - **Optimization / policy search** (from the Optimal Decisions lecture): search a decision space for good actions.
 
-Today: search a decision space when *several* objectives matter and we refuse to collapse them into one number.
+Today: search a decision space when *several* objectives matter, without collapsing them into one number.
 
 ::: {.notes}
 Target: 1:05. Frame this as a synthesis week. Connect explicitly to (a) Week 9 values discussion — incommensurability, weighting is itself a value choice — and (b) the optimization framing from BCA. Multi-objective optimization is what you do when those two ideas meet.
@@ -228,7 +228,7 @@ A GA is stochastic search with a **population** instead of a single point.
 
 . . .
 
-The population is what makes GAs natural for MOO: we carry many trade-off points at once.
+The population is what makes GAs natural for MOO: many trade-off points evolve at once.
 
 ::: {.notes}
 Target: 1:39. "Hill-climbing with a crowd." No gradients required. Crossover/mutation = exploration; selection = exploitation.
@@ -318,11 +318,21 @@ Target: 1:43. The next slides build a working ε-MOEA from scratch and animate c
 
 ## ZDT1: A Test Problem {.smaller}
 
+::: {.columns}
+::: {.column width="50%"}
 A standard MOO benchmark with two decision variables $x_1, x_2 \in [0, 1]$ and two objectives (both minimized):
 
-$$f_1 = x_1, \qquad f_2 = g(x_2)\left(1 - \sqrt{f_1 / g(x_2)}\right), \qquad g(x_2) = 1 + 9 x_2$$
+$$
+\begin{align*}
+f_1 &= x_1 \\
+f_2 &= g(x_2)\left(1 - \sqrt{f_1 / g(x_2)}\right) \\
+g(x_2) &= 1 + 9 x_2
+\end{align*}
+$$
 
-The analytical Pareto front is $x_2 = 0$, giving $f_2 = 1 - \sqrt{f_1}$ on $f_1 \in [0, 1]$ — a convex curve.
+The analytical Pareto front is $x_2 = 0$, giving $f_2 = 1 - \sqrt{f_1}$ on $f_1 \in [0, 1]$.
+:::
+::: {.column width="50%"}
 
 ```{julia}
 #| code-fold: true
@@ -350,6 +360,9 @@ let
 end
 ```
 
+:::
+:::
+
 ::: {.notes}
 Target: 1:45. ZDT1 is one of the Zitzler–Deb–Thiele benchmark problems. The front is convex; algorithms have to find the whole thin red curve from $(0,1)$ to $(1,0)$. Off the front, $f_2$ shoots up.
 :::
@@ -362,8 +375,6 @@ The GA's source of new points: take a parent vector, add small Gaussian noise, c
 #| output: false
 mutate(x) = clamp.(x .+ 0.1 .* randn(length(x)), 0, 1)
 ```
-
-That's it. Local exploration around a parent.
 
 ::: {.notes}
 Target: 1:46. Real MOEAs use polynomial mutation and simulated binary crossover. Gaussian + clamp is the simplest thing that works and makes the mechanism transparent. Step size 0.1 is small enough to refine, large enough to escape local clusters.
@@ -429,6 +440,7 @@ Target: 1:50. Three cases: same box → keep the one closer to the corner; exist
 :::: {.columns}
 ::: {.column width="50%"}
 ```{julia}
+#| output: false
 N = 40
 ε = [0.05, 0.05]
 
@@ -465,9 +477,10 @@ end
 Target: 1:50. 40 random points scattered all over objective space. Archive starts as whatever subset is mutually non-dominated under the ε-grid.
 :::
 
-## One Generation at a Time {.smaller}
+## Running the Model {.smaller}
 
 ```{julia}
+#| output: false
 function step!(pop, archive, ε; p_random=0.3)
     offspring = map(1:length(pop)) do _
         x = rand() < p_random ? rand(2) : mutate(rand(pop).x)
@@ -487,6 +500,7 @@ end
 
 ```{julia}
 #| output: false
+#| code-fold: true
 gens = 50
 # Frame 0: the raw initial random population (before any selection)
 snapshots = Vector{Vector{Point2f}}()

@@ -3,10 +3,10 @@
 
 /*-- scss:defaults --*/
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Inter:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 $font-family-sans-serif: "Inter", sans-serif !default;
-$font-family-monospace: "Fira Mono", monospace !default;
+$font-family-monospace: "JuliaMono", monospace !default;
 
 // Theme colors
 // https://brand.rice.edu/university-colors
@@ -42,6 +42,35 @@ $headings-color: $grass-green !default; // because we're texturing them
 $link-color: $rice-gray;
 
 /*-- scss:rules --*/
+
+@font-face {
+    font-family: "JuliaMono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono/webfonts/JuliaMono-Regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "JuliaMono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono/webfonts/JuliaMono-RegularItalic.woff2") format("woff2");
+}
+@font-face {
+    font-family: "JuliaMono";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono/webfonts/JuliaMono-Bold.woff2") format("woff2");
+}
+@font-face {
+    font-family: "JuliaMono";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono/webfonts/JuliaMono-BoldItalic.woff2") format("woff2");
+}
 
 .boxcol {
     background-color: #000000cc;
@@ -250,9 +279,8 @@ html:has(.quarto-title-block.present) .reveal {
     background: linear-gradient(135deg, $rice-blue 0%, $dark-blue-gray 100%) !important;
 }
 
-// Code block styling
+// Code block styling — let highlight-style (github-dark) handle colors
 .reveal pre {
-    background-color: #1e1e2e;
     border-radius: 8px;
     padding: 1em;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -260,21 +288,15 @@ html:has(.quarto-title-block.present) .reveal {
     font-size: 0.7em;
 }
 
-.reveal pre code {
-    background: transparent;
-    color: #cdd6f4;
-    padding: 0;
-}
-
-// Syntax highlighting overrides for dark code blocks
-.reveal .sourceCode {
-    .kw { color: #cba6f7; } // keywords - mauve
-    .dt { color: #f9e2af; } // data types - yellow
-    .fu { color: #89b4fa; } // functions - blue
-    .st { color: #a6e3a1; } // strings - green
-    .co { color: #6c7086; } // comments - gray
-    .op { color: #89dceb; } // operators - sky
-    .dv, .fl { color: #fab387; } // numbers - peach
+// Inline code in prose: light background, dark text for legibility on white slides
+.reveal p code,
+.reveal li code,
+.reveal td code {
+    background-color: rgba($rice-blue, 0.08);
+    color: $burgundy;
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.9em;
 }
 
 // Callout boxes for slides

@@ -130,6 +130,7 @@ format:
     code-annotations: below
 
     # math and code
+    highlight-style: github
     html-math-method: mathjax
     include-in-header: mathjax-config.html
     date-format: "dddd, MMMM D, YYYY"
