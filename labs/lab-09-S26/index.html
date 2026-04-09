@@ -227,6 +227,16 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-warning callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container"><i class="callout-icon"></i></div>
+<div class="callout-caption-container flex-fill">Draft Material</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This content is under development and subject to change.</p>
+</div>
+</div>
+
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
 <p>In Monday’s lecture you saw how <strong>real options</strong> — the right, but not the obligation, to take an action in the future — can dramatically improve infrastructure design under uncertainty. The Tagus bridge reserved space for rail; the Bluewater parking garage reinforced its columns for future expansion. Both paid a small premium upfront to preserve flexibility.</p>
@@ -289,29 +299,29 @@ window.Quarto = {
 <p>These parameters come from <span class="citation" data-cites="deneufville_parkinggarage:2006">Neufville et al. (<a href="#ref-deneufville_parkinggarage:2006" role="doc-biblioref">2006</a>)</span>. We’ll use them throughout the lab.</p>
 <div id="4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Demand</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>initial_demand <span class="op">=</span> <span class="fl">750</span>       <span class="co"># spaces on opening day</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>growth_rate <span class="op">=</span> <span class="fl">0.08</span>         <span class="co"># ~8%/year; calibrated so 6-floor garage is deterministic optimum</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> INITIAL_DEMAND <span class="op">=</span> <span class="fl">750</span>      <span class="co"># spaces on opening day</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> GROWTH_RATE <span class="op">=</span> <span class="fl">0.08</span> <span class="co"># ~8%/year; calibrated so 6-floor garage is deterministic optimum</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Revenue and cost</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>revenue_per_space <span class="op">=</span> <span class="fl">10_000</span>           <span class="co"># $/year per space used</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>operating_cost_per_space <span class="op">=</span> <span class="fl">2_000</span>     <span class="co"># $/year per space available</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>land_lease <span class="op">=</span> <span class="fl">3_600_000</span>               <span class="co"># $/year</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>construction_cost_per_space <span class="op">=</span> <span class="fl">16_000</span> <span class="co"># $ per space (ground level)</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>level_cost_increase <span class="op">=</span> <span class="fl">1.10</span>           <span class="co"># 10% more per level above ground</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> REVENUE_PER_SPACE <span class="op">=</span> <span class="fl">10_000</span>  <span class="co"># $/year per space used</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> OPERATING_COST_PER_SPACE <span class="op">=</span> <span class="fl">2_000</span>  <span class="co"># $/year per space available</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> LAND_LEASE <span class="op">=</span> <span class="fl">3_600_000</span>     <span class="co"># $/year</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> CONSTRUCTION_COST_PER_SPACE <span class="op">=</span> <span class="fl">16_000</span>  <span class="co"># $ per space (ground level)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> LEVEL_COST_INCREASE <span class="op">=</span> <span class="fl">1.10</span>  <span class="co"># 10% more per level above ground</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Design</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>spaces_per_level <span class="op">=</span> <span class="fl">200</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>max_levels <span class="op">=</span> <span class="fl">8</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> SPACES_PER_LEVEL <span class="op">=</span> <span class="fl">200</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> MAX_LEVELS <span class="op">=</span> <span class="fl">8</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Economics</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>discount_rate <span class="op">=</span> <span class="fl">0.12</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>horizon <span class="op">=</span> <span class="fl">20</span>  <span class="co"># years</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> DISCOUNT_RATE <span class="op">=</span> <span class="fl">0.12</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> HORIZON <span class="op">=</span> <span class="fl">20</span>  <span class="co"># years</span></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncertainty</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>volatility <span class="op">=</span> <span class="fl">0.15</span>  <span class="co"># annual demand volatility</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> VOLATILITY <span class="op">=</span> <span class="fl">0.15</span>  <span class="co"># annual demand volatility</span></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Flexibility</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>retrofit_premium <span class="op">=</span> <span class="fl">1.10</span>  <span class="co"># 10% extra cost for adding levels later</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> RETROFIT_PREMIUM <span class="op">=</span> <span class="fl">1.10</span>  <span class="co"># 10% extra cost for adding levels later</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -324,7 +334,7 @@ window.Quarto = {
 <p><span class="math display">\[D(t) = D_0 \cdot e^{g \cdot t}\]</span></p>
 <p>where <span class="math inline">\(D_0 = 750\)</span> and <span class="math inline">\(g = 0.08\)</span>/year (approximately 8% annual growth).</p>
 <div id="6" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>demand_deterministic <span class="op">=</span> [initial_demand <span class="op">*</span> <span class="fu">exp</span>(growth_rate <span class="op">*</span> t) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>horizon]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>demand_deterministic <span class="op">=</span> [INITIAL_DEMAND <span class="op">*</span> <span class="fu">exp</span>(GROWTH_RATE <span class="op">*</span> t) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>HORIZON]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="implement-calculate_npv" class="level3" data-number="4.2">
@@ -344,7 +354,7 @@ window.Quarto = {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">    calculate_npv(n_levels, demand)</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">Compute the NPV of a rigid parking garage with `n_levels` levels,</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">given a demand trajectory `demand` (a vector of length `horizon`).</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">given a demand trajectory `demand` (a vector of length `HORIZON`).</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">Returns the NPV in dollars.</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
@@ -421,7 +431,7 @@ Figure&nbsp;1: Deterministic NPV for different garage sizes. The optimal design 
 <h3 data-number="5.1" class="anchored" data-anchor-id="implement-simulate_demand"><span class="header-section-number">5.1</span> Implement <code>simulate_demand</code></h3>
 <p>Model demand as a <strong>geometric Brownian motion</strong> (GBM):</p>
 <p><span class="math display">\[D_{t+1} = D_t \cdot \exp\!\left[\left(\mu - \frac{\sigma^2}{2}\right) + \sigma\,\varepsilon_t\right], \quad \varepsilon_t \sim \mathcal{N}(0,1)\]</span></p>
-<p>where <span class="math inline">\(\mu\)</span> = <code>growth_rate</code> (the same 0.08 from Section 1) and <span class="math inline">\(\sigma\)</span> = <code>volatility</code> (0.15).</p>
+<p>where <span class="math inline">\(\mu\)</span> = <code>GROWTH_RATE</code> (the same 0.08 from Section 1) and <span class="math inline">\(\sigma\)</span> = <code>VOLATILITY</code> (0.15).</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -441,10 +451,10 @@ Figure&nbsp;1: Deterministic NPV for different garage sizes. The optimal design 
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">Returns a vector of demand values for years 1 through `n_years`.</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">simulate_demand</span>(</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    n_years; mean_growth_rate<span class="op">=</span>growth_rate, σ<span class="op">=</span>volatility, D₀<span class="op">=</span>initial_demand</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    n_years; mean_growth_rate<span class="op">=</span>GROWTH_RATE, volatility<span class="op">=</span>VOLATILITY, initial_demand<span class="op">=</span>INITIAL_DEMAND</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: replace this with your GBM implementation</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [D₀ <span class="op">*</span> <span class="fu">exp</span>(mean_growth_rate <span class="op">*</span> t) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_years]  <span class="co"># deterministic placeholder</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [initial_demand <span class="op">*</span> <span class="fu">exp</span>(mean_growth_rate <span class="op">*</span> t) for t <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_years]  <span class="co"># deterministic placeholder</span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>Main.Notebook.simulate_demand</code></pre>
@@ -456,7 +466,7 @@ Figure&nbsp;1: Deterministic NPV for different garage sizes. The optimal design 
 <p>Generate 2,000 demand trajectories and compute the NPV for each garage size under each trajectory.</p>
 <div id="16" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>n_scenarios <span class="op">=</span> <span class="fl">2_000</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>demand_scenarios <span class="op">=</span> [<span class="fu">simulate_demand</span>(horizon) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_scenarios]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>demand_scenarios <span class="op">=</span> [<span class="fu">simulate_demand</span>(HORIZON) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_scenarios]</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute NPV for each scenario and each garage size</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>npv_results <span class="op">=</span> <span class="fu">DataFrame</span>(;</span>
@@ -562,7 +572,7 @@ Figure&nbsp;2: Value at Risk curves for 5-floor and 6-floor rigid designs. The 6
 <p><strong>Your task:</strong> replace the placeholder with the expansion logic. You’ll need to track <code>current_levels</code> and <code>capacity</code> as they change over time.</p>
 <div id="22" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">    simulate_flexible_garage(initial_levels, demand_trajectory; expand_threshold=0.8, n_max=max_levels)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">    simulate_flexible_garage(initial_levels, demand_trajectory; expand_threshold=0.8, max_levels=MAX_LEVELS)</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="st">Simulate a flexible parking garage that starts with `initial_levels` levels</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="st">and can expand by one level per year when occupancy exceeds `expand_threshold`.</span></span>
@@ -576,7 +586,7 @@ Figure&nbsp;2: Value at Risk curves for 5-floor and 6-floor rigid designs. The 6
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    initial_levels,</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    demand_trajectory;</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    expand_threshold<span class="op">=</span><span class="fl">0.8</span>,</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    n_max<span class="op">=</span>max_levels,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    max_levels<span class="op">=</span>MAX_LEVELS,</span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: replace this with your implementation</span></span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Hint: start by computing the initial construction cost (with retrofit premium),</span></span>
@@ -611,7 +621,7 @@ Figure&nbsp;2: Value at Risk curves for 5-floor and 6-floor rigid designs. The 6
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    Rigid_6_floors<span class="op">=</span>[</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sum</span>(</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                construction_cost_per_space <span class="op">*</span> spaces_per_level <span class="op">*</span> level_cost_increase<span class="op">^</span>(l <span class="op">-</span> <span class="fl">1</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                CONSTRUCTION_COST_PER_SPACE <span class="op">*</span> SPACES_PER_LEVEL <span class="op">*</span> LEVEL_COST_INCREASE<span class="op">^</span>(l <span class="op">-</span> <span class="fl">1</span>)</span>
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                for l <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span></span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            ) <span class="op">/</span> <span class="fl">1e6</span>;</span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            digits<span class="op">=</span><span class="fl">2</span>,</span>
@@ -623,10 +633,10 @@ Figure&nbsp;2: Value at Risk curves for 5-floor and 6-floor rigid designs. The 6
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    Flexible_4_plus_option<span class="op">=</span>[</span>
 <span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(</span>
 <span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>            <span class="fu">sum</span>(</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                construction_cost_per_space <span class="op">*</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>                spaces_per_level <span class="op">*</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>                level_cost_increase<span class="op">^</span>(l <span class="op">-</span> <span class="fl">1</span>) <span class="op">*</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>                retrofit_premium for l <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                CONSTRUCTION_COST_PER_SPACE <span class="op">*</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>                SPACES_PER_LEVEL <span class="op">*</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>                LEVEL_COST_INCREASE<span class="op">^</span>(l <span class="op">-</span> <span class="fl">1</span>) <span class="op">*</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>                RETROFIT_PREMIUM for l <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
 <span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>            ) <span class="op">/</span> <span class="fl">1e6</span>;</span>
 <span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>            digits<span class="op">=</span><span class="fl">2</span>,</span>
 <span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>        ),</span>
