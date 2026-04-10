@@ -139,39 +139,10 @@ window.MathJax = {
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <meta property="og:title" content="Lab 10: Pareto Fronts – CEVE 421/521 – Spring 2026">
 <meta property="og:description" content="CEVE 421/521">
-<meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-10-S26/index_files/figure-html/fig-surge-slr-output-1.svg">
+<meta property="og:image" content="https://ceve-421-521.github.io/labs/lab-10-S26/index_files/figure-html/fig-pair-plot-output-1.svg">
 <meta property="og:site_name" content="CEVE 421/521 – Spring 2026">
 </head>
 
@@ -187,13 +158,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#before-lab" id="toc-before-lab" class="nav-link" data-scroll-target="#before-lab">Before Lab</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#static-grid" id="toc-static-grid" class="nav-link" data-scroll-target="#static-grid">Static Grid and Trade-offs</a></li>
-  <li><a href="#moo" id="toc-moo" class="nav-link" data-scroll-target="#moo">Adaptive Policies</a></li>
-  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up">Wrap-Up</a></li>
-  <li><a href="#sec-submission" id="toc-sec-submission" class="nav-link" data-scroll-target="#sec-submission">Submission</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
+  <li><a href="#before-lab" id="toc-before-lab" class="nav-link" data-scroll-target="#before-lab"><span class="header-section-number">2</span> Before Lab</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">3</span> Setup</a></li>
+  <li><a href="#section-1-brute-force-trade-offs" id="toc-section-1-brute-force-trade-offs" class="nav-link" data-scroll-target="#section-1-brute-force-trade-offs"><span class="header-section-number">4</span> Section 1: Brute-Force Trade-offs</a></li>
+  <li><a href="#section-2-multi-objective-optimization" id="toc-section-2-multi-objective-optimization" class="nav-link" data-scroll-target="#section-2-multi-objective-optimization"><span class="header-section-number">5</span> Section 2: Multi-Objective Optimization</a></li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="header-section-number">6</span> Wrap-Up</a></li>
+  <li><a href="#sec-submission" id="toc-sec-submission" class="nav-link" data-scroll-target="#sec-submission"><span class="header-section-number">7</span> Submission</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/edit/main/labs/lab-10-S26/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://www.github.com/ceve-421-521/ceve-421-521.github.io/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -226,24 +197,32 @@ window.Quarto = {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>Monday’s lecture used weighted sums to combine objectives — but weights embed value judgments. What if we showed decision-makers the full trade-off instead?</p>
-<p>In this lab you will:</p>
+<div class="callout callout-warning callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container"><i class="callout-icon"></i></div>
+<div class="callout-caption-container flex-fill">Draft Material</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This content is under development and subject to change.</p>
+</div>
+</div>
+
+<section id="overview" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
+<p>Monday’s lecture used weights to combine objectives — but weights embed value judgments. What if we showed decision-makers the full trade-off instead?</p>
+<p>In this lab you’ll do two things:</p>
 <ol type="1">
-<li>Evaluate a <strong>grid of static dike heightenings</strong> and identify which ones are non-dominated on two objectives (investment cost vs.&nbsp;expected damages).</li>
-<li>Use <strong>NSGA-II</strong> to search for <strong>adaptive</strong> buffer/freeboard policies that decide how much to heighten the dike each year in response to observed water levels.</li>
-<li>Compare the adaptive Pareto front to the static grid — and to the policy you recommended in Lab 8.</li>
+<li><strong>Visualize trade-offs</strong> across 4 objectives using a grid of static house elevations</li>
+<li><strong>Use NSGA-II</strong> to find Pareto-optimal adaptive policies that decide when and how much to elevate</li>
 </ol>
-<p>The case study is the <strong>Eijgenraam Ring 15 dike</strong> you met in Lab 8 <span class="citation" data-cites="eijgenraam_flooding:2014">(<a href="#ref-eijgenraam_flooding:2014" role="doc-biblioref">Eijgenraam et al., 2014</a>)</span>, now reformulated with annual timesteps so adaptive policies can react to observed flood conditions. This follows <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span>, who used Direct Policy Search (DPS) to show that adaptive dike heightening strategies can Pareto-dominate static ones.</p>
-<p><strong>References:</strong></p>
+<p>This builds on Lab 9’s real options idea: instead of committing to a single elevation upfront, an adaptive policy can elevate the house over time in response to observed flood risk. The house elevation model comes from <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span>.</p>
+<p><strong>Reference:</strong></p>
 <ul>
-<li><span class="citation" data-cites="eijgenraam_flooding:2014">Eijgenraam et al. (<a href="#ref-eijgenraam_flooding:2014" role="doc-biblioref">2014</a>)</span> — the base dike model</li>
-<li><span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span> — Direct Policy Search for sea-level rise adaptation</li>
+<li><span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span> — the adaptive elevation strategy used in this lab</li>
 </ul>
 </section>
-<section id="before-lab" class="level2">
-<h2 class="anchored" data-anchor-id="before-lab">Before Lab</h2>
+<section id="before-lab" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="before-lab"><span class="header-section-number">2</span> Before Lab</h2>
 <p><strong>Complete these steps BEFORE coming to lab:</strong></p>
 <ol type="1">
 <li><p><strong>Accept the GitHub Classroom assignment</strong> (link on Canvas)</p></li>
@@ -259,16 +238,16 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Submission:</strong> Render this notebook to PDF and submit the PDF to Canvas. See <a href="#sec-submission" class="quarto-xref">Section&nbsp;5</a> for details.</p>
+<p><strong>Submission:</strong> You will render this notebook to PDF and submit the PDF to Canvas. See <a href="#sec-submission" class="quarto-xref">Section&nbsp;7</a> for details.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>Run the cells in this section to load packages and the dike model. You don’t need to modify any of this code — just run it.</p>
-<section id="packages" class="level3">
-<h3 class="anchored" data-anchor-id="packages">Packages</h3>
+<section id="setup" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="setup"><span class="header-section-number">3</span> Setup</h2>
+<p>Run the cells in this section to load packages and define the model. You don’t need to modify any of this code — just run it and read the comments.</p>
+<section id="packages" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">3.1</span> Packages</h3>
 <div id="2" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> !<span class="fu">isfile</span>(<span class="st">"Manifest.toml"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> <span class="bu">Pkg</span></span>
@@ -281,223 +260,183 @@ window.Quarto = {
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Distributions</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Random</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Statistics</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Unitful</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Metaheuristics</span>  <span class="co"># loads the optimization extension</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">2026</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="bu">Metaheuristics</span>  <span class="co"># loads the optimization extension</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">Random</span>.<span class="fu">seed!</span>(<span class="fl">2026</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="the-dike-model" class="level3">
-<h3 class="anchored" data-anchor-id="the-dike-model">The Dike Model</h3>
-<p>The <code>eijgenraam_timestep.jl</code> file defines a timestepping version of the Ring 15 dike model from Lab 8. Each year, a stochastic water level (surge on top of a polynomial SLR trajectory) arrives; the policy decides whether to heighten the dike; failures and costs accumulate with discounting.</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Explore the model.</strong> Open <code>eijgenraam_timestep.jl</code> in VS Code and skim it. You don’t need to memorize every line, but you should be able to identify:</p>
-<ul>
-<li>the <strong>config</strong> (fixed Ring 15 parameters),</li>
-<li>the <strong>scenario</strong> (uncertain inputs: water-level trajectory + economic parameters),</li>
-<li>the two <strong>policies</strong> (static one-shot heightening, adaptive buffer/freeboard rule), and</li>
-<li>the <strong>outcome</strong> metrics (investment cost, expected damages, reliability).</li>
-</ul>
-<p>If any of the SimOptDecisions macros (<code>@scenariodef</code>, <code>@policydef</code>, <code>@outcomedef</code>) or the callback functions (<code>get_action</code>, <code>run_timestep</code>, <code>compute_outcome</code>) are unfamiliar, ask Copilot / Claude Code / Gemini for a line-by-line walkthrough. The AI assistant can explain the framework in context; you should not be memorizing SimOptDecisions syntax.</p>
-</div>
-</div>
-</div>
+<section id="model" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="model"><span class="header-section-number">3.2</span> Model</h3>
+<p>The house elevation model simulates a coastal house over a 70-year horizon. Each year, storm surge can flood the house; elevating the house reduces flood damage but costs money upfront.</p>
 <div id="4" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="st">"eijgenraam_timestep.jl"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="scenarios" class="level3">
-<h3 class="anchored" data-anchor-id="scenarios">Scenarios</h3>
-<p>We sample 100 scenarios for both parts of the lab.</p>
-<p><strong>The only uncertainty we vary is sea-level rise.</strong> Each scenario draws a different polynomial SLR trajectory <span class="math inline">\(z_t = a + b t + c t^2\)</span> from broad distributions over the coefficients, and then adds annual storm surges drawn from a fixed GEV calibrated to the Sewells Point, Norfolk VA tide gauge <span class="citation" data-cites="doss-gollin_subjective:2023">(<a href="#ref-doss-gollin_subjective:2023" role="doc-biblioref">Doss-Gollin &amp; Keller, 2023</a>)</span>. The starting dike height, the storm surge distribution, the discount rate, and the economic parameters are all <strong>fixed</strong> — students should be able to look at differences across scenarios and attribute them to one thing: is SLR fast or slow?</p>
-<p>Sharing the scenario set across policies means differences we observe are <strong>attributable to the policy</strong>, not to sampling noise.</p>
-<div id="6" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">DikeConfig</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n_scenarios <span class="op">=</span> <span class="fl">100</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> <span class="bu">Random</span>.<span class="fu">Xoshiro</span>(<span class="fl">2026</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>scenarios <span class="op">=</span> [<span class="fu">sample_dike_scenario</span>(rng, config) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_scenarios]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Config: </span><span class="sc">$</span>(config.horizon)<span class="st">-year horizon, starting dike H0 = </span><span class="sc">$</span>(config.H0)<span class="st"> cm"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Scenarios: </span><span class="sc">$</span>(n_scenarios)<span class="st"> sampled futures (SLR uncertainty only)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="surge-pdf-and-slr-trajectories" class="level3">
-<h3 class="anchored" data-anchor-id="surge-pdf-and-slr-trajectories">Surge PDF and SLR Trajectories</h3>
-<p>Before running any policy, let’s look at what we actually sampled: the fixed Norfolk-calibrated GEV surge distribution <span class="citation" data-cites="doss-gollin_subjective:2023">(<a href="#ref-doss-gollin_subjective:2023" role="doc-biblioref">Doss-Gollin &amp; Keller, 2023</a>)</span> (converted to feet using <code>Unitful</code>) and the polynomial MSL trajectories across 20 representative scenarios.</p>
-<div id="cell-fig-surge-slr" class="cell" data-execution_count="1">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">900</span>, <span class="fl">400</span>))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- Surge PDF in feet ---</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cm_to_ft</span>(x) <span class="op">=</span> <span class="fu">ustrip</span>(u<span class="st">"ft"</span>, x <span class="op">*</span> u<span class="st">"cm"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">m_to_ft</span>(x)  <span class="op">=</span> <span class="fu">ustrip</span>(u<span class="st">"ft"</span>, x <span class="op">*</span> u<span class="st">"m"</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    surge_dist_m <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        config.mu_surge_m, config.sigma_surge_m, config.xi_surge</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    xs_m  <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0.0</span>, <span class="fl">4.0</span>; length<span class="op">=</span><span class="fl">400</span>)              <span class="co"># meters</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    pdf_m <span class="op">=</span> <span class="fu">pdf</span>.(surge_dist_m, xs_m)                 <span class="co"># density on meters</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    xs_ft <span class="op">=</span> <span class="fu">m_to_ft</span>.(xs_m)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert density: if X in m, Y = X * 3.28084 ft/m, so f_Y(y) = f_X(x)/3.28084</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    pdf_ft <span class="op">=</span> pdf_m <span class="op">./</span> <span class="fl">3.28084</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Annual max storm surge (ft)"</span>,</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Density"</span>,</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Norfolk-like GEV (μ=</span><span class="sc">$</span>(config.mu_surge_m)<span class="st"> m, σ=</span><span class="sc">$</span>(config.sigma_surge_m)<span class="st"> m, ξ=</span><span class="sc">$</span>(config.xi_surge)<span class="st">)"</span>,</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax1, xs_ft, pdf_ft; color<span class="op">=:</span>steelblue, linewidth<span class="op">=</span><span class="fl">2</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mark some quantiles</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (q, label) <span class="kw">in</span> [(<span class="fl">0.5</span>, <span class="st">"p50"</span>), (<span class="fl">0.9</span>, <span class="st">"p90"</span>), (<span class="fl">0.99</span>, <span class="st">"p99"</span>)]</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        qv_m  <span class="op">=</span> <span class="fu">quantile</span>(surge_dist_m, q)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        qv_ft <span class="op">=</span> <span class="fu">m_to_ft</span>(qv_m)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">vlines!</span>(ax1, [qv_ft]; color<span class="op">=:</span>gray, linestyle<span class="op">=:</span>dash)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">text!</span>(ax1, qv_ft, <span class="fu">maximum</span>(pdf_ft) <span class="op">*</span> <span class="fl">0.9</span>;</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>              text<span class="op">=</span>label, align<span class="op">=</span>(<span class="op">:</span>left, <span class="op">:</span>top), fontsize<span class="op">=</span><span class="fl">10</span>)</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># --- SLR trajectories in feet ---</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    years <span class="op">=</span> <span class="fl">1</span><span class="op">:</span>(config.horizon)</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">2</span>];</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Year"</span>,</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"MSL anomaly (ft)"</span>,</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Polynomial SLR trajectories (20 scenarios)"</span>,</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">NOTE</span><span class="co">: these 20 MSL trajectories are sampled INDEPENDENTLY (with their own</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># seeded RNG) purely for visualization — they are NOT the same draws as the</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 100 scenarios used in the rest of the lab. We can't recover MSL from a</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># scenario's water level after the fact (surge is baked in), so we re-draw</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (a, b, c) triples from the same distributions just to show the shape.</span></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    display_rng <span class="op">=</span> <span class="bu">Random</span>.<span class="fu">Xoshiro</span>(<span class="fl">7</span>)</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>        a <span class="op">=</span> <span class="fu">rand</span>(display_rng, <span class="fu">Normal</span>(<span class="fl">0.0</span>, <span class="fl">5.0</span>))</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> <span class="fu">rand</span>(display_rng, <span class="fu">truncated</span>(<span class="fu">Normal</span>(<span class="fl">0.3</span>, <span class="fl">0.1</span>); lower<span class="op">=</span><span class="fl">0.05</span>))</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>        c <span class="op">=</span> <span class="fu">rand</span>(display_rng, <span class="fu">truncated</span>(<span class="fu">Normal</span>(<span class="fl">0.005</span>, <span class="fl">0.003</span>); lower<span class="op">=</span><span class="fl">0.0</span>))</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>        z_cm <span class="op">=</span> [a <span class="op">+</span> b <span class="op">*</span> t <span class="op">+</span> c <span class="op">*</span> t<span class="op">^</span><span class="fl">2</span> for t <span class="kw">in</span> years]</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>        z_ft <span class="op">=</span> <span class="fu">cm_to_ft</span>.(z_cm)</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax2, years, z_ft; color<span class="op">=</span>(<span class="op">:</span>steelblue, <span class="fl">0.4</span>), linewidth<span class="op">=</span><span class="fl">1</span>)</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<summary>Model definitions (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># === Configuration ===</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Base</span>.<span class="pp">@kwdef</span> <span class="kw">struct</span> HouseConfig{T<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>} <span class="op">&lt;:</span><span class="dt"> AbstractConfig</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    horizon<span class="op">::</span><span class="dt">Int </span><span class="op">=</span> <span class="fl">70</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    house_height<span class="op">::</span><span class="dt">T </span><span class="op">=</span> <span class="fl">4.0</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    house_area_ft2<span class="op">::</span><span class="dt">T </span><span class="op">=</span> <span class="fl">1500.0</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    house_value<span class="op">::</span><span class="dt">T </span><span class="op">=</span> <span class="fl">200_000.0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># === Scenario ===</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="pp">@scenariodef</span> HouseScenario <span class="cf">begin</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@timeseries</span> water_levels</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@continuous</span> dd_threshold</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@continuous</span> dd_saturation</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@continuous</span> discount_rate</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">sample_scenario</span>(rng<span class="op">::</span><span class="dt">AbstractRNG</span>, horizon<span class="op">::</span><span class="dt">Int</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw GEV parameters from prior distributions</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    μ <span class="op">=</span> <span class="fu">rand</span>(rng, <span class="fu">Normal</span>(<span class="fl">2.8</span>, <span class="fl">0.3</span>))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    σ <span class="op">=</span> <span class="fu">rand</span>(rng, <span class="fu">truncated</span>(<span class="fu">Normal</span>(<span class="fl">1.0</span>, <span class="fl">0.15</span>); lower<span class="op">=</span><span class="fl">0.3</span>))</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    ξ <span class="op">=</span> <span class="fu">rand</span>(rng, <span class="fu">truncated</span>(<span class="fu">Normal</span>(<span class="fl">0.15</span>, <span class="fl">0.05</span>); lower<span class="op">=-</span><span class="fl">0.2</span>, upper<span class="op">=</span><span class="fl">0.5</span>))</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate water level time series from GEV</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    surge_dist <span class="op">=</span> <span class="fu">GeneralizedExtremeValue</span>(μ, σ, ξ)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    water_levels <span class="op">=</span> [<span class="fu">rand</span>(rng, surge_dist) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>horizon]</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HouseScenario</span>(;</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        water_levels<span class="op">=</span>water_levels,</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        dd_threshold<span class="op">=</span><span class="fu">rand</span>(rng, <span class="fu">Normal</span>(<span class="fl">0.0</span>, <span class="fl">0.25</span>)),</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        dd_saturation<span class="op">=</span><span class="fu">rand</span>(rng, <span class="fu">Normal</span>(<span class="fl">8.0</span>, <span class="fl">0.5</span>)),</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        discount_rate<span class="op">=</span><span class="fu">rand</span>(rng, <span class="fu">truncated</span>(<span class="fu">Normal</span>(<span class="fl">0.03</span>, <span class="fl">0.015</span>); lower<span class="op">=</span><span class="fl">0.01</span>, upper<span class="op">=</span><span class="fl">0.07</span>)),</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co"># === State and Action ===</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> HouseState{T<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>} <span class="op">&lt;:</span><span class="dt"> AbstractState</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    elevation_ft<span class="op">::</span><span class="dt">T</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ElevationAction{T<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>} <span class="op">&lt;:</span><span class="dt"> AbstractAction</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    elevation_ft<span class="op">::</span><span class="dt">T</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co"># === Outcome ===</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="pp">@outcomedef</span> HouseOutcome <span class="cf">begin</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@continuous</span> construction_cost</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@continuous</span> npv_damages</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="co"># === Physics ===</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">depth_damage</span>(depth<span class="op">::</span><span class="dt">T</span>, threshold<span class="op">::</span><span class="dt">T</span>, saturation<span class="op">::</span><span class="dt">T</span>) <span class="kw">where</span> {T<span class="op">&lt;:</span><span class="dt">AbstractFloat</span>}</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    depth <span class="op">&lt;=</span> threshold <span class="op">&amp;&amp;</span> <span class="cf">return</span> <span class="fu">zero</span>(T)</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    depth <span class="op">&gt;=</span> saturation <span class="op">&amp;&amp;</span> <span class="cf">return</span> <span class="fu">one</span>(T)</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    midpoint <span class="op">=</span> (threshold <span class="op">+</span> saturation) <span class="op">/</span> <span class="fl">2</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    steepness <span class="op">=</span> <span class="fu">T</span>(<span class="fl">6</span>) <span class="op">/</span> (saturation <span class="op">-</span> threshold)</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">one</span>(T) <span class="op">/</span> (<span class="fu">one</span>(T) <span class="op">+</span> <span class="fu">exp</span>(<span class="op">-</span>steepness <span class="op">*</span> (depth <span class="op">-</span> midpoint)))</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">elevation_cost</span>(Δh<span class="op">::</span><span class="dt">Real</span>, area_ft2<span class="op">::</span><span class="dt">Real</span>, house_value<span class="op">::</span><span class="dt">Real</span>)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    Δh <span class="op">&lt;=</span> <span class="fl">0</span> <span class="op">&amp;&amp;</span> <span class="cf">return</span> <span class="fl">0.0</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    base_cost <span class="op">=</span> <span class="fl">20_745.0</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    thresholds <span class="op">=</span> [<span class="fl">0.0</span>, <span class="fl">5.0</span>, <span class="fl">8.5</span>, <span class="fl">12.0</span>, <span class="fl">14.0</span>]</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    rates <span class="op">=</span> [<span class="fl">80.36</span>, <span class="fl">82.5</span>, <span class="fl">86.25</span>, <span class="fl">103.75</span>, <span class="fl">113.75</span>]</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    rate <span class="op">=</span> rates[<span class="fl">1</span>]</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>(<span class="fu">length</span>(thresholds) <span class="op">-</span> <span class="fl">1</span>)</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> Δh <span class="op">&lt;=</span> thresholds[i <span class="op">+</span> <span class="fl">1</span>]</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>            t <span class="op">=</span> (Δh <span class="op">-</span> thresholds[i]) <span class="op">/</span> (thresholds[i <span class="op">+</span> <span class="fl">1</span>] <span class="op">-</span> thresholds[i])</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>            rate <span class="op">=</span> rates[i] <span class="op">+</span> t <span class="op">*</span> (rates[i <span class="op">+</span> <span class="fl">1</span>] <span class="op">-</span> rates[i])</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>        rate <span class="op">=</span> rates[i <span class="op">+</span> <span class="fl">1</span>]</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (base_cost <span class="op">+</span> area_ft2 <span class="op">*</span> rate) <span class="op">/</span> house_value</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="fu">elevation_cost</span>(Δh<span class="op">::</span><span class="dt">Real</span>) <span class="op">=</span> <span class="fu">elevation_cost</span>(Δh, <span class="fl">1500.0</span>, <span class="fl">200_000.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<div id="fig-surge-slr" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-surge-slr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-surge-slr-output-1.svg" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-surge-slr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Left: the fixed Norfolk-calibrated GEV annual-max storm surge distribution (PDF, in feet). Right: polynomial MSL trajectories <span class="math inline">\(z_t = a + b t + c t^2\)</span> for 20 representative scenarios (feet above baseline).
-</figcaption>
-</figure>
-</div>
-</div>
 </div>
 </section>
-<section id="metrics" class="level3">
-<h3 class="anchored" data-anchor-id="metrics">Metrics</h3>
-<p>When the optimizer evaluates a candidate policy, it runs that policy on all 100 scenarios and gets 100 <code>DikeOutcome</code> values back — one per scenario. It then needs a single number (actually two, since we have two objectives) per policy to compare against others. That’s what <code>calculate_metrics</code> does: it <strong>aggregates outcomes across scenarios</strong> into the two summary statistics we’ll optimize over.</p>
-<p>Matching <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span>, the two objectives are:</p>
-<ul>
-<li><code>total_investment</code> — average discounted investment cost across scenarios, in M€</li>
-<li><code>total_loss</code> — average discounted expected damages across scenarios, in M€</li>
-</ul>
-<p>We also compute <code>reliability</code> (fraction of years without overtopping) as a diagnostic alongside the two objectives.</p>
+<section id="policies" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="policies"><span class="header-section-number">3.3</span> Policies</h3>
+<p>We define two policy types.</p>
+<p><strong>Static policy:</strong> elevate the house once, at the start, to a fixed height.</p>
+<div id="6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@policydef</span> StaticElevationPolicy <span class="cf">begin</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@continuous</span> elevation_ft <span class="fl">0.0</span> <span class="fl">14.0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Adaptive policy:</strong> each year, check if the gap between the floor level and the current water level is less than a <code>buffer</code>. If so, elevate by enough to restore the buffer plus additional <code>freeboard</code>. This is inspired by the adaptive strategy in <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span> — rather than committing to a single elevation upfront, the homeowner responds to observed conditions.</p>
+<div id="8" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">@policydef</span> AdaptiveElevationPolicy <span class="cf">begin</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@continuous</span> buffer <span class="fl">0.0</span> <span class="fl">6.0</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="pp">@continuous</span> freeboard <span class="fl">0.0</span> <span class="fl">6.0</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="callbacks" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="callbacks"><span class="header-section-number">3.4</span> Callbacks</h3>
+<p>These callbacks connect the policies and physics to the simulation framework. You don’t need to modify them.</p>
 <div id="10" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculate_metrics</span>(outcomes)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    invest <span class="op">=</span> [SimOptDecisions.<span class="fu">value</span>(o.investment_cost)  for o <span class="kw">in</span> outcomes]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    damage <span class="op">=</span> [SimOptDecisions.<span class="fu">value</span>(o.expected_damages) for o <span class="kw">in</span> outcomes]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    rel    <span class="op">=</span> [SimOptDecisions.<span class="fu">value</span>(o.reliability)      for o <span class="kw">in</span> outcomes]</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        total_investment <span class="op">=</span> <span class="fu">mean</span>(invest),</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        total_loss       <span class="op">=</span> <span class="fu">mean</span>(damage),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        reliability      <span class="op">=</span> <span class="fu">mean</span>(rel),</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="a-helper-for-trade-off-plots" class="level3">
-<h3 class="anchored" data-anchor-id="a-helper-for-trade-off-plots">A helper for trade-off plots</h3>
-<p>All our trade-off plots share the same axes (discounted investment cost vs.&nbsp;discounted expected damages, both in M€), and we’d like them to share the same visual conventions too:</p>
-<ul>
-<li>square aspect (both axes are in the same units),</li>
-<li>axes capped at 10⁶ M€ — this is effectively a “no policy costing more than a trillion euros” constraint, used purely to keep the view legible,</li>
-<li>iso-cost reference lines (<code>investment + damage = constant</code>), which run top-left to bottom-right and let you read off the total-cost ordering by eye.</li>
-</ul>
-<div id="12" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All plot data is converted from M€ (the internal unit, matching Eijgenraam</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Table 1) to 10⁹ € for display. Both axes use a pseudo-log scale so that the</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># interesting low-cost region is visible while the overbuilt extremes still</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># fit on the plot. Zero values are drawn natively (pseudolog handles zero).</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ME_PER_BILLION <span class="op">=</span> <span class="fl">1e3</span>      <span class="co"># M€ per 10⁹ €</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax_cap_b <span class="op">=</span> <span class="fl">5.0</span>   <span class="co"># 10⁹ € — visual cap for both axes</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">tradeoff_axis</span>(fig, position; title<span class="op">=</span><span class="st">""</span>, cap<span class="op">=</span>ax_cap_b)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        fig[position<span class="op">...</span>];</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        xlabel<span class="op">=</span><span class="st">"Discounted investment cost (10⁹ €)"</span>,</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Discounted expected damages (10⁹ €)"</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span>title,</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        aspect<span class="op">=</span><span class="fl">1</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        xscale<span class="op">=</span>Makie.pseudolog10,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        yscale<span class="op">=</span>Makie.pseudolog10,</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        limits<span class="op">=</span>(<span class="op">-</span><span class="fl">0.02</span>, cap, <span class="op">-</span><span class="fl">0.02</span>, cap),</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        xticks<span class="op">=</span>[<span class="fl">0</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span>],</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        yticks<span class="op">=</span>[<span class="fl">0</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span>],</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iso-cost reference lines: investment + damage = constant.</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># These become curved under pseudolog but still indicate iso-cost levels.</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> level <span class="kw">in</span> (cap <span class="op">/</span> <span class="fl">5</span>, cap <span class="op">/</span> <span class="fl">2</span>, cap)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        xs <span class="op">=</span> <span class="fu">range</span>(<span class="fl">0.0</span>, level; length<span class="op">=</span><span class="fl">50</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        ys <span class="op">=</span> level <span class="op">.-</span> xs</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, xs, ys; color<span class="op">=</span>(<span class="op">:</span>gray, <span class="fl">0.35</span>), linestyle<span class="op">=:</span>dash, linewidth<span class="op">=</span><span class="fl">1</span>)</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Preference star: bottom-left is ideal.</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(ax, [<span class="fl">0.0</span>], [<span class="fl">0.0</span>];</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>             marker<span class="op">=:</span>star5, color<span class="op">=:</span>gold, strokecolor<span class="op">=:</span>black, strokewidth<span class="op">=</span><span class="fl">1</span>,</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>             markersize<span class="op">=</span><span class="fl">22</span>)</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ax</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="st">"""Convenience: convert a vector of M€ values to 10⁹ €."""</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="fu">to_billion</span>(v) <span class="op">=</span> v <span class="op">./</span> ME_PER_BILLION</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-<section id="static-grid" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="static-grid">Static Grid and Trade-offs</h2>
-<p>Before running any optimizer, let’s evaluate a grid of static heightenings from 0 to 4 m (on top of the existing 2.5 m dike) and see the shape of the trade-off space.</p>
-<section id="run-the-grid" class="level3">
-<h3 class="anchored" data-anchor-id="run-the-grid">Run the Grid</h3>
-<div id="14" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>heightenings <span class="op">=</span> <span class="fu">collect</span>(<span class="fl">0.0</span><span class="op">:</span><span class="fl">20.0</span><span class="op">:</span><span class="fl">400.0</span>)   <span class="co"># cm, 0–4 m</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>static_policies <span class="op">=</span> [<span class="fu">StaticDikePolicy</span>(; u_heighten<span class="op">=</span>u) for u <span class="kw">in</span> heightenings]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>static_result <span class="op">=</span> <span class="fu">explore</span>(config, scenarios, static_policies; progress<span class="op">=</span><span class="cn">false</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Extract per-policy mean metrics and reliability:</p>
-<div id="16" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>investment_mat  <span class="op">=</span> <span class="fu">Array</span>(static_result[<span class="op">:</span>investment_cost])</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>damage_mat      <span class="op">=</span> <span class="fu">Array</span>(static_result[<span class="op">:</span>expected_damages])</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>reliability_mat <span class="op">=</span> <span class="fu">Array</span>(static_result[<span class="op">:</span>reliability])</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>static_df <span class="op">=</span> <span class="fu">DataFrame</span>(;</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    u_heighten       <span class="op">=</span> heightenings,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    total_investment <span class="op">=</span> [<span class="fu">mean</span>(investment_mat[p, <span class="op">:</span>])  for p <span class="kw">in</span> <span class="fu">axes</span>(investment_mat, <span class="fl">1</span>)],</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    total_loss       <span class="op">=</span> [<span class="fu">mean</span>(damage_mat[p, <span class="op">:</span>])      for p <span class="kw">in</span> <span class="fu">axes</span>(damage_mat, <span class="fl">1</span>)],</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    reliability      <span class="op">=</span> [<span class="fu">mean</span>(reliability_mat[p, <span class="op">:</span>]) for p <span class="kw">in</span> <span class="fu">axes</span>(reliability_mat, <span class="fl">1</span>)],</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>static_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Simulation callbacks (click to expand)</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>SimOptDecisions.<span class="fu">initialize</span>(<span class="op">::</span><span class="dt">HouseConfig</span>, <span class="op">::</span><span class="dt">HouseScenario</span>, <span class="op">::</span><span class="dt">AbstractRNG</span>) <span class="op">=</span> <span class="fu">HouseState</span>(<span class="fl">0.0</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>SimOptDecisions.<span class="fu">time_axis</span>(config<span class="op">::</span><span class="dt">HouseConfig</span>, <span class="op">::</span><span class="dt">HouseScenario</span>) <span class="op">=</span> <span class="fl">1</span><span class="op">:</span>(config.horizon)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Static policy: elevate at t=1 only</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> SimOptDecisions.<span class="fu">get_action</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    policy<span class="op">::</span><span class="dt">StaticElevationPolicy</span>, state<span class="op">::</span><span class="dt">HouseState</span>, t<span class="op">::</span><span class="dt">TimeStep</span>, scenario<span class="op">::</span><span class="dt">HouseScenario</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">is_first</span>(t)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">ElevationAction</span>(<span class="fu">value</span>(policy.elevation_ft))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">ElevationAction</span>(<span class="fl">0.0</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Adaptive policy: buffer/freeboard rule each year</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> SimOptDecisions.<span class="fu">get_action</span>(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    policy<span class="op">::</span><span class="dt">AdaptiveElevationPolicy</span>, state<span class="op">::</span><span class="dt">HouseState</span>, t<span class="op">::</span><span class="dt">TimeStep</span>, scenario<span class="op">::</span><span class="dt">HouseScenario</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    floor_level <span class="op">=</span> <span class="fl">4.0</span> <span class="op">+</span> state.elevation_ft  <span class="co"># house_height + current elevation</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    water_level <span class="op">=</span> scenario.water_levels[t]</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    gap <span class="op">=</span> floor_level <span class="op">-</span> water_level</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    buffer_val <span class="op">=</span> <span class="fu">value</span>(policy.buffer)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    freeboard_val <span class="op">=</span> <span class="fu">value</span>(policy.freeboard)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> gap <span class="op">&lt;</span> buffer_val</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        needed <span class="op">=</span> (buffer_val <span class="op">-</span> gap) <span class="op">+</span> freeboard_val</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        max_additional <span class="op">=</span> <span class="fl">14.0</span> <span class="op">-</span> state.elevation_ft</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        actual <span class="op">=</span> <span class="fu">min</span>(needed, max_additional)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">ElevationAction</span>(<span class="fu">max</span>(<span class="fl">0.0</span>, actual))</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">ElevationAction</span>(<span class="fl">0.0</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> SimOptDecisions.<span class="fu">run_timestep</span>(</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    state<span class="op">::</span><span class="dt">HouseState</span>, action<span class="op">::</span><span class="dt">ElevationAction</span>, t<span class="op">::</span><span class="dt">TimeStep</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    config<span class="op">::</span><span class="dt">HouseConfig</span>, scenario<span class="op">::</span><span class="dt">HouseScenario</span>, rng<span class="op">::</span><span class="dt">AbstractRNG</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    new_elevation <span class="op">=</span> state.elevation_ft <span class="op">+</span> action.elevation_ft</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    construction_cost <span class="op">=</span> <span class="fu">elevation_cost</span>(action.elevation_ft, config.house_area_ft2, config.house_value)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    water_level <span class="op">=</span> scenario.water_levels[t]</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    floor_level <span class="op">=</span> config.house_height <span class="op">+</span> new_elevation</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    flood_depth <span class="op">=</span> water_level <span class="op">-</span> floor_level</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    damage <span class="op">=</span> <span class="fu">depth_damage</span>(flood_depth, <span class="fu">value</span>(scenario.dd_threshold), <span class="fu">value</span>(scenario.dd_saturation))</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="fu">HouseState</span>(new_elevation), (construction_cost<span class="op">=</span>construction_cost, damage_fraction<span class="op">=</span>damage))</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> SimOptDecisions.<span class="fu">compute_outcome</span>(</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    step_records<span class="op">::</span><span class="dt">Vector</span>, config<span class="op">::</span><span class="dt">HouseConfig</span>, scenario<span class="op">::</span><span class="dt">HouseScenario</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    construction_cost <span class="op">=</span> <span class="fu">sum</span>(r.construction_cost <span class="cf">for</span> r <span class="kw">in</span> step_records)</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    npv_damages <span class="op">=</span> <span class="fu">sum</span>(</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>        step_records[t].damage_fraction <span class="op">*</span> <span class="fu">discount_factor</span>(<span class="fu">value</span>(scenario.discount_rate), t)</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> t <span class="kw">in</span> <span class="fu">eachindex</span>(step_records)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">HouseOutcome</span>(; construction_cost, npv_damages)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -505,87 +444,241 @@ Figure&nbsp;1: Left: the fixed Norfolk-calibrated GEV annual-max storm surge dis
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Checkpoint:</strong> At <code>u_heighten = 0</code>, investment cost should be zero. As <code>u_heighten</code> grows, investment climbs (roughly exponentially, from the Eijgenraam cost formula) and damages shrink.</p>
+<p><strong>Key design choice:</strong> <code>run_timestep</code> applies whatever elevation the action specifies — it does NOT gate on <code>is_first(t)</code>. For the static policy, <code>get_action</code> returns zero after the first timestep, so only one elevation happens. For the adaptive policy, <code>get_action</code> can return a nonzero elevation in any year, and <code>compute_outcome</code> sums ALL construction costs across the full horizon.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="non-dominated-set" class="level3">
-<h3 class="anchored" data-anchor-id="non-dominated-set">Non-dominated Set</h3>
-<p>A static policy is <strong>non-dominated</strong> on the two objectives if no other policy achieves lower investment cost AND lower damages simultaneously.</p>
+<section id="metrics" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="metrics"><span class="header-section-number">3.5</span> Metrics</h3>
+<p>When comparing policies, we don’t look at individual scenario outcomes. Instead, we aggregate across all scenarios into summary <strong>metrics</strong>. The optimizer uses these metrics as objectives.</p>
+<div id="12" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">Compute metrics from simulation outcomes across many scenarios.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">Used by `optimize()` to evaluate candidate policies.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculate_metrics</span>(outcomes)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    damages <span class="op">=</span> [<span class="fu">value</span>(o.npv_damages) for o <span class="kw">in</span> outcomes]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    costs <span class="op">=</span> [<span class="fu">value</span>(o.construction_cost) for o <span class="kw">in</span> outcomes]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    sorted_damages <span class="op">=</span> <span class="fu">sort</span>(damages)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="fu">length</span>(damages)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        construction_cost<span class="op">=</span><span class="fu">mean</span>(costs),</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        expected_damage<span class="op">=</span><span class="fu">mean</span>(damages),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        q95_damage<span class="op">=</span>sorted_damages[<span class="fu">max</span>(<span class="fl">1</span>, <span class="fu">ceil</span>(<span class="dt">Int</span>, <span class="fl">0.95</span> <span class="op">*</span> n))],</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        cvar_98<span class="op">=</span><span class="fu">mean</span>(sorted_damages[<span class="fu">max</span>(<span class="fl">1</span>, <span class="fu">ceil</span>(<span class="dt">Int</span>, <span class="fl">0.98</span> <span class="op">*</span> n))<span class="op">:</span><span class="kw">end</span>]),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Four metrics capture different aspects of performance:</p>
+<ul>
+<li><strong><code>construction_cost</code></strong>: average upfront spending across scenarios</li>
+<li><strong><code>expected_damage</code></strong>: average NPV of flood damages</li>
+<li><strong><code>q95_damage</code></strong>: 95th percentile damage (Value at Risk)</li>
+<li><strong><code>cvar_98</code></strong>: average of the worst 2% of damage outcomes (Conditional Value at Risk)</li>
+</ul>
+</section>
+<section id="scenarios" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="scenarios"><span class="header-section-number">3.6</span> Scenarios</h3>
+<div id="14" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> <span class="fu">HouseConfig</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n_scenarios <span class="op">=</span> <span class="fl">500</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> <span class="bu">Random</span>.<span class="fu">Xoshiro</span>(<span class="fl">2026</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>scenarios <span class="op">=</span> [<span class="fu">sample_scenario</span>(rng, config.horizon) for _ <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_scenarios]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Config: </span><span class="sc">$</span>(config.horizon)<span class="st">-year horizon, \$</span><span class="sc">$</span>(<span class="fu">Int</span>(config.house_value))<span class="st"> house"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Scenarios: </span><span class="sc">$</span>(n_scenarios)<span class="st"> sampled futures"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="section-1-brute-force-trade-offs" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="section-1-brute-force-trade-offs"><span class="header-section-number">4</span> Section 1: Brute-Force Trade-offs</h2>
+<p>Before running any optimizer, let’s evaluate every static elevation from 0 to 14 ft (in 0.5 ft steps) across all 500 scenarios. This brute-force grid lets us see the full shape of the trade-off space.</p>
+<section id="run-the-grid" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="run-the-grid"><span class="header-section-number">4.1</span> Run the Grid</h3>
+<div id="16" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>policies <span class="op">=</span> [<span class="fu">StaticElevationPolicy</span>(; elevation_ft<span class="op">=</span><span class="cn">e</span>) for <span class="cn">e</span> <span class="kw">in</span> <span class="fl">0.0</span><span class="op">:</span><span class="fl">0.5</span><span class="op">:</span><span class="fl">14.0</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="fu">explore</span>(config, scenarios, policies; progress<span class="op">=</span><span class="cn">false</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Extract the four metrics for each elevation:</p>
 <div id="18" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">    is_nondominated(i, df, cols) -&gt; Bool</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">Return `true` if row `i` of `df` is non-dominated on the objective columns `cols`</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">(all to be minimized). Row `i` is dominated only if some other row `j` is</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">**weakly better on every objective** and **strictly better on at least one**.</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">is_nondominated</span>(i, df, cols)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    row_i <span class="op">=</span> df[i, <span class="op">:</span>]</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fu">axes</span>(df, <span class="fl">1</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        i <span class="op">==</span> j <span class="op">&amp;&amp;</span> <span class="cf">continue</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        row_j <span class="op">=</span> df[j, <span class="op">:</span>]</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        all_leq <span class="op">=</span> <span class="fu">all</span>(row_j[c] <span class="op">&lt;=</span> row_i[c] <span class="cf">for</span> c <span class="kw">in</span> cols)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        any_lt  <span class="op">=</span> <span class="fu">any</span>(row_j[c] <span class="op">&lt;</span>  row_i[c] <span class="cf">for</span> c <span class="kw">in</span> cols)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        all_leq <span class="op">&amp;&amp;</span> any_lt <span class="op">&amp;&amp;</span> <span class="cf">return</span> <span class="cn">false</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">true</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>obj_cols      <span class="op">=</span> [<span class="op">:</span>total_investment, <span class="op">:</span>total_loss]</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>mask          <span class="op">=</span> [<span class="fu">is_nondominated</span>(i, static_df, obj_cols) for i <span class="kw">in</span> <span class="fu">axes</span>(static_df, <span class="fl">1</span>)]</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>static_nondom <span class="op">=</span> static_df[mask, <span class="op">:</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>elevations <span class="op">=</span> <span class="fu">collect</span>(<span class="fl">0.0</span><span class="op">:</span><span class="fl">0.5</span><span class="op">:</span><span class="fl">14.0</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>npv_damages <span class="op">=</span> <span class="fu">Array</span>(result[<span class="op">:</span>npv_damages])</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>construction <span class="op">=</span> <span class="fu">Array</span>(result[<span class="op">:</span>construction_cost])</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>metrics_df <span class="op">=</span> <span class="fu">DataFrame</span>(;</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    elevation<span class="op">=</span>elevations,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    construction_cost<span class="op">=</span>[<span class="fu">mean</span>(construction[p, <span class="op">:</span>]) for p <span class="kw">in</span> <span class="fu">axes</span>(construction, <span class="fl">1</span>)],</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    expected_damage<span class="op">=</span>[<span class="fu">mean</span>(npv_damages[p, <span class="op">:</span>]) for p <span class="kw">in</span> <span class="fu">axes</span>(npv_damages, <span class="fl">1</span>)],</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    q95_damage<span class="op">=</span>[</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sort</span>(npv_damages[p, <span class="op">:</span>])[<span class="fu">max</span>(<span class="fl">1</span>, <span class="fu">ceil</span>(<span class="dt">Int</span>, <span class="fl">0.95</span> <span class="op">*</span> n_scenarios))] for</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        p <span class="kw">in</span> <span class="fu">axes</span>(npv_damages, <span class="fl">1</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    cvar_98<span class="op">=</span>[</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>(<span class="fu">sort</span>(npv_damages[p, <span class="op">:</span>])[<span class="fu">max</span>(<span class="fl">1</span>, <span class="fu">ceil</span>(<span class="dt">Int</span>, <span class="fl">0.98</span> <span class="op">*</span> n_scenarios))<span class="op">:</span><span class="kw">end</span>]) for</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        p <span class="kw">in</span> <span class="fu">axes</span>(npv_damages, <span class="fl">1</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="20" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"</span><span class="sc">$</span>(<span class="fu">nrow</span>(static_nondom))<span class="st"> of </span><span class="sc">$</span>(<span class="fu">nrow</span>(static_df))<span class="st"> static policies are non-dominated"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>9 of 21 static policies are non-dominated</code></pre>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Checkpoint:</strong> At 0 ft elevation, construction cost should be zero and damage metrics should be at their highest. At 14 ft, construction cost should be at its highest and damage metrics near zero. If your results don’t follow this pattern, check that the setup cells ran successfully.</p>
+</div>
 </div>
 </div>
 </section>
-<section id="plot-the-trade-off" class="level3">
-<h3 class="anchored" data-anchor-id="plot-the-trade-off">Plot the Trade-off</h3>
-<div id="cell-fig-static-grid" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">650</span>, <span class="fl">650</span>))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">tradeoff_axis</span>(fig, (<span class="fl">1</span>, <span class="fl">1</span>); title<span class="op">=</span><span class="st">"Static Dike Heightening"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        ax,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(static_df.total_investment),</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(static_df.total_loss);</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>static_df.u_heighten, colormap<span class="op">=:</span>viridis, markersize<span class="op">=</span><span class="fl">11</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Static (grid)"</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        ax,</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(static_nondom.total_investment),</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(static_nondom.total_loss);</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=:</span>red, marker<span class="op">=:</span>diamond, markersize<span class="op">=</span><span class="fl">10</span>, label<span class="op">=</span><span class="st">"Non-dominated"</span>,</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Colorbar</span>(fig[<span class="fl">1</span>, <span class="fl">2</span>]; colormap<span class="op">=:</span>viridis,</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        limits<span class="op">=</span>(<span class="fu">minimum</span>(static_df.u_heighten), <span class="fu">maximum</span>(static_df.u_heighten)),</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Heightening (cm)"</span>)</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>rt)</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<section id="pair-plot" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="pair-plot"><span class="header-section-number">4.2</span> Pair Plot</h3>
+<p>The pair plot shows every pair of objectives as a scatter plot. Each point is one static elevation, colored by elevation height.</p>
+<div id="cell-fig-pair-plot" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    obj_names <span class="op">=</span> [<span class="st">"Construction</span><span class="sc">\n</span><span class="st">Cost"</span>, <span class="st">"Expected</span><span class="sc">\n</span><span class="st">Damage"</span>, <span class="st">"95th %ile</span><span class="sc">\n</span><span class="st">Damage"</span>, <span class="st">"CVaR 98%</span><span class="sc">\n</span><span class="st">Damage"</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    obj_cols <span class="op">=</span> [<span class="op">:</span>construction_cost, <span class="op">:</span>expected_damage, <span class="op">:</span>q95_damage, <span class="op">:</span>cvar_98]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    n_obj <span class="op">=</span> <span class="fu">length</span>(obj_cols)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">800</span>, <span class="fl">800</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_obj</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_obj</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> row <span class="op">==</span> col</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Diagonal: label</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                ax <span class="op">=</span> <span class="fu">Axis</span>(fig[row, col]; limits<span class="op">=</span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>))</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">hidedecorations!</span>(ax)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">hidespines!</span>(ax)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                <span class="fu">text!</span>(ax, <span class="fl">0.5</span>, <span class="fl">0.5</span>; text<span class="op">=</span>obj_names[row], align<span class="op">=</span>(<span class="op">:</span>center, <span class="op">:</span>center), fontsize<span class="op">=</span><span class="fl">14</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elseif</span> row <span class="op">&gt;</span> col</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Lower triangle: scatter</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                ax <span class="op">=</span> <span class="fu">Axis</span>(fig[row, col])</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>                <span class="fu">scatter!</span>(</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>                    ax,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>                    metrics_df[!, obj_cols[col]],</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>                    metrics_df[!, obj_cols[row]];</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>                    color<span class="op">=</span>metrics_df.elevation,</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>                    colormap<span class="op">=:</span>viridis,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                    markersize<span class="op">=</span><span class="fl">8</span>,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> col <span class="op">==</span> <span class="fl">1</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>                    ax.ylabel <span class="op">=</span> obj_names[row]</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">hideydecorations!</span>(ax; ticks<span class="op">=</span><span class="cn">false</span>, grid<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>                <span class="cf">end</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> row <span class="op">==</span> n_obj</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>                    ax.xlabel <span class="op">=</span> obj_names[col]</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">hidexdecorations!</span>(ax; ticks<span class="op">=</span><span class="cn">false</span>, grid<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>                <span class="cf">end</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Upper triangle: empty</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>                ax <span class="op">=</span> <span class="fu">Axis</span>(fig[row, col])</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>                <span class="fu">hidedecorations!</span>(ax)</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>                <span class="fu">hidespines!</span>(ax)</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>            <span class="cf">end</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Colorbar</span>(fig[<span class="op">:</span>, n_obj <span class="op">+</span> <span class="fl">1</span>]; colormap<span class="op">=:</span>viridis, limits<span class="op">=</span>(<span class="fl">0</span>, <span class="fl">14</span>), label<span class="op">=</span><span class="st">"Elevation (ft)"</span>)</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<div id="fig-static-grid" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-pair-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-static-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-static-grid-output-1.svg" class="img-fluid figure-img">
+<div aria-describedby="fig-pair-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-pair-plot-output-1.svg" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-static-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Static heightening grid. Each point is a static one-shot heightening; the red diamonds mark the non-dominated subset (the static Pareto front). Dashed curves are iso-cost reference lines (investment + damage = constant; curved because of the pseudo-log axes).
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pair-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Pair plot of four objectives across static elevations (0–14 ft). Points colored by elevation height. Off-diagonal panels show pairwise scatter; diagonal panels show objective labels.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 1">
+</section>
+<section id="non-dominated-solutions" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="non-dominated-solutions"><span class="header-section-number">4.3</span> Non-Dominated Solutions</h3>
+<p>A solution is <strong>non-dominated</strong> (Pareto-optimal) if no other solution is better on every objective simultaneously. Let’s identify which static elevations are non-dominated across all four metrics.</p>
+<div id="22" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">is_nondominated</span>(i, df, obj_cols)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fu">axes</span>(df, <span class="fl">1</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        i <span class="op">==</span> j <span class="op">&amp;&amp;</span> <span class="cf">continue</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        all_leq <span class="op">=</span> <span class="fu">all</span>(df[j, c] <span class="op">&lt;=</span> df[i, c] <span class="cf">for</span> c <span class="kw">in</span> obj_cols)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        any_lt <span class="op">=</span> <span class="fu">any</span>(df[j, c] <span class="op">&lt;</span> df[i, c] <span class="cf">for</span> c <span class="kw">in</span> obj_cols)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> all_leq <span class="op">&amp;&amp;</span> any_lt</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="cn">false</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">end</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="cn">true</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>obj_cols <span class="op">=</span> [<span class="op">:</span>construction_cost, <span class="op">:</span>expected_damage, <span class="op">:</span>q95_damage, <span class="op">:</span>cvar_98]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>nondom_mask <span class="op">=</span> [<span class="fu">is_nondominated</span>(i, metrics_df, obj_cols) for i <span class="kw">in</span> <span class="fu">axes</span>(metrics_df, <span class="fl">1</span>)]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>nondom_df <span class="op">=</span> metrics_df[nondom_mask, <span class="op">:</span>]</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"</span><span class="sc">$</span>(<span class="fu">nrow</span>(nondom_df))<span class="st"> of </span><span class="sc">$</span>(<span class="fu">nrow</span>(metrics_df))<span class="st"> policies are non-dominated"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="parallel-axis-plot" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="parallel-axis-plot"><span class="header-section-number">4.4</span> Parallel Axis Plot</h3>
+<p>The parallel axis plot shows each non-dominated solution as a polyline connecting its four objective values. Each axis is normalized to [0, 1] so the objectives are comparable.</p>
+<div id="cell-fig-parallel-axis" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    obj_cols <span class="op">=</span> [<span class="op">:</span>construction_cost, <span class="op">:</span>expected_damage, <span class="op">:</span>q95_damage, <span class="op">:</span>cvar_98]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    obj_labels <span class="op">=</span> [<span class="st">"Construction</span><span class="sc">\n</span><span class="st">Cost"</span>, <span class="st">"Expected</span><span class="sc">\n</span><span class="st">Damage"</span>, <span class="st">"95th %ile</span><span class="sc">\n</span><span class="st">Damage"</span>, <span class="st">"CVaR 98%</span><span class="sc">\n</span><span class="st">Damage"</span>]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    n_obj <span class="op">=</span> <span class="fu">length</span>(obj_cols)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize against non-dominated solutions only (spreads trade-offs across full [0,1] range)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    mins <span class="op">=</span> [<span class="fu">minimum</span>(nondom_df[!, c]) for c <span class="kw">in</span> obj_cols]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    maxs <span class="op">=</span> [<span class="fu">maximum</span>(nondom_df[!, c]) for c <span class="kw">in</span> obj_cols]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">1</span>];</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        xticks<span class="op">=</span>(<span class="fl">1</span><span class="op">:</span>n_obj, obj_labels),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Normalized value"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        title<span class="op">=</span><span class="st">"Non-Dominated Static Elevations"</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        limits<span class="op">=</span>(<span class="fl">0.5</span>, n_obj <span class="op">+</span> <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="fl">1.1</span>),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw vertical axis lines</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>n_obj</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">vlines!</span>(ax, [j]; color<span class="op">=:</span>gray, linewidth<span class="op">=</span><span class="fl">1</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">text!</span>(ax, j, <span class="op">-</span><span class="fl">0.05</span>; text<span class="op">=</span><span class="fu">string</span>(<span class="fu">round</span>(mins[j]; digits<span class="op">=</span><span class="fl">3</span>)), align<span class="op">=</span>(<span class="op">:</span>center, <span class="op">:</span>top), fontsize<span class="op">=</span><span class="fl">9</span>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">text!</span>(ax, j, <span class="fl">1.05</span>; text<span class="op">=</span><span class="fu">string</span>(<span class="fu">round</span>(maxs[j]; digits<span class="op">=</span><span class="fl">3</span>)), align<span class="op">=</span>(<span class="op">:</span>center, <span class="op">:</span>bottom), fontsize<span class="op">=</span><span class="fl">9</span>)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw polylines for non-dominated solutions</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> <span class="fu">cgrad</span>(<span class="op">:</span>viridis, <span class="fu">nrow</span>(nondom_df))</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (idx, row) <span class="kw">in</span> <span class="fu">enumerate</span>(<span class="fu">eachrow</span>(nondom_df))</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        vals <span class="op">=</span> [(row[c] <span class="op">-</span> mins[j]) <span class="op">/</span> <span class="fu">max</span>(maxs[j] <span class="op">-</span> mins[j], <span class="fl">1e-10</span>) for (j, c) <span class="kw">in</span> <span class="fu">enumerate</span>(obj_cols)]</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lines!</span>(ax, <span class="fl">1</span><span class="op">:</span>n_obj, vals; color<span class="op">=</span>colors[idx], linewidth<span class="op">=</span><span class="fl">2</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scatter!</span>(ax, <span class="fl">1</span><span class="op">:</span>n_obj, vals; color<span class="op">=</span>colors[idx], markersize<span class="op">=</span><span class="fl">6</span>)</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">end</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Colorbar</span>(</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        fig[<span class="fl">1</span>, <span class="fl">2</span>];</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>        colormap<span class="op">=:</span>viridis,</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        limits<span class="op">=</span>(<span class="fu">minimum</span>(nondom_df.elevation), <span class="fu">maximum</span>(nondom_df.elevation)),</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Elevation (ft)"</span>,</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    fig</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="fig-parallel-axis" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-parallel-axis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-parallel-axis-output-1.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-parallel-axis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Parallel axis plot of non-dominated static elevations. Each line is one Pareto-optimal policy. Axes normalized to [0, 1] with min/max labels.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response --- Question 1">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -595,197 +688,25 @@ Figure&nbsp;2: Static heightening grid. Each point is a static one-shot heighten
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>Look at the static grid plot.</em></p>
+<p><em>Look at the pair plot and the parallel axis plot.</em></p>
 <ol type="1">
-<li><em>Where does the policy you recommended in Lab 8 fall on this plot? (Re-run the grid including your Lab 8 <code>u_heighten</code> value if needed.) Is it on the non-dominated set?</em></li>
-<li><em>How many policies are non-dominated? Describe the shape of the trade-off.</em></li>
-<li><em>Where is the “knee” of the trade-off — the point where additional investment stops buying much damage reduction?</em></li>
+<li><em>Which pairs of objectives are in tension (trade off against each other)? Which move together?</em></li>
+<li><em>Are any of the four objectives redundant — i.e., could you drop one without losing information about the trade-offs?</em></li>
+<li><em>If you had to pick just two objectives to optimize, which would you choose and why?</em></li>
 </ol>
 </div>
 </div>
 </section>
 </section>
-<section id="moo" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="moo">Adaptive Policies</h2>
-<p>The static grid shows the best one-shot heightenings. But a real dike manager can observe rising water levels and decide to heighten later — trading upfront investment for information.</p>
-<p>In most settings adaptivity pays off: waiting to see whether SLR is fast or slow before committing to a heightening should beat any one-shot rule. But “should” is not “always” — if the information arrives too late, or the rule you parameterize can’t tell a one-off surge from a sustained trend, a well-chosen static heightening can match or even beat the adaptive front. Keep an eye out for which regime you’re in.</p>
-<section id="background-garner-keller-2018" class="level3">
-<h3 class="anchored" data-anchor-id="background-garner-keller-2018">Background: Garner &amp; Keller (2018)</h3>
-<p>In <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span>, the authors reformulate a Dutch dike-heightening problem to explicitly handle uncertainty in sea-level rise and storm surge, and compare several formulations of the decision problem. Three pieces of their setup are directly relevant to this lab:</p>
-<ul>
-<li><strong>Two objectives.</strong> Both minimized: discounted investment cost, and discounted expected damages. We use exactly these.</li>
-<li><strong>Direct Policy Search (DPS) with a buffer/freeboard rule.</strong> Each year the policy looks at the gap between the observed water level and the top of the dike; if the gap is less than a <strong>buffer</strong> height, it raises the dike to restore the buffer plus an extra <strong>freeboard</strong> height. The paper also explores a richer 10-variable version of the DPS rule that lets the buffer and freeboard depend on observed SLR trend and variability — but it reports that the simple 2-variable constant rule already captures most of the gain, and the 10-variable version adds only a modest improvement on top. Our lab uses the 2-variable version.</li>
-<li><strong>Borg MOEA.</strong> The paper uses a parallel Borg Multi-Objective Evolutionary Algorithm, run for 50 independent seeds × 200,000 function evaluations each (= 10 million evaluations). Borg combines auto-adaptive operator selection, restart logic, and an archive that explicitly controls objective-space spacing on top of a plain genetic algorithm. We don’t have Borg available in Julia, so we use <strong>NSGA-II</strong> from <code>Metaheuristics.jl</code> — a well-established multi-objective genetic algorithm. See the <a href="https://en.wikipedia.org/wiki/Multi-objective_optimization#NSGA-II">NSGA-II Wikipedia entry</a> for a short description of how it works.</li>
-</ul>
-<div class="callout callout-style-simple callout-note callout-titled" title="Optimizers don't give you a free lunch">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Optimizers don’t give you a free lunch
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>NSGA-II can and will produce a front that looks <em>uneven</em> — dense in some regions and sparse in others — even when the population is “converged”. The reason is that the genetic operators (crossover + mutation) work in <strong>decision space</strong>, while the diversity operator (crowding distance) works in <strong>objective space</strong>; if the decision-space-to-objective-space mapping is strongly non-linear (as it is here, because the Eijgenraam cost is roughly exponential in heightening), uniform exploration in decision space produces very non-uniform coverage of the Pareto front.</p>
-<p>The standard tools for handling this are, in order of increasing effort:</p>
-<ol type="1">
-<li><strong>Tighten decision-variable bounds</strong> so that the search doesn’t waste effort on regions that are dominated by construction.</li>
-<li><strong>Bigger populations</strong> so crowding distance has more points to spread around.</li>
-<li><strong>Reparameterize</strong> the decision variables (e.g.&nbsp;work in log-cost space, or redefine the policy in terms of target dike height rather than buffer cm).</li>
-<li><strong>A different algorithm</strong>: <code>Metaheuristics.jl</code> also ships <code>SMS-EMOA</code>, <code>SPEA2</code>, and <code>MOEA/D-DE</code>, each with a different diversity mechanism. Borg’s ε-dominated archive gives explicit control over objective-space spacing.</li>
-<li><strong>Multiple random seeds</strong> and merging the archives — the approach <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span> took with 50 seeds.</li>
-</ol>
-<p>We’ve already done some of (1) for this lab — the adaptive bounds are tuned so that most of the sampled decision space lands in useful objective-space territory. You can see residual non-uniformity in the resulting Pareto front.</p>
-</div>
-</div>
-<p><strong>What we simplify relative to GK18:</strong></p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Garner &amp; Keller (2018)</th>
-<th>This lab</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Horizon</td>
-<td>300 years</td>
-<td>100 years</td>
-</tr>
-<tr class="even">
-<td>Scenarios</td>
-<td>100,000</td>
-<td>100</td>
-</tr>
-<tr class="odd">
-<td>DPS form</td>
-<td>10 variables (state-dependent)</td>
-<td>2 variables (constant buffer/freeboard)</td>
-</tr>
-<tr class="even">
-<td>Optimizer</td>
-<td>Borg MOEA, 50 seeds × 200k evals</td>
-<td>NSGA-II, 1 seed, ~100 iterations</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="brute-force-grid-over-the-adaptive-policy-space" class="level3">
-<h3 class="anchored" data-anchor-id="brute-force-grid-over-the-adaptive-policy-space">Brute-Force Grid Over the Adaptive Policy Space</h3>
-<p>Before turning to NSGA-II, let’s do the same thing we did for static policies: evaluate a grid of <code>(buffer, freeboard)</code> combinations and see the trade-off directly. With only two decision variables, a modest grid gives us a clear picture of what the <em>true</em> Pareto front looks like, and gives us something to compare the optimizer against.</p>
-<div id="24" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>buffers    <span class="op">=</span> <span class="fu">collect</span>(<span class="fl">0.0</span><span class="op">:</span><span class="fl">25.0</span><span class="op">:</span><span class="fl">400.0</span>)   <span class="co"># cm, 0–4 m</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>freeboards <span class="op">=</span> <span class="fu">collect</span>(<span class="fl">0.0</span><span class="op">:</span><span class="fl">25.0</span><span class="op">:</span><span class="fl">300.0</span>)   <span class="co"># cm, 0–3 m</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>adaptive_grid <span class="op">=</span> [</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    (buffer<span class="op">=</span>buf, freeboard<span class="op">=</span>fb, policy<span class="op">=</span><span class="fu">AdaptiveDikePolicy</span>(; buffer<span class="op">=</span>buf, freeboard<span class="op">=</span>fb))</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    for buf <span class="kw">in</span> buffers, fb <span class="kw">in</span> freeboards</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>adaptive_grid_vec <span class="op">=</span> <span class="fu">vec</span>(adaptive_grid)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>adaptive_result <span class="op">=</span> <span class="fu">explore</span>(</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    config, scenarios,</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    [g.policy for g <span class="kw">in</span> adaptive_grid_vec];</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    progress<span class="op">=</span><span class="cn">false</span>,</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>adaptive_inv_mat <span class="op">=</span> <span class="fu">Array</span>(adaptive_result[<span class="op">:</span>investment_cost])</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>adaptive_dmg_mat <span class="op">=</span> <span class="fu">Array</span>(adaptive_result[<span class="op">:</span>expected_damages])</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>adaptive_rel_mat <span class="op">=</span> <span class="fu">Array</span>(adaptive_result[<span class="op">:</span>reliability])</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>adaptive_grid_df <span class="op">=</span> <span class="fu">DataFrame</span>(;</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    buffer           <span class="op">=</span> [g.buffer    for g <span class="kw">in</span> adaptive_grid_vec],</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    freeboard        <span class="op">=</span> [g.freeboard for g <span class="kw">in</span> adaptive_grid_vec],</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    total_investment <span class="op">=</span> [<span class="fu">mean</span>(adaptive_inv_mat[p, <span class="op">:</span>]) for p <span class="kw">in</span> <span class="fu">axes</span>(adaptive_inv_mat, <span class="fl">1</span>)],</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    total_loss       <span class="op">=</span> [<span class="fu">mean</span>(adaptive_dmg_mat[p, <span class="op">:</span>]) for p <span class="kw">in</span> <span class="fu">axes</span>(adaptive_dmg_mat, <span class="fl">1</span>)],</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    reliability      <span class="op">=</span> [<span class="fu">mean</span>(adaptive_rel_mat[p, <span class="op">:</span>]) for p <span class="kw">in</span> <span class="fu">axes</span>(adaptive_rel_mat, <span class="fl">1</span>)],</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>grid_mask <span class="op">=</span> [<span class="fu">is_nondominated</span>(i, adaptive_grid_df, obj_cols) for i <span class="kw">in</span> <span class="fu">axes</span>(adaptive_grid_df, <span class="fl">1</span>)]</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>adaptive_grid_nondom <span class="op">=</span> adaptive_grid_df[grid_mask, <span class="op">:</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="section-2-multi-objective-optimization" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="section-2-multi-objective-optimization"><span class="header-section-number">5</span> Section 2: Multi-Objective Optimization</h2>
+<p>The brute-force grid only works for one-parameter policies (static elevation). The adaptive buffer/freeboard policy has two parameters, making grid search less practical. Instead, we’ll use <strong>NSGA-II</strong> — a multi-objective evolutionary algorithm — to search for Pareto-optimal adaptive policies.</p>
+<p>This approach mirrors <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span>, where direct policy search was used to find adaptive strategies for house elevation under sea-level rise uncertainty.</p>
+<section id="choose-your-objectives" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="choose-your-objectives"><span class="header-section-number">5.1</span> Choose Your Objectives</h3>
+<p>Pick two of the four metrics to optimize. The <code>minimize(:name)</code> syntax tells the optimizer which metrics to minimize.</p>
 <div id="26" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"</span><span class="sc">$</span>(<span class="fu">nrow</span>(adaptive_grid_nondom))<span class="st"> of </span><span class="sc">$</span>(<span class="fu">nrow</span>(adaptive_grid_df))<span class="st"> grid policies are non-dominated"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>16 of 221 grid policies are non-dominated</code></pre>
-</div>
-</div>
-<div id="cell-fig-adaptive-grid" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> <span class="fu">Figure</span>(; size<span class="op">=</span>(<span class="fl">650</span>, <span class="fl">650</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">tradeoff_axis</span>(fig, (<span class="fl">1</span>, <span class="fl">1</span>); title<span class="op">=</span><span class="st">"Adaptive Policy Grid — Buffer/Freeboard"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        ax,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(static_nondom.total_investment),</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(static_nondom.total_loss);</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=:</span>darkorange, marker<span class="op">=:</span>utriangle, markersize<span class="op">=</span><span class="fl">11</span>,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Static non-dominated"</span>,</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        ax,</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(adaptive_grid_df.total_investment),</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(adaptive_grid_df.total_loss);</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>(<span class="op">:</span>steelblue, <span class="fl">0.35</span>), markersize<span class="op">=</span><span class="fl">6</span>,</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Adaptive (grid)"</span>,</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scatter!</span>(</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        ax,</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(adaptive_grid_nondom.total_investment),</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">to_billion</span>(adaptive_grid_nondom.total_loss);</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=:</span>red, marker<span class="op">=:</span>diamond, markersize<span class="op">=</span><span class="fl">10</span>,</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        label<span class="op">=</span><span class="st">"Grid non-dominated"</span>,</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axislegend</span>(ax; position<span class="op">=:</span>rt)</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    fig</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<div id="fig-adaptive-grid" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-adaptive-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-adaptive-grid-output-1.svg" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-adaptive-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Brute-force grid over the (buffer, freeboard) policy space. Each point is one adaptive policy; red diamonds mark the non-dominated set. The static non-dominated points are shown in orange for reference.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The grid gives us a <strong>visual ground truth</strong> for what the adaptive Pareto front looks like. In the next section we hand the same problem to NSGA-II and check whether it recovers the same shape.</p>
-</section>
-<section id="configure-the-optimizer" class="level3">
-<h3 class="anchored" data-anchor-id="configure-the-optimizer">Configure the Optimizer</h3>
-<p>SimOptDecisions can dispatch to several optimization backends. Here we use the <code>MetaheuristicsBackend</code>, which wraps <code>Metaheuristics.jl</code> and lets us pick an algorithm (<code>:NSGA2</code>), a population size, and a number of iterations. We also set <code>store_history = true</code> so that, at the end, we can look at how the Pareto front evolved across generations — not just the final result.</p>
-<div id="30" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>backend <span class="op">=</span> <span class="fu">MetaheuristicsBackend</span>(;</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    algorithm       <span class="op">=</span> <span class="op">:</span>NSGA2,     <span class="co"># multi-objective GA</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    max_iterations  <span class="op">=</span> <span class="fl">100</span>,        <span class="co"># number of generations (NSGA-II may early-stop if converged)</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    population_size <span class="op">=</span> <span class="fl">60</span>,         <span class="co"># policies carried forward each generation</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    parallel        <span class="op">=</span> <span class="cn">true</span>,       <span class="co"># evaluate scenarios in parallel where possible</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    store_history   <span class="op">=</span> <span class="cn">true</span>,       <span class="co"># keep the per-generation archive for plotting</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Each generation, NSGA-II evaluates 60 candidate policies, each on all 100 scenarios (so 6,000 simulations per generation). NSGA-II typically early-stops around 50 generations once the population stops improving. That should run in well under a minute.</p>
-<p>Default objectives matching GK18: <strong>minimize investment cost and expected damages</strong>. You can swap these for other pairs (e.g.&nbsp;include <code>reliability</code> as a third objective), but each re-run takes a minute or two.</p>
-<div id="32" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="run-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="run-optimization">Run Optimization</h3>
-<p>We time the optimization so you can see how long it took and plan accordingly for the final run.</p>
-<div id="34" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
@@ -793,45 +714,58 @@ Figure&nbsp;3: Brute-force grid over the (buffer, freeboard) policy space. Each 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>This is a first run</strong> with 100 scenarios and 50 iterations to keep things fast. <strong>Before you write up your conclusions</strong>, re-run this block (and the plots below) with more scenarios (e.g.&nbsp;500) and more iterations (e.g.&nbsp;100) so the Pareto front is stable. Expect ~5 minutes for the final run.</p>
+<p>Available objectives (all to be minimized):</p>
+<ul>
+<li><code>:construction_cost</code> — average upfront spending</li>
+<li><code>:expected_damage</code> — average NPV of flood damages</li>
+<li><code>:q95_damage</code> — 95th percentile damage</li>
+<li><code>:cvar_98</code> — average of the worst 2% of damage outcomes</li>
+</ul>
 </div>
 </div>
 </div>
 </section>
-<section id="the-final-pareto-front" class="level3">
-<h3 class="anchored" data-anchor-id="the-final-pareto-front">The Final Pareto Front</h3>
-<p>Plot the adaptive Pareto front on top of the static grid for comparison.</p>
+<section id="configure-the-optimizer" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="configure-the-optimizer"><span class="header-section-number">5.2</span> Configure the Optimizer</h3>
+<div id="28" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>backend <span class="op">=</span> <span class="fu">MetaheuristicsBackend</span>(;</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    algorithm<span class="op">=:</span>NSGA2,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    max_iterations<span class="op">=</span><span class="fl">100</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    population_size<span class="op">=</span><span class="fl">30</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    parallel<span class="op">=</span><span class="cn">true</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="run-optimization" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="run-optimization"><span class="header-section-number">5.3</span> Run Optimization</h3>
+<div id="30" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This optimization may take 1–3 minutes depending on your machine. The algorithm evaluates thousands of candidate policies, each simulated across all 500 scenarios.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-the-pareto-front" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="visualize-the-pareto-front"><span class="header-section-number">5.4</span> Visualize the Pareto Front</h3>
+<p>Plot the adaptive Pareto front alongside the static grid results for comparison. Use your two chosen objectives as the axes.</p>
 <div id="fig-pareto-adaptive" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pareto-adaptive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pareto-adaptive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4
+Figure&nbsp;3
 </figcaption>
 </figure>
 </div>
-</section>
-<section id="watching-the-front-converge" class="level3">
-<h3 class="anchored" data-anchor-id="watching-the-front-converge">Watching the Front Converge</h3>
-<p>Because we set <code>store_history = true</code>, we can extract the Pareto archive at every generation and watch it evolve. Early generations are noisy; later ones should concentrate near the final front.</p>
-<div id="fig-pareto-evolution" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-pareto-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Your code here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pareto-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5
-</figcaption>
-</figure>
-</div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 2">
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response --- Question 2">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -841,15 +775,10 @@ Figure&nbsp;5
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>Pick one solution from the adaptive Pareto front.</em></p>
-<ol type="1">
-<li><em>What buffer and freeboard values does it use?</em></li>
-<li><em>Describe in plain language what this policy does — when does it trigger heightening, and how much does it raise the dike?</em></li>
-<li><em>Who might prefer this solution over the alternatives on the Pareto front — a risk-averse stakeholder, a fiscally-conservative one, or someone in the middle? Why?</em></li>
-</ol>
+<p><em>Pick one solution from the adaptive Pareto front. What buffer and freeboard values does it use? Describe in plain language what this policy does — when does it trigger elevation, and how much does it elevate by? Who might prefer this solution over the alternatives on the Pareto front?</em></p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response — Question 3">
+<div class="callout callout-style-simple callout-tip no-icon callout-titled" title="Your Response --- Question 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -859,55 +788,48 @@ Figure&nbsp;5
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>Compare the adaptive Pareto front to the static grid and to your Lab 8 recommendation.</em></p>
-<ol type="1">
-<li><em>Does the adaptive front Pareto-dominate all of the static policies? Some of them? None?</em></li>
-<li><em>What is the source of the adaptive policy’s advantage (when it has one)?</em></li>
-<li><em>GK18 also studied a 10-variable DPS that lets the buffer and freeboard respond to the observed SLR trend and variability. In their results, the 2-variable version captured most of the gain. Does that match your intuition from this lab — and under what conditions would you expect the 10-variable version to matter more?</em></li>
-</ol>
+<p><em>Compare the adaptive Pareto front to the static grid points. Does the adaptive policy dominate some or all static solutions on your two chosen objectives? What is the source of the adaptive policy’s advantage? Can you think of a situation where a static (one-time) elevation might actually be preferable?</em></p>
 </div>
 </div>
 </section>
 </section>
-<section id="wrap-up" class="level2">
-<h2 class="anchored" data-anchor-id="wrap-up">Wrap-Up</h2>
+<section id="wrap-up" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">6</span> Wrap-Up</h2>
 <p>Key takeaways:</p>
 <ol type="1">
-<li><strong>Choosing objectives is a value judgment.</strong> The Pareto front changes depending on which metrics you optimize. The analyst’s job is to present trade-offs, not prescribe a single answer.</li>
-<li><strong>The Pareto front separates analysis from decision.</strong> It shows what is technically achievable; stakeholders with different risk tolerances, budgets, and values can each identify their preferred solution.</li>
-<li><strong>Adaptive policies can dominate static ones.</strong> By conditioning actions on observed conditions, adaptive strategies exploit information revealed over time.</li>
-<li><strong>Algorithm choices matter.</strong> NSGA-II is a solid workhorse for 2–3 objective problems, but real MORDM work often uses Borg MOEA with ε-dominance and many random seeds. Our classroom setup is a simplified version of what <span class="citation" data-cites="garner_slrise:2018">Garner &amp; Keller (<a href="#ref-garner_slrise:2018" role="doc-biblioref">2018</a>)</span> used.</li>
+<li><strong>Choosing objectives is a value judgment</strong> — the Pareto front changes depending on which metrics you optimize. The analyst’s job is to present trade-offs, not prescribe a single answer.</li>
+<li><strong>The Pareto front separates analysis from decision</strong> — it shows what is technically achievable. Stakeholders with different risk tolerances, budgets, and values can each identify their preferred solution.</li>
+<li><strong>Adaptive policies can dominate static ones</strong> — by conditioning actions on observed conditions, adaptive strategies exploit information revealed over time, achieving better trade-offs than any fixed design.</li>
 </ol>
 </section>
-<section id="sec-submission" class="level2">
-<h2 class="anchored" data-anchor-id="sec-submission">Submission</h2>
+<section id="sec-submission" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="sec-submission"><span class="header-section-number">7</span> Submission</h2>
 <ol type="1">
 <li><p>Write your answers in the response boxes above.</p></li>
-<li><p><strong>Before writing up</strong>, re-run the optimizer with more scenarios and more iterations (see the callout above) so your Pareto front is stable.</p></li>
 <li><p><strong>Render to PDF:</strong></p>
 <ul>
-<li>In VS Code: command palette (<code>Cmd+Shift+P</code> / <code>Ctrl+Shift+P</code>) → “Quarto: Render Document” → select Typst PDF</li>
+<li>In VS Code: Open the command palette (<code>Cmd+Shift+P</code> / <code>Ctrl+Shift+P</code>) –&gt; “Quarto: Render Document” –&gt; select Typst PDF</li>
 <li>Or from the terminal: <code>quarto render index.qmd --to typst</code></li>
 </ul></li>
 <li><p><strong>Submit the PDF</strong> to the Lab 10 assignment on Canvas.</p></li>
 <li><p><strong>Push your code</strong> to GitHub (for backup):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Lab 10 complete"</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Lab 10 complete"</span> <span class="kw">&amp;&amp;</span> <span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ol>
 <section id="checklist" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="checklist">Checklist</h3>
 <p>Before submitting:</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Packages load without error</label></li>
-<li><label><input type="checkbox">Setup cells run (model, scenarios, metrics)</label></li>
-<li><label><input type="checkbox">Static grid evaluated with <code>explore()</code></label></li>
-<li><label><input type="checkbox">Static non-dominated set identified and plotted (<a href="#fig-static-grid" class="quarto-xref">Figure&nbsp;2</a>)</label></li>
-<li><label><input type="checkbox">Question 1 answered (Lab 8 comparison, shape of trade-off, reliability filter)</label></li>
-<li><label><input type="checkbox">NSGA-II optimization run with <code>store_history=true</code></label></li>
-<li><label><input type="checkbox">Final Pareto front plotted over static grid (<a href="#fig-pareto-adaptive" class="quarto-xref">Figure&nbsp;4</a>)</label></li>
-<li><label><input type="checkbox">Pareto-front evolution plotted across generations (<a href="#fig-pareto-evolution" class="quarto-xref">Figure&nbsp;5</a>)</label></li>
+<li><label><input type="checkbox">Setup cells run (model, policies, callbacks, metrics, scenarios)</label></li>
+<li><label><input type="checkbox">Static grid evaluated via <code>explore()</code> and metrics extracted</label></li>
+<li><label><input type="checkbox">Pair plot displayed (<a href="#fig-pair-plot" class="quarto-xref">Figure&nbsp;1</a>)</label></li>
+<li><label><input type="checkbox">Non-dominated solutions identified and parallel axis plot displayed (<a href="#fig-parallel-axis" class="quarto-xref">Figure&nbsp;2</a>)</label></li>
+<li><label><input type="checkbox">Question 1 answered (trade-offs between objectives)</label></li>
+<li><label><input type="checkbox">Two objectives chosen for optimization</label></li>
+<li><label><input type="checkbox">NSGA-II optimization run and Pareto front found</label></li>
+<li><label><input type="checkbox">Pareto front plotted with static grid overlay (<a href="#fig-pareto-adaptive" class="quarto-xref">Figure&nbsp;3</a>)</label></li>
 <li><label><input type="checkbox">Question 2 answered (interpret one adaptive solution)</label></li>
-<li><label><input type="checkbox">Question 3 answered (compare adaptive vs.&nbsp;static, reflect on 2- vs.&nbsp;10-variable DPS)</label></li>
-<li><label><input type="checkbox">Final run completed with more scenarios / iterations</label></li>
+<li><label><input type="checkbox">Question 3 answered (compare adaptive vs static)</label></li>
 <li><label><input type="checkbox">Notebook renders to PDF without errors</label></li>
 </ul>
 
@@ -917,12 +839,6 @@ Figure&nbsp;5
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-doss-gollin_subjective:2023" class="csl-entry" role="listitem">
-Doss-Gollin, J., &amp; Keller, K. (2023). A subjective bayesian framework for synthesizing deep uncertainties in climate risk management. <em>Earth’s Future</em>, <em>11</em>(1). <a href="https://doi.org/10.1029/2022EF003044">https://doi.org/10.1029/2022EF003044</a>
-</div>
-<div id="ref-eijgenraam_flooding:2014" class="csl-entry" role="listitem">
-Eijgenraam, C., Kind, J., Bak, C., Brekelmans, R., Hertog, D. den, Duits, M., et al. (2014). Economically efficient standards to protect the <span>Netherlands</span> against flooding. <em>Interfaces</em>, <em>44</em>(1), 7–21. <a href="https://doi.org/10.1287/inte.2013.0721">https://doi.org/10.1287/inte.2013.0721</a>
-</div>
 <div id="ref-garner_slrise:2018" class="csl-entry" role="listitem">
 Garner, G. G., &amp; Keller, K. (2018). Using direct policy search to identify robust strategies in adapting to uncertain sea-level rise and storm surge. <em>Environmental Modelling &amp; Software</em>, <em>107</em>, 96–104. <a href="https://doi.org/10.1016/j.envsoft.2018.05.006">https://doi.org/10.1016/j.envsoft.2018.05.006</a>
 </div>
