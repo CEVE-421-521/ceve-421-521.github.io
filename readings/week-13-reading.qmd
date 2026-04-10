@@ -11,9 +11,14 @@ format:
 
 ## Overview
 
-@haasnoot_pathways:2012
+@steinschneider_expanded:2015
 
 ## Discussion Questions
 
-1. *TBD*
-2. *TBD*
+1. What are the uncertainties the paper mentioned and which process deals with which type of uncertainty?
+2. What are the differences between conventional long-term planning and the approach the authors applied?
+3. Are climate models meaningful for consideration even with model bias?
+4. The authors select the plan with the smallest elevation change among those exceeding R-Score > 0.70, rather than the plan with the highest R-Score.
+   Is this a justified approach?
+
+Before class, think of one discussion question and be ready to present.
